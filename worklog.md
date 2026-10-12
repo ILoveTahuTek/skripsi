@@ -23,3 +23,22 @@ Stage Summary:
 - Keputusan/posisi: RuView = infrastruktur capture+DSP+alert (bukan mesin pengenalan); 3 alat = 1 platform, 3 deployment; kandidat judul per alat tersedia (9 total) dengan rekomendasi prioritas kelas SLB → ayam (Opsi-1 dewan) → asrama, menunggu keputusan user+pembimbing.
 - Langkah murah berikutnya: cek kebaruan Scopus/DBLP + uji Delta-CSI 2×ESP32 (berlaku utk ketiga opsi karena platform sama).
 - Catatan keamanan: token GitHub TIDAK disimpan di file repo; hanya di remote URL sesi git.
+
+---
+Task ID: 2
+Agent: Super Z (main agent, sesi web)
+Task: Eksekusi penuh /setup-matt-pocock-skills + /wayfinder pada repo skripsi.
+
+Work Log:
+- Install 31 skill mattpocock (engineering 20 + misc 4 + productivity 7) + academic-research → /skills/ → total 101 SKILL.md (match handoff).
+- Buat 10 label GitHub (5 triage default + 5 wayfinder:*); wontfix 422 (sudah ada bawaan).
+- setup-matt-pocock-skills: tulis AGENTS.md (blok ## Agent skills + keputusan setup + aturan kerja), docs/agents/issue-tracker.md (GitHub REST via curl, gh tak terpasang), docs/agents/triage-labels.md (default), docs/agents/domain.md (single-context), GLOSSARY.md (kosakata domain terkunci: flock-level, Delta-CSI, evidence-state, dst.), docs/adr/README.md. Commit 1b6daf0.
+- wayfinder chart: map #1 (wayfinder:map) + 4 tiket child: #2 research kebaruan kelas SLB, #3 research kebaruan tidur/asrama+vital anak, #4 task uji Delta-CSI 3 lokasi, #5 grilling kunci judul (blocked_by #2,#3,#4 via native dependencies 3/3; sub-issue 4/4).
+- Fire 2 subagent riset paralel (web-search). Hasil #2: classroom-CSI umum VERIFIED (tipis); SLB-specific SEARCH-LIMITED condong kosong → kebaruan alat 2 di konteks+privasi. Hasil #3: CSI tidur dewasa VERIFIED ramai (2014–2025); anak/kebutuhan-khusus asrama SEARCH-LIMITED condong kosong → kebaruan alat 3 di populasi; band napas 6–30 BPM aman utk anak sekolah tidur tapi tepi atas 0,5 Hz kritis (rekomendasi ±0,66–0,77 Hz); rujukan vital anak: Fleming 2011 Lancet, Herbert 2020, PALS 2015.
+- Arsipkan 2 laporan riset ke 02-wayfinder-research/; posting komentar resolusi; tutup #2 & #3; update map #1 (Decisions so far).
+- README diperbarui (struktur + status tracker). Push final.
+
+Stage Summary:
+- Frontier sekarang = tiket #4 (uji Delta-CSI fisik, HITL: beli 2×ESP32-S3, flash RuView v0.8.8, 3 lokasi).
+- Setelah #4 selesai → #5 (grilling kunci judul, human-owned) → keluar map → /to-spec.
+- Kedua riset menyimpulkan gap condong kosong tapi berlabel SEARCH-LIMITED; verifikasi Scopus/IEEE Xplore dititipkan di #5.

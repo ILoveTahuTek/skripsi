@@ -20,10 +20,22 @@ skripsi/
 ├── 02-skills-arsip/                   ← Arsip skill untuk restore sesi agent
 │   ├── academicResearchSkill.zip      (academic-research v3)
 │   └── mattpocock-skills.zip          (mattpocock skills-main, 31 skill)
+├── 02-wayfinder-research/             ← Temuan riset kebaruan (resolusi tiket wayfinder)
+│   ├── 2026-10-12_research_kelas-SLB.md
+│   └── 2026-10-12_research_tidur-asrama.md
+├── AGENTS.md                          ← Konfigurasi agent (hasil /setup-matt-pocock-skills)
+├── GLOSSARY.md                        ← Kosakata domain terkunci
+├── docs/
+│   ├── agents/                        ← issue-tracker.md, triage-labels.md, domain.md
+│   └── adr/                           ← Keputusan terkunci (lazy, via /domain-modeling)
 └── worklog.md                         ← Log kerja append-only semua agent
+
+Issue tracker: GitHub Issues repo ini — map wayfinder #1 + tiket keputusan #2–#5.
 ```
 
 ## Ringkasan Keadaan (agar agent sesi berikutnya cepat nyambung)
+
+- **Issue tracker aktif:** map wayfinder **#1** ("Kunci judul proposal skripsi WiFi CSI") + tiket: #2 riset kelas SLB (✅ selesai — SEARCH-LIMITED condong kosong), #3 riset tidur/asrama (✅ selesai — gap di populasi anak; band 0,5 Hz tepi kritis), #4 task uji Delta-CSI fisik (⬜ frontier), #5 grilling kunci judul (🔒 diblok #2,#3,#4). Frontier = #4.
 
 - **2 garis riset:** (1) WiFi CSI ayam broiler — riset/kritik SELESAI, verdict: reformulasi ke level kawanan, uji Delta-CSI = gerbang minggu-1; (2) sensing manusia tanpa kamera via RuView (sebelumnya BISINDO; sekarang berevolusi ke konteks SLB).
 - **3 opsi alat yang dieksplorasi:** ayam broiler · ruang kelas SLB · kamar asrama SLB. Pemetaan fitur & kandidat judul masing-masing ada di `01-ruview-exploration/02_PEMETAAN_FITUR_3_ALAT.md`.
