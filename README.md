@@ -23,6 +23,14 @@ skripsi/
 ├── 02-wayfinder-research/             ← Temuan riset kebaruan (resolusi tiket wayfinder)
 │   ├── 2026-10-12_research_kelas-SLB.md
 │   └── 2026-10-12_research_tidur-asrama.md
+├── 03-dpj/                            ← 3 Dokumen Pengajuan Judul (DOCX, 2026-10-12)
+│   ├── DPJ-1_Proposal_Judul_Kandang_Ayam_Broiler.docx   (12 hal — judul Opsi-1 dewan)
+│   ├── DPJ-2_Proposal_Judul_Ruang_Kelas_SLB.docx        (11 hal)
+│   ├── DPJ-3_Proposal_Judul_Kamar_Asrama_SLB.docx       (11 hal)
+│   └── generator/                     ← Skrip Node.js pembuat docx (reproducible)
+├── 04-referensi-slb/                  ← Hasil verifikasi Crossref referensi garis SLB
+│   ├── verified_refs.json
+│   └── verified_refs2.json
 ├── AGENTS.md                          ← Konfigurasi agent (hasil /setup-matt-pocock-skills)
 ├── GLOSSARY.md                        ← Kosakata domain terkunci
 ├── docs/

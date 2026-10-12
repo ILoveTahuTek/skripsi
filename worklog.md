@@ -42,3 +42,22 @@ Stage Summary:
 - Frontier sekarang = tiket #4 (uji Delta-CSI fisik, HITL: beli 2×ESP32-S3, flash RuView v0.8.8, 3 lokasi).
 - Setelah #4 selesai → #5 (grilling kunci judul, human-owned) → keluar map → /to-spec.
 - Kedua riset menyimpulkan gap condong kosong tapi berlabel SEARCH-LIMITED; verifikasi Scopus/IEEE Xplore dititipkan di #5.
+
+---
+Task ID: 3
+Agent: Super Z (main agent, sesi web)
+Task: Susun 3 Dokumen Pengajuan Judul (DPJ) berbeda judul — eksekusi /grill-with-docs (grilling + domain-modeling) + riset referensi baru garis SLB + generate 3 DOCX penuh.
+
+Work Log:
+- Eksekusi nyata /grill-with-docs: 31 skill mattpocock diinstall ulang dari zip (101 SKILL.md di sistem); rantai grill-with-docs → grilling + domain-modeling dibaca penuh.
+- Grilling round-1 (8 pertanyaan): jawaban terkunci — 3 dokumen per alat, tiap dokumen 1 judul utama + 2 alternatif; DOCX; penuh 10+ hal; full paket (tabel fitur + risiko/fallback + jadwal + anggaran + batasan); referensi DICARI BARU utk garis SLB; RuView eksplisit; tanpa cover identitas; jadwal 1 semester (4,5 bln).
+- domain-modeling: 3 istilah baru terkunci di GLOSSARY.md (DPJ, Judul utama+alternatif, Jadwal semester). Tidak ada ADR baru (tidak lolos tiga gerbang).
+- Riset referensi baru (pilihan user): 10 kueri web + verifikasi Crossref (scripts/verify_slb_refs.py, verify_slb_refs2.py) → 13 kandidat terverifikasi (RT-Fall TMC 2017, TCS-Fall Digital Health 2024, Brena Electronics 2021, Jiang IEEE Access 2018, Zou CVPRW 2019, Al-qaness GIS 2019, Galdino IEEE Access 2023, Mosharaf Sensors 2024, Wi-Sleep RTSS 2014, Tataraidze EMBC 2019, Burimas Applied Sciences 2024, Kontou JBHI 2024, Chang VTC 2023, Pich ICCMA 2025, Touhiduzzaman MobiCom 2024).
+- Generator persisten: scripts/dpj_common.js (renderer akademik: TNR 12pt, spasi 1,5, three-line table, sitasi [n], refs hanging indent, header/footer, tanpa page break) + 3 file konten + generate_dpj.js.
+- 3 DOCX dibuat di download/proposal-pengajuan-judul/ (12/11/11 halaman); postcheck.py 0 error per file; PDF conversion check + inspeksi visual halaman judul & tabel OK.
+- Artefak dibackup ke repo: 03-dpj/ (3 docx + generator), 04-referensi-slb/ (hasil verifikasi Crossref).
+
+Stage Summary:
+- 3 DPJ siap dibawa ke pembimbing: DPJ-1 ayam (judul Opsi-1 dewan), DPJ-2 kelas SLB, DPJ-3 asrama SLB — masing-masing 10 bab + 5 tabel + 10 referensi terverifikasi DOI.
+- Semua klaim dibatasi "studi kelayakan"; pose stub & apnea eksperimental tidak dijanjikan; Delta-CSI = gerbang go/no-go minggu-3 di ketiga dokumen.
+- Keputusan judul final tetap human-owned (#5 grilling di issues).

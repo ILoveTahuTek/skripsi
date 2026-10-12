@@ -30,6 +30,10 @@ Kamus istilah domain skripsi. Setiap skill harus memakai istilah sesuai definisi
 
 ## Proses & tata kelola klaim
 
+- **DPJ (Dokumen Pengajuan Judul)** — deliverable pengajuan ke pembimbing: 1 dokumen per alat (ayam / kelas SLB / asrama SLB), penuh 10+ halaman, tanpa halaman identitas (identitas diisi manual setelahnya). Tiga DPJ dibuat terpisah, bukan satu skripsi tiga judul.
+- **Judul utama + alternatif** — struktur judul tiap DPJ: 1 judul kandidat terkuat (⭐) + 2 judul cadangan dari kandidat §2.4/§3.3/§4.3; semua judul harus tetap dipetakan ke fitur RuView yang MEASURED.
+- **Jadwal semester** — rentang rencana kerja di DPJ: ±4–5 bulan; Delta-CSI & kalibrasi digabung minggu 1–3, eksperimen dipadatkan; bukan rencana 6 bulan atau 8–12 bulan.
+
 - **Evidence-state** — label status klaim: VERIFIED / SUPPORTED / SEARCH-LIMITED. Semua klaim kebaruan wajib berlabel.
 - **Kebaruan dikualifikasi** — klaim yang diizinkan = "studi kelayakan X"; klaim yang dilarang = "pertama untuk hewan/manusia", "pertama di Indonesia" sebagai kebaruan utama.
 - **Human-owned decision** — keputusan yang tidak boleh diambil agent: pemilihan topik final, kosakata/judul final, persetujuan etika (pembimbing, sekolah SLB, komunitas).
