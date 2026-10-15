@@ -61,3 +61,19 @@ Stage Summary:
 - 3 DPJ siap dibawa ke pembimbing: DPJ-1 ayam (judul Opsi-1 dewan), DPJ-2 kelas SLB, DPJ-3 asrama SLB — masing-masing 10 bab + 5 tabel + 10 referensi terverifikasi DOI.
 - Semua klaim dibatasi "studi kelayakan"; pose stub & apnea eksperimental tidak dijanjikan; Delta-CSI = gerbang go/no-go minggu-3 di ketiga dokumen.
 - Keputusan judul final tetap human-owned (#5 grilling di issues).
+
+---
+Task ID: 4 (skill proposal-writing + DPJ-4)
+Agent: Super Z (sesi web, lanjutan)
+Task: Tugas 1 — skill baru aturan proposal dari korpus Drive (to-tickets → #6-#9, GEPA). Tugas 2 — riset + DPJ-4 SIBI/BISINDO (#10-#14). Skip cover.
+
+Work Log:
+- Korpus Drive diunduh (69 dok, 120 MB) → analisis 12 dokumen: struktur 5-BAB + pola bahasa literal korpus D4 TRSE UNM → 05-analisis-korpus/ (analisis-korpus-proposal.md + rubric.json D1-D6).
+- Skill proposal-writing dibuat lewat GEPA asli (gepa 0.1.4, reflection_lm = z-ai chat): seed 0.7196 → kandidat 3 skor 1.0 (iterasi 5) → kurasi anti reward-hacking → v3-final 1.0 legitim. Versi tersimpan di 05-analisis-korpus/skill-proposal-writing/versions/{v1-seed,v2-gepa,v3-final}; final terinstall di sandbox skills/.
+- Riset literatur isyarat (subagent): 22 referensi verified-DOI + gap-analisis → 06-referensi-isyarat/; pemetaan fitur RuView → isyarat (MEASURED/STUB + disiplin klaim).
+- DPJ-4 dibuat dengan generator DPJ 1-3 + bahasa korpus: 15 halaman, 6 tabel, 19 referensi; evaluator doc-mode 1.0 → 07-dpj-4/ (docx + preview pdf + generator).
+- GitHub issues #6-#14 semua closed; worklog sandbox utama: /home/z/my-project/worklog.md (Task ID 4).
+
+Stage Summary:
+- Set proposal kini 4 dokumen: DPJ-1 ayam, DPJ-2 kelas SLB, DPJ-3 asrama SLB, DPJ-4 translasi isyarat SIBI/BISINDO — semua studi kelayakan + gerbang Delta-CSI minggu-3, tanpa cover.
+- Skill "proposal-writing" = aset yang dipakai ulang: struktur korpus, pola bahasa, rubrik D1-D6, evaluator.
