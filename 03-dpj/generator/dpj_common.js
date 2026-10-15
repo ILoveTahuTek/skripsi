@@ -33,13 +33,14 @@ function bodyPara(text) {
   });
 }
 
-function listPara(text, refName, level) {
-  // Daftar: rata kiri (bukan justify) sesuai aturan tata letak
+function numberedPara(text, n) {
+  // Daftar bernomor eksplisit ("1. ..."): rata kiri + hanging indent, tanpa
+  // numbering XML (terbukti tidak dirender LibreOffice/Word pada konfigurasi lama).
   return new Paragraph({
     alignment: AlignmentType.LEFT,
-    numbering: { reference: refName, level: level || 0 },
+    indent: { left: 1069, hanging: 360 },
     spacing: { line: 360, after: 60 },
-    children: [new TextRun({ text: safeText(text), size: 24, color: "000000", font: FONT_BODY })],
+    children: [new TextRun({ text: n + ". " + safeText(text), size: 24, color: "000000", font: FONT_BODY })],
   });
 }
 
@@ -70,11 +71,24 @@ function titleBlock(doc) {
     spacing: { line: 322, lineRule: "atLeast", before: 120, after: 120 },
     children: [new TextRun({ text: "Judul Utama yang Diusulkan", bold: true, size: 24, color: "000000", font: FONT_HEAD })],
   }));
+  // Judul dokumen kapital semua (rubrik D4, pola korpus)
   els.push(new Paragraph({
     alignment: AlignmentType.CENTER,
     spacing: { line: 322, lineRule: "atLeast", after: 240 },
-    children: [new TextRun({ text: safeText(doc.judulUtama), bold: true, size: 28, color: "000000", font: FONT_HEAD })],
+    children: [new TextRun({ text: safeText(doc.judulUtama).toUpperCase(), bold: true, size: 28, color: "000000", font: FONT_HEAD })],
   }));
+  // Blok judul alternatif (rubrik D6)
+  const alts = doc.alternatif || [];
+  alts.forEach((alt, i) => {
+    els.push(new Paragraph({
+      alignment: AlignmentType.CENTER,
+      spacing: { line: 322, lineRule: "atLeast", after: i === alts.length - 1 ? 240 : 120 },
+      children: [
+        new TextRun({ text: safeText(alt.kategori, "Alternatif " + (i + 1)) + ": ", bold: true, size: 24, color: "000000", font: FONT_HEAD }),
+        new TextRun({ text: safeText(alt.judul), size: 24, color: "000000", font: FONT_BODY }),
+      ],
+    }));
+  });
   return els;
 }
 
@@ -135,22 +149,24 @@ function tableSpacer() {
 }
 
 // ---------- Chapter renderer ----------
-let listCounter = 0;
-function makeListRefName() {
-  listCounter += 1;
-  return "list-dpj-" + listCounter;
-}
-
 function renderChapters(doc) {
   const els = [];
-  let tableNo = 0;
   for (const ch of doc.chapters) {
     if (ch.h1) {
       els.push(new Paragraph({
         heading: HeadingLevel.HEADING_1,
         alignment: AlignmentType.CENTER,
-        spacing: { before: 480, after: 240, line: 360 },
+        spacing: { before: 480, after: ch.h1b ? 40 : 240, line: 360 },
         children: [new TextRun({ text: safeText(ch.h1), bold: true, size: 32, color: "000000", font: FONT_HEAD })],
+      }));
+    }
+    if (ch.h1b) {
+      // Heading BAB dua baris gaya korpus: "BAB I" lalu "PENDAHULUAN"
+      els.push(new Paragraph({
+        heading: HeadingLevel.HEADING_1,
+        alignment: AlignmentType.CENTER,
+        spacing: { before: 0, after: 240, line: 360 },
+        children: [new TextRun({ text: safeText(ch.h1b), bold: true, size: 32, color: "000000", font: FONT_HEAD })],
       }));
     }
     for (const sub of (ch.subs || [])) {
@@ -161,32 +177,35 @@ function renderChapters(doc) {
           children: [new TextRun({ text: safeText(sub.h2), bold: true, size: 30, color: "000000", font: FONT_HEAD })],
         }));
       }
+      if (sub.h3) {
+        els.push(new Paragraph({
+          heading: HeadingLevel.HEADING_3,
+          spacing: { before: 240, after: 120, line: 360 },
+          children: [new TextRun({ text: safeText(sub.h3), bold: true, size: 26, color: "000000", font: FONT_HEAD })],
+        }));
+      }
       for (const p of (sub.paras || [])) els.push(bodyPara(p));
       if (sub.numbered) {
-        const refName = makeListRefName();
-        for (const item of sub.numbered) els.push(listPara(item, refName, 0));
+        sub.numbered.forEach((item, i) => els.push(numberedPara(item, i + 1)));
       }
       if (sub.bullets) {
         for (const item of sub.bullets) els.push(bulletPara(item));
       }
       for (const t of (sub.tables || [])) {
-        tableNo += 1;
-        els.push(tableCaption(t.caption.replace("Tabel N", "Tabel " + tableNo)));
+        els.push(tableCaption(t.caption));
         els.push(threeLineTable(t));
         els.push(tableSpacer());
       }
     }
     for (const p of (ch.paras || [])) els.push(bodyPara(p));
     if (ch.numbered) {
-      const refName = makeListRefName();
-      for (const item of ch.numbered) els.push(listPara(item, refName, 0));
+      ch.numbered.forEach((item, i) => els.push(numberedPara(item, i + 1)));
     }
     if (ch.bullets) {
       for (const item of ch.bullets) els.push(bulletPara(item));
     }
     for (const t of (ch.tables || [])) {
-      tableNo += 1;
-      els.push(tableCaption(t.caption.replace("Tabel N", "Tabel " + tableNo)));
+      els.push(tableCaption(t.caption));
       els.push(threeLineTable(t));
       els.push(tableSpacer());
     }
@@ -206,7 +225,6 @@ function renderChapters(doc) {
 
 // ---------- Document assembly ----------
 function buildDoc(doc) {
-  listCounter = 0;
   const header = new Header({
     children: [new Paragraph({
       alignment: AlignmentType.CENTER,

@@ -36,14 +36,13 @@ diberi status `verified-web-only`. **Selesai bila:** file JSON referensi
 tersimpan, nol referensi fiktif.
 
 ### 3. Susun struktur kanonik
-Baca `references/struktur-dpj.md`, susun bab/subbab/tabel sesuai templat —
-urutan bab, subbab wajib BAB I (Latar Belakang, Rumusan Masalah, Tujuan
+Baca `references/struktur-dpj.md`, susun bab/subbab/tabel sesuai templat — ruang lingkup proposal hanya **BAB I–III + DAFTAR PUSTAKA** (proposal ≠ skripsi 5 bab); urutan bab, subbab wajib BAB I (Latar Belakang, Rumusan Masalah, Tujuan
 Penelitian, Batasan Masalah, Manfaat Penelitian dengan Manfaat Teoretis + 
 Manfaat Praktis "Bagi Peneliti" dst.), subbab Metode Penelitian/Metodologi
 Penelitian, tabel Penelitian Terdahulu (kolom fitur, tanda √/−, baris "Penelitian
-Ini"), bab khas DPJ (Jadwal penelitian 1 semester, Rencana biaya dalam Rupiah,
-Risiko+fallback, Batasan klaim). Penamaan bab dibuat konsisten sepanjang
-dokumen. **Selesai bila:** outline lengkap dan setiap bab punya isi rencana
+Ini"), subbab khas DPJ di BAB III (Rencana Kegiatan dan Jadwal penelitian 1
+semester, Rencana biaya dalam Rupiah, Risiko+fallback) dan pernyataan disiplin
+klaim di 1.4. Penamaan bab dibuat konsisten sepanjang dokumen. **Selesai bila:** outline lengkap dan setiap bab punya isi rencana
 ≥150 kata.
 
 ### 4. Tulis dengan pola bahasa korpus
@@ -82,8 +81,9 @@ dimensi rubrik), laporkan skor per dimensi D1–D6 + baris aturan yang gagal +
 saran perbaikan spesifik per aturan.
 
 ## Checklist rubrik (persingkat postcheck; detail aturan di rubric.json repo)
-- D1 Struktur: bab inti + subbab wajib BAB I + tabel Penelitian Terdahulu + bab
-  jadwal/biaya/risiko; penamaan konsisten.
+- D1 Struktur: hanya BAB I–III + DAFTAR PUSTAKA; subbab wajib BAB I + tabel
+  Penelitian Terdahulu + subbab jadwal/biaya/risiko di BAB III; penamaan
+  konsisten.
 - D2 Pola bahasa: pembuka subbab BAB I pola korpus; item tujuan=frasa kerja;
   batasan ditutup "tidak membahas".
 - D3 Sitasi: dalam teks `Nama (Tahun) menjelaskan/menunjukkan/menyoroti`;

@@ -8,9 +8,10 @@ const { renderDoc } = require("./dpj_common");
     require("./dpj_content_1_ayam"),
     require("./dpj_content_2_kelas"),
     require("./dpj_content_3_asrama"),
+    require("./dpj_content_4_isyarat"),
   ];
   for (const d of docs) {
     await renderDoc(d);
   }
-  console.log("SELESAI: 3 dokumen DPJ dibuat.");
+  console.log("SELESAI: 4 dokumen DPJ dibuat.");
 })().catch(err => { console.error(err); process.exit(1); });
