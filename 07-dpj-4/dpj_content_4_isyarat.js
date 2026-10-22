@@ -20,9 +20,9 @@ module.exports = {
         {
           h2: "1.1 Latar Belakang",
           paras: [
-            "Perkembangan teknologi telah memengaruhi hampir semua sisi kehidupan manusia, termasuk cara masyarakat berkomunikasi dan cara lembaga pendidikan melayani peserta didiknya. Pada kelompok tunarungu, teknologi justru menentukan akses informasi karena bahasa isyarat merupakan sarana komunikasi utama, dan di Indonesia dua sistem yang paling banyak digunakan adalah SIBI (Sistem Isyarat Bahasa Indonesia) yang bersifat formal dan terstandar, serta BISINDO (Bahasa Isyarat Indonesia) yang tumbuh secara alami di komunitas. Ketegangan antara keduanya nyata di lembaga pendidikan: sekolah formal cenderung memakai SIBI, sedangkan pergaulan siswa berlangsung dalam BISINDO, sehingga alat bantu komunikasi di prasarana edukasi idealnya mengenali keduanya, bukan salah satunya saja. Rodríguez-Correa et al. (2023) menunjukkan bahwa hambatan komunikasi sehari-hari masih menjadi persoalan utama yang belum terjawab tuntas oleh teknologi bantu yang tersedia [1]. Di sisi lain, Sanjaya et al. (2023) memperlihatkan bahwa hampir seluruh penelitian pengenalan BISINDO bertumpu pada kamera dan pengolahan citra [2], termasuk pendekatan jaringan saraf dalam pada citra video [3].",
-            "Pendekatan berbasis kamera memang maju pesat, tetapi penerapannya di lingkungan pendidikan menghadapi tiga hambatan sekaligus. Pertama, kamera menimbulkan beban privasi dan kesiapan institusi, terutama ketika ruang juga dipakai kelompok lain yang tidak bersedia terekam. Kedua, kualitas pengenalan citra sangat bergantung pada pencahayaan dan sudut pandang, sementara ruang kelas berubah-ubah sepanjang hari. Ketiga, solusi penerjemah isyarat komersial berbasis sensor khusus atau layanan manusia berbiaya tinggi dan tidak realistis untuk sekolah. Akibatnya, alat bantu pengenalan isyarat yang layak untuk prasarana edukasi perlu bebas kamera saat digunakan, murah, dan mudah dipindahkan antar-ruang.",
-            "Wi-Fi Channel State Information (CSI) menawarkan jalur alternatif yang berbeda secara prinsip. CSI adalah informasi fase dan amplitudo subcarrier Wi-Fi yang berubah ketika gelombang terganggu oleh gerakan tubuh manusia, sehingga pola gestur dapat diklasifikasikan langsung dari sinyal tanpa kamera dan tanpa perangkat yang dipakai pada tubuh penandatangan; Ma et al. (2019) mengkatalogkan keluarga kemampuan sensing semacam ini pada manusia [4]. Pengambilan CSI dapat dilakukan perangkat murah seperti ESP32 yang telah memiliki basis penelitian resmi melalui ESP32-CSI-Tool [5]. SignFi membuktikan pengenalan 276 isyarat bahasa isyarat Amerika dari sinyal Wi-Fi [6], dan preseden terbaru menunjukkan bahasa isyarat nasional lain, Filipino Sign Language, juga dapat dikenali dari CSI dengan perangkat komoditas [7]. Fisika sinyalnya menguntungkan: gestur isyarat melibatkan gerakan lengan dan tubuh bagian atas berdurasi 0,5 sampai 3 detik yang memodulasi sinyal jauh lebih kuat daripada gerakan napas, sehingga tantangan sinyal-lemah yang menghantui kasus objek kecil praktis tidak muncul di sini.",
+            "Perkembangan teknologi telah memengaruhi hampir semua sisi kehidupan manusia, termasuk cara masyarakat berkomunikasi dan cara lembaga pendidikan melayani peserta didiknya. Pada kelompok tunarungu, teknologi justru menentukan akses informasi karena bahasa isyarat merupakan sarana komunikasi utama, dan di Indonesia dua sistem yang paling banyak digunakan adalah SIBI (Sistem Isyarat Bahasa Indonesia) yang bersifat formal dan terstandar, serta BISINDO (Bahasa Isyarat Indonesia) yang tumbuh secara alami di komunitas. Ketegangan antara keduanya nyata di lembaga pendidikan: sekolah formal cenderung memakai SIBI, sedangkan pergaulan siswa berlangsung dalam BISINDO sehingga alat bantu komunikasi di prasarana edukasi idealnya mengenali keduanya, bukan salah satunya saja. Rodríguez-Correa dkk. (2023) menunjukkan bahwa hambatan komunikasi sehari-hari masih menjadi persoalan utama yang belum terjawab tuntas oleh teknologi bantu yang tersedia [1]. Di sisi lain, Sanjaya dkk. (2023) memperlihatkan bahwa hampir seluruh penelitian pengenalan BISINDO bertumpu pada kamera dan pengolahan citra [2], termasuk pendekatan jaringan saraf dalam pada citra video [3].",
+            "Pendekatan berbasis kamera memang maju pesat, tetapi penerapannya di lingkungan pendidikan menghadapi tiga hambatan sekaligus. Pertama, kamera menimbulkan beban privasi dan kesiapan institusi, terutama ketika ruang juga dipakai kelompok lain yang tidak bersedia terekam. Kedua, kualitas pengenalan citra sangat bergantung pada pencahayaan dan sudut pandang, sementara ruang kelas berubah-ubah sepanjang hari. Ketiga, solusi penerjemah isyarat komersial berbasis sensor khusus atau layanan manusia berbiaya tinggi dan tidak realistis untuk sekolah. Akibatnya, alat bantu pengenalan isyarat yang layak untuk prasarana edukasi perlu bebas kamera saat digunakan, murah, dan mudah dipindahkan antarruang.",
+            "Wi-Fi Channel State Information (CSI) menawarkan jalur alternatif yang berbeda secara prinsip. CSI adalah informasi fase dan amplitudo subcarrier Wi-Fi yang berubah ketika gelombang terganggu oleh gerakan tubuh manusia sehingga pola gestur dapat diklasifikasikan langsung dari sinyal tanpa kamera dan tanpa perangkat yang dipakai pada tubuh penandatangan; Ma dkk. (2019) mengelompokkan keluarga kemampuan sensing semacam ini pada manusia [4]. Pengambilan CSI dapat dilakukan dengan perangkat murah seperti ESP32 yang telah memiliki basis penelitian resmi melalui ESP32-CSI-Tool [5]. SignFi membuktikan pengenalan 276 isyarat bahasa isyarat Amerika dari sinyal Wi-Fi [6], dan preseden terbaru menunjukkan bahasa isyarat nasional lain, Filipino Sign Language, juga dapat dikenali dari CSI dengan perangkat komoditas [7]. Fisika sinyalnya menguntungkan: gestur isyarat melibatkan gerakan lengan dan tubuh bagian atas berdurasi 0,5 sampai 3 detik yang memodulasi sinyal jauh lebih kuat daripada gerakan napas sehingga tantangan sinyal-lemah yang menghantui kasus objek kecil praktis tidak muncul di sini.",
             "Platform open-source RuView (github.com/ruvnet/RuView) menyediakan fondasi rekayasa yang dibutuhkan: firmware penangkap CSI pada ESP32, alur pengolahan sinyal, mekanisme rekam lalu latih yang adaptif, dashboard, serta penerusan notifikasi melalui MQTT dan Home Assistant. Dengan memakai RuView sebagai basis, penelitian tidak perlu membangun infrastruktur capture dari nol dan dapat memusatkan usaha pada pertanyaan yang benar-benar terbuka, yaitu apakah gestur SIBI dan BISINDO yang dipilih dapat diklasifikasikan dari pola CSI pada perangkat semurah ESP32. Berdasarkan uraian tersebut, penelitian ini dilakukan untuk menguji kelayakan pengenalan gestur terisolasi bahasa isyarat SIBI dan BISINDO dari pola Wi-Fi CSI pada ESP32 sebagai langkah awal translasi tanpa kamera di prasarana edukasi. Tabel 1.1 merangkum usulan judul utama beserta dua judul alternatifnya.",
           ],
           tables: [{
@@ -31,7 +31,7 @@ module.exports = {
             headers: ["Kategori", "Usulan Judul", "Catatan Pemetaan"],
             rows: [
               ["Utama", "Pengenalan Gestur Bahasa Isyarat SIBI dan BISINDO Berbasis Wi-Fi Channel State Information pada ESP32 untuk Prasarana Edukasi: Studi Kelayakan Translasi Tanpa Kamera", "Setiap kata terpetakan ke hal yang terukur: SIBI dan BISINDO (subset gestur terpilih), Wi-Fi CSI (sinyal yang diklasifikasikan), ESP32 (perangkat), prasarana edukasi (lokasi kalibrasi), studi kelayakan (batas klaim)."],
-              ["Alternatif 1", "Studi Kelayakan Klasifikasi Gestur Terisolasi SIBI/BISINDO dari Pola Wi-Fi CSI pada Platform RuView untuk Ruang Kelas Tunarungu", "Dipilih bila fokus pada kelayakan klasifikasi dan integrasi RuView; luaran utama model per-gestur dan laporan kelayakan."],
+              ["Alternatif 1", "Studi Kelayakan Klasifikasi Gestur Terisolasi SIBI/BISINDO dari Pola Wi-Fi CSI pada Platform RuView untuk Ruang Kelas Tunarungu", "Dipilih bila fokus pada kelayakan klasifikasi dan integrasi RuView; luaran utama model per gestur dan laporan kelayakan."],
               ["Alternatif 2", "Dataset dan Klasifikasi Gestur Bahasa Isyarat Indonesia dari Sinyal Wi-Fi CSI pada ESP32: Studi Kelayakan Alat Bantu Komunikasi Pendidikan Tunarungu", "Dipilih bila dataset publik CSI SIBI/BISINDO dijadikan kontribusi utama; cocok untuk arah publikasi dataset."],
             ],
           }],
@@ -39,29 +39,29 @@ module.exports = {
         {
           h2: "1.2 Rumusan Masalah",
           paras: [
-            "Berdasarkan latar belakang permasalahan yang telah diuraikan serta untuk menjawab permasalahan yang menjadi fokus dalam penelitian ini, maka dapat dirumuskan beberapa rumusan masalah yang akan dikaji lebih lanjut. Rumusan masalah pada penelitian ini sebagai berikut.",
+            "Berdasarkan latar belakang permasalahan yang telah diuraikan serta untuk menjawab permasalahan yang menjadi fokus dalam penelitian ini, maka dapat dirumuskan beberapa rumusan masalah yang akan dikaji lebih lanjut. Rumusan masalah pada penelitian ini adalah sebagai berikut.",
           ],
           numbered: [
             "Bagaimana perancangan sistem capture Wi-Fi CSI dua node ESP32 berbasis platform RuView beserta protokol pengumpulan dataset gestur SIBI/BISINDO terisolasi di ruang edukasi yang terkalibrasi?",
             "Bagaimana implementasi ekstraksi fitur dan pelatihan klasifikator gestur dari pola amplitudo, fase, dan Doppler CSI untuk subset gestur SIBI/BISINDO yang dominan gerak lengan?",
-            "Bagaimana hasil pengujian akurasi klasifikasi per-gestur, tingkat alarm palsu, dan integrasi keluaran klasifikasi ke jalur alert RuView (MQTT/Home Assistant) sebagai indikator kelayakan translasi tanpa kamera?",
+            "Bagaimana hasil pengujian akurasi klasifikasi per gestur, tingkat alarm palsu, dan integrasi keluaran klasifikasi ke jalur alert RuView (MQTT/Home Assistant) sebagai indikator kelayakan translasi tanpa kamera?",
           ],
         },
         {
           h2: "1.3 Tujuan Penelitian",
           paras: [
-            "Penelitian ini bertujuan untuk menguji kelayakan pengenalan gestur terisolasi bahasa isyarat SIBI dan BISINDO dari pola Wi-Fi CSI pada ESP32 untuk prasarana edukasi. Adapun tujuan dari penelitian ini adalah sebagai berikut.",
+            "Penelitian ini bertujuan menguji kelayakan pengenalan gestur terisolasi bahasa isyarat SIBI dan BISINDO dari pola Wi-Fi CSI pada ESP32 untuk prasarana edukasi. Adapun tujuan dari penelitian ini adalah sebagai berikut.",
           ],
           numbered: [
             "Merancang sistem capture Wi-Fi CSI dua node ESP32 berbasis RuView beserta protokol pengumpulan dataset gestur terisolasi SIBI/BISINDO yang terdokumentasi dan dapat direplikasi.",
             "Mengimplementasikan ekstraksi fitur dan pelatihan klasifikator gestur dari pola amplitudo, fase, dan Doppler CSI untuk subset gestur yang dipilih.",
-            "Mengetahui hasil pengujian akurasi klasifikasi per-gestur, alarm palsu, dan kelayakan integrasi keluaran ke jalur alert RuView, termasuk keputusan go/no-go pada uji fisik Delta-CSI di minggu ketiga.",
+            "Menguji akurasi klasifikasi per gestur, alarm palsu, dan kelayakan integrasi keluaran ke jalur alert RuView, termasuk keputusan go/no-go pada uji fisik Delta-CSI di minggu ketiga.",
           ],
         },
         {
           h2: "1.4 Batasan Masalah",
           paras: [
-            "Agar penelitian ini memiliki ruang lingkup yang jelas dan terarah sesuai dengan tujuan yang telah ditetapkan, maka ditentukan batasan masalah guna membatasi pembahasan terhadap aspek-aspek yang relevan dengan topik penelitian. Adapun batasan masalah pada penelitian ini sebagai berikut.",
+            "Agar penelitian ini memiliki ruang lingkup yang jelas dan terarah sesuai dengan tujuan yang telah ditetapkan, maka ditentukan batasan masalah guna membatasi pembahasan terhadap aspek-aspek yang relevan dengan topik penelitian. Adapun batasan masalah pada penelitian ini adalah sebagai berikut.",
           ],
           numbered: [
             "Lingkup penelitian adalah studi kelayakan pengenalan gestur terisolasi (isolated) pada subset 5 sampai 12 gestur SIBI/BISINDO yang dominan gerak lengan dan bermakna sama pada kedua sistem, bukan penerjemah kalimat bahasa isyarat kontinu.",
@@ -69,13 +69,13 @@ module.exports = {
             "Kamera hanya digunakan saat perekaman dataset untuk pelabelan ground truth; penggunaan operasional sistem bebas kamera.",
             "Ekstraksi pose atau kerangka tangan tidak dipakai dan tidak dijanjikan karena modul pose on-device RuView masih berupa stub (PCK@20 sekitar 3 persen); klasifikasi dilakukan langsung dari pola CSI.",
             "Setiap ruang edukasi mitra di \u3010Nama Sekolah/Lokasi\u3011 wajib dikalibrasi ulang (600 frame + 8 anchor) dan model dianggap sah untuk sesi yang sama, bukan lintas ruang tanpa kalibrasi.",
-            "Penelitian ini tidak membahas penerjemahan kontinu dua arah, pengenalan multi-penandatangan simultan, akurasi lintas-ruang tanpa kalibrasi, ekstraksi pose tangan, serta aspek komersialisasi alat.",
+            "Penelitian ini tidak membahas penerjemahan kontinu dua arah, pengenalan beberapa penandatangan secara simultan, akurasi lintas ruang tanpa kalibrasi, ekstraksi pose tangan, serta aspek komersialisasi alat.",
           ],
         },
         {
           h2: "1.5 Manfaat Penelitian",
           paras: [
-            "Literatur saat proposal ini disusun belum menemukan satu pun publikasi pengenalan SIBI atau BISINDO berbasis Wi-Fi CSI, sehingga hasil penelitian ini berpotensi menjadi rujukan pertama pada kombinasi tersebut. Proses pengujian bergerbang juga menghasilkan dataset dan protokol yang dapat dipakai penelitian berikutnya. Manfaat penelitian ini diuraikan sebagai berikut.",
+            "Pencarian literatur saat proposal ini disusun belum menemukan satu pun publikasi pengenalan SIBI atau BISINDO berbasis Wi-Fi CSI sehingga hasil penelitian ini berpotensi menjadi rujukan pertama pada kombinasi tersebut. Proses pengujian bergerbang juga menghasilkan dataset dan protokol yang dapat dipakai penelitian berikutnya. Manfaat penelitian ini diuraikan sebagai berikut.",
           ],
           subs: [
             {
@@ -107,20 +107,20 @@ module.exports = {
         {
           h2: "2.1 Wi-Fi Channel State Information",
           paras: [
-            "Wi-Fi Channel State Information (CSI) merupakan informasi per-subcarrier yang menggambarkan kondisi kanal propagasi sinyal Wi-Fi, mencakup amplitudo dan fase pada tiap subcarrier. Gerakan lengan dan tubuh manusia di antara pemancar dan penerima mengubah jalur pantulan sinyal sehingga meninggalkan pola yang terukur, dan pola itulah yang diklasifikasikan sebagai gestur. Ma et al. (2019) mengkatalogkan keluarga aplikasi sensing Wi-Fi pada manusia beserta tantangan sensitivitas lingkungan dan kebutuhan kalibrasi [4], sementara Chen et al. (2023) merangkum strategi lintas-domain untuk mengatasi variasi pengguna dan lingkungan [12]. Untuk kasus isyarat, fisika sinyal menguntungkan karena gerakan lengan memindahkan massa yang jauh lebih besar daripada gerakan napas, sehingga modulasi Doppler yang dihasilkan kuat dan dapat dipisahkan dari latar.",
+            "Wi-Fi Channel State Information (CSI) merupakan informasi per subcarrier yang menggambarkan kondisi kanal propagasi sinyal Wi-Fi, mencakup amplitudo dan fase pada tiap subcarrier. Gerakan lengan dan tubuh manusia di antara pemancar dan penerima mengubah jalur pantulan sinyal sehingga meninggalkan pola yang terukur, dan pola itulah yang diklasifikasikan sebagai gestur. Ma dkk. (2019) mengelompokkan keluarga aplikasi sensing Wi-Fi pada manusia beserta tantangan sensitivitas lingkungan dan kebutuhan kalibrasi [4], sementara Chen dkk. (2023) merangkum strategi lintas domain untuk mengatasi variasi pengguna dan lingkungan [12]. Untuk kasus isyarat, fisika sinyal menguntungkan karena gerakan lengan memindahkan massa yang jauh lebih besar daripada gerakan napas sehingga modulasi Doppler yang dihasilkan kuat dan dapat dipisahkan dari latar.",
           ],
         },
         {
           h2: "2.2 Mikrokontroler ESP32",
           paras: [
-            "ESP32 adalah mikrokontroler murah dengan radio Wi-Fi bawaan yang mampu mengekspor CSI melalui firmware khusus. Hernandez dan Bulut (2020) membuktikan sensing Wi-Fi mandiri dapat berjalan penuh pada perangkat kelas Internet of Things [5], dan ESP32-CSI-Tool menyediakan basis resmi pengambilan CSI pada keluarga perangkat ini [5]. Untuk penelitian ini, dua node ESP32 dipasang mengapit zona penandatangan sehingga gestur terekam dari dua kanal sekaligus. Biaya perangkat yang rendah penting bagi prasarana edukasi karena sekolah dapat mereplikasi sistem tanpa anggaran perangkat riset, dan karakteristik doppler gerak lengan 1 hingga 60 Hz tetap dalam jangkauan laju sampling node.",
+            "ESP32 adalah mikrokontroler murah dengan radio Wi-Fi bawaan yang mampu mengekspor CSI melalui firmware khusus. Hernandez dan Bulut (2020) membuktikan sensing Wi-Fi mandiri dapat berjalan penuh pada perangkat kelas Internet of Things [5], dan ESP32-CSI-Tool menyediakan basis resmi pengambilan CSI pada keluarga perangkat ini [5]. Untuk penelitian ini, dua node ESP32 dipasang mengapit zona penandatangan sehingga gestur terekam dari dua kanal sekaligus. Biaya perangkat yang rendah penting bagi prasarana edukasi karena sekolah dapat mereplikasi sistem tanpa anggaran perangkat riset, dan karakteristik Doppler gerak lengan 1 hingga 60 Hz tetap dalam jangkauan laju sampling node.",
           ],
         },
         {
           h2: "2.3 Platform RuView",
           paras: [
             "Sistem dibangun di atas RuView, proyek open-source (github.com/ruvnet/RuView) yang menyediakan firmware ESP32 untuk penangkapan CSI dengan format frame tetap, alur pengolahan sinyal berbasis buffer frekuensi tinggi, mekanisme rekam lalu latih yang adaptif, dashboard web, serta penerusan notifikasi melalui MQTT dan Home Assistant. Untuk kasus isyarat, komponen yang sama dibaca ulang dengan cara baru: level dan energi gerakan dipakai untuk memotong durasi gestur secara otomatis, dan alur rekam-latih yang semula dipakai untuk kalibrasi kehadiran diadaptasi menjadi prosedur perekaman N repetisi per gestur untuk pembangunan dataset berlabel. Kalibrasi ruang bawaan (600 frame + 8 anchor) tetap dipakai di setiap ruang edukasi mitra sebelum pengambilan data.",
-            "Tabel 2.1 memetakan fitur RuView yang dipakai beserta status keterujinya. Dua batas jujur dinyatakan sejak awal. Pertama, modul pose on-device 17 keypoint pada RuView masih berupa stub dengan PCK@20 sekitar 3 persen, sehingga penelitian ini mengklasifikasikan gestur langsung dari pola CSI mengikuti paradigma literatur [6] [11] dan tidak menjanjikan kerangka tangan. Kedua, penghitungan orang bersifat heuristik dan menurun pada lebih dari dua sampai tiga subjek, sehingga asumsi satu penandatangan per sesi dinyatakan eksplisit pada batasan masalah.",
+            "Tabel 2.1 memetakan fitur RuView yang dipakai beserta status keterujinya. Dua batas jujur dinyatakan sejak awal. Pertama, modul pose on-device 17 keypoint pada RuView masih berupa stub dengan PCK@20 sekitar 3 persen sehingga penelitian ini mengklasifikasikan gestur langsung dari pola CSI mengikuti paradigma literatur [6] [11] dan tidak menjanjikan kerangka tangan. Kedua, penghitungan orang bersifat heuristik dan menurun pada lebih dari dua sampai tiga subjek sehingga asumsi satu penandatangan per sesi dinyatakan eksplisit pada batasan masalah.",
           ],
           tables: [{
             caption: "Tabel 2.1 Pemetaan fitur RuView untuk kasus translasi isyarat",
@@ -143,14 +143,14 @@ module.exports = {
         {
           h2: "2.4 Pengenalan Isyarat Berbasis Wi-Fi CSI",
           paras: [
-            "Pengenalan isyarat dari sinyal Wi-Fi memiliki rantai bukti yang cukup panjang pada bahasa isyarat dunia. Shang dan Wu (2017) membangun WiSign, sistem pengenalan isyarat dengan beberapa transceiver Wi-Fi dan desain fitur tangguh terhadap variasi pengguna [8]. Ma et al. (2018) kemudian menunjukkan SignFi: 276 isyarat ASL dapat diklasifikasikan dari CSI Wi-Fi komoditas dengan akurasi yang layak pada skenario terkalibrasi [6]. Ahmed et al. (2020) menyusun DF-WiSLR, sistem pengenalan isyarat bebas-perangkat berbasis Wi-Fi dengan pembagian subcarrier aktif [9], dan melanjutkannya dengan arsitektur LSTM pada tahun berikutnya [10]. Pada tingkat gestur umum, Zhang et al. (2021) menyelesaikan persoalan lintas-domain melalui Widar3.0 dengan ekstraksi komponen gerak dari Doppler sehingga model tetap bekerja pada pengguna dan lingkungan baru tanpa pelatihan ulang [11].",
-            "Untuk granularitas halus, Hao et al. (2020) membuktikan pengenalan gestur jarimuhan dari CSI pada Wi-SL [13], Sruthi et al. (2024) mengenali gestur tangan dengan integrasi fitur amplitudo-fase pada HandFi [14], dan Cai et al. (2024) menegaskan kembali komplementaritas amplitudo-fase pada perangkat komoditas [15]. WiASL dari Qin et al. (2023) memperlihatkan arah aplikasi praktis dengan sistem tulisan-isyarat pada kamera komersial [16], menegaskan nilai aplikatif domain ini. Kumpulan preseden tersebut memberi dasar metodologis yang kuat: segmentasi gestur, ekstraksi fitur Doppler, dan klasifikasi per-gestur adalah pola yang telah teruji, sehingga pertanyaan penelitian dapat dipusatkan pada bahasa target dan konteks edukasi, bukan pada pembuktian ulang fisika sinyal.",
+            "Pengenalan isyarat dari sinyal Wi-Fi memiliki rantai bukti yang cukup panjang pada bahasa isyarat dunia. Shang dan Wu (2017) membangun WiSign, sistem pengenalan isyarat dengan beberapa transceiver Wi-Fi dan desain fitur tangguh terhadap variasi pengguna [8]. Ma dkk. (2018) kemudian menunjukkan SignFi: 276 isyarat ASL dapat diklasifikasikan dari CSI Wi-Fi komoditas dengan akurasi yang layak pada skenario terkalibrasi [6]. Ahmed dkk. (2020) menyusun DF-WiSLR, sistem pengenalan isyarat bebas-perangkat berbasis Wi-Fi dengan pembagian subcarrier aktif [9], dan melanjutkannya dengan arsitektur LSTM pada tahun berikutnya [10]. Pada tingkat gestur umum, Zhang dkk. (2021) menyelesaikan persoalan lintas domain melalui Widar3.0 dengan ekstraksi komponen gerak dari Doppler sehingga model tetap bekerja pada pengguna dan lingkungan baru tanpa pelatihan ulang [11].",
+            "Untuk granularitas halus, Hao dkk. (2020) membuktikan pengenalan gestur jarimuhan dari CSI pada Wi-SL [13], Sruthi dkk. (2024) mengenali gestur tangan dengan integrasi fitur amplitudo-fase pada HandFi [14], dan Cai dkk. (2024) menegaskan kembali komplementaritas amplitudo-fase pada perangkat komoditas [15]. WiASL dari Qin dkk. (2023) memperlihatkan arah aplikasi praktis dengan sistem tulisan-isyarat pada kamera komersial [16], menegaskan nilai aplikatif domain ini. Kumpulan preseden tersebut memberi dasar metodologis yang kuat: segmentasi gestur, ekstraksi fitur Doppler, dan klasifikasi per gestur adalah pola yang telah teruji sehingga pertanyaan penelitian dapat dipusatkan pada bahasa target dan konteks edukasi, bukan pada pembuktian ulang fisika sinyal.",
           ],
         },
         {
           h2: "2.5 Bahasa Isyarat Indonesia: SIBI dan BISINDO",
           paras: [
-            "Pada bahasa isyarat Indonesia, literatur yang tumbuh nyata-nyata berbasis visi. Dwijayanti et al. (2021) menerapkan CNN untuk pengenalan isyarat bahasa isyarat Indonesia [3]. Tiga karya 2025 memperluas arah ini: dataset video isyarat BISINDO tingkat kata dari Kindy et al. (2025) [17], pengenalan kalimat BISINDO berbasis arsitektur 3D dari Wiguna dan Rojali (2025) [18], dan pengenalan BISINDO dengan blok sadar-ruang dari Sebastian et al. (2025) [19]. Tinjauan sistematis Sanjaya et al. (2023) menegaskan dominasi kamera pada keseluruhan riset BISINDO dan mencatat belum adanya pendekatan sensor wireless device-free [2]. Ketegangan SIBI-BISINDO juga penting dicatat: SIBI adalah sistem formal yang diajarkan di sekolah, sedangkan BISINDO adalah bahasa komunitas yang dipakai sehari-hari, sehingga alat bantu yang menargetkan prasarana edukasi sebaiknya menguji gestur yang berakar pada kedua sistem.",
+            "Pada bahasa isyarat Indonesia, literatur yang nyata-nyata tumbuh berbasis visi. Dwijayanti dkk. (2021) menerapkan CNN untuk pengenalan isyarat bahasa isyarat Indonesia [3]. Tiga karya 2025 memperluas arah ini: dataset video isyarat BISINDO tingkat kata dari Kindy dkk. (2025) [17], pengenalan kalimat BISINDO berbasis arsitektur 3D dari Wiguna dan Rojali (2025) [18], dan pengenalan BISINDO dengan blok sadar-ruang dari Sebastian dkk. (2025) [19]. Tinjauan sistematis Sanjaya dkk. (2023) menegaskan dominasi kamera pada keseluruhan riset BISINDO dan mencatat belum adanya pendekatan sensor wireless device-free [2]. Ketegangan SIBI-BISINDO juga penting dicatat: SIBI adalah sistem formal yang diajarkan di sekolah, sedangkan BISINDO adalah bahasa komunitas yang dipakai sehari-hari sehingga alat bantu yang menargetkan prasarana edukasi sebaiknya menguji gestur yang berakar pada kedua sistem.",
           ],
         },
         {
@@ -165,22 +165,22 @@ module.exports = {
             centerCols: [1, 2, 3, 4, 5],
             rows: [
               ["Shang & Wu (2017) \u2014 WiSign: robust sign language recognition", "Wi-Fi CSI", "\u2212", "\u221a", "\u2212", "\u2212"],
-              ["Ma et al. (2018) \u2014 SignFi: sign language recognition using WiFi", "Wi-Fi CSI", "\u2212", "\u221a", "\u221a", "\u2212"],
-              ["Ahmed et al. (2020) \u2014 DF-WiSLR device-free Wi-Fi sign language", "Wi-Fi CSI", "\u2212", "\u221a", "\u221a", "\u2212"],
-              ["Baldeo et al. (2024) \u2014 Filipino SL recognition using Wi-Fi CSI", "Wi-Fi CSI", "\u2212", "\u221a", "\u221a", "\u2212"],
-              ["Dwijayanti et al. (2021) \u2014 Indonesia SL recognition using CNN", "Kamera/citra", "\u221a", "\u2212", "\u2212", "\u2212"],
-              ["Kindy et al. (2025) \u2014 Word-level BISINDO video dataset", "Kamera/citra", "\u221a", "\u2212", "\u2212", "\u2212"],
+              ["Ma dkk. (2018) \u2014 SignFi: sign language recognition using WiFi", "Wi-Fi CSI", "\u2212", "\u221a", "\u221a", "\u2212"],
+              ["Ahmed dkk. (2020) \u2014 DF-WiSLR device-free Wi-Fi sign language", "Wi-Fi CSI", "\u2212", "\u221a", "\u221a", "\u2212"],
+              ["Baldeo dkk. (2024) \u2014 Filipino SL recognition using Wi-Fi CSI", "Wi-Fi CSI", "\u2212", "\u221a", "\u221a", "\u2212"],
+              ["Dwijayanti dkk. (2021) \u2014 Indonesia SL recognition using CNN", "Kamera/citra", "\u221a", "\u2212", "\u2212", "\u2212"],
+              ["Kindy dkk. (2025) \u2014 Word-level BISINDO video dataset", "Kamera/citra", "\u221a", "\u2212", "\u2212", "\u2212"],
               ["Wiguna & Rojali (2025) \u2014 Sentence-level BISINDO 3D", "Kamera/citra", "\u221a", "\u2212", "\u2212", "\u2212"],
               ["Penelitian Ini", "Wi-Fi CSI (ESP32 + RuView)", "\u221a (SIBI & BISINDO)", "\u221a", "\u221a", "\u221a"],
             ],
           }],
           paras: [
-            "Berdasarkan tabel perbandingan di atas, terlihat bahwa penelitian-penelitian sebelumnya terpisah pada dua kutub: pengenalan isyarat CSI yang matang pada ASL dan bahasa isyarat dunia lain, serta pengenalan BISINDO yang kuat tetapi seluruhnya bergantung kamera. Belum banyak penelitian yang secara spesifik menggabungkan bahasa isyarat Indonesia, platform capture CSI murah (ESP32), dan konteks prasarana edukasi bebas kamera, terdapat juga beberapa celah masalah (gap) yang belum terselesaikan secara simultan oleh peneliti sebelumnya. Penelitian ini mengisi celah tersebut dengan langkah-langkah berikut.",
+            "Berdasarkan tabel perbandingan di atas, terlihat bahwa penelitian-penelitian sebelumnya terpisah pada dua kutub: pengenalan isyarat CSI yang matang pada ASL dan bahasa isyarat dunia lain, serta pengenalan BISINDO yang kuat tetapi seluruhnya bergantung kamera. Belum banyak penelitian yang secara spesifik menggabungkan bahasa isyarat Indonesia, platform capture CSI murah (ESP32), dan konteks prasarana edukasi bebas kamera. Masih terdapat beberapa celah masalah (gap) yang belum terselesaikan secara simultan oleh peneliti sebelumnya. Penelitian ini mengisi celah tersebut dengan langkah-langkah berikut.",
           ],
           numbered: [
-            "Memindahkan paradigma bukti CSI dari bahasa isyarat asing ke SIBI dan BISINDO pada subset gestur terisolasi yang dominan gerak lengan, sehingga sinyal Doppler cukup kuat untuk dipisahkan dari latar.",
-            "Memakai platform open-source RuView agar seluruh rantai capture, kalibrasi ruang, dataset, dan alert dapat direplikasi sekolah lain tanpa biaya lisensi.",
-            "Menempatkan luaran sebagai studi kelayakan bergerbang dengan dataset publik berlabel sebagai artefak tetap, sehingga keputusan lanjut-atau-berhenti dibuat berdasarkan data, bukan harapan.",
+            "Memindahkan paradigma bukti CSI dari bahasa isyarat asing ke SIBI dan BISINDO pada subset gestur terisolasi yang dominan gerak lengan sehingga sinyal Doppler cukup kuat untuk dipisahkan dari latar.",
+            "Memakai platform open-source RuView agar seluruh rantai capture, kalibrasi ruang, dataset, dan alert dapat direplikasi oleh sekolah lain tanpa biaya lisensi.",
+            "Menempatkan luaran sebagai studi kelayakan bergerbang dengan dataset publik berlabel sebagai artefak tetap sehingga keputusan untuk lanjut atau berhenti dibuat berdasarkan data, bukan harapan.",
           ],
         },
       ],
@@ -192,20 +192,20 @@ module.exports = {
         {
           h2: "3.1 Tahapan Penelitian",
           paras: [
-            "Penelitian dalam proposal ini dilaksanakan melalui beberapa tahapan yang tersusun secara sistematis sehingga membentuk suatu alur penelitian yang terstruktur. Tahap pertama adalah studi literatur, yaitu pemetaan sistematis pengenalan isyarat CSI dan bahasa isyarat Indonesia beserta penetapan subset gestur bersama guru/pembina yang memahami SIBI dan BISINDO. Tahap kedua adalah perancangan sistem, mencakup penyiapan dua node ESP32 dengan firmware RuView, skenario penempatan node di ruang edukasi, dan protokol perekaman dataset. Tahap ketiga adalah implementasi, yaitu perekaman dataset gestur berlabel, ekstraksi fitur, dan pelatihan klasifikator. Tahap terakhir adalah pengujian dan evaluasi: pengukuran akurasi per-gestur, alarm palsu, serta integrasi keluaran ke jalur alert, yang berujung pada keputusan kelayakan dan rekomendasi pengembangan. Apabila dalam proses pengujian ditemukan kendala, maka dilakukan evaluasi dan perbaikan secara berulang hingga sistem dapat dievaluasi secara adil.",
+            "Penelitian dalam proposal ini dilaksanakan melalui beberapa tahapan yang tersusun secara sistematis sehingga membentuk suatu alur penelitian yang terstruktur. Tahap pertama adalah studi literatur, yaitu pemetaan sistematis pengenalan isyarat CSI dan bahasa isyarat Indonesia beserta penetapan subset gestur bersama guru/pembina yang memahami SIBI dan BISINDO. Tahap kedua adalah perancangan sistem, mencakup penyiapan dua node ESP32 dengan firmware RuView, skenario penempatan node di ruang edukasi, dan protokol perekaman dataset. Tahap ketiga adalah implementasi, yaitu perekaman dataset gestur berlabel, ekstraksi fitur, dan pelatihan klasifikator. Tahap terakhir adalah pengujian dan evaluasi: pengukuran akurasi per gestur, alarm palsu, serta integrasi keluaran ke jalur alert, yang berujung pada keputusan kelayakan dan rekomendasi pengembangan. Apabila dalam proses pengujian ditemukan kendala, maka dilakukan evaluasi dan perbaikan secara berulang hingga sistem dapat dievaluasi secara adil.",
             "Penelitian ini adalah studi kelayakan kuantitatif dengan gerbang go/no-go pada minggu ketiga. Setiap tahap menghasilkan artefak tetap \u2014 karakterisasi sinyal, protokol perekaman, dataset publik berlabel, model, dan laporan kelayakan \u2014 sehingga penelitian tetap bernilai sekalipun berhenti pada salah satu gerbang. Struktur bergerbang ini konsisten dengan tiga proposal pengajuan judul sebelumnya pada garis penelitian yang sama.",
           ],
         },
         {
           h2: "3.2 Studi Literatur",
           paras: [
-            "Studi literatur dilakukan terhadap tiga kelompok sumber, yaitu pengenalan isyarat dan gestur berbasis CSI, pengenalan bahasa isyarat Indonesia berbasis visi, serta platform sensing ESP32. Sumber diutamakan dari jurnal dan prosiding terindeks (ACM, IEEE, Elsevier, MDPI) pada rentang 2017 hingga 2025. Setiap referensi diverifikasi melalui API Crossref dengan mencocokkan judul, penulis, tahun, dan venue terhadap DOI terdaftar; 19 referensi pada dokumen ini seluruhnya terverifikasi. Hasil studi literatur menegaskan posisi kebaruan kombinatif: bahasa target (SIBI dan BISINDO) belum pernah didatangi sensing CSI, sehingga klaim penelitian dibatasi pada kombinasi bahasa-platform-konteks, bukan klaim pertama secara umum.",
+            "Studi literatur dilakukan terhadap tiga kelompok sumber, yaitu pengenalan isyarat dan gestur berbasis CSI, pengenalan bahasa isyarat Indonesia berbasis visi, serta platform sensing ESP32. Sumber diutamakan dari jurnal dan prosiding terindeks (ACM, IEEE, Elsevier, MDPI) pada rentang 2017 hingga 2025. Setiap referensi diverifikasi melalui API Crossref dengan mencocokkan judul, penulis, tahun, dan venue terhadap DOI terdaftar; 19 referensi pada dokumen ini seluruhnya terverifikasi. Hasil studi literatur menegaskan posisi kebaruan kombinatif: bahasa target (SIBI dan BISINDO) belum pernah didatangi sensing CSI sehingga klaim penelitian dibatasi pada kombinasi bahasa-platform-konteks, bukan klaim pertama secara umum.",
           ],
         },
         {
           h2: "3.3 Perancangan Arsitektur Sistem",
           paras: [
-            "Arsitektur sistem terdiri atas tiga lapisan yang diadaptasi untuk gestur. Lapisan sensing berisi dua node ESP32 (satu access point, satu station) yang mengapit zona penandatangan, sehingga gerakan lengan memotong kanal sinyal dari dua sisi. Lapisan pengolahan berisi server RuView yang menjalankan kalibrasi ruangan, pemotongan durasi gestur berbasis energi gerak, dan ekstraksi fitur amplitudo, fase, serta Doppler pita gerak sekitar 1 sampai 60 Hz; band analisis berpindah dari band napas bawaan 0,1 hingga 0,5 Hz mengikuti fisika gestur. Lapisan penyajian berisi dashboard dan penerusan hasil klasifikasi ke jalur alert MQTT/Home Assistant sebagai entitas semacam gesture terdeteksi. Perbedaan fisika dengan kasus pemantauan lain justru menguntungkan karena modulasi Doppler gestur berorde puluhan kali lebih besar daripada modulasi napas, dan lingkungan pengambilan data lebih terkendali dengan penandatangan statis di zona capture.",
+            "Arsitektur sistem terdiri atas tiga lapisan yang diadaptasi untuk gestur. Lapisan sensing berisi dua node ESP32 (satu access point, satu station) yang mengapit zona penandatangan sehingga gerakan lengan memotong kanal sinyal dari dua sisi. Lapisan pengolahan berisi server RuView yang menjalankan kalibrasi ruangan, pemotongan durasi gestur berbasis energi gerak, dan ekstraksi fitur amplitudo, fase, serta Doppler pita gerak sekitar 1 sampai 60 Hz; band analisis berpindah dari band napas bawaan 0,1 hingga 0,5 Hz mengikuti fisika gestur. Lapisan penyajian berisi dashboard dan penerusan hasil klasifikasi ke jalur alert MQTT/Home Assistant sebagai entitas semacam gesture terdeteksi. Perbedaan fisika dengan kasus pemantauan lain justru menguntungkan karena modulasi Doppler gestur berorde puluhan kali lebih besar daripada modulasi napas, dan lingkungan pengambilan data lebih terkendali dengan penandatangan statis di zona capture.",
           ],
         },
         {
@@ -218,32 +218,32 @@ module.exports = {
           h2: "3.5 Perancangan Perangkat Lunak dan Dataset",
           paras: [
             "Protokol perekaman dataset dirancang terdokumentasi dan dapat direplikasi. Setiap sesi diawali kalibrasi ruang (600 frame + 8 anchor) dan pencatatan kondisi lingkungan (posisi perabot, sumber gerak latar seperti kipas atau AC) sebagai kovariat. Untuk tiap gestur pada subset terpilih, penandatangan melakukan N repetisi (target 30 repetisi per gestur per sesi) di dalam zona capture sambil terekam CSI dua node dan kamera sinkron untuk pelabelan; penanda waktu pada ketiganya disinkronkan lewat trigger bersama. Dataset disimpan lengkap dengan metadata (tanggal, ruang, penandatangan, posisi node) dan dibagikan sebagai dataset publik CSI bahasa isyarat Indonesia berlabel \u2014 kontribusi yang belum tersedia pada literatur [2] [17].",
-            "Fitur diekstraksi dari segmen gestur hasil pemotongan berbasis energi gerak: amplitudo dan fase subcarrier terpilih, komponen Doppler pita gerak sekitar 1 sampai 60 Hz, serta statistik ringkasnya (energi, entropy, lintasan puncak), mengikuti praktik literatur CSI [4] [11] [14] [15]. Klasifikator dimulai dari model yang jujur pada data kecil (SVM dan jaringan kecil 1D-CNN) dengan validasi silang per-sesi; strategi lintas-person dari Widar3.0 dipakai sebagai sumber strategi, bukan janji hasil [11] [12]. Seluruh pelatihan berjalan pada laptop dengan log konfigurasi yang terdokumentasi.",
+            "Fitur diekstraksi dari segmen gestur hasil pemotongan berbasis energi gerak: amplitudo dan fase subcarrier terpilih, komponen Doppler pita gerak sekitar 1 sampai 60 Hz, serta statistik ringkasnya (energi, entropi, lintasan puncak), mengikuti praktik literatur CSI [4] [11] [14] [15]. Klasifikator dimulai dari model yang jujur pada data kecil (SVM dan jaringan kecil 1D-CNN) dengan validasi silang per sesi; strategi lintas penandatangan dari Widar3.0 dipakai sebagai sumber strategi, bukan janji hasil [11] [12]. Seluruh pelatihan berjalan pada laptop dengan log konfigurasi yang terdokumentasi.",
           ],
         },
         {
           h2: "3.6 Lokasi, Partisipan, dan Etika",
           paras: [
-            "Lokasi pengambilan data adalah satu ruang edukasi mitra di \u3010Nama Sekolah/Lokasi\u3011 yang dipilih bersama pihak sekolah, dengan penandatangan dewasa berbahasa isyarat (guru atau pembina) sebagai subjek utama pengambilan dataset dan, apabila disetujui, siswa sebagai partisipan sukarela untuk pengujian variasi. Etika ditangani berjenjang: persetujuan institusi, persetujuan tertulis subjek, hak menarik diri tanpa konsekuensi, dan keterbukaan bahwa kamera hanya menyala saat sesi pelabelan. Sistem operasional bebas kamera dan mode privasi RuView membuang fitur biometrik sebelum data keluar dari node; identifikasi individu bukan keluaran penelitian. Karena subjek utama adalah dewasa dan partisipasi siswa bersifat sukarela dengan persetujuan orang tua, beban etis penelitian ini lebih ringan dibanding kasus pemantauan anak.",
+            "Lokasi pengambilan data adalah satu ruang edukasi mitra di \u3010Nama Sekolah/Lokasi\u3011 yang dipilih bersama pihak sekolah, dengan penandatangan dewasa berbahasa isyarat (guru atau pembina) sebagai subjek utama pengambilan dataset dan, apabila disetujui, siswa sebagai partisipan sukarela untuk pengujian variasi. Etika ditangani berjenjang: persetujuan institusi, persetujuan tertulis subjek, hak menarik diri tanpa konsekuensi, dan keterbukaan bahwa kamera hanya menyala saat sesi pelabelan. Sistem operasional bebas kamera dan mode privasi RuView membuang fitur biometrik sebelum data keluar dari node; identifikasi individu bukan keluaran penelitian. Karena subjek utama adalah dewasa dan partisipasi siswa bersifat sukarela dengan persetujuan orang tua, beban etis penelitian ini lebih ringan dibandingkan dengan kasus pemantauan anak.",
           ],
         },
         {
           h2: "3.7 Rencana Pengujian",
           paras: [
-            "Rencana pengujian terdiri atas tiga kelompok. Pengujian pertama adalah uji fisik Delta-CSI pada minggu ketiga dengan dua node ESP32 di ruang mitra: membandingkan pola CSI ruang kosong, ruang terisi tanpa gestur, dan ruang dengan penandatangan aktif sebagai gerbang go/no-go. Pengujian kedua adalah uji klasifikasi: akurasi per-gestur dan confusion matrix pada skenario dalam-sesi dan lintas-sesi untuk subset gestur terpilih. Pengujian ketiga adalah uji operasional: tingkat alarm palsu per jam saat tidak ada gestur (termasuk saat orang lewat atau perabot bergeser) dan latensi ujung-ke-ujung dari selesainya gestur hingga entitas alert ter-update. Setiap pengujian menghasilkan tabel hasil yang melekat pada dataset publik.",
+            "Rencana pengujian terdiri atas tiga kelompok. Pengujian pertama adalah uji fisik Delta-CSI pada minggu ketiga dengan dua node ESP32 di ruang mitra: membandingkan pola CSI ruang kosong, ruang terisi tanpa gestur, dan ruang dengan penandatangan aktif sebagai gerbang go/no-go. Pengujian kedua adalah uji klasifikasi: akurasi per gestur dan confusion matrix pada skenario dalam sesi dan lintas sesi untuk subset gestur terpilih. Pengujian ketiga adalah uji operasional: tingkat alarm palsu per jam saat tidak ada gestur (termasuk saat orang lewat atau perabot bergeser) dan latensi ujung-ke-ujung dari selesainya gestur hingga entitas alert diperbarui. Setiap pengujian menghasilkan tabel hasil yang melekat pada dataset publik.",
           ],
         },
         {
           h2: "3.8 Evaluasi dan Kriteria Keberhasilan",
           paras: [
-            "Kelayakan dinilai dari empat kelompok metrik: akurasi klasifikasi per-gestur dan confusion matrix pada skenario dalam-sesi dan lintas-sesi; tingkat alarm palsu per jam saat tidak ada gestur; latensi ujung-ke-ujung dari selesainya gestur hingga entitas alert ter-update; dan kualitas dataset (jumlah repetisi valid, cakupan kelas). Kriteria keberhasilan ditetapkan bersama pembimbing sebelum eksperimen, dengan target indikatif akurasi per-gestur di atas 80 persen dalam-sesi pada subset 5 gestur sebagai tanda kelayakan lanjut.",
+            "Kelayakan dinilai dari empat kelompok metrik: akurasi klasifikasi per gestur dan confusion matrix pada skenario dalam sesi dan lintas sesi; tingkat alarm palsu per jam saat tidak ada gestur; latensi ujung-ke-ujung dari selesainya gestur hingga entitas alert diperbarui; dan kualitas dataset (jumlah repetisi valid, cakupan kelas). Kriteria keberhasilan ditetapkan bersama pembimbing sebelum eksperimen, dengan target indikatif akurasi per gestur di atas 80 persen dalam sesi pada subset 5 gestur sebagai tanda kelayakan lanjut.",
             "Gerbang go/no-go minggu ketiga menentukan arah penelitian. Gerbang lolos bila delta antara kondisi penandatangan aktif dan tidak aktif terpisah jelas pada fitur Doppler pita gerak tanpa pembersihan khusus yang rumit; gerbang gagal bila pola tidak dapat dipisahkan setelah penempatan node dioptimalkan. Keputusan mengikuti protokol yang sama dengan tiga proposal sebelumnya: lanjut, kalibrasi ulang satu kali, atau beralih ke judul cadangan. Kegagalan pada gerbang dicatat sebagai temuan studi kelayakan yang bermakna ilmiah, bukan kegagalan skripsi.",
           ],
         },
         {
           h2: "3.9 Rencana Kegiatan dan Jadwal Penelitian",
           paras: [
-            "Jadwal disusun untuk satu semester (sekitar 4,5 bulan efektif) dengan gerbang keputusan yang menandai titik tidak-kembali. Tabel 3.1 merangkum kegiatan per rentang minggu beserta keluarannya; gerbang go/no-go pada minggu ketiga ditandai eksplisit dan menentukan jalur berikutnya.",
+            "Jadwal disusun untuk satu semester (sekitar 4,5 bulan efektif) dengan gerbang keputusan yang menandai titik tanpa jalan kembali. Tabel 3.1 merangkum kegiatan per rentang minggu beserta keluarannya; gerbang go/no-go pada minggu ketiga ditandai eksplisit dan menentukan jalur berikutnya.",
           ],
           tables: [{
             caption: "Tabel 3.1 Jadwal penelitian satu semester",
@@ -254,8 +254,8 @@ module.exports = {
               ["Uji fisik Delta-CSI (GERBANG GO/NO-GO)", "W3", "Laporan karakterisasi + keputusan lanjut/kalibrasi/berhenti"],
               ["Perizinan berjenjang + kalibrasi ruang mitra", "W3-W5", "Surat persetujuan + sesi kalibrasi 600 frame + 8 anchor"],
               ["Perekaman dataset gestur (N repetisi per gestur)", "W6-W8", "Dataset berlabel + kamera ground truth tersinkron"],
-              ["Ekstraksi fitur + pelatihan klasifikator", "W8-W11", "Model per-gestur + confusion matrix per-sesi"],
-              ["Pengujian lintas-sesi + alarm palsu + latensi alert", "W12-W14", "Laporan metrik kelayakan lengkap"],
+              ["Ekstraksi fitur + pelatihan klasifikator", "W8-W11", "Model per gestur + confusion matrix per sesi"],
+              ["Pengujian lintas sesi + alarm palsu + latensi alert", "W12-W14", "Laporan metrik kelayakan lengkap"],
               ["Integrasi keluaran ke MQTT/Home Assistant (demo)", "W14-W15", "Demo entitas gesture terdeteksi pada dashboard"],
               ["Penulisan laporan + persiapan seminar", "W15-W18", "Draf skripsi + slide + dataset publik dirapikan"],
             ],
@@ -264,7 +264,7 @@ module.exports = {
         {
           h2: "3.10 Rencana Biaya Penelitian",
           paras: [
-            "Kebutuhan biaya disusun hemat dengan memanfaatkan perangkat yang sudah dimiliki mahasiswa. Tabel 3.2 merangkum komponen biaya dalam Rupiah; laptop pengolahan data menggunakan milik pribadi sehingga tidak dianggarkan, dan platform RuView tidak menimbulkan biaya lisensi karena open-source.",
+            "Kebutuhan biaya disusun hemat dengan memanfaatkan perangkat yang sudah dimiliki mahasiswa. Tabel 3.2 merangkum komponen biaya dalam rupiah; laptop pengolahan data memakai perangkat milik pribadi sehingga tidak dianggarkan, dan platform RuView tidak menimbulkan biaya lisensi karena open-source.",
           ],
           tables: [{
             caption: "Tabel 3.2 Rencana biaya penelitian",
@@ -284,18 +284,18 @@ module.exports = {
         {
           h2: "3.11 Analisis Risiko dan Rencana Cadangan",
           paras: [
-            "Risiko utama diidentifikasi dari tiga sumber: temuan eksplorasi kode RuView, literatur CSI lintas-domain, dan karakteristik bahasa isyarat itu sendiri. Tabel 3.3 merangkum risiko, dampak, dan rencana cadangan. Dua risiko di antaranya menuntut kejujuran sejak proposal: generalisasi lintas-person pada sensing CSI terbatas sehingga model diperlakukan sah per-sesi atau per-penandatangan dengan kalibrasi ulang [11] [12], dan gestur yang berbeda artinya namun mirip geraknya dapat saling tertukar sehingga pemilihan subset gestur dilakukan bersama guru, mengutamakan gestur yang dominan gerak lengan.",
+            "Risiko utama diidentifikasi dari tiga sumber: temuan eksplorasi kode RuView, literatur CSI lintas domain, dan karakteristik bahasa isyarat itu sendiri. Tabel 3.3 merangkum risiko, dampak, dan rencana cadangan. Dua risiko di antaranya menuntut kejujuran sejak proposal: generalisasi lintas penandatangan pada sensing CSI terbatas sehingga model diperlakukan sah per sesi atau per penandatangan dengan kalibrasi ulang [11] [12], dan gestur yang berbeda arti tetapi mirip geraknya dapat saling tertukar sehingga pemilihan subset gestur dilakukan bersama guru, mengutamakan gestur yang dominan gerak lengan.",
           ],
           tables: [{
             caption: "Tabel 3.3 Risiko utama dan rencana cadangan",
             widths: [26, 22, 52],
             headers: ["Risiko", "Dampak bila terjadi", "Rencana cadangan (fallback)"],
             rows: [
-              ["Gerbang fisik Delta-CSI minggu-3 gagal", "Paradigma klasifikasi CSI tidak layak di lokasi", "Lanjut sebagai studi karakterisasi sinyal + laporan kegagalan yang bermakna ilmiah; atau alih ke judul cadangan dari tabel usulan"],
-              ["Akurasi lintas-person rendah", "Model tidak tahan ganti penandatangan", "Batas klaim: model sah per-sesi/per-penandatangan; dokumentasikan biaya kalibrasi ulang sebagai temuan"],
-              ["Dataset kecil membuat model bias", "Akurasi tidak stabil antar-sesi", "Mulai dari 5 gestur dengan 30 repetisi; augmentasi sederhana; jangan menjanjikan akurasi di luar data"],
+              ["Gerbang fisik Delta-CSI minggu-3 gagal", "Paradigma klasifikasi CSI tidak layak di lokasi", "Lanjut sebagai studi karakterisasi sinyal + laporan kegagalan yang bermakna ilmiah; atau beralih ke judul cadangan dari tabel usulan"],
+              ["Akurasi lintas penandatangan rendah", "Model tidak tahan ganti penandatangan", "Batas klaim: model sah per sesi/per penandatangan; dokumentasikan biaya kalibrasi ulang sebagai temuan"],
+              ["Dataset kecil membuat model bias", "Akurasi tidak stabil antarsesi", "Mulai dari 5 gestur dengan 30 repetisi; augmentasi sederhana; jangan menjanjikan akurasi di luar data"],
               ["Gestur ambigu (mirip gerak)", "Confusion matrix penuh pada pasangan tertentu", "Ganti pasangan gestur pada subset; pisahkan fitur Doppler; laporkan pasangan yang tak terpisahkan sebagai temuan"],
-              ["Konfound gerak latar (kipas, orang lewat)", "Alarm palsu tinggi", "Log kejadian harian sebagai kovariat; penempatan node ulang; threshold energi gerak disetel per ruang"],
+              ["Konfound gerak latar (kipas, orang lewat)", "Alarm palsu tinggi", "Log kejadian harian sebagai kovariat; penempatan node ulang; ambang energi gerak disetel per ruang"],
               ["Perizinan sekolah tertunda", "Pengambilan data mundur", "Mitra cadangan; simulasi di lab dengan penandatangan internal; urutan izin dimulai minggu pertama"],
             ],
           }],
