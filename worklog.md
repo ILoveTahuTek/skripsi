@@ -119,3 +119,18 @@ Stage Summary:
 - 4 proposal kini resmi berformat PROPOSAL (BAB I-III + Daftar Pustaka, tanpa bab rencana terpisah) sesuai klarifikasi user; aturan itu sendiri sudah terekam di skill untuk run berikutnya.
 - Semua dokumen skor evaluator GEPA 1,0; dua bug (evaluator regex alternasi, numbering DOCX) ditemukan dan diperbaiki lewat loop inspeksi — pelajaran: perbaiki metrik dan renderer sebelum menghukum konten.
 - Disiplin tetap terjaga di keempat dokumen: studi kelayakan, gestur terisolasi 5-12 kelas (DPJ-4), pose stub terlarang, gerbang Delta-CSI 2xESP32 minggu-3, placeholder eksplisit.
+
+---
+Task ID: 8
+Agent: Super Z (main agent, sesi web)
+Task: Panduan penulisan proposal DPJ-4 lingkup SIBI-only (tanpa BISINDO) — DOCX 20 hal + markdown + generator; folder 09-panduan-dpj4-sibi; commit a527270.
+
+Work Log:
+- Sumber: analisis korpus Drive TRSE UNM (05-analisis-korpus), skill proposal-writing GEPA v4, skill naskah-id, DPJ-4 md, gap-analisis + 22 referensi terverifikasi (06-referensi-isyarat).
+- Generator persisten 4 file JS (panduan_common + konten A/B + generate) disalin ke 09-panduan-dpj4-sibi/generator/.
+- QA: postcheck 0 error; PDF 20 hal; lint periksa.py bersih (2 temuan tersisa = kutipan pedagogis disengaja); pandoc mirror + md_postprocess (0 residu).
+- README diperbarui (bullet folder 05-09); push b29f283..a527270.
+
+Stage Summary:
+- Panduan berisi: argumen SIBI-only utk pembimbing, struktur wajib BAB I-III, templat bahasa korpus, ejaan baku, disiplin klaim SIBI-only, peta revisi 16 titik + templat siap tempel (judul/rumusan/tujuan/batasan 7 butir), 19 referensi dgn peran, checklist D1-D6 + alat QA.
+- Referensi BISINDO tetap dipakai sebagai bukti celah; klaim kebaruan dua lapis tetap sah utk SIBI.
