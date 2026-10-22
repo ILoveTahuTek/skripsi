@@ -1,0 +1,1141 @@
+2022
+
+Panduan Penulisan
+Laporan Penelitian
+
+PROGRAM STUDI TEKNIK INFORMATIKA
+FAKULTAS ILMU KOMPUTER
+UNIVERSITAS BINA DARMA
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+PENDAHULUAN
+
+1.1
+
+Latar Belakang
+
+Penulisan Laporan Penelitian merupakan salah satu bentuk penulisan
+karya ilmiah yang dilakukan oleh mahasiswa program sarjana di Program Studi
+Teknik Informatika, demikian juga halnya dengan laporan penelitian bagi
+mahasiswa program sarjana.
+Buku ini disusun untuk membantu mahasiswa dalam penulisan Laporan
+Penelitian disamping untuk menyeragamkan format tulisan dan juga
+meningkatkan kualitas tulisan mahasiswa. Dengan adanya pedoman ini,
+mahasiswa diharapkan dapat bekerja lebih efisien dalam menghasilkan karya
+ilmiah.
+
+1.2
+
+Jenis-Jenis Karya Ilmiah
+
+Secara umum karya ilmiah di lingkungan sebuah perguruan tinggi dapat
+dikelompokkan atas beberapa:
+•
+Tugas Akhir
+•
+Skripsi
+•
+Tesis
+•
+Disertasi
+•
+Makalah
+•
+Artikel
+•
+Laporan Penelitian, dll
+Tugas Akhir, skripsi, tesis dan disertasi merupakan karya ilmiah dalam
+suatu bidang studi mahasiswa program ahli madya, sarjana, magister dan doktor.
+Karya ilmiah ini merupakan salah satu persyaratan untuk menyelesaikan program
+studi di suatu perguruan tinggi. Tugas Akhir, skripsi, tesis dan disertasi yang
+ditulis dapat berdasarkan hasil penelitian lapangan, hasil kajian pustaka, kajian
+numerik, kajian analitik, ataupun hasil pengembangan suatu teknologi. Sesuai
+dengan jenjang pendidikan yang ada, yang membedakan ketiga bentuk karya
+ilmiah tersebut dapat dilihat aspek kuantitatif dan kualitatif. Tugas akhir
+mahasiswa D3 dapat pula ditulis berdasarkan hasil kegiatan praktek kerja atau
+magang.
+Dari aspek kuantitatif, disertasi lebih berat bobot akademiknya
+dibandingkan dengan tesis. Tesis lebih berat bobot akademiknya dibandingkan
+dengan skripsi. Skripsi lebih berat bobotnya dibandingkan Tugas Akhir.
+
+1 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Pembandingan ini juga sangat sulit diberikan pada jenis karya ilmiah yang
+berbeda jauh topik ataupun antar bidang yang berbeda. Oleh karena itu
+perbedaan dari aspek kualitatif juga harus dilihat. Aspek kualitatif dapat dilihat
+dari berbagai aspek permasalahan, aspek kajian pustaka, aspek metodologi,
+aspek hasil penelitian, dan aspek kemandirian berpikir dalam penyelesaian
+masalah. Aspek kualitatif ini perlu dilibatkan dalam membandingkan ketiga jenis
+karya ilmiah akademik tersebut.
+
+2 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+2 STRUKTUR LAPORAN PENELITIAN
+
+2.1
+
+Struktur Penulisan
+
+Laporan Penelitian disusun dalam struktur sebagai berikut:
+•
+
+Bagian Awal, meliputi:
+- Halaman Judul
+- Halaman Pengesahan
+- Halaman Persetujuan
+- Abstraksi
+- Kata Pengantar
+- Daftar Isi
+- Daftar Gambar*
+- Daftar Tabel*
+
+•
+
+Bagian Inti, meliputi:
+- Bab pertama: Pendahuluan
+- Bab kedua: Tinjauan Pustaka/Landasan Teori
+- Bab ketiga: Metodologi Penelitian
+- Bab keempat: Hasil dan Pembahasan
+- Bab kelima: Kesimpulan dan Saran
+
+•
+
+Bagian Akhir, meliputi:
+Daftar Pustaka
+Lampiran‐lampiran**
+
+Catatan:
+*) : Apabila ada Gambar dan Tabel
+**) : Dapat berupa lampiran desain rancangan program atau format
+kuisionare
+
+3 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+2.2
+•
+
+Penjelasan Struktur Laporan Penelitan
+
+Bagian Awal merupakan pengantar kepada bagian inti pembahasan Laporan
+Penelitian, meliputi:
+Halaman Judul
+Judul harus sesuai dengan pengajuaan kepada pembimbing dan ketua
+program studi yang telah disetujui.
+Halaman Pengesahan
+Halaman ini memuat pengesahan pembimbing dan pernyataan Dekan bahwa
+Laporan Penelitian telah diterima sebagai bagian persyaratan untuk meraih
+derajat sarjana.
+Halaman Persetujuan
+Halaman ini memuat persetujuan dari team penguji yang diketahui oleh
+ketua program studi.
+Abstraksi
+Abstrak merupakan intisari penelitian yang memuat tiga pokok pikiran: (1)
+latar belakang dan rumusan masalah, (2) metodologi dan pelaksanaan
+penelitian, dan (3) hasil yang dicapai. Abstrak disertai tiga sampai dengan
+lima kata‐kata kunci. Ditulis dengan tidak lebih dari 200 kata.
+Kata Pengantar
+Kata pengantar dapat diisi dengan tujuan penulisan laporan; pengalaman
+pelaksanaan penelitian: kesan, kesulitan, dan dampaknya bagi penulis.
+Ungkapan rasa syukur, dan terima kasih kepada pihak‐pihak yang
+berkontribusi pada pelaksanaan penelitian; termasuk harapan penulis
+terhadap laporan TA dapat diungkapkan pada bagian ini.
+Daftar Isi, Daftar Gambar, dan Daftar Tabel
+Daftar isi merupakan panduan cepat pembaca untuk menemukan halaman
+lokasi bagian naskah. Tabel dan gambar, jika ada, juga harus diringkas
+dalam
+bagian
+tersendiri
+yang
+memungkinkan
+pembaca
+dapat
+menemukandengan cepat.
+
+•
+
+Bagian Inti merupakan batang tubuh TA yang terdiri atas:
+a. Pendahuluan, meliputi:
+
+4 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Latarbelakang
+Deskripsi persoalan‐persoalan yang muncul dan dihadapi, kesenjangan
+antara keadaan nyata dan keadaan ideal yang diharapkan sehingga
+melahirkan inti masalah baru yang harus diselesaikan. Latarbelakang juga
+memuat uraian makna penting alasan penelitian harus dilaksanakan.
+Perumusan Masalah
+Rumusan masalah merupakan ungkapan pertanyaan yang menegaskan
+masalah yang menjadi fokus penelitian. Rumusan masalah tidak harus
+diungkapkan dalam kalimat tanya.
+Tujuan Penelitian
+Bagian ini memuat hal‐hal yang ingin dicapai setelah penelitian berakhir.
+Ruang Lingkup dan Batasan Masalah
+Penegasan bagian masalah yang akan dipecahkan, termasuk asumsi asumsi
+yang digunakan.
+Manfaat Penelitian
+Manfaat penelitian adalah dampak yang diperoleh ketika tujuan tercapai.
+b. Kajian Teori
+Kajian teori, atau sering juga disebut landasan teori atau tinjauan pustaka,
+memuat hasil‐hasil penelitian sejenis terdahulu yang menginspirasi atau
+melandasi pelaksanakan penelitian ini; dan juga mengulas landasan teoritik
+yang berhubungan dengan penelitian yang akan dilakukan. Perlu ditegaskan
+bahwa bagian ini bukan hanya menampilkan definisi-definisi tetapi juga
+diskusi tentang apa yang menjadi tinjauan.
+c. Metodologi Penelitian
+Bagian
+ini
+menguraikan
+Langkah‐langkah ini harus
+penelitian.
+
+langkah‐langkah
+penyelesaian
+masalah.
+disesuaikan dengan fokus permasalahan
+
+d. Pembahasan hasil penelitian dan diskusi
+Bagian ini menyajikan hasil‐hasil yang diperoleh dan cara pencapaiannya.
+Uraian harus komprehensif namun tetap ringkas dan padu. Pembahasan hasil
+penelitian meliputi kelebihan dan kekurangan serta pengujian.
+e. Penutup, terdiri atas:
+Kesimpulan
+Kesimpulan merupakan rangkuman hasil dicapai dan merupakan jawaban
+atas rumusan masalah.
+
+5 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Saran
+Bagian ini menguraikan saran‐saran yang perlu diperhatikan berdasarkan
+keterbatasan yang ditemukan dan asumsi yang dibuat, termasuk saran untuk
+pengembangan lebih lanjut.
+•
+
+Bagian Akhir, meliputi:
+Daftar Pustaka
+Daftar pustaka memuat semua sumber pustaka yang dijadikan acuan dalam
+naskah TA. Semua acuan yang dinyatakan di dalam naskah harus
+dicantumkan dalam daftar acuan, dan sumber‐sumber pustaka yang
+dinyatakan di dalam daftar acuan harus diacu dalam naskah. Daftar Acuan
+diurutkan ascending secara alfabetis—mulai A s.d. Z. (Lihat .....) serta
+menggunakan format Penulisan APA style (American Psychological
+Association) atau Harvard Style.
+Lampiran
+Keterangan tambahan yang mendukung penjelasan/uraian dalam naskah.
+
+6 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+3 FORMAT DAN PENATAAN PENULISAN
+
+3.1
+
+Ukuran kertas dan Margin penulisan
+
+Laporan Penelitian dicetak pada kertas ukuran A4 (80 gram). Naskah ditulis
+hanya satu muka (tidak bolak-balik). Naskah ditulis menggunakan software word
+processing dengan huruf Cambria ukuran 12 pt. Jumlah lembar minimal 25
+lembar di luar daftar pustaka.
+Margin penulisan:
+- batas kiri 4 cm
+- batas atas 3 cm
+- batas kanan 3 cm
+- batas bawah 3 cm
+
+3.2
+
+Style penulisan
+
+Anda dapat memanfaatkan fasilitas word processing untuk memudahkan setting
+huruf sekaligus menjaga konsistensi. Sedangkan penggunaan huruf diatur pada
+Microsoft Word sebagai berikut:
+Style
+Heading 1
+
+Bagian Tulisan
+SubBab
+
+Heading 2
+
+SubSubBab
+
+Heading 3
+
+SubSubSubBab
+
+Normal
+
+Paragraf
+
+Definisi Style
+Font: Cambria, 12pt, Bold
+Spacing: Before 0 pt, After 10 pt,
+Spacing 1,0 Single lines
+Alignment: Left
+Font: Cambria, 12pt
+Spacing: Before 0 pt, After 10 pt,
+Spacing 1,0 Single lines
+Alignment: Left
+Font: Cambria, 12pt
+Spacing: Before 0 pt, After 10 pt,
+Spacing 1,0 Single lines
+Alignment: Left
+Font: Cambria, 12pt
+Spacing: Before 0 pt, After 0 pt, Line
+Spacing 1,0 lines
+Alignment: Justify
+
+7 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+3.2.1
+Style
+Normal
+_bernomor
+
+Bagian Tulisan
+Paragraf
+bernomor
+
+Definisi Style
+Font: Cambria, 12pt
+Spacing: Before 0 pt, After 10 pt, Line
+Spacing 1,5 lines
+Alignment: Left
+
+Kutipan
+
+Kutipan
+langsung
+
+Script _judul
+
+Judul Script/
+Kode Program
+
+Script
+
+Script/Kode
+Program
+
+Tabel_judul
+
+Judul Tabel
+
+Tabel_header
+
+Header Tabel
+(nama kolom)
+
+Tabel _isi
+
+Isi Tabel
+
+Gambar_judul
+
+Judul Gambar
+
+Daftar Acuan
+
+Daftar Acuan
+
+Font: Cambria, 12pt
+Spacing: Before 0 pt, After 10 pt, Line
+Spacing Multiple
+Alignment: Left
+Indentation: Left 3,25 cm
+Font: Cambria, 10pt
+Spacing: Before 6 pt, After 6 pt, Line
+Spacing Single
+Alignment: Left
+Font: Cambria, 10pt
+Spacing: Before 0 pt, After 0 pt, Line
+Spacing Single
+Alignment: Left
+Font: Cambria, 12pt
+Spacing: Before 0 pt, After 8 pt, Line
+Spacing Single
+Alignment: Left
+Font: Cambria, 9pt, Bold
+Spacing: Before 2 pt, After 2 pt, Line
+Spacing Single
+Alignment: Centered
+Font: Cambria, 9pt
+Spacing: Before 0 pt, After 0 pt, Line
+Spacing Single
+Alignment: Left
+Font: Cambria, 12pt
+Spacing: Before 6 pt, After 6 pt, Line
+Spacing Single
+Alignment: Centered
+Font: Cambria, 12pt
+Spacing: Before 0 pt, After 6 pt, Line
+Spacing Single
+Alignment: Left
+Indentation: Special Hanging 1,25 cm
+
+8 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+3.3
+
+Bahasa dan Penggunaan Tanda Baca
+
+Bahasa yang digunakan adalah bahasa Indonesia baku dengan EYD (Ejaan
+Yang Disempurnakan) sebagai bahasa Ilmiah. Bahasa Ilmiah merupakan bahasa
+yang singkat, tepat dan tidak multi tafsir. Penggunaan istilah asing sangat
+dimungkinkan. Yang perlu diperhatikan istilah asing harus dituliskan dalam
+bentuk miring / italic, kecuali nama ataupun istilah asing yang telah diadopsi ke
+bahasa Indonesia.
+Tanda baca harus digunakan secara cermat untuk menghindari salah
+pengertian, di bawah ini diberikan beberapa pokoknya:
+•
+
+Tanda Titik (.)
+Tanda titik digunakan untuk menandai akhir suatu kalimat yang bukan
+kalimat seru atau kalimat tanya. Sesudah tanda tanya (?) dan tanda seru (!)
+tidak dibubuhkan tanda titik. Tanda titik juga tidak digunakan untuk
+akronim (SIM, bukan S.I.M.).
+
+•
+
+Tanda Koma (,)
+o Tanda koma digunakan di antara unsur‐unsur dalam suatu
+pemerincian atau pembilangan, yang mengakhiri suatu pernyataan,
+e.g. Piranti masukan yang digunakan adalah keyboard, mouse, dan
+scanner.
+o Tanda koma digunakan untuk memisahkan kalimat setara dari
+kalimat setara berikutnya, yang didahului kata‐kata tetapi,
+melainkan, dan kata hubung lainnya.
+o Tanda koma juga digunakan untuk mengapit keterangan tambahan,
+e.g. Kondisi seperti di atas, yaitu suhu 25o C, komputer akan
+berjalan dengan baik.
+
+•
+
+Tanda Titik Koma (;)
+Tanda baca ini digunakan di antara unsur‐unsur pemerincian atau
+pembilangan yang sudah mengandung tanda koma.
+
+•
+
+Tanda Titik Dua (:)
+Tanda baca ini digunakan di akhir suatu pernyataan lengkap yang diikuti
+rangkaian tambahan informasi yang lebih detail,
+e.g.
+Spesifikasi minimal perangkat keras yang digunakan:
+Prosesor Intel Dual Core 5050, memori 1GB PC2 5300,
+HDD 73GB 10K Hot‐swap dan Ethernet Controller.
+
+9 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+•
+
+Tanda Petik (“ “)
+Kutipan langsung diawali dan diakhiri tanda ini, termasuk terjemahan
+harfiah suatu naskah atau bahan tertulis lainnya.
+
+•
+
+Tanda Hubung (‐)
+Tanda hubung digunakan untuk menyambung suku‐suku kata yang terpenggal
+oleh pergantian baris dan menyambung unsur‐unsur kata ulang.
+Tanda hubung juga digunakan untuk: (1) merangkai kata sedengan kata
+berikutnya yang diawali dengan huruf capital, (2) merangkai kata ke dengan
+bilangan, (3) merangkai bilangan dengan akhiran ‐an, (4) merangkai unsur
+bahasa Indonesia dengan unsur bahasa asing, e.g.
+se‐Indonesia
+ujicoba ke‐2
+tahun 90‐an
+halaman itu di‐print
+
+•
+
+Tanda Pisah (–) dan (—)
+Tanda pisah (–, en dash) digunakan di antara dua bilangan atau tanggal
+dengan arti “mulai … sampai dengan …”, e.g.
+tanggal 5–10 April 2007
+Tanda pisah (—, em dash) digunakan untuk menyatakan sisipan atau
+keterangan tambahan sebagai penegasan, e.g.
+Findability— yang meliputi elemen desain seperti arsitektur
+informasi, nama kategori, dan link— merupakan salah satu
+aspek …
+
+•
+
+Tanda Kurung (( ))
+Tanda ini mengapit keterangan tambahan atau penjelasan.
+
+•
+
+Elipsis (…)
+Tanda ini menyatakan adanya penghapusan kata atau kalimat ketika ellipsis
+
+3.4
+
+Style Penomoran
+
+3.4.1. Nama Bab dan sub-bab
+Judul bab ditulis dengan menggunakan huruf latin dengan aturan sebagai
+berikut:
+
+10 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+LAPORAN PENELITIAN
+Judul Laporan Penelitian
+1. Sub Bab
+2. Sub Bab
+2.1.1. Sub Sub bab
+2.1.2. Sub Sub bab
+Jika dalam masing-masing sub masih dibutuhkan pemecahan dapat digunakan
+alphabetik a,b, c dan seterusnya.
+
+3.4.2. Penomoran Halaman
+Penomoran halaman laporan ditulis dengan ketentuan sebagai berikut:
+•
+Bagian Awal menggunakan angka Romawi kecil; i, ii, iii, dst. pada posisi
+tengah‐bawah halaman.
+•
+Bagian Inti dan Akhir menggunakan angka Latin; 1, 2, 3, ... dst pada sudut
+kanan‐bawah halaman.
+
+3.4.3. Penulisan Acuan /Referensi
+Ada beberapa alasan mengapa perlunya menuliskan referensi secara benar:
+•
+Pertama, untuk menghindari plagiat. Plagiat secara sederhana dapat
+dikatakan mengakui hasil karya, ide atau pikiran orang lain sebagai
+karya sendiri. Dengan menggunakan cara mengutip yang benar, seorang
+penulis dapat menghindari plagiat ini sekaligus memanfaatkan ide
+/pikiran orang lain didalam tulisannya.
+•
+Kedua, untuk menverifikasi kutipan. Adapun maksudnya baik pembaca
+ataupun si empunya karya dapat mengetahui sumber kutipan dan dapat
+memverifikasi keabsahan yang menjadi kutipan dan ini berhubungan
+dengan erat dengan alasan ketiga.
+•
+Ketiga, memungkinkan pembaca untuk memfollow-up dan membaca
+argumen penulis secara lebih seksama.
+Adapun alasan-alasan diatas sangat berhubungan erat dengan etika dan kode
+etik yang lazim ditumbuhbudayakan dalam penulisan karya. Hak cipta dan paten
+dari segi hukum harus diikuti dan difahami dengan baik. Penulis harus memahami
+etika penulisan karya ilmiah secara baik. Kode etik adalah norma-norma yang
+telah diterima dan diakui oleh masyarakat dan citivitas akademik perlu
+diperhatikan dalam penulisan karya ilmiah. Norma ini berkaitan dengan
+pengutipan, perujukan, perijinan terhadap bahan yang digunakan, dan
+penyebutan sumber data ataupun informan.
+Informasi yang dikutip untuk menguatkan pernyataan dalam naskah harus
+dilengkapi dengan acuan. Sumber informasi dapat berupa: buku, atau bagian
+buku; makalah yang diterbitkan dalam jurnal, majalah, atau publikasi pertemuan
+
+11 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+ilmiah lainnya; dan laporan yang diterbitkan oleh suatu badan atau lembaga
+resmi.
+Sumber‐sumber informasi tersebut dapat berupa bahan tercetak maupun
+dipublikasikan secara elektronik. Sumber acuan yang tidak dipublikasikan atau
+berasal dari komunikasi pribadi tidak dicantumkan dalam daftar acuan.
+
+3.4.4. Pengacuan Dalam‐Naskah / In-text Reference
+Referensi dalam tulisan atau in-text reference menunjukkan bagian dalam
+tulisan dari idea atau kutipan dengan menyebutkan identitas dari sumber asalnya
+Pengacuan dalam naskah menyajikan informasi ringkas, nama penulis dan tanggal
+publikasi, untuk membantu pembaca menelusuri asal sumber informasi dalam
+daftar acuan pada bagian akhir naskah.
+Bentuk pengacuan sumber informasi ini dapat berupa: parafrase, ringkasan,
+atau kutipan.
+•
+Parafrase adalah bentuk acuan dengan mencantumkan tulisan orang
+lain menggunakan ungkapan sendiri—tidak menggunakan kata dan
+struktur kalimat asal.
+•
+Ringkasan adalah bentuk acuan dengan mencantumkan tulisan orang
+lain yang telah diringkas dan ditulis menggunakan ungkapan sendiri, e.g.
+meringkas naskah, buku, atau bagianbuku dalam beberapa kalimat saja.
+• Kutipan adalah bentuk acuan langsung—mengutip tulisan orang lain
+sebagaimana adanya. Kutipan langsung diapit dengan menggunakan
+tanda petik (“ “) dan dicantumkan nomor halaman sumber kutipan. Jika
+sumber acuan berupa dokumen elektronik, maka dicantumkan judul
+(heading) yang menunjukkan lokasi acuan tersebut.
+Cara pengacuan dalam‐naskah dapat dilakukan dengan frase pengantar
+(signal phrase), kutipan dalam tanda kurung (parenthetical citation), atau
+keduanya.
+Signal phrase Pengacuan dengan menggunakan frase pengantar terhadap
+kutipan pendek, parafrase, atau ringkasan; yaitu dengan mencantumkan nama
+penulis dalam frase pengantar atau menuliskannya dalam tanda kurung tepat
+setelah frase pengantar dan tanggal publikasi.
+Contoh:
+Steve Krug (2006) menyatakan bahwa, “One of the very few well
+documented facts about Web use is that people tend to spend very
+little time reading most Web pages. Instead, we scan (or skim) them,
+looking for words or phrases that catch our eye” (h. 22).
+… hal tersebut sejalan dengan temuan (Krug, 2006) bahwa sebagian
+kecil pengguna Web yang membaca halaman‐halaman Web, melainkan
+
+12 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+scanning—membaca cepat dengan melihat kata‐kata atau frase yang
+mencolok.
+Pengacuan di atas dirujukkan ke daftar acuan berikut:
+Krug, S. (2006), Don’t make me think: A common sense approach to
+web usability, 2nd ed., New Riders, Berkeley.
+Parenthetical citation Pengacuan dilakukan dengan meletakkan nama penulis
+dan tanggal publikasi dalam tanda kurung tepat setelah akhir acuan, e.g.
+Sebagian kecil pengguna Web yang membaca halaman-halaman Web,
+melainkan scanning—membaca cepat dengan melihat kata‐kata atau
+frase yang mencolok(Krug, 2006).ulisan Definisi Style
+Previewing sentence and Parenthetical citation Pengacuan kutipan yang
+panjang (terdiri atas 40 kata atau lebih), dilakukan dengan menggunakan frase
+pengantar yang memuat nama penulis dan tanggal publikasi di akhiri dengan
+tanda titik dua diikuti dengan kutipan. Frase pengantar ini akan membantu
+pembaca untuk mendapatkan gambaran ringkas mengenai kutipan yang diacu.
+Kutipan ditulis menjorok sebanyak satu indentasi paragraf, ±1,25 cm.
+Contoh:
+Tanembaum (1997) mendefinisikan pengertian Local Area Network dan
+jenis‐jenisnya:
+Local area network, seringkali disebut LAN, merupakan
+jaringan milik pribadi di dalam sebuah gedung atau kampus
+yang berukuran sampai beberapa kilometer. LAN seringkali
+digunakan untuk menghubungkan komputer‐komputer pribadi
+atau workstation dalam kantor perusahaan atau pabrik‐pabrik
+untuk memakai bersama resource (misalnya, printer) dan saling
+bertukar informasi. LAN dapat dibedakan dari jenis jaringan
+lainnya berdasarkan tiga karakteristik: (1) ukuran, (2) teknologi
+transmisi, dan (3) topologinya. (h.6)
+Pengacuan di atas dirujukkan ke daftar acuan berikut:
+Tanembaum, A. S. (1997), Jaringan Komputer (Jilid 1), Terj.
+Computer Networks (3rd ed.), G. Priatna (Pen.), P. W. Indarto
+(Ed.), Prenhallindo, Jakarta.
+
+13 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Lebih lanjut berikut ini contoh-contoh penulisan acuan dalam naskah :
+1. Jika penulis menjadi bagian dari kalimat, maka penulisannya ditandai
+dengan penulisan nama penulis dan diikuti dengan tahun penerbitan dalam
+tanda kurung. Penulisan sumber kutipan ini dilakukan pada bagian terdekat
+dengan ide atau informasi yang dikutip
+Contoh:
+Luthfi (2004) berargumentasi bahwa ...
+Sistem yang dikembangkan oleh Alman & Syakti (2005)
+mengungkapkan ...
+AI sangat efektif seperti yang dibuktikan oleh Hamzah (1983) ...
+Disisi lain, Iskandar dkk (1999) melaporkan …
+Baik Bhakti (2003) maupun Kurniawan (2006) membuktikan ...
+Ada kalanya penulis yang sama melakukan penerbitan tulisan secara
+berulang-ulang untuk ide yang sama. Contoh
+Jogianto (1995, 1997, 2004) secara konsisten menyatakan bahwa …
+Sistem yang dikembangkan oleh Agustina dan Meileni (1999, 2003)
+menemukan fakta bahwa …
+2.
+
+Jika penulis bukan merupakan bagian natural dari kalimat maka penulisan
+identitas sumber kutipan ditunjukkan dengan menuliskan author dan tahun
+didalam tanda kurung.
+Contoh:
+Penelitian (Luthfie, 2004) menemukan kenyataan ……
+Telah terbukti bahwa AI sangat efektif (Febriansyah et al, 2000)
+dalam ...
+!!! Hati-hati … jangan seperti contoh berikut
+Penelitian oleh (Oemar, 2004) menemukan …
+Menurut (Syamsuar, 2004) bahwa .....
+Perhatikan kalimat tersebut dimana identitas sumber kutipan tidak
+menyatu dengan kalimat...!!! Semestinya
+Penelitian oleh Oemar (2004) menemukan …
+Menurut Syamsuar (2004) bahwa .....
+Untuk referensi dari beberapa sumber dapat dituliskan pada daftar tunggal
+menggunakan tanda titik-koma (;) untuk memisahkan penulis- penulis yang
+berbeda:
+Pada titik ini beberapa penulis sepakat (Jogianto 1995, 2004;
+Fathoni & Febriansyah, 2003; Syamsuar 2003, 2005), tetapi …
+
+14 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+3.4.5. Acuan Sumber Sekunder
+Pengacuan suatu karya yang didiskusikan dalam sumber sekunder, sumber
+rujukan yang dinyatakan dalam daftar acuan adalah sumber sekunder.
+Perhatikan contoh berikut: pendapat yang dikemukakan oleh James Martin
+dan James J. Odell dikutip oleh Hariyanto.
+Martin dan Odell (1999, dalam Hariyanto 2004) mengemukakan bahwa
+“Objek adalah sesuatu yang dapat dikonsepkan yang diperlukan untuk
+pemecahan masalah. Objek dapat berupa konsep, abstraksi, atau
+sesuatu dengan batas‐batas yang tegas.” (h. 26)
+Rujukan yang dimuat dalam daftar acuan adalah sumber sekunder yang
+langsung dibaca penulis, bukan sumber asal.
+Hariyanto, B. (2004), Rekayasa Sistem Berorientasi Objek, Informatika,
+Bandung.
+
+3.4.6. Beberapa Catatan
+-
+
+Untuk dua penulis sebaiknya digunakan tanda ‘&’ (tanda dan) sebagai
+penghubung. Hal ini memberikan keuntungan pada saat menjumpai
+kasus sbb:
+•
+Baik Brown & Smith (1986) dan Carson (1970) berargumen ...
+Sehingga terlihat jelas bahwa kedua sumber tersebut berbeda.
+
+-
+
+Jika ada dua penulis, kedua nama tersebut harus disebutkan. Sedangkan
+jika ada 3 penulis atau lebih, hanya satu penulis saja yang perlu
+dituliskan diikuti dengan dkk (singkatan dari dan kawan-kawan atau et
+al (biasanya italic). Et al sendiri singkatan dari ‘et alia’ yang berarti
+‘others’ atau dkk.
+-
+
+Jika referensi dapat menimbulkan kebingungan (ambiguous) karena
+ada penulis dan tahun penerbita yang sama, huruf kecil ("a", "b",
+dst.) ditempatkan segera setelah tahun, contoh “(Jones 1983a,
+1983b)".
+
+-
+
+Bila harus menuliskan halaman (utamanya pada kutipan langsung),
+nomor halaman dapat diletakkan langsung setelah tahun mengikuti
+‘h’ (halaman)
+•
+Algoritma berikut diadopsi dari Zuhri (2003, h. 30-35).
+•
+Satu definisi yang mungkin dapat menggambarkan
+pengertian dari system (Wijaya 1980, h. 12) adalah..
+
+15 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+3.4.7. Penulisan Rumus Matematika
+Berikut Contoh penulisan rumus matematika pada laporan penelitian :
+
+(1)
+3.4.8. Penulisan Daftar Acuan (Tutorial Penggunaan Bibtex)
+Sebelum melakukan penambahan bibliography pada Microsoft word, pastikan
+anda sudah melakukan instalasi pada ketiga software dibawah ini :
+1. MikTex
+2. JabRef
+3. Bibtex4word
+Ketiga software diatas bisa di download di internet dengan kata kunci sesuai
+namanya. Selanjutnya setelah semua sudah terinstal dan terpasang, silahkan cek
+Microsoft Word anda apakah sudah terdapat “Add-Ins” pada menu bar, seperti
+gambar dibawah ini.
+
+Note : Jika berhasil maka akan seperti tampilan diatas.
+Langkah Berikutnya…
+Untuk membuat referensi atau daftar pustaka pada Microsoft word dengan
+mudah kita akan menggunakan “JabRef” sebagai basisdata dari referensi yang
+kita ambil di “Google Scholar”.
+
+16 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Langkah pertama buka Jabref
+
+Berikut adalah tampilan dari “JabRef”, disini nantinya data-data referensi kita
+akan disimpan dan akan di panggil di Microsoft Word
+
+Kali ini kita akan menambahkan referensi pada JabRef, yang akan kita ambil dari
+Google Scholar, kami akan mencontohkan dengan mengambil referensi jurnal
+dari salah satu dosen, seperti dibawah ini.
+*note: katakunci pencarian bisa berupa nama penulis atau judul article/jurnal yang
+disesuaikan dengan kutipan yang ingin dirujuk.
+
+17 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Kita akan mengutip dari jurnal tersebut, dengan mudah kita akan mendapatkan
+referensi untuk daftar pustakanya nanti, dengan mengklik tanda kutip tersebut,
+lalu kita akan pilih BibTex seperti gambar dibawah.
+
+Kemudian klik bibtex, maka akan muncul bibtex source yang akan kita salin pada
+JabRef
+
+18 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Kode diatas akan kita salin pada JabRef sebagai referensi untuk daftar pustaka di
+word, klik tambah
+
+Kemudian sesuaikan dengan referensi yang kita ambil, tadi kami contohkan
+dengan artikel, jadi BibTex yang akan dibuat adalah Articel
+
+19 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Kemudian akan muncul tampilan seperti di bawah ini
+
+Kemudian salin kode yang tadi sudah di-copy sebelumnya tadi, lalu paste-kan di
+BibTex Source
+
+20 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Kemudian simpan file JabRef tersebut
+
+File jabref ini yang nantinya akan kita panggil di Microsoft Word sebagai basis
+data dari referensi atau daftar pustaka kita
+Kemudian pada jabref terdapat bibtex key, bibtex key tersebut akan menjadi
+data setiap refensi kita, setiap kita menambah referensi baru di jabref, maka
+bibtex key tersebut akan berbeda-beda
+
+21 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Kemudian buka dokumen yang akan anda tambahkan daftar pustaka,
+
+Kemudian pilih menu add-ins lalu tambahkan data jabref yang kita simpan tadi,
+klik icon folder tersebut lalu masukkan file jabref tadi
+
+22 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Untuk menambahkan daftar pustakanya, letakakn kursor pada paragraph yang
+akan kita jadikan referensi, lalu silahkan klik icon [+] seperti dibawah ini
+
+23 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Lalu salin bibtex key tadi, setelah itu klik Ok, maka akan muncul seperti gambar
+dibawah ini
+
+Kemudian untuk memunculkan daftar pustaka, klik pada icon dibawah ini, dan
+letak kan kursor pada bagian bawah daftar pustaka, seperti dibawah ini
+
+24 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Maka akan tampil seperti di bawah ini
+
+Untuk merubah style referensi klik pada icon dibawah ini, kemudian ganti
+“plain” menjadi “apa” atau “apalike” sesuai Microsoft word masing-masing
+
+25 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+Maka akan berubah menjadi seperti ini
+
+Dan selesai, lakukan secara berulang pada database yang sama untuk
+menambahkan tiap daftar rujukan seperti langkah yang telah dijelaskan diatas.
+Tidak hanya menyediakan tutorial bibtex, aplikasi sejenis ini yang juga bisa
+dipakai ialah zotero untuk melihat tutorial lengkapnya silahkan cek di youtube
+http://www.youtube.com/c/berguru
+
+26 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+3.5
+
+Penomoran Tabel dan Gambar
+
+3.5.1
+
+Tabel
+
+Identitas tabel ditulis pada bagian atas tabel rata kiri dan terdiri dari nomor
+tabel dan judul tabel tersebut. Penulisan nomor tabel merupakan kombinasi
+antara nomor Bab dan urutan no tabel pada bab tersebut dimana
+menggunakan style bold dan diikuti dengan nama tabel dalam style normal.
+Contoh :
+Tabel 3.3. Desain tabel pelanggan
+Nama
+Type
+no_ktp
+Varchar
+nm_pelanggan
+varchar
+alamat
+varchar
+kota
+varchar
+telp
+varchar
+
+3.5.2
+
+Width
+15
+35
+50
+25
+12
+
+Keterangan
+Nomor Kartu Tanda
+Penduduk
+Nama Pelanggan
+Alamat
+Kota Telpon
+
+Gambar
+
+Seperti halnya tabel, identitas gambar terdiri dari no gambar dan judul
+gambar. No gambar merupakan kombinasi nomor bab dan nomor gambar pada
+bab tersebut. Judul menjelaskan secara ringkas makna gambar ditulis.
+Keterangan gambar tersebut diletakkan di bawah gambar dengan posisi center
+terhadap halaman. Untuk memberikan batasan gambar, gambar tersebut
+dapat diletakkan dalam suatu bingkai/frame.
+Contoh:
+
+Gambar 4.1. Tampilan Home
+
+27 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+4.
+
+4.1.
+
+LAYOUT
+
+Halaman Kulit Muka
+
+JUDUL
+
+LAPORAN PENELITIAN
+
+NAMA
+NIM
+
+PROGRAM STUDI TEKNIK INFORMATIKA
+FAKULTAS ILMU KOMPUTER
+UNIVERSITAS BINADARMA
+PALEMBANG
+2022
+28 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+4.2.
+
+Halaman Sampul Dalam
+
+JUDUL
+NAMA
+NIM
+
+Laporan Penelitian ini diajukan sebagai syarat memperoleh gelar Sarjana
+Komputer
+
+PROGRAM STUDI TEKNIK INFORMATIKA
+FAKULTAS ILMU KOMPUTER
+UNIVERSITAS BINADARMA
+2022
+
+29 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+4.3.
+
+Halaman Pengesahan
+
+HALAMAN PENGESAHAN
+
+JUDUL
+
+NAMA
+NIM
+
+Telah diterima sebagai salah satu syarat untuk memperoleh gelar
+Sarjana Komputer pada Program Studi Teknik Informatika
+
+Pembimbing ,
+
+Palembang, Oktober 2022
+Program Studi Teknik Informatika
+Fakultas Ilmu Komputer
+Universitas Bina Darma
+Dekan,
+
+Nama Pembimbing
+
+Dr. Tata Sutabri, S.Kom., M.MSI., M.KM
+
+ii
+
+30 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+4.4.
+
+Halaman Persetujuan
+
+HALAMAN PERSETUJUAN
+
+Penelitian berjudul ”JUDUL PENELITIAN” Oleh ”NAMA” telah dipertahankan
+didepan komisi penguji pada hari HARI tanggal TANGGAL BULAN TAHUN.
+
+Komisi Penguji
+1. Ketua
+
+: Nama Pembimbing
+
+(…………………….)
+
+2. Anggota
+
+: Nama Penguji 1
+
+(…………………….)
+
+3. Anggota
+
+: Nama Penguji 2
+
+(…………………….)
+
+Mengetahui,
+Program Studi Teknik Informatika
+Fakultas Ilmu Komputer
+Universitas Bina Darma
+Ketua,
+
+Alex Wijaya, S.Kom., M.I.T.
+
+iii
+
+31 of 33
+
+Panduan Penulisan Laporan Penelitian
+Program Studi Teknik Informatika Universitas Bina Darma
+@2022
+
+4.5.
+
+Halaman Pernyataan
+
+SURAT PERNYATAAN
+
+Saya yang bertanda tangan di bawah ini :
+Nama
+NIM
+
+:
+:
+
+Dengan ini menyatakan bahwa :
+1. Karya tulis saya adalah asli dan belum pernah diajukan untuk mendapatkan
+gelar akademik (Sarjana) di Universitas Bina Darma atau perguruan tinggi
+lainnya ;
+2. Karya tulis ini murni gagasan, rumusan dan penelitian saya dengan arahan
+dari tim pembimbing ;
+3. Di dalam karya tulis ini tidak terdapat karya atau pendapat yang telah ditulis
+atau di publikasikan orang lain, kecuali secara tertulis dengan jelas dikutip
+dengan mencantumkan nama pengarang dan memasukkan ke dalam daftar
+rujukan ;
+4. Saya bersedia karya tulis ini di cek keasliannya menggunakan plagiarism
+checker serta di unggah ke internet, sehingga dapat diakses secara daring ;
+5. Surat pernyataan ini saya tulis dengan sungguh-sungguh dan apabila terbukti
+melakukan penyimpangan atau ketidakbenaran dalam pernyataan ini maka
+saya bersedia menerima sanksi dengan peraturan dan perundang-undangan
+yang berlaku ;
+Demikian surat pernyataan ini saya buat agar dapat dipergunakan sebagaimana mestinya.
+
+Palembang,
+Oktober 2022
+Yang membuat pernyataan,
+
+NAMA LENGKAP
+NIM :
+iv
+
+32 of 33
+
+

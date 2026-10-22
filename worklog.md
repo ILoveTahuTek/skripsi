@@ -121,16 +121,75 @@ Stage Summary:
 - Disiplin tetap terjaga di keempat dokumen: studi kelayakan, gestur terisolasi 5-12 kelas (DPJ-4), pose stub terlarang, gerbang Delta-CSI 2xESP32 minggu-3, placeholder eksplisit.
 
 ---
-Task ID: 8
+Task ID: 6
 Agent: Super Z (main agent, sesi web)
-Task: Panduan penulisan proposal DPJ-4 lingkup SIBI-only (tanpa BISINDO) — DOCX 20 hal + markdown + generator; folder 09-panduan-dpj4-sibi; commit a527270.
+Task: Konversi 4 Google Docs (DPJ-1..4 versi BAB I-III) menjadi 4 file Markdown terpisah; backup ke GitHub.
 
 Work Log:
-- Sumber: analisis korpus Drive TRSE UNM (05-analisis-korpus), skill proposal-writing GEPA v4, skill naskah-id, DPJ-4 md, gap-analisis + 22 referensi terverifikasi (06-referensi-isyarat).
-- Generator persisten 4 file JS (panduan_common + konten A/B + generate) disalin ke 09-panduan-dpj4-sibi/generator/.
-- QA: postcheck 0 error; PDF 20 hal; lint periksa.py bersih (2 temuan tersisa = kutipan pedagogis disengaja); pandoc mirror + md_postprocess (0 residu).
-- README diperbarui (bullet folder 05-09); push b29f283..a527270.
+- Unduh 4 doc via endpoint export docs.google.com (format=docx, HTTP 200, 26-29 KB; verifikasi `file` = Microsoft Word 2007+; 0 media/gambar). ID: 1QdfLfVD (DPJ-1 broiler), 1WARmt9x (DPJ-2 kelas SLB), 17vku-HV (DPJ-3 asrama SLB), 1yK3LkJe (DPJ-4 isyarat) — judul terkonfirmasi dari docProps/core.xml.
+- pandoc 3.1.11.1: docx -> GFM (--wrap=none) -> download/markdown/DPJ-{1..4}_*.md (243-269 baris; heading BAB I-III + subbab utuh, tabel GFM utuh, sitasi [n] & DOI utuh, placeholder 【...】 utuh).
+- Post-process scripts/md_postprocess.py: blockquote bawaan pandoc utk daftar bernomor eksplisit ("> 1\\.") -> ordered list GFM polos; 59 item + 43 separator dibersihkan; 0 blockquote residu di 4 file.
+- Backup GitHub: 08-markdown-dpj/ (4 md) + 42 file mode-only (100644->100755, 0 delta konten) dikommit 4f64df6, push main sukses (434861e..4f64df6).
 
 Stage Summary:
-- Panduan berisi: argumen SIBI-only utk pembimbing, struktur wajib BAB I-III, templat bahasa korpus, ejaan baku, disiplin klaim SIBI-only, peta revisi 16 titik + templat siap tempel (judul/rumusan/tujuan/batasan 7 butir), 19 referensi dgn peran, checklist D1-D6 + alat QA.
-- Referensi BISINDO tetap dipakai sebagai bukti celah; klaim kebaruan dua lapis tetap sah utk SIBI.
+- 4 markdown terpisah siap di download/markdown/ dan mirror di repo GitHub folder 08-markdown-dpj/.
+- Struktur markdown identik dgn DOCX remake BAB I-III (tanpa cover); siap dipakai sebagai korpus pembanding/diff utk revisi proposal berikutnya.
+
+---
+Task ID: 7
+Agent: Super Z (main agent, sesi web)
+Task: Perbaiki penulisan & bahasa 4 proposal DPJ (markdown upload user di Drive) dengan skill naskah-id (file Drive 1aK3y8Ah..., path /naskah-id); regenerasi DOCX; push GitHub.
+
+Work Log:
+- gdown 6 file Drive: 1 zip = skill naskah-id (dipasang ke skills/naskah-id + diarsip ke repo skills-arsip/), 1 handoff (bukan proposal), 4 markdown DPJ — md5 identik dengan salinan lokal download/markdown/.
+- Baca lengkap SKILL.md + KONTRAK.md + 8 references (pola-ai, kalimat-efektif, ejaan-eyd-v, kata-baku, pertahankan, sitasi, bagian-naskah, alat-riset) → pekerjaan = level SUNTING; angka/sitasi/klaim tidak disentuh.
+- periksa.py awal: 44 temuan (EJ-10 koma-sehingga 41, KB-01 kontinyu, AI-14 di mana, EJ-05 multi). Penandaan manual menyeluruh 4 berkas (4×~250 baris): + kalke Inggris (kecil-kecil banyak, kontak-less, dewasa-ke-anak, lintas-person, ter-update, mendeploy), kata depan per- (21), blok-waktu, et al.→dkk. (46), nominalisasi, verba tujuan "Mengetahui"→"Menguji", kalimat >35 kata dipecah, splice koma di 2.6 (4 file), antar-/lintas- serangkai & terpisah, Doppler kapital, entropy→entropi, threshold→ambang, milidetik→ms, dsb.
+- scripts/fix_bahasa_dpj.py: ~62 pasangan (old,new) global+per-file diterapkan IDENTIK ke 4 md DAN 4 modul konten JS (sinkron); 2 perbaikan susulan (antar-sesi→antarsesi; ", karena" 2×).
+- Keputusan desain: cetak miring istilah asing DITUNDA (aturan lokal didahulukan — pedoman kampus belum dicek; konsistensi > sebagian); istilah teknis asing lazim + judul + angka + daftar pustaka dipertahankan (pertahankan.md).
+- Regenerasi 4 DOCX (node generate_dpj.js) → QA: periksa.py 0 temuan; evaluator GEPA D1-D6 = 4/4 skor 1.0; postcheck.py 0 error (1 warning spasi = desain tabel, sama dgn versi lolos); sync-verify pandoc round-trip 4/4 identik (scripts/verify_sync_dpj.py, normalisasi padding tabel); PDF 15/14/14/16 hal; visual hal-3 & hal-12 OK.
+- CATATAN-PERUBAHAN.md (sebelum→sesudah per kategori + verifikasi + tindak lanjut) di download/markdown/ & repo 08-markdown-dpj/.
+- Commit b29f283 push main sukses (4f64df6..b29f283): DOCX 03-dpj/07-dpj-4, generator+script QA, markdown+catatan, arsip skill naskah-id.
+
+Stage Summary:
+- 4 proposal versi bahasa-final: markdown (download/markdown/) + DOCX (download/proposal-pengajuan-judul/) — konten kedua format terjamin sinkron.
+- Skill naskah-id kini terpasang di skills/naskah-id dan bisa dipakai ulang (periksa.py sbg lint bahasa).
+- Sisa keputusan human-owned: miring istilah asing menunggu konfirmasi pedoman kampus; placeholder 【…】 masih kosong.
+
+---
+Task ID: 8
+Agent: Super Z (main agent, sesi web)
+Task: Susun panduan penulisan proposal DPJ-4 lingkup SIBI-only (tanpa BISINDO) dari hasil pembelajaran korpus Drive TRSE UNM; DOCX + markdown + push GitHub.
+
+Work Log:
+- Rangkum sumber: worklog Task 1-7, analisis korpus 69 dokumen Drive (05-analisis-korpus), skill proposal-writing GEPA v4 (struktur/bahasa/disiplin), skill naskah-id, DPJ-4 markdown (peta 28 kemunculan BISINDO), gap-analisis + pemetaan RuView + 22 referensi terverifikasi.
+- Keputusan desain dokumen: Template-Following Mode gaya DPJ (TNR 12pt, spasi 1,5, tanpa cover/TOC, footer "- N -", tabel three-line) — konsisten ekosistem 4 DPJ yang lolos QA; rantai skill docx dibaca penuh (SKILL.md, create.md, academic.md, common-rules.md, docx-js-core.md, design-system.md).
+- Generator persisten: scripts/panduan_common.js (renderer + quotePara templat + runsPara) + panduan_content_a.js (Bagian 1-4) + panduan_content_b.js (Bagian 5-8) + generate_panduan_dpj4_sibi.js.
+- Konten panduan 8 bagian: (1) tentang panduan; (2) keputusan lingkup SIBI-only + 3 argumen + jebakan frasa dua-sistem; (3) struktur wajib BAB I-III (Tabel 2.1 kerangka 23 subbab); (4) pola bahasa korpus + templat literal; (5) ejaan/kata baku Tabel 4.1 old->new; (6) disiplin klaim SIBI-only + tabel batas + pernyataan templat; (7) peta revisi per bagian Tabel 6.1 (16 titik) + judul utama/2 alternatif baru + rumusan/tujuan/batasan 7 butir siap tempel + kebijakan referensi; (8) referensi Tabel 7.1 (19 entri + DOI + peran); (9) checklist D1-D6 + alat QA + keputusan human-owned.
+- QA loop: postcheck 0 error (1 warning spasi tabel = desain, sama dgn DPJ lolos); PDF 21->20 hal setelah perbaikan; bug visual diperbaiki: sel tabel kosong dirender placeholder (safeText) -> dibiarkan kosong, kolom Bab 16->23% agar PENDAHULUAN tidak terpotong kata; lint periksa.py: 7 temuan -> 5 koma-sehingga + 1 typo (isvat->isyarat) dibersihkan di sumber JS, regenerasi; sisa 2 temuan = kutipan pola keliru yang disengaja (Tabel 4.1).
+- Mirror markdown: pandoc -> GFM + md_postprocess.py (diperluas agar menerima argv; 25 item numbered + 22 separator dibersihkan; 0 residu blockquote rusak).
+- Push GitHub: 09-panduan-dpj4-sibi/ (DOCX + PDF pratinjau + markdown + generator 4 file) + README diperbarui (bullet folder 05-09) -> commit a527270, push main sukses (b29f283..a527270).
+
+Stage Summary:
+- Panduan 20 halaman tersimpan di download/panduan-proposal/ (DOCX + PDF + markdown mirror) dan mirror repo GitHub folder 09-panduan-dpj4-sibi/.
+- Inti panduan: keputusan SIBI-only dibela dengan 3 argumen (formal-terstandar, beban dataset 1 semester, kebaruan kombinatif tetap sah); referensi BISINDO TETAP disitasi sebagai bukti lanskap-celah; klaim kebaruan dua lapis ("belum ada CSI untuk SIBI maupun BISINDO" + "penelitian ini menargetkan SIBI").
+- Sisa human-owned: konfirmasi judul ke pembimbing, isi placeholder, miring istilah asing, uji fisik Delta-CSI W3, lalu revisi DPJ-4 sesuai peta Bagian 6.
+
+---
+Task ID: 9
+Agent: Super Z (main agent, sesi web)
+Task: Buat skill/panduan agent "proposal-writing v5" (markdown terpecah per bagian, isi EN, keluaran ID) dari korpus skripsi Drive + panduan Bina Darma + integrasi to-tickets, naskah-id (GitHub), GEPA; eksekusi via to-tickets #22-#27; push GitHub.
+
+Work Log:
+- Unduh 3 file Drive baru: panduan Bina Darma 2022 (PDF 33 hal, file 1sdvz1Mq...), arsip skills-main/to-tickets (1z7a-xaB...), skill gepa-optimize-anything (1KZiprYa...) -> tmp/refs3/; verifikasi tipe via `file`.
+- Clone github.com/nothinx/naskah-id -> versi GitHub LEBIH BARU dari arsip zip lama (tambahan istilah.md, singkatan.md, CHANGELOG.md, evals/jalankan.py); sinkronkan skills/naskah-id + arsip repo ke versi GitHub.
+- Baca lengkap semua sumber: PDF Bina Darma (struktur laporan, margin/font Cambria/style Word, penomoran, kutipan APA-Harvard signal-phrase vs parenthetical + larangan "oleh (Nama, Tahun)", sumber sekunder, kutipan >=40 kata, caption tabel-atas/gambar-bawah, mekanika tanda baca), SKILL.md gepa + to-tickets.md, skill v4 + 3 referensi + rubric.json D1-D6.
+- to-tickets: 6 tiket #22-#27 dipublikasikan (blockers first, edge native blocked-by 6/6 HTTP 201 via REST dependencies API); #22 prefactor ditutup segera (sudah selesai).
+- Tulis skill v5: SKILL.md (EN, 158 baris, 9 langkah, semua "Done when") + 10 referensi terpecah per bagian: 00 kontrak bahasa keluaran (EN->ID + glosarium istilah tak-terjemahkan), 01 lingkup proposal=BAB I-III, 02 struktur kanonik + tabel wajib + switch profil, 03 pola bahasa korpus (templat ID verbatim), 04 sitasi (aturan Bina Darma + APA 7 + pipeline verifikasi Crossref/OpenAlex), 05 format dua profil (DPJ-UNM vs BD-2022) + PUEBI + tanda baca, 06 jembatan naskah-id (load-when map + tabel perbaikan rutin Task 7), 07 disiplin klaim + lingkup SIBI-only, 08 loop GEPA (kontrak evaluator, anti reward-hacking, budget, preseden reflection_lm z-ai), 09 workflow (pipeline + integrasi + gerbang mutu).
+- Bawa evaluator v4 ke scripts/ + 2 patch: REF_FILES -> 10 referensi baru; kriteria selesai menerima "Selesai bila|Done when". Sinkron kedua salinan (skill dir + scripts/).
+- QA: evaluator --skill = 1.0 (D1-D6 coverage 1.0, 9 langkah/9 done-when, 0 fail); audit token: SKILL.md 158 baris, referensi 54-79 baris/file, total 1.027; 0 pointer menggantung; smoke test --doc pada DPJ-1 = 0.96 (0,8 D2 karena suntingan sendiri pengguna "bertujuan menguji" tanpa "untuk" di Google Docs - variasi sah, bukan cacat skill).
+- Kemas: download/skill-proposal-writing-v5.zip (15 file); mirror repo 10-skill-proposal-v5/ (skill + SOURCES.md + sources/panduan-bina-darma-2022.txt + gepa-skill-arsip.md); commit + push.
+
+Stage Summary:
+- Skill proposal-writing v5 terpasang di skills/proposal-writing/ dan terarsip di repo (10-skill-proposal-v5/): panduan agent markdown terpecah 10 bagian, isi EN hemat token, keluaran wajib ID; integrasi to-tickets (slicing), naskah-id (EYD-V lint + etika rujukan), GEPA (optimalisasi kata-per-kata).
+- Sumber terdokumentasi di SOURCES.md: korpus TRSE UNM (folder Drive), panduan Bina Darma 2022 (file Drive), to-tickets + GEPA (file Drive), naskah-id (GitHub) - "menyalin cara menulis, bukan isinya".
+- Pemakaian: arahkan agent ke folder skill (atau pakai zip); SKILL.md memuat proses 9 langkah; untuk dokumen kampus Bina Darma pilih profil BD-2022.

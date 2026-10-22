@@ -21,8 +21,9 @@ GenAI pada Pembelajaran di Perguruan Tinggi (Ditjen Diktiristek, 2024), dan pand
 5. **Batas perubahan sesuai permintaan.** Koreksi ejaan hanya membetulkan ejaan dan tanda baca.
    Sunting kalimat boleh mengubah susunan kalimat tanpa menggeser makna. Tulis ulang hanya
    dilakukan bila pengguna memintanya. Lihat tabel di `SKILL.md`.
-6. **Kekuatan klaim sebanding dengan bukti.** "Menunjukkan" tidak sama dengan "membuktikan".
-   Korelasi tidak ditulis sebagai sebab-akibat. "Signifikan" hanya dipakai dalam arti
+6. **Kekuatan klaim sebanding dengan bukti.** `menunjukkan` tidak sama dengan `membuktikan`.
+   Korelasi tidak ditulis sebagai sebab-akibat. `periksa.py` menandai `membuktikan` (KK-01)
+   agar kekuatan klaimnya dicek. "Signifikan" hanya dipakai dalam arti
    statistik dan disertai nilai ujinya.
 7. **Pengungkapan.** Agen menyusun draf pernyataan penggunaan AI sesuai sasaran naskah dan
    menyebut apakah ia hanya menyunting bahasa atau ikut menyusun substansi. Templat ada di
@@ -46,8 +47,9 @@ pembimbing.
 
 Pola dalam `references/pola-ai.md` adalah sinyal gaya, bukan bukti bahwa sebuah teks ditulis
 mesin. Penulis manusia, terutama yang terbiasa membaca literatur berbahasa Inggris, juga
-menulis `di mana` dan `memainkan peran`. Jangan memakai skill ini atau `scripts/periksa.py`
-untuk menuduh mahasiswa atau menilai integritas akademik seseorang.
+menulis `di mana` dan `memainkan peran`. Hasil skill ini dan `scripts/periksa.py` jangan
+dijadikan bukti bahwa seorang mahasiswa memakai AI, dan jangan dipakai untuk menilai
+kejujuran akademik seseorang.
 
 ## Membedakan sunting dan susun
 

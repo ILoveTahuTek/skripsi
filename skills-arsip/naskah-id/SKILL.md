@@ -86,6 +86,8 @@ Perbaiki sesuai batas pekerjaan. Rujukan per masalah:
 | Subjek hilang, pleonasme, nominalisasi, perangkai | `references/kalimat-efektif.md` |
 | Ejaan, kata depan, gabungan kata, angka, satuan, tanda baca | `references/ejaan-eyd-v.md` |
 | Kata tidak baku | `references/kata-baku.md` |
+| Istilah asing: diterjemahkan, diserap, atau dipertahankan | `references/istilah.md` |
+| Singkatan, akronim, nama lembaga | `references/singkatan.md` |
 | Rujukan dan cara menyitir | `references/sitasi.md` |
 | Menyambungkan alat pencarian rujukan | `references/alat-riset.md` |
 | Abstrak, pendahuluan, tinjauan pustaka, metode, hasil, simpulan | `references/bagian-naskah.md` |
@@ -103,8 +105,12 @@ Bandingkan draf dengan teks asli:
 - Kekuatan klaim tidak naik? ("diduga" tidak menjadi "terbukti").
 - Istilah teknis tetap konsisten dari awal sampai akhir?
 
-Bila tersedia, jalankan `python scripts/periksa.py <berkas>` untuk menyaring pola K dan AI
-yang terlewat. Hasilnya petunjuk, bukan putusan.
+Bila Python tersedia, simpan teks asli dan draf ke berkas lalu jalankan
+`python scripts/periksa.py --banding asli.md draf.md`. Perintah ini melaporkan angka, sitasi,
+dan kutipan yang hilang atau bertambah. Setiap baris laporan harus bisa dijelaskan sebelum draf
+diserahkan, misalnya angka yang sengaja ditulis dengan huruf. Lalu jalankan
+`python scripts/periksa.py <berkas>` untuk menyaring pola K dan AI yang terlewat. Hasil
+keduanya petunjuk, bukan putusan.
 
 ### 5. Serahkan
 
@@ -117,10 +123,12 @@ ini sunting bahasa atau ikut menyusun substansi.
 Pakai alat yang tersedia, dalam urutan ini:
 
 1. **Consensus** (MCP) untuk sintesis temuan ("apa kata riset tentang X").
-2. **OpenAlex** untuk metadata, abstrak, BibTeX, dan cek keberadaan karya. Selalu tersedia
-   lewat `python scripts/openalex.py` (cari, doi, bib, cek, dikutip) dari folder skill ini.
-3. Sumber lain bila ada: PubMed (kesehatan), alphaXiv (praterbit), Crossref (DOI), Garuda dan
-   SINTA (jurnal Indonesia).
+2. **OpenAlex dan Crossref** untuk metadata, abstrak, entri daftar pustaka, dan cek keberadaan
+   karya. Selalu tersedia lewat `python scripts/openalex.py` dari folder skill ini:
+   `cek "judul" --penulis "…" --tahun …` untuk satu rujukan, `daftar berkas.txt` untuk seluruh
+   daftar pustaka, `rujukan <DOI> --gaya apa|ieee|bib` untuk entri siap tempel.
+3. Sumber lain bila ada: PubMed (kesehatan), alphaXiv (praterbit), Garuda dan SINTA (jurnal
+   Indonesia tanpa DOI).
 
 Saat pekerjaan pertama yang butuh rujukan dalam satu sesi, periksa alat mana yang tersedia.
 Bila Consensus, alphaXiv, atau PubMed belum tersambung, tawarkan sekali kepada pengguna cara
@@ -132,6 +140,22 @@ Setiap rujukan yang masuk naskah harus sudah dicek keberadaannya dan isinya mema
 kalimat yang mengutipnya. Bila tidak ada alat pencarian sama sekali, jangan menebak judul,
 penulis, tahun, atau DOI. Tulis `[PERLU RUJUKAN: klaim yang perlu didukung]` dan minta
 pengguna melengkapinya.
+
+Entri daftar pustaka disusun dari keluaran `rujukan`, bukan diketik ulang. Bila keluaran
+memuat `PERINGATAN: metadata penulis`, nama penulis disalin dari PDF artikelnya. Hasil RAGU
+pada `cek` atau `daftar` dilaporkan kepada pengguna apa adanya; jangan "membetulkan" entri
+dengan menebak.
+
+## Naskah panjang
+
+Untuk skripsi, tesis, atau naskah lebih dari sekitar 3.000 kata:
+
+1. Kerjakan per bab atau per subbab, jangan sekaligus.
+2. Sebelum bab pertama, susun daftar istilah dan sudut pandang dari teks pengguna (misalnya
+   *filter Kalman*, *responden*, impersonal). Pakai daftar itu di semua bab dan tanyakan
+   pengguna bila ada dua istilah untuk konsep yang sama.
+3. Jalankan `--banding` per bab, bukan sekali di akhir.
+4. Di akhir, laporkan per bab: jenis pekerjaan, perubahan penting, dan penanda yang tersisa.
 
 ## Tanda terkuat
 
@@ -158,11 +182,17 @@ Urutan dari yang paling sering dan paling mudah dikenali. Daftar lengkap di
 - Pasif untuk prosedur ("Sampel diambil dengan…"), aktif untuk temuan ("Metode ini menurunkan
   galat 12%").
 - Satu sudut pandang per naskah: *kami*, *penulis*, atau impersonal, sesuai gaya selingkung.
-- Verba langsung, bukan "melakukan + nomina": *mengukur*, bukan *melakukan pengukuran*.
+- Verba langsung, bukan "melakukan + nomina": *mengukur*, bukan `melakukan pengukuran`.
 - Verba pelapor yang tepat saat menyitir: *mengukur, menemukan, mengusulkan, membantah,
   memperluas*, bukan *mengatakan* untuk semua sumber.
-- Istilah asing: padanan yang sudah hidup lebih dulu, lalu serapan, lalu istilah asing
-  bercetak miring. Jangan memaksakan padanan yang asing bagi pembaca bidang itu.
+- Istilah asing: jangan menebak apakah padanannya lazim. Ukur dengan
+  `python scripts/openalex.py istilah "padanan" "asing" --bidang …`, dahulukan gaya selingkung,
+  dan jangan mengganti pilihan penulis kecuali bentuknya hampir tidak dipakai
+  (`references/istilah.md`). Contoh: *mikrokontroler* dan *panel surya* menang jauh, tetapi
+  *deep learning* dan *stakeholder* lebih hidup daripada padanannya.
+- Singkatan dijelaskan pada kemunculan pertama: usaha mikro, kecil, dan menengah (UMKM).
+  Kepanjangan yang tidak ada di naskah dan tidak pasti ditulis `[PERLU DATA: kepanjangan …]`,
+  karena banyak singkatan bermakna ganda (`references/singkatan.md`).
 
 ## Jangan dikoreksi berlebihan
 
