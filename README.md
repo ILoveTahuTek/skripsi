@@ -49,6 +49,7 @@ Issue tracker: GitHub Issues repo ini — map wayfinder #1 + tiket keputusan #2�
 - **3 opsi alat yang dieksplorasi:** ayam broiler · ruang kelas SLB · kamar asrama SLB. Pemetaan fitur & kandidat judul masing-masing ada di `01-ruview-exploration/02_PEMETAAN_FITUR_3_ALAT.md`.
 - **RuView (github.com/ruvnet/RuView):** platform WiFi CSI ESP32 open-source. Yang NYATA: capture CSI, presence, motion, napas/jantung manusia (band hardcoded!), fall, kalibrasi ruangan, record→train adaptif, MQTT/HA, dashboard. Yang STUB: pose 17-keypoint (PCK@20 3%, confidence=0), person count lemah, sleep-stage/apnea tak tervalidasi. Jantung ayam (250–330 BPM) di luar band filter → detak jantung unggas mustahil tanpa ubah kode.
 - **Langkah murah berikutnya:** cek kebaruan Scopus/DBLP (classroom/SLB/CSI) + uji Delta-CSI 2×ESP32 di lokasi target.
+- **Folder 05-09 (belum tergambar pada pohon di atas):** `05-analisis-korpus/` (analisis 12 dokumen korpus TRSE + skill proposal-writing GEPA v1-v4 + rubrik D1-D6), `06-referensi-isyarat/` (22 referensi DOI terverifikasi + gap-analisis + pemetaan RuView-isyarat), `07-dpj-4/` (DPJ-4 + generator), `08-markdown-dpj/` (4 markdown DPJ versi BAB I-III + CATATAN-PERUBAHAN bahasa), `09-panduan-dpj4-sibi/` (panduan penulisan proposal DPJ-4 lingkup SIBI-only: DOCX 20 halaman + markdown + PDF pratinjau + generator Node.js). Status terkini: DPJ-4 dipilih user dengan pengetatan lingkup SIBI tanpa BISINDO; panduan di 09 memuat peta revisi per bagian + templat kalimat siap tempel.
 
 ## Aturan repo
 
