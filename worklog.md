@@ -210,3 +210,23 @@ Stage Summary:
 - Bahan DPJ-4 human-centered lengkap: corong latar belakang baru berangkat dari masalah sosial/pendidikan (bukan "perkembangan teknologi"), alat diposisikan sebagai mitra latihan SIBI dengan umpan balik seketika bagi keluarga/guru/mahasiswa, empati diposisikan sebagai design intent (bukan klaim terukur).
 - 8 referensi DOI baru melengkapi bank 22 lama; data resmi (BPS/BRIN/Kemendikdasmen/WHO) terkumpul dengan status verifikasi; tensi "SIBI hanya 1,9%" sudah punya skrip jawaban 3 argumen.
 - Sisa human-owned: verifikasi persen BPS LFSP2020 22,97 juta sebelum dikutip, konfirmasi judul baru ke pembimbing, keputusan pilot pembelajar diadakan atau tidak, lalu regenerasi DPJ-4 DOCX dari kit ini.
+
+---
+Task ID: 11
+Agent: Super Z (main agent, sesi web)
+Task: Ekstraksi lanjutan bahan DPJ-4 atas gagasan alur metode baru pemilik (latih model pose estimation visi YOLO/MediaPipe lalu pakai untuk "mengenalkan" pose SIBI ke model Wi-Fi CSI RuView) + konsultasi skill llm-council (file Drive 17xX4RKVFQ5l...) + diagram alur untuk BAB III; tulis dossier markdown mendalam; push GitHub.
+
+Work Log:
+- Unduh file Drive rujukan "council" -> ternyata arsip skill llm-council (SKILL.md 15KB); baca penuh protokol 5 advisor + peer review anonim + chairman.
+- Baca ulang DPJ-4 markdown penuh + audit aset RuView repo: temuan kunci ADR-079 — pipeline camera-supervised SUDAH ADA (scripts/collect-ground-truth.py: MediaPipe PoseLandmarker 17-COCO kp sinkron CSI ESP32 -> latih CSI->pose; skill train-pose.md: PCK@20 59,5% split terpisah vs baseline mean-pose 50% (+9,4 pp); riwayat klaim 92,9% ditarik; modul pose on-device stub 3%; jalur WiFlow camera-free + swarm presets).
+- Riset web 3 batch: DensePose-from-WiFi (arXiv 2301.00250, transfer visi->WiFi level region tubuh), Person-in-WiFi (ICCV 2019), MediaPipe/BlazePose/Hands (arXiv), stat tunarungu (WHO 430 jt/700 jt 2050; 90-95% anak tunarungu ortu pendengar; Kemenko PMK 500 JBI : 1,92 jt; BRIN 2026 BISINDO 77,7% vs SIBI 1,9%).
+- Crossref verifikasi 8 rujukan baru (scripts/dpj4_verify_new_refs.py): Mitchell&Karchmer 2004+2005 SLS, Lieberman 2022 Applied Linguistics Review, Ritmeester 2025 JDSDE, Kim 2023 Applied Sciences (MediaPipe), Person-in-WiFi 2019, Chadha 2021 Bull WHO; arsip tool-results/dpj4-bahan/crossref/verified_new_refs2.json.
+- LLM Council penuh: 5 advisor paralel (Contrarian/First Principles/Expansionist/Outsider/Executor, bahasa ID) -> 5 peer review anonim A-E (pemetaan acak) -> chairman. Putusan: alur dua tahap TEPAT sbg infrastruktur pelabelan, TIDAK TEPAT sbg tulang punggung metodologis 1 semester; guru MediaPipe mencetak LABEL KELAS, murid CSI = klasifikator langsung 5-8 kelas; jari/ekspresi wajah tidak realistis dr CSI (lambda 6-12 cm); distilasi pose = kerja lanjutan; blind spot tertangkap: generalisasi lintas pengguna/ruangan, flywheel label pemula-salah, paradoks privasi Wi-Fi, validator tunarungu wajib, pengukuran hasil belajar pre/post.
+- Tulis dossier 9 bagian (~6.000 kata, 2 diagram Mermaid BAB III): arah latar belakang (corong masalah sosial/pendidikan + tabel fakta F1-F8 + kerangka 4 paragraf + anti-pattern), masalah (lapangan/riset/teknis), bahan (referensi A-D, perangkat, software RuView map, dataset dua saringan kurasi, peran manusia), metode (putusan (a)-(e), tahap T0-T5, gerbang G0-G4 dgn angka, uji generalisasi + kegunaan alat + diagnosis interpretabilitas, etika, risiko), penyelesaian (pemetaan masalah->fitur->bukti, skenario pemakaian, empati teroperasional, kalimat klaim layak/tidak), delta vs draf lama + 3 usulan judul baru SIBI-only, verdict dewan lengkap, 6 pertanyaan utk pembimbing, lampiran sumber.
+- Tulis transkrip council pendamping (respon 5 advisor + 5 review verbatim + ringkasan chairman).
+- Simpan download/markdown/DPJ-4_Bahan-Proposal-SIBI.md + DPJ-4_Council-Transkrip-Alur.md; mirror repo 12-council-alur-dpj4/ (2 md + crossref JSON); README diperbarui (bullet Folder 12); commit + push main.
+
+Stage Summary:
+- Gagasan alur pemilik teraudit dewan dan mendapat bentuk final: "guru mencetak label, bukan pose yang dikejar murid" — klasifikasi langsung 5-8 isyarat SIBI, MediaPipe = pelabel otomatis (bukan model yang dilatih ulang), diagram Mermaid 2 buah siap dipindah ke BAB III.
+- Dossier + transkrip + JSON verifikasi tersimpan di 12-council-alur-dpj4/; gerbang G0 (replikasi PCK@20 >= 55%, kunci akhir M2) menjadi aksi pertama; validator tunarungu kini kebutuhan wajib proposal.
+- Sisa human-owned: pilih 5-8 isyarat bersama validator + Kamus SIBI, konfirmasi judul baru, isi placeholder mitra, lalu regenerasi DPJ-4 DOCX mengikuti dossier ini.
