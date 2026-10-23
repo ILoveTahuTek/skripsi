@@ -127,16 +127,16 @@ Berdasarkan tabel perbandingan di atas, terlihat bahwa penelitian-penelitian seb
 
 Tabel 2.2 Perbandingan penelitian terdahulu
 
-| **Peneliti (Tahun) dan Judul Singkat**                          | **Sinyal/Modalitas**       | **Bahasa Isyarat Indonesia** | **Bebas Kamera** | **Perangkat Murah** | **Konteks Edukasi** |
-|-----------------------------------------------------------------|----------------------------|------------------------------|------------------|---------------------|---------------------|
-| Shang & Wu (2017) — WiSign: robust sign language recognition    | Wi-Fi CSI                  | −                            | √                | −                   | −                   |
+| **Peneliti (Tahun) dan Judul Singkat**                        | **Sinyal/Modalitas**       | **Bahasa Isyarat Indonesia** | **Bebas Kamera** | **Perangkat Murah** | **Konteks Edukasi** |
+|---------------------------------------------------------------|----------------------------|------------------------------|------------------|---------------------|---------------------|
+| Shang & Wu (2017) — WiSign: robust sign language recognition  | Wi-Fi CSI                  | −                            | √                | −                   | −                   |
 | Ma dkk. (2018) — SignFi: sign language recognition using WiFi | Wi-Fi CSI                  | −                            | √                | √                   | −                   |
 | Ahmed dkk. (2020) — DF-WiSLR device-free Wi-Fi sign language  | Wi-Fi CSI                  | −                            | √                | √                   | −                   |
 | Baldeo dkk. (2024) — Filipino SL recognition using Wi-Fi CSI  | Wi-Fi CSI                  | −                            | √                | √                   | −                   |
 | Dwijayanti dkk. (2021) — Indonesia SL recognition using CNN   | Kamera/citra               | √                            | −                | −                   | −                   |
 | Kindy dkk. (2025) — Word-level BISINDO video dataset          | Kamera/citra               | √                            | −                | −                   | −                   |
-| Wiguna & Rojali (2025) — Sentence-level BISINDO 3D              | Kamera/citra               | √                            | −                | −                   | −                   |
-| Penelitian Ini                                                  | Wi-Fi CSI (ESP32 + RuView) | √ (SIBI & BISINDO)           | √                | √                   | √                   |
+| Wiguna & Rojali (2025) — Sentence-level BISINDO 3D            | Kamera/citra               | √                            | −                | −                   | −                   |
+| Penelitian Ini                                                | Wi-Fi CSI (ESP32 + RuView) | √ (SIBI & BISINDO)           | √                | √                   | √                   |
 
 # **BAB III**
 
@@ -219,14 +219,14 @@ Risiko utama diidentifikasi dari tiga sumber: temuan eksplorasi kode RuView, lit
 
 Tabel 3.3 Risiko utama dan rencana cadangan
 
-| **Risiko**                                | **Dampak bila terjadi**                         | **Rencana cadangan (fallback)**                                                                                                   |
-|-------------------------------------------|-------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| **Risiko**                                | **Dampak bila terjadi**                         | **Rencana cadangan (fallback)**                                                                                                      |
+|-------------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Gerbang fisik Delta-CSI minggu-3 gagal    | Paradigma klasifikasi CSI tidak layak di lokasi | Lanjut sebagai studi karakterisasi sinyal + laporan kegagalan yang bermakna ilmiah; atau beralih ke judul cadangan dari tabel usulan |
-| Akurasi lintas penandatangan rendah              | Model tidak tahan ganti penandatangan           | Batas klaim: model sah per sesi/per penandatangan; dokumentasikan biaya kalibrasi ulang sebagai temuan                            |
-| Dataset kecil membuat model bias          | Akurasi tidak stabil antarsesi                 | Mulai dari 5 gestur dengan 30 repetisi; augmentasi sederhana; jangan menjanjikan akurasi di luar data                             |
-| Gestur ambigu (mirip gerak)               | Confusion matrix penuh pada pasangan tertentu   | Ganti pasangan gestur pada subset; pisahkan fitur Doppler; laporkan pasangan yang tak terpisahkan sebagai temuan                  |
-| Konfound gerak latar (kipas, orang lewat) | Alarm palsu tinggi                              | Log kejadian harian sebagai kovariat; penempatan node ulang; ambang energi gerak disetel per ruang                             |
-| Perizinan sekolah tertunda                | Pengambilan data mundur                         | Mitra cadangan; simulasi di lab dengan penandatangan internal; urutan izin dimulai minggu pertama                                 |
+| Akurasi lintas penandatangan rendah       | Model tidak tahan ganti penandatangan           | Batas klaim: model sah per sesi/per penandatangan; dokumentasikan biaya kalibrasi ulang sebagai temuan                               |
+| Dataset kecil membuat model bias          | Akurasi tidak stabil antarsesi                  | Mulai dari 5 gestur dengan 30 repetisi; augmentasi sederhana; jangan menjanjikan akurasi di luar data                                |
+| Gestur ambigu (mirip gerak)               | Confusion matrix penuh pada pasangan tertentu   | Ganti pasangan gestur pada subset; pisahkan fitur Doppler; laporkan pasangan yang tak terpisahkan sebagai temuan                     |
+| Konfound gerak latar (kipas, orang lewat) | Alarm palsu tinggi                              | Log kejadian harian sebagai kovariat; penempatan node ulang; ambang energi gerak disetel per ruang                                   |
+| Perizinan sekolah tertunda                | Pengambilan data mundur                         | Mitra cadangan; simulasi di lab dengan penandatangan internal; urutan izin dimulai minggu pertama                                    |
 
 # **DAFTAR PUSTAKA**
 
