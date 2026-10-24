@@ -1,0 +1,47 @@
+flowchart TD
+    T0["T0 Replikasi platform dan uji Delta-CSI, M1–M2"]
+    G0{"G0 akhir M2, akuisisi stabil dan pola gerak terpisah dari diam dan kosong"}
+    P0["Perbaikan penempatan node satu kali"]
+    G0U{"G0 diuji ulang"}
+    S0["Jalur CSI dihentikan, dilaporkan sebagai temuan karakterisasi"]
+    T1["T1 Kurasi isyarat, kalibrasi ruang, protokol, M2–M4"]
+    G1{"G1 M3, separabilitas awal 2–3 isyarat"}
+    P1["Perubahan penempatan atau orientasi node satu kali"]
+    G1U{"G1 diuji ulang"}
+    S1["Tindakan lanjutan sesuai Tabel 3.6, butir 2, dan hasilnya dicatat sebagai temuan"]
+    T2["T2 Perekaman dataset dan klasifikasi, M4–M8"]
+    G2{"G2 M6–M7, akurasi skema dalam sesi jauh di atas peluang acak"}
+    P2["Pemangkasan ke 3–5 isyarat yang pembedanya paling bertumpu pada lintasan"]
+    T3["T3 Uji generalisasi, M8–M10"]
+    G3{"G3 M10, kinerja lintas partisipan dan lintas ruang di atas peluang acak"}
+    P3["Cakupan menjadi personalisasi per pengguna, ditulis sebagai temuan"]
+    T4["T4 Pengemasan mode latihan dan uji kegunaan, M10–M12"]
+    G4{"G4 M12, tiga syarat kegunaan terpenuhi"}
+    P4["Hasil negatif dilaporkan sebagai temuan kelayakan"]
+    T5["T5 Analisis dan penulisan, M12–M14"]
+
+    T0 --> G0
+    G0 -->|lolos| T1
+    G0 -->|gagal| P0
+    P0 --> G0U
+    G0U -->|lolos| T1
+    G0U -->|gagal| S0
+    S0 --> T5
+    T1 --> G1
+    G1 -->|lolos| T2
+    G1 -->|gagal| P1
+    P1 --> G1U
+    G1U -->|lolos| T2
+    G1U -->|gagal| S1
+    T2 --> G2
+    G2 -->|lolos| T3
+    G2 -->|gagal| P2
+    P2 --> T3
+    T3 --> G3
+    G3 -->|lolos| T4
+    G3 -->|gagal| P3
+    P3 --> T4
+    T4 --> G4
+    G4 -->|lolos| T5
+    G4 -->|gagal| P4
+    P4 --> T5

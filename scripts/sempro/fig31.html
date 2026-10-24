@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; font-family: "Helvetica Neue", Arial, "Noto Sans", sans-serif; }
+  .fig { position: relative; background: #fff; width: 1560px; height: 1420px; overflow: hidden; }
+  .node {
+    position: absolute; border: 2px solid #1a1a1a; border-radius: 8px;
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 8px 12px; font-size: 13.5px; line-height: 1.3;
+    color: #111; font-weight: 500;
+  }
+  .gate { position: absolute; border: 2px solid #1a1a1a; background: #f4f4f4;
+    transform: rotate(45deg); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center; }
+  .gate-inner { transform: rotate(-45deg); text-align: center; font-size: 12.5px;
+    line-height: 1.26; color: #111; font-weight: 600; }
+  .temuan { background: #ececec; }
+  .final { background: #e3e3e3; font-weight: 700; }
+  .elabel { position: absolute; font-size: 13px; font-style: italic; color: #333;
+    background: #fff; padding: 0 3px; }
+  svg.edges { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+  svg.edges path, svg.edges line { stroke: #1a1a1a; stroke-width: 1.8; fill: none; }
+</style>
+</head>
+<body>
+<!-- ======== GAMBAR 3.1 : Tahapan penelitian dan gerbang keputusan ========
+     Kolom: T x30-290 | G wrap x330-650 (diamond 250x180, cx490) | P x700-940
+            GU wrap x1000-1260 (diamond 170x140, cx1130) | S x1320-1500 | rail x1520
+     Baris (wrap-top W): 30, 270, 510, 750, 990 | T5 y1300-1360
+     Pusat baris = W+130 ==================================================== -->
+<div class="fig" id="fig31">
+  <svg class="edges">
+    <defs>
+      <marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+        <path d="M0,0 L9,4.5 L0,9 z" style="fill:#1a1a1a; stroke:none;"/>
+      </marker>
+    </defs>
+    <!-- Baris 1 (W=30) -->
+    <line x1="290" y1="160" x2="357" y2="160" marker-end="url(#a)"/>
+    <line x1="623" y1="160" x2="696" y2="160" marker-end="url(#a)"/>
+    <line x1="940" y1="160" x2="1037" y2="160" marker-end="url(#a)"/>
+    <line x1="1223" y1="160" x2="1316" y2="160" marker-end="url(#a)"/>
+    <path d="M 1130 234 L 1130 262 L 210 262 L 210 321" marker-end="url(#a)"/>
+    <path d="M 490 254 L 490 280 L 155 280 L 155 321" marker-end="url(#a)"/>
+    <!-- Baris 2 (W=270) -->
+    <line x1="290" y1="400" x2="357" y2="400" marker-end="url(#a)"/>
+    <line x1="623" y1="400" x2="696" y2="400" marker-end="url(#a)"/>
+    <line x1="940" y1="400" x2="1037" y2="400" marker-end="url(#a)"/>
+    <line x1="1223" y1="400" x2="1316" y2="400" marker-end="url(#a)"/>
+    <path d="M 1130 474 L 1130 502 L 210 502 L 210 561" marker-end="url(#a)"/>
+    <path d="M 490 494 L 490 520 L 155 520 L 155 561" marker-end="url(#a)"/>
+    <!-- Baris 3 (W=510) -->
+    <line x1="290" y1="640" x2="357" y2="640" marker-end="url(#a)"/>
+    <line x1="623" y1="640" x2="696" y2="640" marker-end="url(#a)"/>
+    <path d="M 490 734 L 490 760 L 155 760 L 155 821" marker-end="url(#a)"/>
+    <path d="M 820 695 L 820 770 L 260 770 L 260 821" marker-end="url(#a)"/>
+    <!-- Baris 4 (W=750) -->
+    <line x1="290" y1="880" x2="357" y2="880" marker-end="url(#a)"/>
+    <line x1="623" y1="880" x2="696" y2="880" marker-end="url(#a)"/>
+    <path d="M 490 974 L 490 1000 L 155 1000 L 155 1061" marker-end="url(#a)"/>
+    <path d="M 820 935 L 820 1010 L 260 1010 L 260 1061" marker-end="url(#a)"/>
+    <!-- Baris 5 (W=990) -->
+    <line x1="290" y1="1120" x2="357" y2="1120" marker-end="url(#a)"/>
+    <line x1="623" y1="1120" x2="696" y2="1120" marker-end="url(#a)"/>
+    <path d="M 490 1214 L 490 1240 L 155 1240 L 155 1296" marker-end="url(#a)"/>
+    <path d="M 820 1175 L 820 1250 L 260 1250 L 260 1296" marker-end="url(#a)"/>
+    <!-- Rel kanan: S0, S1 -> T5 -->
+    <line x1="1500" y1="140" x2="1520" y2="140"/>
+    <line x1="1500" y1="380" x2="1520" y2="380"/>
+    <path d="M 1520 140 L 1520 1330 L 466 1330" marker-end="url(#a)"/>
+  </svg>
+
+  <!-- ============ BARIS 1 ============ -->
+  <div class="node" style="left:30px; top:105px; width:260px; height:110px;">T0&nbsp;Replikasi platform dan uji Delta-CSI, M1–M2</div>
+  <div class="gate" style="left:365px; top:70px; width:250px; height:180px;">
+    <div class="gate-inner" style="width:128px;">G0&nbsp;akhir&nbsp;M2, akuisisi stabil dan pola gerak terpisah dari diam dan kosong</div>
+  </div>
+  <div class="node" style="left:700px; top:105px; width:240px; height:110px;">Perbaikan penempatan node satu kali</div>
+  <div class="gate" style="left:1045px; top:100px; width:170px; height:140px;">
+    <div class="gate-inner" style="width:96px;">G0 diuji ulang</div>
+  </div>
+  <div class="node temuan" style="left:1320px; top:70px; width:180px; height:140px; font-size:12px;">Jalur CSI dihentikan, dilaporkan sebagai temuan karakterisasi</div>
+  <div class="elabel" style="left:638px; top:138px;">gagal</div>
+  <div class="elabel" style="left:1236px; top:138px;">gagal</div>
+  <div class="elabel" style="left:1148px; top:240px;">lolos</div>
+  <div class="elabel" style="left:505px; top:258px;">lolos</div>
+
+  <!-- ============ BARIS 2 ============ -->
+  <div class="node" style="left:30px; top:345px; width:260px; height:110px;">T1&nbsp;Kurasi isyarat, kalibrasi ruang, protokol, M2–M4</div>
+  <div class="gate" style="left:365px; top:310px; width:250px; height:180px;">
+    <div class="gate-inner" style="width:128px;">G1&nbsp;M3, separabilitas awal 2–3 isyarat</div>
+  </div>
+  <div class="node" style="left:700px; top:345px; width:240px; height:110px;">Perubahan penempatan atau orientasi node satu kali</div>
+  <div class="gate" style="left:1045px; top:340px; width:170px; height:140px;">
+    <div class="gate-inner" style="width:96px;">G1 diuji ulang</div>
+  </div>
+  <div class="node temuan" style="left:1320px; top:310px; width:180px; height:140px; font-size:12px;">Tindakan lanjutan sesuai Tabel&nbsp;3.6, butir&nbsp;2, dan hasilnya dicatat sebagai temuan</div>
+  <div class="elabel" style="left:638px; top:378px;">gagal</div>
+  <div class="elabel" style="left:1236px; top:378px;">gagal</div>
+  <div class="elabel" style="left:1148px; top:480px;">lolos</div>
+  <div class="elabel" style="left:505px; top:498px;">lolos</div>
+
+  <!-- ============ BARIS 3 ============ -->
+  <div class="node" style="left:30px; top:585px; width:260px; height:110px;">T2&nbsp;Perekaman dataset dan klasifikasi, M4–M8</div>
+  <div class="gate" style="left:365px; top:550px; width:250px; height:180px;">
+    <div class="gate-inner" style="width:128px;">G2&nbsp;M6–M7, akurasi skema dalam sesi jauh di atas peluang acak</div>
+  </div>
+  <div class="node" style="left:700px; top:585px; width:240px; height:110px; font-size:12.5px;">Pemangkasan ke 3–5 isyarat yang pembedanya paling bertumpu pada lintasan</div>
+  <div class="elabel" style="left:638px; top:618px;">gagal</div>
+  <div class="elabel" style="left:505px; top:738px;">lolos</div>
+
+  <!-- ============ BARIS 4 ============ -->
+  <div class="node" style="left:30px; top:825px; width:260px; height:110px;">T3&nbsp;Uji generalisasi, M8–M10</div>
+  <div class="gate" style="left:365px; top:790px; width:250px; height:180px;">
+    <div class="gate-inner" style="width:128px;">G3&nbsp;M10, kinerja lintas partisipan dan lintas ruang di atas peluang acak</div>
+  </div>
+  <div class="node" style="left:700px; top:825px; width:240px; height:110px; font-size:12.5px;">Cakupan menjadi personalisasi per pengguna, ditulis sebagai temuan</div>
+  <div class="elabel" style="left:638px; top:858px;">gagal</div>
+  <div class="elabel" style="left:505px; top:978px;">lolos</div>
+
+  <!-- ============ BARIS 5 ============ -->
+  <div class="node" style="left:30px; top:1065px; width:260px; height:110px;">T4&nbsp;Pengemasan mode latihan dan uji kegunaan, M10–M12</div>
+  <div class="gate" style="left:365px; top:1030px; width:250px; height:180px;">
+    <div class="gate-inner" style="width:128px;">G4&nbsp;M12, tiga syarat kegunaan terpenuhi</div>
+  </div>
+  <div class="node temuan" style="left:700px; top:1065px; width:240px; height:110px;">Hasil negatif dilaporkan sebagai temuan kelayakan</div>
+  <div class="elabel" style="left:638px; top:1098px;">gagal</div>
+  <div class="elabel" style="left:505px; top:1218px;">lolos</div>
+
+  <!-- ============ BARIS 6 : T5 ============ -->
+  <div class="node final" style="left:30px; top:1300px; width:430px; height:60px;">T5&nbsp;Analisis dan penulisan, M12–M14</div>
+</div>
+</body>
+</html>
