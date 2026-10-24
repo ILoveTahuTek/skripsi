@@ -1,0 +1,43 @@
+flowchart LR
+    subgraph JO ["Jalur operasional tanpa kamera"]
+        TX["Node pemancar TX ESP32"]
+        ZI["Zona isyarat, satu pengisyarat"]
+        RX["Node penerima RX ESP32"]
+        CSI["Deret CSI, amplitudo, fase, Doppler 1–60 Hz"]
+        SEG["Segmentasi berbasis energi gerak"]
+        FIT["Ekstraksi fitur"]
+        KLS["Klasifikator 5–8 kelas, SVM dan 1D-CNN, dengan skor keyakinan"]
+        UB["Umpan balik di dashboard, isyarat terdeteksi, cocok atau tidak cocok, atau tidak dikenali"]
+    end
+    subgraph JP ["Jalur pelabelan, hanya saat perekaman dataset"]
+        KP["Kartu pemandu"]
+        LBL["Label kelas"]
+        CAM["Webcam"]
+        MP["MediaPipe"]
+        KEY["Deret keypoint"]
+        VER["Verifikasi batas segmen dan penyaringan kualitas"]
+        DS["Dataset CSI berlabel"]
+    end
+    SYN["Sinkronisasi waktu kamera dan CSI, collect-ground-truth.py ADR-079"]
+    DIAG["Diagnosis kesalahan klasifikator, luring di luar jalur operasional"]
+
+    TX --> ZI
+    ZI --> RX
+    RX --> CSI
+    CSI --> SEG
+    SEG --> FIT
+    FIT --> KLS
+    KLS --> UB
+    KP --> LBL
+    CAM --> MP
+    MP --> KEY
+    KEY --> VER
+    LBL --> DS
+    VER --> DS
+    CAM -.-> SYN
+    RX -.-> SYN
+    SYN -.-> DS
+    SEG -.-> DS
+    DS -.->|pelatihan| KLS
+    KEY -.-> DIAG
+    KLS -.-> DIAG

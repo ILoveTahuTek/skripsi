@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; font-family: "Helvetica Neue", Arial, "Noto Sans", sans-serif; }
+  .fig { position: relative; background: #fff; width: 1660px; height: 1060px; overflow: hidden; }
+  .node {
+    position: absolute; border: 2px solid #1a1a1a; border-radius: 8px;
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 8px 12px; font-size: 14px; line-height: 1.3;
+    color: #111; font-weight: 500;
+  }
+  .panel {
+    position: absolute; border: 2px dashed #777; border-radius: 12px;
+  }
+  .panel-title {
+    position: absolute; width: 100%; text-align: center; top: 10px;
+    font-size: 15px; font-weight: 700; color: #333;
+  }
+  .elabel { position: absolute; font-size: 13px; font-style: italic; color: #333;
+    background: #fff; padding: 0 3px; }
+  svg.edges { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+  svg.edges path, svg.edges line { stroke: #1a1a1a; stroke-width: 1.8; fill: none; }
+  svg.edges .dashed { stroke-dasharray: 8 6; }
+</style>
+</head>
+<body>
+<!-- ======== GAMBAR 3.2 : Arsitektur sistem dua jalur ========
+     Panel kiri x60-560 y60-820 (node x100-380, kolom tunggal 8 node)
+     Panel kanan x700-1180 y60-820 (kolA x740-920, kolB x980-1160, DS x740-1160 y520-590)
+     SYN x80-460 y880-950 | DIAG x1300-1550 y880-950 ============================ -->
+<div class="fig" id="fig32">
+  <svg class="edges">
+    <defs>
+      <marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+        <path d="M0,0 L9,4.5 L0,9 z" style="fill:#1a1a1a; stroke:none;"/>
+      </marker>
+    </defs>
+    <!-- Rantai solid jalur operasional -->
+    <line x1="240" y1="155" x2="240" y2="179" marker-end="url(#a)"/>
+    <line x1="240" y1="240" x2="240" y2="264" marker-end="url(#a)"/>
+    <line x1="240" y1="325" x2="240" y2="349" marker-end="url(#a)"/>
+    <line x1="240" y1="410" x2="240" y2="434" marker-end="url(#a)"/>
+    <line x1="240" y1="495" x2="240" y2="519" marker-end="url(#a)"/>
+    <line x1="240" y1="580" x2="240" y2="604" marker-end="url(#a)"/>
+    <line x1="240" y1="680" x2="240" y2="714" marker-end="url(#a)"/>
+    <!-- Rantai solid jalur pelabelan -->
+    <line x1="830" y1="155" x2="830" y2="194" marker-end="url(#a)"/>
+    <line x1="1070" y1="155" x2="1070" y2="194" marker-end="url(#a)"/>
+    <line x1="1070" y1="255" x2="1070" y2="294" marker-end="url(#a)"/>
+    <line x1="1070" y1="360" x2="1070" y2="394" marker-end="url(#a)"/>
+    <line x1="830" y1="255" x2="830" y2="514" marker-end="url(#a)"/>
+    <line x1="1070" y1="475" x2="1070" y2="514" marker-end="url(#a)"/>
+    <!-- Sisi putus-putus -->
+    <path class="dashed" d="M 1160 127 H 1620 V 1000 H 40 V 915 H 76" marker-end="url(#a)"/>
+    <path class="dashed" d="M 100 297 H 20 V 595 H 420 V 874" marker-end="url(#a)"/>
+    <path class="dashed" d="M 460 895 H 750 V 591" marker-end="url(#a)"/>
+    <path class="dashed" d="M 380 467 H 950 V 514" marker-end="url(#a)"/>
+    <path class="dashed" d="M 740 555 H 386" marker-end="url(#a)"/>
+    <path class="dashed" d="M 100 615 H 55 V 975 H 1350 V 954" marker-end="url(#a)"/>
+    <path class="dashed" d="M 1160 330 H 1600 V 915 H 1556" marker-end="url(#a)"/>
+  </svg>
+
+  <!-- Panel kiri -->
+  <div class="panel" style="left:60px; top:60px; width:500px; height:760px;"></div>
+  <div class="panel-title" style="left:60px; top:70px; width:500px;">Jalur operasional tanpa kamera</div>
+  <div class="node" style="left:100px; top:100px; width:280px; height:55px;">Node pemancar TX ESP32</div>
+  <div class="node" style="left:100px; top:185px; width:280px; height:55px;">Zona isyarat, satu pengisyarat</div>
+  <div class="node" style="left:100px; top:270px; width:280px; height:55px;">Node penerima RX ESP32</div>
+  <div class="node" style="left:100px; top:355px; width:280px; height:55px;">Deret CSI, amplitudo, fase, Doppler 1–60&nbsp;Hz</div>
+  <div class="node" style="left:100px; top:440px; width:280px; height:55px;">Segmentasi berbasis energi gerak</div>
+  <div class="node" style="left:100px; top:525px; width:280px; height:55px;">Ekstraksi fitur</div>
+  <div class="node" style="left:100px; top:610px; width:280px; height:70px;">Klasifikator 5–8 kelas, SVM dan 1D-CNN, dengan skor keyakinan</div>
+  <div class="node" style="left:100px; top:720px; width:280px; height:80px;">Umpan balik di <i>dashboard</i>, isyarat terdeteksi, cocok atau tidak cocok, atau tidak dikenali</div>
+
+  <!-- Panel kanan -->
+  <div class="panel" style="left:700px; top:60px; width:480px; height:760px;"></div>
+  <div class="panel-title" style="left:700px; top:70px; width:480px;">Jalur pelabelan, hanya saat perekaman <i>dataset</i></div>
+  <div class="node" style="left:740px; top:100px; width:180px; height:55px;">Kartu pemandu</div>
+  <div class="node" style="left:740px; top:200px; width:180px; height:55px;">Label kelas</div>
+  <div class="node" style="left:980px; top:100px; width:180px; height:55px;"><i>Webcam</i></div>
+  <div class="node" style="left:980px; top:200px; width:180px; height:55px;">MediaPipe</div>
+  <div class="node" style="left:980px; top:300px; width:180px; height:60px;">Deret <i>keypoint</i></div>
+  <div class="node" style="left:980px; top:400px; width:180px; height:75px;">Verifikasi batas segmen dan penyaringan kualitas</div>
+  <div class="node" style="left:740px; top:520px; width:420px; height:70px;"><i>Dataset</i> CSI berlabel</div>
+
+  <!-- Node bawah -->
+  <div class="node" style="left:80px; top:880px; width:380px; height:70px; font-size:13px;">Sinkronisasi waktu kamera dan CSI, collect-ground-truth.py ADR-079</div>
+  <div class="node" style="left:1300px; top:880px; width:250px; height:70px; font-size:12.5px;">Diagnosis kesalahan klasifikator, luring di luar jalur operasional</div>
+  <div class="elabel" style="left:500px; top:532px;">pelatihan</div>
+</div>
+</body>
+</html>

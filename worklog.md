@@ -230,3 +230,24 @@ Stage Summary:
 - Gagasan alur pemilik teraudit dewan dan mendapat bentuk final: "guru mencetak label, bukan pose yang dikejar murid" — klasifikasi langsung 5-8 isyarat SIBI, MediaPipe = pelabel otomatis (bukan model yang dilatih ulang), diagram Mermaid 2 buah siap dipindah ke BAB III.
 - Dossier + transkrip + JSON verifikasi tersimpan di 12-council-alur-dpj4/; gerbang G0 (replikasi PCK@20 >= 55%, kunci akhir M2) menjadi aksi pertama; validator tunarungu kini kebutuhan wajib proposal.
 - Sisa human-owned: pilih 5-8 isyarat bersama validator + Kamus SIBI, konfirmasi judul baru, isi placeholder mitra, lalu regenerasi DPJ-4 DOCX mengikuti dossier ini.
+
+---
+Task ID: 12
+Agent: Super Z (main agent, sesi web)
+Task: Buat dokumen terstruktur (docx + markdown) dari bahan sempro DPJ-4 SIBI-CSI di folder Drive (1_GmfOnAi...) memakai skill naskah-id (1aK3y8Ah...) + sempro-mepet (1dzISJm...); push ke GitHub sandbox.
+
+Work Log:
+- Unduh materi Drive (gdown, retry rate-limit): sempro/dpj4-sibi-csi lengkap — BAB I-III + daftar-pustaka 34 entri + catatan + lembar fakta + laporan-penanda (98 kemunculan: 53 PERLU DATA, 24 PERLU RUJUKAN) + _berkunci + skrip; kedua file skill = zip (naskah-id sudah ada di repo; sempro-mepet baru).
+- Sinkron repo: pull origin/main (riwayat sampai 444fab8), token PAT dipasang di remote URL sesi.
+- Baca penuh rantai skill docx (SKILL.md, create.md, academic.md, common-rules.md, docx-js-core.md, toc.md, design-system.md R5+calcTitleLayout) + sempro-mepet (SKILL.md, language-core, qc-checklist) + seluruh materi (BAB I 2.400 kata, BAB II 4.000, BAB III 5.100, tabel 2.1-3.6, 2 diagram Mermaid).
+- Klasifikasi pekerjaan: KOMPILASI/PENGEMASAN (bukan sunting) — teks disalin verbatim, penanda dipertahankan; keputusan mengikuti jawaban rekomendasi AskUserQuestion (gabungan BAB I-III, cover+TOC, penanda sorot kuning, Mermaid jadi gambar, gaya skripsi Indonesia 4-3-3-3, identitas sampul kosong bertanda, push main, markdown terpadu).
+- Diagram: mmdc TD = 1:7,7 (tak muat halaman), LR = 1:0,12; gambar ulang kedua figur via HTML/CSS + Playwright (deviceScaleFactor 2) dengan koordinat tata letak bebas-silang terverifikasi manual (simpul/teks/jalur/label identik sumber): G3.1 3120x2840 (1:0,91), G3.2 3320x2120 (1:0,64); inspeksi VLM 2x lolos.
+- Generator persisten scripts/sempro/: parse_md.js (markdown->JSON; 568 unit; perbaikan bug kalimat "Tabel 2.2 memperlihatkan..." salah tertangkap sebagai keterangan tabel -> aturan lihat-baris-tabel; 98/98 penanda tertangkap) + generate_docx.js (docx-js: sampul R5 adaptasi Indonesia, judul kapital 3 baris via calcTitleLayoutMixed Latin, tabel meta persentase, TOC bidang romawi kecil -> isi arab, TNR 12pt line 360, tabel tiga-garis 9pt kepala tebal tengah + keterangan atas kiri, gambar tengah keterangan bawah, daftar pustaka indentasi gantung, penanda highlight kuning, Courier New utk kode) + patch_footer.py (instrText \* roman / \* arabic + hapus pgNumType kosong) + build_md.py + verify_sync.py.
+- QA: add_toc_placeholders 55 entri (perbaikan duplikat heading DAFTAR PUSTAKA + Consolas->Courier New); postcheck 0 error 1 warning spasi tabel (desain, sama dgn DPJ lolos); PDF 49 hal; inspeksi visual VLM halaman sampul/TOC/BAB I/T2.2/G3.1/T3.5/DP lolos; sinkron pandoc round-trip 568/568 unit; lint periksa.py = 8 temuan (1 genuin: koma sebelum "sehingga" Subbab 3.7.6; 2 positif palsu; 5 gaya) — dilaporkan di catatan-pengemasan, TIDAK diubah sesuai batas pekerjaan.
+- Deliverable download/sempro-dpj4-sibi-csi/: DOCX 513KB + markdown terpadu 91KB + assets 2 PNG + catatan-pengemasan.md (keputusan, verifikasi, temuan lint, tindak lanjut pemilik).
+- Mirror repo 13-sempro-docx/ (deliverable + generator + materi-asal); skill sempro-mepet diarsip ke skills-arsip/sempro-mepet/ (+ zip .skill); README diperbarui (bullet Folder 13).
+
+Stage Summary:
+- Dokumen terstruktur siap pakai: Proposal-Sempro-DPJ4-SIBI-CSI.docx (49 hal: sampul -> daftar isi i-iii -> BAB I-III + Daftar Pustaka 1-45) + .md terpadu; konten 100% setia materi (568/568), 98 penanda [PERLU ...] tersorot kuning siap diisi.
+- Diagram G3.1/G3.2 kini gambar cetak rasio halaman (kode Mermaid asli tetap utuh di markdown).
+- Sisa human-owned: isi identitas sampul + 98 penanda (prioritas di laporan-penanda), Update Field TOC di Word, 8 keputusan terbuka catatan.md materi (utamanya redaksi rumusan no. 3 + "separabilitas fisik"), 1 perbaikan koma-sehingga bila disetujui.
