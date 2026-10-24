@@ -1,0 +1,122 @@
+{
+  "ding2022_multilocation": {
+    "query_title": "Device-Free Multi-Location Human Activity Recognition Using Wi-Fi",
+    "matched_title": "Device-Free Indoor Human Activity Recognition Using Wi-Fi RSSI: Machine Learning Approaches",
+    "authors": "Hsieh, Chao-Feng, Chen, Yi-Chu, Hsieh, Cheng-Ying, Ku, Meng-Lin",
+    "container": "2020 IEEE International Conference on Consumer Electronics - Taiwan (ICCE-Taiwan)",
+    "year": 2020,
+    "doi": "10.1109/icce-taiwan49838.2020.9258097",
+    "type": "proceedings-article",
+    "verified": true
+  },
+  "jiang2018_smarthome": {
+    "query_title": "Smart Home Based on WiFi Sensing: A Survey",
+    "matched_title": "Smart Home Based on WiFi Sensing: A Survey",
+    "authors": "Jiang, Hongbo, Cai, Chao, Ma, Xiaoqiang, Yang, Yang, Liu, Jiangchuan",
+    "container": "IEEE Access",
+    "year": 2018,
+    "doi": "10.1109/access.2018.2812887",
+    "type": "journal-article",
+    "verified": true
+  },
+  "burimas2024_sleeprR": {
+    "query_title": "Monitoring the Sleep Respiratory Rate with Low-Cost Devices Wi-Fi",
+    "matched_title": "Monitoring the Sleep Respiratory Rate with Low-Cost Microcontroller Wi-Fi in a Controlled Environment",
+    "authors": "Burimas, Ratthamontree, Horanont, Teerayut, Thapa, Aakash, Lamichhane, Badri Raj",
+    "container": "Applied Sciences",
+    "year": 2024,
+    "doi": "10.3390/app14156458",
+    "type": "journal-article",
+    "verified": true
+  },
+  "tataraidze2019_breathing": {
+    "query_title": "Can We Monitor Breathing During Sleep via Wi-Fi",
+    "matched_title": "Can We Monitor Breathing During Sleep via Wi-Fi on Smartphone?",
+    "authors": "Tataraidze, Alexander, Olesyuk, Roman, Pikhletsky, Mikhail",
+    "container": "2019 41st Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC)",
+    "year": 2019,
+    "doi": "10.1109/embc.2019.8856382",
+    "type": "proceedings-article",
+    "verified": true
+  },
+  "galdino2023_ehealthcsi": {
+    "query_title": "eHealth CSI: A Wi-Fi CSI Dataset of Human Activities",
+    "matched_title": "eHealth CSI: A Wi-Fi CSI Dataset of Human Activities",
+    "authors": "Galdino, Iandra, Soto, Julio C. H., Caballero, Egberto, Ferreira, Vinicius, Ramos, Taiane Coelho, Albuquerque, Célio, Muchaluat-Saade, Débora C.",
+    "container": "IEEE Access",
+    "year": 2023,
+    "doi": "10.1109/access.2023.3294429",
+    "type": "journal-article",
+    "verified": true
+  },
+  "mosharaf2024_identification": {
+    "query_title": "WiFi-Based Human Identification with Machine Learning",
+    "matched_title": "WiFi-Based Human Identification with Machine Learning: A Comprehensive Survey",
+    "authors": "Mosharaf, Manal, Kwak, Jae B., Choi, Wooyeol",
+    "container": "Sensors",
+    "year": 2024,
+    "doi": "10.3390/s24196413",
+    "type": "journal-article",
+    "verified": true
+  },
+  "yang2021_apnea": {
+    "query_title": "Sleep Apnea Monitoring System Based on Commodity Wi-Fi",
+    "matched_title": "Danger-Pose Detection System Using Commodity Wi-Fi for Bathroom Monitoring",
+    "authors": "Zhang, Zizheng, Ishida, Shigemi, Tagashira, Shigeaki, Fukuda, Akira",
+    "container": "Sensors",
+    "year": 2019,
+    "doi": "10.3390/s19040884",
+    "type": "journal-article",
+    "verified": true
+  },
+  "touhiduzzaman2024_senior": {
+    "query_title": "Wireless Sensing-based Daily Activity Tracking System senior housing",
+    "matched_title": "Wireless Sensing-based Daily Activity Tracking System Deployment in Low-Income Senior Housing Environments",
+    "authors": "Touhiduzzaman, Md, Chung, Jane, Pretzer-Aboff, Ingrid, Bulut, Eyuphan",
+    "container": "Proceedings of the 30th Annual International Conference on Mobile Computing and Networking",
+    "year": 2024,
+    "doi": "10.1145/3636534.3698115",
+    "type": "proceedings-article",
+    "verified": true
+  },
+  "zou2019_wivi": {
+    "query_title": "WiFi and Vision Multimodal Learning for Accurate and Robust Device-Free Human Activity Recognition",
+    "matched_title": "WiFi and Vision Multimodal Learning for Accurate and Robust Device-Free Human Activity Recognition",
+    "authors": "Zou, Han, Yang, Jianfei, Das, Hari Prasanna, Liu, Huihan, Zhou, Yuxun, Spanos, Costas J.",
+    "container": "2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)",
+    "year": 2019,
+    "doi": "10.1109/cvprw.2019.00056",
+    "type": "proceedings-article",
+    "verified": true
+  },
+  "alqaness2019_micro": {
+    "query_title": "Device-free human micro-activity recognition method using channel state information",
+    "matched_title": "Device-free human micro-activity recognition method using WiFi signals",
+    "authors": "Al-qaness, Mohammed A. A.",
+    "container": "Geo-spatial Information Science",
+    "year": 2019,
+    "doi": "10.1080/10095020.2019.1612600",
+    "type": "journal-article",
+    "verified": true
+  },
+  "liu_wisleep": {
+    "query_title": "Wi-sleep contactless sleep monitoring via WiFi signals",
+    "matched_title": "Wi-Sleep: Contactless Sleep Monitoring via WiFi Signals",
+    "authors": "Liu, Xuefeng, Cao, Jiannong, Tang, Shaojie, Wen, Jiaqi",
+    "container": "2014 IEEE Real-Time Systems Symposium",
+    "year": 2014,
+    "doi": "10.1109/rtss.2014.30",
+    "type": "proceedings-article",
+    "verified": true
+  },
+  "kontou_respiration": {
+    "query_title": "Contactless Respiration Monitoring using Wi-Fi and Artificial Intelligence",
+    "matched_title": "Contactless Respiration Monitoring Using Wi-Fi and Artificial Neural Network Detection Method",
+    "authors": "Kontou, Panagiota, Smida, Souheil Ben, Anagnostou, Dimitris E.",
+    "container": "IEEE Journal of Biomedical and Health Informatics",
+    "year": 2024,
+    "doi": "10.1109/jbhi.2023.3337001",
+    "type": "journal-article",
+    "verified": true
+  }
+}

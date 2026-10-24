@@ -1,0 +1,246 @@
+{
+  "ritmeester2026_hearing_parents": {
+    "query": "Navigating sign language learning insights from hearing parents of deaf and hard-of-hearing children Ritmeester Sumer",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "mitchell2004_parental": {
+    "query": "Parental hearing status and signing among deaf and hard of hearing students Mitchell Karchmer Sign Language Studies",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "hassan2026_asl_ai": {
+    "query": "ASL Educators Perspectives on AI for Enhancing Student Learning sign language Hassan",
+    "candidates": [
+      {
+        "DOI": "10.1145/3772318.3791928",
+        "title": "ASL Educators’ Perspectives on AI for Enhancing Student Learning in American Sign Language Education",
+        "container": "Proceedings of the 2026 CHI Conference on Human Factors in Computing Systems",
+        "authors": [
+          "Saad Hassan",
+          "Laleh Nourian",
+          "Caluã de Lacerda Pataca",
+          "Michelle M Olson",
+          "Toni D'aurio"
+        ],
+        "year": 2026,
+        "vol": null,
+        "issue": null,
+        "page": "1-20",
+        "type": "proceedings-article"
+      },
+      {
+        "DOI": "10.2307/j.ctv2rr3f9n.7",
+        "title": "Teaching ASL",
+        "container": "Learning To See",
+        "authors": [],
+        "year": 2014,
+        "vol": null,
+        "issue": null,
+        "page": "76-111",
+        "type": "book-chapter"
+      },
+      {
+        "DOI": "10.3102/ip.25.2188731",
+        "title": "Longitudinal Study on Enhancing English Literacy Through ASL (American Sign Language) Metalinguistic Skills",
+        "container": "AERA 2025",
+        "authors": [
+          "Emily Jo Noschese"
+        ],
+        "year": 2025,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "proceedings-article"
+      }
+    ]
+  },
+  "who2021_world_report": {
+    "query": "World report on hearing WHO 2021",
+    "candidates": [
+      {
+        "DOI": "10.1097/01.hj.0000737556.29344.05",
+        "title": "The First World Report on Hearing: Toward Accessible Ear and Hearing Care",
+        "container": "The Hearing Journal",
+        "authors": [
+          "Jackie L. Clark"
+        ],
+        "year": 2021,
+        "vol": "74",
+        "issue": "3",
+        "page": "6,7",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.2471/b09509",
+        "title": "WHO interactive multistakeholder hearing on noncommunicable diseases and mental health for young professionals",
+        "container": "",
+        "authors": [
+          ""
+        ],
+        "year": 2025,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "monograph"
+      },
+      {
+        "DOI": "10.1093/geroni/igaa057.2931",
+        "title": "WHO World Report on Hearing: Implications for the United States and the WHO Decade of Healthy Aging",
+        "container": "Innovation in Aging",
+        "authors": [
+          "Carrie Nieman"
+        ],
+        "year": 2020,
+        "vol": "4",
+        "issue": "Supplement_1",
+        "page": "807-807",
+        "type": "journal-article"
+      }
+    ]
+  },
+  "luckner2010_skills": {
+    "query": "Skills students who are deaf or hard of hearing need to learn Luckner",
+    "candidates": [
+      {
+        "DOI": "10.1093/oxfordhb/9780195390032.013.0004",
+        "title": "Preparing Teachers of Students Who Are Deaf or Hard of Hearing",
+        "container": "Oxford Handbooks Online",
+        "authors": [
+          "John Luckner"
+        ],
+        "year": 2010,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "edited-book"
+      },
+      {
+        "DOI": "10.1353/aad.2013.0012",
+        "title": "Using the Dynamic Indicators of Basic Early Literacy Skills With Students Who Are Deaf or Hard of Hearing: Perspectives of a Panel of Experts",
+        "container": "American Annals of the Deaf",
+        "authors": [
+          "John L. Luckner"
+        ],
+        "year": 2013,
+        "vol": "158",
+        "issue": "1",
+        "page": "7-19",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.4324/9781003252054-9",
+        "title": "Supporting Students Who Are Deaf and Hard of Hearing and Have Attention Deficit Hyperactivity Disorder: Strategies for Success",
+        "container": "Deaf and Hard of Hearing Learners With Disabilities",
+        "authors": [
+          "Nancy Norman",
+          "Natalia Rohatyn-Martin",
+          "John Luckner"
+        ],
+        "year": 2022,
+        "vol": null,
+        "issue": null,
+        "page": "262-287",
+        "type": "book-chapter"
+      }
+    ]
+  },
+  "hall2019_language": {
+    "query": "Language deprivation and deaf mental health psychosis Hall",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "swanwick2017_deaf_edu": {
+    "query": "Languages and Languaging in Deaf Education Swanwick",
+    "candidates": [
+      {
+        "DOI": "10.4324/9780203064801",
+        "title": "Issues in Deaf Education",
+        "container": "",
+        "authors": [
+          "Ruth Swanwick"
+        ],
+        "year": 2012,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "book"
+      },
+      {
+        "DOI": "10.1093/oso/9780190880545.003.0004",
+        "title": "Dialogic Teaching and Translanguaging in Deaf Education",
+        "container": "Evidence-Based Practices in Deaf Education",
+        "authors": [
+          "Ruth Swanwick"
+        ],
+        "year": 2018,
+        "vol": null,
+        "issue": null,
+        "page": "81-108",
+        "type": "book-chapter"
+      },
+      {
+        "DOI": "10.1093/acprof:oso/9780190215194.003.0026",
+        "title": "Re-Envisioning Learning and Teaching in Deaf Education",
+        "container": "Educating Deaf Learners",
+        "authors": [
+          "Ruth Swanwick"
+        ],
+        "year": 2015,
+        "vol": null,
+        "issue": null,
+        "page": "595-614",
+        "type": "book-chapter"
+      }
+    ]
+  },
+  "hmelo2017_scaffold": {
+    "query": "Scaffolding and problem based learning feedback motor skill practice",
+    "candidates": [
+      {
+        "DOI": "10.3990/1.9789036523028",
+        "title": "Motor skill learning age and augmented feedback",
+        "container": "",
+        "authors": [
+          "Henk van Dijk"
+        ],
+        "year": null,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "dissertation"
+      },
+      {
+        "DOI": "10.7554/elife.109934",
+        "title": "Policy-Gradient Reinforcement Learning as a General Theory of Practice-Based Motor Skill Learning",
+        "container": "",
+        "authors": [
+          "Adrian M Haith"
+        ],
+        "year": 2026,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "posted-content"
+      },
+      {
+        "DOI": "10.7554/elife.109934.1",
+        "title": "Policy-Gradient Reinforcement Learning as a General Theory of Practice-Based Motor Skill Learning",
+        "container": "",
+        "authors": [
+          "Adrian M Haith"
+        ],
+        "year": 2026,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "posted-content"
+      }
+    ]
+  },
+  "hassan2026b_asl_edu_ai": {
+    "query": "Artificial intelligence American Sign Language education educators survey",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "ekstranda2023_deaf_job": {
+    "query": "Deaf people employment barriers communication Indonesia",
+    "error": "HTTP Error 429: Too Many Requests"
+  }
+}

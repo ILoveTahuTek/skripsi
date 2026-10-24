@@ -1,0 +1,91 @@
+{
+  "nama": "rubric-proposal-dpj-trse",
+  "versi": 1,
+  "deskripsi": "Rubrik terukur untuk menilai (a) kualitas SKILL.md aturan-proposal dan (b) kepatuhan dokumen DPJ terhadap pola korpus TRSE Universitas Negeri Malang. Sumber pola: 05-analisis-korpus/analisis-korpus-proposal.md. Skor total = bobot x skor per dimensi (0..1).",
+  "dimensi": [
+    {
+      "id": "D1",
+      "nama": "Struktur bab",
+      "bobot": 0.2,
+      "aturan": [
+        "Bab inti ada: Pendahuluan, Kajian/Tinjauan Pustaka, Metode/Metodologi Penelitian",
+        "BAB I berisi minimal: Latar Belakang, Rumusan Masalah, Tujuan Penelitian, Batasan Masalah, Manfaat Penelitian",
+        "BAB II memuat subbab 'Penelitian Terdahulu' dengan tabel komparasi (kolom fitur, tanda benar/salin, baris 'Penelitian Ini')",
+        "BAB III memuat subbab pembuka alur/tahapan penelitian + studi literatur + pengujian + evaluasi",
+        "Penamaan bab konsisten (tidak campur KAJIAN PUSTAKA dan TINJAUAN PUSTAKA sekaligus)"
+      ]
+    },
+    {
+      "id": "D2",
+      "nama": "Pola bahasa subbab BAB I",
+      "bobot": 0.2,
+      "aturan": [
+        "Rumusan masalah dibuka dengan kalimat pengantar korpus dan item berupa pertanyaan 'Bagaimana ...?'",
+        "Tujuan dibuka 'Penelitian ini bertujuan untuk ...' dan item memakai frasa kerja (Merancang/Mengimplementasikan/Mengetahui)",
+        "Batasan masalah dibuka kalimat pengantar korpus; item terakhir berpola 'Penelitian ini tidak membahas ...'",
+        "Manfaat terbagi Teoretis dan Praktis (sub-item Bagi ...)",
+        "Latar belakang bercorong: konteks umum -> masalah spesifik -> teknologi per paragraf ber sitasi -> penutup 'Berdasarkan uraian tersebut, penelitian ini dilakukan untuk ...'"
+      ]
+    },
+    {
+      "id": "D3",
+      "nama": "Sitasi dan referensi",
+      "bobot": 0.15,
+      "aturan": [
+        "Sitasi dalam teks pola 'Nama (Tahun) menjelaskan/menunjukkan/menyoroti bahwa ...' atau '(Nama et al., Tahun)'",
+        "Daftar pustaka APA 7, hanging indent, DOI URL disertakan bila ada",
+        "Semua referensi yang dikutip di teks muncul di daftar pustaka dan sebaliknya",
+        "Referensi terverifikasi (DOI dicek) - tidak ada referensi fiktif"
+      ]
+    },
+    {
+      "id": "D4",
+      "nama": "Mekanika penulisan",
+      "bobot": 0.15,
+      "aturan": [
+        "Judul dokumen kapital semua, pola RANCANG BANGUN/IMPLEMENTASI/PERANCANGAN ... BERBASIS ... MENGGUNAKAN ...",
+        "Penomoran gambar/tabel per bab (Gambar 3.1, Tabel 2.1) dengan judul",
+        "Ejaan PUEBI: 'memengaruhi' bukan 'mempengaruhi'; angka desimal koma",
+        "Tanpa orang pertama; subjek 'penelitian ini/sistem/alat'",
+        "Istilah asing Latin (computer vision, real-time) tanpa padanan memaksakan"
+      ]
+    },
+    {
+      "id": "D5",
+      "nama": "Disiplin kelayakan (khusus DPJ WiFi-CSI)",
+      "bobot": 0.15,
+      "aturan": [
+        "Semua klaim dibatasi 'studi kelayakan'; tidak menjanjikan sistem jadi",
+        "Fitur stub RuView (pose 17-kp, apnea/sleep-stage) tidak dijanjikan; paradigma klasifikasi gesture dari pola CSI, bukan pose",
+        "Gerbang fisik Delta-CSI 2xESP32 ada sebagai go/no-go minggu awal",
+        "Risiko utama + mitigasi eksplisit"
+      ]
+    },
+    {
+      "id": "D6",
+      "nama": "Kelengkapan DPJ",
+      "bobot": 0.15,
+      "aturan": [
+        "1 judul utama + 2 judul alternatif",
+        "Jadwal 1 semester (~4,5 bulan) ada",
+        "Rencana biaya/anggaran ada",
+        "Batasan ruang lingkup ada",
+        "Tanpa halaman cover (aturan user: skip bagian cover)"
+      ]
+    }
+  ],
+  "kualitas_skor": {
+    "1.0": "semua aturan terpenuhi",
+    "0.8-0.9": "1-2 aturan minor terlewat",
+    "0.5-0.7": "beberapa aturan penting terlewat, perlu revisi",
+    "<0.5": "tidak layak, revisi besar"
+  },
+  "larangan_global": [
+    "klaim hasil yang belum diuji (untuk DPJ)",
+    "menjanjikan pose/titik-titik tubuh akurat dari RuView",
+    "halaman sampul",
+    "paragraf 1-2 kalimat",
+    "bullet tanpa kalimat pengantar",
+    "penanda akhir dokumen artifisial ('--- End of Report ---' dsb.)"
+  ]
+}

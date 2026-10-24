@@ -1,0 +1,493 @@
+{
+  "mitchell2004_parental": {
+    "query": "Chasing the mythical ten percent parental hearing status of deaf and hard of hearing students in the United States",
+    "candidates": [
+      {
+        "DOI": "10.1353/sls.2004.0005",
+        "title": "Chasing the Mythical Ten Percent: Parental Hearing Status of Deaf and Hard of Hearing Students in the United States",
+        "container": "Sign Language Studies",
+        "authors": [
+          "Ross E Mitchell",
+          "Michael A Karchmer"
+        ],
+        "year": 2004,
+        "vol": "4",
+        "issue": "2",
+        "page": "138-163",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.1353/sls.2005.0004",
+        "title": "Parental Hearing Status and Signing among Deaf and Hard of Hearing Students",
+        "container": "Sign Language Studies",
+        "authors": [
+          "Ross E Mitchell",
+          "Michael A Karchmer"
+        ],
+        "year": 2005,
+        "vol": "5",
+        "issue": "2",
+        "page": "231-244",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.2307/j.ctv2rr3fhr.11",
+        "title": "Accountability and Students Who Are Deaf or Hard of Hearing",
+        "container": "Accountability-Based Reforms",
+        "authors": [],
+        "year": 2011,
+        "vol": null,
+        "issue": null,
+        "page": "132-142",
+        "type": "book-chapter"
+      },
+      {
+        "DOI": "10.1037/e619512007-001",
+        "title": "The Deaf and Hard of Hearing and HIV/AIDS in the United States",
+        "container": "PsycEXTRA Dataset",
+        "authors": [],
+        "year": 2006,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "dataset"
+      }
+    ]
+  },
+  "lieberman2022_parents_asl": {
+    "query": "Hearing parents learning American Sign Language with their deaf children",
+    "candidates": [
+      {
+        "DOI": "10.1093/oso/9780197524886.003.0008",
+        "title": "English and American Sign Language Grammar",
+        "container": "Language Learning in Children Who Are Deaf and Hard of Hearing",
+        "authors": [
+          "Susan R. Easterbrooks"
+        ],
+        "year": 2021,
+        "vol": null,
+        "issue": null,
+        "page": "246-304",
+        "type": "book-chapter"
+      },
+      {
+        "DOI": "10.1093/jdsade/enag037",
+        "title": "Experiences of learning New Zealand sign language: hearing parents’ identities and socialization goals for their deaf children",
+        "container": "Journal of Deaf Studies and Deaf Education",
+        "authors": [
+          "Rebekah Butterfield",
+          "Mele Taumoepeau"
+        ],
+        "year": 2026,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.1515/applirev-2021-0120",
+        "title": "Hearing parents learning American Sign Language with their deaf children: a mixed-methods survey",
+        "container": "Applied Linguistics Review",
+        "authors": [
+          "Amy M. Lieberman",
+          "Julie Mitchiner",
+          "Elana Pontecorvo"
+        ],
+        "year": 2022,
+        "vol": "15",
+        "issue": "1",
+        "page": "309-333",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.1353/sls.1975.0001",
+        "title": "Hearing Parents of Deaf Children: A Typology",
+        "container": "Sign Language Studies",
+        "authors": [
+          "Jeff Nash"
+        ],
+        "year": 1975,
+        "vol": "7",
+        "issue": "1",
+        "page": "163-180",
+        "type": "journal-article"
+      }
+    ]
+  },
+  "ritmeester2026_parents": {
+    "query": "Navigating sign language learning insights from hearing parents of deaf and hard-of-hearing children",
+    "candidates": [
+      {
+        "DOI": "10.1093/jdsade/enaf059",
+        "title": "Navigating sign language learning: insights from hearing parents of deaf and hard-of-hearing children",
+        "container": "Journal of Deaf Studies and Deaf Education",
+        "authors": [
+          "Jos Ritmeester",
+          "Beyza Sümer",
+          "Marije Boonstra",
+          "Maartje de Meulder",
+          "Belinda van der Aa",
+          "Floris Roelofsen"
+        ],
+        "year": 2025,
+        "vol": "31",
+        "issue": "1",
+        "page": "85-103",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.1093/oso/9780197524886.003.0008",
+        "title": "English and American Sign Language Grammar",
+        "container": "Language Learning in Children Who Are Deaf and Hard of Hearing",
+        "authors": [
+          "Susan R. Easterbrooks"
+        ],
+        "year": 2021,
+        "vol": null,
+        "issue": null,
+        "page": "246-304",
+        "type": "book-chapter"
+      },
+      {
+        "DOI": "10.1093/oso/9780197524886.003.0003",
+        "title": "Current Research on the Acquisition of Language in Children Who Are Deaf and Hard of Hearing",
+        "container": "Language Learning in Children Who Are Deaf and Hard of Hearing",
+        "authors": [
+          "Susan R. Easterbrooks"
+        ],
+        "year": 2021,
+        "vol": null,
+        "issue": null,
+        "page": "51-89",
+        "type": "book-chapter"
+      },
+      {
+        "DOI": "10.1093/oso/9780197524886.001.0001",
+        "title": "Language Learning in Children Who Are Deaf and Hard of Hearing",
+        "container": null,
+        "authors": [
+          "Susan R. Easterbrooks"
+        ],
+        "year": 2021,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "edited-book"
+      }
+    ]
+  },
+  "app2023_mediapipe_3d": {
+    "query": "Human pose estimation using MediaPipe Pose and optimization methods for 3D reconstruction of human joint angles",
+    "candidates": [
+      {
+        "DOI": "10.5220/0010879400003124",
+        "title": "Camera Pose Estimation using Human Head Pose Estimation",
+        "container": "Proceedings of the 17th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications",
+        "authors": [
+          "Robert Fischer",
+          "Michael Hödlmoser",
+          "Margrit Gelautz"
+        ],
+        "year": 2022,
+        "vol": null,
+        "issue": null,
+        "page": "877-886",
+        "type": "proceedings-article"
+      },
+      {
+        "DOI": "10.3390/app13042700",
+        "title": "Human Pose Estimation Using MediaPipe Pose and Optimization Method Based on a Humanoid Model",
+        "container": "Applied Sciences",
+        "authors": [
+          "Jong-Wook Kim",
+          "Jin-Young Choi",
+          "Eun-Ju Ha",
+          "Jae-Ho Choi"
+        ],
+        "year": 2023,
+        "vol": "13",
+        "issue": "4",
+        "page": "2700",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.1007/978-981-97-9334-1_5",
+        "title": "Joint Data Augmentation and Representation for 3D Human Pose Estimation",
+        "container": "Human Pose Analysis",
+        "authors": [
+          "Songlin Du",
+          "Takeshi Ikenaga"
+        ],
+        "year": 2024,
+        "vol": null,
+        "issue": null,
+        "page": "91-117",
+        "type": "book-chapter"
+      },
+      {
+        "DOI": "10.1145/3719384.3719453",
+        "title": "Ergonomic Risk Assessment Using Human Pose Estimation with MediaPipe Pose",
+        "container": "Proceedings of the 2024 7th Artificial Intelligence and Cloud Computing Conference",
+        "authors": [
+          "Chansiri Singhtaun",
+          "Suriya Natsupakpong",
+          "Pollakrit Lorprasertkul"
+        ],
+        "year": 2024,
+        "vol": null,
+        "issue": null,
+        "page": "465-471",
+        "type": "proceedings-article"
+      }
+    ]
+  },
+  "personinwifi3d": {
+    "query": "Person-in-WiFi 3D fine-grained human perception commodity WiFi",
+    "candidates": [
+      {
+        "DOI": "10.1109/iccv.2019.00555",
+        "title": "Person-in-WiFi: Fine-Grained Person Perception Using WiFi",
+        "container": "2019 IEEE/CVF International Conference on Computer Vision (ICCV)",
+        "authors": [
+          "Fei Wang",
+          "Sanping Zhou",
+          "Stanislav Panev",
+          "Jinsong Han",
+          "Dong Huang"
+        ],
+        "year": 2019,
+        "vol": null,
+        "issue": null,
+        "page": "5451-5460",
+        "type": "proceedings-article"
+      },
+      {
+        "DOI": "10.21203/rs.3.rs-423277/v1",
+        "title": "WiImage: Fine-grained Human Imaging from Commodity WiFi",
+        "container": null,
+        "authors": [
+          "Shengkai Zhang",
+          "Gaoyang Liu",
+          "Keping YU",
+          "Shaohua Wan"
+        ],
+        "year": 2021,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "posted-content"
+      },
+      {
+        "DOI": "10.1109/jsen.2019.2900511",
+        "title": "3D-WiFi: 3D Localization With Commodity WiFi",
+        "container": "IEEE Sensors Journal",
+        "authors": [
+          "Lingyan Zhang",
+          "Hongyu Wang"
+        ],
+        "year": 2019,
+        "vol": "19",
+        "issue": "13",
+        "page": "5141-5152",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.1109/wcnc.2018.8377133",
+        "title": "Fine-grained adaptive location-independent activity recognition using commodity WiFi",
+        "container": "2018 IEEE Wireless Communications and Networking Conference (WCNC)",
+        "authors": [
+          "Jianfei Yang",
+          "Han Zou",
+          "Hao Jiang",
+          "Lihua Xie"
+        ],
+        "year": 2018,
+        "vol": null,
+        "issue": null,
+        "page": "1-6",
+        "type": "proceedings-article"
+      }
+    ]
+  },
+  "ekstranda_deaf_indonesia": {
+    "query": "deaf people employment communication barriers Indonesia",
+    "candidates": [
+      {
+        "DOI": "10.14711/thesis-hdl167730",
+        "title": "Breaking Barriers, Building Connections: Digital Participation and Communication of Deaf or Hard-of-Hearing People",
+        "container": null,
+        "authors": [
+          "Beiyan Cao"
+        ],
+        "year": null,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "dissertation"
+      },
+      {
+        "DOI": "10.1093/9780191983726.003.0001",
+        "title": "Introduction to Communication Interventions with Deaf People",
+        "container": "Communication Interventions with Deaf People",
+        "authors": [
+          "Rosalind Herman Gelbart",
+          "Charlotte Enns"
+        ],
+        "year": 2025,
+        "vol": null,
+        "issue": null,
+        "page": "1-9",
+        "type": "book-chapter"
+      },
+      {
+        "DOI": "10.1093/9780191983726.003.0024",
+        "title": "Communication Interventions with Deaf People: Future Directions",
+        "container": "Communication Interventions with Deaf People",
+        "authors": [
+          "Charlotte Enns",
+          "Rosalind Herman Gelbart"
+        ],
+        "year": 2025,
+        "vol": null,
+        "issue": null,
+        "page": "493-498",
+        "type": "book-chapter"
+      },
+      {
+        "DOI": "10.1093/9780191983726.003.0002",
+        "title": "Deaf Perspectives on Communication Interventions",
+        "container": "Communication Interventions with Deaf People",
+        "authors": [
+          "Leala Holcomb"
+        ],
+        "year": 2025,
+        "vol": null,
+        "issue": null,
+        "page": "10-23",
+        "type": "book-chapter"
+      }
+    ]
+  },
+  "deaf_communication_barrier_health_indonesia": {
+    "query": "communication barriers deaf patients healthcare Indonesia sign language interpreter",
+    "candidates": [
+      {
+        "DOI": "10.47191/etj/v11i05.28",
+        "title": "Sign Language Interpreter: A Mobile-Based Communication Application for Bridging the Communication Gap Between Deaf and Hearing Individuals",
+        "container": "Engineering and Technology Journal",
+        "authors": [
+          "Felise O. Marcaida",
+          "Althea D. L. Romero",
+          "Robert John V. Santos",
+          "Eliza Ayo"
+        ],
+        "year": 2026,
+        "vol": "11",
+        "issue": "05",
+        "page": null,
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.1037/e334202004-005",
+        "title": "Sign Language Interpreter Mood Affects Deaf Recipient",
+        "container": "PsycEXTRA Dataset",
+        "authors": [
+          "J. G. Brunson",
+          "P.S. Lawrence"
+        ],
+        "year": 2003,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "dataset"
+      },
+      {
+        "DOI": "10.1109/iccicct.2014.6993193",
+        "title": "American Sign Language interpreter system for deaf and dumb individuals",
+        "container": "2014 International Conference on Control, Instrumentation, Communication and Computational Technologies (ICCICCT)",
+        "authors": [
+          "Sruthi Upendran",
+          "A Thamizharasi"
+        ],
+        "year": 2014,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "proceedings-article"
+      },
+      {
+        "DOI": "10.18122/td/1735/boisestate",
+        "title": "Communication in Healthcare Settings",
+        "container": null,
+        "authors": [
+          "Elizabeth Schniedewind"
+        ],
+        "year": null,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "dissertation"
+      }
+    ]
+  },
+  "who2021_hearing_report": {
+    "query": "World report on hearing",
+    "candidates": [
+      {
+        "DOI": "10.1097/01.hj.0000737556.29344.05",
+        "title": "The First World Report on Hearing: Toward Accessible Ear and Hearing Care",
+        "container": "The Hearing Journal",
+        "authors": [
+          "Jackie L. Clark"
+        ],
+        "year": 2021,
+        "vol": "74",
+        "issue": "3",
+        "page": "6,7",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.2471/blt.21.285643",
+        "title": "The world report on hearing, 2021",
+        "container": "Bulletin of the World Health Organization",
+        "authors": [
+          "Shelly Chadha",
+          "Kaloyan Kamenov",
+          "Alarcos Cieza"
+        ],
+        "year": 2021,
+        "vol": "99",
+        "issue": "4",
+        "page": "242-242A",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.1017/s0022215120000663",
+        "title": "The World Health Organization's World Report on Hearing: a call to action for hearing care providers",
+        "container": "The Journal of Laryngology &amp; Otology",
+        "authors": [
+          "C L Nieman",
+          "C M McMahon"
+        ],
+        "year": 2020,
+        "vol": "134",
+        "issue": "5",
+        "page": "377-378",
+        "type": "journal-article"
+      },
+      {
+        "DOI": "10.2471/b09509",
+        "title": "WHO interactive multistakeholder hearing on noncommunicable diseases and mental health for young professionals",
+        "container": null,
+        "authors": [
+          ""
+        ],
+        "year": 2025,
+        "vol": null,
+        "issue": null,
+        "page": null,
+        "type": "monograph"
+      }
+    ]
+  }
+}
