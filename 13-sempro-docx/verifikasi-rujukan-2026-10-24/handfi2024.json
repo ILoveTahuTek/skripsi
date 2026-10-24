@@ -1,0 +1,27 @@
+{
+ "paperId": "f8695019e175d39cda0a439b9b2dc8006bfb683e",
+ "title": "HandFi: WiFi Sensing based Hand Gesture Recognition using Channel State Information",
+ "venue": "ICMLDE",
+ "year": 2023,
+ "openAccessPdf": {
+  "url": "https://doi.org/10.1016/j.procs.2024.04.042",
+  "status": "GOLD",
+  "license": "CCBYNCND",
+  "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1016/j.procs.2024.04.042?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/j.procs.2024.04.042, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+ },
+ "authors": [
+  {
+   "authorId": "2402067709",
+   "name": "P. Sruthi"
+  },
+  {
+   "authorId": "2264796524",
+   "name": "S. Satapathy"
+  },
+  {
+   "authorId": "1733650",
+   "name": "S. Udgata"
+  }
+ ],
+ "abstract": null
+}

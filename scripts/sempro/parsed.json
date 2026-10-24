@@ -12,14 +12,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Sebagian besar anak tunarungu lahir di tengah keluarga pendengar. Mitchell dan Karchmer [1], [2] menunjukkan kondisi tersebut melalui data siswa tunarungu di Amerika Serikat sekaligus membantah anggapan lama bahwa sekitar 10% anak tunarungu memiliki orang tua tunarungu. Proporsi yang lazim dikutip untuk anak tunarungu dengan orang tua pendengar berkisar 90–95% [1], [2]. Angka sebanding untuk Indonesia belum ditemukan dalam penelusuran penelitian ini "
-    },
-    {
-     "text": "[PERLU DATA: proporsi anak tunarungu dari orang tua pendengar di Indonesia]",
-     "highlight": true
-    },
-    {
-     "text": " sehingga angka dari Amerika Serikat itu dipakai sebagai gambaran umum. Keluarga pendengar dari anak yang berkomunikasi dengan isyarat perlu ikut mempelajari bahasa isyarat, padahal proses belajarnya tidak mudah. Lieberman dkk. [3] melaporkan bahwa orang tua pendengar yang belajar "
+     "text": "Sebagian besar anak tunarungu lahir di tengah keluarga pendengar. Mitchell dan Karchmer [1], [2] menunjukkan kondisi tersebut melalui data siswa tunarungu di Amerika Serikat sekaligus membantah anggapan lama bahwa sekitar 10% anak tunarungu memiliki orang tua tunarungu. Proporsi yang lazim dikutip untuk anak tunarungu dengan orang tua pendengar berkisar 90–95% [1], [2]. Angka sebanding untuk Indonesia belum ditemukan dalam penelusuran penelitian ini (Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026) sehingga angka dari Amerika Serikat itu dipakai sebagai gambaran umum. Keluarga pendengar dari anak yang berkomunikasi dengan isyarat perlu ikut mempelajari bahasa isyarat, padahal proses belajarnya tidak mudah. Lieberman dkk. [3] melaporkan bahwa orang tua pendengar yang belajar "
     },
     {
      "text": "American Sign Language",
@@ -49,14 +42,7 @@
      "italics": true
     },
     {
-     "text": " di 26 provinsi sehingga tidak mewakili populasi nasional, tetapi tetap menunjukkan kecenderungan bahwa komunitas tunarungu lebih banyak memakai BISINDO dalam keseharian. Di sisi lain, pembelajar dari jalur pendidikan formal mempelajari SIBI, yaitu sistem isyarat yang memang berkembang di jalur itu [7]. Bagi keluarga yang anaknya bersekolah di jalur formal, SIBI merupakan sistem isyarat yang dipakai di sekolah "
-    },
-    {
-     "text": "[PERLU RUJUKAN: penggunaan SIBI dalam pembelajaran di sekolah luar biasa atau kurikulum pendidikan khusus]",
-     "highlight": true
-    },
-    {
-     "text": ". Sebaliknya, bila tujuan utama keluarga adalah berkomunikasi sehari-hari dengan komunitas tunarungu, BISINDO lebih relevan; kebutuhan itu berada di luar cakupan penelitian ini dan menjadi kerja lanjutan."
+     "text": " di 26 provinsi sehingga tidak mewakili populasi nasional, tetapi tetap menunjukkan kecenderungan bahwa komunitas tunarungu lebih banyak memakai BISINDO dalam keseharian. Di sisi lain, pembelajar dari jalur pendidikan formal mempelajari SIBI, yaitu sistem isyarat yang memang berkembang di jalur itu [7]. Bagi keluarga yang anaknya bersekolah di jalur formal, SIBI merupakan sistem isyarat yang dipakai di sekolah: melalui Surat Pemberitahuan Direktorat Pendidikan Dasar Nomor 868/C/U/95, semua SLB tunarungu yang menerapkan komunikasi total diwajibkan memakai sistem isyarat yang telah dibakukan [8], dan penelitian di SLB Negeri Ogan Ilir menunjukkan murid tunarungu memakai SIBI dalam komunikasi sehari-hari di sekolah [9]. Sebaliknya, bila tujuan utama keluarga adalah berkomunikasi sehari-hari dengan komunitas tunarungu, BISINDO lebih relevan; kebutuhan itu berada di luar cakupan penelitian ini dan menjadi kerja lanjutan."
     }
    ]
   },
@@ -64,42 +50,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Isyarat dipelajari melalui gerak tubuh sehingga kemampuan berisyarat tidak cukup dibangun dengan membaca kamus atau menghafal gambar; pembelajar perlu memperagakan isyarat berulang kali "
-    },
-    {
-     "text": "[PERLU RUJUKAN: pentingnya praktik peragaan berulang dalam pembelajaran bahasa isyarat]",
-     "highlight": true
-    },
-    {
-     "text": ". Latihan berulang itu lebih bermanfaat bila pembelajar segera mengetahui apakah gerakannya sesuai dengan isyarat target "
-    },
-    {
-     "text": "[PERLU RUJUKAN: peran umpan balik segera dalam latihan keterampilan gerak atau pembelajaran bahasa isyarat]",
-     "highlight": true
-    },
-    {
-     "text": ". Dengan demikian, pembelajar membutuhkan sarana latihan yang cepat memberi umpan balik atas setiap peragaan isyarat. Sarana yang ditelusuri dalam penelitian ini masih terbatas untuk kebutuhan tersebut "
-    },
-    {
-     "text": "[PERLU DATA: aplikasi atau video belajar SIBI yang tersedia beserta bentuk umpan baliknya]",
-     "highlight": true
-    },
-    {
-     "text": ". Pendampingan oleh guru atau kursus SIBI belum tentu tersedia bagi keluarga "
-    },
-    {
-     "text": "[PERLU DATA: ketersediaan guru atau kursus SIBI bagi keluarga dan calon guru]",
-     "highlight": true
-    },
-    {
-     "text": ". "
+     "text": "Isyarat dipelajari melalui gerak tubuh sehingga kemampuan berisyarat tidak cukup dibangun dengan membaca kamus atau menghafal gambar; sebagaimana keterampilan gerak pada umumnya, kemampuan itu dibangun melalui latihan yang diulang [10]. Latihan berulang itu lebih bermanfaat bila pembelajar segera mengetahui apakah gerakannya sesuai dengan isyarat target karena umpan balik tambahan yang segera memungkinkan perbaikan pada repetisi berikutnya [10]. Dengan demikian, pembelajar membutuhkan sarana latihan yang cepat memberi umpan balik atas setiap peragaan isyarat. Sarana yang ditelusuri dalam penelitian ini masih terbatas untuk kebutuhan tersebut: aplikasi pembelajaran SIBI yang tersedia antara lain menyajikan materi dasar secara mobile [11], memadukan materi dengan keluaran suara melalui OpenSIBI [12], atau berbentuk kamus digital berbasis suara yang memetakan kata ke isyarat [13], sedangkan pemanfaatan pengenalan otomatis pada aplikasi SIBI yang ditelusuri masih terbatas mengenali huruf statis dari kamera [14]. Pendampingan oleh guru atau kursus SIBI belum tentu tersedia bagi keluarga: guru SLB memang menggunakan sistem isyarat baku [8], tetapi kursus SIBI yang terjangkau bagi keluarga belum terdokumentasi dalam kajian ekosistem bahasa isyarat [7], sementara jumlah juru bahasa isyarat bersertifikat sangat terbatas [5]. "
     },
     {
      "text": "Kamus SIBI",
      "italics": true
     },
     {
-     "text": " [8] menyajikan acuan bentuk baku isyarat, sedangkan latihan dengan cermin atau rekaman diri memberi umpan balik visual; keduanya tidak menilai kesesuaian peragaan dengan isyarat target."
+     "text": " [15] menyajikan acuan bentuk baku isyarat, sedangkan latihan dengan cermin atau rekaman diri memberi umpan balik visual; keduanya tidak menilai kesesuaian peragaan dengan isyarat target."
     }
    ]
   },
@@ -107,28 +65,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Teknologi bantu komunikasi bagi tunarungu terus berkembang [9]. Di antara pendekatan pengenalan isyarat, sensor yang dikenakan pada tangan dapat menangkap konfigurasi jari "
-    },
-    {
-     "text": "[PERLU RUJUKAN: pengenalan isyarat berbasis sarung tangan sensor atau sensor inersia]",
-     "highlight": true
-    },
-    {
-     "text": ", tetapi perangkatnya harus dipasang setiap kali berlatih "
-    },
-    {
-     "text": "[PERLU RUJUKAN: hambatan pemakaian sensor yang dikenakan dalam latihan isyarat]",
-     "highlight": true
-    },
-    {
-     "text": ". Riset pengenalan isyarat di Indonesia yang ditelusuri dalam penelitian ini umumnya bertumpu pada citra atau video dari kamera [10]–[14]. Pendekatan berbasis kamera menuntut pencahayaan dan sudut pengambilan gambar tertentu "
-    },
-    {
-     "text": "[PERLU RUJUKAN: kepekaan pengenalan isyarat berbasis kamera terhadap pencahayaan dan sudut pandang]",
-     "highlight": true
-    },
-    {
-     "text": ". Selain itu, berlatih di depan kamera yang menyala diduga terasa seperti diawasi sehingga sulit dijadikan kebiasaan harian; dugaan ini diperlakukan sebagai hipotesis yang ditelaah secara deskriptif melalui kuesioner persepsi pada kondisi kamera menyala dan kamera mati. Bila dugaan tersebut benar, sarana latihan yang tidak memerlukan kamera menyala dapat menjadi alternatif, dan penelitian ini menjajaki kemungkinan itu melalui penginderaan berbasis sinyal Wi-Fi."
+     "text": "Teknologi bantu komunikasi bagi tunarungu terus berkembang [16]. Di antara pendekatan pengenalan isyarat, sensor yang dikenakan pada tangan, seperti sarung tangan sensor dan sensor inersia, dapat menangkap konfigurasi jari [17], tetapi perangkatnya harus dikenakan dan dikalibrasi setiap kali berlatih [17], [18]. Riset pengenalan isyarat di Indonesia yang ditelusuri dalam penelitian ini umumnya bertumpu pada citra atau video dari kamera [19]–[23]. Pendekatan berbasis kamera menuntut pencahayaan dan sudut pengambilan gambar tertentu karena perubahan pencahayaan menurunkan ketangguhan pengenalan [24] dan pengenalan citra bergantung pada garis pandang kamera [18], [17]. Selain itu, berlatih di depan kamera yang menyala diduga terasa seperti diawasi sehingga sulit dijadikan kebiasaan harian; dugaan ini diperlakukan sebagai hipotesis yang ditelaah secara deskriptif melalui kuesioner persepsi pada kondisi kamera menyala dan kamera mati. Bila dugaan tersebut benar, sarana latihan yang tidak memerlukan kamera menyala dapat menjadi alternatif, dan penelitian ini menjajaki kemungkinan itu melalui penginderaan berbasis sinyal Wi-Fi."
     }
    ]
   },
@@ -150,28 +87,21 @@
      "italics": true
     },
     {
-     "text": "; kedua besaran itu berubah ketika gerak tubuh mengganggu jalur propagasi sinyal [15]. Gerak lengan juga menghasilkan komponen Doppler yang dapat diukur sehingga gerakan dapat dikenali tanpa kamera dan tanpa sensor yang dipasang pada tubuh. Ma dkk. [16] memanfaatkan sifat tersebut melalui SignFi yang mengenali 276 isyarat ASL dari CSI, sedangkan Shang dan Wu [17] membangun sistem pengenalan bahasa isyarat yang tangguh dengan beberapa perangkat Wi-Fi. Pendekatan serupa dikembangkan pada DF-WiSLR yang tidak memerlukan perangkat pada tubuh pengguna [18], pada model berbasis jaringan "
+     "text": "; kedua besaran itu berubah ketika gerak tubuh mengganggu jalur propagasi sinyal [25]. Gerak lengan juga menghasilkan komponen Doppler yang dapat diukur sehingga gerakan dapat dikenali tanpa kamera dan tanpa sensor yang dipasang pada tubuh. Ma dkk. [26] memanfaatkan sifat tersebut melalui SignFi yang mengenali 276 isyarat ASL dari CSI, sedangkan Shang dan Wu [27] membangun sistem pengenalan bahasa isyarat yang tangguh dengan beberapa perangkat Wi-Fi. Pendekatan serupa dikembangkan pada DF-WiSLR yang tidak memerlukan perangkat pada tubuh pengguna [28], pada model berbasis jaringan "
     },
     {
      "text": "Long Short-Term Memory",
      "italics": true
     },
     {
-     "text": " [19], dan pada pengenalan "
+     "text": " [29], dan pada pengenalan "
     },
     {
      "text": "Filipino Sign Language",
      "italics": true
     },
     {
-     "text": " [20]. WiASL [21] memperluas arah itu dengan mengenali tulisan ASL menggunakan perangkat Wi-Fi komersial. Meskipun demikian, penelusuran literatur dalam penelitian ini "
-    },
-    {
-     "text": "[PERLU DATA: basis data, kata kunci, dan rentang tahun penelusuran literatur]",
-     "highlight": true
-    },
-    {
-     "text": " belum menemukan publikasi yang memakai CSI untuk mengenali isyarat SIBI maupun untuk memberi umpan balik latihan kepada pembelajar bahasa isyarat. Kebaruan yang diajukan tidak terletak pada jumlah kosakata, tetapi pada penerapan CSI dari dua node ESP32 untuk isyarat SIBI dan pada pemakaian keluaran klasifikator sebagai umpan balik latihan yang ditinjau validator penutur tunarungu."
+     "text": " [18]. WiASL [30] memperluas arah itu dengan mengenali tulisan ASL menggunakan perangkat Wi-Fi komersial. Meskipun demikian, penelusuran literatur penelitian ini, yang dilakukan pada Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 dengan kata kunci bahasa Inggris (\"Wi-Fi sensing\", \"channel state information\", \"sign language recognition\", dan \"gesture recognition\") dan bahasa Indonesia (\"SIBI\", \"BISINDO\", \"pengenalan isyarat\", dan \"bahasa isyarat\"), belum menemukan publikasi yang memakai CSI untuk mengenali isyarat SIBI maupun untuk memberi umpan balik latihan kepada pembelajar bahasa isyarat. Kebaruan yang diajukan tidak terletak pada jumlah kosakata, tetapi pada penerapan CSI dari dua node ESP32 untuk isyarat SIBI dan pada pemakaian keluaran klasifikator sebagai umpan balik latihan yang ditinjau validator penutur tunarungu."
     }
    ]
   },
@@ -179,7 +109,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Penelitian ini memakai ESP32, yaitu mikrokontroler murah dengan radio Wi-Fi yang dapat mengekspor CSI; basis akuisisi CSI pada ESP32 dikembangkan oleh Hernandez dan Bulut [22]. Platform RuView [23] melengkapi ESP32 dengan "
+     "text": "Penelitian ini memakai ESP32, yaitu mikrokontroler murah dengan radio Wi-Fi yang dapat mengekspor CSI; basis akuisisi CSI pada ESP32 dikembangkan oleh Hernandez dan Bulut [31]. Platform RuView [32] melengkapi ESP32 dengan "
     },
     {
      "text": "firmware",
@@ -214,7 +144,7 @@
      "italics": true
     },
     {
-     "text": " MediaPipe [24], dan pada satu kondisi uji persepsi. Rancangan yang dikerjakan dalam penelitian ini mencakup penempatan kedua node, protokol perekaman beserta kurasi kosakata, ekstraksi fitur dan klasifikasi, serta mode latihan umpan balik, sedangkan RuView menjadi basis akuisisinya. Rancangan itu tidak terikat pada satu bahasa isyarat sehingga perluasan ke BISINDO pada prinsipnya cukup dilakukan dengan mengganti "
+     "text": " MediaPipe [33], dan pada satu kondisi uji persepsi. Rancangan yang dikerjakan dalam penelitian ini mencakup penempatan kedua node, protokol perekaman beserta kurasi kosakata, ekstraksi fitur dan klasifikasi, serta mode latihan umpan balik, sedangkan RuView menjadi basis akuisisinya. Rancangan itu tidak terikat pada satu bahasa isyarat sehingga perluasan ke BISINDO pada prinsipnya cukup dilakukan dengan mengganti "
     },
     {
      "text": "dataset",
@@ -229,21 +159,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Panjang gelombang Wi-Fi pada pita 2,4 GHz dan 5 GHz berkisar 6–12 cm sehingga, pada satu tautan antara dua node ESP32, perbedaan konfigurasi jari dan ekspresi wajah diasumsikan terlalu halus untuk dibedakan secara andal "
-    },
-    {
-     "text": "[PERLU RUJUKAN: batas resolusi spasial CSI terhadap gerak jari dan ekspresi wajah]",
-     "highlight": true
-    },
-    {
-     "text": ". Keberhasilan SignFi dan penelitian sejenis dalam mengenali isyarat tangan tidak serta-merta berlaku pada konfigurasi ini "
-    },
-    {
-     "text": "[PERLU DATA: perangkat, jumlah antena, dan lebar pita pada SignFi, Wi-SL, dan HandFi]",
-     "highlight": true
-    },
-    {
-     "text": ". Oleh karena itu, penelitian ini membatasi pengenalan pada lintasan lengan, tubuh atas, dan kepala. Umpan balik ditampilkan di "
+     "text": "Panjang gelombang Wi-Fi pada pita 2,4 GHz dan 5 GHz berkisar 6–12 cm. Sistem CSI yang berhasil mengenali isyarat dan gestur tangan memakai perangkat riset dengan banyak antena, yaitu SignFi dengan NIC Intel 5300 dan tiga antena penerima [26], Wi-SL dengan tiga antena penerima pada kanal 40 MHz dan laju cuplik 400 Hz [34], serta HandFi dengan NIC Intel 5300 sebagai penerima dari router Wi-Fi komersial [35], sehingga keberhasilan mereka tidak serta-merta berlaku pada satu tautan antara dua node ESP32. Oleh karena itu, pada konfigurasi itu perbedaan konfigurasi jari dan ekspresi wajah diasumsikan terlalu halus untuk dibedakan secara andal, dan asumsi ini diperiksa pada uji Delta-CSI sebelum perekaman (BAB III); penelitian ini membatasi pengenalan pada lintasan lengan, tubuh atas, dan kepala. Umpan balik ditampilkan di "
     },
     {
      "text": "dashboard",
@@ -279,7 +195,7 @@
      "italics": true
     },
     {
-     "text": " pada orang dan ruang tempat data direkam [25]; keunggulan Wi-Fi atas kamera dengan demikian tidak diasumsikan. Oleh karena itu, kinerja klasifikasi diukur pada skenario dalam sesi, lintas partisipan, dan lintas ruang; skenario dalam sesi memakai pembagian data temporal per blok, bukan pembagian acak, dan setiap hasil dibandingkan dengan peluang acak. Widar3.0 [26] dijadikan sumber strategi lintas domain dalam merancang fitur."
+     "text": " pada orang dan ruang tempat data direkam [36]; keunggulan Wi-Fi atas kamera dengan demikian tidak diasumsikan. Oleh karena itu, kinerja klasifikasi diukur pada skenario dalam sesi, lintas partisipan, dan lintas ruang; skenario dalam sesi memakai pembagian data temporal per blok, bukan pembagian acak, dan setiap hasil dibandingkan dengan peluang acak. Widar3.0 [37] dijadikan sumber strategi lintas domain dalam merancang fitur."
     }
    ]
   },
@@ -414,7 +330,7 @@
      "italics": true
     },
     {
-     "text": " [8]. Sistem yang dikembangkan bukan penerjemah kalimat dan tidak menangani pengenalan isyarat kontinu."
+     "text": " [15]. Sistem yang dikembangkan bukan penerjemah kalimat dan tidak menangani pengenalan isyarat kontinu."
     }
    ]
   },
@@ -490,14 +406,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Penelitian ini diharapkan memberikan bukti awal tentang kelayakan pengenalan sekelompok kecil isyarat SIBI terisolasi dari CSI dua node ESP32, yaitu isyarat yang dipilih karena dibedakan oleh lintasan gerak; bukti itu tidak berlaku bagi kosakata yang dibedakan oleh bentuk jari "
+     "text": "Penelitian ini diharapkan memberikan bukti awal tentang kelayakan pengenalan sekelompok kecil isyarat SIBI terisolasi dari CSI dua node ESP32, yaitu isyarat yang dipilih karena dibedakan oleh lintasan gerak; bukti itu tidak berlaku bagi kosakata yang dibedakan oleh bentuk jari. Proporsi kosakata "
     },
     {
-     "text": "[PERLU DATA: proporsi kosakata Kamus SIBI yang dibedakan terutama oleh lintasan gerak]",
-     "highlight": true
+     "text": "Kamus SIBI",
+     "italics": true
     },
     {
-     "text": ". "
+     "text": " yang dibedakan terutama oleh lintasan gerak belum terdokumentasi dalam publikasi yang ditelusuri sehingga tidak diklaim dalam penelitian ini. "
     },
     {
      "text": "Dataset",
@@ -633,14 +549,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Bahasa isyarat merupakan bahasa visual yang menyampaikan makna melalui gerak tangan, lengan, tubuh, dan ekspresi wajah "
-    },
-    {
-     "text": "[PERLU RUJUKAN: definisi bahasa isyarat]",
-     "highlight": true
-    },
-    {
-     "text": ". Di Indonesia, Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas mengakui bahasa isyarat dan mewajibkan penyediaan aksesibilitas komunikasi [6]. Kewajiban tersebut sulit dipenuhi oleh juru bahasa isyarat saja karena jumlahnya terbatas (Subbab 2.2). Penelitian ini memandang bahwa kemampuan berisyarat pihak pendengar di lingkungan tunarungu, termasuk di sekolah, ikut menentukan terpenuhinya aksesibilitas komunikasi tersebut."
+     "text": "Bahasa isyarat merupakan bahasa visual yang menyampaikan makna melalui gerak tangan, lengan, tubuh, dan ekspresi wajah [38], [17]. Di Indonesia, Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas mengakui bahasa isyarat dan mewajibkan penyediaan aksesibilitas komunikasi [6]. Kewajiban tersebut sulit dipenuhi oleh juru bahasa isyarat saja karena jumlahnya terbatas (Subbab 2.2). Penelitian ini memandang bahwa kemampuan berisyarat pihak pendengar di lingkungan tunarungu, termasuk di sekolah, ikut menentukan terpenuhinya aksesibilitas komunikasi tersebut."
     }
    ]
   },
@@ -648,21 +557,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Pemakaian bahasa isyarat di Indonesia tidak seragam. Survei ekosistem bahasa isyarat [7] menunjukkan bahwa Bahasa Isyarat Indonesia (BISINDO) jauh lebih banyak dipakai respondennya daripada Sistem Isyarat Bahasa Indonesia (SIBI), sedangkan SIBI berkembang di pendidikan formal; angka pemakaian dan keterbatasan sampel survei tersebut telah dipaparkan pada Subbab 1.1. SIBI dan BISINDO memiliki karakteristik yang berbeda "
-    },
-    {
-     "text": "[PERLU RUJUKAN: karakteristik SIBI dan perbedaannya dengan BISINDO]",
-     "highlight": true
-    },
-    {
-     "text": ". Bentuk baku isyarat SIBI didokumentasikan dalam "
+     "text": "Pemakaian bahasa isyarat di Indonesia tidak seragam. Survei ekosistem bahasa isyarat [7] menunjukkan bahwa Bahasa Isyarat Indonesia (BISINDO) jauh lebih banyak dipakai respondennya daripada Sistem Isyarat Bahasa Indonesia (SIBI), sedangkan SIBI berkembang di pendidikan formal; angka pemakaian dan keterbatasan sampel survei tersebut telah dipaparkan pada Subbab 1.1. SIBI dan BISINDO memiliki karakteristik yang berbeda: SIBI merupakan sistem isyarat baku yang dikembangkan untuk keperluan pendidikan formal, sedangkan BISINDO berkembang secara alami di komunitas tunarungu [7], [8]; kajian pada mahasiswa tunarungu [39] dan pada siswa SLB [40] memerikan perbedaan pemakaian keduanya. Bentuk baku isyarat SIBI didokumentasikan dalam "
     },
     {
      "text": "Kamus Sistem Isyarat Bahasa Indonesia",
      "italics": true
     },
     {
-     "text": " [8], yang selanjutnya disebut "
+     "text": " [15], yang selanjutnya disebut "
     },
     {
      "text": "Kamus SIBI",
@@ -692,14 +594,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Secara struktural, sebuah isyarat tersusun atas bentuk tangan, lokasi, gerak, orientasi telapak tangan, dan komponen nonmanual seperti ekspresi wajah; perbedaan pada satu parameter saja dapat membedakan makna dua isyarat "
-    },
-    {
-     "text": "[PERLU RUJUKAN: parameter fonologis isyarat]",
-     "highlight": true
-    },
-    {
-     "text": ". Dalam penelitian ini, kelima parameter tersebut menjadi acuan untuk memisahkan bagian isyarat yang dapat dinilai sistem dari bagian yang tetap memerlukan penilaian validator penutur tunarungu (Subbab 2.3)."
+     "text": "Secara struktural, sebuah isyarat tersusun atas bentuk tangan, lokasi, gerak, orientasi telapak tangan, dan komponen nonmanual seperti ekspresi wajah; perbedaan pada satu parameter saja dapat membedakan makna dua isyarat [38], [17]. Dalam penelitian ini, kelima parameter tersebut menjadi acuan untuk memisahkan bagian isyarat yang dapat dinilai sistem dari bagian yang tetap memerlukan penilaian validator penutur tunarungu (Subbab 2.3)."
     }
    ]
   },
@@ -711,14 +606,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Bahasa isyarat tidak hanya dipelajari oleh tunarungu, tetapi juga oleh keluarga pendengar. Sebagian besar anak tunarungu lahir dari orang tua pendengar [1], [2], dan orang tua pendengar yang belajar bahasa isyarat membutuhkan dukungan belajar yang terstruktur serta menghadapi hambatan praktis [3], [4]; data dan temuan tersebut telah dipaparkan pada Subbab 1.1. Kebutuhan serupa diduga juga dialami pembelajar pendengar SIBI yang masuk melalui jalur pendidikan formal "
-    },
-    {
-     "text": "[PERLU DATA: kebutuhan belajar pembelajar pendengar SIBI di Indonesia, termasuk calon guru dan mahasiswa]",
-     "highlight": true
-    },
-    {
-     "text": ". Bagi rancangan sarana latihan, kebutuhan akan dukungan yang terstruktur menjadi alasan kosakata yang dilatihkan disusun lebih dahulu dan divalidasi bersama validator penutur tunarungu (Subbab 2.3)."
+     "text": "Bahasa isyarat tidak hanya dipelajari oleh tunarungu, tetapi juga oleh keluarga pendengar. Sebagian besar anak tunarungu lahir dari orang tua pendengar [1], [2], dan orang tua pendengar yang belajar bahasa isyarat membutuhkan dukungan belajar yang terstruktur serta menghadapi hambatan praktis [3], [4]; data dan temuan tersebut telah dipaparkan pada Subbab 1.1. Kebutuhan serupa diduga juga dialami pembelajar pendengar SIBI yang masuk melalui jalur pendidikan formal; kajian khusus tentang kebutuhan kelompok itu belum ditemukan dalam penelusuran literatur penelitian ini, tetapi kebutuhan pembelajar pendengar tercermin dari pengembangan aplikasi pembelajaran SIBI bagi masyarakat umum [11], [12] dan dari pemanfaatan SIBI di SLB [9]. Bagi rancangan sarana latihan, kebutuhan akan dukungan yang terstruktur menjadi alasan kosakata yang dilatihkan disusun lebih dahulu dan divalidasi bersama validator penutur tunarungu (Subbab 2.3)."
     }
    ]
   },
@@ -726,7 +614,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Kebutuhan akan pendengar yang mampu berisyarat diperkuat oleh terbatasnya jumlah juru bahasa isyarat di Indonesia [5], sebagaimana dipaparkan pada Subbab 1.1. Keterbatasan tersebut menandakan bahwa komunikasi sehari-hari tunarungu tidak dapat bertumpu pada juru bahasa isyarat saja sehingga kemampuan isyarat pendengar di sekitarnya ikut menentukan kelancaran komunikasi tersebut. Kondisi itu berlaku bagi pembelajar pendengar pada umumnya dan tidak menentukan sistem isyarat yang dipelajari; pemilihan SIBI dalam penelitian ini didasarkan pada jalur pendidikan formal (Subbab 2.1). Upaya lain untuk menjembatani kesenjangan komunikasi adalah teknologi bantu komunikasi; Rodríguez-Correa dkk. [9] meninjau secara sistematis manfaat dan perkembangannya bagi tunarungu."
+     "text": "Kebutuhan akan pendengar yang mampu berisyarat diperkuat oleh terbatasnya jumlah juru bahasa isyarat di Indonesia [5], sebagaimana dipaparkan pada Subbab 1.1. Keterbatasan tersebut menandakan bahwa komunikasi sehari-hari tunarungu tidak dapat bertumpu pada juru bahasa isyarat saja sehingga kemampuan isyarat pendengar di sekitarnya ikut menentukan kelancaran komunikasi tersebut. Kondisi itu berlaku bagi pembelajar pendengar pada umumnya dan tidak menentukan sistem isyarat yang dipelajari; pemilihan SIBI dalam penelitian ini didasarkan pada jalur pendidikan formal (Subbab 2.1). Upaya lain untuk menjembatani kesenjangan komunikasi adalah teknologi bantu komunikasi; Rodríguez-Correa dkk. [16] meninjau secara sistematis manfaat dan perkembangannya bagi tunarungu."
     }
    ]
   },
@@ -734,14 +622,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Bagi pembelajar pendengar, latihan mandiri memerlukan umpan balik atas isyarat yang diperagakannya. Kamus dan buku menyediakan bentuk acuan, tetapi tidak menilai apakah gerak yang diperagakan pembelajar sudah sesuai. Umpan balik yang segera memungkinkan pembelajar memperbaiki gerak pada repetisi berikutnya "
-    },
-    {
-     "text": "[PERLU RUJUKAN: peran umpan balik segera dalam latihan keterampilan gerak atau pembelajaran bahasa isyarat]",
-     "highlight": true
-    },
-    {
-     "text": "."
+     "text": "Bagi pembelajar pendengar, latihan mandiri memerlukan umpan balik atas isyarat yang diperagakannya. Kamus dan buku menyediakan bentuk acuan, tetapi tidak menilai apakah gerak yang diperagakan pembelajar sudah sesuai. Umpan balik yang segera memungkinkan pembelajar memperbaiki gerak pada repetisi berikutnya; dalam telaah pembelajaran motorik, umpan balik tambahan yang diberikan selama latihan terbukti mempercepat perolehan keterampilan gerak [10], dan para pendidik bahasa isyarat juga melihat potensi umpan balik berbasis teknologi dalam mendukung latihan [41]."
     }
    ]
   },
@@ -749,21 +630,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Pengenalan isyarat berbasis kamera (Subbab 2.8) dapat menjadi dasar umpan balik otomatis "
-    },
-    {
-     "text": "[PERLU RUJUKAN: sistem latihan bahasa isyarat dengan umpan balik otomatis berbasis kamera atau sensor]",
-     "highlight": true
-    },
-    {
-     "text": ", tetapi pendekatan tersebut menuntut pencahayaan dan sudut pengambilan gambar tertentu "
-    },
-    {
-     "text": "[PERLU RUJUKAN: kepekaan pengenalan isyarat berbasis kamera terhadap pencahayaan dan sudut pandang]",
-     "highlight": true
-    },
-    {
-     "text": ". Sistem berbasis sinyal Wi-Fi dalam penelitian ini juga memiliki tuntutan sendiri. Pengguna harus berada di zona isyarat di antara dua node ESP32, dan ruang perlu dikalibrasi lebih dulu dengan kalibrasi bawaan yang berlangsung ±4 menit (Subbab 2.4). Kalibrasi tersebut dilakukan di ruang mitra, sedangkan penyiapan mandiri oleh pengguna di rumah berada di luar cakupan penelitian ini. Dengan demikian, pembeda utama yang ditelusuri adalah kehadiran kamera selama latihan."
+     "text": "Pengenalan isyarat berbasis kamera (Subbab 2.8) dapat menjadi dasar umpan balik otomatis; gagasan itu sudah lama diwujudkan, misalnya sistem pembelajaran bahasa isyarat Jepang yang memadukan pengenalan isyarat dengan pembangkitan isyarat sebagai umpan balik latihan [42], dan dikembangkan lagi dalam sistem latihan bahasa dengan umpan balik pengenalan waktu nyata [43], tetapi pendekatan tersebut menuntut pencahayaan dan sudut pengambilan gambar tertentu [24], [17]. Sistem berbasis sinyal Wi-Fi dalam penelitian ini juga memiliki tuntutan sendiri. Pengguna harus berada di zona isyarat di antara dua node ESP32, dan ruang perlu dikalibrasi lebih dulu dengan kalibrasi bawaan yang berlangsung ±4 menit (Subbab 2.4). Kalibrasi tersebut dilakukan di ruang mitra, sedangkan penyiapan mandiri oleh pengguna di rumah berada di luar cakupan penelitian ini. Dengan demikian, pembeda utama yang ditelusuri adalah kehadiran kamera selama latihan."
     }
    ]
   },
@@ -771,14 +638,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Kehadiran kamera yang menyala diduga membuat pembelajar merasa diawasi, sedangkan rasa diawasi dapat memengaruhi kenyamanan dan kemauan untuk berlatih berulang "
-    },
-    {
-     "text": "[PERLU RUJUKAN: pengaruh rasa diawasi terhadap kenyamanan dan kemauan berlatih]",
-     "highlight": true
-    },
-    {
-     "text": ". Atas dasar dugaan tersebut, mode latihan dalam penelitian ini memberikan umpan balik per repetisi tanpa kamera menyala. Dugaan itu diperlakukan sebagai hipotesis kerja yang ditelusuri secara deskriptif melalui kuesioner persepsi (BAB III), sedangkan pembentukan kebiasaan harian itu sendiri tidak diukur."
+     "text": "Kehadiran kamera yang menyala diduga membuat pembelajar merasa diawasi, sedangkan rasa diawasi dapat memengaruhi kenyamanan dan kemauan untuk berlatih berulang: kehadiran pengamat diketahui memengaruhi perilaku dan kinerja (fasilitasi sosial) [44], dan paparan kamera yang berkelanjutan dikaitkan dengan kelelahan nonverbal serta tekanan penampilan diri [45]. Atas dasar dugaan tersebut, mode latihan dalam penelitian ini memberikan umpan balik per repetisi tanpa kamera menyala. Dugaan itu diperlakukan sebagai hipotesis kerja yang ditelusuri secara deskriptif melalui kuesioner persepsi (BAB III), sedangkan pembentukan kebiasaan harian itu sendiri tidak diukur."
     }
    ]
   },
@@ -804,7 +664,7 @@
      "italics": true
     },
     {
-     "text": " yang menggambarkan kondisi kanal propagasi antara pemancar dan penerima Wi-Fi [15]. Sinyal Wi-Fi tiba di penerima melalui beberapa jalur, yaitu jalur langsung dan jalur pantulan dari dinding, perabot, serta tubuh manusia [15]. Ketika tubuh bergerak di antara pemancar dan penerima, panjang jalur pantulan berubah sehingga amplitudo dan fase pada setiap "
+     "text": " yang menggambarkan kondisi kanal propagasi antara pemancar dan penerima Wi-Fi [25]. Sinyal Wi-Fi tiba di penerima melalui beberapa jalur, yaitu jalur langsung dan jalur pantulan dari dinding, perabot, serta tubuh manusia [25]. Ketika tubuh bergerak di antara pemancar dan penerima, panjang jalur pantulan berubah sehingga amplitudo dan fase pada setiap "
     },
     {
      "text": "subcarrier",
@@ -819,7 +679,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Amplitudo dan fase memuat informasi yang berbeda tentang perubahan kanal. Cai dkk. [27] memanfaatkan keduanya sebagai informasi yang saling melengkapi untuk pengenalan gestur. Setiap "
+     "text": "Amplitudo dan fase memuat informasi yang berbeda tentang perubahan kanal. Cai dkk. [46] memanfaatkan keduanya sebagai informasi yang saling melengkapi untuk pengenalan gestur. Setiap "
     },
     {
      "text": "subcarrier",
@@ -833,7 +693,7 @@
      "italics": true
     },
     {
-     "text": " [15]. Dengan demikian, CSI menyediakan banyak kanal pengamatan dari satu pasang pemancar dan penerima."
+     "text": " [25]. Dengan demikian, CSI menyediakan banyak kanal pengamatan dari satu pasang pemancar dan penerima."
     }
    ]
   },
@@ -841,28 +701,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Gerak lengan juga menghasilkan komponen Doppler, yaitu pergeseran frekuensi yang sebanding dengan laju perubahan panjang jalur pantulan [15], [26]. Komponen tersebut dapat diukur dari deret CSI dan mencerminkan kecepatan gerak. Penelitian ini memusatkan analisis Doppler pada pita frekuensi gerak 1–60 Hz. Agar pita tersebut terwakili, laju pencuplikan ("
+     "text": "Gerak lengan juga menghasilkan komponen Doppler, yaitu pergeseran frekuensi yang sebanding dengan laju perubahan panjang jalur pantulan [25], [37]. Komponen tersebut dapat diukur dari deret CSI dan mencerminkan kecepatan gerak. Penelitian ini memusatkan analisis Doppler pada pita frekuensi gerak 1–60 Hz. Agar pita tersebut terwakili, laju pencuplikan ("
     },
     {
      "text": "sampling rate",
      "italics": true
     },
     {
-     "text": ") CSI harus sekurang-kurangnya dua kali frekuensi tertingginya, yaitu 120 Hz, sesuai kriteria Nyquist "
-    },
-    {
-     "text": "[PERLU RUJUKAN: teorema pencuplikan Nyquist]",
-     "highlight": true
-    },
-    {
-     "text": ". Laju pencuplikan node ESP32 pada konfigurasi RuView adalah "
-    },
-    {
-     "text": "[PERLU DATA: laju pencuplikan CSI node ESP32 pada konfigurasi RuView]",
-     "highlight": true
-    },
-    {
-     "text": " dan diukur pada tahap replikasi (BAB III). Bila laju terukur lebih rendah daripada 120 Hz, pita Doppler yang dapat diamati menyempit hingga setengah laju pencuplikan aktual; tindakan rancangan untuk kondisi tersebut diuraikan pada BAB III."
+     "text": ") CSI harus sekurang-kurangnya dua kali frekuensi tertingginya, yaitu 120 Hz, sesuai kriteria Nyquist [47], [48]. Firmware RuView membatasi pengiriman frame CSI paling sering setiap 20 ms, yang setara laju maksimum 50 frame per detik, menurut kode sumber firmware-nya [32]; laju aktual pada konfigurasi penelitian diukur pada tahap replikasi (BAB III). Bila laju terukur lebih rendah daripada 120 Hz, pita Doppler yang dapat diamati menyempit hingga setengah laju pencuplikan aktual; tindakan rancangan untuk kondisi tersebut diuraikan pada BAB III."
     }
    ]
   },
@@ -877,7 +723,7 @@
      "italics": true
     },
     {
-     "text": " terhadap orang dan ruang tempat data pelatihan direkam [25]. Chen dkk. [25] merangkum strategi generalisasi lintas domain untuk mengatasi persoalan tersebut. Zhang dkk. [26] mengusulkan Widar3.0 yang mengenali gestur lintas domain tanpa pelatihan ulang dengan profil kecepatan yang diturunkan dari Doppler. Dalam penelitian ini, strategi lintas domain dijadikan acuan rancangan, sedangkan kemampuan generalisasi sistem diukur langsung melalui skenario pengujian yang diuraikan pada Subbab 2.7."
+     "text": " terhadap orang dan ruang tempat data pelatihan direkam [36]. Chen dkk. [36] merangkum strategi generalisasi lintas domain untuk mengatasi persoalan tersebut. Zhang dkk. [37] mengusulkan Widar3.0 yang mengenali gestur lintas domain tanpa pelatihan ulang dengan profil kecepatan yang diturunkan dari Doppler. Dalam penelitian ini, strategi lintas domain dijadikan acuan rancangan, sedangkan kemampuan generalisasi sistem diukur langsung melalui skenario pengujian yang diuraikan pada Subbab 2.7."
     }
    ]
   },
@@ -885,21 +731,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Panjang gelombang Wi-Fi pada pita 2,4 GHz dan 5 GHz berkisar 6–12 cm dan membatasi resolusi spasial CSI. Sejumlah penelitian melaporkan pengenalan isyarat dan gestur tangan dari CSI [16], [28], [29] dengan perangkat dan konfigurasi antena tertentu "
-    },
-    {
-     "text": "[PERLU DATA: perangkat, jumlah antena, dan lebar pita pada SignFi, Wi-SL, dan HandFi]",
-     "highlight": true
-    },
-    {
-     "text": ". Penelitian ini tidak mengasumsikan kemampuan tersebut juga dimiliki perangkat yang digunakan. Dengan dua node ESP32, perbedaan konfigurasi jari dan ekspresi wajah diasumsikan terlalu halus untuk dibedakan secara andal "
-    },
-    {
-     "text": "[PERLU RUJUKAN: batas resolusi spasial CSI terhadap gerak jari dan ekspresi wajah]",
-     "highlight": true
-    },
-    {
-     "text": " sehingga cakupan pengenalan dibatasi pada lintasan lengan, tubuh atas, dan kepala."
+     "text": "Panjang gelombang Wi-Fi pada pita 2,4 GHz dan 5 GHz berkisar 6–12 cm dan membatasi resolusi spasial CSI. Sejumlah penelitian melaporkan pengenalan isyarat dan gestur tangan dari CSI [26], [34], [35] dengan perangkat riset multi-antena: SignFi memakai NIC Intel 5300 dengan tiga antena penerima [26], Wi-SL memakai router TP-Link WDR4310 dengan dua antena pemancar dan tiga antena penerima pada kanal 40 MHz dengan laju cuplik 400 Hz [34], dan HandFi memakai NIC Intel 5300 sebagai penerima dari router Wi-Fi komersial [35]. Penelitian ini tidak mengasumsikan kemampuan tersebut juga dimiliki perangkat yang digunakan. Dengan dua node ESP32, perbedaan konfigurasi jari dan ekspresi wajah diasumsikan terlalu halus untuk dibedakan secara andal, dan asumsi tersebut diperiksa melalui uji Delta-CSI (BAB III) sehingga cakupan pengenalan dibatasi pada lintasan lengan, tubuh atas, dan kepala."
     }
    ]
   },
@@ -914,21 +746,21 @@
      "italics": true
     },
     {
-     "text": " [8]. Jumlah kandidat isyarat dalam "
+     "text": " [15]. Angka pasti jumlah kandidat tidak dapat dikutip karena belum ada publikasi yang menghitung proporsi kosakata "
     },
     {
      "text": "Kamus SIBI",
      "italics": true
     },
     {
-     "text": " yang lolos saringan separabilitas fisik adalah "
+     "text": " yang dibedakan terutama oleh lintasan gerak; jumlah kandidat karena itu ditetapkan pada tahap kurasi T1 melalui penapisan butir demi butir terhadap "
     },
     {
-     "text": "[PERLU DATA: perkiraan jumlah kandidat isyarat Kamus SIBI yang lolos saringan separabilitas fisik]",
-     "highlight": true
+     "text": "Kamus SIBI",
+     "italics": true
     },
     {
-     "text": "."
+     "text": " bersama validator penutur tunarungu (Subbab 3.6.2)."
     }
    ]
   },
@@ -948,21 +780,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "ESP32 merupakan mikrokontroler berbiaya rendah dengan radio Wi-Fi yang dapat mengekspor CSI [22]. Hernandez dan Bulut [22] mengembangkan sistem penginderaan Wi-Fi mandiri yang ringan berbasis "
+     "text": "ESP32 merupakan mikrokontroler berbiaya rendah dengan radio Wi-Fi yang dapat mengekspor CSI [31]. Hernandez dan Bulut [31] mengembangkan sistem penginderaan Wi-Fi mandiri yang ringan berbasis "
     },
     {
      "text": "Internet of Things",
      "italics": true
     },
     {
-     "text": ", dan penelitian tersebut menjadi dasar alat akuisisi CSI pada ESP32. Varian papan yang digunakan dalam penelitian ini adalah "
-    },
-    {
-     "text": "[PERLU DATA: varian ESP32 yang dipakai, misalnya ESP32 DevKit atau ESP32-S3]",
-     "highlight": true
-    },
-    {
-     "text": ". Dua node ESP32 berperan sebagai node pemancar (TX) dan node penerima (RX) yang mengapit zona isyarat. Laptop berperan sebagai "
+     "text": ", dan penelitian tersebut menjadi dasar alat akuisisi CSI pada ESP32. Varian papan yang digunakan dalam penelitian ini adalah ESP32-S3, yaitu varian yang direkomendasikan dokumentasi RuView untuk node penangkap CSI [32]. Dua node ESP32 berperan sebagai node pemancar (TX) dan node penerima (RX) yang mengapit zona isyarat. Laptop berperan sebagai "
     },
     {
      "text": "server",
@@ -977,7 +802,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "RuView merupakan proyek sumber terbuka yang menyediakan rantai akuisisi dan pengolahan CSI pada ESP32. Menurut dokumentasi repositorinya [23], komponen RuView meliputi "
+     "text": "RuView merupakan proyek sumber terbuka yang menyediakan rantai akuisisi dan pengolahan CSI pada ESP32. Menurut dokumentasi repositorinya [32], komponen RuView meliputi "
     },
     {
      "text": "firmware",
@@ -1012,14 +837,14 @@
      "italics": true
     },
     {
-     "text": " yang ditetapkan dalam dokumen ADR-018 RuView "
+     "text": " yang ditetapkan dalam dokumen ADR-018 RuView, yaitu ADR atau "
     },
     {
-     "text": "[PERLU DATA: kepanjangan dan arti ADR pada repositori RuView]",
-     "highlight": true
+     "text": "architecture decision record",
+     "italics": true
     },
     {
-     "text": " dan mengirimkan data secara "
+     "text": " (catatan keputusan arsitektur) yang dipakai repositori tersebut untuk mendokumentasikan keputusan desain [32], dan mengirimkan data secara "
     },
     {
      "text": "streaming",
@@ -1047,14 +872,7 @@
      "italics": true
     },
     {
-     "text": " dengan durasi ±4 menit. Mode privasi membuang fitur biometrik "
-    },
-    {
-     "text": "[PERLU DATA: fitur biometrik yang dibuang mode privasi RuView]",
-     "highlight": true
-    },
-    {
-     "text": ". RuView juga menyediakan "
+     "text": " dengan durasi ±4 menit. Mode privasi menekan fitur biometrik berupa detak jantung, laju napas, dan estimasi pose agar tidak diterbitkan keluar dari server [32]. RuView juga menyediakan "
     },
     {
      "text": "pipeline",
@@ -1166,21 +984,14 @@
      "italics": true
     },
     {
-     "text": " tubuh manusia, seperti bahu, siku, dan pergelangan tangan, dari citra atau video "
-    },
-    {
-     "text": "[PERLU RUJUKAN: definisi estimasi pose manusia]",
-     "highlight": true
-    },
-    {
-     "text": ". MediaPipe [24] merupakan kerangka kerja untuk membangun "
+     "text": " tubuh manusia, seperti bahu, siku, dan pergelangan tangan, dari citra atau video [49]. MediaPipe [33] merupakan kerangka kerja untuk membangun "
     },
     {
      "text": "pipeline",
      "italics": true
     },
     {
-     "text": " persepsi. BlazePose [30] melacak pose tubuh secara "
+     "text": " persepsi. BlazePose [50] melacak pose tubuh secara "
     },
     {
      "text": "real-time",
@@ -1194,7 +1005,7 @@
      "italics": true
     },
     {
-     "text": " tubuh, sedangkan MediaPipe Hands [31] melacak tangan secara "
+     "text": " tubuh, sedangkan MediaPipe Hands [51] melacak tangan secara "
     },
     {
      "text": "real-time",
@@ -1208,7 +1019,7 @@
      "italics": true
     },
     {
-     "text": " per tangan. Kim dkk. [32] memberikan contoh penerapan MediaPipe Pose untuk estimasi pose manusia yang dioptimalkan dengan model "
+     "text": " per tangan. Kim dkk. [52] memberikan contoh penerapan MediaPipe Pose untuk estimasi pose manusia yang dioptimalkan dengan model "
     },
     {
      "text": "humanoid",
@@ -1251,7 +1062,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Pemakaian visi sebagai pemberi supervisi bagi pelatihan model Wi-Fi telah memiliki preseden. Wang dkk. [33] mengembangkan Person-in-WiFi yang memperoleh persepsi tubuh dari sinyal Wi-Fi dengan supervisi kamera. Geng dkk. [34] mengembangkan DensePose From WiFi yang memetakan sinyal Wi-Fi ke koordinat permukaan setiap bagian tubuh dengan jaringan visi sebagai guru. Kedua penelitian tersebut menjadi preseden konsep \"guru visi, murid CSI\": kamera menyediakan label acuan selama pelatihan, sedangkan model Wi-Fi belajar memperoleh informasi serupa dari sinyal. Namun, keduanya bekerja pada tingkat tubuh, bukan pada tingkat jari."
+     "text": "Pemakaian visi sebagai pemberi supervisi bagi pelatihan model Wi-Fi telah memiliki preseden. Wang dkk. [53] mengembangkan Person-in-WiFi yang memperoleh persepsi tubuh dari sinyal Wi-Fi dengan supervisi kamera. Geng dkk. [54] mengembangkan DensePose From WiFi yang memetakan sinyal Wi-Fi ke koordinat permukaan setiap bagian tubuh dengan jaringan visi sebagai guru. Kedua penelitian tersebut menjadi preseden konsep \"guru visi, murid CSI\": kamera menyediakan label acuan selama pelatihan, sedangkan model Wi-Fi belajar memperoleh informasi serupa dari sinyal. Namun, keduanya bekerja pada tingkat tubuh, bukan pada tingkat jari."
     }
    ]
   },
@@ -1306,35 +1117,35 @@
    "t": "p",
    "runs": [
     {
-     "text": "Pengenalan bahasa isyarat dari CSI telah diteliti pada beberapa bahasa isyarat di luar Indonesia. Sebagian penelitian menargetkan kosakata besar, seperti SignFi yang diusulkan Ma dkk. [16] untuk mengenali 276 isyarat "
+     "text": "Pengenalan bahasa isyarat dari CSI telah diteliti pada beberapa bahasa isyarat di luar Indonesia. Sebagian penelitian menargetkan kosakata besar, seperti SignFi yang diusulkan Ma dkk. [26] untuk mengenali 276 isyarat "
     },
     {
      "text": "American Sign Language",
      "italics": true
     },
     {
-     "text": " (ASL) dari CSI. Penelitian lain menekankan ketangguhan sistem dengan beberapa perangkat Wi-Fi [17], pengenalan tanpa perangkat yang dikenakan pengguna ("
+     "text": " (ASL) dari CSI. Penelitian lain menekankan ketangguhan sistem dengan beberapa perangkat Wi-Fi [27], pengenalan tanpa perangkat yang dikenakan pengguna ("
     },
     {
      "text": "device-free",
      "italics": true
     },
     {
-     "text": ") melalui DF-WiSLR [18], atau model deret waktu berbasis jaringan "
+     "text": ") melalui DF-WiSLR [28], atau model deret waktu berbasis jaringan "
     },
     {
      "text": "Long Short-Term Memory",
      "italics": true
     },
     {
-     "text": " [19]. Pengenalan berbasis CSI juga telah dicoba pada "
+     "text": " [29]. Pengenalan berbasis CSI juga telah dicoba pada "
     },
     {
      "text": "Filipino Sign Language",
      "italics": true
     },
     {
-     "text": " [20]. Kelompok penelitian tersebut menjadi acuan pengenalan isyarat dari CSI dalam penelitian ini."
+     "text": " [18]. Kelompok penelitian tersebut menjadi acuan pengenalan isyarat dari CSI dalam penelitian ini."
     }
    ]
   },
@@ -1342,7 +1153,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Penelitian pengenalan gestur berbasis CSI menjadi acuan rancangan fitur dan strategi generalisasi dalam penelitian ini. Profil kecepatan berbasis Doppler pada Widar3.0 [26] (Subbab 2.3) mendasari pemakaian fitur Doppler. Wi-SL [28] mengenali gestur isyarat yang halus dari CSI tanpa kontak, sedangkan HandFi [29] mengenali gestur tangan dari CSI. Pada sisi aplikasi, Qin dkk. [21] mengembangkan WiASL yang mengenali tulisan ASL dengan perangkat Wi-Fi komersial. Pendekatan Wi-SL dan HandFi pada gestur tangan tidak diterapkan secara langsung dalam penelitian ini karena detail jari tidak dijadikan target pada konfigurasi dua node ESP32 (Subbab 2.3)."
+     "text": "Penelitian pengenalan gestur berbasis CSI menjadi acuan rancangan fitur dan strategi generalisasi dalam penelitian ini. Profil kecepatan berbasis Doppler pada Widar3.0 [37] (Subbab 2.3) mendasari pemakaian fitur Doppler. Wi-SL [34] mengenali gestur isyarat yang halus dari CSI tanpa kontak, sedangkan HandFi [35] mengenali gestur tangan dari CSI. Pada sisi aplikasi, Qin dkk. [30] mengembangkan WiASL yang mengenali tulisan ASL dengan perangkat Wi-Fi komersial. Pendekatan Wi-SL dan HandFi pada gestur tangan tidak diterapkan secara langsung dalam penelitian ini karena detail jari tidak dijadikan target pada konfigurasi dua node ESP32 (Subbab 2.3)."
     }
    ]
   },
@@ -1357,7 +1168,7 @@
      "italics": true
     },
     {
-     "text": " terpilih, spektrum Doppler pada pita 1–60 Hz, serta statistik ringkas berupa energi, entropi, dan lintasan puncak [15], [26], [29], [27]. Amplitudo dan fase merekam perubahan kanal secara langsung, sedangkan spektrum Doppler merekam kecepatan gerak. Statistik ringkas mengubah setiap segmen menjadi vektor berukuran tetap yang dapat langsung diolah klasifikator."
+     "text": " terpilih, spektrum Doppler pada pita 1–60 Hz, serta statistik ringkas berupa energi, entropi, dan lintasan puncak [25], [37], [35], [46]. Amplitudo dan fase merekam perubahan kanal secara langsung, sedangkan spektrum Doppler merekam kecepatan gerak. Statistik ringkas mengubah setiap segmen menjadi vektor berukuran tetap yang dapat langsung diolah klasifikator."
     }
    ]
   },
@@ -1376,14 +1187,7 @@
      "italics": true
     },
     {
-     "text": " pemisah dengan margin terbesar antarkelas "
-    },
-    {
-     "text": "[PERLU RUJUKAN: teori Support Vector Machine]",
-     "highlight": true
-    },
-    {
-     "text": ". Dalam penelitian ini, SVM digunakan sebagai pembanding dasar ("
+     "text": " pemisah dengan margin terbesar antarkelas [55]. Dalam penelitian ini, SVM digunakan sebagai pembanding dasar ("
     },
     {
      "text": "baseline",
@@ -1404,14 +1208,7 @@
      "italics": true
     },
     {
-     "text": " (CNN) yang menerapkan konvolusi sepanjang satu sumbu "
-    },
-    {
-     "text": "[PERLU RUJUKAN: teori 1D-CNN untuk data deret waktu]",
-     "highlight": true
-    },
-    {
-     "text": ". Pada data deret waktu, sumbu tersebut adalah sumbu waktu sehingga pola gerak lokal dapat dipelajari dari urutan nilai di dalam segmen. Untuk SVM, fitur setiap segmen diringkas menjadi satu vektor, sedangkan untuk 1D-CNN fitur disusun sebagai deret per langkah waktu (BAB III). Ukuran 1D-CNN dibuat kecil karena "
+     "text": " (CNN) yang menerapkan konvolusi sepanjang satu sumbu dan dirancang untuk data deret waktu [56]. Pada data deret waktu, sumbu tersebut adalah sumbu waktu sehingga pola gerak lokal dapat dipelajari dari urutan nilai di dalam segmen. Untuk SVM, fitur setiap segmen diringkas menjadi satu vektor, sedangkan untuk 1D-CNN fitur disusun sebagai deret per langkah waktu (BAB III). Ukuran 1D-CNN dibuat kecil karena "
     },
     {
      "text": "dataset",
@@ -1433,14 +1230,14 @@
      "italics": true
     },
     {
-     "text": ") selalu memilih salah satu kelas, termasuk ketika gerak yang diperagakan tidak termasuk kosakata yang dilatihkan atau bukan isyarat sama sekali "
+     "text": ") selalu memilih salah satu kelas, termasuk ketika gerak yang diperagakan tidak termasuk kosakata yang dilatihkan atau bukan isyarat sama sekali; mekanisme penolakan ("
     },
     {
-     "text": "[PERLU RUJUKAN: klasifikasi dengan opsi penolakan/open-set]",
-     "highlight": true
+     "text": "reject option",
+     "italics": true
     },
     {
-     "text": ". Untuk alat latihan, perilaku tersebut berisiko memberikan umpan balik yang menyesatkan. Oleh karena itu, keluaran klasifikator dilengkapi skor keyakinan. Jika skor berada di bawah ambang, sistem menampilkan pesan \"isyarat tidak dikenali, ulangi\"; jika berada di atas ambang, sistem menampilkan isyarat yang terdeteksi beserta kecocokannya dengan isyarat target. Nilai ambang ditetapkan dari data validasi "
+     "text": ") memang dilengkapi ke klasifikator agar keluaran berkeyakinan rendah tidak dipaksa menjadi kelas tertentu [57]. Untuk alat latihan, perilaku tersebut berisiko memberikan umpan balik yang menyesatkan. Oleh karena itu, keluaran klasifikator dilengkapi skor keyakinan. Jika skor berada di bawah ambang, sistem menampilkan pesan \"isyarat tidak dikenali, ulangi\"; jika berada di atas ambang, sistem menampilkan isyarat yang terdeteksi beserta kecocokannya dengan isyarat target. Nilai ambang ditetapkan dari data validasi "
     },
     {
      "text": "[PERLU DATA: ambang skor keyakinan, ditetapkan dari data validasi]",
@@ -1466,14 +1263,7 @@
      "italics": true
     },
     {
-     "text": ") digunakan untuk menilai apakah suatu pendekatan dapat dijalankan sebelum dikembangkan lebih jauh "
-    },
-    {
-     "text": "[PERLU RUJUKAN: definisi studi kelayakan]",
-     "highlight": true
-    },
-    {
-     "text": ". Dalam penelitian ini, kelayakan dinilai bertahap melalui gerbang keputusan G0–G4 (BAB III). Kriteria gerbang yang menyangkut kinerja klasifikasi dirumuskan relatif terhadap peluang acak, tidak sebagai target akurasi. Setiap tahap menghasilkan artefak tetap, yaitu laporan karakterisasi sinyal, protokol perekaman, "
+     "text": ") digunakan untuk menilai apakah suatu pendekatan dapat dijalankan sebelum dikembangkan lebih jauh [58]. Dalam penelitian ini, kelayakan dinilai bertahap melalui gerbang keputusan G0–G4 (BAB III). Kriteria gerbang yang menyangkut kinerja klasifikasi dirumuskan relatif terhadap peluang acak, tidak sebagai target akurasi. Setiap tahap menghasilkan artefak tetap, yaitu laporan karakterisasi sinyal, protokol perekaman, "
     },
     {
      "text": "dataset",
@@ -1502,14 +1292,7 @@
      "italics": true
     },
     {
-     "text": " per isyarat "
-    },
-    {
-     "text": "[PERLU RUJUKAN: metrik evaluasi klasifikasi]",
-     "highlight": true
-    },
-    {
-     "text": ". Skor F1 makro merata-ratakan skor setiap isyarat tanpa pembobotan sehingga setiap isyarat berbobot sama, sedangkan "
+     "text": " per isyarat [59]. Skor F1 makro merata-ratakan skor setiap isyarat tanpa pembobotan sehingga setiap isyarat berbobot sama, sedangkan "
     },
     {
      "text": "confusion matrix",
@@ -1582,14 +1365,7 @@
      "italics": true
     },
     {
-     "text": "), yaitu selang waktu dari selesainya isyarat hingga umpan balik tampil, diukur karena umpan balik baru bermanfaat bila diterima segera (Subbab 2.2). Laju deteksi palsu per jam saat tidak ada isyarat diukur untuk mengetahui seberapa sering sistem bereaksi terhadap gangguan, seperti orang lewat, kipas angin, atau perabot yang bergeser. Persepsi pengguna diukur dengan kuesioner skala Likert "
-    },
-    {
-     "text": "[PERLU RUJUKAN: skala Likert]",
-     "highlight": true
-    },
-    {
-     "text": " dan dianalisis secara deskriptif tanpa statistik inferensial. Ketepatan peragaan peserta sebelum dan sesudah latihan dinilai validator penutur tunarungu dengan rubrik yang independen dari sistem CSI, dan validator juga menilai kewajaran umpan balik sistem."
+     "text": "), yaitu selang waktu dari selesainya isyarat hingga umpan balik tampil, diukur karena umpan balik baru bermanfaat bila diterima segera (Subbab 2.2). Laju deteksi palsu per jam saat tidak ada isyarat diukur untuk mengetahui seberapa sering sistem bereaksi terhadap gangguan, seperti orang lewat, kipas angin, atau perabot yang bergeser. Persepsi pengguna diukur dengan kuesioner skala Likert [60] dan dianalisis secara deskriptif tanpa statistik inferensial. Ketepatan peragaan peserta sebelum dan sesudah latihan dinilai validator penutur tunarungu dengan rubrik yang independen dari sistem CSI, dan validator juga menilai kewajaran umpan balik sistem."
     }
    ]
   },
@@ -1619,15 +1395,15 @@
    "rows": [
     [
      "1",
-     "Shang dan Wu (2017) [17]",
+     "Shang dan Wu (2017) [27]",
      "Wi-Fi, beberapa perangkat",
-     "[PERLU DATA: bahasa isyarat yang dikenali]",
+     "Tidak disebutkan (isyarat tangan dan lengan)",
      "Ya",
      "Pengenalan bahasa isyarat yang tangguh"
     ],
     [
      "2",
-     "Ma dkk. (2018) [16]",
+     "Ma dkk. (2018) [26]",
      "CSI",
      "ASL",
      "Ya",
@@ -1635,15 +1411,15 @@
     ],
     [
      "3",
-     "Ahmed dkk. (2020) [18]",
+     "Ahmed dkk. (2020) [28]",
      "Wi-Fi, tanpa perangkat yang dikenakan",
-     "[PERLU DATA: bahasa isyarat yang dikenali]",
+     "Tidak disebutkan (49 gestur isyarat)",
      "Ya",
      "Pengenalan bahasa isyarat"
     ],
     [
      "4",
-     "Baldeo dkk. (2024) [20]",
+     "Baldeo dkk. (2024) [18]",
      "CSI",
      "*Filipino Sign Language*",
      "Ya",
@@ -1651,7 +1427,7 @@
     ],
     [
      "5",
-     "Wang dkk. (2019) [33]",
+     "Wang dkk. (2019) [53]",
      "Wi-Fi; kamera sebagai supervisi saat pelatihan",
      "Bukan bahasa isyarat",
      "Ya",
@@ -1659,7 +1435,7 @@
     ],
     [
      "6",
-     "Geng dkk. (2023) [34]",
+     "Geng dkk. (2023) [54]",
      "Wi-Fi; jaringan visi sebagai guru saat pelatihan",
      "Bukan bahasa isyarat",
      "Ya",
@@ -1667,15 +1443,15 @@
     ],
     [
      "7",
-     "Dwijayanti dkk. (2021) [11]",
+     "Dwijayanti dkk. (2021) [20]",
      "Citra; CNN",
-     "Bahasa isyarat di Indonesia [PERLU DATA: SIBI atau BISINDO]",
+     "BISINDO (huruf dan angka)",
      "Tidak",
      "Pengenalan isyarat dari citra"
     ],
     [
      "8",
-     "Kindy dkk. (2025) [12]",
+     "Kindy dkk. (2025) [21]",
      "Video",
      "BISINDO tingkat kata",
      "Tidak",
@@ -1683,7 +1459,7 @@
     ],
     [
      "9",
-     "Wiguna dan Rojali (2025) [13]",
+     "Wiguna dan Rojali (2025) [22]",
      "Video",
      "BISINDO tingkat kalimat",
      "Tidak",
@@ -1691,7 +1467,7 @@
     ],
     [
      "10",
-     "Sebastian dkk. (2025) [14]",
+     "Sebastian dkk. (2025) [23]",
      "Visi; gestur tubuh berbasis informasi spasial",
      "BISINDO",
      "Tidak",
@@ -1699,27 +1475,27 @@
     ],
     [
      "11",
-     "[PERLU RUJUKAN: penelitian pengenalan isyarat SIBI berbasis kamera atau sensor]",
-     "[PERLU DATA: sesuai rujukan]",
-     "SIBI",
-     "[PERLU DATA: sesuai rujukan]",
-     "Pengenalan isyarat SIBI"
+     "Soekarta dkk. (2024) [61]",
+     "Citra; MediaPipe; Android",
+     "SIBI (24 huruf statis)",
+     "Tidak",
+     "Deteksi isyarat SIBI berbasis Android"
     ],
     [
      "12",
-     "[PERLU RUJUKAN: sistem latihan bahasa isyarat dengan umpan balik otomatis berbasis kamera atau sensor]",
-     "Kamera atau sensor",
-     "[PERLU DATA: sesuai rujukan]",
-     "[PERLU DATA: sesuai rujukan]",
-     "Latihan isyarat dengan umpan balik otomatis"
+     "Sagawa dan Takeuchi (2002) [42]",
+     "Kamera",
+     "Bahasa isyarat Jepang",
+     "Tidak",
+     "Pembelajaran isyarat dengan pengenalan dan pembangkitan isyarat"
     ],
     [
      "13",
-     "[PERLU RUJUKAN: pengenalan isyarat berbasis sarung tangan sensor atau sensor inersia]",
-     "Sensor yang dikenakan pada tangan",
-     "[PERLU DATA: sesuai rujukan]",
-     "Ya",
-     "Pengenalan isyarat, termasuk konfigurasi jari"
+     "Ong dan Ranganath (2005) [17]",
+     "Sensor yang dikenakan pada tangan dan kamera (survei)",
+     "Berbagai bahasa isyarat (survei)",
+     "Sebagian",
+     "Survei pengenalan isyarat bersensor dan berbasis visi"
     ],
     [
      "14",
@@ -1735,21 +1511,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Tabel 2.2 memperlihatkan tiga kelompok penelitian. Kelompok pertama mengenali bahasa isyarat dari sinyal Wi-Fi [17], [16], [18], [20]. Kelompok ini menunjukkan bahwa isyarat dapat dikenali tanpa kamera saat sistem dipakai, dengan bahasa yang diteliti antara lain ASL dan "
+     "text": "Tabel 2.2 memperlihatkan tiga kelompok penelitian. Kelompok pertama mengenali bahasa isyarat dari sinyal Wi-Fi [27], [26], [28], [18]. Kelompok ini menunjukkan bahwa isyarat dapat dikenali tanpa kamera saat sistem dipakai, dengan bahasa yang diteliti antara lain ASL dan "
     },
     {
      "text": "Filipino Sign Language",
      "italics": true
     },
     {
-     "text": ". Sasaran kelompok ini adalah pengenalan isyarat; orientasi pembelajaran belum ditemukan dalam penelusuran literatur penelitian ini "
-    },
-    {
-     "text": "[PERLU DATA: verifikasi apakah penelitian kelompok pertama memuat orientasi pembelajaran]",
-     "highlight": true
-    },
-    {
-     "text": ". Kelompok kedua memindahkan pengetahuan visi ke Wi-Fi [33], [34]. Kamera hanya berperan saat pelatihan, dan sasarannya adalah persepsi tubuh umum."
+     "text": ". Sasaran kelompok ini adalah pengenalan isyarat; orientasi pembelajaran tidak dijumpai pada keempat publikasi tersebut, yang seluruhnya menargetkan pengenalan. Kelompok kedua memindahkan pengetahuan visi ke Wi-Fi [53], [54]. Kamera hanya berperan saat pelatihan, dan sasarannya adalah persepsi tubuh umum."
     }
    ]
   },
@@ -1757,7 +1526,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Kelompok ketiga mengenali bahasa isyarat di Indonesia (SIBI atau BISINDO) dari citra atau video. Dwijayanti dkk. [11] menggunakan CNN pada citra, sedangkan Kindy dkk. [12] menyusun "
+     "text": "Kelompok ketiga mengenali bahasa isyarat di Indonesia (SIBI atau BISINDO) dari citra atau video. Dwijayanti dkk. [20] menggunakan CNN pada citra, sedangkan Kindy dkk. [21] menyusun "
     },
     {
      "text": "dataset",
@@ -1771,28 +1540,21 @@
      "italics": true
     },
     {
-     "text": ". Wiguna dan Rojali [13] mengenali kalimat BISINDO dari video, dan Sebastian dkk. [14] menggunakan pengenalan gestur tubuh yang memperhitungkan informasi spasial ("
+     "text": ". Wiguna dan Rojali [22] mengenali kalimat BISINDO dari video, dan Sebastian dkk. [23] menggunakan pengenalan gestur tubuh yang memperhitungkan informasi spasial ("
     },
     {
      "text": "spatially aware",
      "italics": true
     },
     {
-     "text": "). Tinjauan sistematis atas pengenalan BISINDO [10] juga berfokus pada teknik "
+     "text": "). Tinjauan sistematis atas pengenalan BISINDO [19] juga berfokus pada teknik "
     },
     {
      "text": "deep learning",
      "italics": true
     },
     {
-     "text": " untuk pengolahan citra. Seluruh penelitian dalam kelompok ini memerlukan kamera saat sistem dipakai. Selain ketiga kelompok tersebut, Tabel 2.2 memuat dua pembanding yang paling dekat dengan penelitian ini, yaitu penelitian pengenalan isyarat SIBI dan sistem latihan bahasa isyarat dengan umpan balik otomatis; rujukan keduanya masih perlu dilengkapi. Tabel 2.2 juga memuat pengenalan isyarat berbasis sensor yang dikenakan pada tangan sebagai pendekatan lain yang tidak memerlukan kamera. Pendekatan tersebut dapat menangkap konfigurasi jari, tetapi perangkatnya harus dipasang setiap kali berlatih "
-    },
-    {
-     "text": "[PERLU RUJUKAN: hambatan pemakaian sensor yang dikenakan dalam latihan isyarat]",
-     "highlight": true
-    },
-    {
-     "text": "."
+     "text": " untuk pengolahan citra. Seluruh penelitian dalam kelompok ini memerlukan kamera saat sistem dipakai. Selain ketiga kelompok tersebut, Tabel 2.2 memuat dua pembanding yang paling dekat dengan penelitian ini, yaitu penelitian pengenalan isyarat SIBI berbasis MediaPipe di Android [61] dan sistem latihan bahasa isyarat dengan umpan balik otomatis [42]. Tabel 2.2 juga memuat pengenalan isyarat berbasis sensor yang dikenakan pada tangan sebagai pendekatan lain yang tidak memerlukan kamera. Pendekatan tersebut dapat menangkap konfigurasi jari, tetapi perangkatnya harus dikenakan dan dikalibrasi setiap kali berlatih [17], [18]."
     }
    ]
   },
@@ -1800,14 +1562,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Dalam batas penelusuran literatur penelitian ini "
-    },
-    {
-     "text": "[PERLU DATA: basis data, kata kunci, dan rentang tahun penelusuran literatur]",
-     "highlight": true
-    },
-    {
-     "text": ", belum ditemukan penelitian yang mengenali isyarat SIBI dari CSI. Belum ditemukan pula penelitian yang memakai CSI pada ESP32 untuk memberikan umpan balik latihan isyarat bagi pembelajar pendengar."
+     "text": "Dalam batas penelusuran literatur penelitian ini, yang mencakup Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 dengan kata kunci bahasa Inggris maupun bahasa Indonesia (Subbab 1.1), belum ditemukan penelitian yang mengenali isyarat SIBI dari CSI. Belum ditemukan pula penelitian yang memakai CSI pada ESP32 untuk memberikan umpan balik latihan isyarat bagi pembelajar pendengar."
     }
    ]
   },
@@ -1891,7 +1646,7 @@
      "italics": true
     },
     {
-     "text": " RuView [23] (Subbab 2.4), lalu "
+     "text": " RuView [32] (Subbab 2.4), lalu "
     },
     {
      "text": "pipeline",
@@ -1905,14 +1660,14 @@
      "code": true
     },
     {
-     "text": " (ADR-079) diuji tanpa partisipan untuk memastikan CSI dan video dapat diselaraskan. Arti kode ADR adalah "
+     "text": " (ADR-079) diuji tanpa partisipan untuk memastikan CSI dan video dapat diselaraskan. ADR adalah singkatan dari "
     },
     {
-     "text": "[PERLU DATA: kepanjangan dan arti ADR pada repositori RuView]",
-     "highlight": true
+     "text": "architecture decision record",
+     "italics": true
     },
     {
-     "text": ". Tahap ini ditempatkan paling awal karena "
+     "text": " (catatan keputusan arsitektur), yaitu format dokumentasi keputusan desain yang dipakai repositori RuView [32]. Tahap ini ditempatkan paling awal karena "
     },
     {
      "text": "pipeline",
@@ -2001,7 +1756,7 @@
      "italics": true
     },
     {
-     "text": " pada orang dan ruang tempat data latih direkam [25]. Oleh karena itu, model diuji lintas sesi, lintas partisipan, lintas ruang, dan pada satu pengguna baru tanpa pelatihan ulang (Subbab 3.7.5). Strategi lintas domain Widar3.0 [26] dijadikan acuan tanpa mengasumsikan hasil yang sama pada isyarat SIBI (Tabel 3.6, butir 15). Bila G3 gagal, cakupan menjadi personalisasi per pengguna yang memerlukan data latih dari setiap pengguna, padahal pembelajar pemula diduga belum dapat memperagakan isyarat dengan tepat. Untuk itu, model, ruang, dan prosedur yang dipakai pada T4 untuk setiap hasil G3 tercantum pada Tabel 3.6, butir 17."
+     "text": " pada orang dan ruang tempat data latih direkam [36]. Oleh karena itu, model diuji lintas sesi, lintas partisipan, lintas ruang, dan pada satu pengguna baru tanpa pelatihan ulang (Subbab 3.7.5). Strategi lintas domain Widar3.0 [37] dijadikan acuan tanpa mengasumsikan hasil yang sama pada isyarat SIBI (Tabel 3.6, butir 15). Bila G3 gagal, cakupan menjadi personalisasi per pengguna yang memerlukan data latih dari setiap pengguna, padahal pembelajar pemula diduga belum dapat memperagakan isyarat dengan tepat. Untuk itu, model, ruang, dan prosedur yang dipakai pada T4 untuk setiap hasil G3 tercantum pada Tabel 3.6, butir 17."
     }
    ]
   },
@@ -2115,8 +1870,8 @@
    "rows": [
     [
      "1",
-     "ESP32",
-     "[PERLU DATA: varian ESP32 yang dipakai, misalnya ESP32 DevKit atau ESP32-S3]",
+     "ESP32-S3",
+     "Papan pengembangan ESP32-S3, varian yang direkomendasikan RuView untuk node CSI [32]",
      "2 unit (+1 cadangan)",
      "Node TX dan node RX penangkap CSI"
     ],
@@ -2241,7 +1996,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Pada jalur operasional, gerak pengisyarat di zona isyarat antara node TX dan node RX mengubah amplitudo, fase, dan komponen Doppler pada deret CSI [15]. Deret tersebut diolah hingga menjadi umpan balik di "
+     "text": "Pada jalur operasional, gerak pengisyarat di zona isyarat antara node TX dan node RX mengubah amplitudo, fase, dan komponen Doppler pada deret CSI [25]. Deret tersebut diolah hingga menjadi umpan balik di "
     },
     {
      "text": "dashboard",
@@ -2263,7 +2018,7 @@
      "italics": true
     },
     {
-     "text": ". Label kelas berasal dari kartu pemandu yang ditampilkan sebelum setiap repetisi, bukan dari kamera. MediaPipe [24] mengubah video "
+     "text": ". Label kelas berasal dari kartu pemandu yang ditampilkan sebelum setiap repetisi, bukan dari kamera. MediaPipe [33] mengubah video "
     },
     {
      "text": "webcam",
@@ -2277,7 +2032,7 @@
      "italics": true
     },
     {
-     "text": " tubuh [30] dan tangan [31] yang diselaraskan dengan CSI melalui ADR-079 untuk memverifikasi batas segmen, menyaring segmen buruk, dan mendiagnosis kesalahan klasifikator secara luring. Berbeda dengan preseden Person-in-WiFi [33] dan DensePose From WiFi [34] (Subbab 2.5), dalam penelitian ini kamera tidak mengajarkan pose kepada model CSI; distilasi pengetahuan penuh ditempatkan sebagai penelitian lanjutan."
+     "text": " tubuh [50] dan tangan [51] yang diselaraskan dengan CSI melalui ADR-079 untuk memverifikasi batas segmen, menyaring segmen buruk, dan mendiagnosis kesalahan klasifikator secara luring. Berbeda dengan preseden Person-in-WiFi [53] dan DensePose From WiFi [54] (Subbab 2.5), dalam penelitian ini kamera tidak mengajarkan pose kepada model CSI; distilasi pengetahuan penuh ditempatkan sebagai penelitian lanjutan."
     }
    ]
   },
@@ -2315,7 +2070,7 @@
      "italics": true
     },
     {
-     "text": " karena CSI peka terhadap perubahan kondisi ruang [25]. Posisi perabot, kipas angin atau pendingin ruangan yang menyala, dan orang yang lewat dicatat sebagai kovariat untuk menganalisis perbedaan kinerja antarsesi dan antarruang."
+     "text": " karena CSI peka terhadap perubahan kondisi ruang [36]. Posisi perabot, kipas angin atau pendingin ruangan yang menyala, dan orang yang lewat dicatat sebagai kovariat untuk menganalisis perbedaan kinerja antarsesi dan antarruang."
     }
    ]
   },
@@ -2357,7 +2112,7 @@
      "italics": true
     },
     {
-     "text": " [8]. Hasilnya adalah 5–8 isyarat terisolasi "
+     "text": " [15]. Hasilnya adalah 5–8 isyarat terisolasi "
     },
     {
      "text": "[PERLU DATA: daftar isyarat SIBI terpilih]",
@@ -2521,14 +2276,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Laju pencuplikan CSI node ESP32 pada konfigurasi RuView adalah "
-    },
-    {
-     "text": "[PERLU DATA: laju pencuplikan CSI node ESP32 pada konfigurasi RuView]",
-     "highlight": true
-    },
-    {
-     "text": ". Pita Doppler 1–60 Hz hanya terwakili bila laju pencuplikan sedikitnya 120 Hz (Subbab 2.3). Bila laju yang diukur pada T0 lebih rendah, pita yang dianalisis dibatasi hingga setengah laju aktual dan pembatasan itu dilaporkan."
+     "text": "Firmware RuView membatasi pengiriman frame CSI paling sering setiap 20 ms sehingga laju maksimumnya adalah 50 frame per detik [32]; laju aktual pada konfigurasi penelitian diukur pada T0. Pita Doppler 1–60 Hz hanya terwakili bila laju pencuplikan sedikitnya 120 Hz (Subbab 2.3). Bila laju yang diukur pada T0 lebih rendah, pita yang dianalisis dibatasi hingga setengah laju aktual dan pembatasan itu dilaporkan."
     }
    ]
   },
@@ -2573,7 +2321,7 @@
      "italics": true
     },
     {
-     "text": " terpilih yang saling melengkapi [27], spektrum Doppler pita 1–60 Hz [26], serta statistik ringkas berupa energi, entropi, dan lintasan puncak. Susunan fitur tersebut mengikuti praktik pengenalan gestur berbasis CSI [15], [29]. Kriteria pemilihan "
+     "text": " terpilih yang saling melengkapi [46], spektrum Doppler pita 1–60 Hz [37], serta statistik ringkas berupa energi, entropi, dan lintasan puncak. Susunan fitur tersebut mengikuti praktik pengenalan gestur berbasis CSI [25], [35]. Kriteria pemilihan "
     },
     {
      "text": "subcarrier",
@@ -2592,35 +2340,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "SVM mencari batas pemisah antarkelas dengan margin terbesar "
-    },
-    {
-     "text": "[PERLU RUJUKAN: teori Support Vector Machine]",
-     "highlight": true
-    },
-    {
-     "text": " dan dipilih sebagai pembanding dasar karena dapat dilatih pada "
+     "text": "SVM mencari batas pemisah antarkelas dengan margin terbesar [55] dan dipilih sebagai pembanding dasar karena dapat dilatih pada "
     },
     {
      "text": "dataset",
      "italics": true
     },
     {
-     "text": " berukuran kecil "
-    },
-    {
-     "text": "[PERLU RUJUKAN: kesesuaian SVM untuk data latih berukuran kecil]",
-     "highlight": true
-    },
-    {
-     "text": ". Model 1D-CNN menerapkan konvolusi sepanjang sumbu waktu deret fitur "
-    },
-    {
-     "text": "[PERLU RUJUKAN: teori 1D-CNN untuk data deret waktu]",
-     "highlight": true
-    },
-    {
-     "text": " dan dipilih karena dapat mempelajari pola temporal langsung dari deret tersebut. Ukuran jaringannya dibuat kecil agar sebanding dengan jumlah data. SVM dan 1D-CNN diimplementasikan pada laptop, berturut-turut dengan scikit-learn dan PyTorch. Hiperparameter kedua klasifikator dipilih berdasarkan data validasi yang terpisah dari data uji."
+     "text": " berukuran kecil [62]. Model 1D-CNN menerapkan konvolusi sepanjang sumbu waktu deret fitur [56] dan dipilih karena dapat mempelajari pola temporal langsung dari deret tersebut. Ukuran jaringannya dibuat kecil agar sebanding dengan jumlah data. SVM dan 1D-CNN diimplementasikan pada laptop, berturut-turut dengan scikit-learn dan PyTorch. Hiperparameter kedua klasifikator dipilih berdasarkan data validasi yang terpisah dari data uji."
     }
    ]
   },
@@ -2688,7 +2415,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Skema kedua sampai kelima mengukur ketahanan terhadap perubahan domain [25]; karena jumlah pengisyarat dan ruang kecil, hasil lintas partisipan dan lintas ruang dilaporkan untuk setiap putaran ("
+     "text": "Skema kedua sampai kelima mengukur ketahanan terhadap perubahan domain [36]; karena jumlah pengisyarat dan ruang kecil, hasil lintas partisipan dan lintas ruang dilaporkan untuk setiap putaran ("
     },
     {
      "text": "fold",
@@ -3467,11 +3194,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[5] Kementerian Koordinator Bidang Pembangunan Manusia dan Kebudayaan, \"Kemenko PMK bergerak bersama wujudkan selaras bahasa isyarat,\" 3 Okt. 2025. [Online]. Available: "
-    },
-    {
-     "text": "[PERLU RUJUKAN: URL lengkap rilis di kemenkopmk.go.id dan tanggal akses]",
-     "highlight": true
+     "text": "[5] Kementerian Koordinator Bidang Pembangunan Manusia dan Kebudayaan, \"Kemenko PMK bergerak bersama wujudkan selaras bahasa isyarat,\" 3 Okt. 2025. [Online]. Available: https://www.kemenkopmk.go.id/kemenko-pmk-bergerak-bersama-wujudkan-selaras-bahasa-isyarat, diakses 24 Okt. 2026."
     }
    ]
   },
@@ -3494,11 +3217,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[7] Badan Riset dan Inovasi Nasional, \"BRIN dorong penguatan ekosistem bahasa isyarat, BISINDO dominan digunakan penyandang tuli,\" 26 Agu. 2026. [Online]. Available: https://brin.go.id/news/130095 "
-    },
-    {
-     "text": "[PERLU DATA: tanggal akses]",
-     "highlight": true
+     "text": "[7] Badan Riset dan Inovasi Nasional, \"BRIN dorong penguatan ekosistem bahasa isyarat, BISINDO dominan digunakan penyandang tuli,\" 26 Agu. 2026. [Online]. Available: https://brin.go.id/news/130095, diakses 24 Okt. 2026."
     }
    ]
   },
@@ -3506,11 +3225,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[8] "
-    },
-    {
-     "text": "[PERLU RUJUKAN: data terbitan resmi Kamus Sistem Isyarat Bahasa Indonesia (penerbit, tahun, edisi)]",
-     "highlight": true
+     "text": "[8] Lembaga Penelitian dan Pengembangan Sistem Isyarat Bahasa Indonesia, \"Kamus SIBI Digital,\" Direktorat Pendidikan Masyarakat dan Pendidikan Khusus, Kementerian Pendidikan dan Kebudayaan RI, 2020. [Online]. Available: https://pkplk.kemendikdasmen.go.id/sibi, diakses 24 Okt. 2026."
     }
    ]
   },
@@ -3518,7 +3233,112 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[9] P. A. Rodríguez-Correa, A. Valencia-Arias, O. N. Patiño-Toro, Y. Oblitas Díaz, and R. Teodori De la Puente, \"Benefits and development of assistive technologies for Deaf people's communication: A systematic review,\" "
+     "text": "[9] S. As Satillah, K. Khotimah, N. N. Muslihah, R. Rahmayanti, W. Mirip, Y. D. Suryani, and L. D. A. Pagarwati, \"Ragam bahasa anak tunarungu dengan SIBI di SLB N Ogan Ilir,\" "
+    },
+    {
+     "text": "Jurnal Anak Usia Dini Holistik Integratif (AUDHI)",
+     "italics": true
+    },
+    {
+     "text": ", vol. 7, no. 1, pp. 31–43, 2024, doi: 10.36722/jaudhi.v7i1.2876."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[10] R. Sigrist, G. Rauter, R. Riener, and P. Wolf, \"Augmented visual, auditory, haptic, and multimodal feedback in motor learning: A review,\" "
+    },
+    {
+     "text": "Psychonomic Bulletin & Review",
+     "italics": true
+    },
+    {
+     "text": ", vol. 20, no. 1, pp. 21–53, 2013, doi: 10.3758/s13423-012-0333-8."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[11] B. I. Rodhiyah and S. Wulandari, \"Aplikasi berbasis mobile sebagai sarana pembelajaran dasar bahasa isyarat,\" "
+    },
+    {
+     "text": "INTECOMS: Journal of Information Technology and Computer Science",
+     "italics": true
+    },
+    {
+     "text": ", vol. 7, no. 1, pp. 58–63, 2024, doi: 10.31539/intecoms.v7i1.8326."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[12] R. Fatmawati, R. Asmara, Y. R. Prayogi, and R. Y. Hakkun, \"Aplikasi pembelajaran sistem isyarat bahasa Indonesia (SIBI) berbasis voice menggunakan OpenSIBI,\" "
+    },
+    {
+     "text": "Technomedia Journal",
+     "italics": true
+    },
+    {
+     "text": ", vol. 7, no. 1, pp. 22–39, 2022, doi: 10.33050/tmj.v7i1.1690."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[13] M. Zikky and Z. F. Akbar, \"Kamus sistem isyarat bahasa Indonesia (KASIBI) dengan voice recognition sebagai pendukung belajar bahasa isyarat berbasis Android,\" "
+    },
+    {
+     "text": "Jurnal Sains Terapan",
+     "italics": true
+    },
+    {
+     "text": ", vol. 5, no. 2, 2019, doi: 10.32487/jst.v5i2.732."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[14] R. A. Maulana, A. R. Adriansyah, and Z. Imaduddin, \"Integrasi model deep learning pada pengembangan aplikasi Android pendeteksi bahasa isyarat SIBI menggunakan Jetpack Compose,\" "
+    },
+    {
+     "text": "DBESTI: Journal of Digital Business and Technology Innovation",
+     "italics": true
+    },
+    {
+     "text": ", vol. 3, no. 1, pp. 78–85, 2026, doi: 10.54914/dbesti.v3i1.2081."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[15] Departemen Pendidikan dan Kebudayaan, "
+    },
+    {
+     "text": "Kamus Sistem Isyarat Bahasa Indonesia",
+     "italics": true
+    },
+    {
+     "text": " (edisi pertama). Jakarta, Indonesia: Departemen Pendidikan dan Kebudayaan, 1994."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[16] P. A. Rodríguez-Correa, A. Valencia-Arias, O. N. Patiño-Toro, Y. Oblitas Díaz, and R. Teodori De la Puente, \"Benefits and development of assistive technologies for Deaf people's communication: A systematic review,\" "
     },
     {
      "text": "Frontiers in Education",
@@ -3533,14 +3353,14 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[10] S. A. Sanjaya and H. F. Ilone, \"BISINDO sign language recognition: A systematic literature review of deep learning techniques for image processing,\" "
+     "text": "[17] S. C. W. Ong and S. Ranganath, \"Automatic sign language analysis: A survey and the future beyond lexical meaning,\" "
     },
     {
-     "text": "Indonesian Journal of Computer Science",
+     "text": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
      "italics": true
     },
     {
-     "text": ", vol. 12, no. 6, 2023, doi: 10.33022/ijcs.v12i6.3539."
+     "text": ", vol. 27, no. 6, pp. 873–891, 2005, doi: 10.1109/TPAMI.2005.112."
     }
    ]
   },
@@ -3548,142 +3368,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[11] S. Dwijayanti, Hermawati, S. I. Taqiyyah, H. Hikmarika, and B. Y. Suprapto, \"Indonesia sign language recognition using convolutional neural network,\" "
-    },
-    {
-     "text": "International Journal of Advanced Computer Science and Applications",
-     "italics": true
-    },
-    {
-     "text": ", vol. 12, no. 10, 2021, doi: 10.14569/IJACSA.2021.0121046."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[12] G. O. Kindy, G. Leonali, and H. Lucky, \"Word-level BISINDO: A novel video Indonesian sign language dataset and baseline methods,\" "
-    },
-    {
-     "text": "Procedia Computer Science",
-     "italics": true
-    },
-    {
-     "text": ", vol. 269, pp. 249–258, 2025, doi: 10.1016/j.procs.2025.08.277."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[13] K. L. Wiguna and Rojali, \"Sentence-level Indonesian sign language (BISINDO) recognition using 3D CNN-LSTM and 3D CNN-BiLSTM models,\" "
-    },
-    {
-     "text": "International Journal of Advanced Computer Science and Applications",
-     "italics": true
-    },
-    {
-     "text": ", vol. 16, no. 9, 2025, doi: 10.14569/IJACSA.2025.0160941."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[14] C. Sebastian, J. Limanza, L. Laurentia, J. Harefa, and K. Jingga, \"Indonesian sign language (BISINDO) recognition using spatially aware body gesture recognition,\" "
-    },
-    {
-     "text": "Procedia Computer Science",
-     "italics": true
-    },
-    {
-     "text": ", vol. 269, pp. 1002–1011, 2025, doi: 10.1016/j.procs.2025.09.042."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[15] Y. Ma, G. Zhou, and S. Wang, \"WiFi sensing with channel state information: A survey,\" "
-    },
-    {
-     "text": "ACM Computing Surveys",
-     "italics": true
-    },
-    {
-     "text": ", vol. 52, no. 3, pp. 1–36, 2019, doi: 10.1145/3310194."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[16] Y. Ma, G. Zhou, S. Wang, H. Zhao, and W. Jung, \"SignFi: Sign language recognition using WiFi,\" "
-    },
-    {
-     "text": "Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies",
-     "italics": true
-    },
-    {
-     "text": ", vol. 2, no. 1, pp. 1–21, 2018, doi: 10.1145/3191755."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[17] J. Shang and J. Wu, \"A robust sign language recognition system with multiple Wi-Fi devices,\" in "
-    },
-    {
-     "text": "Proc. Workshop on Mobility in the Evolving Internet Architecture (MobiArch)",
-     "italics": true
-    },
-    {
-     "text": ", 2017, pp. 19–24, doi: 10.1145/3097620.3097624."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[18] H. F. Thariq Ahmed, H. Ahmad, K. Narasingamurthi, H. Harkat, and S. K. Phang, \"DF-WiSLR: Device-free Wi-Fi-based sign language recognition,\" "
-    },
-    {
-     "text": "Pervasive and Mobile Computing",
-     "italics": true
-    },
-    {
-     "text": ", vol. 69, Art. no. 101289, 2020, doi: 10.1016/j.pmcj.2020.101289."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[19] H. F. Thariq Ahmed, H. Ahmad, S. K. Phang, H. Harkat, and K. Narasingamurthi, \"Wi-Fi CSI based human sign language recognition using LSTM network,\" in "
-    },
-    {
-     "text": "Proc. 2021 IEEE Int. Conf. Industry 4.0, Artificial Intelligence, and Communications Technology (IAICT)",
-     "italics": true
-    },
-    {
-     "text": ", 2021, pp. 51–57, doi: 10.1109/IAICT52856.2021.9532548."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[20] J. M. E. G. Baldeo, J. A. P. Canlas, K. D. C. Clata, D. C. C. Flores, J. J. D. Surot, and J. M. R. Reyes, \"Filipino sign language recognition using Wi-Fi channel state information,\" in "
+     "text": "[18] J. M. E. G. Baldeo, J. A. P. Canlas, K. D. C. Clata, D. C. C. Flores, J. J. D. Surot, and J. M. R. Reyes, \"Filipino sign language recognition using Wi-Fi channel state information,\" in "
     },
     {
      "text": "Proc. TENCON 2024 – 2024 IEEE Region 10 Conf.",
@@ -3698,7 +3383,172 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[21] Y. Qin, S. Pan, W. Zhou, D. Pan, and Z. Li, \"WiASL: American Sign Language writing recognition system using commercial WiFi devices,\" "
+     "text": "[19] S. A. Sanjaya and H. F. Ilone, \"BISINDO sign language recognition: A systematic literature review of deep learning techniques for image processing,\" "
+    },
+    {
+     "text": "Indonesian Journal of Computer Science",
+     "italics": true
+    },
+    {
+     "text": ", vol. 12, no. 6, 2023, doi: 10.33022/ijcs.v12i6.3539."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[20] S. Dwijayanti, Hermawati, S. I. Taqiyyah, H. Hikmarika, and B. Y. Suprapto, \"Indonesia sign language recognition using convolutional neural network,\" "
+    },
+    {
+     "text": "International Journal of Advanced Computer Science and Applications",
+     "italics": true
+    },
+    {
+     "text": ", vol. 12, no. 10, 2021, doi: 10.14569/IJACSA.2021.0121046."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[21] G. O. Kindy, G. Leonali, and H. Lucky, \"Word-level BISINDO: A novel video Indonesian sign language dataset and baseline methods,\" "
+    },
+    {
+     "text": "Procedia Computer Science",
+     "italics": true
+    },
+    {
+     "text": ", vol. 269, pp. 249–258, 2025, doi: 10.1016/j.procs.2025.08.277."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[22] K. L. Wiguna and Rojali, \"Sentence-level Indonesian sign language (BISINDO) recognition using 3D CNN-LSTM and 3D CNN-BiLSTM models,\" "
+    },
+    {
+     "text": "International Journal of Advanced Computer Science and Applications",
+     "italics": true
+    },
+    {
+     "text": ", vol. 16, no. 9, 2025, doi: 10.14569/IJACSA.2025.0160941."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[23] C. Sebastian, J. Limanza, L. Laurentia, J. Harefa, and K. Jingga, \"Indonesian sign language (BISINDO) recognition using spatially aware body gesture recognition,\" "
+    },
+    {
+     "text": "Procedia Computer Science",
+     "italics": true
+    },
+    {
+     "text": ", vol. 269, pp. 1002–1011, 2025, doi: 10.1016/j.procs.2025.09.042."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[24] A. Sadeghzadeh, A. F. M. Shahen Shah, and M. B. Islam, \"MLMSign: Multi-lingual multi-modal illumination-invariant sign language recognition,\" "
+    },
+    {
+     "text": "Intelligent Systems with Applications",
+     "italics": true
+    },
+    {
+     "text": ", vol. 22, Art. no. 200384, 2024, doi: 10.1016/j.iswa.2024.200384."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[25] Y. Ma, G. Zhou, and S. Wang, \"WiFi sensing with channel state information: A survey,\" "
+    },
+    {
+     "text": "ACM Computing Surveys",
+     "italics": true
+    },
+    {
+     "text": ", vol. 52, no. 3, pp. 1–36, 2019, doi: 10.1145/3310194."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[26] Y. Ma, G. Zhou, S. Wang, H. Zhao, and W. Jung, \"SignFi: Sign language recognition using WiFi,\" "
+    },
+    {
+     "text": "Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies",
+     "italics": true
+    },
+    {
+     "text": ", vol. 2, no. 1, pp. 1–21, 2018, doi: 10.1145/3191755."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[27] J. Shang and J. Wu, \"A robust sign language recognition system with multiple Wi-Fi devices,\" in "
+    },
+    {
+     "text": "Proc. Workshop on Mobility in the Evolving Internet Architecture (MobiArch)",
+     "italics": true
+    },
+    {
+     "text": ", 2017, pp. 19–24, doi: 10.1145/3097620.3097624."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[28] H. F. Thariq Ahmed, H. Ahmad, K. Narasingamurthi, H. Harkat, and S. K. Phang, \"DF-WiSLR: Device-free Wi-Fi-based sign language recognition,\" "
+    },
+    {
+     "text": "Pervasive and Mobile Computing",
+     "italics": true
+    },
+    {
+     "text": ", vol. 69, Art. no. 101289, 2020, doi: 10.1016/j.pmcj.2020.101289."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[29] H. F. Thariq Ahmed, H. Ahmad, S. K. Phang, H. Harkat, and K. Narasingamurthi, \"Wi-Fi CSI based human sign language recognition using LSTM network,\" in "
+    },
+    {
+     "text": "Proc. 2021 IEEE Int. Conf. Industry 4.0, Artificial Intelligence, and Communications Technology (IAICT)",
+     "italics": true
+    },
+    {
+     "text": ", 2021, pp. 51–57, doi: 10.1109/IAICT52856.2021.9532548."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[30] Y. Qin, S. Pan, W. Zhou, D. Pan, and Z. Li, \"WiASL: American Sign Language writing recognition system using commercial WiFi devices,\" "
     },
     {
      "text": "Measurement",
@@ -3713,7 +3563,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[22] S. M. Hernandez and E. Bulut, \"Lightweight and standalone IoT based WiFi sensing for active repositioning and mobility,\" in "
+     "text": "[31] S. M. Hernandez and E. Bulut, \"Lightweight and standalone IoT based WiFi sensing for active repositioning and mobility,\" in "
     },
     {
      "text": "Proc. 2020 IEEE 21st Int. Symp. \"A World of Wireless, Mobile and Multimedia Networks\" (WoWMoM)",
@@ -3728,11 +3578,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[23] ruvnet, \"RuView,\" GitHub repository. [Online]. Available: https://github.com/ruvnet/RuView "
-    },
-    {
-     "text": "[PERLU DATA: tanggal akses dan versi/commit yang dipakai]",
-     "highlight": true
+     "text": "[32] ruvnet, \"RuView,\" GitHub repository. [Online]. Available: https://github.com/ruvnet/RuView, commit fefb0f9, diakses 24 Okt. 2026."
     }
    ]
   },
@@ -3740,7 +3586,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[24] C. Lugaresi "
+     "text": "[33] C. Lugaresi "
     },
     {
      "text": "et al.",
@@ -3755,52 +3601,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[25] C. Chen, G. Zhou, and Y. Lin, \"Cross-domain WiFi sensing with channel state information: A survey,\" "
-    },
-    {
-     "text": "ACM Computing Surveys",
-     "italics": true
-    },
-    {
-     "text": ", vol. 55, no. 11, pp. 1–37, 2023, doi: 10.1145/3570325."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[26] Y. Zhang, Y. Zheng, K. Qian, G. Zhang, Y. Liu, C. Wu, and Z. Yang, \"Widar3.0: Zero-effort cross-domain gesture recognition with Wi-Fi,\" "
-    },
-    {
-     "text": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
-     "italics": true
-    },
-    {
-     "text": ", vol. 44, no. 11, pp. 8671–8685, 2022, doi: 10.1109/TPAMI.2021.3105387."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[27] Z. Cai, Z. Li, Z. Chen, H. Zhuo, L. Zheng, X. Wu, and Y. Liu, \"Device-free wireless sensing for gesture recognition based on complementary CSI amplitude and phase,\" "
-    },
-    {
-     "text": "Sensors",
-     "italics": true
-    },
-    {
-     "text": ", vol. 24, no. 11, Art. no. 3414, 2024, doi: 10.3390/s24113414."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[28] Z. Hao, Y. Duan, X. Dang, Y. Liu, and D. Zhang, \"Wi-SL: Contactless fine-grained gesture recognition uses channel state information,\" "
+     "text": "[34] Z. Hao, Y. Duan, X. Dang, Y. Liu, and D. Zhang, \"Wi-SL: Contactless fine-grained gesture recognition uses channel state information,\" "
     },
     {
      "text": "Sensors",
@@ -3815,7 +3616,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[29] P. Sruthi, S. Satapathy, and S. K. Udgata, \"HandFi: WiFi sensing based hand gesture recognition using channel state information,\" "
+     "text": "[35] P. Sruthi, S. Satapathy, and S. K. Udgata, \"HandFi: WiFi sensing based hand gesture recognition using channel state information,\" "
     },
     {
      "text": "Procedia Computer Science",
@@ -3830,7 +3631,14 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[30] V. Bazarevsky, I. Grishchenko, K. Raveendran, T. Zhu, F. Zhang, and M. Grundmann, \"BlazePose: On-device real-time body pose tracking,\" arXiv:2006.10204, 2020, doi: 10.48550/arXiv.2006.10204."
+     "text": "[36] C. Chen, G. Zhou, and Y. Lin, \"Cross-domain WiFi sensing with channel state information: A survey,\" "
+    },
+    {
+     "text": "ACM Computing Surveys",
+     "italics": true
+    },
+    {
+     "text": ", vol. 55, no. 11, pp. 1–37, 2023, doi: 10.1145/3570325."
     }
    ]
   },
@@ -3838,7 +3646,217 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[31] F. Zhang "
+     "text": "[37] Y. Zhang, Y. Zheng, K. Qian, G. Zhang, Y. Liu, C. Wu, and Z. Yang, \"Widar3.0: Zero-effort cross-domain gesture recognition with Wi-Fi,\" "
+    },
+    {
+     "text": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+     "italics": true
+    },
+    {
+     "text": ", vol. 44, no. 11, pp. 8671–8685, 2022, doi: 10.1109/TPAMI.2021.3105387."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[38] W. C. Stokoe, \"Sign language structure: An outline of the visual communication systems of the American deaf,\" "
+    },
+    {
+     "text": "Journal of Deaf Studies and Deaf Education",
+     "italics": true
+    },
+    {
+     "text": ", vol. 10, no. 1, pp. 3–37, 2005, doi: 10.1093/deafed/eni001 (cetak ulang monograf 1960)."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[39] A. S. Nugraheni, A. P. Husain, and H. Unayah, \"Optimalisasi penggunaan bahasa isyarat dengan SIBI dan BISINDO pada mahasiswa difabel tunarungu di Prodi PGMI UIN Sunan Kalijaga,\" "
+    },
+    {
+     "text": "Jurnal Holistika",
+     "italics": true
+    },
+    {
+     "text": ", vol. 5, no. 1, pp. 28–33, 2023, doi: 10.24853/holistika.5.1.28-33."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[40] M. Malika and Berlianti, \"Penggunaan bahasa isyarat SIBI dan BISINDO untuk siswa tuli di Sekolah Luar Biasa Negeri Pembina Medan,\" "
+    },
+    {
+     "text": "Concept: Journal of Social Humanities and Education",
+     "italics": true
+    },
+    {
+     "text": ", vol. 4, no. 3, pp. 78–87, 2025, doi: 10.55606/concept.v4i3.2178."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[41] S. Hassan, L. Nourian, C. de Lacerda Pataca, M. Olson, T. D'aurio, K. Agarwal, S. M. N. Asad, G. W. Tigwell, and M. Huenerfauth, \"ASL educators' perspectives on AI for enhancing student learning in American Sign Language education,\" in "
+    },
+    {
+     "text": "Proc. 2026 CHI Conf. Human Factors in Computing Systems (CHI)",
+     "italics": true
+    },
+    {
+     "text": ", 2026, pp. 1–20, doi: 10.1145/3772318.3791928."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[42] H. Sagawa and M. Takeuchi, \"A teaching system of Japanese sign language using sign language recognition and generation methods,\" in "
+    },
+    {
+     "text": "Proc. 10th ACM Int. Conf. Multimedia",
+     "italics": true
+    },
+    {
+     "text": ", 2002, pp. 137–145, doi: 10.1145/641007.641035."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[43] C. A. Daniel, N. M. Liam, Y. Habchi, and S. Basnet, \"Enhancing language learning with real-time sign language recognition and feedback,\" in "
+    },
+    {
+     "text": "Proc. 2024 IEEE MIT Undergraduate Research Technology Conf. (URTC)",
+     "italics": true
+    },
+    {
+     "text": ", 2024, pp. 1–5, doi: 10.1109/URTC65039.2024.10937578."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[44] R. B. Zajonc, \"Social facilitation,\" "
+    },
+    {
+     "text": "Science",
+     "italics": true
+    },
+    {
+     "text": ", vol. 149, no. 3681, pp. 269–274, 1965, doi: 10.1126/science.149.3681.269."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[45] J. N. Bailenson, \"Nonverbal overload: A theoretical argument for the causes of Zoom fatigue,\" "
+    },
+    {
+     "text": "Technology, Mind, and Behavior",
+     "italics": true
+    },
+    {
+     "text": ", vol. 2, no. 1, 2021, doi: 10.1037/tmb0000030."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[46] Z. Cai, Z. Li, Z. Chen, H. Zhuo, L. Zheng, X. Wu, and Y. Liu, \"Device-free wireless sensing for gesture recognition based on complementary CSI amplitude and phase,\" "
+    },
+    {
+     "text": "Sensors",
+     "italics": true
+    },
+    {
+     "text": ", vol. 24, no. 11, Art. no. 3414, 2024, doi: 10.3390/s24113414."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[47] H. Nyquist, \"Certain topics in telegraph transmission theory,\" "
+    },
+    {
+     "text": "Transactions of the American Institute of Electrical Engineers",
+     "italics": true
+    },
+    {
+     "text": ", vol. 47, no. 2, pp. 617–644, 1928, doi: 10.1109/T-AIEE.1928.5055024."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[48] C. E. Shannon, \"Communication in the presence of noise,\" "
+    },
+    {
+     "text": "Proceedings of the IRE",
+     "italics": true
+    },
+    {
+     "text": ", vol. 37, no. 1, pp. 10–21, 1949, doi: 10.1109/JRPROC.1949.232969."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[49] C. Zheng "
+    },
+    {
+     "text": "et al.",
+     "italics": true
+    },
+    {
+     "text": ", \"Deep learning-based human pose estimation: A survey,\" "
+    },
+    {
+     "text": "ACM Computing Surveys",
+     "italics": true
+    },
+    {
+     "text": ", vol. 56, no. 1, pp. 1–37, 2023, doi: 10.1145/3603618."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[50] V. Bazarevsky, I. Grishchenko, K. Raveendran, T. Zhu, F. Zhang, and M. Grundmann, \"BlazePose: On-device real-time body pose tracking,\" arXiv:2006.10204, 2020, doi: 10.48550/arXiv.2006.10204."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[51] F. Zhang "
     },
     {
      "text": "et al.",
@@ -3853,7 +3871,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[32] J.-W. Kim, J.-Y. Choi, E.-J. Ha, and J.-H. Choi, \"Human pose estimation using MediaPipe Pose and optimization method based on a humanoid model,\" "
+     "text": "[52] J.-W. Kim, J.-Y. Choi, E.-J. Ha, and J.-H. Choi, \"Human pose estimation using MediaPipe Pose and optimization method based on a humanoid model,\" "
     },
     {
      "text": "Applied Sciences",
@@ -3868,7 +3886,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[33] F. Wang, S. Zhou, S. Panev, J. Han, and D. Huang, \"Person-in-WiFi: Fine-grained person perception using WiFi,\" in "
+     "text": "[53] F. Wang, S. Zhou, S. Panev, J. Han, and D. Huang, \"Person-in-WiFi: Fine-grained person perception using WiFi,\" in "
     },
     {
      "text": "Proc. IEEE/CVF Int. Conf. Computer Vision (ICCV)",
@@ -3883,7 +3901,127 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[34] J. Geng, D. Huang, and F. De la Torre, \"DensePose from WiFi,\" arXiv:2301.00250, 2023, doi: 10.48550/arXiv.2301.00250."
+     "text": "[54] J. Geng, D. Huang, and F. De la Torre, \"DensePose from WiFi,\" arXiv:2301.00250, 2023, doi: 10.48550/arXiv.2301.00250."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[55] C. Cortes and V. Vapnik, \"Support-vector networks,\" "
+    },
+    {
+     "text": "Machine Learning",
+     "italics": true
+    },
+    {
+     "text": ", vol. 20, no. 3, pp. 273–297, 1995, doi: 10.1007/BF00994018."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[56] S. Kiranyaz, O. Avci, O. Abdeljaber, T. Ince, M. Gabbouj, and D. J. Inman, \"1D convolutional neural networks and applications: A survey,\" "
+    },
+    {
+     "text": "Mechanical Systems and Signal Processing",
+     "italics": true
+    },
+    {
+     "text": ", vol. 151, Art. no. 107398, 2021, doi: 10.1016/j.ymssp.2020.107398."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[57] C. K. Chow, \"On optimum recognition error and reject tradeoff,\" "
+    },
+    {
+     "text": "IEEE Transactions on Information Theory",
+     "italics": true
+    },
+    {
+     "text": ", vol. 16, no. 1, pp. 41–46, 1970, doi: 10.1109/TIT.1970.1054406."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[58] D. J. Bowen, M. Kreuter, B. Spring, L. Cofta-Woerpel, L. Linnan, D. Weiner, S. Bakken, C. P. Kaplan, L. Squiers, C. Fabrizio, and M. Fernandez, \"How we design feasibility studies,\" "
+    },
+    {
+     "text": "American Journal of Preventive Medicine",
+     "italics": true
+    },
+    {
+     "text": ", vol. 36, no. 5, pp. 452–457, 2009, doi: 10.1016/j.amepre.2009.02.002."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[59] M. Sokolova and G. Lapalme, \"A systematic analysis of performance measures for classification tasks,\" "
+    },
+    {
+     "text": "Information Processing & Management",
+     "italics": true
+    },
+    {
+     "text": ", vol. 45, no. 4, pp. 427–437, 2009, doi: 10.1016/j.ipm.2009.03.002."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[60] R. Likert, \"A technique for the measurement of attitudes,\" "
+    },
+    {
+     "text": "Archives of Psychology",
+     "italics": true
+    },
+    {
+     "text": ", no. 140, pp. 5–55, 1932."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[61] R. Soekarta, S. Aras, R. Rezki, and N. K. D. P. Ainun, \"Sistem deteksi simbol isyarat pada SIBI (Sistem Isyarat Bahasa Indonesia) menggunakan Mediapipe berbasis Android,\" "
+    },
+    {
+     "text": "Insect (Informatics and Security): Jurnal Teknik Informatika",
+     "italics": true
+    },
+    {
+     "text": ", vol. 10, no. 2, pp. 90–100, 2024, doi: 10.33506/insect.v10i2.4079."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[62] G. Mountrakis, J. Im, and C. Ogole, \"Support vector machines in remote sensing: A review,\" "
+    },
+    {
+     "text": "ISPRS Journal of Photogrammetry and Remote Sensing",
+     "italics": true
+    },
+    {
+     "text": ", vol. 66, no. 3, pp. 247–259, 2011, doi: 10.1016/j.isprsjprs.2010.11.001."
     }
    ]
   }

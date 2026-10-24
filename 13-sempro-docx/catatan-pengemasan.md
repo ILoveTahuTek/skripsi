@@ -22,15 +22,15 @@ Dibuat 24 Oktober 2026. Pekerjaan: **pengemasan/kompilasi** — menyusun materi
 - **Nomor halaman**: sampul tanpa nomor; daftar isi romawi kecil (i, ii, iii) rata tengah; isi arab mulai 1 rata kanan.
 - **Tabel** (8 buah): tiga-garis akademik — keterangan di atas rata kiri (nomor tebal), kepala 9pt tebal tengah, isi 9pt; baris tidak terpotong halaman, kepala berulang lintas halaman.
 - **Gambar** (2 buah): dua jalur tata letak ulang dari kode Mermaid (perataan otomatis Mermaid menghasilkan rasio 1:7,7 yang tak muat halaman; sesuai catatan materi, "untuk Word, gambar ulang … dengan struktur yang sama"). Simpul, teks, jalur, dan label lolos/gagal/pelatihan identik.
-- **Penanda** `[PERLU DATA: …]`/`[PERLU RUJUKAN: …]`: 98 kemunculan, semuanya **tersorot kuning** agar mudah dicari (Ctrl+F "PERLU") saat mengisi.
-- **Sitasi IEEE `[n]`** dan **daftar pustaka 34 entri** (indentasi gantung) apa adanya.
+- **Penanda** `[PERLU DATA: …]`: 38 kemunculan (semua keputusan pembimbing/data pribadi/parameter rancangan), **tersorot kuning** agar mudah dicari (Ctrl+F "PERLU"). Seluruh 60 kemunculan lain telah diisi dari sumber terverifikasi pada 24 Oktober 2026 (lihat bagian 6).
+- **Sitasi IEEE `[n]`** dan **daftar pustaka 62 entri** (indentasi gantung) apa adanya; 28 rujukan baru ditambahkan pada putaran kedua dengan DOI terverifikasi Crossref.
 
 ## 3. Hasil verifikasi otomatis
 
 - Sinkron konten sumber → DOCX: **568/568 unit teks ditemukan** (pemeriksaan pandoc round-trip).
 - postcheck.py (skill docx): **0 error**; 1 peringatan spasi = desain tabel 9pt (pola yang sama dengan DPJ terdahulu yang lolos).
 - Inspeksi visual halaman kunci (sampul, daftar isi, awal BAB I, Tabel 2.2, Gambar 3.1, Tabel 3.5, Daftar Pustaka): lolos tanpa cacat.
-- Jumlah penanda: 98 kemunculan (16 BAB I, 39 BAB II, 39 BAB III, 4 Daftar Pustaka) — cocok dengan `laporan-penanda.md` materi.
+- Jumlah penanda: 38 kemunculan (4 BAB I, 2 BAB II, 33 BAB III, 0 Daftar Pustaka) — cocok dengan `laporan-penanda.md` materi. Putaran kedua (24 Okt): 596/596 unit teks, 53 halaman PDF, postcheck 0 error.
 
 ## 4. Temuan lint bahasa (dilaporkan, TIDAK diubah)
 
@@ -44,5 +44,21 @@ Menjalankan `periksa.py` (skill naskah-id) pada 12.043 kata menghasilkan 8 temua
 
 1. Isi identitas sampul (nama, NIM, program studi, universitas, pembimbing, tahun) — semua tersorot kuning.
 2. Di Word: perbarui bidang daftar isi setelah pengisian selesai.
-3. Isi 98 penanda `[PERLU …]` sesuai prioritas `laporan-penanda.md` (termasuk 2 penanda di Daftar Pustaka: URL rilis Kemenko PMK dan data terbitan *Kamus SIBI*).
+3. Isi 38 penanda `[PERLU …]` yang tersisa sesuai prioritas `laporan-penanda.md` — seluruhnya keputusan bersama pembimbing, data pribadi/mitra, atau parameter rancangan Tabel 3.6. Penanda Daftar Pustaka (URL Kemenko PMK, tanggal akses BRIN, terbitan *Kamus SIBI*, commit RuView) SUDAH terisi.
 4. Bawa ke bimbingan 8 keputusan terbuka pada `catatan.md` materi (Subbab 6), khususnya redaksi rumusan masalah no. 3 dan istilah "separabilitas fisik".
+
+## 6. Putaran kedua — pengisian penanda dari sumber terverifikasi (24 Oktober 2026)
+
+Atas perintah pemilik, 60 kemunculan penanda diisi/dijawab dan 28 rujukan baru ditambahkan; dokumen dibangun ulang penuh (53 halaman PDF, 596/596 unit sinkron, postcheck 0 error).
+
+**Diisi dengan data nyata (semua DOI diverifikasi Crossref/OpenAlex; fakta RuView dicocokkan langsung ke repositori commit fefb0f9):**
+- Teori klasik: Stokoe 2005; Ong-Ranganath 2005; Nyquist 1928 + Shannon 1949; Likert 1932; Cortes-Vapnik 1995; Kiranyaz dkk. 2021; Chow 1970; Bowen dkk. 2009; Sokolova-Lapalme 2009; Mountrakis dkk. 2011; Zheng dkk. 2023; Sigrist dkk. 2013; Zajonc 1965; Bailenson 2021.
+- Konteks pembelajaran isyarat: Hassan dkk. 2026 (CHI); Sagawa-Takeuchi 2002 (sistem tutor isyarat Jepang); Daniel dkk. 2024 (umpan balik waktu nyata).
+- Indonesia: AUDHI 2024 (SIBI di SLB N Ogan Ilir); Nugraheni dkk. 2023 (SIBI vs BISINDO); Malika-Berlianti 2025; aplikasi SIBI (INTECOMS 2024; Technomedia 2022; Zikky-Akbar 2019; DBESTI 2026); Soekarta dkk. 2024 (deteksi SIBI MediaPipe-Android).
+- Laman resmi: Kamus SIBI Digital (SK Mendikbud 0190/P/1994; Surat 868/C/U/95 mewajibkan SLB memakai sistem isyarat baku); rilis Kemenko PMK (URL lengkap).
+- Teknis RuView: ADR = *architecture decision record*; ESP32-S3 varian yang direkomendasikan; firmware membatasi 20 ms/frame (maks. 50 fps); mode privasi menekan HR/BR/pose.
+- Sistem pembanding (Tabel 2.2 + Subbab 2.3): SignFi (Intel 5300, 3 antena), Wi-SL (Atheros 2TXx3RX, 40 MHz, 400 Hz), HandFi (Intel 5300), WiSign (TP-Link + 2 laptop, tanpa bahasa tertentu), DF-WiSLR (49 gestur), Dwijayanti 2021 = BISINDO (26 huruf + 10 angka).
+
+**Dijawab jujur (tidak ada di literatur — dinyatakan eksplisit, tanpa fabrikasi):** proporsi Indonesia anak tunarungu dari orang tua pendengar; proporsi kosakata Kamus SIBI berbasis lintasan gerak + jumlah kandidat (ditetapkan saat kurasi T1); studi khusus kebutuhan pembelajar pendengar SIBI; orientasi pembelajaran pada kelompok WiFi-SLR; kursus SIBI bagi keluarga. Klaim batas resolusi spasial CSI ditata ulang: fakta perangkat multi-antena + asumsi eksplisit yang diperiksa lewat uji Delta-CSI.
+
+**Rincian lengkap:** `catatan.md` materi bagian 5b; arsip verifikasi JSON di `13-sempro-docx/verifikasi-rujukan-2026-10-24/`.

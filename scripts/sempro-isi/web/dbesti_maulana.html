@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="id-ID" xml:lang="id-ID">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>
+		Integrasi Model Deep Learning pada Pengembangan Aplikasi Android Pendeteksi Bahasa Isyarat SIBI Menggunakan Jetpack Compose
+							| DBESTI: Journal of Digital Business and Technology Innovation
+			</title>
+
+	
+<link rel="icon" href="https://journal.nurulfikri.ac.id/public/journals/7/favicon_id_ID.png">
+<meta name="generator" content="Open Journal Systems 3.3.0.19">
+<meta name="google-site-verification" content="Fh52VwlSmiNeClWOrFiVdjxe9xmn2Xv0pqev6s4wnow" />
+<meta name="gs_meta_revision" content="1.1"/>
+<meta name="citation_journal_title" content="DBESTI: Journal of Digital Business and Technology Innovation"/>
+<meta name="citation_journal_abbrev" content="j. of digit. bus. and technol.  innov."/>
+<meta name="citation_issn" content="3032-775X"/> 
+<meta name="citation_author" content="Raka Agus Maulana"/>
+<meta name="citation_author_institution" content="Sekolah Tinggi Teknologi Terpadu Nurul Fikri"/>
+<meta name="citation_author" content="Ahmad Rio Adriansyah"/>
+<meta name="citation_author_institution" content="Sekolah Tinggi Teknologi Terpadu Nurul Fikri"/>
+<meta name="citation_author" content="Zaki Imaduddin"/>
+<meta name="citation_author_institution" content="Sekolah Tinggi Teknologi Terpadu Nurul Fikri"/>
+<meta name="citation_title" content="Integrasi Model Deep Learning pada Pengembangan Aplikasi Android Pendeteksi Bahasa Isyarat SIBI Menggunakan Jetpack Compose"/>
+<meta name="citation_language" content="id"/>
+<meta name="citation_date" content="2026/05/26"/>
+<meta name="citation_volume" content="3"/>
+<meta name="citation_issue" content="1"/>
+<meta name="citation_firstpage" content="78"/>
+<meta name="citation_lastpage" content="85"/>
+<meta name="citation_doi" content="10.54914/dbesti.v3i1.2081"/>
+<meta name="citation_abstract_html_url" content="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2081"/>
+<meta name="citation_keywords" xml:lang="id" content="Android"/>
+<meta name="citation_keywords" xml:lang="id" content="Deep Learning"/>
+<meta name="citation_keywords" xml:lang="id" content="Rapid Application Development"/>
+<meta name="citation_keywords" xml:lang="id" content="SIBI"/>
+<meta name="citation_keywords" xml:lang="id" content="TensorFlow Lite"/>
+<meta name="citation_pdf_url" content="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/download/2081/486"/>
+<meta name="citation_reference" content="R. Fatmawati, R. Asmara, Y. R. Prayogi, and R. Y. Hakkun, “Aplikasi Pembelajaran Sistem Isyarat Bahasa Indonesia (SIBI) Berbasis Voice Menggunakan OpenSIBI,” Technomedia Journal, vol. 7, no. 1, pp. 22–39, 2022, doi: 10.33050/tmj.v7i1.1690."/>
+<meta name="citation_reference" content="S. Apendi, C. Setianingsih, and M. W. Paryasto, “Deteksi Bahasa Isyarat Sistem Isyarat Bahasa Indonesia Menggunakan Metode Single Shot Multibox Detector,” eProceedings of Engineering, vol. 10, no. 1, pp. 249–255, 2023, [Online]. Available: https://openlibrarypublications.telkomuniversity.ac.id/index.php/engineering/article/view/19322"/>
+<meta name="citation_reference" content="World Health Organization (WHO), World Report On Disability. Jenewa, Swiss: WHO, 2021."/>
+<meta name="citation_reference" content="S. F. T. Andalas, “209,3 Juta Orang di Indonesia Menggunakan Smartphone pada Tahun 2023,” Good stats. Accessed: Sep. 24, 2024. [Online]. Available: https://data.goodstats.id/statistic/2093-juta-orang-di-indonesia-menggunakan-smartphone-pada-tahun-2023-cbha0"/>
+<meta name="citation_reference" content="F. P. Al Fajri, “Perancangan Model Deep Learning untuk Penerjemah Bahasa Isyarat SIBI menggunakan Transfer Learning MobileNetV2,” Tugas Akhir Sekolah Tinggi Teknologi Terpadu Nurul Fikri, Depok, 2024."/>
+<meta name="citation_reference" content="D. I. Setyawan, H. Tolle, and A. P. Kharisma, “Perancangan Aplikasi Communication Board Berbasis Android Tablet Sebagai Media Pembelajaran dan Komunikasi Bagi Anak Tuna Rungu,” Jurnal Pengembangan Teknologi Informasi dan Ilmu Komputer, vol. 2, no. 8, pp. 2933–2943, 2018, [Online]. Available: http://j-ptiik.ub.ac.id"/>
+<meta name="citation_reference" content="N. Wiranda and A. E. Putra, “Model Identifikasi Kata Ucapan Tuna Wicara,” Indonesian Journal of Electronicsand Instrumentation Systems(IJEIS), vol. 9, no. 2, pp. 131–140, 2019."/>
+<meta name="citation_reference" content="W. D. Prastowo, D. Danianti, and A. Pramuntadi, “Analisis Risiko Pada Pengembangan Perangkat Lunak Menggunakan Metode Agile Dan Rad (Rapid Application Development),” Citizen : Jurnal Ilmiah Multidisiplin Indonesia, vol. 3, no. 3, pp. 169–174, 2023, doi: 10.53866/jimi.v3i3.388."/>
+<meta name="citation_reference" content="D. Murdiani and M. Sobirin, “Perbandingan Metodologi Waterfall Dan RAD Dalam Pengembangan Sistem Informasi,” JINTEKS (Jurnal Informatika Teknologi dan Sains), vol. 4, no. 4, pp. 302–306, 2022, [Online]. Available: http://www.jurnal.uts.ac.id/index.php/JINTEKS/article/view/2008"/>
+<meta name="citation_reference" content="E. Susanti, “Implementasi RESTful API dalam Pembuatan Master Data Planogram Menggunakan Framework Flask (Studi Kasus: PT Sumber Alfaria Trijaya, Tbk),” Techno.Com, vol. 19, no. 3, pp. 295–307, 2020, doi: 10.33633/tc.v19i3.3468."/>
+<meta name="citation_reference" content="Jetbrains, “Get started with Kotlin,” Kotlin Language. Accessed: Sep. 29, 2024. [Online]. Available: https://kotlinlang.org/docs/getting-started.html#backend"/>
+<meta name="citation_reference" content="F. Dzulqarnain and T. Tukino, “Rancang Bangun Aplikasi Belajar Arab Untuk Android Menggunakan Jetpack Compose Dan Kotlin,” Computer Based Information System Journal, vol. 11, no. 1, pp. 25–35, 2023, doi: 10.33884/cbis.v11i1.6666."/>
+<meta name="citation_reference" content="E. Milla and M. Radonjić, “Analysis of Developing Native Android Applications Using Xml and Jetpack Compose,” Balkan Journal of Applied Mathematics and Informatics, vol. 6, no. 2, pp. 167–178, 2023, [Online]. Available: https://js.ugd.edu.mk/index.php/bjami/article/view/6019"/>
+<meta name="citation_reference" content="M. Peleš, S. Jevremović, A. Simović, and A. Hadžić, “Possibilities for developing and implementing a mobile application for recognizing the shape of the environment, text, and reading QR codes using the Android CameraX framework and the Machine Learning Kit,” Procedia of Economics and Business Administration, vol. 12, no. 2, pp. 119–127, 2021, [Online]. Available: www.icesba.euhttps://doi.org/10.26458/v6.i1.x"/>
+<meta name="citation_reference" content="S. S. Sindarto, D. E. Ratnawati, and I. Arwani, “Klasifikasi Citra Sistem Isyarat Bahasa Indonesia (SIBI) dengan Metode Convolutional Neural Network pada Perangkat Lunak berbasis Android,” Jurnal Pengembangan Teknologi Informasi dan Ilmu Komputerurnal Pengembangan Teknologi Informasi dan Ilmu Komputer, vol. 6, no. 5, pp. 2129–2138, 2022, [Online]. Available: http://j-ptiik.ub.ac.id"/>
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.Creator.PersonalName" content="Raka Agus Maulana"/>
+<meta name="DC.Creator.PersonalName" content="Ahmad Rio Adriansyah"/>
+<meta name="DC.Creator.PersonalName" content="Zaki Imaduddin"/>
+<meta name="DC.Date.created" scheme="ISO8601" content="2026-05-26"/>
+<meta name="DC.Date.dateSubmitted" scheme="ISO8601" content="2025-07-12"/>
+<meta name="DC.Date.issued" scheme="ISO8601" content="2026-05-26"/>
+<meta name="DC.Date.modified" scheme="ISO8601" content="2026-05-26"/>
+<meta name="DC.Description" xml:lang="en" content="Communication barriers between the deaf community and the general public persist due to a limited understanding of sign language. This study aims to develop an Android application capable of recognizing static alphabet letters in the Indonesian Sign Language (SIBI) in real time to support inclusive communication. The application was developed using the Kotlin programming language and Jetpack Compose, and follows the Clean Architecture approach to ensure modularity and ease of maintenance. A machine learning model was integrated using TensorFlow Lite to enable optimal performance on mobile devices. The development process adopted the Rapid Application Development (RAD) methodology, including stages of literature review, system design, implementation, and testing. Black Box testing showed that all core features functioned as expected. Furthermore, user acceptance testing (UAT) showed a satisfaction rate of 91.3%, indicating a positive perception of usability and interface design. This application is expected to serve as an initial solution to help reduce communication gaps between the deaf community and the broader society."/>
+<meta name="DC.Description" xml:lang="id" content="Hambatan komunikasi antara penyandang tunarungu dan masyarakat umum masih menjadi persoalan akibat kurangnya pemahaman terhadap bahasa isyarat. Penelitian ini bertujuan untuk mengembangkan aplikasi Android yang mampu mengenali huruf alfabet statis dalam Sistem Isyarat Bahasa Indonesia (SIBI) secara real-time guna mendukung komunikasi yang inklusif. Aplikasi ini dikembangkan menggunakan bahasa pemrograman Kotlin dan Jetpack Compose, serta menerapkan arsitektur perangkat lunak Clean Architecture untuk meningkatkan modularitas dan kemudahan pemeliharaan. Model Deep Learning diterapkan melalui integrasi TensorFlow Lite agar dapat dijalankan secara optimal pada perangkat mobile. Proses pengembangan mengikuti metode Rapid Application Development (RAD) dengan tahapan studi literatur, desain, implementasi, dan pengujian. Hasil pengujian menggunakan metode Black Box menunjukkan bahwa semua fitur utama berfungsi sesuai dengan kebutuhan. Selain itu, uji penerimaan pengguna (UAT) menghasilkan tingkat kepuasan sebesar 91,3%, yang menandakan bahwa aplikasi diterima dengan baik dari segi kegunaan dan antarmuka. Aplikasi ini diharapkan dapat menjadi solusi awal dalam memperkecil kesenjangan komunikasi antara penyandang tunarungu dan masyarakat luas."/>
+<meta name="DC.Format" scheme="IMT" content="application/pdf"/>
+<meta name="DC.Identifier" content="2081"/>
+<meta name="DC.Identifier.pageNumber" content="78-85"/>
+<meta name="DC.Identifier.DOI" content="10.54914/dbesti.v3i1.2081"/>
+<meta name="DC.Identifier.URI" content="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2081"/>
+<meta name="DC.Language" scheme="ISO639-1" content="id"/>
+<meta name="DC.Rights" content="Hak Cipta (c) 2026 Raka Agus Maulana, Ahmad Rio Adriansyah, Zaki Imaduddin"/>
+<meta name="DC.Rights" content="https://creativecommons.org/licenses/by-sa/4.0"/>
+<meta name="DC.Source" content="DBESTI: Journal of Digital Business and Technology Innovation"/>
+<meta name="DC.Source.ISSN" content="3032-775X"/>
+<meta name="DC.Source.Issue" content="1"/>
+<meta name="DC.Source.Volume" content="3"/>
+<meta name="DC.Source.URI" content="https://journal.nurulfikri.ac.id/index.php/DBESTI"/>
+<meta name="DC.Subject" xml:lang="id" content="Android"/>
+<meta name="DC.Subject" xml:lang="id" content="Deep Learning"/>
+<meta name="DC.Subject" xml:lang="id" content="Rapid Application Development"/>
+<meta name="DC.Subject" xml:lang="id" content="SIBI"/>
+<meta name="DC.Subject" xml:lang="id" content="TensorFlow Lite"/>
+<meta name="DC.Title" content="Integrasi Model Deep Learning pada Pengembangan Aplikasi Android Pendeteksi Bahasa Isyarat SIBI Menggunakan Jetpack Compose"/>
+<meta name="DC.Title.Alternative" xml:lang="en" content="Integration of Deep Learning Models in the Development of SIBI Sign Language Detection Android Applications Using Jetpack Compose"/>
+<meta name="DC.Type" content="Text.Serial.Journal"/>
+<meta name="DC.Type.articleType" content="Artikel"/>
+<link rel="alternate" type="application/atom+xml" href="https://journal.nurulfikri.ac.id/index.php/DBESTI/gateway/plugin/WebFeedGatewayPlugin/atom">
+<link rel="alternate" type="application/rdf+xml" href="https://journal.nurulfikri.ac.id/index.php/DBESTI/gateway/plugin/WebFeedGatewayPlugin/rss">
+<link rel="alternate" type="application/rss+xml" href="https://journal.nurulfikri.ac.id/index.php/DBESTI/gateway/plugin/WebFeedGatewayPlugin/rss2">
+	<link rel="stylesheet" href="https://journal.nurulfikri.ac.id/index.php/DBESTI/$$$call$$$/page/page/css?name=stylesheet" type="text/css" /><link rel="stylesheet" href="https://journal.nurulfikri.ac.id/index.php/DBESTI/$$$call$$$/page/page/css?name=font" type="text/css" /><link rel="stylesheet" href="https://journal.nurulfikri.ac.id/lib/pkp/styles/fontawesome/fontawesome.css?v=3.3.0.19" type="text/css" /><link rel="stylesheet" href="https://journal.nurulfikri.ac.id/plugins/generic/citations/css/citations.css?v=3.3.0.19" type="text/css" /><link rel="stylesheet" href="https://journal.nurulfikri.ac.id/public/journals/7/styleSheet.css?d=2024-02-06+17%3A43%3A10" type="text/css" /><link rel="stylesheet" href="https://journal.nurulfikri.ac.id/public/site/styleSheet.css?v=3.3.0.19" type="text/css" />
+</head>
+<body class="pkp_page_article pkp_op_view has_site_logo" dir="ltr">
+
+	<div class="pkp_structure_page">
+
+				<header class="pkp_structure_head" id="headerNavigationContainer" role="banner">
+						
+ <nav class="cmp_skip_to_content" aria-label="Buka tautan konten">
+	<a href="#pkp_content_main">Beralih ke bagian utama</a>
+	<a href="#siteNav">Beralih ke menu navigasi utama</a>
+		<a href="#pkp_content_footer">Beralih ke bagian footer website</a>
+</nav>
+
+			<div class="pkp_head_wrapper">
+
+				<div class="pkp_site_name_wrapper">
+					<button class="pkp_site_nav_toggle">
+						<span>Open Menu</span>
+					</button>
+										<div class="pkp_site_name">
+																<a href="						https://journal.nurulfikri.ac.id/index.php/DBESTI/index
+					" class="is_img">
+							<img src="https://journal.nurulfikri.ac.id/public/journals/7/pageHeaderLogoImage_id_ID.png" width="1064" height="171"  />
+						</a>
+										</div>
+				</div>
+
+				
+				<nav class="pkp_site_nav_menu" aria-label="Navigasi Website">
+					<a id="siteNav"></a>
+					<div class="pkp_navigation_primary_row">
+						<div class="pkp_navigation_primary_wrapper">
+																				<ul id="navigationPrimary" class="pkp_navigation_primary pkp_nav_list">
+								<li class="">
+				<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/current">
+					Terkini
+				</a>
+							</li>
+								<li class="">
+				<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/archive">
+					Arsip
+				</a>
+							</li>
+								<li class="">
+				<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/announcement">
+					Pengumuman
+				</a>
+							</li>
+								<li class="">
+				<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about">
+					Tentang Kami
+				</a>
+									<ul>
+																					<li class="">
+									<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about">
+										Tentang Jurnal Ini
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about/submissions">
+										Penyerahan Naskah
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about/editorialTeam">
+										Dewan Editor
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about/privacy">
+										Pernyataan Privasi
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about/contact">
+										Kontak
+									</a>
+								</li>
+																		</ul>
+							</li>
+			</ul>
+
+				
+
+																						<div class="pkp_navigation_search_wrapper">
+									<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/search" class="pkp_search pkp_search_desktop">
+										<span class="fa fa-search" aria-hidden="true"></span>
+										Cari
+									</a>
+								</div>
+													</div>
+					</div>
+					<div class="pkp_navigation_user_wrapper" id="navigationUserWrapper">
+							<ul id="navigationUser" class="pkp_navigation_user pkp_nav_list">
+								<li class="profile">
+				<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/user/register">
+					Daftar
+				</a>
+							</li>
+								<li class="profile">
+				<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/login">
+					Login
+				</a>
+							</li>
+										</ul>
+
+					</div>
+				</nav>
+			</div><!-- .pkp_head_wrapper -->
+		</header><!-- .pkp_structure_head -->
+
+						<div class="pkp_structure_content has_sidebar">
+			<div class="pkp_structure_main" role="main">
+				<a id="pkp_content_main"></a>
+
+<div class="page page_article">
+			<nav class="cmp_breadcrumbs" role="navigation" aria-label="Anda berada di sini:">
+	<ol>
+		<li>
+			<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/index">
+				Beranda
+			</a>
+			<span class="separator">/</span>
+		</li>
+		<li>
+			<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/archive">
+				Arsip
+			</a>
+			<span class="separator">/</span>
+		</li>
+					<li>
+				<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/60">
+					Vol 3 No 1 (2026): Mei, 2026
+				</a>
+				<span class="separator">/</span>
+			</li>
+				<li class="current" aria-current="page">
+			<span aria-current="page">
+									Artikel
+							</span>
+		</li>
+	</ol>
+</nav>
+	
+		  	 <article class="obj_article_details">
+
+		
+	<h1 class="page_title">
+		Integrasi Model Deep Learning pada Pengembangan Aplikasi Android Pendeteksi Bahasa Isyarat SIBI Menggunakan Jetpack Compose
+	</h1>
+
+	
+	<div class="row">
+		<div class="main_entry">
+
+							<section class="item authors">
+					<h2 class="pkp_screen_reader">Penulis</h2>
+					<ul class="authors">
+											<li>
+							<span class="name">
+								Raka Agus Maulana
+							</span>
+															<span class="affiliation">
+									Sekolah Tinggi Teknologi Terpadu Nurul Fikri
+																	</span>
+																				</li>
+											<li>
+							<span class="name">
+								Ahmad Rio Adriansyah
+							</span>
+															<span class="affiliation">
+									Sekolah Tinggi Teknologi Terpadu Nurul Fikri
+																	</span>
+																				</li>
+											<li>
+							<span class="name">
+								Zaki Imaduddin
+							</span>
+															<span class="affiliation">
+									Sekolah Tinggi Teknologi Terpadu Nurul Fikri
+																	</span>
+																				</li>
+										</ul>
+				</section>
+			
+																												<section class="item doi">
+						<h2 class="label">
+														DOI:
+						</h2>
+						<span class="value">
+							<a href="https://doi.org/10.54914/dbesti.v3i1.2081">
+								https://doi.org/10.54914/dbesti.v3i1.2081
+							</a>
+						</span>
+					</section>
+							
+									<section class="item keywords">
+				<h2 class="label">
+										Kata Kunci:
+				</h2>
+				<span class="value">
+											Android, 											Deep Learning, 											Rapid Application Development, 											SIBI, 											TensorFlow Lite									</span>
+			</section>
+			
+										<section class="item abstract">
+					<h2 class="label">Abstrak</h2>
+					<p>Hambatan komunikasi antara penyandang tunarungu dan masyarakat umum masih menjadi persoalan akibat kurangnya pemahaman terhadap bahasa isyarat. Penelitian ini bertujuan untuk mengembangkan aplikasi Android yang mampu mengenali huruf alfabet statis dalam Sistem Isyarat Bahasa Indonesia (SIBI) secara <em>real-time</em> guna mendukung komunikasi yang inklusif. Aplikasi ini dikembangkan menggunakan bahasa pemrograman <em>Kotlin</em> dan <em>Jetpack Compose</em>, serta menerapkan arsitektur perangkat lunak <em>Clean Architecture</em> untuk meningkatkan modularitas dan kemudahan pemeliharaan. Model <em>Deep Learning</em> diterapkan melalui integrasi TensorFlow Lite agar dapat dijalankan secara optimal pada perangkat <em>mobile</em>. Proses pengembangan mengikuti metode <em>Rapid Application Development</em> (RAD) dengan tahapan studi literatur, desain, implementasi, dan pengujian. Hasil pengujian menggunakan metode <em>Black Box</em> menunjukkan bahwa semua fitur utama berfungsi sesuai dengan kebutuhan. Selain itu, uji penerimaan pengguna (UAT) menghasilkan tingkat kepuasan sebesar 91,3%, yang menandakan bahwa aplikasi diterima dengan baik dari segi kegunaan dan antarmuka. Aplikasi ini diharapkan dapat menjadi solusi awal dalam memperkecil kesenjangan komunikasi antara penyandang tunarungu dan masyarakat luas.</p>
+				</section>
+			
+			<div class="item downloads_chart">
+	<h3 class="label">
+		Unduhan
+	</h3>
+	<div class="value">
+		<canvas class="usageStatsGraph" data-object-type="Submission" data-object-id="2081"></canvas>
+		<div class="usageStatsUnavailable" data-object-type="Submission" data-object-id="2081">
+			Data unduhan belum tersedia.
+		</div>
+	</div>
+</div>
+
+
+																																	
+										<section class="item references">
+					<h2 class="label">
+						Referensi
+					</h2>
+					<div class="value">
+																					<p>R. Fatmawati, R. Asmara, Y. R. Prayogi, and R. Y. Hakkun, “Aplikasi Pembelajaran Sistem Isyarat Bahasa Indonesia (SIBI) Berbasis Voice Menggunakan OpenSIBI,” Technomedia Journal, vol. 7, no. 1, pp. 22–39, 2022, doi: 10.33050/tmj.v7i1.1690. </p>
+															<p>S. Apendi, C. Setianingsih, and M. W. Paryasto, “Deteksi Bahasa Isyarat Sistem Isyarat Bahasa Indonesia Menggunakan Metode Single Shot Multibox Detector,” eProceedings of Engineering, vol. 10, no. 1, pp. 249–255, 2023, [Online]. Available: <a href="https://openlibrarypublications.telkomuniversity.ac.id/index.php/engineering/article/view/19322">https://openlibrarypublications.telkomuniversity.ac.id/index.php/engineering/article/view/19322</a> </p>
+															<p>World Health Organization (WHO), World Report On Disability. Jenewa, Swiss: WHO, 2021. </p>
+															<p>S. F. T. Andalas, “209,3 Juta Orang di Indonesia Menggunakan Smartphone pada Tahun 2023,” Good stats. Accessed: Sep. 24, 2024. [Online]. Available: <a href="https://data.goodstats.id/statistic/2093-juta-orang-di-indonesia-menggunakan-smartphone-pada-tahun-2023-cbha0">https://data.goodstats.id/statistic/2093-juta-orang-di-indonesia-menggunakan-smartphone-pada-tahun-2023-cbha0</a> </p>
+															<p>F. P. Al Fajri, “Perancangan Model Deep Learning untuk Penerjemah Bahasa Isyarat SIBI menggunakan Transfer Learning MobileNetV2,” Tugas Akhir Sekolah Tinggi Teknologi Terpadu Nurul Fikri, Depok, 2024. </p>
+															<p>D. I. Setyawan, H. Tolle, and A. P. Kharisma, “Perancangan Aplikasi Communication Board Berbasis Android Tablet Sebagai Media Pembelajaran dan Komunikasi Bagi Anak Tuna Rungu,” Jurnal Pengembangan Teknologi Informasi dan Ilmu Komputer, vol. 2, no. 8, pp. 2933–2943, 2018, [Online]. Available: <a href="http://j-ptiik.ub.ac.id">http://j-ptiik.ub.ac.id</a> </p>
+															<p>N. Wiranda and A. E. Putra, “Model Identifikasi Kata Ucapan Tuna Wicara,” Indonesian Journal of Electronicsand Instrumentation Systems(IJEIS), vol. 9, no. 2, pp. 131–140, 2019. </p>
+															<p>W. D. Prastowo, D. Danianti, and A. Pramuntadi, “Analisis Risiko Pada Pengembangan Perangkat Lunak Menggunakan Metode Agile Dan Rad (Rapid Application Development),” Citizen : Jurnal Ilmiah Multidisiplin Indonesia, vol. 3, no. 3, pp. 169–174, 2023, doi: 10.53866/jimi.v3i3.388. </p>
+															<p>D. Murdiani and M. Sobirin, “Perbandingan Metodologi Waterfall Dan RAD Dalam Pengembangan Sistem Informasi,” JINTEKS (Jurnal Informatika Teknologi dan Sains), vol. 4, no. 4, pp. 302–306, 2022, [Online]. Available: <a href="http://www.jurnal.uts.ac.id/index.php/JINTEKS/article/view/2008">http://www.jurnal.uts.ac.id/index.php/JINTEKS/article/view/2008</a> </p>
+															<p>E. Susanti, “Implementasi RESTful API dalam Pembuatan Master Data Planogram Menggunakan Framework Flask (Studi Kasus: PT Sumber Alfaria Trijaya, Tbk),” Techno.Com, vol. 19, no. 3, pp. 295–307, 2020, doi: 10.33633/tc.v19i3.3468. </p>
+															<p>Jetbrains, “Get started with Kotlin,” Kotlin Language. Accessed: Sep. 29, 2024. [Online]. Available: <a href="https://kotlinlang.org/docs/getting-started.html#backend">https://kotlinlang.org/docs/getting-started.html#backend</a> </p>
+															<p>F. Dzulqarnain and T. Tukino, “Rancang Bangun Aplikasi Belajar Arab Untuk Android Menggunakan Jetpack Compose Dan Kotlin,” Computer Based Information System Journal, vol. 11, no. 1, pp. 25–35, 2023, doi: 10.33884/cbis.v11i1.6666. </p>
+															<p>E. Milla and M. Radonjić, “Analysis of Developing Native Android Applications Using Xml and Jetpack Compose,” Balkan Journal of Applied Mathematics and Informatics, vol. 6, no. 2, pp. 167–178, 2023, [Online]. Available: <a href="https://js.ugd.edu.mk/index.php/bjami/article/view/6019">https://js.ugd.edu.mk/index.php/bjami/article/view/6019</a> </p>
+															<p>M. Peleš, S. Jevremović, A. Simović, and A. Hadžić, “Possibilities for developing and implementing a mobile application for recognizing the shape of the environment, text, and reading QR codes using the Android CameraX framework and the Machine Learning Kit,” Procedia of Economics and Business Administration, vol. 12, no. 2, pp. 119–127, 2021, [Online]. Available: www.icesba.eu<a href="https://doi.org/10.26458/v6.i1.x">https://doi.org/10.26458/v6.i1.x</a> </p>
+															<p>S. S. Sindarto, D. E. Ratnawati, and I. Arwani, “Klasifikasi Citra Sistem Isyarat Bahasa Indonesia (SIBI) dengan Metode Convolutional Neural Network pada Perangkat Lunak berbasis Android,” Jurnal Pengembangan Teknologi Informasi dan Ilmu Komputerurnal Pengembangan Teknologi Informasi dan Ilmu Komputer, vol. 6, no. 5, pp. 2129–2138, 2022, [Online]. Available: <a href="http://j-ptiik.ub.ac.id">http://j-ptiik.ub.ac.id</a> </p>
+																		</div>
+				</section>
+			
+		</div><!-- .main_entry -->
+
+		<div class="entry_details">
+
+										<div class="item cover_image">
+					<div class="sub_item">
+													<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/60">
+								<img src="https://journal.nurulfikri.ac.id/public/journals/7/cover_issue_60_id_ID.png" alt="">
+							</a>
+											</div>
+				</div>
+			
+										<div class="item galleys">
+					<h2 class="pkp_screen_reader">
+						Unduhan
+					</h2>
+					<ul class="value galleys_links">
+													<li>
+								
+	
+							
+
+<a class="obj_galley_link pdf" href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2081/486">
+
+		
+	PDF
+
+	</a>
+							</li>
+											</ul>
+				</div>
+						
+						<div class="item published">
+				<section class="sub_item">
+					<h2 class="label">
+						Diterbitkan
+					</h2>
+					<div class="value">
+																			<span>26-05-2026</span>
+																	</div>
+				</section>
+							</div>
+			
+										<div class="item citation">
+					<section class="sub_item citation_display">
+						<h2 class="label">
+							Cara Mengutip
+						</h2>
+						<div class="value">
+							<div id="citationOutput" role="region" aria-live="polite">
+								<div class="csl-bib-body">
+  <div class="csl-entry">Maulana, R. A., Adriansyah, A. R., &#38; Imaduddin, Z. (2026). Integrasi Model Deep Learning pada Pengembangan Aplikasi Android Pendeteksi Bahasa Isyarat SIBI Menggunakan Jetpack Compose. <i>DBESTI: Journal of Digital Business and Technology Innovation</i>, <i>3</i>(1), 78–85. https://doi.org/10.54914/dbesti.v3i1.2081</div>
+</div>
+							</div>
+							<div class="citation_formats">
+								<button class="cmp_button citation_formats_button" aria-controls="cslCitationFormats" aria-expanded="false" data-csl-dropdown="true">
+									Format Sitasi Lainnya
+								</button>
+								<div id="cslCitationFormats" class="citation_formats_list" aria-hidden="true">
+									<ul class="citation_formats_styles">
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/acm-sig-proceedings?submissionId=2081&amp;publicationId=2046"
+													data-load-citation
+													data-json-href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/acm-sig-proceedings?submissionId=2081&amp;publicationId=2046&amp;return=json"
+												>
+													ACM
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/acs-nano?submissionId=2081&amp;publicationId=2046"
+													data-load-citation
+													data-json-href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/acs-nano?submissionId=2081&amp;publicationId=2046&amp;return=json"
+												>
+													ACS
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/apa?submissionId=2081&amp;publicationId=2046"
+													data-load-citation
+													data-json-href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/apa?submissionId=2081&amp;publicationId=2046&amp;return=json"
+												>
+													APA
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/associacao-brasileira-de-normas-tecnicas?submissionId=2081&amp;publicationId=2046"
+													data-load-citation
+													data-json-href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/associacao-brasileira-de-normas-tecnicas?submissionId=2081&amp;publicationId=2046&amp;return=json"
+												>
+													ABNT
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/chicago-author-date?submissionId=2081&amp;publicationId=2046"
+													data-load-citation
+													data-json-href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/chicago-author-date?submissionId=2081&amp;publicationId=2046&amp;return=json"
+												>
+													Chicago
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/harvard-cite-them-right?submissionId=2081&amp;publicationId=2046"
+													data-load-citation
+													data-json-href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/harvard-cite-them-right?submissionId=2081&amp;publicationId=2046&amp;return=json"
+												>
+													Harvard
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/ieee?submissionId=2081&amp;publicationId=2046"
+													data-load-citation
+													data-json-href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/ieee?submissionId=2081&amp;publicationId=2046&amp;return=json"
+												>
+													IEEE40r
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/modern-language-association?submissionId=2081&amp;publicationId=2046"
+													data-load-citation
+													data-json-href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/modern-language-association?submissionId=2081&amp;publicationId=2046&amp;return=json"
+												>
+													MLA
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/turabian-fullnote-bibliography?submissionId=2081&amp;publicationId=2046"
+													data-load-citation
+													data-json-href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/turabian-fullnote-bibliography?submissionId=2081&amp;publicationId=2046&amp;return=json"
+												>
+													Turabian
+												</a>
+											</li>
+																					<li>
+												<a
+													aria-controls="citationOutput"
+													href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/vancouver?submissionId=2081&amp;publicationId=2046"
+													data-load-citation
+													data-json-href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/get/vancouver?submissionId=2081&amp;publicationId=2046&amp;return=json"
+												>
+													Vancouver
+												</a>
+											</li>
+																			</ul>
+																			<div class="label">
+											Unduh Sitasi
+										</div>
+										<ul class="citation_formats_styles">
+																							<li>
+													<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/download/ris?submissionId=2081&amp;publicationId=2046">
+														<span class="fa fa-download"></span>
+														Endnote/Zotero/Mendeley (RIS)
+													</a>
+												</li>
+																							<li>
+													<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/citationstylelanguage/download/bibtex?submissionId=2081&amp;publicationId=2046">
+														<span class="fa fa-download"></span>
+														BibTeX
+													</a>
+												</li>
+																					</ul>
+																	</div>
+							</div>
+						</div>
+					</section>
+				</div>
+			
+										<div class="item issue">
+
+											<section class="sub_item">
+							<h2 class="label">
+								Terbitan
+							</h2>
+							<div class="value">
+								<a class="title" href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/60">
+									Vol 3 No 1 (2026): Mei, 2026
+								</a>
+							</div>
+						</section>
+					
+											<section class="sub_item">
+							<h2 class="label">
+								Bagian
+							</h2>
+							<div class="value">
+								Artikel
+							</div>
+						</section>
+					
+									</div>
+			
+															
+										<div class="item copyright">
+					<h2 class="label">
+						Lisensi
+					</h2>
+																										<p>Hak Cipta (c) 2026 Raka Agus Maulana, Ahmad Rio Adriansyah, Zaki Imaduddin</p>
+														<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" src="//i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><p>Artikel ini berlisensi<a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
+																
+				</div>
+			
+			<div class="item citations-container" data-image-path="https://journal.nurulfikri.ac.id/plugins/generic/citations/images/" data-citations-url="https://journal.nurulfikri.ac.id/index.php/DBESTI/citations/get?citationsId=10.54914%2Fdbesti.v3i1.2081&amp;citationsShowList=1&amp;citationsProvider=all"
+     data-citations-provider="all" data-citations-total="1" data-citations-list="1"
+     data-show-google="1" data-show-pmc="0">
+	<div id="citations-loader"></div>
+	<div class="citations-count">
+		<div class="citations-count-crossref">
+			<img class="img-fluid" src="https://journal.nurulfikri.ac.id/plugins/generic/citations/images/crossref.png" alt="Crossref"/>
+			<div class="badge_total"></div>
+		</div>
+		<div class="citations-count-scopus">
+			<img src="https://journal.nurulfikri.ac.id/plugins/generic/citations/images/scopus.png" alt="Scopus"/>
+			<br/>
+			<span class="badge_total"></span>
+		</div>
+		<div class="citations-count-google">
+			<a href="https://scholar.google.com/scholar?q=10.54914/dbesti.v3i1.2081" target="_blank" rel="noreferrer">
+				<img src="https://journal.nurulfikri.ac.id/plugins/generic/citations/images/scholar.png" alt="Google Scholar"/>
+			</a>
+		</div>
+		<div class="citations-count-pmc">
+			<a href="http://europepmc.org/search?scope=fulltext&query=(REF:10.54914/dbesti.v3i1.2081)" target="_blank" rel="noreferrer">
+				<img src="https://journal.nurulfikri.ac.id/plugins/generic/citations/images/pmc.png" alt="Europe PMC"/>
+				<br/>
+				<span class="badge_total"></span>
+			</a>
+		</div>
+	</div>
+	<div class="citations-list"></div>
+    </div>
+
+
+		</div><!-- .entry_details -->
+	</div><!-- .row -->
+
+</article>
+
+	<div id="articlesBySimilarityList">
+				<h3>
+			<a name="articlesBySimilarity">Artikel Serupa</a>
+		</h3>
+		<ul>
+
+											
+				<li>
+											Fikri Pratama Al Fajri,
+											Ahmad Rio Adriansyah,
+											Sirojul Munir,
+										<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1476">
+						Model Deep Learning untuk Penerjemah Bahasa Isyarat SIBI dengan Arsitektur Transfer Learning
+					</a>
+					,
+					<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/54">
+						DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 1 (2025): Mei, 2025
+					</a>
+									</li>
+											
+				<li>
+											Fakhirul Akmal,
+											Nasrul,
+										<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2006">
+						Penerapan ReactJs dalam Pengembangan Front-End Aplikasi Komunitas Zeromaterial
+					</a>
+					,
+					<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/57">
+						DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 2 (2025): November, 2025
+					</a>
+									</li>
+											
+				<li>
+											Anisa Yuniarti,
+											Sirojul Munir,
+											Misna Asqia,
+										<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1344">
+						Aplikasi Konsultasi Psikologi Berbasis Flutter dan ChatGPT Menggunakan Metode Extreme Programming
+					</a>
+					,
+					<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/54">
+						DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 1 (2025): Mei, 2025
+					</a>
+									</li>
+											
+				<li>
+											Nabilah Khariyyah,
+											Krisna Panji,
+											Shelly Pramudiawardani,
+										<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1984">
+						Implementasi UI/UX Aplikasi Mobile Teepties untuk Monitoring Perkembangan Siswa SDIT Bina Auladi Menggunakan Metode Design Thinking
+					</a>
+					,
+					<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/57">
+						DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 2 (2025): November, 2025
+					</a>
+									</li>
+											
+				<li>
+											Rizky Febriana Akbar,
+											Henry Saptono,
+											April Rustianto,
+										<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1374">
+						Perancangan Prototype Aplikasi Pemesanan Makanan Sehat Berbasis Mobile Menggunakan Metode Design Sprint
+					</a>
+					,
+					<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/54">
+						DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 1 (2025): Mei, 2025
+					</a>
+									</li>
+											
+				<li>
+											Efrizal,
+											Hilmy Abidzar Tawakal,
+										<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1095">
+						Pengembangan Aplikasi General Affairs Berbasis Web Menggunakan Framework CodeIgniter Kasus PT. Rajawali Nusantara Indonesia
+					</a>
+					,
+					<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/47">
+						DBESTI: Journal of Digital Business and Technology Innovation: Vol 1 No 1 (2024): Mei, 2024
+					</a>
+									</li>
+											
+				<li>
+											Ira Kusuma Wardani,
+											Reza Maulana,
+											Bambang Harie Wiyono,
+										<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2154">
+						Studi Perbandingan Pembelajaran Online dan Offline: Implementasi Decision Tree di STT Terpadu Nurul Fikri
+					</a>
+					,
+					<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/60">
+						DBESTI: Journal of Digital Business and Technology Innovation: Vol 3 No 1 (2026): Mei, 2026
+					</a>
+									</li>
+											
+				<li>
+											Rita Awaliyah,
+											Rusmanto,
+											Edi Wibowo,
+										<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1634">
+						Evaluasi Penggunaan Aplikasi Ninja Driver di Ninja Xpress Jasinga Bogor Menggunakan PIECES Framework
+					</a>
+					,
+					<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/54">
+						DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 1 (2025): Mei, 2025
+					</a>
+									</li>
+											
+				<li>
+											Nelan,
+											Nasrul,
+											Reza Maulana,
+										<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2076">
+						Implementasi ReactJS dan Firebase untuk Pengembangan Aplikasi Perencanaan Keuangan Pegawai di Nurul Fikri Academy
+					</a>
+					,
+					<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/60">
+						DBESTI: Journal of Digital Business and Technology Innovation: Vol 3 No 1 (2026): Mei, 2026
+					</a>
+									</li>
+											
+				<li>
+											Muhammad Fikri,
+											Ishom Muhammad Drehem,
+											Ahmad Rio Adriansyah,
+										<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1631">
+						Penerapan Micro Frontend dengan Next.js dan Module Federation pada Aplikasi Cash Management
+					</a>
+					,
+					<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/54">
+						DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 1 (2025): Mei, 2025
+					</a>
+									</li>
+					</ul>
+		<p id="articlesBySimilarityPages">
+			<strong>1</strong>&nbsp;<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2081?articlesBySimilarityPage=2#articlesBySimilarity">2</a>&nbsp;<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2081?articlesBySimilarityPage=3#articlesBySimilarity">3</a>&nbsp;<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2081?articlesBySimilarityPage=4#articlesBySimilarity">4</a>&nbsp;<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2081?articlesBySimilarityPage=5#articlesBySimilarity">5</a>&nbsp;<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2081?articlesBySimilarityPage=6#articlesBySimilarity">6</a>&nbsp;<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2081?articlesBySimilarityPage=2#articlesBySimilarity">&gt;</a>&nbsp;<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2081?articlesBySimilarityPage=6#articlesBySimilarity">&gt;&gt;</a>&nbsp;
+		</p>
+		<p id="articlesBySimilaritySearch">
+						Anda juga bisa <a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/search/search?query=android%20deep%20learning%20rapid%20application%20development%20sibi%20tensorflow%20lite">Mulai pencarian similarity tingkat lanjut</a> untuk artikel ini.
+		</p>
+	</div>
+<div id="articlesBySameAuthorList">
+						<h3>Artikel paling banyak dibaca berdasarkan penulis yang sama</h3>
+
+			<ul>
+																													<li>
+													Fikri Pratama Al Fajri,
+													Ahmad Rio Adriansyah,
+													Sirojul Munir,
+												<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1476">
+							Model Deep Learning untuk Penerjemah Bahasa Isyarat SIBI dengan Arsitektur Transfer Learning
+						</a>,
+						<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/54">
+							DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 1 (2025): Mei, 2025
+						</a>
+					</li>
+																													<li>
+													Asep Sahrudin,
+													Ahmad Rio Adriansyah,
+												<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1158">
+							Reengineering REST API Monolit ke Microservice Menggunakan Framework Laravel
+						</a>,
+						<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/54">
+							DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 1 (2025): Mei, 2025
+						</a>
+					</li>
+																													<li>
+													Muhammad Fikri,
+													Ishom Muhammad Drehem,
+													Ahmad Rio Adriansyah,
+												<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1631">
+							Penerapan Micro Frontend dengan Next.js dan Module Federation pada Aplikasi Cash Management
+						</a>,
+						<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/54">
+							DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 1 (2025): Mei, 2025
+						</a>
+					</li>
+																													<li>
+													Zakiah Nabila,
+													Ahmad Rio Adriansyah,
+												<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/2059">
+							Implementasi Sistem Pengolahan Data Terintegrasi dengan Algoritma K-Means pada KNIME
+						</a>,
+						<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/57">
+							DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 2 (2025): November, 2025
+						</a>
+					</li>
+																													<li>
+													Said Al Khairi,
+													Ahmad Rio Adriansyah,
+													Lukman Rosyidi,
+												<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/article/view/1477">
+							Perbandingan XGB Regressor dengan Algoritma Lain untuk Prediksi Tarif Tol
+						</a>,
+						<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/issue/view/54">
+							DBESTI: Journal of Digital Business and Technology Innovation: Vol 2 No 1 (2025): Mei, 2025
+						</a>
+					</li>
+							</ul>
+			<div id="articlesBySameAuthorPages">
+				
+			</div>
+			</div>
+
+
+</div><!-- .page -->
+
+	</div><!-- pkp_structure_main -->
+
+									<div class="pkp_structure_sidebar left" role="complementary" aria-label="Sidebar">
+				<div class="pkp_block block_custom" id="customblock-template">
+	<h2 class="title pkp_screen_reader">template</h2>
+	<div class="content">
+		<p><span class="blockTitle">Template</span></p>
+<p><a href="https://docs.google.com/document/d/1EHXkTw5azry4pUWxexyJOdvvrUhox8r-/edit?usp=drive_link" target="_blank" rel="noopener"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://journal.nurulfikri.ac.id/public/site/images/admin/cover-dbesti-2.png" alt="" width="189" height="73"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-submit">
+	<h2 class="title pkp_screen_reader">submit</h2>
+	<div class="content">
+		<table style="background-color: #fffff;" cellspacing="0" cellpadding="0" align="center">
+<tbody>
+<tr>
+<td style="height: 20px; padding-top: 4px; vertical-align: middle; border-bottom: 1px solid #ffff; background-color: #124559; text-align: center; width: 486px; border-radius: 20px;">
+<h2><a style="font-size: medium; color: #ffffff;" href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about/submissions">Serahkan Naskah</a></h2>
+</td>
+</tr>
+</tbody>
+</table>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-index">
+	<h2 class="title pkp_screen_reader">index</h2>
+	<div class="content">
+		<p><strong>Terindeks oleh :</strong></p>
+<p><a title="Google Scholar" href="https://scholar.google.com/citations?hl=en&amp;user=pw9x-uwAAAAJ" target="_blank" rel="noopener"><img src="https://journal.nurulfikri.ac.id/public/site/images/admin/google.png" alt="Google Scholar" width="222" height="77"></a><a title="Garuda" href="https://garuda.kemdiktisaintek.go.id/journal/view/38480" target="_blank" rel="noopener"><img src="https://journal.nurulfikri.ac.id/public/site/images/admin/garuda.png" alt="" width="222" height="77"></a><a title="Index Copernicus" href="https://journals.indexcopernicus.com/search/details?id=122631" target="_blank" rel="noopener">&nbsp;</a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-menu">
+	<h2 class="title pkp_screen_reader">menu</h2>
+	<div class="content">
+		<ul class="cus-sidemenu">
+<li class="cus-menu-item show open">
+<div class="cus-dropdown-title">Menu</div>
+<ul class="cus-menu" style="display: block;">
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI"><em class="fa fa-home">&nbsp;</em>Home</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about/editorialTeam"><em class="fa fa-user-circle-o">&nbsp;</em>Editor</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/reviewers"><em class="fa fa-users">&nbsp;</em>Reviewer</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/author-guideline"><em class="fa fa-pencil-square-o">&nbsp;</em>Panduan Penulis</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/plagiarism-policy"><em class="fa fa-times-circle">&nbsp;</em>Kebijakan Plagiarisme</a></li>
+<li class="show"><a href="#"><em class="fa fa-pencil-square-o">&nbsp;</em>Tutorial Unggah</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/fees"><em class="fa fa-credit-card">&nbsp;</em>Biaya Penulis</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about/contact"><em class="fa fa-address-book-o">&nbsp;</em>Kontak Kami</a></li>
+</ul>
+</li>
+</ul>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-kebijakan">
+	<h2 class="title pkp_screen_reader">kebijakan</h2>
+	<div class="content">
+		<ul class="cus-sidemenu">
+<li class="cus-menu-item show open">
+<div class="cus-dropdown-title">Kebijakan Editorial</div>
+<ul class="cus-menu" style="display: block;">
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/focus-and-scope"><em class="fa fa-circle-o">&nbsp;</em>Fokus dan Ruang Lingkup</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/review-process"><em class="fa fa-check-square-o">&nbsp;</em>Proses Peer Review</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/license"><em class="fa fa-cc">&nbsp;</em>Lisensi</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/copyright"><em class="fa fa-copyright">&nbsp;</em>Hak Cipta</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/publication-ethics"><em class="fa fa-gavel">&nbsp;</em>Etika Publikasi</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about/submissions#privacyStatement"><em class="fa fa-lock">&nbsp;</em>Kebijakan Privasi</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/open-access"><em class="fa fa-unlock">&nbsp;</em>Kebijakan Akses Terbuka</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/gateway/lockss"><em class="fa fa-archive">&nbsp;</em>Kebijakan Arsip</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/history"><em class="fa fa-calendar-check-o">&nbsp;</em>Sejarah Jurnal</a></li>
+<li class="show"><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/withdrawal"><em class="fa fa fa-repeat">&nbsp;</em>Penarikan Artikel</a></li>
+</ul>
+</li>
+</ul>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-statscounter">
+	<h2 class="title pkp_screen_reader">statscounter</h2>
+	<div class="content">
+		<p><span class="blockTitle">Statistik</span></p>
+<center>
+<p><a href="https://info.flagcounter.com/Dh0K"><img src="https://s11.flagcounter.com/count2/Dh0K/bg_FFFFFF/txt_000000/border_CCCCCC/columns_2/maxflags_10/viewers_0/labels_0/pageviews_0/flags_0/percent_0/" alt="Flag Counter" border="0"></a></p>
+<p><a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank" rel="noopener"><img src="https://c.statcounter.com/12964477/0/e6712854/0/" alt="Web Analytics Made Easy - Statcounter"></a></p>
+<p><a href="https://statcounter.com/p12964477/?guest=1">Statistik</a></p>
+</center>
+	</div>
+</div>
+
+			</div><!-- pkp_sidebar.left -->
+			</div><!-- pkp_structure_content -->
+
+<div class="pkp_structure_footer_wrapper" role="contentinfo">
+	<a id="pkp_content_footer"></a>
+
+	<div class="pkp_structure_footer">
+
+					<div class="pkp_footer_content">
+				<p><a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/" target="_blank" rel="noopener"><strong>DBESTI: Journal of Digital Business and Technology Innovation</strong></a><br /><strong>Diterbitkan Oleh</strong> LPPM STT Terpadu Nurul Fikri<br /><strong>Alamat</strong> Jl. Situ Indah 116, Tugu, Cimanggis, Depok, Jawa Barat 16451 Indonesia<br /><strong>Website</strong> <a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/" target="_blank" rel="noopener">https://journal.nurulfikri.ac.id/index.php/DBESTI/</a><br /><strong>Email</strong> <a href="https://journal.nurulfikri.ac.id/index.php/DBESTY/management/settings/website/mailto:lppm@nurulfikri.ac.id">lppm@nurulfikri.ac.id</a> | <a href="https://journal.nurulfikri.ac.id/index.php/DBESTY/management/settings/website/mailto:journal@nurulfikri.ac.id" target="_blank" rel="noopener">journal@nurulfikri.ac.id</a></p>
+<p><img src="https://journal.nurulfikri.ac.id/public/site/images/admin/header-thumbnail-dbesti-2.png" alt="" width="109" height="49" /></p>
+<p>This work is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" rel="license">Creative Commons Attribution-ShareAlike 4.0 International License.</a></p>
+<p><a title="Web Analytics Made Easy - Statcounter" href="https://statcounter.com/" target="_blank" rel="noopener"><img src="https://c.statcounter.com/12964477/0/e6712854/0/" alt="Web Analytics Made Easy - Statcounter" /></a></p>
+<p><a href="https://statcounter.com/p12964477/?guest=1">Statistik</a></p>
+			</div>
+		
+		<div class="pkp_brand_footer" role="complementary">
+			<a href="https://journal.nurulfikri.ac.id/index.php/DBESTI/about/aboutThisPublishingSystem">
+				<img alt="Informasi lengkap tentang sistem publikasi, Platform dan Alur Kerja oleh OJS/PKP." src="https://journal.nurulfikri.ac.id/templates/images/ojs_brand.png">
+			</a>
+		</div>
+	</div>
+</div><!-- pkp_structure_footer_wrapper -->
+
+</div><!-- pkp_structure_page -->
+
+<script src="https://journal.nurulfikri.ac.id/lib/pkp/lib/vendor/components/jquery/jquery.min.js?v=3.3.0.19" type="text/javascript"></script><script src="https://journal.nurulfikri.ac.id/lib/pkp/lib/vendor/components/jqueryui/jquery-ui.min.js?v=3.3.0.19" type="text/javascript"></script><script src="https://journal.nurulfikri.ac.id/plugins/themes/default/js/lib/popper/popper.js?v=3.3.0.19" type="text/javascript"></script><script src="https://journal.nurulfikri.ac.id/plugins/themes/default/js/lib/bootstrap/util.js?v=3.3.0.19" type="text/javascript"></script><script src="https://journal.nurulfikri.ac.id/plugins/themes/default/js/lib/bootstrap/dropdown.js?v=3.3.0.19" type="text/javascript"></script><script src="https://journal.nurulfikri.ac.id/plugins/themes/default/js/main.js?v=3.3.0.19" type="text/javascript"></script><script src="https://journal.nurulfikri.ac.id/plugins/generic/citationStyleLanguage/js/articleCitation.js?v=3.3.0.19" type="text/javascript"></script><script src="https://journal.nurulfikri.ac.id/plugins/generic/citations/js/citations.js?v=3.3.0.19" type="text/javascript"></script><script type="text/javascript">var pkpUsageStats = pkpUsageStats || {};pkpUsageStats.data = pkpUsageStats.data || {};pkpUsageStats.data.Submission = pkpUsageStats.data.Submission || {};pkpUsageStats.data.Submission[2081] = {"data":{"2026":{"1":0,"2":0,"3":0,"4":0,"5":14,"6":42,"7":19,"8":21,"9":19,"10":15,"11":0,"12":0}},"label":"Semua Unduhan","color":"79,181,217","total":130};</script><script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.0.1/Chart.js?v=3.3.0.19" type="text/javascript"></script><script type="text/javascript">var pkpUsageStats = pkpUsageStats || {};pkpUsageStats.locale = pkpUsageStats.locale || {};pkpUsageStats.locale.months = ["Jan","Feb","Mar","Apr","Mei","Jun","Jul","Agus","Sep","Okt","Nov","Des"];pkpUsageStats.config = pkpUsageStats.config || {};pkpUsageStats.config.chartType = "bar";</script><script src="https://journal.nurulfikri.ac.id/plugins/generic/usageStats/js/UsageStatsFrontendHandler.js?v=3.3.0.19" type="text/javascript"></script>
+
+
+</body>
+</html>

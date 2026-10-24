@@ -64,7 +64,7 @@ Gambar 3.1 Tahapan penelitian dan gerbang keputusan
 
 ### 3.2.1 Tahap T0: Replikasi Platform dan Uji Delta-CSI (M1–M2)
 
-Dua node ESP32 disiapkan dengan *firmware* RuView [@ruview] (Subbab 2.4), lalu *pipeline* akuisisi tersinkron `scripts/collect-ground-truth.py` (ADR-079) diuji tanpa partisipan untuk memastikan CSI dan video dapat diselaraskan. Arti kode ADR adalah [PERLU DATA: kepanjangan dan arti ADR pada repositori RuView]. Tahap ini ditempatkan paling awal karena *pipeline* yang belum stabil tidak layak dijadikan dasar perekaman. Uji Delta-CSI (Subbab 3.8.1) dan pengukuran laju pencuplikan (Subbab 3.7.1) menghasilkan laporan karakterisasi sinyal sebagai bahan G0.
+Dua node ESP32 disiapkan dengan *firmware* RuView [@ruview] (Subbab 2.4), lalu *pipeline* akuisisi tersinkron `scripts/collect-ground-truth.py` (ADR-079) diuji tanpa partisipan untuk memastikan CSI dan video dapat diselaraskan. ADR adalah singkatan dari *architecture decision record* (catatan keputusan arsitektur), yaitu format dokumentasi keputusan desain yang dipakai repositori RuView [@ruview]. Tahap ini ditempatkan paling awal karena *pipeline* yang belum stabil tidak layak dijadikan dasar perekaman. Uji Delta-CSI (Subbab 3.8.1) dan pengukuran laju pencuplikan (Subbab 3.7.1) menghasilkan laporan karakterisasi sinyal sebagai bahan G0.
 
 ### 3.2.2 Tahap T1: Kurasi Isyarat dan Protokol (M2–M4)
 
@@ -98,7 +98,7 @@ Tabel 3.1 Perangkat keras penelitian
 
 | No. | Nama | Spesifikasi | Jumlah | Keterangan |
 |---|---|---|---|---|
-| 1 | ESP32 | [PERLU DATA: varian ESP32 yang dipakai, misalnya ESP32 DevKit atau ESP32-S3] | 2 unit (+1 cadangan) | Node TX dan node RX penangkap CSI |
+| 1 | ESP32-S3 | Papan pengembangan ESP32-S3, varian yang direkomendasikan RuView untuk node CSI [@ruview] | 2 unit (+1 cadangan) | Node TX dan node RX penangkap CSI |
 | 2 | Aksesori node | Kabel, adaptor daya, dudukan setinggi dada pengisyarat | 1 set | Pemasangan dan catu daya node |
 | 3 | Laptop | Milik pribadi; [PERLU DATA: spesifikasi laptop] | 1 unit | *Server* RuView, mesin pelatihan, dan tampilan umpan balik |
 | 4 | *Webcam* | Bawaan laptop | 1 unit | Hanya menyala saat sesi pelabelan dan pada satu kondisi uji persepsi |
@@ -213,7 +213,7 @@ Perekaman dimulai setelah persetujuan institusi mitra dan persetujuan tertulis s
 
 ### 3.7.1 Laju Pencuplikan
 
-Laju pencuplikan CSI node ESP32 pada konfigurasi RuView adalah [PERLU DATA: laju pencuplikan CSI node ESP32 pada konfigurasi RuView]. Pita Doppler 1–60 Hz hanya terwakili bila laju pencuplikan sedikitnya 120 Hz (Subbab 2.3). Bila laju yang diukur pada T0 lebih rendah, pita yang dianalisis dibatasi hingga setengah laju aktual dan pembatasan itu dilaporkan.
+Firmware RuView membatasi pengiriman frame CSI paling sering setiap 20 ms sehingga laju maksimumnya adalah 50 frame per detik [@ruview]; laju aktual pada konfigurasi penelitian diukur pada T0. Pita Doppler 1–60 Hz hanya terwakili bila laju pencuplikan sedikitnya 120 Hz (Subbab 2.3). Bila laju yang diukur pada T0 lebih rendah, pita yang dianalisis dibatasi hingga setengah laju aktual dan pembatasan itu dilaporkan.
 
 ### 3.7.2 Segmentasi
 
@@ -225,7 +225,7 @@ Sesuai Subbab 2.6, fitur setiap segmen terdiri atas amplitudo dan fase *subcarri
 
 ### 3.7.4 Klasifikasi
 
-SVM mencari batas pemisah antarkelas dengan margin terbesar [PERLU RUJUKAN: teori Support Vector Machine] dan dipilih sebagai pembanding dasar karena dapat dilatih pada *dataset* berukuran kecil [PERLU RUJUKAN: kesesuaian SVM untuk data latih berukuran kecil]. Model 1D-CNN menerapkan konvolusi sepanjang sumbu waktu deret fitur [PERLU RUJUKAN: teori 1D-CNN untuk data deret waktu] dan dipilih karena dapat mempelajari pola temporal langsung dari deret tersebut. Ukuran jaringannya dibuat kecil agar sebanding dengan jumlah data. SVM dan 1D-CNN diimplementasikan pada laptop, berturut-turut dengan scikit-learn dan PyTorch. Hiperparameter kedua klasifikator dipilih berdasarkan data validasi yang terpisah dari data uji.
+SVM mencari batas pemisah antarkelas dengan margin terbesar [@cortes1995] dan dipilih sebagai pembanding dasar karena dapat dilatih pada *dataset* berukuran kecil [@mountrakis2011]. Model 1D-CNN menerapkan konvolusi sepanjang sumbu waktu deret fitur [@kiranyaz2021] dan dipilih karena dapat mempelajari pola temporal langsung dari deret tersebut. Ukuran jaringannya dibuat kecil agar sebanding dengan jumlah data. SVM dan 1D-CNN diimplementasikan pada laptop, berturut-turut dengan scikit-learn dan PyTorch. Hiperparameter kedua klasifikator dipilih berdasarkan data validasi yang terpisah dari data uji.
 
 ### 3.7.5 Skema Pembagian Data
 

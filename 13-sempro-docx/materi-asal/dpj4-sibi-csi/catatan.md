@@ -2,7 +2,7 @@
 
 **Judul:** Alat Pembelajaran Isyarat SIBI Tanpa Kamera Berbasis Wi-Fi Channel State Information pada ESP32: Studi Kelayakan Umpan Balik Latihan bagi Pembelajar Pendengar
 
-Disusun 23 Oktober 2026 dengan bantuan AI (Claude). Semua isi berasal dari bahan pemilik (draf DPJ-4, dossier, transkrip council) dan dari metadata DOI yang dicek langsung. Data, angka, atau rujukan yang tidak tersedia tidak dikarang, tetapi ditandai `[PERLU DATA: …]` atau `[PERLU RUJUKAN: …]`.
+Disusun 23 Oktober 2026 dengan bantuan AI (Claude); penanda diisi dari sumber terverifikasi pada 24 Oktober 2026. Semua isi berasal dari bahan pemilik (draf DPJ-4, dossier, transkrip council) dan dari metadata DOI yang dicek langsung. Data, angka, atau rujukan yang tidak tersedia tidak dikarang, tetapi ditandai `[PERLU DATA: …]` atau `[PERLU RUJUKAN: …]`.
 
 ## 1. Isi folder
 
@@ -11,7 +11,7 @@ Disusun 23 Oktober 2026 dengan bantuan AI (Claude). Semua isi berasal dari bahan
 | `bab1-pendahuluan.md` | BAB I, sitasi IEEE bernomor |
 | `bab2-kajian-pustaka.md` | BAB II, sitasi IEEE bernomor |
 | `bab3-metodologi.md` | BAB III, sitasi IEEE bernomor, dua diagram Mermaid |
-| `daftar-pustaka.md` | 34 rujukan, urut sesuai kemunculan pertama |
+| `daftar-pustaka.md` | 62 rujukan, urut sesuai kemunculan pertama |
 | `_berkunci/` | Salinan ketiga bab dengan sitasi berupa kunci `[@kunci]`. Pakai versi ini bila menambah atau menghapus sitasi, lalu nomori ulang. |
 | `_lembar-fakta.md` | Sumber fakta, istilah, dan desain penelitian yang dipakai semua bab |
 | `_metadata-doi.json` | Metadata DOI hasil pengecekan |
@@ -58,11 +58,27 @@ Semua DOI dicek langsung lewat doi.org pada 23 Oktober 2026.
 - **Volume:** DF-WiSLR terbit di vol. 69, bukan 68.
 - **Isi:** WiASL memakai perangkat Wi-Fi komersial, bukan kamera.
 - **Widar3.0:** Crossref hanya menyimpan versi *early access* (2021). Daftar pustaka memakai data terbitan cetak (vol. 44, no. 11, pp. 8671–8685, 2022), yang tidak tercatat di metadata DOI. **Cocokkan dengan IEEE Xplore.**
-- **Belum dicek ulang di sesi ini:**
+- **Belum dicek ulang di sesi 23 Okt (kemudian diselesaikan 24 Okt, lihat bagian 5b):**
   - URL berita BRIN (dari dossier);
   - rilis Kemenko PMK (URL belum ada);
   - fakta teknis RuView (ADR-018, ADR-079, kalibrasi 600 *frame* + 8 *anchor*, mode privasi), yang semuanya berasal dari dossier dan belum dicocokkan langsung dengan repositori.
 - **Kamus SIBI** masih berupa penanda, karena data terbitan resminya belum ada.
+
+## 5b. Pengisian penanda 24 Oktober 2026 (putaran kedua)
+
+Atas perintah pemilik ("isikan dengan kebenaran mutlak dengan mencari artikel/jurnal"), 61 kemunculan penanda diisi atau dijawab secara jujur; sisa 38 kemunculan (35 unik, semua PERLU DATA) sengaja dibiarkan karena berupa keputusan pembimbing, data pribadi, atau parameter rancangan yang memang ditetapkan kemudian.
+
+**Rujukan baru (28, DOI dicek lewat Crossref 24 Okt 2026):** Stokoe 2005 (JDSDE, cetak ulang monograf 1960); Ong dan Ranganath 2005 (TPAMI 27(6), survei SLR sensor+visi); Cortes dan Vapnik 1995; Kiranyaz dkk. 2021; Sigrist dkk. 2013; Bowen dkk. 2009; Sokolova dan Lapalme 2009; Chow 1970 (DOI benar 10.1109/TIT.1970.1054406, bukan ...54508); Mountrakis dkk. 2011; Zheng dkk. 2023 (DOI benar 10.1145/3603618); Zajonc 1965; Bailenson 2021 (DOI benar 10.1037/tmb0000030); Nyquist 1928; Shannon 1949; Likert 1932 (tanpa DOI); Sadeghzadeh dkk. 2024 (MLMSign, ISWA 22); Sagawa dan Takeuchi 2002 (ACM Multimedia, sistem pembelajaran isyarat Jepang); Daniel dkk. 2024 (URTC); Hassan dkk. 2026 (CHI); As Satillah dkk. 2024 (AUDHI, SIBI di SLB N Ogan Ilir); Nugraheni dkk. 2023 (Holistika 5(1); Crossref terbit daring 21-2-2023 - Google Scholar menampilkan 2021, pakai 2023); Malika dan Berlianti 2025 (Concept 4(3)); Rodhiyah dan Wulandari 2024 (INTECOMS 7(1)); Fatmawati dkk. 2022 (Technomedia 7(1), OpenSIBI); Zikky dan Akbar 2019 (JST 5(2)); Maulana dkk. 2026 (DBESTI 3(1)); Soekarta dkk. 2024 (Insect 10(2):90-100, MediaPipe Android); Lemlitbang SIBI, Kamus SIBI Digital 2020 (laman resmi).
+
+**Entri lama yang diisi:** [5] Kemenko PMK (URL kemenkopmk.go.id terverifikasi, akses 24 Okt 2026); [7] BRIN (tanggal akses); [8] Kamus SIBI (Depdikbud 1994, edisi pertama, diluncurkan 2 Mei 1994 dengan SK Mendikbud 0190/P/1994); [23] RuView (commit fefb0f9, 22 Okt 2026, akses 24 Okt 2026).
+
+**Fakta teknis RuView yang kini dicocokkan langsung ke repositori:** ADR = *architecture decision record*; varian yang direkomendasikan untuk node CSI = ESP32-S3; firmware membatasi pengiriman frame CSI paling sering setiap 20 ms (`CSI_MIN_SEND_INTERVAL_US` di `csi_collector.c`) = maksimum 50 frame/detik; mode privasi menekan keluaran biometrik detak jantung, laju napas, dan pose agar tidak keluar dari server. Jarak antarnode tidak dipreskripsi repo sehingga tetap ditetapkan pada T0.
+
+**Fakta sistem pembanding (dari makalahnya):** SignFi = Intel 5300 + 3 antena penerima via 802.11n CSI Tool; Wi-SL = TP-Link WDR4310 (Atheros AR9580), 2 antena TX x 3 RX, kanal 40 MHz, cuplik 400 Hz, 12 gestur; HandFi = Intel 5300 sebagai RX dari router komersial, 12 gestur tangan; WiSign (Shang-Wu) = router TP-Link TL-WR1043ND + 2 laptop Lenovo X100e, tidak menyebut bahasa isyarat tertentu; DF-WiSLR = 49 gestur (30 statis + 19 dinamis), tidak menyebut bahasa tertentu; Dwijayanti dkk. 2021 = BISINDO (26 huruf + 10 angka, 39.455 data).
+
+**Dijawab jujur tanpa fabrikasi (data tidak tersedia di literatur):** proporsi anak tunarungu dari orang tua pendengar di Indonesia (dinyatakan tidak ditemukan pada penelusuran Google Scholar/Crossref/OpenAlex hingga Okt 2026, angka AS tetap dipakai sebagai gambaran); proporsi kosakata Kamus SIBI yang dibedakan lintasan gerak dan jumlah kandidat isyarat (dinyatakan belum terdokumentasi, ditetapkan saat kurasi T1); kebutuhan belajar khusus pembelajar pendengar SIBI (belum ada studi khusus; tercermin dari aplikasi dan SLB); orientasi pembelajaran kelompok WiFi-SLR (tidak dijumpai; keempatnya menargetkan pengenalan); ketersediaan kursus SIBI bagi keluarga (belum terdokumentasi dalam kajian ekosistem). Klaim "batas resolusi spasial CSI" ditata ulang menjadi fakta perangkat multi-antena sistem pembanding + asumsi eksplisit yang diperiksa lewat uji Delta-CSI, karena tidak ditemukan sumber terverifikasi yang menyatakan batas resolusi untuk satu tautan ESP32.
+
+Arsip verifikasi: `scripts/sempro-isi/crossref/*.json`, `scripts/sempro-isi/ss/*.json`, salinan `13-sempro-docx/verifikasi-rujukan-2026-10-24/`.
 
 ## 6. Keputusan yang masih terbuka (bawa ke bimbingan)
 
@@ -80,7 +96,7 @@ Semua DOI dicek langsung lewat doi.org pada 23 Oktober 2026.
 
 ## 7. Penanda yang masih harus diisi
 
-Daftar lengkapnya ada di `laporan-penanda.md`, dikelompokkan menurut pihak yang mengisi dan disertai lokasi berkas:baris. Laporan itu dibuat ulang dengan `python _laporan-penanda.py` setiap kali ada penanda yang diisi. Per 23 Oktober 2026 masih ada 77 penanda unik (98 kemunculan): 53 PERLU DATA dan 24 PERLU RUJUKAN.
+Daftar lengkapnya ada di `laporan-penanda.md`, dikelompokkan menurut pihak yang mengisi dan disertai lokasi berkas:baris. Laporan itu dibuat ulang dengan `python _laporan-penanda.py` setiap kali ada penanda yang diisi. Per 24 Oktober 2026 tersisa 35 penanda unik (38 kemunculan), seluruhnya PERLU DATA: keputusan bersama pembimbing (ambang G2/G3, batas operasional, tindakan gagal), data pribadi dan mitra (identitas, sekolah, jadwal, laptop), serta parameter rancangan Tabel 3.6. Seluruh 24 penanda PERLU RUJUKAN telah terisi.
 
 Parameter rancangan BAB III yang baru ditetapkan menjelang eksperimen, seperti ambang gerbang, pembagian data, durasi, rubrik, dan kuesioner, kini terkumpul di **Tabel 3.6 (Subbab 3.10)**. Prosa cukup merujuk "(Tabel 3.6, butir n)".
 

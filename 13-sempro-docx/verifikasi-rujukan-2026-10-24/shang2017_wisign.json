@@ -1,0 +1,23 @@
+{
+ "paperId": "5c88d3287561cfcc0453ce234fb64e04b010c85f",
+ "title": "A Robust Sign Language Recognition System with Multiple Wi-Fi Devices",
+ "venue": "International Workshop on Mobility in the Evolving Internet Architecture",
+ "year": 2017,
+ "openAccessPdf": {
+  "url": "",
+  "status": "CLOSED",
+  "license": null,
+  "disclaimer": "Notice: The following paper fields have been elided by the publisher: {'abstract'}. Paper or abstract available at https://api.unpaywall.org/v2/10.1145/3097620.3097624?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1145/3097620.3097624, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+ },
+ "authors": [
+  {
+   "authorId": "2115682",
+   "name": "Jiacheng Shang"
+  },
+  {
+   "authorId": "2118432358",
+   "name": "Jie Wu"
+  }
+ ],
+ "abstract": null
+}

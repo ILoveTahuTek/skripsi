@@ -1,0 +1,35 @@
+{
+ "paperId": "3d24447ce12feadcff24b813261c35c7c3bef3a0",
+ "title": "Indonesia Sign Language Recognition using Convolutional Neural Network",
+ "venue": "International Journal of Advanced Computer Science and Applications",
+ "year": 2021,
+ "openAccessPdf": {
+  "url": "http://thesai.org/Downloads/Volume12No10/Paper_46-Indonesia_Sign_Language_Recognition.pdf",
+  "status": "GOLD",
+  "license": "CCBY",
+  "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.14569/ijacsa.2021.0121046?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.14569/ijacsa.2021.0121046, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+ },
+ "authors": [
+  {
+   "authorId": "9365310",
+   "name": "Suci Dwijayanti"
+  },
+  {
+   "authorId": "2416708517",
+   "name": "Hermawati"
+  },
+  {
+   "authorId": "2139846481",
+   "name": "Sahirah Inas Taqiyyah"
+  },
+  {
+   "authorId": "2085084536",
+   "name": "Hera Hikmarika"
+  },
+  {
+   "authorId": "3492948",
+   "name": "B. Suprapto"
+  }
+ ],
+ "abstract": "In daily life, the deaf use sign language to communicate with others. However, the non-deaf experience difficulties in understanding this communication. To overcome this, sign recognition via human-machine interaction can be utilized. In Indonesia, the deaf use a specific language, referred to as Indonesia Sign Language (BISINDO). However, only a few studies have examined this language. Thus, this study proposes a deep learning approach, namely, a new convolutional neural network (CNN) to recognize BISINDO. There are 26 letters and 10 numbers to be recognized. A total of 39,455 data points were obtained from 10 respondents by considering the lighting and perspective of the person: specifically, bright and dim lightning, and from first and second-person perspectives. The architecture of the proposed network consisted of four convolutional layers, three pooling layers, and three fully connected layers. This model was tested against two common CNNs models, AlexNet and VGG-16. The results indicated that the proposed network is superior to a modified VGG-16, with a loss of 0.0201. The proposed network also had smaller number of parameters compared to a modified AlexNet, thereby reducing the computation time. Further, the model was tested using testing data with an accuracy of 98.3%, precision of 98.3%, recall of 98.4%, and F1-score of 99.3%. The proposed model could recognize BISINDO in both dim and bright lighting, as well as the signs from the first-and second-person perspectives. Keywords—Indonesia sign language (BISINDO); recognition; CNN; lighting"
+}

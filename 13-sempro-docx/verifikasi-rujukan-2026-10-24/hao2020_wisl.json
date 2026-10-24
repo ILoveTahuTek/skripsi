@@ -1,0 +1,35 @@
+{
+ "paperId": "f7fd974d3f5a5157a01c143da626961167fe66a3",
+ "title": "Wi-SL: Contactless Fine-Grained Gesture Recognition Uses Channel State Information",
+ "venue": "Italian National Conference on Sensors",
+ "year": 2020,
+ "openAccessPdf": {
+  "url": "https://www.mdpi.com/1424-8220/20/14/4025/pdf?version=1595430346",
+  "status": "GOLD",
+  "license": "CCBY",
+  "disclaimer": "Notice: Paper or abstract available at https://pmc.ncbi.nlm.nih.gov/articles/PMC7412096, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+ },
+ "authors": [
+  {
+   "authorId": "1870120",
+   "name": "Zhanjun Hao"
+  },
+  {
+   "authorId": "2087104569",
+   "name": "Yu Duan"
+  },
+  {
+   "authorId": "1751121",
+   "name": "Xiao-Chao Dang"
+  },
+  {
+   "authorId": "2152802562",
+   "name": "Yang Liu"
+  },
+  {
+   "authorId": "1829149487",
+   "name": "Daiyang Zhang"
+  }
+ ],
+ "abstract": "In recent years, with the development of wireless sensing technology and the widespread popularity of WiFi devices, human perception based on WiFi has become possible, and gesture recognition has become an active topic in the field of human-computer interaction. As a kind of gesture, sign language is widely used in life. The establishment of an effective sign language recognition system can help people with aphasia and hearing impairment to better interact with the computer and facilitate their daily life. For this reason, this paper proposes a contactless fine-grained gesture recognition method using Channel State Information (CSI), namely Wi-SL. This method uses a commercial WiFi device to establish the correlation mapping between the amplitude and phase difference information of the subcarrier level in the wireless signal and the sign language action, without requiring the user to wear any device. We combine an efficient denoising method to filter environmental interference with an effective selection of optimal subcarriers to reduce the computational cost of the system. We also use K-means combined with a Bagging algorithm to optimize the Support Vector Machine (SVM) classification (KSB) model to enhance the classification of sign language action data. We implemented the algorithms and evaluated them for three different scenarios. The experimental results show that the average accuracy of Wi-SL gesture recognition can reach 95.8%, which realizes device-free, non-invasive, high-precision sign language gesture recognition."
+}

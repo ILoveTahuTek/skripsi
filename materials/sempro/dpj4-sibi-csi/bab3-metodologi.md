@@ -64,7 +64,7 @@ Gambar 3.1 Tahapan penelitian dan gerbang keputusan
 
 ### 3.2.1 Tahap T0: Replikasi Platform dan Uji Delta-CSI (M1–M2)
 
-Dua node ESP32 disiapkan dengan *firmware* RuView [23] (Subbab 2.4), lalu *pipeline* akuisisi tersinkron `scripts/collect-ground-truth.py` (ADR-079) diuji tanpa partisipan untuk memastikan CSI dan video dapat diselaraskan. Arti kode ADR adalah [PERLU DATA: kepanjangan dan arti ADR pada repositori RuView]. Tahap ini ditempatkan paling awal karena *pipeline* yang belum stabil tidak layak dijadikan dasar perekaman. Uji Delta-CSI (Subbab 3.8.1) dan pengukuran laju pencuplikan (Subbab 3.7.1) menghasilkan laporan karakterisasi sinyal sebagai bahan G0.
+Dua node ESP32 disiapkan dengan *firmware* RuView [32] (Subbab 2.4), lalu *pipeline* akuisisi tersinkron `scripts/collect-ground-truth.py` (ADR-079) diuji tanpa partisipan untuk memastikan CSI dan video dapat diselaraskan. ADR adalah singkatan dari *architecture decision record* (catatan keputusan arsitektur), yaitu format dokumentasi keputusan desain yang dipakai repositori RuView [32]. Tahap ini ditempatkan paling awal karena *pipeline* yang belum stabil tidak layak dijadikan dasar perekaman. Uji Delta-CSI (Subbab 3.8.1) dan pengukuran laju pencuplikan (Subbab 3.7.1) menghasilkan laporan karakterisasi sinyal sebagai bahan G0.
 
 ### 3.2.2 Tahap T1: Kurasi Isyarat dan Protokol (M2–M4)
 
@@ -76,7 +76,7 @@ T1 mencakup kurasi 5–8 isyarat (Subbab 3.6.2) bersama validator penutur tunaru
 
 ### 3.2.4 Tahap T3: Uji Generalisasi (M8–M10)
 
-Model CSI mudah mengalami *overfitting* pada orang dan ruang tempat data latih direkam [25]. Oleh karena itu, model diuji lintas sesi, lintas partisipan, lintas ruang, dan pada satu pengguna baru tanpa pelatihan ulang (Subbab 3.7.5). Strategi lintas domain Widar3.0 [26] dijadikan acuan tanpa mengasumsikan hasil yang sama pada isyarat SIBI (Tabel 3.6, butir 15). Bila G3 gagal, cakupan menjadi personalisasi per pengguna yang memerlukan data latih dari setiap pengguna, padahal pembelajar pemula diduga belum dapat memperagakan isyarat dengan tepat. Untuk itu, model, ruang, dan prosedur yang dipakai pada T4 untuk setiap hasil G3 tercantum pada Tabel 3.6, butir 17.
+Model CSI mudah mengalami *overfitting* pada orang dan ruang tempat data latih direkam [36]. Oleh karena itu, model diuji lintas sesi, lintas partisipan, lintas ruang, dan pada satu pengguna baru tanpa pelatihan ulang (Subbab 3.7.5). Strategi lintas domain Widar3.0 [37] dijadikan acuan tanpa mengasumsikan hasil yang sama pada isyarat SIBI (Tabel 3.6, butir 15). Bila G3 gagal, cakupan menjadi personalisasi per pengguna yang memerlukan data latih dari setiap pengguna, padahal pembelajar pemula diduga belum dapat memperagakan isyarat dengan tepat. Untuk itu, model, ruang, dan prosedur yang dipakai pada T4 untuk setiap hasil G3 tercantum pada Tabel 3.6, butir 17.
 
 ### 3.2.5 Tahap T4: Pengemasan Mode Latihan dan Uji Kegunaan (M10–M12)
 
@@ -98,7 +98,7 @@ Tabel 3.1 Perangkat keras penelitian
 
 | No. | Nama | Spesifikasi | Jumlah | Keterangan |
 |---|---|---|---|---|
-| 1 | ESP32 | [PERLU DATA: varian ESP32 yang dipakai, misalnya ESP32 DevKit atau ESP32-S3] | 2 unit (+1 cadangan) | Node TX dan node RX penangkap CSI |
+| 1 | ESP32-S3 | Papan pengembangan ESP32-S3, varian yang direkomendasikan RuView untuk node CSI [32] | 2 unit (+1 cadangan) | Node TX dan node RX penangkap CSI |
 | 2 | Aksesori node | Kabel, adaptor daya, dudukan setinggi dada pengisyarat | 1 set | Pemasangan dan catu daya node |
 | 3 | Laptop | Milik pribadi; [PERLU DATA: spesifikasi laptop] | 1 unit | *Server* RuView, mesin pelatihan, dan tampilan umpan balik |
 | 4 | *Webcam* | Bawaan laptop | 1 unit | Hanya menyala saat sesi pelabelan dan pada satu kondisi uji persepsi |
@@ -172,9 +172,9 @@ flowchart TD
 
 Gambar 3.2 Arsitektur sistem dua jalur
 
-Pada jalur operasional, gerak pengisyarat di zona isyarat antara node TX dan node RX mengubah amplitudo, fase, dan komponen Doppler pada deret CSI [15]. Deret tersebut diolah hingga menjadi umpan balik di *dashboard* tanpa kamera (Subbab 3.7).
+Pada jalur operasional, gerak pengisyarat di zona isyarat antara node TX dan node RX mengubah amplitudo, fase, dan komponen Doppler pada deret CSI [25]. Deret tersebut diolah hingga menjadi umpan balik di *dashboard* tanpa kamera (Subbab 3.7).
 
-Jalur pelabelan hanya aktif selama perekaman *dataset*. Label kelas berasal dari kartu pemandu yang ditampilkan sebelum setiap repetisi, bukan dari kamera. MediaPipe [24] mengubah video *webcam* menjadi deret *keypoint* tubuh [30] dan tangan [31] yang diselaraskan dengan CSI melalui ADR-079 untuk memverifikasi batas segmen, menyaring segmen buruk, dan mendiagnosis kesalahan klasifikator secara luring. Berbeda dengan preseden Person-in-WiFi [33] dan DensePose From WiFi [34] (Subbab 2.5), dalam penelitian ini kamera tidak mengajarkan pose kepada model CSI; distilasi pengetahuan penuh ditempatkan sebagai penelitian lanjutan.
+Jalur pelabelan hanya aktif selama perekaman *dataset*. Label kelas berasal dari kartu pemandu yang ditampilkan sebelum setiap repetisi, bukan dari kamera. MediaPipe [33] mengubah video *webcam* menjadi deret *keypoint* tubuh [50] dan tangan [51] yang diselaraskan dengan CSI melalui ADR-079 untuk memverifikasi batas segmen, menyaring segmen buruk, dan mendiagnosis kesalahan klasifikator secara luring. Berbeda dengan preseden Person-in-WiFi [53] dan DensePose From WiFi [54] (Subbab 2.5), dalam penelitian ini kamera tidak mengajarkan pose kepada model CSI; distilasi pengetahuan penuh ditempatkan sebagai penelitian lanjutan.
 
 ### 3.5.2 Penempatan Node
 
@@ -182,7 +182,7 @@ Kedua node dipasang pada dudukan setinggi dada pengisyarat dan mengapit zona isy
 
 ### 3.5.3 Kalibrasi Ruang
 
-Setiap sesi diawali kalibrasi ruang bawaan RuView selama ±4 menit dengan 600 *frame* dan 8 *anchor* karena CSI peka terhadap perubahan kondisi ruang [25]. Posisi perabot, kipas angin atau pendingin ruangan yang menyala, dan orang yang lewat dicatat sebagai kovariat untuk menganalisis perbedaan kinerja antarsesi dan antarruang.
+Setiap sesi diawali kalibrasi ruang bawaan RuView selama ±4 menit dengan 600 *frame* dan 8 *anchor* karena CSI peka terhadap perubahan kondisi ruang [36]. Posisi perabot, kipas angin atau pendingin ruangan yang menyala, dan orang yang lewat dicatat sebagai kovariat untuk menganalisis perbedaan kinerja antarsesi dan antarruang.
 
 ## 3.6 Protokol Perekaman *Dataset*, Partisipan, dan Etika
 
@@ -192,7 +192,7 @@ Partisipan terdiri atas 3–4 pengisyarat kompeten, sedikitnya satu validator pe
 
 ### 3.6.2 Kurasi Isyarat
 
-Isyarat dipilih melalui saringan separabilitas fisik dan validitas pedagogis (Subbab 2.3) dengan acuan *Kamus SIBI* [8]. Hasilnya adalah 5–8 isyarat terisolasi [PERLU DATA: daftar isyarat SIBI terpilih] yang dideskripsikan dalam lembar definisi isyarat sebagai acuan perekaman dan penilaian.
+Isyarat dipilih melalui saringan separabilitas fisik dan validitas pedagogis (Subbab 2.3) dengan acuan *Kamus SIBI* [15]. Hasilnya adalah 5–8 isyarat terisolasi [PERLU DATA: daftar isyarat SIBI terpilih] yang dideskripsikan dalam lembar definisi isyarat sebagai acuan perekaman dan penilaian.
 
 ### 3.6.3 Prosedur Perekaman
 
@@ -213,7 +213,7 @@ Perekaman dimulai setelah persetujuan institusi mitra dan persetujuan tertulis s
 
 ### 3.7.1 Laju Pencuplikan
 
-Laju pencuplikan CSI node ESP32 pada konfigurasi RuView adalah [PERLU DATA: laju pencuplikan CSI node ESP32 pada konfigurasi RuView]. Pita Doppler 1–60 Hz hanya terwakili bila laju pencuplikan sedikitnya 120 Hz (Subbab 2.3). Bila laju yang diukur pada T0 lebih rendah, pita yang dianalisis dibatasi hingga setengah laju aktual dan pembatasan itu dilaporkan.
+Firmware RuView membatasi pengiriman frame CSI paling sering setiap 20 ms sehingga laju maksimumnya adalah 50 frame per detik [32]; laju aktual pada konfigurasi penelitian diukur pada T0. Pita Doppler 1–60 Hz hanya terwakili bila laju pencuplikan sedikitnya 120 Hz (Subbab 2.3). Bila laju yang diukur pada T0 lebih rendah, pita yang dianalisis dibatasi hingga setengah laju aktual dan pembatasan itu dilaporkan.
 
 ### 3.7.2 Segmentasi
 
@@ -221,11 +221,11 @@ Deret CSI dipotong menjadi segmen isyarat dengan segmentasi berbasis energi gera
 
 ### 3.7.3 Ekstraksi Fitur
 
-Sesuai Subbab 2.6, fitur setiap segmen terdiri atas amplitudo dan fase *subcarrier* terpilih yang saling melengkapi [27], spektrum Doppler pita 1–60 Hz [26], serta statistik ringkas berupa energi, entropi, dan lintasan puncak. Susunan fitur tersebut mengikuti praktik pengenalan gestur berbasis CSI [15], [29]. Kriteria pemilihan *subcarrier* dan definisi lintasan puncak tercantum pada Tabel 3.6, butir 9 dan 10. Fitur diringkas menjadi satu vektor untuk SVM dan disusun sebagai deret per langkah waktu untuk 1D-CNN.
+Sesuai Subbab 2.6, fitur setiap segmen terdiri atas amplitudo dan fase *subcarrier* terpilih yang saling melengkapi [46], spektrum Doppler pita 1–60 Hz [37], serta statistik ringkas berupa energi, entropi, dan lintasan puncak. Susunan fitur tersebut mengikuti praktik pengenalan gestur berbasis CSI [25], [35]. Kriteria pemilihan *subcarrier* dan definisi lintasan puncak tercantum pada Tabel 3.6, butir 9 dan 10. Fitur diringkas menjadi satu vektor untuk SVM dan disusun sebagai deret per langkah waktu untuk 1D-CNN.
 
 ### 3.7.4 Klasifikasi
 
-SVM mencari batas pemisah antarkelas dengan margin terbesar [PERLU RUJUKAN: teori Support Vector Machine] dan dipilih sebagai pembanding dasar karena dapat dilatih pada *dataset* berukuran kecil [PERLU RUJUKAN: kesesuaian SVM untuk data latih berukuran kecil]. Model 1D-CNN menerapkan konvolusi sepanjang sumbu waktu deret fitur [PERLU RUJUKAN: teori 1D-CNN untuk data deret waktu] dan dipilih karena dapat mempelajari pola temporal langsung dari deret tersebut. Ukuran jaringannya dibuat kecil agar sebanding dengan jumlah data. SVM dan 1D-CNN diimplementasikan pada laptop, berturut-turut dengan scikit-learn dan PyTorch. Hiperparameter kedua klasifikator dipilih berdasarkan data validasi yang terpisah dari data uji.
+SVM mencari batas pemisah antarkelas dengan margin terbesar [55] dan dipilih sebagai pembanding dasar karena dapat dilatih pada *dataset* berukuran kecil [62]. Model 1D-CNN menerapkan konvolusi sepanjang sumbu waktu deret fitur [56] dan dipilih karena dapat mempelajari pola temporal langsung dari deret tersebut. Ukuran jaringannya dibuat kecil agar sebanding dengan jumlah data. SVM dan 1D-CNN diimplementasikan pada laptop, berturut-turut dengan scikit-learn dan PyTorch. Hiperparameter kedua klasifikator dipilih berdasarkan data validasi yang terpisah dari data uji.
 
 ### 3.7.5 Skema Pembagian Data
 
@@ -241,7 +241,7 @@ Tabel 3.3 Skema pembagian data
 | 4 | Lintas ruang (*leave-one-room-out*) | Semua ruang kecuali satu | Ruang yang ditinggalkan, bergiliran | Ketahanan terhadap pergantian ruang |
 | 5 | Pengguna baru | Seluruh pengisyarat *dataset* | Satu pengguna baru tanpa pelatihan ulang | Kesiapan dipakai orang baru tanpa perekaman tambahan |
 
-Skema kedua sampai kelima mengukur ketahanan terhadap perubahan domain [25]; karena jumlah pengisyarat dan ruang kecil, hasil lintas partisipan dan lintas ruang dilaporkan untuk setiap putaran (*fold*). Data validasi hanya diambil dari data latih sehingga data uji tidak dipakai untuk memilih *subcarrier*, menormalkan fitur, memilih hiperparameter, atau menetapkan ambang (Tabel 3.6, butir 11). Karena segmen *dataset* tersaring kamera, sedangkan mode latihan tidak, kinerja pada data uji dapat lebih optimistis daripada kinerja jalur operasional (butir 12).
+Skema kedua sampai kelima mengukur ketahanan terhadap perubahan domain [36]; karena jumlah pengisyarat dan ruang kecil, hasil lintas partisipan dan lintas ruang dilaporkan untuk setiap putaran (*fold*). Data validasi hanya diambil dari data latih sehingga data uji tidak dipakai untuk memilih *subcarrier*, menormalkan fitur, memilih hiperparameter, atau menetapkan ambang (Tabel 3.6, butir 11). Karena segmen *dataset* tersaring kamera, sedangkan mode latihan tidak, kinerja pada data uji dapat lebih optimistis daripada kinerja jalur operasional (butir 12).
 
 ### 3.7.6 Umpan Balik dengan Penolakan
 

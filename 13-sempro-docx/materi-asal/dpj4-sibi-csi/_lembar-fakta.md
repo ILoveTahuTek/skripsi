@@ -187,3 +187,20 @@ Konten sumber sudah diverifikasi metadata-nya (DOI). Klaim tentang isi sumber ha
 | *leave-one-room-out* | *leave-one-room-out* (miring, dijelaskan sekali) |
 | *leave-one-subject-out* | *leave-one-subject-out* (miring, dijelaskan sekali) |
 | *split* temporal | pembagian data temporal |
+
+## Fakta terverifikasi tambahan (24 Oktober 2026, dari repo RuView & makalah pembanding)
+
+Fakta-fakta ini kini bersumber langsung dan boleh dirujuk sebagai kenyataan (sitasi [@ruview], [@signfi2018], [@hao2020], [@sruthi2024]):
+
+- ADR pada repositori RuView berarti *architecture decision record* (catatan keputusan arsitektur).
+- Varian ESP32 yang direkomendasikan dokumentasi RuView untuk node penangkap CSI adalah ESP32-S3.
+- Firmware RuView membatasi pengiriman frame CSI paling sering setiap 20 ms (`CSI_MIN_SEND_INTERVAL_US` pada `firmware/esp32-csi-node/main/csi_collector.c`), setara laju maksimum 50 frame per detik; laju aktual diukur pada T0.
+- Mode privasi RuView menekan keluaran biometrik detak jantung (HR), laju napas (BR), dan estimasi pose agar tidak diterbitkan ke luar server.
+- Jarak antarnode tidak dipreskripsi repositori RuView sehingga tetap ditetapkan pada T0.
+- SignFi memakai NIC Intel 5300 dengan tiga antena penerima melalui 802.11n CSI Tool.
+- Wi-SL memakai router TP-Link WDR4310 (Atheros AR9580), dua antena pemancar dan tiga antena penerima, kanal 40 MHz, laju cuplik 400 Hz, dan mengenali 12 gestur isyarat umum.
+- HandFi memakai NIC Intel 5300 sebagai penerima dari router Wi-Fi komersial dan mengenali 12 gestur tangan.
+- WiSign (Shang dan Wu) memakai router TP-Link TL-WR1043ND dan dua laptop Lenovo X100e (akurasi rerata 93,8%); makalahnya tidak menyebut bahasa isyarat tertentu.
+- DF-WiSLR mengenali 49 gestur isyarat (30 statis + 19 dinamis) tanpa menyebut bahasa tertentu.
+- Dwijayanti dkk. (2021) memakai dataset BISINDO (26 huruf + 10 angka; 39.455 data; memperhitungkan pencahayaan dan perspektif).
+- Kamus SIBI edisi pertama diterbitkan Departemen Pendidikan dan Kebudayaan (diluncurkan 2 Mei 1994, SK Mendikbud 0190/P/1994); Surat Direktorat Pendidikan Dasar Nomor 868/C/U/95 mewajibkan SLB tunarungu yang menerapkan komunikasi total memakai sistem isyarat baku.

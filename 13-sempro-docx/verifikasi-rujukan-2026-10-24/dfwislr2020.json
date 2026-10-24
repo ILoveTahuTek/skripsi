@@ -1,0 +1,35 @@
+{
+ "paperId": "2656de85dcf6b0a394167ec9c60fc1519bdc7262",
+ "title": "DF-WiSLR: Device-Free Wi-Fi-based Sign Language Recognition",
+ "venue": "Pervasive and Mobile Computing",
+ "year": 2020,
+ "openAccessPdf": {
+  "url": "",
+  "status": null,
+  "license": null,
+  "disclaimer": "Notice: Paper or abstract available at https://api.unpaywall.org/v2/10.1016/j.pmcj.2020.101289?email=<INSERT_YOUR_EMAIL> or https://doi.org/10.1016/j.pmcj.2020.101289, which is subject to the license by the author or copyright owner provided with this content. Please go to the source to verify the license and copyright information for your use."
+ },
+ "authors": [
+  {
+   "authorId": "152338899",
+   "name": "H. F. T. Ahmed"
+  },
+  {
+   "authorId": "100641212",
+   "name": "Hafisoh Ahmad"
+  },
+  {
+   "authorId": "102454089",
+   "name": "Kulasekharan Narasingamurthi"
+  },
+  {
+   "authorId": "9411380",
+   "name": "Houda Harkat"
+  },
+  {
+   "authorId": "2720271",
+   "name": "S. Phang"
+  }
+ ],
+ "abstract": "Abstract Recent advancements in wireless technologies enable pervasive and device free gesture recognition that enable assisted living utilizing off the shelf commercial Wi-Fi devices. This paper proposes a Device-Free Wi-Fi-based Sign Language Recognition (DF-WiSLR) for recognizing 30 static and 19 dynamic sign gestures. The raw Channel State Information (CSI) acquired from the Wi-Fi device for 49 sign gestures, with a volunteer performing the sign gestures in home and office environments. The proposed system adopts machine learning classifiers such as SVM, KNN, RF, NB, and a deep learning classifier CNN, for measuring the gesture recognition accuracy. To address the practical limitation of building a voluminous dataset, DF-WiSLR augments the originally acquired CSI values with Additive White Gaussian Noise (AWGN). Higher-order cumulant features of orders 2, 3, and 4 are extracted from the original and augmented data, as the machine learning classifiers demand manual feature extraction. To reduce the computational complexity of machine learning classifiers, an informative and reduced optimal feature subset is selected using MIFS. Whilst the pre-processed original and augmented CSI values directly fed as input to an 8-layer deep CNN, it performs auto feature extraction and selection. DF-WiSLR reported better recognition accuracies with SVM for static and dynamic gestures in both home and office environments. SVM achieved 93.4% 98.8% and 98.9% accuracies in home and office environments respectively, for static gestures. For dynamic gestures, 92.3% recognition accuracy achieved in home environment. On augmented data, the corresponding gesture recognition accuracy values reported are 97.1%, 99.9%, 99.9%, and 98.5%."
+}

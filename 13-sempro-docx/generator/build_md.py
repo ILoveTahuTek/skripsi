@@ -32,7 +32,7 @@ header = """# Alat Pembelajaran Isyarat SIBI Tanpa Kamera Berbasis Wi-Fi Channel
 | Pembimbing | [PERLU DATA: nama pembimbing, bila sudah ditetapkan] |
 | Tahun | [PERLU DATA: tahun penyusunan] |
 
-> Catatan pengemasan: dokumen ini disusun dari materi `sempro/dpj4-sibi-csi` (23 Oktober 2026) tanpa mengubah teks. Penanda `[PERLU DATA: ...]` dan `[PERLU RUJUKAN: ...]` berarti data belum tersedia dan harus diisi pemiliknya; daftar lengkapnya ada pada `laporan-penanda.md`. Diagram Gambar 3.1 dan 3.2 tersimpan sebagai berkas PNG pada `assets/`.
+> Catatan pengemasan: dokumen ini disusun dari materi `sempro/dpj4-sibi-csi` (23 Oktober 2026; penanda diisi dari sumber terverifikasi pada 24 Oktober 2026). Penanda `[PERLU DATA: ...]` yang tersisa berupa keputusan bersama pembimbing, data pribadi, atau parameter rancangan yang memang ditetapkan kemudian; daftar lengkapnya ada pada `laporan-penanda.md`. Diagram Gambar 3.1 dan 3.2 tersimpan sebagai berkas PNG pada `assets/`.
 
 ---
 

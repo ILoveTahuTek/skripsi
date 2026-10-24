@@ -1,0 +1,22 @@
+{
+ "DOI": "10.1145/3603618",
+ "title": "Deep Learning-based Human Pose Estimation: A Survey",
+ "container": [
+  "ACM Computing Surveys"
+ ],
+ "authors": [
+  "Zheng, Ce",
+  "Wu, Wenhan",
+  "Chen, Chen",
+  "Yang, Taojiannan",
+  "Zhu, Sijie",
+  "Shen, Ju",
+  "Kehtarnavaz, Nasser",
+  "Shah, Mubarak"
+ ],
+ "year": 2023,
+ "volume": "56",
+ "issue": "1",
+ "pages": "1-37",
+ "publisher": "Association for Computing Machinery (ACM)"
+}
