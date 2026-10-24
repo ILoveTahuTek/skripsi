@@ -1,0 +1,2002 @@
+     1→{
+     2→ "rodriguez2023": {
+     3→  "indexed": {
+     4→   "date-parts": [
+     5→    [
+     6→     2026,
+     7→     10,
+     8→     22
+     9→    ]
+    10→   ],
+    11→   "date-time": "2026-10-22T19:52:12Z",
+    12→   "timestamp": 1792698732363,
+    13→   "version": "4.5.0"
+    14→  },
+    15→  "reference-count": 54,
+    16→  "publisher": "Frontiers Media SA",
+    17→  "license": [
+    18→   {
+    19→    "start": {
+    20→     "date-parts": [
+    21→      [
+    22→       2023,
+    23→       4,
+    24→       5
+    25→      ]
+    26→     ],
+    27→     "date-time": "2023-04-05T00:00:00Z",
+    28→     "timestamp": 1680652800000
+    29→    },
+    30→    "content-version": "vor",
+    31→    "delay-in-days": 0,
+    32→    "URL": "https://creativecommons.org/licenses/by/4.0/"
+    33→   }
+    34→  ],
+    35→  "funder": [
+    36→   {
+    37→    "DOI": "10.13039/501100018928",
+    38→    "name": "Instituto Tecnológico Metropolitano",
+    39→    "doi-asserted-by": "publisher",
+    40→    "award": [
+    41→     "P20232"
+    42→    ],
+    43→    "award-info": [
+    44→     {
+    45→      "award-number": [
+    46→       "P20232"
+    47→      ]
+    48→     }
+    49→    ],
+    50→    "id": [
+    51→     {
+    52→      "id": "10.13039/501100018928",
+    53→      "id-type": "DOI",
+    54→      "asserted-by": "publisher"
+    55→     }
+    56→    ]
+    57→   }
+    58→  ],
+    59→  "content-domain": {
+    60→   "domain": [
+    61→    "frontiersin.org"
+    62→   ],
+    63→   "crossmark-restriction": true
+    64→  },
+    65→  "abstract": "<jats:p>The development of technologies has made digital accessibility relevant to many everyday processes. Multiple resources have been designed to meet the special needs of a wide variety of people, such as Deaf sign language users, who require inclusive technologies to facilitate their communication in work, educational, and social environments. The objective of this study is to identify assistive technologies that favor and improve communication between Deaf and hearing people. To this end, a systematic review was carried out following the PRISMA checklist and using the Scopus, Web of Science, and PubMed databases. A total of 492 documents were identified and subjected to inclusion and exclusion criteria, of which 27 were included in the quantitative synthesis. As a result, technologies based on gesture recognition for the translation of sign language into speech and vice versa, technologies for sign language teaching, technologies for automatic caption generation, technologies based on online content, and technologies based on text and illumination networks were found in the studies. The findings suggest that there is a need for further research into the motivations for developing sign language technologies, as a contribution to the inclusion of Deaf communities in society without linguistic impositions.</jats:p>",
+    66→  "DOI": "10.3389/feduc.2023.1121597",
+    67→  "type": "journal-article",
+    68→  "created": {
+    69→   "date-parts": [
+    70→    [
+    71→     2023,
+    72→     4,
+    73→     5
+    74→    ]
+    75→   ],
+    76→   "date-time": "2023-04-05T05:36:22Z",
+    77→   "timestamp": 1680672982000
+    78→  },
+    79→  "update-policy": "https://doi.org/10.3389/crossmark-policy",
+    80→  "source": "Crossref",
+    81→  "is-referenced-by-count": 48,
+    82→  "title": "Benefits and development of assistive technologies for Deaf people's communication: A systematic review",
+    83→  "prefix": "10.3389",
+    84→  "volume": "8",
+    85→  "author": [
+    86→   {
+    87→    "given": "Paula Andrea",
+    88→    "family": "Rodríguez-Correa",
+    89→    "sequence": "first",
+    90→    "affiliation": [],
+    91→    "role": [
+    92→     {
+    93→      "vocabulary": "crossref",
+    94→      "role": "author"
+    95→     }
+    96→    ]
+    97→   },
+    98→   {
+    99→    "given": "Alejandro",
+   100→    "family": "Valencia-Arias",
+   101→    "sequence": "additional",
+   102→    "affiliation": [],
+   103→    "role": [
+   104→     {
+   105→      "vocabulary": "crossref",
+   106→      "role": "author"
+   107→     }
+   108→    ]
+   109→   },
+   110→   {
+   111→    "given": "Orfa Nidia",
+   112→    "family": "Patiño-Toro",
+   113→    "sequence": "additional",
+   114→    "affiliation": [],
+   115→    "role": [
+   116→     {
+   117→      "vocabulary": "crossref",
+   118→      "role": "author"
+   119→     }
+   120→    ]
+   121→   },
+   122→   {
+   123→    "given": "Yober",
+   124→    "family": "Oblitas Díaz",
+   125→    "sequence": "additional",
+   126→    "affiliation": [],
+   127→    "role": [
+   128→     {
+   129→      "vocabulary": "crossref",
+   130→      "role": "author"
+   131→     }
+   132→    ]
+   133→   },
+   134→   {
+   135→    "given": "Renata",
+   136→    "family": "Teodori De la Puente",
+   137→    "sequence": "additional",
+   138→    "affiliation": [],
+   139→    "role": [
+   140→     {
+   141→      "vocabulary": "crossref",
+   142→      "role": "author"
+   143→     }
+   144→    ]
+   145→   }
+   146→  ],
+   147→  "member": "1965",
+   148→  "published-online": {
+   149→   "date-parts": [
+   150→    [
+   151→     2023,
+   152→     4,
+   153→     5
+   154→    ]
+   155→   ]
+   156→  },
+   157→  "reference": [
+   158→   {
+   159→    "key": "B1",
+   160→    "doi-asserted-by": "publisher",
+   161→    "first-page": "179",
+   162→    "DOI": "10.1007/S10209-015-0416-1",
+   163→    "article-title": "Rethinking universal accessibility: a broader approach considering the digital gap",
+   164→    "volume": "15",
+   165→    "author": "Abascal",
+   166→    "year": "2015",
+   167→    "journal-title": "Univ. Acc. Inform. Soc."
+   168→   },
+   169→   {
+   170→    "key": "B2",
+   171→    "first-page": "295",
+   172→    "article-title": "“Assistive technology for deaf people based on android platform,”",
+   173→    "volume-title": "Procedia Computer Science",
+   174→    "author": "Abdallah",
+   175→    "year": "2016"
+   176→   },
+   177→   {
+   178→    "key": "B3",
+   179→    "doi-asserted-by": "publisher",
+   180→    "first-page": "833",
+   181→    "DOI": "10.1590/0034-7167.2016690503",
+   182→    "article-title": "Avaliação da acessibilidade de tecnologia assistiva para surdos",
+   183→    "volume": "69",
+   184→    "author": "Áfio",
+   185→    "year": "2016",
+   186→    "journal-title": "Rev. Bras. Enferm."
+   187→   },
+   188→   {
+   189→    "key": "B4",
+   190→    "doi-asserted-by": "publisher",
+   191→    "first-page": "22007",
+   192→    "DOI": "10.1007/S11042-018-5860-5/TABLES/5",
+   193→    "article-title": "Enssat: wearable technology application for the deaf and hard of hearing",
+   194→    "volume": "77",
+   195→    "author": "Alkhalifa",
+   196→    "year": "2018",
+   197→    "journal-title": "Multimed. Tools Appl."
+   198→   },
+   199→   {
+   200→    "key": "B5",
+   201→    "doi-asserted-by": "publisher",
+   202→    "first-page": "e06915",
+   203→    "DOI": "10.1016/J.HELIYON.2021.E06915",
+   204→    "article-title": "Using online information technology for deaf students during COVID-19: A closer look from experience",
+   205→    "volume": "7",
+   206→    "author": "Alshawabkeh",
+   207→    "year": "2021",
+   208→    "journal-title": "Heliyon"
+   209→   },
+   210→   {
+   211→    "key": "B6",
+   212→    "doi-asserted-by": "publisher",
+   213→    "first-page": "8502",
+   214→    "DOI": "10.1109/ACCESS.2022.3142918",
+   215→    "article-title": "Helping Hearing-Impaired in Emergency Situations: A Deep Learning-Based Approach",
+   216→    "volume": "10",
+   217→    "author": "Areeb",
+   218→    "year": "2022",
+   219→    "journal-title": "IEEE Access"
+   220→   },
+   221→   {
+   222→    "key": "B7",
+   223→    "doi-asserted-by": "crossref",
+   224→    "first-page": "1",
+   225→    "DOI": "10.1145/3123818.3123830",
+   226→    "article-title": "“Collaborative learning as educational strategy for deaf children: a systematic literature review CCS CONCEPTS,”",
+   227→    "volume-title": "Proceedings of the XVIII International Conference on Human Computer Interaction",
+   228→    "author": "Aristizábal",
+   229→    "year": "2017"
+   230→   },
+   231→   {
+   232→    "key": "B8",
+   233→    "doi-asserted-by": "publisher",
+   234→    "first-page": "1",
+   235→    "DOI": "10.33010/ierierediech.v11i0.792",
+   236→    "article-title": "Inclusión e interculturalidad para la cultura Sorda: caminos recorridos y desafíos pendientes",
+   237→    "volume": "11",
+   238→    "author": "Becerra Sepúlveda",
+   239→    "year": "2020",
+   240→    "journal-title": "Rev. de Invest. Edu. de La Red."
+   241→   },
+   242→   {
+   243→    "key": "B9",
+   244→    "unstructured": "Exclusión digital de las comunidades de personas con discapacidad en Brasile1567\n            Berrío ZapataC.\n            Chaves dos SantosZ.E.\n            Chalhub OliveiraT.\n          Revista Cubana de Información en Ciencias de la Salud312021"
+   245→   },
+   246→   {
+   247→    "key": "B10",
+   248→    "doi-asserted-by": "publisher",
+   249→    "first-page": "27",
+   250→    "DOI": "10.1080/10400435.2021.1945705",
+   251→    "article-title": "Accessibility to digital technology: Virtual barriers, real opportunities",
+   252→    "volume": "33",
+   253→    "author": "Botelho",
+   254→    "year": "2021",
+   255→    "journal-title": "Assis. Technol."
+   256→   },
+   257→   {
+   258→    "key": "B11",
+   259→    "doi-asserted-by": "publisher",
+   260→    "first-page": "457",
+   261→    "DOI": "10.1007/S10897-017-0188-2",
+   262→    "article-title": "Bilingual cancer genetic education modules for the deaf community: development and evaluation of the online video material",
+   263→    "volume": "27",
+   264→    "author": "Boudreault",
+   265→    "year": "2018",
+   266→    "journal-title": "J. Genet. Couns."
+   267→   },
+   268→   {
+   269→    "key": "B12",
+   270→    "doi-asserted-by": "publisher",
+   271→    "first-page": "393",
+   272→    "DOI": "10.1353/SLS.2003.0015",
+   273→    "article-title": "Brazilian sign language lexicography and technology: dictionary, digital encyclopedia, chereme-based sign retrieval, and quadriplegic deaf communication systems",
+   274→    "volume": "3",
+   275→    "author": "Capovilla",
+   276→    "year": "2003",
+   277→    "journal-title": "Sign Lang. Stud."
+   278→   },
+   279→   {
+   280→    "key": "B13",
+   281→    "doi-asserted-by": "publisher",
+   282→    "DOI": "10.5380./CE.V24I0.62767",
+   283→    "article-title": "Instructional design in nursing: Assistive technologies for the blind and deaf",
+   284→    "volume": "24",
+   285→    "author": "Carvalho",
+   286→    "year": "2019",
+   287→    "journal-title": "Cog. Enferm."
+   288→   },
+   289→   {
+   290→    "key": "B14",
+   291→    "doi-asserted-by": "publisher",
+   292→    "first-page": "690",
+   293→    "DOI": "10.5195/JMLA.2021.1361",
+   294→    "article-title": "Sharing electronically and accessibly in library-led instruction",
+   295→    "volume": "109",
+   296→    "author": "Dahm",
+   297→    "year": "2021",
+   298→    "journal-title": "J. Med. Lib. Assoc. JMLA"
+   299→   },
+   300→   {
+   301→    "key": "B15",
+   302→    "doi-asserted-by": "publisher",
+   303→    "first-page": "762",
+   304→    "DOI": "10.1016/J.INS.04008",
+   305→    "article-title": "An approach to generate and embed sign language video tracks into multimedia contents",
+   306→    "volume": "281",
+   307→    "author": "de Araújo",
+   308→    "year": "2014",
+   309→    "journal-title": "Inf. Sci."
+   310→   },
+   311→   {
+   312→    "key": "B16",
+   313→    "doi-asserted-by": "publisher",
+   314→    "first-page": "107",
+   315→    "DOI": "10.1007/s13173-012-0086-2",
+   316→    "article-title": "Automatic generation of Brazilian sign language windows for digital TV systems",
+   317→    "volume": "19",
+   318→    "author": "de Araújo",
+   319→    "year": "2013",
+   320→    "journal-title": "J. Brazil. Comp. Soc."
+   321→   },
+   322→   {
+   323→    "key": "B17",
+   324→    "doi-asserted-by": "publisher",
+   325→    "first-page": "215",
+   326→    "DOI": "10.1590/S1413-65382317000200005",
+   327→    "article-title": "Aplicação de um programa de ensino de palavras em libras utilizando tecnologia de realidade aumentada",
+   328→    "volume": "23",
+   329→    "author": "de Carvalho",
+   330→    "year": "2017",
+   331→    "journal-title": "Rev. Brasil. de Edu. Espec."
+   332→   },
+   333→   {
+   334→    "key": "B18",
+   335→    "doi-asserted-by": "publisher",
+   336→    "first-page": "251",
+   337→    "DOI": "10.1590/S0101-32622006000200008",
+   338→    "article-title": "Tecnologias digitais: novo espaço interativo na produção escrita dos surdos",
+   339→    "volume": "26",
+   340→    "author": "de Lima Arcoverde",
+   341→    "year": "2006",
+   342→    "journal-title": "Cadernos CEDES"
+   343→   },
+   344→   {
+   345→    "key": "B19",
+   346→    "doi-asserted-by": "publisher",
+   347→    "first-page": "793",
+   348→    "DOI": "10.1007/S10209-016-0504-X/TABLES/3",
+   349→    "article-title": "Signing avatars: making education more inclusive",
+   350→    "volume": "16",
+   351→    "author": "De Martino",
+   352→    "year": "2017",
+   353→    "journal-title": "Univ. Access Inform. Soc."
+   354→   },
+   355→   {
+   356→    "key": "B20",
+   357→    "doi-asserted-by": "publisher",
+   358→    "first-page": "1",
+   359→    "DOI": "10.1007./S11042-021-11830-Y/TABLES/11",
+   360→    "article-title": "An AI-based approach for improved sign language recognition using multiple videos",
+   361→    "author": "Dignan",
+   362→    "year": "2022",
+   363→    "journal-title": "Multimed. Tools Appl."
+   364→   },
+   365→   {
+   366→    "key": "B21",
+   367→    "doi-asserted-by": "publisher",
+   368→    "first-page": "226",
+   369→    "DOI": "10.5220./0007676102260235",
+   370→    "article-title": "“Conceptual framework to support a web authoring tool of educational games for deaf children,”",
+   371→    "author": "dos Passos Canteri",
+   372→    "year": "2019",
+   373→    "journal-title": "Proceedings of the 11th International Conference on Computer Supported Education (CSEDU 2019)"
+   374→   },
+   375→   {
+   376→    "key": "B22",
+   377→    "doi-asserted-by": "publisher",
+   378→    "first-page": "164",
+   379→    "DOI": "10.3389/FEDUC.2020.578389/BIBTEX",
+   380→    "article-title": "Assistive technology to promote communication and social interaction for people with deafblindness: a systematic review",
+   381→    "volume": "5",
+   382→    "author": "Dyzel",
+   383→    "year": "2020",
+   384→    "journal-title": "Fron. Edu."
+   385→   },
+   386→   {
+   387→    "key": "B23",
+   388→    "unstructured": "An Intelligent Web-based System to Enhance Digital Circuits Concepts and Skills for Deaf Students2026\n            ElgamlA. F.\n            BaladohS. M.\n          Int. J. Engin. Innovat. Technol. (IJEIT)42014"
+   389→   },
+   390→   {
+   391→    "key": "B24",
+   392→    "doi-asserted-by": "publisher",
+   393→    "first-page": "295",
+   394→    "DOI": "10.1016/J.EIJ.04001",
+   395→    "article-title": "Translation from Arabic speech to Arabic sign language based on cloud computing",
+   396→    "volume": "17",
+   397→    "author": "El-Gayyar",
+   398→    "year": "2016",
+   399→    "journal-title": "Egyptian Inform. J."
+   400→   },
+   401→   {
+   402→    "key": "B25",
+   403→    "doi-asserted-by": "publisher",
+   404→    "DOI": "10.1145./3290605.3300276",
+   405→    "article-title": "“Deaf and hard-of-hearing individuals' preferences for wearable and mobile sound awareness technologies,”",
+   406→    "author": "Findlater",
+   407→    "year": "2019",
+   408→    "journal-title": "Conference on Human Factors in Computing Systems - Proceedings. Association for Computing Machinery"
+   409→   },
+   410→   {
+   411→    "key": "B26",
+   412→    "doi-asserted-by": "publisher",
+   413→    "first-page": "87",
+   414→    "DOI": "10.1016/j.tele.2018.09.002",
+   415→    "article-title": "Digital transformation to support literacy teaching to deaf children: from storytelling to digital interactive storytelling",
+   416→    "volume": "38",
+   417→    "author": "Flórez-Aristizábal",
+   418→    "year": "2019",
+   419→    "journal-title": "Telemat. Inform."
+   420→   },
+   421→   {
+   422→    "key": "B27",
+   423→    "doi-asserted-by": "publisher",
+   424→    "first-page": "8627",
+   425→    "DOI": "10.1155./2022/3978627",
+   426→    "article-title": "CNN-LSTM hybrid real-time IoT-based cognitive approaches for ISLR with WebRTC: auditory impaired assistive technology",
+   427→    "volume": "2022",
+   428→    "author": "Gupta",
+   429→    "year": "2022",
+   430→    "journal-title": "J. Healthc. Eng."
+   431→   },
+   432→   {
+   433→    "key": "B28",
+   434→    "unstructured": "From NASA to EU: the evolution of the TRL scale in Public Sector Innovation - SZTAKI Publication Repository123\n            HéderM.\n          The Innovation Journal222017"
+   435→   },
+   436→   {
+   437→    "key": "B29",
+   438→    "doi-asserted-by": "publisher",
+   439→    "first-page": "107",
+   440→    "DOI": "10.4067/S0718-50062015000600013",
+   441→    "article-title": "Technological Proposal for the Improvement of Education and Social Inclusion in the Deaf Children",
+   442→    "volume": "8",
+   443→    "author": "Hernández",
+   444→    "year": "2015",
+   445→    "journal-title": "Form. Univer."
+   446→   },
+   447→   {
+   448→    "key": "B30",
+   449→    "doi-asserted-by": "publisher",
+   450→    "first-page": "17",
+   451→    "DOI": "10.1044/1059-0889(2003/005)",
+   452→    "article-title": "Using talking lights illumination-based communication networks to enhance word comprehension by people who are deaf or hard of hearing",
+   453→    "volume": "12",
+   454→    "author": "Hinman",
+   455→    "year": "2003",
+   456→    "journal-title": "Am. J. Audiol."
+   457→   },
+   458→   {
+   459→    "key": "B31",
+   460→    "doi-asserted-by": "publisher",
+   461→    "first-page": "262",
+   462→    "DOI": "10.1016/J.MEDCLE.10003",
+   463→    "article-title": "The PRISMA statement extension for systematic reviews incorporating network meta-analysis: PRISMA-NMA",
+   464→    "volume": "147",
+   465→    "author": "Hutton",
+   466→    "year": "2016",
+   467→    "journal-title": "Medicina Clínica"
+   468→   },
+   469→   {
+   470→    "key": "B32",
+   471→    "doi-asserted-by": "publisher",
+   472→    "first-page": "153",
+   473→    "DOI": "10.1080/10400435.2018.1508093",
+   474→    "article-title": "Developing a bilingual mobile dictionary for Indian Sign Language and gathering users experience with SignDict",
+   475→    "volume": "32",
+   476→    "author": "Joy",
+   477→    "year": "2018",
+   478→    "journal-title": "Assist. Technol."
+   479→   },
+   480→   {
+   481→    "key": "B33",
+   482→    "doi-asserted-by": "publisher",
+   483→    "first-page": "173",
+   484→    "DOI": "10.1108/JET-03-2019-0014/FULL/XML",
+   485→    "article-title": "SiLearn: an intelligent sign vocabulary learning tool",
+   486→    "volume": "13",
+   487→    "author": "Joy",
+   488→    "year": "2019",
+   489→    "journal-title": "J. Enabl. Technol."
+   490→   },
+   491→   {
+   492→    "key": "B34",
+   493→    "doi-asserted-by": "publisher",
+   494→    "first-page": "259",
+   495→    "DOI": "10.1016/J.PROCS.01080",
+   496→    "article-title": "IoT based assistive device for deaf, dumb and blind people",
+   497→    "volume": "165",
+   498→    "author": "Karmel",
+   499→    "year": "2019",
+   500→    "journal-title": "Procedia Comput. Sci."
+   501→   },
+   502→   {
+   503→    "key": "B35",
+   504→    "doi-asserted-by": "publisher",
+   505→    "first-page": "e13233",
+   506→    "DOI": "10.2196/13233",
+   507→    "article-title": "Video remote interpreting technology in health care: cross-sectional study of deaf patients' experiences",
+   508→    "volume": "6",
+   509→    "author": "Kushalnagar",
+   510→    "year": "2019",
+   511→    "journal-title": "JMIR Rehabil. Assist. Technol."
+   512→   },
+   513→   {
+   514→    "key": "B36",
+   515→    "doi-asserted-by": "publisher",
+   516→    "first-page": "433",
+   517→    "DOI": "10.1108/IJILT-11-2020-0206/FULL/XML",
+   518→    "article-title": "Sign language teaching technological advances and differences in international contexts",
+   519→    "volume": "38",
+   520→    "author": "Llamazares de Prado",
+   521→    "year": "2021",
+   522→    "journal-title": "Int. J. Inform. Learn. Technol."
+   523→   },
+   524→   {
+   525→    "key": "B37",
+   526→    "doi-asserted-by": "publisher",
+   527→    "first-page": "577",
+   528→    "DOI": "10.1080./1034912X.2020.1849577",
+   529→    "article-title": "Sign Language Policy in the International Arena and Spanish, the Value of the Interpreter and the Teacher",
+   530→    "volume": "4",
+   531→    "author": "Llamazares De Prado",
+   532→    "year": "2020",
+   533→    "journal-title": "Int. J. Disabil. Develop. Edu."
+   534→   },
+   535→   {
+   536→    "key": "B38",
+   537→    "doi-asserted-by": "publisher",
+   538→    "first-page": "263",
+   539→    "DOI": "10.1016/J.PROCS.09270",
+   540→    "article-title": "Accessible options for deaf people in e-learning platforms: technology solutions for sign language translation",
+   541→    "volume": "67",
+   542→    "author": "Martins",
+   543→    "year": "2015",
+   544→    "journal-title": "Proced. Comput. Sci."
+   545→   },
+   546→   {
+   547→    "key": "B39",
+   548→    "doi-asserted-by": "publisher",
+   549→    "first-page": "808",
+   550→    "DOI": "10.1080/17483107.2016.1269210",
+   551→    "article-title": "Technology-assisted language intervention for children who are deaf or hard-of-hearing; a pilot study of augmentative and alternative communication for enhancing language development",
+   552→    "volume": "12",
+   553→    "author": "Meinzen-Derr",
+   554→    "year": "2016",
+   555→    "journal-title": "Disabil. Rehabil, Assist. Technol."
+   556→   },
+   557→   {
+   558→    "key": "B40",
+   559→    "doi-asserted-by": "publisher",
+   560→    "first-page": "172",
+   561→    "DOI": "10.14306/renhyd.18.3.114",
+   562→    "article-title": "Ítems de referencia para publicar Revisiones Sistemáticas y Metaanálisis: La Declaración PRISMA",
+   563→    "volume": "18",
+   564→    "author": "Moher",
+   565→    "year": "2014",
+   566→    "journal-title": "Revista Española de Nutrición Humana y Dietética"
+   567→   },
+   568→   {
+   569→    "key": "B41",
+   570→    "doi-asserted-by": "publisher",
+   571→    "first-page": "2787",
+   572→    "DOI": "10.1080./17483107.2021.2022787",
+   573→    "article-title": "Development of a low-resource wearable continuous gesture-to-speech conversion system",
+   574→    "volume": "5",
+   575→    "author": "Parthasarathy",
+   576→    "year": "2022",
+   577→    "journal-title": "Disabil. Rehabil, Assist. Technol"
+   578→   },
+   579→   {
+   580→    "key": "B42",
+   581→    "doi-asserted-by": "publisher",
+   582→    "first-page": "105825",
+   583→    "DOI": "10.1016/j.chb.2018.12.003",
+   584→    "article-title": "An educational game to teach numbers in Brazilian Sign Language while having fun",
+   585→    "volume": "107",
+   586→    "author": "Pontes",
+   587→    "year": "2020",
+   588→    "journal-title": "Comp. Human Behav."
+   589→   },
+   590→   {
+   591→    "key": "B43",
+   592→    "first-page": "20",
+   593→    "article-title": "“Technology acceptance evaluation by deaf students considering the inclusive education context,”",
+   594→    "volume-title": "Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)",
+   595→    "author": "Prietch",
+   596→    "year": "2015"
+   597→   },
+   598→   {
+   599→    "key": "B44",
+   600→    "doi-asserted-by": "publisher",
+   601→    "first-page": "63",
+   602→    "DOI": "10.1080/10400435.2015.1085923",
+   603→    "article-title": "The text telephone as an empowering technology in the daily lives of deaf people—A qualitative study",
+   604→    "volume": "28",
+   605→    "author": "Roos",
+   606→    "year": "2016",
+   607→    "journal-title": "Assist. Technol."
+   608→   },
+   609→   {
+   610→    "key": "B45",
+   611→    "unstructured": "A review of mobile application characteristics based on teaching and learning2428\n            SamsudinM.\n            GuanT.\n            YusofA.\n            YaacobM.\n          Int. J. Technol. Edu. Sci.12017"
+   612→   },
+   613→   {
+   614→    "key": "B46",
+   615→    "doi-asserted-by": "publisher",
+   616→    "first-page": "84",
+   617→    "DOI": "10.1109/MC.2008.226",
+   618→    "article-title": "HandTalk: Assistive technology for the deaf",
+   619→    "volume": "41",
+   620→    "author": "Sarji",
+   621→    "year": "2008",
+   622→    "journal-title": "Computer"
+   623→   },
+   624→   {
+   625→    "key": "B47",
+   626→    "unstructured": "No a la discapacidad: La Sordera como minoría lingüística y cultural6380\n            SolanoC. I. H.\n            BarrazaJ. A. V.\n            AvelarR. S.\n            BustosG. N.\n          Revista Nacional e Internacional de Educación Inclusiva112018"
+   627→   },
+   628→   {
+   629→    "key": "B48",
+   630→    "doi-asserted-by": "publisher",
+   631→    "first-page": "6620",
+   632→    "DOI": "10.1590./0102-311X00206620",
+   633→    "article-title": "Políticas de saúde e concepções de surdez e de deficiência auditiva no SUS: um monólogo? Health policies and definitions of deafness and hearing impairment in the SUS: a monologue?",
+   634→    "volume": "37",
+   635→    "author": "Soleman",
+   636→    "year": "2021",
+   637→    "journal-title": "Cadernos de Saúde Públ."
+   638→   },
+   639→   {
+   640→    "key": "B49",
+   641→    "doi-asserted-by": "publisher",
+   642→    "first-page": "1161",
+   643→    "DOI": "10.5753/CBIE.SBIE.2019.1161",
+   644→    "article-title": "Technologies for educating deaf children—a systematic literature review",
+   645→    "volume": "30",
+   646→    "author": "Sousa",
+   647→    "year": "2019",
+   648→    "journal-title": "Brazilian Symposium on Computers in Education (Simpósio Brasileiro de Informática na Educação - SBIE)"
+   649→   },
+   650→   {
+   651→    "key": "B50",
+   652→    "doi-asserted-by": "publisher",
+   653→    "first-page": "137",
+   654→    "DOI": "10.1080/03091900500067769",
+   655→    "article-title": "Evaluation of text telephones designed for people with impaired hearing or speech",
+   656→    "volume": "29",
+   657→    "author": "Spicer",
+   658→    "year": "2009",
+   659→    "journal-title": "J. Med. Engin. Technol."
+   660→   },
+   661→   {
+   662→    "key": "B51",
+   663→    "doi-asserted-by": "publisher",
+   664→    "first-page": "191",
+   665→    "DOI": "10.1109/7333.928579",
+   666→    "article-title": "A fuzzy rule-based approach to recognizing 3-D arm movements",
+   667→    "volume": "9",
+   668→    "author": "Su",
+   669→    "year": "2001",
+   670→    "journal-title": "IEEE Transact. Neural Sys. Rehabil. Engin."
+   671→   },
+   672→   {
+   673→    "key": "B52",
+   674→    "doi-asserted-by": "publisher",
+   675→    "first-page": "68",
+   676→    "DOI": "10.1016/J.JCLINEPI.09001",
+   677→    "article-title": "Extending the PRISMA statement to equity-focused systematic reviews (PRISMA-E 2012): explanation and elaboration",
+   678→    "volume": "70",
+   679→    "author": "Welch",
+   680→    "year": "2016",
+   681→    "journal-title": "J. Clin. Epidemiol."
+   682→   },
+   683→   {
+   684→    "key": "B53",
+   685→    "doi-asserted-by": "publisher",
+   686→    "DOI": "10.1016./j.compeleceng.2021.107026",
+   687→    "article-title": "Real time wearable speech recognition system for deaf persons",
+   688→    "volume": "91",
+   689→    "author": "Yaganoglu",
+   690→    "year": "2021",
+   691→    "journal-title": "Comp. Elect. Engin."
+   692→   },
+   693→   {
+   694→    "key": "B54",
+   695→    "doi-asserted-by": "publisher",
+   696→    "first-page": "44",
+   697→    "DOI": "10.1177/1084713808330207",
+   698→    "article-title": "User evaluation of a communication system that automatically generates captions to improve telephone communication",
+   699→    "volume": "13",
+   700→    "author": "Zekveld",
+   701→    "year": "2008",
+   702→    "journal-title": "Trends Hear."
+   703→   }
+   704→  ],
+   705→  "container-title": "Frontiers in Education",
+   706→  "original-title": [],
+   707→  "link": [
+   708→   {
+   709→    "URL": "https://www.frontiersin.org/articles/10.3389/feduc.2023.1121597/full",
+   710→    "content-type": "unspecified",
+   711→    "content-version": "vor",
+   712→    "intended-application": "similarity-checking"
+   713→   }
+   714→  ],
+   715→  "deposited": {
+   716→   "date-parts": [
+   717→    [
+   718→     2023,
+   719→     4,
+   720→     5
+   721→    ]
+   722→   ],
+   723→   "date-time": "2023-04-05T05:36:34Z",
+   724→   "timestamp": 1680672994000
+   725→  },
+   726→  "score": 1,
+   727→  "resource": {
+   728→   "primary": {
+   729→    "URL": "https://www.frontiersin.org/articles/10.3389/feduc.2023.1121597/full"
+   730→   }
+   731→  },
+   732→  "subtitle": [],
+   733→  "short-title": [],
+   734→  "issued": {
+   735→   "date-parts": [
+   736→    [
+   737→     2023,
+   738→     4,
+   739→     5
+   740→    ]
+   741→   ]
+   742→  },
+   743→  "references-count": 54,
+   744→  "alternative-id": [
+   745→   "10.3389/feduc.2023.1121597"
+   746→  ],
+   747→  "URL": "http://dx.doi.org/10.3389/feduc.2023.1121597",
+   748→  "relation": {},
+   749→  "ISSN": [
+   750→   "2504-284X"
+   751→  ],
+   752→  "subject": [],
+   753→  "container-title-short": "Front. Educ.",
+   754→  "published": {
+   755→   "date-parts": [
+   756→    [
+   757→     2023,
+   758→     4,
+   759→     5
+   760→    ]
+   761→   ]
+   762→  },
+   763→  "article-number": "1121597"
+   764→ },
+   765→ "sanjaya2023": {
+   766→  "indexed": {
+   767→   "date-parts": [
+   768→    [
+   769→     2026,
+   770→     9,
+   771→     29
+   772→    ]
+   773→   ],
+   774→   "date-time": "2026-09-29T17:30:37Z",
+   775→   "timestamp": 1790703037696,
+   776→   "version": "4.1.0"
+   777→  },
+   778→  "reference-count": 0,
+   779→  "publisher": "STMIK Indonesia Padang",
+   780→  "issue": "6",
+   781→  "license": [
+   782→   {
+   783→    "start": {
+   784→     "date-parts": [
+   785→      [
+   786→       2023,
+   787→       12,
+   788→       30
+   789→      ]
+   790→     ],
+   791→     "date-time": "2023-12-30T00:00:00Z",
+   792→     "timestamp": 1703894400000
+   793→    },
+   794→    "content-version": "unspecified",
+   795→    "delay-in-days": 0,
+   796→    "URL": "https://creativecommons.org/licenses/by-sa/4.0"
+   797→   }
+   798→  ],
+   799→  "content-domain": {
+   800→   "domain": [],
+   801→   "crossmark-restriction": false
+   802→  },
+   803→  "abstract": "<jats:p>This study uses the Systematic Literature Review (SLR) method to examine the application of deep learning techniques focusing on BISINDO (Bahasa Isyarat Indonesia) image recognition. This is crucial for enhancing communication accessibility for the hearing-impaired community. The SLR process involves three stages: planning, conducting, and reporting. During the planning stage, research topics, questions, and search criteria are established, while the conducting stage involves comprehensive article retrieval and rigorous filtering. In the reporting stage, the study highlights the significance of various deep learning methodologies, including the implementation of several algorithms that ace in image recognition. For example, Convolutional Neural Network (CNN), Long Short Term Memory (LSTM), and a combination of the two methods, each with unique advantages and limitations. Along with that, this paper aims to find gaps in previous research and act as a guide for future deep learning model development. Moreover, the research outlines the development of a high-performance model, emphasizing key phases such as image augmentation and data preprocessing, as well as model optimization. These efforts contribute to a better understanding of BISINDO image recognition, offering valuable insights for researchers and practitioners aiming to support easier accessibility and communication for the hearing-impaired community through advanced deep learning approaches.</jats:p>",
+   804→  "DOI": "10.33022/ijcs.v12i6.3539",
+   805→  "type": "journal-article",
+   806→  "created": {
+   807→   "date-parts": [
+   808→    [
+   809→     2024,
+   810→     1,
+   811→     7
+   812→    ]
+   813→   ],
+   814→   "date-time": "2024-01-07T09:01:12Z",
+   815→   "timestamp": 1704618072000
+   816→  },
+   817→  "source": "Crossref",
+   818→  "is-referenced-by-count": 3,
+   819→  "title": "BISINDO Sign Language Recognition: A Systematic Literature Review of Deep Learning Techniques for Image Processing",
+   820→  "prefix": "10.33022",
+   821→  "volume": "12",
+   822→  "author": [
+   823→   {
+   824→    "given": "Samuel Ady",
+   825→    "family": "Sanjaya",
+   826→    "sequence": "first",
+   827→    "affiliation": [],
+   828→    "role": [
+   829→     {
+   830→      "vocabulary": "crossref",
+   831→      "role": "author"
+   832→     }
+   833→    ]
+   834→   },
+   835→   {
+   836→    "given": "Hadinata",
+   837→    "family": "Faustine Ilone",
+   838→    "sequence": "additional",
+   839→    "affiliation": [],
+   840→    "role": [
+   841→     {
+   842→      "vocabulary": "crossref",
+   843→      "role": "author"
+   844→     }
+   845→    ]
+   846→   }
+   847→  ],
+   848→  "member": "18447",
+   849→  "published-online": {
+   850→   "date-parts": [
+   851→    [
+   852→     2023,
+   853→     12,
+   854→     30
+   855→    ]
+   856→   ]
+   857→  },
+   858→  "container-title": "Indonesian Journal of Computer Science",
+   859→  "original-title": [],
+   860→  "link": [
+   861→   {
+   862→    "URL": "http://ijcs.stmikindonesia.ac.id/ijcs/index.php/ijcs/article/download/3539/298",
+   863→    "content-type": "application/pdf",
+   864→    "content-version": "vor",
+   865→    "intended-application": "text-mining"
+   866→   },
+   867→   {
+   868→    "URL": "http://ijcs.stmikindonesia.ac.id/ijcs/index.php/ijcs/article/download/3539/298",
+   869→    "content-type": "unspecified",
+   870→    "content-version": "vor",
+   871→    "intended-application": "similarity-checking"
+   872→   }
+   873→  ],
+   874→  "deposited": {
+   875→   "date-parts": [
+   876→    [
+   877→     2024,
+   878→     1,
+   879→     7
+   880→    ]
+   881→   ],
+   882→   "date-time": "2024-01-07T09:01:13Z",
+   883→   "timestamp": 1704618073000
+   884→  },
+   885→  "score": 1,
+   886→  "resource": {
+   887→   "primary": {
+   888→    "URL": "http://ijcs.stmikindonesia.ac.id/ijcs/index.php/ijcs/article/view/3539"
+   889→   }
+   890→  },
+   891→  "subtitle": [],
+   892→  "short-title": [],
+   893→  "issued": {
+   894→   "date-parts": [
+   895→    [
+   896→     2023,
+   897→     12,
+   898→     30
+   899→    ]
+   900→   ]
+   901→  },
+   902→  "references-count": 0,
+   903→  "journal-issue": {
+   904→   "issue": "6",
+   905→   "published-online": {
+   906→    "date-parts": [
+   907→     [
+   908→      2023,
+   909→      12,
+   910→      30
+   911→     ]
+   912→    ]
+   913→   }
+   914→  },
+   915→  "URL": "http://dx.doi.org/10.33022/ijcs.v12i6.3539",
+   916→  "relation": {},
+   917→  "ISSN": [
+   918→   "2549-7286",
+   919→   "2302-4364"
+   920→  ],
+   921→  "subject": [],
+   922→  "container-title-short": "ijcs",
+   923→  "published": {
+   924→   "date-parts": [
+   925→    [
+   926→     2023,
+   927→     12,
+   928→     30
+   929→    ]
+   930→   ]
+   931→  }
+   932→ },
+   933→ "dwijayanti2021": {
+   934→  "indexed": {
+   935→   "date-parts": [
+   936→    [
+   937→     2026,
+   938→     5,
+   939→     29
+   940→    ]
+   941→   ],
+   942→   "date-time": "2026-05-29T11:15:14Z",
+   943→   "timestamp": 1780053314071,
+   944→   "version": "3.54.0"
+   945→  },
+   946→  "reference-count": 0,
+   947→  "publisher": "The Science and Information Organization",
+   948→  "issue": "10",
+   949→  "content-domain": {
+   950→   "domain": [],
+   951→   "crossmark-restriction": false
+   952→  },
+   953→  "DOI": "10.14569/ijacsa.2021.0121046",
+   954→  "type": "journal-article",
+   955→  "created": {
+   956→   "date-parts": [
+   957→    [
+   958→     2021,
+   959→     11,
+   960→     8
+   961→    ]
+   962→   ],
+   963→   "date-time": "2021-11-08T12:13:25Z",
+   964→   "timestamp": 1636373605000
+   965→  },
+   966→  "source": "Crossref",
+   967→  "is-referenced-by-count": 5,
+   968→  "title": "Indonesia Sign Language Recognition using Convolutional Neural Network",
+   969→  "prefix": "10.14569",
+   970→  "volume": "12",
+   971→  "author": [
+   972→   {
+   973→    "given": "Suci",
+   974→    "family": "Dwijayanti",
+   975→    "sequence": "first",
+   976→    "affiliation": [],
+   977→    "role": [
+   978→     {
+   979→      "vocabulary": "crossref",
+   980→      "role": "author"
+   981→     }
+   982→    ]
+   983→   },
+   984→   {
+   985→    "given": "Hermawati",
+   986→    "family": "-",
+   987→    "sequence": "additional",
+   988→    "affiliation": [],
+   989→    "role": [
+   990→     {
+   991→      "vocabulary": "crossref",
+   992→      "role": "author"
+   993→     }
+   994→    ]
+   995→   },
+   996→   {
+   997→    "given": "Sahirah Inas",
+   998→    "family": "Taqiyyah",
+   999→    "sequence": "additional",
+  1000→    "affiliation": [],
+  1001→    "role": [
+  1002→     {
+  1003→      "vocabulary": "crossref",
+  1004→      "role": "author"
+  1005→     }
+  1006→    ]
+  1007→   },
+  1008→   {
+  1009→    "given": "Hera",
+  1010→    "family": "Hikmarika",
+  1011→    "sequence": "additional",
+  1012→    "affiliation": [],
+  1013→    "role": [
+  1014→     {
+  1015→      "vocabulary": "crossref",
+  1016→      "role": "author"
+  1017→     }
+  1018→    ]
+  1019→   },
+  1020→   {
+  1021→    "given": "Bhakti Yudho",
+  1022→    "family": "Suprapto",
+  1023→    "sequence": "additional",
+  1024→    "affiliation": [],
+  1025→    "role": [
+  1026→     {
+  1027→      "vocabulary": "crossref",
+  1028→      "role": "author"
+  1029→     }
+  1030→    ]
+  1031→   }
+  1032→  ],
+  1033→  "member": "5673",
+  1034→  "published-online": {
+  1035→   "date-parts": [
+  1036→    [
+  1037→     2021
+  1038→    ]
+  1039→   ]
+  1040→  },
+  1041→  "container-title": "International Journal of Advanced Computer Science and Applications",
+  1042→  "original-title": [],
+  1043→  "language": "en",
+  1044→  "link": [
+  1045→   {
+  1046→    "URL": "http://thesai.org/Downloads/Volume12No10/Paper_46-Indonesia_Sign_Language_Recognition.pdf",
+  1047→    "content-type": "unspecified",
+  1048→    "content-version": "vor",
+  1049→    "intended-application": "similarity-checking"
+  1050→   }
+  1051→  ],
+  1052→  "deposited": {
+  1053→   "date-parts": [
+  1054→    [
+  1055→     2021,
+  1056→     11,
+  1057→     8
+  1058→    ]
+  1059→   ],
+  1060→   "date-time": "2021-11-08T12:14:48Z",
+  1061→   "timestamp": 1636373688000
+  1062→  },
+  1063→  "score": 1,
+  1064→  "resource": {
+  1065→   "primary": {
+  1066→    "URL": "http://thesai.org/Publications/ViewPaper?Volume=12&Issue=10&Code=IJACSA&SerialNo=46"
+  1067→   }
+  1068→  },
+  1069→  "subtitle": [],
+  1070→  "short-title": [],
+  1071→  "issued": {
+  1072→   "date-parts": [
+  1073→    [
+  1074→     2021
+  1075→    ]
+  1076→   ]
+  1077→  },
+  1078→  "references-count": 0,
+  1079→  "journal-issue": {
+  1080→   "issue": "10",
+  1081→   "published-online": {
+  1082→    "date-parts": [
+  1083→     [
+  1084→      2021
+  1085→     ]
+  1086→    ]
+  1087→   }
+  1088→  },
+  1089→  "alternative-id": [
+  1090→   "10.14569/IJACSA.2021.0121046"
+  1091→  ],
+  1092→  "URL": "http://dx.doi.org/10.14569/IJACSA.2021.0121046",
+  1093→  "relation": {},
+  1094→  "ISSN": [
+  1095→   "2156-5570",
+  1096→   "2158-107X"
+  1097→  ],
+  1098→  "subject": [],
+  1099→  "container-title-short": "IJACSA",
+  1100→  "published": {
+  1101→   "date-parts": [
+  1102→    [
+  1103→     2021
+  1104→    ]
+  1105→   ]
+  1106→  }
+  1107→ },
+  1108→ "ma2019survey": {
+  1109→  "indexed": {
+  1110→   "date-parts": [
+  1111→    [
+  1112→     2026,
+  1113→     10,
+  1114→     22
+  1115→    ]
+  1116→   ],
+  1117→   "date-time": "2026-10-22T17:01:28Z",
+  1118→   "timestamp": 1792688488707,
+  1119→   "version": "4.5.0"
+  1120→  },
+  1121→  "reference-count": 155,
+  1122→  "publisher": "Association for Computing Machinery (ACM)",
+  1123→  "issue": "3",
+  1124→  "license": [
+  1125→   {
+  1126→    "start": {
+  1127→     "date-parts": [
+  1128→      [
+  1129→       2019,
+  1130→       6,
+  1131→       18
+  1132→      ]
+  1133→     ],
+  1134→     "date-time": "2019-06-18T00:00:00Z",
+  1135→     "timestamp": 1560816000000
+  1136→    },
+  1137→    "content-version": "vor",
+  1138→    "delay-in-days": 0,
+  1139→    "URL": "https://www.acm.org/publications/policies/copyright_policy#Background"
+  1140→   }
+  1141→  ],
+  1142→  "funder": [
+  1143→   {
+  1144→    "DOI": "10.13039/100000001",
+  1145→    "name": "U.S. National Science Foundation",
+  1146→    "doi-asserted-by": "crossref",
+  1147→    "award": [
+  1148→     "CNS-1253506 (CAREER) and CNS-1841129"
+  1149→    ],
+  1150→    "award-info": [
+  1151→     {
+  1152→      "award-number": [
+  1153→       "CNS-1253506 (CAREER) and CNS-1841129"
+  1154→      ]
+  1155→     }
+  1156→    ],
+  1157→    "id": [
+  1158→     {
+  1159→      "id": "10.13039/100000001",
+  1160→      "id-type": "DOI",
+  1161→      "asserted-by": "crossref"
+  1162→     }
+  1163→    ]
+  1164→   }
+  1165→  ],
+  1166→  "content-domain": {
+  1167→   "domain": [
+  1168→    "dl.acm.org"
+  1169→   ],
+  1170→   "crossmark-restriction": true
+  1171→  },
+  1172→  "published-print": {
+  1173→   "date-parts": [
+  1174→    [
+  1175→     2020,
+  1176→     5,
+  1177→     31
+  1178→    ]
+  1179→   ]
+  1180→  },
+  1181→  "abstract": "<jats:p>With the high demand for wireless data traffic, WiFi networks have experienced very rapid growth, because they provide high throughput and are easy to deploy. Recently, Channel State Information (CSI) measured by WiFi networks is widely used for different sensing purposes. To get a better understanding of existing WiFi sensing technologies and future WiFi sensing trends, this survey gives a comprehensive review of the signal processing techniques, algorithms, applications, and performance results of WiFi sensing with CSI. Different WiFi sensing algorithms and signal processing techniques have their own advantages and limitations and are suitable for different WiFi sensing applications. The survey groups CSI-based WiFi sensing applications into three categories, detection, recognition, and estimation, depending on whether the outputs are binary/multi-class classifications or numerical values. With the development and deployment of new WiFi technologies, there will be more WiFi sensing opportunities wherein the targets may go beyond from humans to environments, animals, and objects. The survey highlights three challenges for WiFi sensing: robustness and generalization, privacy and security, and coexistence of WiFi sensing and networking. Finally, the survey presents three future WiFi sensing trends, i.e., integrating cross-layer network information, multi-device cooperation, and fusion of different sensors, for enhancing existing WiFi sensing capabilities and enabling new WiFi sensing opportunities.</jats:p>",
+  1182→  "DOI": "10.1145/3310194",
+  1183→  "type": "journal-article",
+  1184→  "created": {
+  1185→   "date-parts": [
+  1186→    [
+  1187→     2019,
+  1188→     6,
+  1189→     19
+  1190→    ]
+  1191→   ],
+  1192→   "date-time": "2019-06-19T12:05:38Z",
+  1193→   "timestamp": 1560945938000
+  1194→  },
+  1195→  "page": "1-36",
+  1196→  "update-policy": "https://doi.org/10.1145/crossmark-policy",
+  1197→  "source": "Crossref",
+  1198→  "is-referenced-by-count": 865,
+  1199→  "title": "WiFi Sensing with Channel State Information",
+  1200→  "prefix": "10.1145",
+  1201→  "volume": "52",
+  1202→  "author": [
+  1203→   {
+  1204→    "ORCID": "https://orcid.org/0000-0002-8321-3735",
+  1205→    "authenticated-orcid": false,
+  1206→    "given": "Yongsen",
+  1207→    "family": "Ma",
+  1208→    "sequence": "first",
+  1209→    "affiliation": [
+  1210→     {
+  1211→      "name": "Computer Science Department, College of William 8 Mary, VA, USA"
+  1212→     }
+  1213→    ],
+  1214→    "role": [
+  1215→     {
+  1216→      "vocabulary": "crossref",
+  1217→      "role": "author"
+  1218→     }
+  1219→    ]
+  1220→   },
+  1221→   {
+  1222→    "given": "Gang",
+  1223→    "family": "Zhou",
+  1224→    "sequence": "additional",
+  1225→    "affiliation": [
+  1226→     {
+  1227→      "name": "Computer Science Department, College of William 8 Mary, VA, USA"
+  1228→     }
+  1229→    ],
+  1230→    "role": [
+  1231→     {
+  1232→      "vocabulary": "crossref",
+  1233→      "role": "author"
+  1234→     }
+  1235→    ]
+  1236→   },
+  1237→   {
+  1238→    "given": "Shuangquan",
+  1239→    "family": "Wang",
+  1240→    "sequence": "additional",
+  1241→    "affiliation": [
+  1242→     {
+  1243→      "name": "Computer Science Department, College of William 8 Mary, VA, USA"
+  1244→     }
+  1245→    ],
+  1246→    "role": [
+  1247→     {
+  1248→      "vocabulary": "crossref",
+  1249→      "role": "author"
+  1250→     }
+  1251→    ]
+  1252→   }
+  1253→  ],
+  1254→  "member": "320",
+  1255→  "published-online": {
+  1256→   "date-parts": [
+  1257→    [
+  1258→     2019,
+  1259→     6,
+  1260→     18
+  1261→    ]
+  1262→   ]
+  1263→  },
+  1264→  "reference": [
+  1265→   {
+  1266→    "key": "e_1_2_1_1_1",
+  1267→    "doi-asserted-by": "publisher",
+  1268→    "DOI": "10.1145/2746285.2755969"
+  1269→   },
+  1270→   {
+  1271→    "key": "e_1_2_1_2_1",
+  1272→    "volume-title": "Proceedings of the 2015 IEEE Conference on Computer Communications (INFOCOM’15)",
+  1273→    "author": "Abdelnasser Heba"
+  1274→   },
+  1275→   {
+  1276→    "key": "e_1_2_1_3_1",
+  1277→    "doi-asserted-by": "publisher",
+  1278→    "DOI": "10.1145/2486001.2486039"
+  1279→   },
+  1280→   {
+  1281→    "key": "e_1_2_1_4_1",
+  1282→    "doi-asserted-by": "publisher",
+  1283→    "DOI": "10.1145/2789168.2790109"
+  1284→   },
+  1285→   {
+  1286→    "key": "e_1_2_1_5_1",
+  1287→    "doi-asserted-by": "publisher",
+  1288→    "DOI": "10.1109/JSAC.2017.2680998"
+  1289→   },
+  1290→   {
+  1291→    "key": "e_1_2_1_6_1",
+  1292→    "doi-asserted-by": "publisher",
+  1293→    "DOI": "10.1109/WoWMoM.2017.7974315"
+  1294→   },
+  1295→   {
+  1296→    "key": "e_1_2_1_7_1",
+  1297→    "doi-asserted-by": "publisher",
+  1298→    "DOI": "10.1145/2818000.2818028"
+  1299→   },
+  1300→   {
+  1301→    "key": "e_1_2_1_8_1",
+  1302→    "doi-asserted-by": "publisher",
+  1303→    "DOI": "10.1145/2627393.2627418"
+  1304→   },
+  1305→   {
+  1306→    "key": "e_1_2_1_9_1",
+  1307→    "doi-asserted-by": "publisher",
+  1308→    "DOI": "10.1145/2504730.2504742"
+  1309→   },
+  1310→   {
+  1311→    "key": "e_1_2_1_10_1",
+  1312→    "doi-asserted-by": "publisher",
+  1313→    "DOI": "10.1145/3130906"
+  1314→   },
+  1315→   {
+  1316→    "key": "e_1_2_1_11_1",
+  1317→    "doi-asserted-by": "publisher",
+  1318→    "DOI": "10.1145/2942358.2942373"
+  1319→   },
+  1320→   {
+  1321→    "key": "e_1_2_1_12_1",
+  1322→    "volume-title": "Deep Learning with Python",
+  1323→    "author": "Chollet Francois",
+  1324→    "edition": "1"
+  1325→   },
+  1326→   {
+  1327→    "key": "e_1_2_1_13_1",
+  1328→    "doi-asserted-by": "publisher",
+  1329→    "DOI": "10.1145/2632048.2636066"
+  1330→   },
+  1331→   {
+  1332→    "key": "e_1_2_1_14_1",
+  1333→    "doi-asserted-by": "publisher",
+  1334→    "DOI": "10.1145/2753497.2753499"
+  1335→   },
+  1336→   {
+  1337→    "key": "e_1_2_1_15_1",
+  1338→    "doi-asserted-by": "publisher",
+  1339→    "DOI": "10.1145/2935651.2935657"
+  1340→   },
+  1341→   {
+  1342→    "key": "e_1_2_1_16_1",
+  1343→    "first-page": "2",
+  1344→    "article-title": "WiDriver: Driver activity recognition system based on WiFi CSI",
+  1345→    "volume": "25",
+  1346→    "author": "Duan Shihong",
+  1347→    "year": "2018",
+  1348→    "journal-title": "Int. J. Wireless Inf. Netw."
+  1349→   },
+  1350→   {
+  1351→    "key": "e_1_2_1_17_1",
+  1352→    "volume-title": "Retrieved on",
+  1353→    "author": "Research Ettus",
+  1354→    "year": "2018"
+  1355→   },
+  1356→   {
+  1357→    "key": "e_1_2_1_18_1",
+  1358→    "doi-asserted-by": "publisher",
+  1359→    "DOI": "10.1145/2906388.2906411"
+  1360→   },
+  1361→   {
+  1362→    "key": "e_1_2_1_19_1",
+  1363→    "doi-asserted-by": "publisher",
+  1364→    "DOI": "10.1109/IPSN.2016.7460677"
+  1365→   },
+  1366→   {
+  1367→    "key": "e_1_2_1_20_1",
+  1368→    "volume-title": "MAIS: Multiple activity identification system using channel state information of WiFi signals. In Wireless Algorithms, Systems, and Applications",
+  1369→    "author": "Feng Chunhai",
+  1370→    "year": "2017"
+  1371→   },
+  1372→   {
+  1373→    "key": "e_1_2_1_21_1",
+  1374→    "volume-title": "Proceedings of the 15th USENIX Symposium on Networked Systems Design and Implementation (NSDI’18)",
+  1375→    "author": "Gao Chuhan",
+  1376→    "year": "2018"
+  1377→   },
+  1378→   {
+  1379→    "key": "e_1_2_1_22_1",
+  1380→    "doi-asserted-by": "publisher",
+  1381→    "DOI": "10.1109/TVT.2017.2737553"
+  1382→   },
+  1383→   {
+  1384→    "key": "e_1_2_1_23_1",
+  1385→    "doi-asserted-by": "publisher",
+  1386→    "DOI": "10.3390/s151229896"
+  1387→   },
+  1388→   {
+  1389→    "key": "e_1_2_1_24_1",
+  1390→    "doi-asserted-by": "publisher",
+  1391→    "DOI": "10.1016/j.adhoc.2015.09.005"
+  1392→   },
+  1393→   {
+  1394→    "key": "e_1_2_1_25_1",
+  1395→    "volume-title": "Deep Learning",
+  1396→    "author": "Goodfellow Ian"
+  1397→   },
+  1398→   {
+  1399→    "key": "e_1_2_1_26_1",
+  1400→    "volume-title": "Generative adversarial networks. (June",
+  1401→    "author": "Goodfellow Ian",
+  1402→    "year": "2014"
+  1403→   },
+  1404→   {
+  1405→    "key": "e_1_2_1_27_1",
+  1406→    "first-page": "6",
+  1407→    "article-title": "MoSense: An RF-based motion detection system via off-the-shelf WiFi devices",
+  1408→    "volume": "4",
+  1409→    "author": "Gu Yu",
+  1410→    "year": "2017",
+  1411→    "journal-title": "IEEE IoT J."
+  1412→   },
+  1413→   {
+  1414→    "key": "e_1_2_1_28_1",
+  1415→    "volume-title": "HuAc: Human activity recognition using crowdsourced WiFi signals and skeleton data. Wireless Communications and Mobile Computing",
+  1416→    "author": "Guo Linlin",
+  1417→    "year": "2018"
+  1418→   },
+  1419→   {
+  1420→    "key": "e_1_2_1_29_1",
+  1421→    "doi-asserted-by": "publisher",
+  1422→    "DOI": "10.1145/3131672.3131692"
+  1423→   },
+  1424→   {
+  1425→    "key": "e_1_2_1_31_1",
+  1426→    "doi-asserted-by": "publisher",
+  1427→    "DOI": "10.1145/1925861.1925870"
+  1428→   },
+  1429→   {
+  1430→    "key": "e_1_2_1_32_1",
+  1431→    "volume-title": "Proceedings of the 2014 IEEE Conference on Computer Communications (INFOCOM’14)",
+  1432→    "author": "Han Chunmei"
+  1433→   },
+  1434→   {
+  1435→    "key": "e_1_2_1_33_1",
+  1436→    "doi-asserted-by": "publisher",
+  1437→    "DOI": "10.1109/ICCCN.2015.7288485"
+  1438→   },
+  1439→   {
+  1440→    "key": "e_1_2_1_34_1",
+  1441→    "doi-asserted-by": "publisher",
+  1442→    "DOI": "10.1145/2994374.2994377"
+  1443→   },
+  1444→   {
+  1445→    "key": "e_1_2_1_35_1",
+  1446→    "doi-asserted-by": "publisher",
+  1447→    "DOI": "10.1145/2668332.2668344"
+  1448→   },
+  1449→   {
+  1450→    "key": "e_1_2_1_36_1",
+  1451→    "doi-asserted-by": "publisher",
+  1452→    "DOI": "10.1145/1866307.1866318"
+  1453→   },
+  1454→   {
+  1455→    "key": "e_1_2_1_37_1",
+  1456→    "doi-asserted-by": "publisher",
+  1457→    "DOI": "10.1145/2968219.2971377"
+  1458→   },
+  1459→   {
+  1460→    "key": "e_1_2_1_38_1",
+  1461→    "doi-asserted-by": "publisher",
+  1462→    "DOI": "10.1145/2935651.2935659"
+  1463→   },
+  1464→   {
+  1465→    "key": "e_1_2_1_39_1",
+  1466→    "doi-asserted-by": "publisher",
+  1467→    "DOI": "10.1145/3241539.3241548"
+  1468→   },
+  1469→   {
+  1470→    "key": "e_1_2_1_40_1",
+  1471→    "doi-asserted-by": "publisher",
+  1472→    "DOI": "10.1109/INFCOM.2013.6567061"
+  1473→   },
+  1474→   {
+  1475→    "key": "e_1_2_1_41_1",
+  1476→    "volume-title": "Proceedings of the 12th USENIX Conference on Networked Systems Design and Implementation (NSDI’15)",
+  1477→    "author": "Joshi Kiran",
+  1478→    "year": "2015"
+  1479→   },
+  1480→   {
+  1481→    "key": "e_1_2_1_42_1",
+  1482→    "volume-title": "Proceedings of the 16th ACM/IEEE International Conference on Information Processing in Sensor Networks (IPSN’17)",
+  1483→    "author": "Chitra"
+  1484→   },
+  1485→   {
+  1486→    "key": "e_1_2_1_43_1",
+  1487→    "doi-asserted-by": "publisher",
+  1488→    "DOI": "10.5555/1072430.1072434"
+  1489→   },
+  1490→   {
+  1491→    "key": "e_1_2_1_44_1",
+  1492→    "doi-asserted-by": "publisher",
+  1493→    "DOI": "10.1109/ICUFN.2017.7993844"
+  1494→   },
+  1495→   {
+  1496→    "key": "e_1_2_1_45_1",
+  1497→    "doi-asserted-by": "publisher",
+  1498→    "DOI": "10.1145/2307863.2307869"
+  1499→   },
+  1500→   {
+  1501→    "key": "e_1_2_1_46_1",
+  1502→    "doi-asserted-by": "publisher",
+  1503→    "DOI": "10.1145/2785956.2787487"
+  1504→   },
+  1505→   {
+  1506→    "key": "e_1_2_1_47_1",
+  1507→    "doi-asserted-by": "publisher",
+  1508→    "DOI": "10.1145/2486001.2486034"
+  1509→   },
+  1510→   {
+  1511→    "key": "e_1_2_1_48_1",
+  1512→    "doi-asserted-by": "publisher",
+  1513→    "DOI": "10.1109/ACCESS.2017.2776527"
+  1514→   },
+  1515→   {
+  1516→    "key": "e_1_2_1_49_1",
+  1517→    "doi-asserted-by": "publisher",
+  1518→    "DOI": "10.1145/2971648.2971738"
+  1519→   },
+  1520→   {
+  1521→    "key": "e_1_2_1_50_1",
+  1522→    "doi-asserted-by": "publisher",
+  1523→    "DOI": "10.1145/2976749.2978397"
+  1524→   },
+  1525→   {
+  1526→    "key": "e_1_2_1_51_1",
+  1527→    "volume-title": "Enhanced Quality of Life and Smart Living",
+  1528→    "author": "Li Shengjie"
+  1529→   },
+  1530→   {
+  1531→    "key": "e_1_2_1_52_1",
+  1532→    "doi-asserted-by": "publisher",
+  1533→    "DOI": "10.1145/3130940"
+  1534→   },
+  1535→   {
+  1536→    "key": "e_1_2_1_53_1",
+  1537→    "doi-asserted-by": "publisher",
+  1538→    "DOI": "10.1145/2590296.2590321"
+  1539→   },
+  1540→   {
+  1541→    "key": "e_1_2_1_54_1",
+  1542→    "doi-asserted-by": "publisher",
+  1543→    "DOI": "10.1109/TMC.2017.2718540"
+  1544→   },
+  1545→   {
+  1546→    "key": "e_1_2_1_55_1",
+  1547→    "doi-asserted-by": "publisher",
+  1548→    "DOI": "10.1109/HealthCom.2017.8210800"
+  1549→   },
+  1550→   {
+  1551→    "key": "e_1_2_1_56_1",
+  1552→    "doi-asserted-by": "publisher",
+  1553→    "DOI": "10.1145/2746285.2746303"
+  1554→   },
+  1555→   {
+  1556→    "key": "e_1_2_1_57_1",
+  1557→    "doi-asserted-by": "publisher",
+  1558→    "DOI": "10.1109/RTSS.2014.30"
+  1559→   },
+  1560→   {
+  1561→    "key": "e_1_2_1_58_1",
+  1562→    "doi-asserted-by": "publisher",
+  1563→    "DOI": "10.1109/TMC.2015.2505729"
+  1564→   },
+  1565→   {
+  1566→    "key": "e_1_2_1_59_1",
+  1567→    "doi-asserted-by": "publisher",
+  1568→    "DOI": "10.1109/ACCESS.2017.2785444"
+  1569→   },
+  1570→   {
+  1571→    "key": "e_1_2_1_60_1",
+  1572→    "doi-asserted-by": "publisher",
+  1573→    "DOI": "10.1145/3106989.3106996"
+  1574→   },
+  1575→   {
+  1576→    "key": "e_1_2_1_61_1",
+  1577→    "doi-asserted-by": "publisher",
+  1578→    "DOI": "10.1145/2968219.2971394"
+  1579→   },
+  1580→   {
+  1581→    "key": "e_1_2_1_62_1",
+  1582→    "doi-asserted-by": "publisher",
+  1583→    "DOI": "10.1145/3191755"
+  1584→   },
+  1585→   {
+  1586→    "key": "e_1_2_1_63_1",
+  1587→    "volume-title": "Proceedings of the 2015 9th International Conference on Signal Processing and Communication Systems (ICSPCS’15)",
+  1588→    "author": "Maheshwari Saurabh"
+  1589→   },
+  1590→   {
+  1591→    "key": "e_1_2_1_64_1",
+  1592→    "doi-asserted-by": "publisher",
+  1593→    "DOI": "10.1145/2632048.2632095"
+  1594→   },
+  1595→   {
+  1596→    "key": "e_1_2_1_65_1",
+  1597→    "doi-asserted-by": "publisher",
+  1598→    "DOI": "10.1145/3128128.3128133"
+  1599→   },
+  1600→   {
+  1601→    "key": "e_1_2_1_66_1",
+  1602→    "doi-asserted-by": "publisher",
+  1603→    "DOI": "10.1145/3131898"
+  1604→   },
+  1605→   {
+  1606→    "key": "e_1_2_1_67_1",
+  1607→    "doi-asserted-by": "publisher",
+  1608→    "DOI": "10.1145/2993422.2993579"
+  1609→   },
+  1610→   {
+  1611→    "key": "e_1_2_1_68_1",
+  1612→    "doi-asserted-by": "publisher",
+  1613→    "DOI": "10.1145/3161183"
+  1614→   },
+  1615→   {
+  1616→    "key": "e_1_2_1_69_1",
+  1617→    "doi-asserted-by": "publisher",
+  1618→    "DOI": "10.1145/2632048.2632097"
+  1619→   },
+  1620→   {
+  1621→    "key": "e_1_2_1_70_1",
+  1622→    "doi-asserted-by": "publisher",
+  1623→    "DOI": "10.1109/GLOCOM.2017.8253925"
+  1624→   },
+  1625→   {
+  1626→    "key": "e_1_2_1_71_1",
+  1627→    "doi-asserted-by": "publisher",
+  1628→    "DOI": "10.1145/3123024.3124418"
+  1629→   },
+  1630→   {
+  1631→    "key": "e_1_2_1_72_1",
+  1632→    "doi-asserted-by": "publisher",
+  1633→    "DOI": "10.1145/2500423.2500436"
+  1634→   },
+  1635→   {
+  1636→    "key": "e_1_2_1_73_1",
+  1637→    "doi-asserted-by": "publisher",
+  1638→    "DOI": "10.1145/3157677"
+  1639→   },
+  1640→   {
+  1641→    "key": "e_1_2_1_74_1",
+  1642→    "doi-asserted-by": "publisher",
+  1643→    "DOI": "10.1145/3084041.3084067"
+  1644→   },
+  1645→   {
+  1646→    "key": "e_1_2_1_75_1",
+  1647→    "doi-asserted-by": "publisher",
+  1648→    "DOI": "10.1109/PADSW.2014.7097784"
+  1649→   },
+  1650→   {
+  1651→    "key": "e_1_2_1_76_1",
+  1652→    "doi-asserted-by": "publisher",
+  1653→    "DOI": "10.1145/2980115.2980131"
+  1654→   },
+  1655→   {
+  1656→    "key": "e_1_2_1_77_1",
+  1657→    "doi-asserted-by": "publisher",
+  1658→    "DOI": "10.1145/3025453.3025678"
+  1659→   },
+  1660→   {
+  1661→    "key": "e_1_2_1_78_1",
+  1662→    "doi-asserted-by": "publisher",
+  1663→    "DOI": "10.1109/ICDCS.2018.00045"
+  1664→   },
+  1665→   {
+  1666→    "key": "e_1_2_1_79_1",
+  1667→    "volume-title": "Retrieved",
+  1668→    "author": "Rice University",
+  1669→    "year": "2018"
+  1670→   },
+  1671→   {
+  1672→    "key": "e_1_2_1_80_1",
+  1673→    "doi-asserted-by": "publisher",
+  1674→    "DOI": "10.1145/2987354.2987360"
+  1675→   },
+  1676→   {
+  1677→    "key": "e_1_2_1_81_1",
+  1678→    "doi-asserted-by": "publisher",
+  1679→    "DOI": "10.1145/3097620.3097624"
+  1680→   },
+  1681→   {
+  1682→    "key": "e_1_2_1_82_1",
+  1683→    "doi-asserted-by": "publisher",
+  1684→    "DOI": "10.1145/3084041.3084061"
+  1685→   },
+  1686→   {
+  1687→    "key": "e_1_2_1_83_1",
+  1688→    "doi-asserted-by": "publisher",
+  1689→    "DOI": "10.1145/3092305.3092308"
+  1690→   },
+  1691→   {
+  1692→    "key": "e_1_2_1_84_1",
+  1693→    "doi-asserted-by": "publisher",
+  1694→    "DOI": "10.1145/2789168.2790129"
+  1695→   },
+  1696→   {
+  1697→    "key": "e_1_2_1_85_1",
+  1698→    "doi-asserted-by": "publisher",
+  1699→    "DOI": "10.1145/2942358.2942393"
+  1700→   },
+  1701→   {
+  1702→    "key": "e_1_2_1_86_1",
+  1703→    "volume-title": "Fundamentals of Wireless Communication",
+  1704→    "author": "Tse David"
+  1705→   },
+  1706→   {
+  1707→    "key": "e_1_2_1_87_1",
+  1708→    "doi-asserted-by": "publisher",
+  1709→    "DOI": "10.5555/2930611.2930623"
+  1710→   },
+  1711→   {
+  1712→    "key": "e_1_2_1_88_1",
+  1713→    "doi-asserted-by": "publisher",
+  1714→    "DOI": "10.1145/3210240.3210335"
+  1715→   },
+  1716→   {
+  1717→    "key": "e_1_2_1_89_1",
+  1718→    "doi-asserted-by": "publisher",
+  1719→    "DOI": "10.1145/3081333.3081340"
+  1720→   },
+  1721→   {
+  1722→    "key": "e_1_2_1_90_1",
+  1723→    "volume-title": "Proceedings of the 20th Annual International Conference on Mobile Computing and Networking (MobiCom’14)",
+  1724→    "author": "Wang Guanhua"
+  1725→   },
+  1726→   {
+  1727→    "key": "e_1_2_1_91_1",
+  1728→    "doi-asserted-by": "publisher",
+  1729→    "DOI": "10.1145/2971648.2971744"
+  1730→   },
+  1731→   {
+  1732→    "key": "e_1_2_1_92_1",
+  1733→    "doi-asserted-by": "publisher",
+  1734→    "DOI": "10.1109/TMC.2016.2557795"
+  1735→   },
+  1736→   {
+  1737→    "key": "e_1_2_1_93_1",
+  1738→    "doi-asserted-by": "publisher",
+  1739→    "DOI": "10.1145/2973750.2973776"
+  1740→   },
+  1741→   {
+  1742→    "key": "e_1_2_1_94_1",
+  1743→    "first-page": "4",
+  1744→    "article-title": "Device-free wireless sensing in complex scenarios using spatial structural information",
+  1745→    "volume": "17",
+  1746→    "author": "Wang Jie",
+  1747→    "year": "2018",
+  1748→    "journal-title": "IEEE Trans. Wireless Commun."
+  1749→   },
+  1750→   {
+  1751→    "key": "e_1_2_1_95_1",
+  1752→    "doi-asserted-by": "publisher",
+  1753→    "DOI": "10.1109/HealthCom.2017.8210837"
+  1754→   },
+  1755→   {
+  1756→    "key": "e_1_2_1_96_1",
+  1757→    "doi-asserted-by": "publisher",
+  1758→    "DOI": "10.1109/TWC.2015.2487453"
+  1759→   },
+  1760→   {
+  1761→    "key": "e_1_2_1_97_1",
+  1762→    "doi-asserted-by": "publisher",
+  1763→    "DOI": "10.1145/2971648.2971670"
+  1764→   },
+  1765→   {
+  1766→    "key": "e_1_2_1_98_1",
+  1767→    "doi-asserted-by": "publisher",
+  1768→    "DOI": "10.1145/2789168.2790093"
+  1769→   },
+  1770→   {
+  1771→    "key": "e_1_2_1_99_1",
+  1772→    "doi-asserted-by": "publisher",
+  1773→    "DOI": "10.1109/JSAC.2017.2679658"
+  1774→   },
+  1775→   {
+  1776→    "key": "e_1_2_1_100_1",
+  1777→    "doi-asserted-by": "publisher",
+  1778→    "DOI": "10.1109/ICDCS.2017.206"
+  1779→   },
+  1780→   {
+  1781→    "key": "e_1_2_1_101_1",
+  1782→    "unstructured": "Xuyu Wang Chao Yang and Shiwen Mao. 2017. TensorBeat: Tensor decomposition for monitoring multi-person breathing beats with commodity WiFi. (2017). arXiv:1702.02046.  Xuyu Wang Chao Yang and Shiwen Mao. 2017. TensorBeat: Tensor decomposition for monitoring multi-person breathing beats with commodity WiFi. (2017). arXiv:1702.02046."
+  1783→   },
+  1784→   {
+  1785→    "key": "e_1_2_1_102_1",
+  1786→    "doi-asserted-by": "publisher",
+  1787→    "DOI": "10.3390/s150717195"
+  1788→   },
+  1789→   {
+  1790→    "key": "e_1_2_1_103_1",
+  1791→    "doi-asserted-by": "publisher",
+  1792→    "DOI": "10.1145/2639108.2639143"
+  1793→   },
+  1794→   {
+  1795→    "key": "e_1_2_1_104_1",
+  1796→    "volume-title": "Proceedings of the 12th Annual International Conference on Mobile Systems, Applications, and Services (MobiSys’14)",
+  1797→    "author": "Wang Yan"
+  1798→   },
+  1799→   {
+  1800→    "key": "e_1_2_1_105_1",
+  1801→    "volume-title": "Proceedings of the 19th Annual International Conference on Mobile Computing 8 Networking (MobiCom’13)",
+  1802→    "author": "Wang Yan"
+  1803→   },
+  1804→   {
+  1805→    "key": "e_1_2_1_106_1",
+  1806→    "unstructured": "Zhu Wang Bin Guo Zhiwen Yu and Xingshe Zhou. 2017. Wi-Fi CSI based behavior recognition: From signals actions to activities. (2017). arXiv:1712.00146.  Zhu Wang Bin Guo Zhiwen Yu and Xingshe Zhou. 2017. Wi-Fi CSI based behavior recognition: From signals actions to activities. (2017). arXiv:1712.00146."
+  1807→   },
+  1808→   {
+  1809→    "key": "e_1_2_1_107_1",
+  1810→    "doi-asserted-by": "publisher",
+  1811→    "DOI": "10.1145/2737095.2737117"
+  1812→   },
+  1813→   {
+  1814→    "key": "e_1_2_1_108_1",
+  1815→    "doi-asserted-by": "publisher",
+  1816→    "DOI": "10.1145/2789168.2790119"
+  1817→   },
+  1818→   {
+  1819→    "key": "e_1_2_1_109_1",
+  1820→    "doi-asserted-by": "publisher",
+  1821→    "DOI": "10.1145/2789168.2790113"
+  1822→   },
+  1823→   {
+  1824→    "key": "e_1_2_1_111_1",
+  1825→    "volume-title": "Proceedings of the 2017 26th International Conference on Computer Communication and Networks (ICCCN’17)",
+  1826→    "author": "Won Myounggyu"
+  1827→   },
+  1828→   {
+  1829→    "key": "e_1_2_1_112_1",
+  1830→    "doi-asserted-by": "publisher",
+  1831→    "DOI": "10.1109/JSAC.2015.2430294"
+  1832→   },
+  1833→   {
+  1834→    "key": "e_1_2_1_113_1",
+  1835→    "doi-asserted-by": "publisher",
+  1836→    "DOI": "10.1109/INFOCOM.2015.7218588"
+  1837→   },
+  1838→   {
+  1839→    "key": "e_1_2_1_114_1",
+  1840→    "doi-asserted-by": "publisher",
+  1841→    "DOI": "10.1109/MCOM.2017.1700143"
+  1842→   },
+  1843→   {
+  1844→    "key": "e_1_2_1_115_1",
+  1845→    "doi-asserted-by": "publisher",
+  1846→    "DOI": "10.1145/2971648.2971658"
+  1847→   },
+  1848→   {
+  1849→    "key": "e_1_2_1_116_1",
+  1850→    "doi-asserted-by": "publisher",
+  1851→    "DOI": "10.1109/ICC.2016.7511472"
+  1852→   },
+  1853→   {
+  1854→    "key": "e_1_2_1_117_1",
+  1855→    "doi-asserted-by": "publisher",
+  1856→    "DOI": "10.1145/2820716.2820727"
+  1857→   },
+  1858→   {
+  1859→    "key": "e_1_2_1_118_1",
+  1860→    "doi-asserted-by": "publisher",
+  1861→    "DOI": "10.1145/2976749.2978298"
+  1862→   },
+  1863→   {
+  1864→    "key": "e_1_2_1_119_1",
+  1865→    "doi-asserted-by": "publisher",
+  1866→    "DOI": "10.1109/INFOCOM.2014.6847958"
+  1867→   },
+  1868→   {
+  1869→    "key": "e_1_2_1_120_1",
+  1870→    "volume-title": "Linqing Gui, Juan Li Sun, and Wang Ruchuan.",
+  1871→    "author": "Xiao Fu",
+  1872→    "year": "2018"
+  1873→   },
+  1874→   {
+  1875→    "key": "e_1_2_1_121_1",
+  1876→    "doi-asserted-by": "publisher",
+  1877→    "DOI": "10.1145/2820716.2820719"
+  1878→   },
+  1879→   {
+  1880→    "key": "e_1_2_1_122_1",
+  1881→    "doi-asserted-by": "publisher",
+  1882→    "DOI": "10.1145/2933232"
+  1883→   },
+  1884→   {
+  1885→    "key": "e_1_2_1_123_1",
+  1886→    "doi-asserted-by": "publisher",
+  1887→    "DOI": "10.1145/2789168.2790124"
+  1888→   },
+  1889→   {
+  1890→    "key": "e_1_2_1_124_1",
+  1891→    "doi-asserted-by": "crossref",
+  1892→    "unstructured": "Tong Xin Bin Guo Zhu Wang Mingyang Li and Zhiwen Yu. 2016. FreeSense: Indoor human identification with WiFi signals. (2016). arXiv:1608.03430.  Tong Xin Bin Guo Zhu Wang Mingyang Li and Zhiwen Yu. 2016. FreeSense: Indoor human identification with WiFi signals. (2016). arXiv:1608.03430.",
+  1893→    "DOI": "10.1109/GLOCOM.2016.7841847"
+  1894→   },
+  1895→   {
+  1896→    "key": "e_1_2_1_125_1",
+  1897→    "doi-asserted-by": "publisher",
+  1898→    "DOI": "10.1145/2500423.2500444"
+  1899→   },
+  1900→   {
+  1901→    "key": "e_1_2_1_126_1",
+  1902→    "doi-asserted-by": "publisher",
+  1903→    "DOI": "10.1145/3161415"
+  1904→   },
+  1905→   {
+  1906→    "key": "e_1_2_1_127_1",
+  1907→    "volume-title": "Wireless Algorithms, Systems, and Applications",
+  1908→    "author": "Yang Hao"
+  1909→   },
+  1910→   {
+  1911→    "key": "e_1_2_1_128_1",
+  1912→    "doi-asserted-by": "publisher",
+  1913→    "DOI": "10.1145/2543581.2543592"
+  1914→   },
+  1915→   {
+  1916→    "key": "e_1_2_1_129_1",
+  1917→    "doi-asserted-by": "publisher",
+  1918→    "DOI": "10.1109/MCOM.2017.1700082"
+  1919→   },
+  1920→   {
+  1921→    "key": "e_1_2_1_130_1",
+  1922→    "doi-asserted-by": "publisher",
+  1923→    "DOI": "10.1145/3191783"
+  1924→   },
+  1925→   {
+  1926→    "key": "e_1_2_1_131_1",
+  1927→    "doi-asserted-by": "publisher",
+  1928→    "DOI": "10.1145/2742647.2742662"
+  1929→   },
+  1930→   {
+  1931→    "key": "e_1_2_1_132_1",
+  1932→    "doi-asserted-by": "publisher",
+  1933→    "DOI": "10.1145/2753497.2753508"
+  1934→   },
+  1935→   {
+  1936→    "key": "e_1_2_1_133_1",
+  1937→    "doi-asserted-by": "publisher",
+  1938→    "DOI": "10.1109/IPSN.2016.7460727"
+  1939→   },
+  1940→   {
+  1941→    "key": "e_1_2_1_134_1",
+  1942→    "doi-asserted-by": "publisher",
+  1943→    "DOI": "10.1145/2643614.2643620"
+  1944→   },
+  1945→   {
+  1946→    "key": "e_1_2_1_135_1",
+  1947→    "volume-title": "Anti-fall: A non-intrusive and real-time fall detector leveraging CSI from commodity WiFi devices. In Inclusive Smart Cities and e-Health",
+  1948→    "author": "Zhang Daqing",
+  1949→    "year": "2015"
+  1950→   },
+  1951→   {
+  1952→    "key": "e_1_2_1_136_1",
+  1953→    "doi-asserted-by": "publisher",
+  1954→    "DOI": "10.1109/MC.2017.7"
+  1955→   },
+  1956→   {
+  1957→    "key": "e_1_2_1_137_1",
+  1958→    "first-page": "2163",
+  1959→    "article-title": "WiSpeed: A statistical electromagnetic approach for device-free indoor speed estimation",
+  1960→    "volume": "5",
+  1961→    "author": "Zhang Feng",
+  1962→    "year": "2018",
+  1963→    "journal-title": "IEEE IoT J."
+  1964→   },
+  1965→   {
+  1966→    "key": "e_1_2_1_138_1",
+  1967→    "doi-asserted-by": "publisher",
+  1968→    "DOI": "10.1145/3191785"
+  1969→   },
+  1970→   {
+  1971→    "key": "e_1_2_1_139_1",
+  1972→    "doi-asserted-by": "publisher",
+  1973→    "DOI": "10.1109/PERCOMW.2016.7457075"
+  1974→   },
+  1975→   {
+  1976→    "key": "e_1_2_1_140_1",
+  1977→    "doi-asserted-by": "publisher",
+  1978→    "DOI": "10.1145/2999572.2999582"
+  1979→   },
+  1980→   {
+  1981→    "key": "e_1_2_1_141_1",
+  1982→    "volume-title": "Smart Computing and Communication",
+  1983→    "author": "Zhang Xiang"
+  1984→   },
+  1985→   {
+  1986→    "key": "e_1_2_1_142_1",
+  1987→    "doi-asserted-by": "publisher",
+  1988→    "DOI": "10.1109/INFOCOM.2016.7524399"
+  1989→   },
+  1990→   {
+  1991→    "key": "e_1_2_1_143_1",
+  1992→    "doi-asserted-by": "publisher",
+  1993→    "DOI": "10.1109/TNET.2017.2752367"
+  1994→   },
+  1995→   {
+  1996→    "key": "e_1_2_1_144_1",
+  1997→    "doi-asserted-by": "publisher",
+  1998→    "DOI": "10.1145/3123024.3124419"
+  1999→   },
+  2000→   {
+
+[showing lines 1-2000 of 14474; use offset=2001 with limit to continue reading]
