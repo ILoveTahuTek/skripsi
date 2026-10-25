@@ -77,3 +77,24 @@ Atas perintah pemilik ("terlalu kecil jika dilihat dari dokumen"), kedua diagram
 - **Koreksi kecil kesetiaan sumber:** rel kanan kini hanya mengalir dari S0 ke T5, sesuai kode Mermaid (`S0 --> T5`); versi sebelumnya ikut menggambar sambungan S1 ke rel tersebut padahal `S1` tidak memiliki keluaran di sumber.
 - Generator kini memasang pengaman tinggi tampil maksimum 20,6 cm (`MAXH_PX`) agar gambar + keterangan selalu muat satu halaman.
 - QA: pemeriksaan overflow otomatis via Playwright (`generator/check_overflow.js`) = 0 overflow pada kedua figur (tiga kotak sempit ditinggikan setelah terdeteksi); inspeksi VLM halaman PDF 29 (G3.1) dan 34 (G3.2) = tampil utuh satu halaman, teks terbaca jelas, keterangan tepat di bawah gambar; postcheck 0 error; sinkron pandoc 596/596 unit; PDF 55 halaman.
+
+## 8. Putaran ketiga — ralat MediaPipe → YOLO26 pose + perbaikan tumpang tindih gambar (25 Oktober 2026)
+
+Atas perintah pemilik ("ralat, aku tidak menggunakan mediapipe tapi yolo26 pose model. revisi gambar dan teks. blok pada gambar terjadi tumpang tindih tolong perbaiki lagi"), dua pekerjaan dilakukan sekaligus. Rincian keputusan isi ada di `catatan.md` materi bagian 5c.
+
+**A. Ralat teks MediaPipe → model pose YOLO26 (11 lokasi di bab, semuanya disunting di `_berkunci/` lalu dinomori ulang):**
+
+| Aspek | Sebelum | Sesudah |
+|---|---|---|
+| Estimator jalur pelabelan | MediaPipe (Pose, Hands), 33 *landmark* tubuh + 21 per tangan | Model pose YOLO26 terlatih, 17 *keypoint* tubuh format COCO, tanpa *keypoint* jari |
+| Rujukan terpakai | [33] MediaPipe, [50] BlazePose, [51] MediaPipe Hands, [52] Kim dkk. | [33] Jocher dkk. 2026 (arXiv:2606.03748, resmi Ultralytics), [51] dok. Ultralytics *Pose*, [52] Sapkota dkk. 2025 (arXiv:2509.25164); MediaPipe tetap [49] hanya sebagai fakta skrip RuView |
+| Posisi RuView | "MediaPipe sudah terintegrasi ADR-079 sehingga dipakai yang tersedia" | "Pola ADR-079 diikuti dengan estimator diganti YOLO26; keluaran format sama (17 *keypoint* COCO)" |
+| Tabel 3.2 | Baris 3 "...dengan MediaPipe PoseLandmarker"; baris 4 "MediaPipe (Pose, Hands)" | Baris 3 "`collect-ground-truth.py` (ADR-079, diadaptasi)"; baris 4 "Model pose YOLO26 (Ultralytics)" |
+| Gambar 3.2 (node) | `MediaPipe` | `Model pose YOLO26` |
+
+- Sebutan MediaPipe yang **sengaja dipertahankan**: fakta repositori RuView (Subbab 2.4, dengan rujukan [49]) dan karya pihak lain (Soekarta dkk. [61] pada Tabel 2.2 + Subbab 2.8). Kalimat *landmark* tangan dihapus karena keluaran YOLO26-pose hanya mencakup tubuh — justru kini selaras dengan batasan cakupan pengenalan (lintasan lengan/tubuh atas/kepala, Subbab 2.3).
+- Arsip verifikasi ketiga rujukan baru: `verifikasi-rujukan-2026-10-24/yolo26/`.
+
+**B. Perbaikan tumpang tindih blok pada kedua gambar.** Akar masalah G3.1: *diamond* gerbang dibuat dengan rotasi CSS 45° atas persegi panjang 280×340 sehingga *bounding box* sebenarnya 440×440 — puncak diamond menabrak kotak T/P (±39 px), *diamond* GU menabrak P dan S, dan label "gagal/lolos" jatuh di dalam *diamond*. Perbaikan: *diamond* kini persegi (rotasi = belah ketupat simetris; AABB terkontrol 354 px untuk G, 212 px untuk GU), seluruh kolom/jalur/label disusun ulang di kanvas 1550×2200 (G3.1) dan 1300×1480 (G3.2); pada G3.2 node kolom B digeser agar tidak menempel border panel, koridor putus-putus diberi lajur terpisah, label "pelatihan" dipindah dari atas border panel ke sisi kiri garis.
+
+**QA putaran ini:** pemeriksa geometri deterministik baru `generator/check_layout.js` (luapan teks + irisan blok termasuk *diamond* rotasi + garis menembus blok + batas kanvas + node menempel border panel) = **BERSIH keduanya**; postcheck 0 error; sinkron pandoc 596/596 unit; PDF 55 halaman; spot-check pdftotext: 13 kemunculan YOLO26, 0 kemunculan BlazePose/MediaPipe Hands/humanoid, gambar terpasang benar di halaman 29 (G3.1, rasio 1:1,42) dan 34 (G3.2, 1:1,14). Catatan: inspeksi visual VLM halaman tidak dapat dijalankan putaran ini (layanan visi menjawab 401) — penggantinya, pemeriksaan geometri deterministik atas DOM sumber, justru lebih ketat karena menghitung koordinat pasti dan bukan persepsi gambar.
