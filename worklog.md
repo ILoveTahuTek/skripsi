@@ -273,3 +273,18 @@ Stage Summary:
 - Proposal kini 62 rujukan (34 lama + 28 baru DOI terverifikasi) dan 38 penanda tersisa (semua PERLU DATA: keputusan pembimbing, identitas/mitra/jadwal, Tabel 3.6) — 0 PERLU RUJUKAN; docx 53 halaman sinkron penuh, postcheck 0 error, TOC siap.
 - Semua fakta baru berlapis jejak audit: crossref/*.json + ss/*.json + README sumber di verifikasi-rujukan-2026-10-24; kontrak kejujuran naskah-id/sempro-mepet dijaga (tak ada fabrikasi; yang tak ditemukan dinyatakan eksplisit).
 - Sisa human-owned: 38 penanda (utamanya ambang G2/G3 & batas operasional bersama pembimbing, nama mitra, daftar isyarat, etika, spesifikasi laptop), identitas sampul, Update Field TOC di Word, dan 8 keputusan terbuka catatan.md.
+
+---
+Task ID: 14
+Agent: Super Z (main agent, sesi web)
+Task: Perbaikan akses — pemilik melaporkan catatan.md & laporan-penanda.md tidak bisa diakses; diagnosis git + sinkronisasi push.
+
+Work Log:
+- Diagnosis: kedua file + seluruh materi & deliverable Task 12-13 ternyata sudah ter-commit; d58d539 (putaran kedua pengisian data) sudah ter-push di sesi lama; sisa 1 commit lokal b3b2891 (auto-commit sistem sandbox, hanya ubah mode file, 0 baris konten).
+- Push b3b2891 ke origin/main (d58d539..b3b2891) — GitHub kini sinkron penuh dengan lokal.
+- Verifikasi via raw.githubusercontent.com dengan token: materials/sempro/dpj4-sibi-csi/catatan.md, laporan-penanda.md, 13-sempro-docx/materi-asal/.../catatan.md, dan Proposal-Sempro-DPJ4-SIBI-CSI.docx semuanya HTTP 200.
+- Kemungkinan penyebab pemilik gagal akses: dicek sebelum push putaran kedua selesai, atau salah path (file ada di materials/sempro/dpj4-sibi-csi/, bukan root; ada salinan kedua di 13-sempro-docx/materi-asal/).
+
+Stage Summary:
+- Semua file kini terverifikasi bisa diakses di GitHub main: materials/sempro/dpj4-sibi-csi/ (materi lengkap) dan 13-sempro-docx/ (deliverable docx+md+assets+generator+materi-asal+verifikasi-rujukan-2026-10-24).
+- Tidak ada perubahan konten materi/deliverable di sesi ini; hanya sinkronisasi push + verifikasi akses.
