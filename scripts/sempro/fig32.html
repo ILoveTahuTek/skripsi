@@ -17,7 +17,7 @@
   }
   .panel-title {
     position: absolute; width: 100%; text-align: center; top: 12px;
-    font-size: 28px; font-weight: 700; color: #333;
+    font-size: 26px; font-weight: 700; color: #333;
   }
   .elabel { position: absolute; font-size: 22px; font-style: italic; color: #333;
     background: #fff; padding: 0 4px; }
@@ -28,11 +28,20 @@
 </head>
 <body>
 <!-- ======== GAMBAR 3.2 : Arsitektur sistem dua jalur ========
-     Revisi 25-10-2026: font diperbesar (26/24px) dan tata letak dipadatkan
-     agar terbaca jelas saat dicetak selebar halaman (semula font 14px).
-     Panel kiri x40-580 y40-1255 (node x100-520, kolom tunggal 8 node)
-     Panel kanan x660-1260 y40-895 (kolA x700-950, kolB x1010-1260,
-       DS x700-1260 y745-845) | SYN x60-590 y1300-1420 | DIAG x700-1260 ============= -->
+     Revisi 25-10-2026 (putaran 2): perbaiki tumpang tindih blok.
+     - Node kolom B (x1010-1260 lama) MENEMPEL tepat pada border kanan panel
+       (x1260 = 1260). Kini: panel kanan x660-1270, kolB x1000-1240 (jeda 27px),
+       kolA x690-940, DS x690-1240.
+     - Koridor putus-putus diberi LAJUR TERPISAH agar tidak sejajar menempel:
+       gap antar-panel (x580-660): SYN->DS x640, KLS->DIAG x616, SEG->DS x648;
+       margin kanan: CAM->SYN x1288, KEY->DIAG lewat dalam panel x1252 lalu
+       keluar bawah panel (bukan menempel x1284 seperti versi lama).
+     - Label "pelatihan" dipindah ke kiri garis vertikal x560 (x450-550) agar
+       tidak lagi menimpa border panel (masalah versi lama: label x558-668
+       menimpa border x577-580).
+     - Node "MediaPipe" diganti "Model pose YOLO26" (ralat pemilik 25 Okt 2026).
+     Panel kiri x40-580 y40-1275 (node x100-520, kolom tunggal 8 node)
+     Panel kanan x660-1270 y40-895 | SYN x60-590 y1300-1420 | DIAG x690-1250 -->
 <div class="fig" id="fig32">
   <svg class="edges">
     <defs>
@@ -49,25 +58,26 @@
     <line x1="310" y1="885" x2="310" y2="926" marker-end="url(#a)"/>
     <line x1="310" y1="1040" x2="310" y2="1081" marker-end="url(#a)"/>
     <!-- Rantai solid jalur pelabelan -->
-    <line x1="825" y1="200" x2="825" y2="256" marker-end="url(#a)"/>
-    <line x1="1135" y1="200" x2="1135" y2="256" marker-end="url(#a)"/>
-    <line x1="1135" y1="340" x2="1135" y2="396" marker-end="url(#a)"/>
-    <line x1="1135" y1="490" x2="1135" y2="541" marker-end="url(#a)"/>
-    <line x1="825" y1="340" x2="825" y2="741" marker-end="url(#a)"/>
-    <line x1="1135" y1="675" x2="1135" y2="741" marker-end="url(#a)"/>
-    <!-- Sisi putus-putus -->
-    <path class="dashed" d="M 1264 160 H 1288 V 1455 H 40 V 1390 H 56" marker-end="url(#a)"/>
-    <path class="dashed" d="M 96 410 H 20 V 1360 H 56" marker-end="url(#a)"/>
-    <path class="dashed" d="M 594 1360 H 600 V 970 H 900 V 849" marker-end="url(#a)"/>
-    <path class="dashed" d="M 524 705 H 645 V 795 H 692" marker-end="url(#a)"/>
-    <path class="dashed" d="M 696 820 H 550 V 985 H 528" marker-end="url(#a)"/>
-    <path class="dashed" d="M 524 985 H 625 V 1360 H 692" marker-end="url(#a)"/>
-    <path class="dashed" d="M 1264 445 H 1272 V 1285 H 1100 V 1296" marker-end="url(#a)"/>
+    <line x1="815" y1="200" x2="815" y2="256" marker-end="url(#a)"/>
+    <line x1="1120" y1="200" x2="1120" y2="256" marker-end="url(#a)"/>
+    <line x1="1120" y1="340" x2="1120" y2="396" marker-end="url(#a)"/>
+    <line x1="1120" y1="490" x2="1120" y2="541" marker-end="url(#a)"/>
+    <line x1="815" y1="340" x2="815" y2="741" marker-end="url(#a)"/>
+    <line x1="1120" y1="690" x2="1120" y2="741" marker-end="url(#a)"/>
+    <!-- Sisi putus-putus (lajur: x616 KLS->DIAG, x640 SYN->DS, x648 SEG->DS,
+         x1252 KEY->DIAG dalam panel, x1288 CAM->SYN, x24 RX->SYN) -->
+    <path class="dashed" d="M 1244 160 H 1288 V 1455 H 36 V 1390 H 54" marker-end="url(#a)"/>
+    <path class="dashed" d="M 96 410 H 24 V 1360 H 54" marker-end="url(#a)"/>
+    <path class="dashed" d="M 594 1360 H 640 V 970 H 950 V 851" marker-end="url(#a)"/>
+    <path class="dashed" d="M 524 985 H 616 V 1340 H 686" marker-end="url(#a)"/>
+    <path class="dashed" d="M 524 705 H 648 V 795 H 686" marker-end="url(#a)"/>
+    <path class="dashed" d="M 686 820 H 560 V 985 H 530" marker-end="url(#a)"/>
+    <path class="dashed" d="M 1244 445 H 1252 V 1285 H 1100 V 1294" marker-end="url(#a)"/>
   </svg>
 
   <!-- Panel kiri -->
   <div class="panel" style="left:40px; top:40px; width:540px; height:1235px;"></div>
-  <div class="panel-title" style="left:40px; top:52px; width:540px;">Jalur operasional tanpa kamera</div>
+  <div class="panel-title" style="left:50px; top:52px; width:520px;">Jalur operasional tanpa kamera</div>
   <div class="node" style="left:100px; top:120px; width:420px; height:80px;">Node pemancar TX ESP32</div>
   <div class="node" style="left:100px; top:245px; width:420px; height:80px;">Zona isyarat, satu pengisyarat</div>
   <div class="node" style="left:100px; top:370px; width:420px; height:80px;">Node penerima RX ESP32</div>
@@ -78,20 +88,20 @@
   <div class="node" style="left:100px; top:1085px; width:420px; height:170px; font-size:25px;">Umpan balik di <i>dashboard</i>, isyarat terdeteksi, cocok atau tidak cocok, atau tidak dikenali</div>
 
   <!-- Panel kanan -->
-  <div class="panel" style="left:660px; top:40px; width:600px; height:855px;"></div>
-  <div class="panel-title" style="left:660px; top:52px; width:600px;">Jalur pelabelan, hanya saat perekaman <i>dataset</i></div>
-  <div class="node" style="left:700px; top:120px; width:250px; height:80px;">Kartu pemandu</div>
-  <div class="node" style="left:700px; top:260px; width:250px; height:80px;">Label kelas</div>
-  <div class="node" style="left:1010px; top:120px; width:250px; height:80px;"><i>Webcam</i></div>
-  <div class="node" style="left:1010px; top:260px; width:250px; height:80px;">MediaPipe</div>
-  <div class="node" style="left:1010px; top:400px; width:250px; height:90px;">Deret <i>keypoint</i></div>
-  <div class="node" style="left:1010px; top:545px; width:250px; height:145px;">Verifikasi batas segmen dan penyaringan kualitas</div>
-  <div class="node" style="left:700px; top:745px; width:560px; height:100px;"><i>Dataset</i> CSI berlabel</div>
+  <div class="panel" style="left:660px; top:40px; width:610px; height:855px;"></div>
+  <div class="panel-title" style="left:670px; top:52px; width:590px;">Jalur pelabelan, hanya saat perekaman <i>dataset</i></div>
+  <div class="node" style="left:690px; top:120px; width:250px; height:80px;">Kartu pemandu</div>
+  <div class="node" style="left:690px; top:260px; width:250px; height:80px;">Label kelas</div>
+  <div class="node" style="left:1000px; top:120px; width:240px; height:80px;"><i>Webcam</i></div>
+  <div class="node" style="left:1000px; top:260px; width:240px; height:80px;">Model pose YOLO26</div>
+  <div class="node" style="left:1000px; top:400px; width:240px; height:90px;">Deret <i>keypoint</i></div>
+  <div class="node" style="left:1000px; top:545px; width:240px; height:145px;">Verifikasi batas segmen dan penyaringan kualitas</div>
+  <div class="node" style="left:690px; top:745px; width:550px; height:100px;"><i>Dataset</i> CSI berlabel</div>
 
   <!-- Node bawah -->
   <div class="node" style="left:60px; top:1300px; width:530px; height:120px; font-size:24px;">Sinkronisasi waktu kamera dan CSI, collect-ground-truth.py ADR-079</div>
-  <div class="node" style="left:700px; top:1300px; width:560px; height:120px; font-size:24px;">Diagnosis kesalahan klasifikator, luring di luar jalur operasional</div>
-  <div class="elabel" style="left:558px; top:888px;">pelatihan</div>
+  <div class="node" style="left:690px; top:1300px; width:560px; height:120px; font-size:24px;">Diagnosis kesalahan klasifikator, luring di luar jalur operasional</div>
+  <div class="elabel" style="left:448px; top:890px;">pelatihan</div>
 </div>
 </body>
 </html>

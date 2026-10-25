@@ -144,7 +144,7 @@
      "italics": true
     },
     {
-     "text": " MediaPipe [33], dan pada satu kondisi uji persepsi. Rancangan yang dikerjakan dalam penelitian ini mencakup penempatan kedua node, protokol perekaman beserta kurasi kosakata, ekstraksi fitur dan klasifikasi, serta mode latihan umpan balik, sedangkan RuView menjadi basis akuisisinya. Rancangan itu tidak terikat pada satu bahasa isyarat sehingga perluasan ke BISINDO pada prinsipnya cukup dilakukan dengan mengganti "
+     "text": " dari model pose YOLO26 [33], dan pada satu kondisi uji persepsi. Rancangan yang dikerjakan dalam penelitian ini mencakup penempatan kedua node, protokol perekaman beserta kurasi kosakata, ekstraksi fitur dan klasifikasi, serta mode latihan umpan balik, sedangkan RuView menjadi basis akuisisinya. Rancangan itu tidak terikat pada satu bahasa isyarat sehingga perluasan ke BISINDO pada prinsipnya cukup dilakukan dengan mengganti "
     },
     {
      "text": "dataset",
@@ -886,7 +886,21 @@
      "code": true
     },
     {
-     "text": " (ADR-079) yang memakai MediaPipe PoseLandmarker."
+     "text": " (ADR-079) yang memakai MediaPipe PoseLandmarker [49] dan menuliskan 17 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " tubuh format COCO untuk setiap "
+    },
+    {
+     "text": "frame",
+     "italics": true
+    },
+    {
+     "text": " video."
     }
    ]
   },
@@ -932,7 +946,7 @@
     ],
     [
      "*Pipeline* akuisisi tersinkron kamera–CSI (`scripts/collect-ground-truth.py`, ADR-079)",
-     "Menyinkronkan video, *keypoint* MediaPipe, dan CSI pada jalur pelabelan"
+     "Menyinkronkan video, *keypoint* tubuh, dan CSI pada jalur pelabelan"
     ],
     [
      "Modul estimasi pose *on-device*",
@@ -984,77 +998,63 @@
      "italics": true
     },
     {
-     "text": " tubuh manusia, seperti bahu, siku, dan pergelangan tangan, dari citra atau video [49]. MediaPipe [33] merupakan kerangka kerja untuk membangun "
+     "text": " tubuh manusia, seperti bahu, siku, dan pergelangan tangan, dari citra atau video [50]. YOLO26 merupakan keluarga model visi waktu nyata terbaru dari Ultralytics yang mendukung deteksi, segmentasi, klasifikasi, dan estimasi pose dalam satu kerangka [33]. Model pose YOLO26 dilatih pada "
     },
     {
-     "text": "pipeline",
+     "text": "dataset keypoint",
      "italics": true
     },
     {
-     "text": " persepsi. BlazePose [50] melacak pose tubuh secara "
-    },
-    {
-     "text": "real-time",
-     "italics": true
-    },
-    {
-     "text": " di perangkat dan menghasilkan 33 "
-    },
-    {
-     "text": "landmark",
-     "italics": true
-    },
-    {
-     "text": " tubuh, sedangkan MediaPipe Hands [51] melacak tangan secara "
-    },
-    {
-     "text": "real-time",
-     "italics": true
-    },
-    {
-     "text": " dan menghasilkan 21 "
-    },
-    {
-     "text": "landmark",
-     "italics": true
-    },
-    {
-     "text": " per tangan. Kim dkk. [52] memberikan contoh penerapan MediaPipe Pose untuk estimasi pose manusia yang dioptimalkan dengan model "
-    },
-    {
-     "text": "humanoid",
-     "italics": true
-    },
-    {
-     "text": ". MediaPipe PoseLandmarker sudah terintegrasi pada "
-    },
-    {
-     "text": "pipeline",
-     "italics": true
-    },
-    {
-     "text": " akuisisi tersinkron ADR-079 di RuView (Subbab 2.4) sehingga penelitian ini menggunakan MediaPipe yang tersedia dan tidak melatih model visi baru. "
-    },
-    {
-     "text": "Landmark",
-     "italics": true
-    },
-    {
-     "text": " tangan dari MediaPipe Hands melengkapi "
-    },
-    {
-     "text": "landmark",
-     "italics": true
-    },
-    {
-     "text": " tubuh tersebut dalam deret "
+     "text": " COCO dan menghasilkan 17 "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " yang dipakai pada jalur pelabelan (BAB III)."
+     "text": " tubuh per orang, mencakup titik wajah, bahu, siku, dan pergelangan tangan, tanpa "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " jari [51]. Analisis independen atas YOLO26 menunjukkan bahwa model ini dirancang untuk efisiensi inferensi dan kesiapan penerapan pada perangkat tepi ("
+    },
+    {
+     "text": "edge",
+     "italics": true
+    },
+    {
+     "text": ") [52]. Dalam penelitian ini, model pose YOLO26 dipakai sebagai estimator terlatih tanpa pelatihan ulang; "
+    },
+    {
+     "text": "pipeline",
+     "italics": true
+    },
+    {
+     "text": " akuisisi tersinkron mengikuti pola ADR-079 RuView (Subbab 2.4) dengan estimator MediaPipe PoseLandmarker diganti model pose YOLO26 yang keluarannya juga 17 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " format COCO, setara dengan format keluaran skrip asli, sehingga penelitian ini tetap tidak melatih model visi baru. Karena keluaran model hanya mencakup tubuh, deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " pada jalur pelabelan tidak memuat "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " jari; batas tersebut sejalan dengan cakupan pengenalan yang memang dibatasi pada lintasan lengan, tubuh atas, dan kepala (Subbab 2.3)."
     }
    ]
   },
@@ -1070,14 +1070,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Dalam penelitian ini, konsep tersebut tidak diterapkan pada pelatihan klasifikator. Label kelas isyarat berasal dari protokol elisitasi: kartu pemandu ditampilkan sebelum setiap repetisi sehingga kelas setiap segmen sudah diketahui. MediaPipe hanya memberikan deret "
+     "text": "Dalam penelitian ini, konsep tersebut tidak diterapkan pada pelatihan klasifikator. Label kelas isyarat berasal dari protokol elisitasi: kartu pemandu ditampilkan sebelum setiap repetisi sehingga kelas setiap segmen sudah diketahui. Model pose YOLO26 hanya memberikan deret "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " yang digunakan untuk tiga keperluan. Pertama, batas awal dan akhir segmen isyarat diverifikasi. Kedua, segmen buruk disaring, misalnya ketika orang tidak terdeteksi atau "
+     "text": " tubuh yang digunakan untuk tiga keperluan. Pertama, batas awal dan akhir segmen isyarat diverifikasi. Kedua, segmen buruk disaring, misalnya ketika orang tidak terdeteksi atau "
     },
     {
      "text": "keypoint",
@@ -1919,13 +1919,13 @@
     ],
     [
      "3",
-     "`scripts/collect-ground-truth.py` (ADR-079)",
-     "Menyinkronkan akuisisi kamera dan CSI dengan MediaPipe PoseLandmarker"
+     "`scripts/collect-ground-truth.py` (ADR-079, diadaptasi)",
+     "Menyinkronkan akuisisi kamera dan CSI; estimator pose diganti model YOLO26"
     ],
     [
      "4",
-     "MediaPipe (Pose, Hands)",
-     "Menghasilkan deret *keypoint* tubuh dan tangan dari video pada jalur pelabelan"
+     "Model pose YOLO26 (Ultralytics)",
+     "Menghasilkan deret 17 *keypoint* tubuh format COCO dari video pada jalur pelabelan"
     ],
     [
      "5",
@@ -2018,21 +2018,21 @@
      "italics": true
     },
     {
-     "text": ". Label kelas berasal dari kartu pemandu yang ditampilkan sebelum setiap repetisi, bukan dari kamera. MediaPipe [33] mengubah video "
+     "text": ". Label kelas berasal dari kartu pemandu yang ditampilkan sebelum setiap repetisi, bukan dari kamera. Model pose YOLO26 [33] mengubah video "
     },
     {
      "text": "webcam",
      "italics": true
     },
     {
-     "text": " menjadi deret "
+     "text": " menjadi deret 17 "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " tubuh [50] dan tangan [51] yang diselaraskan dengan CSI melalui ADR-079 untuk memverifikasi batas segmen, menyaring segmen buruk, dan mendiagnosis kesalahan klasifikator secara luring. Berbeda dengan preseden Person-in-WiFi [53] dan DensePose From WiFi [54] (Subbab 2.5), dalam penelitian ini kamera tidak mengajarkan pose kepada model CSI; distilasi pengetahuan penuh ditempatkan sebagai penelitian lanjutan."
+     "text": " tubuh format COCO [51] yang diselaraskan dengan CSI melalui pola ADR-079 untuk memverifikasi batas segmen, menyaring segmen buruk, dan mendiagnosis kesalahan klasifikator secara luring. Berbeda dengan preseden Person-in-WiFi [53] dan DensePose From WiFi [54] (Subbab 2.5), dalam penelitian ini kamera tidak mengajarkan pose kepada model CSI; distilasi pengetahuan penuh ditempatkan sebagai penelitian lanjutan."
     }
    ]
   },
@@ -2190,7 +2190,7 @@
    "n": "5.",
    "runs": [
     {
-     "text": "Membuang segmen bila orang tidak terdeteksi MediaPipe, "
+     "text": "Membuang segmen bila orang tidak terdeteksi oleh model pose, "
     },
     {
      "text": "jitter",
@@ -2723,7 +2723,7 @@
      "italics": true
     },
     {
-     "text": " MediaPipe untuk membedakan kesalahan akibat lintasan yang mirip dari kesalahan akibat sinyal CSI yang lemah."
+     "text": " YOLO26 untuk membedakan kesalahan akibat lintasan yang mirip dari kesalahan akibat sinyal CSI yang lemah."
     }
    ]
   },
@@ -3586,14 +3586,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[33] C. Lugaresi "
-    },
-    {
-     "text": "et al.",
-     "italics": true
-    },
-    {
-     "text": ", \"MediaPipe: A framework for building perception pipelines,\" arXiv:1906.08172, 2019, doi: 10.48550/arXiv.1906.08172."
+     "text": "[33] G. Jocher, J. Qiu, M. Liu, S. Lyu, F. C. Akyon, and M. E. Kalfaoglu, \"Ultralytics YOLO26: Unified real-time end-to-end vision models,\" arXiv:2606.03748, 2026, doi: 10.48550/arXiv.2606.03748."
     }
    ]
   },
@@ -3826,7 +3819,22 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[49] C. Zheng "
+     "text": "[49] C. Lugaresi "
+    },
+    {
+     "text": "et al.",
+     "italics": true
+    },
+    {
+     "text": ", \"MediaPipe: A framework for building perception pipelines,\" arXiv:1906.08172, 2019, doi: 10.48550/arXiv.1906.08172."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[50] C. Zheng "
     },
     {
      "text": "et al.",
@@ -3848,7 +3856,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[50] V. Bazarevsky, I. Grishchenko, K. Raveendran, T. Zhu, F. Zhang, and M. Grundmann, \"BlazePose: On-device real-time body pose tracking,\" arXiv:2006.10204, 2020, doi: 10.48550/arXiv.2006.10204."
+     "text": "[51] Ultralytics, \"Pose estimation,\" Ultralytics YOLO Docs. [Online]. Available: https://docs.ultralytics.com/tasks/pose/, diakses 25 Okt. 2026."
     }
    ]
   },
@@ -3856,29 +3864,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[51] F. Zhang "
-    },
-    {
-     "text": "et al.",
-     "italics": true
-    },
-    {
-     "text": ", \"MediaPipe Hands: On-device real-time hand tracking,\" arXiv:2006.10214, 2020, doi: 10.48550/arXiv.2006.10214."
-    }
-   ]
-  },
-  {
-   "t": "ref",
-   "runs": [
-    {
-     "text": "[52] J.-W. Kim, J.-Y. Choi, E.-J. Ha, and J.-H. Choi, \"Human pose estimation using MediaPipe Pose and optimization method based on a humanoid model,\" "
-    },
-    {
-     "text": "Applied Sciences",
-     "italics": true
-    },
-    {
-     "text": ", vol. 13, no. 4, Art. no. 2700, 2023, doi: 10.3390/app13042700."
+     "text": "[52] R. Sapkota, R. H. Cheppally, A. Sharda, and M. Karkee, \"YOLO26: Key architectural enhancements and performance benchmarking for real-time object detection,\" arXiv:2509.25164, 2025, doi: 10.48550/arXiv.2509.25164."
     }
    ]
   },

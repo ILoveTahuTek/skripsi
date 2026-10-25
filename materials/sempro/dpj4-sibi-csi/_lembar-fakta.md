@@ -39,10 +39,10 @@ Dokumen ini adalah SATU-SATUNYA sumber fakta untuk BAB I, II, dan III. Semua ang
 - **Batas fisika**: panjang gelombang Wi-Fi 2,4/5 GHz ±6–12 cm; dengan dua node ESP32, konfigurasi jari dan ekspresi wajah TIDAK dapat dibedakan. Cakupan pengenalan: **lintasan lengan, tubuh atas, dan kepala**.
 - **ESP32**: mikrokontroler murah dengan radio Wi-Fi yang dapat mengekspor CSI; basis akuisisi CSI pada ESP32 dikembangkan oleh Hernandez dan Bulut `[@hernandez2020]`. Varian papan: `[PERLU DATA: varian ESP32 yang dipakai, misalnya ESP32 DevKit atau ESP32-S3]`.
 - **Laju sampling CSI**: `[PERLU DATA: laju sampling CSI node ESP32 pada konfigurasi RuView]`; agar pita Doppler gerak 1–60 Hz terwakili, laju sampling minimal ±120 Hz (kriteria Nyquist).
-- **Platform RuView** `[@ruview]` (proyek sumber terbuka, github.com/ruvnet/RuView): firmware ESP32 penangkap CSI (format frame ADR-018, streaming UDP), server pengolahan sinyal, kalibrasi ruang bawaan (600 *frame* + 8 *anchor*, ±4 menit), segmentasi berbasis energi gerak, *dashboard* web, mode privasi yang membuang fitur biometrik, dan *pipeline* akuisisi tersinkron kamera–CSI `scripts/collect-ground-truth.py` (ADR-079) yang memakai MediaPipe PoseLandmarker. Modul estimasi pose *on-device* RuView TIDAK dipakai. Jangan menulis angka PCK apa pun.
-- **MediaPipe** `[@mediapipe2019]`: kerangka kerja *pipeline* persepsi; BlazePose `[@blazepose2020]` menghasilkan 33 *landmark* tubuh; MediaPipe Hands `[@mphands2020]` menghasilkan 21 *landmark* per tangan; contoh penerapan jurnal `[@kim2023]`.
+- **Platform RuView** `[@ruview]` (proyek sumber terbuka, github.com/ruvnet/RuView): firmware ESP32 penangkap CSI (format frame ADR-018, streaming UDP), server pengolahan sinyal, kalibrasi ruang bawaan (600 *frame* + 8 *anchor*, ±4 menit), segmentasi berbasis energi gerak, *dashboard* web, mode privasi yang membuang fitur biometrik, dan *pipeline* akuisisi tersinkron kamera–CSI `scripts/collect-ground-truth.py` (ADR-079) yang memakai MediaPipe PoseLandmarker dan menuliskan 17 *keypoint* tubuh format COCO per *frame*. Modul estimasi pose *on-device* RuView TIDAK dipakai. Jangan menulis angka PCK apa pun.
+- **YOLO26 pose (RALAT PEMILIK 25 Okt 2026 — pengganti MediaPipe pada jalur pelabelan)** `[@jocher2026]`: keluarga model visi waktu nyata Ultralytics (arXiv:2606.03748, resmi dari tim Ultralytics); model pose terlatih pada *dataset keypoint* COCO, keluaran 17 *keypoint* tubuh per orang (titik wajah + bahu/siku/pergelangan tangan/lutut/pergelangan kaki), TANPA *keypoint* jari `[@ultralyticspose]`; analisis independen `[@sapkota2025]` menegaskan perancangan untuk efisiensi dan perangkat tepi. Dipakai sebagai estimator terlatih tanpa pelatihan ulang; pola sinkronisasi ADR-079 diikuti dengan keluaran format sama (17 keypoint COCO) sehingga pertukaran estimator tidak mengubah format data. MediaPipe `[@mediapipe2019]` kini hanya disebut sebagai estimator bawaan skrip RuView (fakta repositori), bukan alat penelitian ini.
 - **Transfer visi→Wi-Fi (preseden konsep "guru visi, murid CSI")**: Person-in-WiFi `[@personinwifi2019]` (persepsi tubuh dari Wi-Fi dengan supervisi kamera); DensePose From WiFi `[@densepose2023]` (memetakan sinyal Wi-Fi ke koordinat permukaan tubuh tingkat region, dilatih dengan guru visi). Keduanya bekerja pada tingkat tubuh, bukan jari.
-- **PERAN KAMERA YANG JUJUR**: label kelas isyarat diketahui dari protokol elisitasi (kartu pemandu ditampilkan sebelum tiap repetisi). MediaPipe TIDAK "mencetak label kelas"; MediaPipe memberi deret *keypoint* yang dipakai untuk (1) memverifikasi batas awal–akhir segmen isyarat, (2) menyaring segmen buruk (orang tidak terdeteksi, *jitter*), dan (3) diagnosis kesalahan klasifikator (apakah salah karena lintasan mirip atau sinyal lemah). Distilasi pose penuh CSI→pose→kelas adalah kerja lanjutan, bukan janji.
+- **PERAN KAMERA YANG JUJUR**: label kelas isyarat diketahui dari protokol elisitasi (kartu pemandu ditampilkan sebelum tiap repetisi). Model pose YOLO26 TIDAK "mencetak label kelas"; model memberi deret *keypoint* tubuh yang dipakai untuk (1) memverifikasi batas awal–akhir segmen isyarat, (2) menyaring segmen buruk (orang tidak terdeteksi, *jitter*), dan (3) diagnosis kesalahan klasifikator (apakah salah karena lintasan mirip atau sinyal lemah). Distilasi pose penuh CSI→pose→kelas adalah kerja lanjutan, bukan janji.
 - **Fitur**: amplitudo dan fase *subcarrier* terpilih, spektrum Doppler pita 1–60 Hz, statistik ringkas (energi, entropi, lintasan puncak) `[@ma2019survey]`, `[@widar2021]`, `[@sruthi2024]`, `[@cai2024]`.
 - **Klasifikator**: *Support Vector Machine* (SVM) sebagai *baseline* dan *1D Convolutional Neural Network* (1D-CNN) kecil. Rujukan teori SVM/CNN tidak tersedia → `[PERLU RUJUKAN: …]`.
 - **Umpan balik**: keluaran klasifikator + skor keyakinan. Skor di bawah ambang → "isyarat tidak dikenali, ulangi" (penolakan). Skor di atas ambang → ditampilkan isyarat yang terdeteksi dan kecocokannya dengan isyarat target. "Benar" berarti **lintasan gerak lengan/tubuh atas sesuai**, BUKAN bentuk jari benar — ditulis eksplisit sebagai keterbatasan. Umpan balik ditampilkan di *dashboard* pada laptop. Nilai ambang `[PERLU DATA: ambang skor keyakinan, ditetapkan dari data validasi]`.
@@ -89,20 +89,20 @@ Prinsip: ini studi kelayakan; setiap tahap menghasilkan artefak tetap (laporan k
 ### E.5 Alat dan bahan
 
 Perangkat keras: ESP32 2 unit (+1 cadangan) `[PERLU DATA: varian]`; aksesori (kabel, adaptor daya, dudukan setinggi dada pengisyarat); laptop pribadi sebagai server RuView, mesin pelatihan, dan tampilan umpan balik `[PERLU DATA: spesifikasi laptop]`; *webcam* bawaan laptop (hanya saat pelabelan dan satu kondisi uji persepsi).
-Perangkat lunak: firmware dan server RuView; `scripts/collect-ground-truth.py` (ADR-079); MediaPipe (Pose/Holistic, Hands); Python; scikit-learn; PyTorch; *dashboard* RuView.
+Perangkat lunak: firmware dan server RuView; `scripts/collect-ground-truth.py` (ADR-079, diadaptasi: estimator pose diganti model YOLO26); model pose YOLO26 (Ultralytics); Python; scikit-learn; PyTorch; *dashboard* RuView.
 Bahan: *dataset* CSI isyarat SIBI hasil perekaman sendiri; lembar definisi isyarat; formulir persetujuan; instrumen pre/post dan kuesioner persepsi.
 
 ### E.6 Arsitektur dua jalur (untuk diagram BAB III)
 
 - **Jalur operasional (bebas kamera):** ESP32 TX — zona isyarat — ESP32 RX → deret CSI (amplitudo, fase, Doppler 1–60 Hz) → segmentasi berbasis energi gerak → ekstraksi fitur → klasifikator 5–8 kelas (SVM, 1D-CNN) + skor keyakinan → umpan balik di *dashboard* (isyarat terdeteksi, cocok/tidak cocok, atau "tidak dikenali").
-- **Jalur pelabelan (hanya saat perekaman dataset):** kartu pemandu → label kelas; *webcam* → MediaPipe → deret *keypoint* → verifikasi batas segmen, penyaringan kualitas, diagnosis. Sinkronisasi waktu kamera–CSI melalui `collect-ground-truth.py` (ADR-079).
+- **Jalur pelabelan (hanya saat perekaman dataset):** kartu pemandu → label kelas; *webcam* → model pose YOLO26 → deret *keypoint* tubuh (17 titik COCO) → verifikasi batas segmen, penyaringan kualitas, diagnosis. Sinkronisasi waktu kamera–CSI mengikuti pola `collect-ground-truth.py` (ADR-079).
 
 ### E.7 Protokol perekaman, partisipan, etika
 
 - Setiap sesi: kalibrasi ruang (600 *frame* + 8 *anchor*), pencatatan kondisi latar (posisi perabot, kipas/AC, orang lewat) sebagai kovariat.
 - Elisitasi terisolasi: kartu pemandu ditampilkan, satu isyarat per segmen, jeda antar-repetisi, ±30 repetisi per isyarat per sesi.
 - Metadata: tanggal, ruang, kode pengisyarat, posisi node, kondisi latar.
-- Aturan buang-segmen: orang tidak terdeteksi MediaPipe, *jitter* *keypoint* ekstrem, segmen terpotong. Tingkat segmen terbuang dicatat.
+- Aturan buang-segmen: orang tidak terdeteksi model pose, *jitter* *keypoint* ekstrem, segmen terpotong. Tingkat segmen terbuang dicatat.
 - Validator mengambil sampel segmen untuk memeriksa kebenaran bentuk isyarat.
 - Lokasi: `[PERLU DATA: nama sekolah/lembaga mitra]`, sedikitnya dua ruang.
 - Partisipan: 3–4 pengisyarat kompeten (guru/pembina SIBI, dapat penutur tunarungu) untuk *dataset*; minimal 1 validator penutur tunarungu (wajib); 3–5 pembelajar pendengar pemula untuk uji kegunaan.
@@ -115,7 +115,7 @@ Bahan: *dataset* CSI isyarat SIBI hasil perekaman sendiri; lembar definisi isyar
 3. Uji operasional: laju deteksi palsu per jam saat tidak ada isyarat (orang lewat, kipas, perabot bergeser); latensi ujung-ke-ujung dari selesainya isyarat hingga umpan balik tampil.
 4. Uji kegunaan (3–5 pemula): sebelum dan sesudah sesi latihan, peserta memperagakan isyarat target; ketepatan dinilai validator dengan rubrik (independen dari sistem CSI). Kuesioner persepsi skala Likert (±5 butir: kenyamanan, rasa diawasi, kemauan berlatih lagi) diberikan setelah peserta berlatih pada dua kondisi — kamera menyala dan kamera mati — dengan urutan diacak (*within-subject*). Analisis deskriptif; tidak ada klaim kausal atau statistik inferensial.
 5. Penilaian validator atas kewajaran umpan balik.
-6. Diagnosis (sekunder): mengaitkan kesalahan klasifikator dengan kemiripan lintasan tubuh dari *keypoint* MediaPipe.
+6. Diagnosis (sekunder): mengaitkan kesalahan klasifikator dengan kemiripan lintasan tubuh dari *keypoint* YOLO26.
 
 ## F. Kunci rujukan (HANYA kunci ini yang boleh dipakai)
 
@@ -144,10 +144,10 @@ Konten sumber sudah diverifikasi metadata-nya (DOI). Klaim tentang isi sumber ha
 | qin2023 | WiASL: pengenalan tulisan ASL dengan perangkat Wi-Fi komersial | 2023 |
 | personinwifi2019 | Person-in-WiFi: persepsi tubuh halus dari Wi-Fi dengan supervisi kamera | 2019 |
 | densepose2023 | DensePose From WiFi: transfer jaringan visi ke Wi-Fi untuk pose padat tingkat region tubuh | 2023 |
-| mediapipe2019 | MediaPipe: kerangka kerja *pipeline* persepsi | 2019 |
-| blazepose2020 | BlazePose: pelacakan pose tubuh *real-time* di perangkat (33 *landmark*) | 2020 |
-| mphands2020 | MediaPipe Hands: pelacakan tangan *real-time* (21 *landmark*) | 2020 |
-| kim2023 | Estimasi pose manusia dengan MediaPipe Pose dan optimasi model humanoid | 2023 |
+| mediapipe2019 | MediaPipe: kerangka kerja *pipeline* persepsi (estimator bawaan skrip ADR-079 RuView; bukan alat penelitian ini) | 2019 |
+| jocher2026 | Ultralytics YOLO26: paper resmi keluarga model visi waktu nyata (deteksi/segmentasi/klasifikasi/pose) | 2026 |
+| ultralyticspose | Dok. Ultralytics "Pose estimation": model pose YOLO26 terlatih COCO, 17 *keypoint* tubuh per orang | 2026 |
+| sapkota2025 | Analisis independen arsitektur YOLO26 (efisiensi inferensi, perangkat tepi) | 2025 |
 | chadha2021 | Laporan dunia WHO tentang pendengaran 2021 | 2021 |
 | mitchell2004 | Status pendengaran orang tua siswa tuli di AS (membantah mitos 10%) | 2004 |
 | mitchell2005 | Status pendengaran orang tua dan penggunaan isyarat siswa tuli | 2005 |
@@ -175,7 +175,7 @@ Konten sumber sudah diverifikasi metadata-nya (DOI). Klaim tentang isi sumber ha
 | *dataset* | *dataset* (miring) |
 | *subcarrier* | *subcarrier* (miring) |
 | *pose estimation* | estimasi pose |
-| *keypoint/landmark* | *keypoint* (miring); *landmark* hanya saat menyebut keluaran MediaPipe |
+| *keypoint/landmark* | *keypoint* (miring); *landmark* hanya saat menyebut keluaran asli MediaPipe pada skrip RuView |
 | *ground truth* | label acuan |
 | *classifier* | klasifikator |
 | SVM | pertama: *Support Vector Machine* (SVM) |

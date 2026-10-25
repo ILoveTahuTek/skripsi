@@ -109,8 +109,8 @@ Tabel 3.2 Perangkat lunak penelitian
 |---|---|---|
 | 1 | *Firmware* RuView | Menangkap CSI pada node ESP32 dalam format *frame* ADR-018 dan mengirimkannya melalui *User Datagram Protocol* (UDP) |
 | 2 | *Server* RuView | Mengolah sinyal, mengalibrasi ruang, dan memotong deret CSI menjadi segmen berdasarkan energi gerak |
-| 3 | `scripts/collect-ground-truth.py` (ADR-079) | Menyinkronkan akuisisi kamera dan CSI dengan MediaPipe PoseLandmarker |
-| 4 | MediaPipe (Pose, Hands) | Menghasilkan deret *keypoint* tubuh dan tangan dari video pada jalur pelabelan |
+| 3 | `scripts/collect-ground-truth.py` (ADR-079, diadaptasi) | Menyinkronkan akuisisi kamera dan CSI; estimator pose diganti model YOLO26 |
+| 4 | Model pose YOLO26 (Ultralytics) | Menghasilkan deret 17 *keypoint* tubuh format COCO dari video pada jalur pelabelan |
 | 5 | Python | Mengimplementasikan ekstraksi fitur, pelatihan, dan evaluasi model |
 | 6 | scikit-learn | Mengimplementasikan klasifikator SVM |
 | 7 | PyTorch | Mengimplementasikan klasifikator 1D-CNN |
@@ -140,7 +140,7 @@ flowchart TD
         KP["Kartu pemandu"]
         LBL["Label kelas"]
         CAM["Webcam"]
-        MP["MediaPipe"]
+        MP["Model pose YOLO26"]
         KEY["Deret keypoint"]
         VER["Verifikasi batas segmen dan penyaringan kualitas"]
         DS["Dataset CSI berlabel"]
@@ -174,7 +174,7 @@ Gambar 3.2 Arsitektur sistem dua jalur
 
 Pada jalur operasional, gerak pengisyarat di zona isyarat antara node TX dan node RX mengubah amplitudo, fase, dan komponen Doppler pada deret CSI [25]. Deret tersebut diolah hingga menjadi umpan balik di *dashboard* tanpa kamera (Subbab 3.7).
 
-Jalur pelabelan hanya aktif selama perekaman *dataset*. Label kelas berasal dari kartu pemandu yang ditampilkan sebelum setiap repetisi, bukan dari kamera. MediaPipe [33] mengubah video *webcam* menjadi deret *keypoint* tubuh [50] dan tangan [51] yang diselaraskan dengan CSI melalui ADR-079 untuk memverifikasi batas segmen, menyaring segmen buruk, dan mendiagnosis kesalahan klasifikator secara luring. Berbeda dengan preseden Person-in-WiFi [53] dan DensePose From WiFi [54] (Subbab 2.5), dalam penelitian ini kamera tidak mengajarkan pose kepada model CSI; distilasi pengetahuan penuh ditempatkan sebagai penelitian lanjutan.
+Jalur pelabelan hanya aktif selama perekaman *dataset*. Label kelas berasal dari kartu pemandu yang ditampilkan sebelum setiap repetisi, bukan dari kamera. Model pose YOLO26 [33] mengubah video *webcam* menjadi deret 17 *keypoint* tubuh format COCO [51] yang diselaraskan dengan CSI melalui pola ADR-079 untuk memverifikasi batas segmen, menyaring segmen buruk, dan mendiagnosis kesalahan klasifikator secara luring. Berbeda dengan preseden Person-in-WiFi [53] dan DensePose From WiFi [54] (Subbab 2.5), dalam penelitian ini kamera tidak mengajarkan pose kepada model CSI; distilasi pengetahuan penuh ditempatkan sebagai penelitian lanjutan.
 
 ### 3.5.2 Penempatan Node
 
@@ -202,7 +202,7 @@ Perekaman memakai elisitasi terisolasi, yaitu satu isyarat per segmen dengan jed
 2. Menjalankan kalibrasi ruang dan mencatat metadata sesi, yaitu tanggal, ruang, kode pengisyarat, posisi node, dan kondisi latar.
 3. Menjalankan `scripts/collect-ground-truth.py` agar perekaman CSI dan *webcam* tersinkron.
 4. Menampilkan kartu pemandu isyarat target, merekam satu repetisi, memberi jeda, dan mengulanginya hingga setiap isyarat mencapai ±30 repetisi.
-5. Membuang segmen bila orang tidak terdeteksi MediaPipe, *jitter* *keypoint* ekstrem, atau segmen terpotong, lalu mencatat tingkat segmen terbuang per isyarat dan per pengisyarat sebagai indikator kualitas.
+5. Membuang segmen bila orang tidak terdeteksi oleh model pose, *jitter* *keypoint* ekstrem, atau segmen terpotong, lalu mencatat tingkat segmen terbuang per isyarat dan per pengisyarat sebagai indikator kualitas.
 6. Meminta validator mengambil sampel segmen untuk memeriksa kebenaran bentuk isyarat yang diperagakan.
 
 ### 3.6.4 Etika Penelitian
@@ -289,7 +289,7 @@ Ketepatan peragaan uji awal dan uji akhir dinilai validator dengan rubrik yang i
 
 ### 3.8.5 Penilaian Validator dan Diagnosis Kesalahan
 
-Validator penutur tunarungu menilai kewajaran umpan balik sistem, yaitu kesesuaian status cocok atau tidak cocok yang ditampilkan sistem dengan penilaian validator atas peragaan yang sama. Untuk setiap percobaan peserta, keluaran sistem berupa cocok, tidak cocok, atau tidak dikenali dicatat, lalu validator menilai secara independen apakah lintasan peragaan sesuai dengan isyarat target. Kesesuaian keduanya disajikan dalam tabel silang dan proporsi percobaan yang tidak dikenali dilaporkan sebagai tingkat penolakan pada peragaan pemula. Kasus ketika sistem menampilkan status cocok untuk peragaan yang dinilai tidak sesuai oleh validator dilaporkan tersendiri karena dapat menyesatkan pembelajar. Persetujuan validator atas kewajaran umpan balik menjadi syarat G4 dengan batas kesesuaian pada Tabel 3.6, butir 26. Sebagai analisis sekunder, kesalahan klasifikator dikaitkan secara luring dengan kemiripan lintasan tubuh dari deret *keypoint* MediaPipe untuk membedakan kesalahan akibat lintasan yang mirip dari kesalahan akibat sinyal CSI yang lemah.
+Validator penutur tunarungu menilai kewajaran umpan balik sistem, yaitu kesesuaian status cocok atau tidak cocok yang ditampilkan sistem dengan penilaian validator atas peragaan yang sama. Untuk setiap percobaan peserta, keluaran sistem berupa cocok, tidak cocok, atau tidak dikenali dicatat, lalu validator menilai secara independen apakah lintasan peragaan sesuai dengan isyarat target. Kesesuaian keduanya disajikan dalam tabel silang dan proporsi percobaan yang tidak dikenali dilaporkan sebagai tingkat penolakan pada peragaan pemula. Kasus ketika sistem menampilkan status cocok untuk peragaan yang dinilai tidak sesuai oleh validator dilaporkan tersendiri karena dapat menyesatkan pembelajar. Persetujuan validator atas kewajaran umpan balik menjadi syarat G4 dengan batas kesesuaian pada Tabel 3.6, butir 26. Sebagai analisis sekunder, kesalahan klasifikator dikaitkan secara luring dengan kemiripan lintasan tubuh dari deret *keypoint* YOLO26 untuk membedakan kesalahan akibat lintasan yang mirip dari kesalahan akibat sinyal CSI yang lemah.
 
 ### 3.8.6 Kriteria Gerbang Keputusan
 
