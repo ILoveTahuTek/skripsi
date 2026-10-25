@@ -1,0 +1,28 @@
+%% G3.4 — Diagram perangkat, komunikasi antarmodul, dan server (BAB III, Subbab 3.5)
+%% Tipe: flowchart LR, topologi jaringan satu kanal
+flowchart LR
+    subgraph MODS["2-3 modul ESP32-S3 (baterai)"]
+        MA["Modul A (TX)<br/>pemancar ESP-NOW"]
+        MB["Modul B (RX)<br/>CSI + inferensi int8"]
+        MC["Modul C (pengguna)<br/>layar + speaker + mikrofon I2S"]
+    end
+
+    AP["Access point:<br/>router atau hotspot laptop<br/>(semua perangkat satu kanal)"]
+
+    subgraph SERVER["Server lokal laptop (RTX 3070 8 GB)"]
+        RUVR["Server RuView:<br/>kalibrasi ruang, segmentasi dataset"]
+        ASR["ASR faster-whisper"]
+        TTS["TTS Indonesia"]
+        KAMUS["Kamus label dan isyarat"]
+    end
+
+    CLOUD["Cloud jarak jauh<br/>(alternatif, tidak diuji<br/>pada prototipe)"]
+
+    MA -- "ESP-NOW beacon<br/>sumber CSI" --> MB
+    MB -- "UDP: label dan skor" --> AP
+    AP --> RUVR
+    MC -- "streaming audio" --> AP --> ASR
+    AP --> TTS
+    TTS -- "audio" --> MC
+    KAMUS -- "glos/gambar/ejaan jari" --> MC
+    AP -.-> CLOUD

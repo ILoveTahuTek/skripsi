@@ -331,3 +331,68 @@ Stage Summary:
 - Deliverable: DOCX 55 halaman + markdown terpadu + 2 PNG baru; postcheck 0 error; sinkron 596/596; 38 penanda PERLU DATA tetap menunggu keputusan pembimbing.
 - Catatan: layanan VLM CLI 401 (missing X-Token) sejak tengah sesi — jika pemilik butuh inspeksi visual tambahan, jalankan ulang setelah restart sesi.
 - Sisa human-owned: sama seperti sebelumnya (identitas sampul, 38 penanda, Update Field TOC di Word, 8 keputusan terbuka catatan.md, 1 koma-sehingga opsional) + konfirmasi ke pembimbing bahwa skrip ADR-079 memang akan diadaptasi untuk YOLO26.
+
+---
+Task ID: T17-R2
+Agent: general-purpose subagent (pengumpul bahan riset)
+Task: Riset kemampuan teknis ESP32-S3 (ML on-device, memori, baterai) dan perolehan Wi-Fi CSI keluarga ESP32, untuk proposal penerjemah dua arah SIBI (2-3 modul ESP32-S3 + layar/baterai/speaker/mic I2S, server RTX 3070); termasuk pertanyaan kritis koeksistensi radio (CSI + STA-TCP/IP + ESP-NOW pada satu chip).
+
+Work Log:
+- Baca worklog Task 1/11/13/16 + laporan 01-ruview-exploration; verifikasi klon lokal RuView commit fefb0f9 utuh (firmware/esp32-csi-node/, docs/adr/).
+- Inspeksi kode RuView (bukti primer, path:baris): csi_collector.c (CSI_MIN_SEND_INTERVAL_US 20 ms = 50 Hz, baris 98; gate proses 50 Hz baris 115; WIFI_MODE_STA + promiscuous MGMT-only #396 + self-ping #954; konfig lltf/htltf/stbc utk S3; S3 1 antena; STBC 192 I/Q), main.c (wifi_init_sta 189-267; ESP-NOW sync "works on both S3 and C6" 554-566), c6_sync_espnow.c (beacon 10 Hz, 16 B), stream_sender.c (UDP sendto), README firmware (8MB flash ~943KB terpakai; PSRAM 8MB, 640KB arena WASM; ~20 Hz 64 subcarrier ~5 KB/s; peringatan termal WIFI_PS_NONE; 3-6 node/ruang), ADR-018 (56 subcarrier; tanpa FFT on-device).
+- Riset daring via curl (tanpa WebSearch/WebFetch tool): unduh ESP32-S3 Datasheet v2.2 (2026-03-05) PDF + pdftotext — verifikasi CPU dual-core LX7 240 MHz, SRAM 512 KB, ROM 384 KB, PSRAM in-package 2/8/16 MB (octal), flash 8 MB quad, 1 GB eksternal teralamat, PIE 128-bit, Wi-Fi b/g/n 2,4 GHz 1T1R 150 Mbps HT20/40, BLE 5; arus: TX 283-340 mA, RX 88-91 mA, modem-sleep 66-92 mA @240MHz, light-sleep 240 uA, deep-sleep 7-8 uA.
+- Dokumen ESP-IDF v5.4 (S3) Wi-Fi Driver: tabel CSI resmi (HT20 non-STBC LLTF+HT-LTF = 256 byte; 802.11n 20 MHz = 56 subcarrier total/52 data; 40 MHz = 114/108) + rekomendasi resmi "enable sniffer mode to receive more CSI" saat STA terhubung; ESP-NOW docs (payload 250 B v1/1470 B v2, 20 peer, rate 1 Mbps, syarat kanal sama); Long Range 1 km (fitur Wi-Fi).
+- Repo Espressif (diunduh penuh): esp-csi (S3 didukung penuh; csi_send TX ESP-NOW broadcast + csi_recv RX; csi_recv_router STA+ping; esp-radar console_test S3); ESP32-CSI-Tool — KOREKSI: repo pindah ke StevenMHernandez/ESP32-CSI-Tool (espressif/esp32-csi-tool = 404), TX master = UDP socket bukan ESP-NOW, butuh IDF v4.3 (ESP32 klasik), paper WoWMoM 2020 Hernandez & Bulut (bibtex resmi); esp-dl (MobileNetV2 s8 S3 437,9/389,7 ms; YOLO11n 3,9 s @640; gesture MobileNetV2-0.5 69,2 ms; benchmark operator S3 vs ESP32 Conv 22,9x); esp-tflite-micro (person detection 300.568 B = 293,5 KB, invoke 54 ms dgn ESP-NN; micro_speech 18.800 B; arena 100/30 KB); esp-nn (tabel kernel & model-level S3: VWW 54 ms, MobileNetV3-S 729 ms, YOLO11n-192 1253 ms).
+- Koeksistensi radio (pertanyaan paling kritis): JAWABAN YA dengan bukti kode produksi — firmware RuView S3 menjalankan STA terhubung AP + UDP ke server + CSI promiscuous + ESP-NOW sync serentak pada satu chip; dokumentasi IDF mendukung (sniffer + CSI + STA; ESP-NOW via antarmuka Station; STA+SoftAP koeksisten di MAC). Batasan terdokumentasi: kanal tunggal (semua node harus di kanal AP), filter DATA penuh berisiko crash Core 0 (wDev_ProcessFiq, #396), modem-sleep harus mati utk CSI, AP 802.11b-reply tanpa CSI (#2287). Risiko terbuka: streaming audio I2S + CSI satu radio belum teruji.
+- Baterai: estimasi modul penuh (radio RX + CPU 240 MHz + layar SPI + I2S audio) ~150-250 mA → 2000 mAh ~8-13 jam, 5000 mAh ~20-33 jam (label ESTIMASI); arus INMP441/MAX98357A/ILI9341 TIDAK BERHASIL diverifikasi (datasheet vendor diblokir/404) — ditandai jujur untuk diukur T0.
+- Tulis catatan riset lengkap (10 seksi, label per klaim, kontradiksi, belum terselesaikan): /home/z/my-project/riset-translator-sibi/T17-R2-esp32s3-csi.md.
+
+Stage Summary:
+- Semua 6 pertanyaan riset terjawab dengan jejak sumber: datasheet v2.2 + IDF v5.4 + 5 repo resmi (diunduh & dibaca langsung) + kode RuView (kutipan baris). Angka kunci: S3 = LX7 dual 240 MHz/512 KB SRAM/8 MB PSRAM modul; CSI HT20 56 subcarrier (buffer 64 I/Q-pair per LTF, 256 B); laju firmware 50 Hz maks, 10-20 Hz tipikal; ML int8 on-device: person detection 293,5 KB/54 ms, gesture 128px 69 ms, MobileNetV2 390-438 ms; koeksistensi CSI+STA+ESP-NOW pada 1 chip TERBUKTI di firmware produksi (syarat: 1 kanal, MGMT-only utk papan berlayar, WIFI_PS_NONE).
+- 2 koreksi penting utk proposal: (1) URL esp32-csi-tool kini github.com/StevenMHernandez/ESP32-CSI-Tool (espressif 404); (2) TX esp32-csi-tool master = UDP, bukan ESP-NOW (pola ESP-NOW ada di esp-csi csi_send).
+- Belum terverifikasi (perlu T0/ukur): arus periferal (INMP441/MAX98357A/ILI9341), latensi ESP-NOW end-to-end, benchmark model CSI-isyarat on-device, interaksi streaming audio+CSI. Tidak menulis deliverable final proposal — bahan diserahkan ke agent utama.
+
+---
+Task ID: T17-R3
+Agent: general-purpose subagent (pengumpul bahan riset)
+Task: Riset ulang pendekatan translasi teks/ucapan Indonesia → representasi isyarat SIBI (struktur linguistik, sistem terdahulu, opsi tampilan layar SPI, batas jujur) untuk arah 2 penerjemah dua arah.
+
+Work Log:
+- Manfaatkan deposit sesi 2026-10-24 (metadata Crossref `13-sempro-docx/verifikasi-rujukan-2026-10-24/`, cache HTML `scripts/sempro-isi/web/`) agar tidak menghabiskan waktu memverifikasi ulang keberadaan KASIBI/OpenSIBI/INTECOMS/DBESTI.
+- Crossref segar (2026-10-25): abstrak penuh OpenSIBI 2022 (input suara → Google Speech-to-Text → tampilan animasi 3D; Java+MySQL; uji SUS), INTECOMS 2024 (aplikasi mobile pembelajaran dasar isyarat SIBI), DBESTI 2026 (Android+TensorFlow Lite mengenali alfabet statis SIBI; UAT 91,3%; arah pengenalan, bukan teks→isyarat), Rabit 2026 (dataset Kaggle 7.582 citra, 24 kelas A–Y tanpa J/Z), Soekarta 2024 (24 kelas huruf statis), INKLUSI 2015 (100 responden; 91% lebih memakai BISINDO; konsep SIBI dianggap menyulitkan).
+- OpenAlex (2026-10-25): abstrak KASIBI 2019 — suara→teks (speech-to-text) → pencarian kata di database → tampilan animasi peraga 3D; uji kelayakan 3,362/4.
+- Unduh PDF penuh OpenSIBI (ijc.ilearning.co, 2026-10-25): API OpenSIBI menyimpan dataset model 3D kosakata isyarat; penelitian memodelkan 50 kosakata (mis. Ibu, Buku, Jam, Bola, Kakak); keterbatasan dilaporkan: terlalu banyak kosakata untuk dimodelkan detail; saran lanjutan menambah kosakata & karakter animasi.
+- Unduh PDF Dwijayanti dkk. 2021 (IJACSA, akses terbuka): latar SIBI 1994 bahasa formal pendidikan; daftar referensinya memuat Rakun dkk. 2015 "A heuristic HMM to recognize inflectional words … SIBI" (bukti kata berinfleksi/jadian SIBI), SIBI Blue 2017, Humairah 2018 K-NN SIBI.
+- DDG: publikasi "penerjemah rule-based" bahasa isyarat Indonesia yang ditemukan umumnya arah pengenalan (isyarat→teks: BISINDO WEB rule-based umc.ac.id; jnatia VGG SIBI statis) — arah teks→isyarat yang ditemukan hanya sekelas kamus kata-level (KASIBI, OpenSIBI). Tidak ditemukan sistem teks→SIBI bertata bahasa penuh.
+- Internasional (Crossref 2026-10-25): Picron dkk. 2024 "(Towards) Sign Language Machine Translation in Practice" (Springer, 10.1007/978-3-031-47362-3_14); Hakozaki dkk. 2025 "Evaluation of Japanese Sign Language Avatar with Mouthing in News Content" (ASSETS, 10.1145/3663547.3759693).
+- KSD pkplk.kemendikdasmen.go.id/sibi: terblokir Cloudflare; snapshot Wayback 2026-05-07 ada tapi archive.org timeout dari sandbox → aset (video/gambar/lisensi) TIDAK DIVERIFIKASI sesi ini; klaim "±2600 kosakata" TIDAK DITEMUKAN sumber yang layak kutip sesi ini.
+
+Temuan kunci:
+- Seluruh sistem Indonesia arah teks/suara→isyarat berbasis pencocokan kata-level + animasi 3D per kosakata (KASIBI 2019; OpenSIBI 2022, 50 kosakata) — bukan penerjemahan tata bahasa; ini preseden yang jujur untuk MVP arah 2.
+- Ejaan jari (manual alphabet) adalah bagian resmi SIBI (dataset riset memakai 24 kelas statis + J/Z dinamis; BISINDO 26 huruf di Dwijayanti 2021) → glos + fingerspelling paling selaras struktur SIBI untuk layar kecil.
+
+Output: /home/z/my-project/riset-translator-sibi/T17-R3-representasi-sibi.md (bukti per klaim + status + tanggal akses).
+
+---
+Task ID: 17
+Agent: Super Z (main agent, sesi web)
+Task: Pengumpul bahan — riset ulang dan revisi proposal Translator SIBI dua arah sesuai visi produk terbaru (2-3 modul ESP32-S3 portabel berlayar/baterai/speaker/mikrofon; YOLO26-Pose hanya riset; produk akhir tanpa kamera; laptop RTX 3070 = dev+server lokal). Keluaran: 5 deliverable (.md + diagram Mermaid editable) memakai skill naskah-id (1aK3y8Ah...) + sempro-mepet (1dzISJm...).
+
+Work Log:
+- Unduh & ekstrak 2 skill Drive: naskah-id (sama dgn terpasang) + sempro-mepet (baru; dibaca penuh: SKILL.md + language-core + bab1/2/3 + qc-checklist).
+- Baca penuh proposal sumber 711 baris + worklog Task 1-16 + catatan riset proyek.
+- 4 subagent riset paralel: T17-R2 (ESP32-S3+CSI) SUKSES (datasheet v2.2 diverifikasi; koeksistensi CSI+STA+UDP+ESP-NOW pada satu chip terbukti dari kode RuView dgn syarat satu kanal+filter MGMT+WIFI_PS_NONE; 56 subcarrier HT20; ESP-NN 54 ms/293,5 KB; daya modul est. 150-250 mA; catatan di riset-translator-sibi/T17-R2-esp32s3-csi.md); T17-R3 (representasi SIBI) SUKSES percobaan-2 (OpenSIBI PDF penuh: Google STT→kata→Collada 3D, 50 kosakata 9 angka+26 huruf+15 kata; angka ±2600 kosakata TIDAK ditemukan sumber layak; 24 vs 26 kelas; MVP glos+gambar+ejaan jari; catatan di T17-R3-representasi-sibi.md); T17-R1 (TTS/ASR) & T17-R4 (kelayakan CSI+konektivitas) GAGAL 2x "context deadline exceeded" → riset dikerjakan langsung agent utama via WebSearch/WebFetch.
+- Riset mandiri TTS/ASR: Kokoro-82M v1.0 = 8 bahasa TANPA Indonesia (model card HF); facebook/mms-tts-ind ADA (VITS, CC-BY-NC 4.0); Google TTS id-ID Standard/Premium ($4/jt karakter Standard); Azure id-ID-GadisNeural/ArdiNeural; Whisper 100+ bahasa (large-v3 1,55B, turbo 809M ~6 GB); faster-whisper benchmark RTX 3070 Ti 8 GB (int8 2,9 GB VRAM; 13 menit→59 detik); Vosk resmi tanpa model Indonesia.
+- Riset mandiri kelayakan CSI: WiKey (Ali dkk., MobiCom 2015, DOI 10.1145/2789168.2790109, deteksi 97,5%/klasifikasi 96,4%); Mosleh 2022 IEEE Access (napas 99,54%, DOI 10.1109/access.2022.3230003); SignFi dalam sesi 98,01/98,91/94,81%; TEMUAN PENTING WiSign (Zhang dkk., ACM TIST 11(3) 2020, DOI 10.1145/3377553) = kalimat ASL KONTINU via CSI → klaim kebaruan kontinu tidak boleh dibuat; MDPI 26/5/1652 = kamera (bukan CSI), dicatat pembanding.
+- Verifikasi Crossref 10 rujukan baru (wisign2020, wikey2015, mosleh2022, mursita2015 91% BISINDO, picron2024, hakozaki2025, rabit2026 24 kelas, rakun2015 TIME-E DOI 10.1109/TIME-E.2015.7389747, anggraini2019 ICEEI) → meta_rujukan_baru.json.
+- Tulis 10 diagram Mermaid (G1.1 peta masalah, G1.2 visi dua arah, G2.1 taksonomi, G2.2 alur arah 1, G2.3 alur arah 2, G3.1 pelatihan bergerbang, G3.2 arsitektur akhir, G3.3 topologi, G3.4 inferensi tepi, G3.5 dataset-evaluasi) — semua lolos validasi mmdc; sebaran 2/3/5 per bab.
+- Tulis 4 deliverable di download/translator-sibi-revisi/: Audit-Arsitektur (vonis 10 komponen; audit pertahankan/revisi/hapus; arsitektur utama + cadangan A-D; 5 uji validasi awal), Matriks-Literatur-dan-Bukti (±80 rujukan 8 kelompok + status + kontradiksi + metodologi), Rencana-Visual-Proposal (alokasi 10 visual + konvensi + cara render), Proposal-Revisi (BAB I-III + DP).
+- Proposal dibangun via pipeline part*.md + [@kunci] + build_proposal.py (79 rujukan dinomori otomatis gaya IEEE; mirror pipeline _nomori-sitasi proyek).
+- QA iteratif: periksa.py 5 temuan → 3 diperbaiki (daripada, koma-sehingga, antar→antara), 2 positif palsu dipertahankan (F1 makro; judul asli Mursita); evaluator D1-D6 0,72 → 1,0 setelah tambah "bertujuan untuk", "tidak membahas" (batasan butir 9), "memengaruhi" (hipotesis kenyamanan), DOI resolvable Kokoro (10.57967/hf/4329); sinkronisasi nama file diagram dgn urutan Gambar (G3.3 topologi/G3.4 inferensi); verify_proposal.py SEMUA LOLOS (10 mermaid, 79 DP 1..79, 207 sitasi, semua gambar/tabel dirujuk, 0 sisa [@]).
+- catatan.md pengiriman (jenis pekerjaan, 7 perubahan utama, 41 penanda tersisa, hasil verifikasi, konfirmasi pembimbing).
+
+Stage Summary:
+- 5 deliverable lengkap di download/translator-sibi-revisi/: Proposal-Revisi-Translator-SIBI.md (±15,9 ribu kata; 79 rujukan; 41 PERLU DATA; 0 PERLU RUJUKAN; evaluator D1-D6 = 1,0), Audit-Arsitektur, Matriks-Literatur-dan-Bukti, Rencana-Visual-Proposal, diagram/ (10 .mmd tervalidasi), catatan.md.
+- Keputusan kunci yang diambil: (a) kebaruan dibatasi kombinatif (CSI untuk SIBI + inferensi tepi + integrasi dua arah TTS/ASR) karena WiSign sudah kalimat kontinu ASL; (b) TTS utama = MMS-TTS-ind lokal (lisensi nonkomersial dicatat), ASR = faster-whisper; (c) arah 2 = kamus kata-level + ejaan jari 26 huruf+9 angka ala OpenSIBI, bukan SLMT penuh; (d) cadangan A-D eksplisit di 3.11; (e) 6 rujukan lama dikeluarkan (kerangka latihan), 21 baru masuk.
+- Sisa human-owned: 41 penanda (Tabel 3.6 + identitas sampul), konfirmasi pembimbing atas gaya sitasi + frasa judul, keputusan final TTS/ASR di T4.
+- Catatan operasional: subagent general-purpose berat (riset web panjang) rentan "context deadline exceeded" (3/6 panggilan gagal 2x) — untuk riset berat berikutnya pecah cakupan lebih kecil atau kerjakan langsung.

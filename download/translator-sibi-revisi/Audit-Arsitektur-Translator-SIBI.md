@@ -1,0 +1,106 @@
+# Audit Arsitektur — Purwarupa Penerjemah Dua Arah SIBI Berbasis Wi-Fi CSI
+
+Dokumen ini mengaudit arsitektur purwarupa penerjemah dua arah Sistem Isyarat Bahasa Indonesia (SIBI) berbasis 2-3 modul ESP32-S3 dengan pemrosesan bahasa pada server, sebagaimana visi produk terbaru pemilik penelitian. Audit membandingkan visi tersebut dengan proposal lama (`Proposal-Sempro-DPJ4-SIBI-CSI.md`, revisi YOLO26 tanggal 24-25 Oktober 2026), memeriksa kelayakan setiap komponen teknologi terhadap bukti yang dapat diverifikasi, menetapkan arsitektur utama beserta alternatif cadangannya, dan menandai apa yang masih belum diketahui. Hasil audit menjadi dasar penyusunan `Proposal-Revisi-Translator-SIBI.md`.
+
+## 1. Ringkasan visi produk dan vonis kelayakan
+
+Visi produk baru berbeda dari proposal lama pada tiga hal. Pertama, produk lama adalah alat pembelajaran yang memberi umpan balik latihan bagi pembelajar pendengar, sedangkan visi baru adalah perangkat penerjemah dua arah yang portabel: arah pertama mengubah isyarat SIBI menjadi teks dan suara Bahasa Indonesia, arah kedua mengubah teks atau ucapan menjadi representasi SIBI di layar. Kedua, produk lama memakai dua node ESP32 dan laptop sebagai server RuView sekaligus tampilan umpan balik, sedangkan visi baru memakai 2-3 modul ESP32-S3 yang masing-masing direncanakan memiliki layar, baterai, speaker, dan mikrofon, dengan inferensi pengenalan berlangsung langsung pada perangkat. Ketiga, visi baru menegaskan pembagian peran: YOLO26-Pose hanya dipakai selama tahap penelitian untuk pelabelan, ekstraksi informasi gerakan, dan pembentukan ground truth, sedangkan produk akhir tidak menggunakan kamera maupun citra; laptop ASUS TUF Dash F15 FX516PR (Intel Core i7-11370H, RTX 3070 Laptop 8 GB VRAM, RAM 16 GB) menjadi mesin pengembangan, pelatihan, dan server lokal prototipe.
+
+Vonis kelayakan per komponen dirangkum pada Tabel 1. Empat komponen berstatus layak dengan bukti kuat, empat komponen layak bersyarat karena masih menyisakan parameter yang harus diukur sendiri, dan dua komponen merupakan keputusan desain yang dibatasi klaim, bukan hasil yang sudah terbukti.
+
+Tabel 1 Vonis kelayakan komponen arsitektur
+
+| No. | Komponen | Vonis | Status bukti | Prasyarat utama |
+|---|---|---|---|---|
+| 1 | Akuisisi CSI pada ESP32-S3 | Layak | Terverifikasi (dokumentasi resmi + kode produksi) | Kalibrasi ruang; laju aktual diukur ulang di T0 |
+| 2 | Koeksistensi CSI + STA + ESP-NOW pada satu chip | Layak | Terverifikasi (kode firmware RuView, komentar "Works on both S3 and C6") | Satu kanal; filter MGMT; WIFI_PS_NONE |
+| 3 | Inferensi klasifikasi int8 on-device | Layak bersyarat | Didukung tolok ukur model sebanding (54-69 ms); belum ada tolok ukur model CSI-isyarat | Model dirancang kecil; tolok ukur diukur di T2 |
+| 4 | Komunikasi label/audio ke server lokal | Layak | Terverifikasi (UDP firmware; pola STA umum) | Kanal tunggal; uji beban gabungan di T0 |
+| 5 | TTS Bahasa Indonesia | Layak | Terverifikasi (MMS-TTS-ind; Azure id-ID; Google id-ID) | Pilihan final menunggu lisensi (MMS = nonkomersial) |
+| 6 | ASR Bahasa Indonesia | Layak | Terverifikasi (Whisper 100+ bahasa; tolok ukur faster-whisper di GPU 8 GB) | Kualitas ucapan Indonesia diuji sendiri di T4 |
+| 7 | Pemetaan teks ke representasi SIBI | Layak bersyarat | Didukung preseden kata-level (KASIBI, OpenSIBI) | Aset isyarat dibuat/ dikumpulkan; cakupan dibatasi |
+| 8 | Pengenalan isyarat SIBI dari CSI | Belum terbukti (inti riset) | Preseden kuat pada bahasa lain (SignFi, WiSign); SIBI belum ada | Gerbang G0-G3; bukan asumsi |
+| 9 | Dua arah sebagai satu produk mulus | Keputusan desain dibatasi klaim | Tidak ada preseden penerjemah dua arah CSI | Klaim dibatasi kosakata terbatas |
+| 10 | Baterai untuk pemakaian portabel | Layak bersyarat | Angka arus chip terverifikasi; modul penuh masih estimasi | Pengukuran arus modul nyata di T4 |
+
+## 2. Metode audit
+
+Audit memakai sumber primer yang diinspeksi langsung antara 24-25 Oktober 2026: datasheet resmi ESP32-S3 v2.2, dokumentasi ESP-IDF v5.4, repositori resmi Espressif (esp-csi, esp-dl, esp-tflite-micro, esp-nn), kode sumber firmware RuView pada klon lokal commit fefb0f9, model card Hugging Face (Kokoro-82M, mms-tts-ind, Systran/faster-whisper-large-v3), halaman harga dan dukungan suara resmi Google Cloud dan Azure, makalah ber-DOI yang diverifikasi melalui Crossref, serta PDF penuh beberapa makalah (OpenSIBI, Dwijayanti, WiKey). Setiap klaim diberi label status: DIVERIFIKASI (sumber dilihat langsung), DIDUKUNG (preseden kuat tetapi konteks berbeda), HIPOTESIS (interpretasi yang akan diuji), atau BELUM DIKETAHUI. Rincian sumber per klaim tercantum pada `Matriks-Literatur-dan-Bukti.md` dan catatan riset pada folder `riset-translator-sibi/`.
+
+## 3. Audit proposal lama: pertahankan, revisi, hapus
+
+Tabel 2 memetakan bagian proposal lama ke putusannya pada proposal revisi. Prinsipnya: seluruh disiplin klaim, gerbang keputusan, protokol dataset, dan etika dipertahankan karena menjaga kejujuran ilmiah; kerangka produk dan rumusan masalah direvisi mengikuti visi dua arah; asumsi yang berubah dihapus atau ditulis ulang.
+
+Tabel 2 Putusan audit per bagian proposal lama
+
+| Bagian lama | Putusan | Alasan |
+|---|---|---|
+| Latar belakang: kesenjangan komunikasi, data juru bahasa, SIBI vs BISINDO, UU 8/2016 | Pertahankan | Fakta terverifikasi tetap relevan; corong diperluas ke kebutuhan dua arah |
+| Latar belakang: umpan balik latihan bagi pembelajar sebagai muara | Revisi | Visi produk berubah menjadi penerjemah dua arah; kerangka pembelajaran dipindah ke manfaat |
+| Pemakaian SIBI (bukan BISINDO) untuk jalur pendidikan formal | Pertahankan | Diperkuat bukti baru Mursita 2015 (91% pemakai sehari-hari BISINDO) sehingga batas posisi semakin jelas |
+| Batasan 5-8 isyarat terisolasi, tanpa konfigurasi jari dan wajah | Pertahankan | Inti disiplin klaim; tetap menjadi batas MVP |
+| Peran kamera: hanya perekaman dataset + satu kondisi uji persepsi kamera menyala/mati | Revisi | Uji persepsi A/B kamera dihapus; kamera hanya untuk pelabelan riset |
+| Peran YOLO26-Pose: pelabelan, verifikasi segmen, diagnosis (pola ADR-079) | Pertahankan | Selaras visi baru: alat bantu riset, bukan produk |
+| Klasifikasi SVM + 1D-CNN di laptop | Revisi | Pelatihan tetap di laptop, tetapi model terpilih dikuantisasi dan di-deploy ke ESP32-S3 |
+| Tabel 2.2 penelitian terdahulu | Revisi | Ditambah baris WiSign (CSI kalimat kontinu), WiKey dan Mosleh (bukti gerak halus), KASIBI/OpenSIBI (arah balik) |
+| Arsitektur dua jalur (operasional tanpa kamera + pelabelan) | Pertahankan dan perkaya | Ditambah arah kedua (ASR → pemetaan → layar) dan topologi modul |
+| Gerbang G0-G4 dan tahapan T0-T5 | Pertahankan | Struktur bergerbang menjaga kejujuran; isi T0 dan T2 diperbarui |
+| Skema pembagian data 5 skema, metrik relatif peluang acak | Pertahankan | Metodologi tetap; ditambah metrik arah kedua (cakupan kamus) dan latensi per arah |
+| Tabel 3.6 parameter yang ditetapkan kemudian (27 butir) | Revisi | Dipangkas; butir yang terkait uji persepsi kamera dihapus, butir baru (kanal, pilihan TTS/ASR final, ambang latensi) ditambah |
+| Pernyataan "belum ada CSI untuk SIBI" sebagai kebaruan utama | Pertahankan dengan batas | Tetap benar untuk SIBI; kebaruan dua arah CSI tidak diklaim penuh karena WiSign telah mengenali kalimat ASL kontinu |
+
+## 4. Audit teknologi per komponen
+
+### 4.1 Akuisisi CSI pada ESP32-S3
+
+Fakta terverifikasi: ESP32-S3 didukung penuh oleh esp-csi resmi Espressif; CSI diperoleh melalui antarmuka pemrograman `esp_wifi_set_csi` dengan mode promiscuous; pada kanal HT20 802.11n terdapat 56 subcarrier (52 data, 4 pilot) dan penyangga CSI memuat 64 pasang I/Q per LTF; laju firmware RuView dibatasi `CSI_MIN_SEND_INTERVAL_US` 20 ms sehingga maksimum 50 frame per detik, dengan laju tipikal teramati 10-20 Hz. Batas penting: ESP32-S3 beradio tunggal SISO 1T1R (satu antena), berbeda dari perangkat riset multi-antena yang dipakai SignFi (Intel 5300, tiga antena penerima) dan Wi-SL (dua pemancar, tiga penerima, 400 Hz). Konsekuensi yang dipertahankan dari proposal lama: konfigurasi jari dan ekspresi wajah diasumsikan terlalu halus untuk dibedakan andal pada satu tautan; asumsi ini diperiksa pada uji Delta-CSI (G0). Tambahan bukti sensitivitas gerak halus: WiKey mengenali ketukan tombol tunggal dengan akurasi 96,4% dan Mosleh dkk. mengklasifikasikan pola napas (gerak dada milimeter) dari CSI dengan akurasi 99,54% pada kanal cukup baik, keduanya pada kondisi terkendali dan jarak dekat. Kedua preseden mendukung kelayakan menggarap gerak lengan, bukan jari.
+
+### 4.2 Koeksistensi radio: pertanyaan kritis yang kini terjawab
+
+Pertanyaan paling menentukan arsitektur: dapatkah satu ESP32-S3 menangkap CSI dari paket modul lain dan pada saat yang sama terhubung sebagai station ke access point untuk mengirim data ke server? Audit menemukan jawaban positif dari kode produksi, bukan sekadar klaim forum: firmware RuView esp32-csi-node berjalan sebagai station yang terhubung AP dan mengirim UDP ke server sambil menerima CSI mode promiscuous dan sinkronisasi ESP-NOW (beacon 10 Hz) secara serentak pada satu chip, dengan komentar kode bahwa pola ini bekerja pada S3 dan C6. Tiga syarat teknis wajib: seluruh perangkat berada pada satu kanal (kanal AP), filter paket dibatasi kelompok manajemen (MGMT) agar tidak membebani interupsi (filter data penuh pernah memicu kegagalan stabilitas pada laporan isu RuView), dan mode hemat daya radio dimatikan (`WIFI_PS_NONE`) karena CSI menuntut radio tetap terjaga. Implikasi arsitektur: tidak diperlukan node gateway khusus; setiap modul dapat berperan ganda. Risiko yang tersisa dan harus diukur di T0: beban gabungan CSI + streaming audio + UDP pada satu radio yang sama ketika arah kedua aktif.
+
+### 4.3 Inferensi langsung pada modul (edge inference)
+
+Fakta terverifikasi: ESP32-S3 memiliki SRAM 512 KB, PSRAM terpasang sampai 8 MB (oktal), CPU dual-core LX7 240 MHz dengan instruksi vektor 128-bit; ESP-NN mempercepat person detection TFLM dari 2.300 ms menjadi 54 ms pada S3 (model 293,5 KB, arena 100 KB); contoh model ESP-DL pada S3 mencakup hand-gesture MobileNetV2-0.5 128x128 sebesar 69,2 ms. Masukan klasifikasi CSI (vektor fitur deret pendek) jauh lebih kecil daripada citra sehingga klasifikasi 5-8 kelas realistis berjalan dalam anggaran waktu bingkai; namun belum ada publikasi tolok ukur model CSI-isyarat pada ESP32-S3 sehingga kelayakan latensi tetap harus diukur sendiri pada T2. Keputusan desain: model 1D-CNN kecil dilatih di laptop dengan PyTorch, dikuantisasi int8, lalu di-deploy melalui TFLM atau ESP-DL; SVM tetap sebagai pembanding dasar yang dijalankan pada server selama evaluasi, bukan di modul.
+
+### 4.4 Komunikasi modul-server dan antarmodul
+
+Fakta terverifikasi: ESP-NOW memuat sampai 250 bita per paket (20 perangkat peer) dan dipakai RuView sebagai sumber sinkronisasi; UDP dipakai firmware untuk mengalirkan CSI/label ke server; server lokal berupa laptop pada jaringan yang sama (router atau hotspot laptop). Protokol aplikasi (MQTT atau WebSocket atau HTTP) untuk jalur hasil dan audio dipilih pada tahap perancangan; dokumentasi resmi Espressif menyediakan contoh keduanya sehingga tidak ada hambatan kelayakan. Latensi ujung ke ujung tiap arah ditetapkan sebagai parameter yang diukur (Tabel 3.6 revisi), bukan angka yang dijanjikan. Catatan jujur: latensi API ucapan awan dari Indonesia belum terdokumentasi pada sumber yang diinspeksi sehingga perbandingan cloud jarak jauh hanya dibahas kualitatif.
+
+### 4.5 TTS Bahasa Indonesia
+
+Hasil audit opsi (semua diverifikasi langsung ke halaman resmi): Kokoro-82M v1.0 hanya mendukung delapan bahasa (AS/Britania Inggris, Spanyol, Prancis, Hindi, Italia, Jepang, Portugis, Mandarin) dan Bahasa Indonesia tidak termasuk, sehingga Kokoro tidak dapat menjadi TTS utama; Meta MMS menyediakan checkpoint bahasa Indonesia facebook/mms-tts-ind (arsitektur VITS, lisensi CC-BY-NC 4.0, dapat dijalankan lokal dan berjalan pada GPU 8 GB); Google Cloud TTS menyediakan suara id-ID tingkat Standard dan Premium (biaya setelah jatah gratis: sekitar 4 dolar AS per juta karakter Standard); Azure Speech menyediakan id-ID-GadisNeural (perempuan) dan id-ID-ArdiNeural (laki-laki) dengan tingkat gratis bulanan yang perlu dikonfirmasi angkanya sebelum dipakai. Keputusan desain: purwarupa memakai TTS pada server lokal (MMS-TTS-ind) sebagai jalur utama gratis dan mandiri jaringan, dengan layanan awan sebagai pembanding; angka latensi sintesis diukur sendiri karena belum ada tolok ukur publik untuk kalimat Indonesia pendek pada perangkat keras ini.
+
+### 4.6 ASR Bahasa Indonesia
+
+Hasil audit opsi: Whisper keluarga model openai mendukung lebih dari 100 bahasa termasuk Indonesia dan tersedia pada beberapa ukuran (small hingga large-v3 1,55 miliar parameter); varian turbo (809 juta) membutuhkan sekitar 6 GB VRAM; Systran faster-whisper (CTranslate2, lisensi MIT) mencatat tolok ukur large-v3 pada GPU RTX 3070 Ti 8 GB: fp16 memakai sekitar 4,5 GB VRAM dan int8 sekitar 2,9 GB, dengan 13 menit audio selesai dalam 59 detik (int8) — sekitar tiga belas kali lebih cepat dari waktu nyata. Vosk resmi tidak menyertakan model bahasa Indonesia pada daftar modelnya. Google Cloud dan Azure menyediakan STT id-ID berbayar. Keputusan desain: server lokal memakai faster-whisper; ukuran model pasti (small/medium/large-v3) dipilih pada T4 dengan mengutamakan keseimbangan VRAM bersama TTS; tingkat galat kata pada ucapan pengguna nyata diukur sendiri karena angka WER Whisper untuk bahasa Indonesia pada domain percakapan pendek belum terverifikasi dari sumber primer.
+
+### 4.7 Pemetaan teks ke representasi SIBI di layar
+
+Bukti terverifikasi: preseden Indonesia arah ini seluruhnya kata-level — KASIBI (suara → teks → basis data → animasi peraga 3D) dan OpenSIBI (Google Speech-to-Text → pencocokan ke API berisi model 3D Collada → animasi 3D di Android, hanya 50 kosakata: 9 angka, 26 huruf, 15 kata). Struktur SIBI mendukung pendekatan bertingkat: alfabet manual 26 huruf dan angka 1-9 terdokumentasi pada OpenSIBI; kajian Rakun dkk. 2015 beserta karya lanjutan Anggraini dan Rakun 2019-2020 membuktikan adanya kata berinfleksi yang tersusun dari komponen; namun angka kosakata kamus (sering dikutip sekitar 2.600) tidak ditemukan sumber layak kutip sehingga tidak dipakai. Batas internasional: penerjemahan mesin bahasa isyarat tingkat kalimat dengan tata bahasa penuh dan penanda non-manual masih masalah terbuka (Picron dkk. 2024; avatar mouthing Hakozaki dkk. 2025). Keputusan desain MVP: kamus kata-level (5-8 isyarat hasil kurasi riset + set kosakata tampilan seperti 26 huruf dan angka) dengan fallback ejaan jari; tampilan utama berupa glos teks dan gambar konfigurasi tangan yang muat di penyimpanan modul (estimasi 26 gambar kecil sekitar setengah megabita), opsi sekunder animasi/video yang dirender atau di-stream dari server laptop karena video on-device tidak muat memori.
+
+### 4.8 YOLO26-Pose: peran riset yang dipersempit dengan benar
+
+Audit menegaskan peran yang sudah diperbaiki pada revisi sebelumnya tetap benar untuk visi baru: model pose YOLO26 (17 keypoint tubuh COCO, tanpa jari) dipakai tanpa pelatihan ulang pada jalur pelabelan mengikuti pola ADR-079 RuView dengan estimator diganti; keluarannya dipakai untuk verifikasi batas segmen, penyaringan segmen buruk, dan diagnosis kesalahan klasifikator; seluruhnya berjalan luring di laptop, bukan di modul. Produk akhir tidak memuat kamera dan tidak menjalankan model visi apa pun. Distilasi pengetahuan visi-ke-CSI penuh tetap ditunda sebagai penelitian lanjutan.
+
+### 4.9 Server lokal laptop versus cloud jarak jauh
+
+Pembagian yang dipakai proposal revisi: laptop ASUS TUF Dash F15 berperan sebagai (a) mesin pelatihan dan eksperimen di seluruh tahap, dan (b) server lokal prototipe pada jaringan yang sama dengan modul (memungkinkan mode hotspot laptop bila tanpa router), menjalankan server RuView, faster-whisper, TTS, dan kamus pemetaan. Cloud jarak jauh (layanan ucapan berbayar) dibahas sebagai alternatif skalabel dan pembanding, tidak diuji pada prototipe. Pembedaan ini penting karena kelayakan latensi dan biaya prototipe bergantung pada server lokal, sedangkan klaim produk masa depan tidak dibuat berbasis cloud yang belum diukur.
+
+## 5. Arsitektur utama dan alternatif cadangan
+
+Arsitektur utama yang diusulkan (dirinci pada Gambar 3.2 dan 3.3 proposal revisi): dua modul ESP32-S3 bertindak sebagai pemancar (TX, beacon ESP-NOW) dan penerima (RX, penangkap CSI sekaligus inferensi int8); modul ketiga opsional menjadi modul pengguna bertipe layar-speaker-mikrofon; seluruh perangkat berada pada satu kanal jaringan (AP router atau hotspot laptop); label hasil inferensi dikirim via UDP ke server lokal; server menjalankan kamus label-ke-teks, TTS, ASR, dan pemetaan teks-ke-representasi; audio hasil TTS dan data tampilan dikirim kembali ke modul pengguna. Kamera dan YOLO26 hanya berada di laptop untuk jalur pelabelan saat pembuatan dataset.
+
+Alternatif cadangan disusun bertingkat sesuai titik kegagalan yang paling mungkin. Cadangan A (bila akurasi lintas pengguna rendah pada G3): personalisasi per pengguna dengan data latih singkat dari pengguna itu, sebagaimana jalur fallback proposal lama. Cadangan B (bila inferensi on-device terbukti terlalu berat memori atau waktu pada T2): klasifikasi berjalan di server lokal (modul hanya mengirim segmen fitur ringkas melalui UDP), sementara klaim "inferensi di perangkat" diturunkan menjadi hasil uji banding. Cadangan C (bila koeksistensi beban penuh bermasalah saat arah kedua aktif): pemisahan peran modul menjadi modul CSI khusus dan modul pengguna khusus yang tidak menangkap CSI, dengan komunikasi keduanya melalui AP. Cadangan D (bila TTS lokal MMS terbukti terlalu lambat untuk kalimat pendek): memakai layanan TTS awan dengan angka latensi yang diukur sendiri. Setiap cadangan tidak mengubah rumusan masalah, hanya mempersempit klaim, sehingga konsistensi proposal tetap terjaga.
+
+## 6. Batas MVP dan disiplin klaim
+
+Batas MVP yang dipertahankan dan diperluas: pengenalan terbatas pada 5-8 isyarat SIBI terisolasi yang dibedakan lintasan lengan, tubuh atas, atau kepala (bukan bentuk jari); arah kedua berbentuk kamus kata-level dengan fallback ejaan jari (bukan penerjemahan kalimat); tidak ada klaim penerjemahan kontinu dua arah; tidak ada klaim pengenalan penanda non-manual; sistem diposisikan sebagai purwarupa sarana bantu komunikasi dan pembelajaran SIBI pada konteks pendidikan formal, bukan pengganti juru bahasa. Frasa "penerjemah dua arah" pada judul tetap dapat dipertahankan dengan penanda "purwarupa" dan "kosakata terbatas" karena kedua arah memang berfungsi, tetapi setiap kemunculan klaim kemampuan di teks dibatasi kosakata tersebut. Ucapan "alat komunikasi komunitas tunarungu sehari-hari" tidak dibuat karena bukti menunjukkan kebutuhan komunitas lebih dekat ke BISINDO (91% pemakai sehari-hari pada survei Mursita 2015) sedangkan SIBI hidup di jalur pendidikan formal.
+
+## 7. Eksperimen validasi awal sebelum arsitektur dikunci
+
+Arsitektur utama belum dikunci sebelum lima uji validasi awal berikut selesai pada tahap T0-T2. Pertama, uji Delta-CSI (dipertahankan dari proposal lama) yang memastikan pola CSI pengisyarat terpisah dari kondisi diam dan ruang kosong pada konfigurasi modul nyata. Kedua, uji koeksistensi terukur: menjalankan CSI + koneksi STA + UDP secara serentak pada satu chip ESP32-S3 dengan mengukur laju CSI aktual dan kehilangan paket, termasuk saat streaming audio mikrofon aktif. Ketiga, uji tolok ukur inferensi: model 1D-CNN int8 ukuran kecil dideploy ke modul dan diukur waktu inferensi serta pemakaian memori pada laju bingkai 10-50 Hz. Keempat, uji jalur ucapan: latensi dan keterbacaan keluaran TTS lokal (MMS-TTS-ind) serta akurasi kata faster-whisper pada lima belas sampai lima puluh frasa pendek Indonesia diucapkan beberapa penutur pada mikrofon modul. Kelima, uji tampilan arah kedua: menampilkan glos dan gambar ejaan jari pada layar SPI dari memori modul serta mengukur waktu tampil. Hasil kelima uji tersebut menentukan parameter Tabel 3.6 revisi; kegagalan pada uji pertama dan kedua menyalakan cadangan sesuai Subbab 5.
+
+## 8. Yang belum diketahui dan perlu keputusan
+
+Hal yang masih belum diketahui setelah audit ini: angka WER Whisper untuk ucapan Indonesia domain percakapan pendek dari sumber primer; angka latensi TTS lokal dan awan pada kalimat Indonesia pendek untuk perangkat keras ini; jarak dan laju ESP-NOW yang stabil pada ruang nyata; ketahanan baterai modul lengkap (radio + layar + audio) karena angka arus periferal layar dan amplifier belum terverifikasi dari datasheet pihak ketiga; mekanisme lengkap pembentukan kata jadian SIBI (memerlukan buku Kamus SIBI 1994 atau pakar karena sumber daringnya terblokir); dan angka pasti jatah gratis layanan ucapan awan saat pemakaian. Keputusan yang menunggu pemilik penelitian dan pembimbing: penetapan daftar isyarat terpilih bersama validator, pilihan final TTS dan ukuran model ASR, kanal dan penempatan modul di ruang mitra, serta identitas mitra dan jadwal persetujuan etika. Seluruh butir ini ditandai pada proposal revisi dengan penanda `[PERLU DATA: ...]` atau `[PERLU RUJUKAN: ...]` sesuai kontrak kejujuran.

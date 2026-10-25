@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sempro-Mepet"
+  short_description: "Write Indonesian thesis proposals (BAB I-III) in baku academic register"
+policy:
+  allow_implicit_invocation: true

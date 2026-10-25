@@ -1,0 +1,231 @@
+{
+ "wisign2020": {
+  "doi": "10.1145/3377553",
+  "title": "WiSign",
+  "container": "ACM Transactions on Intelligent Systems and Technology",
+  "volume": "11",
+  "issue": "3",
+  "pages": "1-24",
+  "year": 2020,
+  "authors": [
+   [
+    "Zhang",
+    "Lei"
+   ],
+   [
+    "Zhang",
+    "Yixiang"
+   ],
+   [
+    "Zheng",
+    "Xiaolong"
+   ]
+  ],
+  "type": "journal-article"
+ },
+ "wikey2015": {
+  "doi": "10.1145/2789168.2790109",
+  "title": "Keystroke Recognition Using WiFi Signals",
+  "container": "Proceedings of the 21st Annual International Conference on Mobile Computing and Networking",
+  "volume": "",
+  "issue": "",
+  "pages": "90-102",
+  "year": 2015,
+  "authors": [
+   [
+    "Ali",
+    "Kamran"
+   ],
+   [
+    "Liu",
+    "Alex X."
+   ],
+   [
+    "Wang",
+    "Wei"
+   ],
+   [
+    "Shahzad",
+    "Muhammad"
+   ]
+  ],
+  "type": "proceedings-article"
+ },
+ "mosleh2022": {
+  "doi": "10.1109/access.2022.3230003",
+  "title": "Monitoring Respiratory Motion With Wi-Fi CSI: Characterizing Performance and the BreatheSmart Algorithm",
+  "container": "IEEE Access",
+  "volume": "10",
+  "issue": "",
+  "pages": "131932-131951",
+  "year": 2022,
+  "authors": [
+   [
+    "Mosleh",
+    "Susanna"
+   ],
+   [
+    "Coder",
+    "Jason B."
+   ],
+   [
+    "Scully",
+    "Christopher G."
+   ],
+   [
+    "Forsyth",
+    "Keith"
+   ],
+   [
+    "Kalaa",
+    "Mohamad Omar Al"
+   ]
+  ],
+  "type": "journal-article"
+ },
+ "mursita2015": {
+  "doi": "10.14421/ijds.2202",
+  "title": "RESPON TUNARUNGU TERHADAP PENGGUNAAN SISTEM BAHASA ISYARAT INDONESA (SIBI) DAN BAHASA ISYARAT INDONESIA (BISINDO) DALAM KOMUNIKASI",
+  "container": "INKLUSI",
+  "volume": "2",
+  "issue": "2",
+  "pages": "221",
+  "year": 2015,
+  "authors": [
+   [
+    "Mursita",
+    "Rohmah Ageng"
+   ]
+  ],
+  "type": "journal-article"
+ },
+ "picron2024": {
+  "doi": "10.1007/978-3-031-47362-3_14",
+  "title": "(Towards) Sign Language Machine Translation in Practice",
+  "container": "Machine Translation: Technologies and Applications",
+  "volume": "",
+  "issue": "",
+  "pages": "327-343",
+  "year": 2024,
+  "authors": [
+   [
+    "Picron",
+    "Frankie"
+   ],
+   [
+    "Van Landuyt",
+    "Davy"
+   ],
+   [
+    "Omardeen",
+    "Rehana"
+   ]
+  ],
+  "type": "book-chapter"
+ },
+ "hakozaki2025": {
+  "doi": "10.1145/3663547.3759693",
+  "title": "Evaluation of Japanese Sign Language Avatar with Mouthing in News Content",
+  "container": "Proceedings of the 27th International ACM SIGACCESS Conference on Computers and Accessibility",
+  "volume": "",
+  "issue": "",
+  "pages": "1-5",
+  "year": 2025,
+  "authors": [
+   [
+    "Hakozaki",
+    "Kohei"
+   ],
+   [
+    "Murakami",
+    "Tomoya"
+   ],
+   [
+    "Uchida",
+    "Tsubasa"
+   ],
+   [
+    "Kaneko",
+    "Hiroyuki"
+   ]
+  ],
+  "type": "proceedings-article"
+ },
+ "rabit2026": {
+  "doi": "10.36341/rabit.v11i2.8340",
+  "title": "OPTIMASI KLASIFIKASI CITRA ALFABET SISTEM ISYARAT BAHASA INDONESIA (SIBI) MENGGUNAKAN AUGMENTASI DATA DAN FINE-TUNING MOBILENETV2",
+  "container": "Rabit : Jurnal Teknologi dan Sistem Informasi Univrab",
+  "volume": "11",
+  "issue": "2",
+  "pages": "4377-4391",
+  "year": 2026,
+  "authors": [
+   [
+    "Amelia Safrida",
+    ""
+   ],
+   [
+    "Edy Mulyanto",
+    ""
+   ],
+   [
+    "Muhammad Naufal",
+    ""
+   ]
+  ],
+  "type": "journal-article"
+ },
+ "rakun_search": [
+  {
+   "doi": "10.1109/time-e.2015.7389747",
+   "title": "A heuristic Hidden Markov Model to recognize inflectional words in sign system for Indonesian langua",
+   "container": "2015 International Conference on Technology, Informatics, Ma",
+   "year": 2015,
+   "authors": [
+    "Rakun",
+    "Fanany",
+    "Wisesa",
+    "Tjandra"
+   ]
+  },
+  {
+   "doi": "10.1109/icacsis51025.2020.9263206",
+   "title": "Label Selection of Inflectional Word Gestures for Indonesian Sign System known as SIBI (Sistem Isyar",
+   "container": "2020 International Conference on Advanced Computer Science a",
+   "year": 2020,
+   "authors": [
+    "Anggraini",
+    "Rakun"
+   ]
+  },
+  {
+   "doi": "10.1109/iceei47359.2019.8988806",
+   "title": "Recognizing The Components of Inflectional Word Gestures in Indonesian Sign System known as SIBI (Si",
+   "container": "2019 International Conference on Electrical Engineering and ",
+   "year": 2019,
+   "authors": [
+    "Anggraini",
+    "Rakun",
+    "Stefanus"
+   ]
+  },
+  {
+   "doi": "10.31979/etd.svzf-n3yj",
+   "title": "Detecting Botnets Using Hidden Markov Model, Profile Hidden Markov Model and Network Flow Analysis",
+   "container": "",
+   "year": null,
+   "authors": [
+    "Mannikar"
+   ]
+  },
+  {
+   "doi": "10.1002/9780471650126.dob0318.pub2",
+   "title": "Hidden Markov Model (\n            <scp>HMM</scp>\n            , Hidden Semi‐Markov Models, Profile Hi",
+   "container": "Dictionary of Bioinformatics and Computational Biology",
+   "year": 2004,
+   "authors": [
+    "Meyer"
+   ]
+  }
+ ]
+}

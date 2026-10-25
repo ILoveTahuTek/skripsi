@@ -1,0 +1,36 @@
+%% G3.2 — Arsitektur produk akhir tanpa kamera (BAB III, Subbab 3.5)
+%% Tipe: flowchart TD, dua jalur resmi + jalur pelabelan riset (putus-putus)
+flowchart TD
+    subgraph JALUR1["Arah 1: SIBI menjadi teks dan suara (tanpa kamera)"]
+        TX["Modul TX ESP32-S3<br/>pemancar ESP-NOW"]
+        ZN["Zona isyarat,<br/>satu pengisyarat"]
+        RX["Modul RX ESP32-S3:<br/>penangkap CSI + inferensi int8"]
+        NET["Kirim label via UDP<br/>pada kanal AP"]
+        SRV1["Server lokal:<br/>kamus label, penyusun teks"]
+        TTS["TTS Indonesia"]
+        AUD["Audio ke speaker modul"]
+    end
+
+    subgraph JALUR2["Arah 2: teks/ucapan menjadi representasi SIBI (tanpa kamera)"]
+        MIC["Mikrofon I2S modul"]
+        STREAM["Streaming audio<br/>via WiFi ke server"]
+        ASR["ASR Indonesia (faster-whisper)"]
+        MAP["Pemetaan teks ke kamus isyarat<br/>+ ejaan jari"]
+        LCD["Tampilan di layar modul:<br/>glos, gambar, animasi"]
+    end
+
+    subgraph LAB["Jalur pelabelan: hanya saat riset, di luar produk akhir"]
+        CAM["Webcam laptop"]
+        Y26["Model pose YOLO26:<br/>17 keypoint COCO"]
+        VER["Verifikasi batas segmen,<br/>saring segmen buruk, diagnosis"]
+        DS["Dataset CSI berlabel"]
+    end
+
+    SYN["Sinkronisasi waktu kamera-CSI<br/>collect-ground-truth.py (ADR-079)"]
+
+    TX --> ZN --> RX --> NET --> SRV1 --> TTS --> AUD
+    MIC --> STREAM --> ASR --> MAP --> LCD
+    CAM --> Y26 --> VER
+    VER -.-> DS
+    SYN -.-> DS
+    DS -. "melatih" .-> RX

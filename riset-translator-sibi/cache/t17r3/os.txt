@@ -1,0 +1,561 @@
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+Aplikasi Pembelajaran Sistem Isyarat Bahasa Indonesia (SIBI)
+Berbasis Voice Menggunakan Open SIBI
+Risa Fatmawati1
+Rengga Asmara2
+Yanuar Risah Prayogi3
+Rizky Yuniar Hakkun4
+Politeknik Elektronika Negeri Surabaya
+Surabaya, Indonesia
+E-mail: risafatmawati@it.student.pens.ac.id1 ; rengga@pens.ac.id2; yanuar@pens.ac.id3
+rizky@pens.ac.id 4
+
+Fatmawati, R., Asmara, R., Prayogi, Y. R., & Hakkun, R. Y. (2022). Aplikasi Pembelajaran
+Sistem Isyarat Bahasa Indonesia (SIBI) Berbasis Voice Menggunakan
+OpenSIBI. Technomedia Journal, 7(1 Juni), 22–39.
+https://doi.org/10.33050/tmj.v7i1%20Juni.1690
+ABSTRAK
+Bahasa isyarat merupakan salah satu alat komunikasi bagi penyandang tuna rungu dan tuna wicara,
+terlebih antara orang normal dengan penyandang dalam masyarakat yang lebih luas. Tetapi pada
+kenyataan, tidak semua orang dapat mengerti dan memahami maksud dan arti dari bahasa isyarat yang
+digunakan sehingga kurangnya pengetahuan orang normal tentang bahasa isyarat yang ada di
+Indonesia dan masih minimnya media pembelajaran digital yang efektif dan mudah dipahami. Pada
+penelitian ini, kami mengajukan suatu pendekatan baru untuk membuat aplikasi pembelajaran bahasa
+isyarat untuk orang normal menggunakan voice sebagai masukan yang nantinya dapat menampilkan
+hasil visualisasi gerakan bahasa isyarat berupa animasi 3D. Tampilan gerakan animasi 3D
+menggunakan data yang mengacu pada kurikulum SIBI (Sistem Isyarat Bahasa Indonesia). Aplikasi
+Bahasa Isyarat ini dibangun dengan memanfaatkan Google Speech to Text API untuk mengolah input
+suara, Java sebagai bahasa pemrograman yang digunakan dan mySQL untuk mengelola basis data.
+Berdasarkan uji coba terhadap pengguna (masyarakat umum, para tuna rungu, dan tuna wicara)
+menggunakan metode SUS (System Usability Scale), dapat disimpulkan bahwa Aplikasi Pembelajaran
+Bahasa Isyarat dengan input suara berbasis Android ini berhasil memproses masukan dari pengguna
+untuk menampilkan semua animasi gerakan bahasa isyarat, bermanfaat dalam membantu pengguna
+dalam mempelajari bahasa isyarat dan fitur-fiturnya dapat dimengerti dengan baik.
+Kata kunci: Bahasa Isyarat, Aplikasi Pembelajaran, Android, Animasi 3D, Speech to Text
+ABSTRACT
+Sign language is one of the means of communication for people who are deaf and speech impaired,
+especially between normal people and people with disabilities in the wider community. But in reality,
+not everyone can understand the meaning and purpose of the sign language used so that there is a lack
+
+22
+Copyright Author 2022 Risa Fatmawati 1, Rengga Asmara 2, Yanuar Risah
+Prayogi3, Rizky Yuniar Hakkun4
+Karya ini berlisensi di bawah Creative Commons Attribution 4.0 (CC BY 4.0)
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+of knowledge of normal people about sign language in Indonesia and there is still a lack of effective
+and easy-to-understand digital learning media. In this study, we propose a new approach to create a
+sign language learning application for normal people using voice as input which can later display the
+results of visualization of sign language movements in the form of 3D animation. The display of 3D
+animation movements uses data that refers to the SIBI (Indonesian Language Sign System) curriculum.
+This Sign Language application was built by utilizing the Google Speech to Text API to process voice
+input, Java as the programming language used and mysql to manage the database. Based on system
+testing and on users (general public and persons with disabilities) using the SUS (System Usability
+Scale) method, it can be concluded that the sign language learning application with Android-based
+voice input is successful in facilitating the sign language learning process and in terms of usability or
+usability of the application getting an assessment that the application can be accepted by users and is
+suitable for use as a learning support media because its features can be understood well.
+Keywords: Sign Language, Learning Application, Android, 3D Animation, Speech to Text
+
+PENDAHULUAN
+Bahasa merupakan media penghubung dalam berkomunikasi yang sangat penting bagi
+kehidupan manusia. Banyak bahasa yang digunakan di dunia, salah satunya adalah Bahasa
+Isyarat. Bahasa Isyarat merupakan istilah umum yang mengacu pada setiap gesture atau bahasa
+visual yang menggunakan bentuk dan gerakan jari-jari, tangan, lengan, serta gerakan mata,
+wajah, kepala, dan tubuh [1]. Di Indonesia Bahasa Isyarat yang digunakan oleh kalangan tuna
+rungu mengacu pada dua sistem yaitu BISINDO (Bahasa Isyarat Indonesia) dan SIBI (Sistem
+Isyarat Bahasa Indonesia). BISINDO adalah bahasa isyarat yang berkembang di lingkungan
+tunarungu secara alami. Dikembangkan oleh orang tuna rungu sendiri melalui GERKATIN
+(Gerakan Kesejahteraan Tuna Rungu Indonesia). SIBI adalah bahasa yang telah dirancang dan
+diresmikan oleh pemerintah sebagai acuan pembelajaran di sekolah – sekolah SLB dan
+dijadikan sebagai Bahasa isyarat resmi di Indonesia dan dikembangkan oleh masyarakat normal
+[2].
+Berdasarkan data dari Kementerian Kesehatan Republik Indonesia terdapat sekitar 7.87
+persen dari penduduk berkebutuhan khusus di Indonesia merupakan tunarungu, dimana 19.933
+diantaranya anak-anak yang menderita tunarungu dan Jawa Timur menjadi salah satu provinsi
+dengan penyandang tunarungu terbesar di Indonesia [3]. Bahasa isyarat merupakan salah satu
+sarana yang membantu komunikasi sesama penyandang tuna rungu dan tuna wicara atau antara
+orang normal dengan penyandang tuna rungu dan tuna wicara tersebut dalam masyarakat yang
+lebih luas [4]. Tetapi masih kurangnya pengetahuan masyarakat normal dalam memahami
+kosakata bahasa isyarat secara mendetail dikarenakan begitu banyak kosakata dengan gerakan
+yang berbeda-beda dan kurangnya media untuk dapat menunjang proses belajar bahasa isyarat
+tersebut [5].
+PERMASALAHAN
+Berdasarkan dari latar belakang yang ada, kurangnya tingkat pengetahuan dan
+pemahaman masyarakat normal tentang Bahasa Isyarat yang digunakan di Indonesia dan
+minimnya media pembelajaran digital yang mudah dipahami sehingga terjadi kesulitan dalam
+berkomunikasi antara masyarakat normal dengan penyandang disabilitas tuna rungu.
+
+23
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+METODOLOGI PENELITIAN
+
+Gambar 1. MDLC
+(Sumber: https://pelajarindo.com/)
+Dalam penelitian ini menggunakan metode Multimedia Development Life Cycle versi
+Luther Sutopo dalam Binanto (2010) yang terdiri dari 6 tahap seperti pada Gambar 1.
+1. Concept
+Tahap concept (konsep) adalah tahap untuk menentukan tujuan dan siapa pengguna
+aplikasi. Selain itu menentukan macam aplikasi (presentasi, interaktif, dll) dan tujuan
+aplikasi (hiburan, pelatihan, pembelajaran, dll).
+2. Design
+Design (perancangan) adalah tahap membuat spesifikasi mengenai tampilan aplikasi.
+Desain yang akan dibuat meliputi rancangan sistem, mockup, userflow, dan activity
+diagram aplikasi yang bertujuan untuk menggambarkan alur dari satu scene ke scene
+lain.
+3. Material Collecting
+Material Collecting adalah tahap dimana pengumpulan bahan yang sesuai dengan
+kebutuhan dilakukan. Tahap ini dapat dikerjakan paralel dengan tahap assembly. Pada
+beberapa kasus, tahap Material Collecting dan tahap Assembly akan dikerjakan secara
+linear tidak paralel.
+4. Assembly
+Tahap assembly (pembuatan) adalah tahap dimana semua objek atau bahan multimedia
+dibuat. Pembuatan aplikasi didasarkan pada tahap design.
+5. Testing
+Dilakukan setelah selesai tahap pembuatan (assembly) dengan menjalankan aplikasi
+atau program dan dilihat apakah ada kesalahan atau tidak.
+6. Distribution
+Tahapan dimana aplikasi disimpan dalam suatu media penyimpanan. Pada tahap ini jika
+media penyimpanan tidak cukup untuk menampung aplikasinya, maka dilakukan
+kompresi terhadap aplikasi tersebut.
+
+24
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+Dengan melakukan studi pustaka pada penelitian ini, bertujuan untuk memahami teori,
+praktik, mengidentifikasi kesamaan dan meneruskan penelitian yang sudah dilakukan
+sebelumnya. Penelitian yang dilakukan oleh Baby Lolita Basyah, Elvina & Fadhil Mauludy [6]
+bertujuan membuat rancangan aplikasi menggunakan Unify Modelling Language dan Eclipse.
+Menghasilkan aplikasi yang berisi informasi mengenai bahasa isyarat berupa Abjad, Angka,
+Gesture dan Video dengan gambar sebagai outputnya. Aplikasi ditujukan untuk berkomunikasi
+dengan kaum tunarungu maupun tuna wicara. Metode yang dilakukan yakni mulai dari tahap
+pengumpulan data, perancangan aplikasi, Uji Coba dan Implementasi. Penelitian yang
+dilakukan oleh Iman Winaldi & Agus Setyawabertujuan merancang media belajar khusus
+bahasa isyarat berbasis android. Untuk mengembangkan kemampuan berbahasa sehingga dapat
+mengurangi masalah kesulitan berkomunikasi yang dialami oleh anak-anak tunarungu.
+Software yang digunakan untuk membangun aplikasi pada penelitian ini adalah Eclipse
+Mars 2 dengan menggunakan bahasa pemrograman Java. Aplikasi ini berisi tentang kata-kata
+dalam bahasa isyarat yang biasa digunakan untuk percakapan sehari-hari dan dibuat dengan
+menggunakan elemen multimedia seperti video dan gambar sehingga anak tunarungu dapat
+dengan mudah menirukan gerakan bahasa isyarat yang diajarkan. Metode yang dilakukan
+adalah Observasi, Wawancara dan Kajian Pustaka. Penelitian yang dilakukan oleh Fras Setia
+Rahman & Yuhefizar bertujuan untuk membangun sebuah aplikasi virtual kata untuk
+membantu berkomunikasi dengan penyandang tunarungu berbasis android. Aplikasi ini
+menggunakan karakter virtual 3D sebagai media penerjemah suara menjadi bahasa isyarat.
+Bahasa isyarat dikonversi menjadi berbentuk animasi 3D agar lebih mudah dipahami dan
+atraktif. Sistem bahasa isyarat yang digunakan dalam aplikasi ini adalah sistem SIBI (Sistem
+Isyarat Bahasa Indonesia). Aplikasi ini dibangun menggunakan perangkat lunak Unity 3D
+dengan bahasa pemrograman C# dan Java, sedangkan untuk membuat animasi 3D
+menggunakan perangkat lunak Blender. Dari hasil uji coba aplikasi ini dapat mempermudah
+dalam berkomunikasi dengan penyandang tunarungu [7].
+Penelitian yang dilakukan oleh Hari Sugiarto bertujuan untuk menyimpulkan bahwa
+multimedia pembelajaran interaktif berbasis multimedia yang dirancang secara menarik akan
+membangkitkan motivasi dan rangsangan kegiatan belajar peserta didik, membantu peserta
+didik meningkatkan pemahaman materi pembelajaran serta menumbuhkan kreativitas belajar
+sehingga akan berdampak pada peningkatan kualitas pembelajaran. Ini juga membantu guru
+dalam proses mengajar peserta didiknya. Hasil dari penelitian ini adalah sebuah aplikasi
+pengenalan abjad dan angka dan dilengkapi dengan game dan quiz. Penelitian yang dilakukan
+oleh Idris Kautsar, Rohmat Indra & Ari Sulistyawati bertujuan untuk mengembangkan aplikasi
+untuk bahasa isyarat BISINDO. Aplikasi ini dibangun dengan metode pengembangan sistem
+MDLC untuk menghasilkan produk yang berbasis multimedia. Hasil aplikasi ini berupa aplikasi
+yang dapat menampilkan pembelajaran dan bermain yang dilengkapi dengan gambar, audio
+dan video bahasa isyarat. Penelitian yang dilakukan oleh Jauharul Khikam Hikmalansya, Dwi
+& Dwi Cahyono bertujuan untuk membuat sebuah aplikasi pembelajaran Bahasa Isyarat
+dengan berbasis Android. Dengan terciptanya Aplikasi Pembelajaran Bahasa Isyarat Berbasis
+Android ini, memiliki manfaat untuk memudahkan pengguna dalam belajar dua bahasa isyarat
+Indonesia, baik sistem bahasa isyarat SIBI maupun BISINDO [8].
+HASIL DAN PEMBAHASAN
+Hasil akhir yang dapat diperoleh dari penelitian ini adalah sebuah Aplikasi
+Pembelajaran Sistem Isyarat Bahasa Indonesia berbasis Voice menggunakan OpenSIBI.
+25
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+Tahapan dalam pembuatan aplikasi ini dimulai dari tahap pertama (konsep) sampai dengan
+tahap terakhir (distribusi), dan akan dijelaskan sebagai berikut:
+1. Concept (Pengonsepan)
+Pada tahap ini, aplikasi dirancang dengan tampilan yang sederhana, mudah digunakan
+dan dipahami pengguna, terdapat beberapa fitur diantaranya adalah fitur Login,
+Register, Edit Profil, Tentang SIBI dan fitur utama yakni Fitur Pembelajaran . Media
+pembelajaran ini dibuat untuk membantu proses pembelajaran bahasa isyarat dengan
+input berupa voice atau suara yang menghasilkan visualisasi berupa Animasi 3D
+Gerakan SIBI dan diharapkan dapat memberikan manfaat kepada masyarakat normal
+dan penyandang disabilitas dalam melakukan pembelajaran Bahasa Isyarat secara
+mudah . Selain itu, aplikasi ini diharapkan dapat diimplementasikan di kehidupan sehari
+– hari sebagai solusi dalam mengatasi kurangnya pengetahuan masyarakat normal
+tentang bahasa isyarat SIBI dan membantu komunikasi antara masyarakat normal
+dengan penyandang disabilitas tuna rungu .
+2. Design (Perancangan)
+Pada tahap ini pembuatan spesifikasi mengenai tampilan aplikasi. Desain yang akan
+dibuat meliputi rancangan sistem, mockup, userflow, dan activity diagram aplikasi yang
+bertujuan untuk menggambarkan alur dari satu scene ke scene lain. Berikut ini disajikan
+rancangan dari aplikasi pembelajaran bahasa isyarat SIBI berbasis voice. ● Desain Sistem
+
+Gambar 2. Desain Sistem
+Pada Gambar 2 merupakan Desain Sistem dari Aplikasi yang akan dibangun oleh penulis.
+OpenSIBI sendiri merupakan sebuah sistem microservice API yang independen, dapat
+digunakan untuk multi-platform sehingga sangat kecil ketergantungan dengan aplikasi lain.
+Didalam OpenSIBI yang akan dibangun, yakni menampung semua dataset 3D Model dalam
+format Collada, yang dapat mengklasifikasi data dari inputan suara berupa gerakan bahasa
+isyarat huruf, angka dan kata. OpenSIBI juga akan menjembatani semua permintaan dari client,
+yakni sistem dari Android. Dengan adanya OpenSIBI ini, sistem yang berjalan di dalam
+perangkat Android akan lebih ringan pemrosesannya karena tidak perlu menyimpan semua data
+di dalam Android itu sendiri [9]. Gambaran rancangan sistem aplikasi, pengguna menginputkan
+26
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+suara dengan menekan tombol microphone yang ada dalam aplikasi android, lalu suara dibaca
+oleh Google Speech Text to API dengan menerjemahkan suara ke dalam text, setelah suara
+dikenali muncul hasil suara yang disebutkan, maka aplikasi meminta request kepada server
+API OpenSIBI yang didalamnya menyimpan dataset 3D model kosakata bahasa isyarat dalam
+format collada [10]. Untuk hasil konversi suara di dalam sistem Android yang sudah
+diterjemahkan oleh Google Speech Text to API ke dalam teks akan mencocokkan dengan apa
+yang ada di OpenSIBI API yang sudah dibuat sebelumnya berisi dataset 3D Model, setelah
+cocok akan di render ke dalam sistem Android, dan Android memunculkan hasil visualisasi
+dari suara yang disebutkan berupa model animasi 3D.
+● Data Flow Diagram Level 0
+
+Gambar 3. Data Flow Diagram Level 0
+● Userflow Aplikasi
+
+Gambar 4. Userflow
+● Activity Diagram
+a. Activity Diagram Login dan Register Pengguna
+
+27
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+Gambar 5. Activity Diagram Login & Register
+b. Activity Diagram Pembelajaran
+
+Gambar 6. Activity Diagram Pembelajaran
+Pada Gambar 5. merupakan activity diagram dari login dan register pengguna ke system.
+Saat pengguna sudah melakukan registrasi akun maka mereka dapat langsung login ke aplikasi
+28
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+sesuai email dan password yang sudah di daftarkan. Pada Gambar 6. merupakan activity
+diagram fitur pembelajaran SIBI dari pengguna ke system. Mulai dari pengguna masuk ke
+halaman utama, sampai sistem menampilkan hasil dari suara yang diucapkan pengguna berupa
+visualisasi 3D bahasa isyarat.
+3. Material Collecting (Pengumpulan Bahan Materi)
+Pada tahap ini adalah tahap pengumpulan bahan materi pembelajaran atau data yang
+sesuai dengan kebutuhan untuk dikerjakan. Data tersebut antara lain 50 kosakata bahasa
+isyarat SIBI yang terdiri dari 9 angka yakni 1-9, 26 huruf yakni A-Z dan 15 kata
+campuran yakni Gigi, Hidung, Kaki, Mata, Mulut, Pipi, Tangan, Telinga, Adik, Ayah,
+Ibu, Buku, Jam, Bola, Kakak.
+4. Assembly (Pembuatan)
+Pada tahap ini dilakukan proses pembuatan aplikasi media pembelajaran bahasa isyarat
+sesuai dengan rancangan yang telah dibuat sebelumnya, mulai dari pembuatan data
+model animasi 3D sampai pembuatan program aplikasi.
+● Pembuatan Data Model Animasi 3D
+a. Sketsa Karakter
+Pembuatan sketsa karakter untuk dijadikan acuan selama dalam proses modelling 3D.
+Karakter tidak akan dibuat seluruh badan namun hanya sampai diantara pinggang dan
+lutut saja.
+
+Gambar 7. Sketsa Karakter
+b. Modelling
+Menjadikan model sesuai dengan bentuk dari sketsa karakter sesuai dengan kaidahkaidah modelling yang berlaku.
+
+Gambar 8. Modelling
+
+29
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+c. UV Mapping
+Proses pemberian warna pada permukaan objek 3D yang telah selesai dibuat. UV pada
+penamaan digunakan untuk menunjukan sumbu yang biasa menggunakan sumbu x Z
+dan y
+
+Gambar 9. UV Mapping
+d. Rigging
+Proses penulangan pada karakter yang sudah dibuat. Penulangan ini mengikuti struktur
+tulang menyerupai tulang manusia asli.
+
+Gambar 10. Rigging
+e. Weight Painting
+Proses ini dilakukan untuk memberikan pembobotan pada permukaan objek terhadap
+struktur tulang yang sudah dibuat sebelumnya.
+
+Gambar 11. Weight Painting
+
+30
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+f. Animation
+Proses menggerakkan karakter sesuai dengan rancangan gerakan bahasa isyarat SIBI.
+
+Gambar 12. Animation
+● Pembuatan Program Android
+a.React Native
+React Native adalah framework yang digunakan untuk membuat mobile aplikasi di dua
+sistem operasi sekaligus, yaitu Android dan iOS. Untuk itulah, React Native disebut
+juga dengan cross-platform network karena pengguna bisa membuat satu aplikasi yang
+bisa digunakan di berbagai platform, yaitu Android dan iOS. Framework ini digunakan
+untuk pembuatan program aplikasi
+b. Java
+Java merupakan bahasa yang diciptakan oleh James Gosling di tahun 1990-an. Java
+muncul sebagai bahasa yang dapat dijalankan di berbagai platform tanpa perlu rekompilasi. Berdasarkan TIOBE Programming Community Index, Java masih
+merupakan salah satu bahasa pemrograman terpopuler di dunia. Oracle menyatakan
+90% perusahaan terkemuka pada daftar Fortune 500 pernah menggunakan bahasa Java.
+Selain itu, Java juga dapat digunakan untuk mengembangkan aplikasi pada platform
+desktop, web, mobile, embedded, dan IoT.
+● Pembuatan Website Admin a.
+a. CodeIgniter
+CodeIgniter merupakan aplikasi sumber terbuka yang berupa kerangka kerja PHP
+dengan model MVC (Model, View, Controller).
+b. PHP
+PHP adalah singkatan dari "PHP: Hypertext Prepocessor", yaitu bahasa pemrograman
+yang digunakan secara luas untuk penanganan pembuatan dan pengembangan sebuah
+situs web dan bisa digunakan bersamaan dengan HTML. PHP diciptakan oleh Rasmus
+Lerdorf pertama kali tahun 1994. PHP versi terbaru adalah versi ke-5.
+5. Testing (Pengujian)
+Tahap pengujian dilakukan setelah menyelesaikan tahap pembuatan. Ada 2 pengujian,
+yang pertama menguji sistem atau program aplikasi untuk melihat apakah ada kesalahan
+atau tidak dengan menjalankan-nya di dalam ponsel android dan pengujian kedua untuk
+mengetahui “usability” aplikasi menggunakan metode penyebaran kuesioner SUS
+(System Usability Scale).
+31
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+6. Distribution (Pendistribusian)
+Pada tahap ini proses yang dilakukan adalah menyimpan aplikasi pembelajaran ke
+dalam suatu media penyimpanan yang berupa Google Drive. Setelah dilakukan
+penyimpanan, media pembelajaran di distribusikan dan dapat digunakan oleh
+pengguna.
+A. Hasil Aplikasi
+Hasil Pengujian dan menjalankan Sistem Aplikasi pada Smartphone Android Samsung
+A515F/DSN dengan spesifikasi Android Versi 10 dan RAM 4GB.
+
+Gambar 13. Splash Screen
+
+Gambar 14. Login
+
+32
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+Gambar 15. Pendaftaran
+
+Gambar 16. Notifikasi Pendaftaran berhasil
+33
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Juni 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+Pada Gambar 13. merupakan Hasil Tampilan pembuka dari Aplikasi “Belajar SIBI”
+yakni Splash Screen, terdapat logo yang mengisyaratkan telapak tangan. Pada Gambar 14
+merupakan tampilan Menu Login dari Aplikasi “Belajar SIBI”. Untuk Login ke dalam
+Aplikasi “Belajar SIBI”, pengguna harus mempunyai Email dan Kata Sandi terlebih dahulu,
+jika belum mempunyai pengguna dapat melakukan registrasi/pendaftaran. Pada Gambar 15
+merupakan Tampilan Menu Pendaftaran/Registrasi dari Aplikasi “Belajar SIBI”. Untuk
+Login ke dalam Aplikasi “Belajar SIBI”, pengguna harus mempunyai Email dan Kata Sandi
+terlebih dahulu, jika belum mempunyai pengguna dapat melakukan registrasi/pendaftaran.
+Melakukan pendaftaran dengan cara memasukkan data Nama Lengkap, Email dan Kata
+Sandi. Pada Gambar 16. merupakan Tampilan Notifikasi Pendaftaran Berhasil. Setelah itu
+pengguna dapat melakukan Login.
+
+Gambar 17. Halaman Utama
+
+34
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Agustus 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+Gambar 18. Tentang SIBI
+
+Gambar 19. Record
+
+35
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Agustus 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+Gambar 20. Edit Profil
+Pada Gambar 17. merupakan Tampilan Menu/Halaman Utama dari Aplikasi
+“Belajar SIBI”. Didalam menu utama Aplikasi ini, terdapat 2 fitur yakni fitur utama yakni
+fitur Record untuk memasukkan suara serta melakukan pembelajaran didalamnya dan fitur
+Tentang SIBI sebagai informasi mengenai Aplikasi dan konten apa saja yang diberikan
+kepada pengguna. Pada Gambar 18. merupakan Tampilan Menu Tentang SIBI dari
+Aplikasi “Belajar SIBI”. Didalam menu “Tentang SIBI” ini berisi mengenai informasi
+seputar Aplikasi, berupa penjelasan singkat tentang apa itu SIBI dan konten apa saja yang
+ada dalam Aplikasi. Pada Gambar 19. merupakan Tampilan Menu Utama dari Aplikasi
+“Belajar SIBI” yakni Menu “Record”. Didalam menu Record ini, pengguna menekan
+tombol microphone di dalam Aplikasi lalu berbicara/memasukkan suara Bahasa Isyarat
+yang diinginkan sesuai dengan konten yang disediakan. Pada Gambar 20. merupakan
+Tampilan Menu Edit Profil dari aplikasi “Belajar SIBI”.
+B. Hasil Voice Recognition
+Pada proses percobaan voice recognition dilakukan uji coba penerapan voice
+recognition yang menggunakan API dari Google. Pengguna perlu memencet tombol
+yang memiliki gambar microphone pada layar. Pada saat ditekan pengguna langsung
+bisa berbicara kosakata yang diinginkan dan aplikasi akan menampilkan kosakata yang
+diinginkan oleh pengguna.
+
+36
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Agustus 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+Berdasarkan hasil uji coba pada Tabel 1. telah dilakukan percobaan sebanyak 25
+kali dan voice recognition berjalan dengan baik dalam mendeteksi suara pengguna
+tanpa ada masalah dari percobaan 1-25.
+Salah satu contoh percobaan voice recognition yang berhasil, pengguna
+memberikan masukan suara kata “dua”. Selanjutnya akan dilakukan proses translasi
+dari memasukan suara ke dalam bentuk teks oleh Google Voice API. Hasil teks tersebut
+dilakukan pengecekan dalam database kosakata. Jika kata tersebut terdapat pada
+database maka akan ditampilkan gerakan bahasa isyarat oleh peraga karakter 3D sesuai
+pada Gambar 21.
+Tabel 1. Hasil Percobaan Voice Recognition
+
+Gambar 13. Hasil Percobaan Voice Recognition Berhasil
+
+37
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Agustus 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+C. Hasil Kuesioner Pengguna
+Hasil dari penelitian aplikasi ini diuji cobakan kepada 35 responden, terdiri dari
+masyarakat normal berusia 18-50 tahun dan pengajar SLB yang berdomisili Lamongan dan
+Surabaya. Kuesioner yang digunakan menggunakan metode System Usability Scale (SUS).
+Metode ini bertujuan untuk mengetahui fungsi “usability” dari aplikasi. Terdapat 10 pernyataan
+yang masing-masing pertanyaan memiliki skala lima poin yang berkisar dari “Sangat Tidak
+Setuju” bernilai “1” poin hingga “Sangat Setuju.” Bernilai “5” poin.
+Tabel 2. Hasil Responden
+
+Gambar 14. Pedoman SUS
+Sumber: https://www.edisusilo.com/cara-menggunakan-system-usability-scale/
+
+38
+
+Technomedia Journal (TMJ)
+Vol. 7 No. 1 Agustus 2022
+
+p-ISSN: 2620-3383
+e-ISSN: 2528-6544
+
+Rata-rata total penilaian yang didapat dari 35 responden adalah 83. Dan dilihat dari
+pedoman penilaian metode SUS seperti pada Gambar 22., angka 83 berada pada kategori
+“EXCELLENT” dengan grade skala nilai B. Yang berarti secara “usability” atau kegunaan
+aplikasi mendapatkan penilaian bahwa aplikasi dapat diterima oleh pengguna dan layak untuk
+digunakan.
+KESIMPULAN
+Dalam penelitian ini penulis telah berhasil membuat aplikasi pembelajaran sistem isyarat
+bahasa Indonesia berbasis voice dengan menggunakan visualisasi animasi 3D. Berdasarkan hasil
+eksperimen, aplikasi yang dibuat berhasil membantu proses pembelajaran bahasa isyarat untuk
+lebih mudah dipahami dan bermanfaat membantu komunikasi dengan penyandang disabilitas
+tuna rungu. Dari hasil kuesioner, aplikasi mendapatkan nilai 83 yang berarti secara usability
+atau kegunaan aplikasi mendapatkan penilaian bahwa aplikasi dapat diterima oleh pengguna
+dan layak untuk digunakan sebagai media pendukung pembelajaran bahasa isyarat.
+SARAN
+Pengembangan lebih lanjut terhadap aplikasi dengan menambahkan banyak kosakata Bahasa
+isyarat, pembuatan karakter animasi agar dibuat lebih menonjol dan pengembangan untuk
+tampilan agar lebih menarik.
+DAFTAR PUSTAKA
+[1] B. L. Basyah and F. M. Elvina, “Rancang Bangun Aplikasi Pembelajaran Bahasa Isyarat Berbasis
+Android”.
+[2] I. Winaldi and A. Setyawan, “Aplikasi Pengenalan Bahasa Isyarat Untuk Penyandang Tuna Tungu
+Berbasis Android (Studi Kasus: SLB Madina Serang),” JSiI (Jurnal Sistem Informasi), vol. 5, no. 2,
+2018.
+[3] F. S. Rahman and Y. Yuhefizar, “Aplikasi Virtual Kata Untuk Komunikasi Penyandang Tunarungu
+Berbasis Android,” Jurnal RESTI (Rekayasa Sistem dan Teknologi Informasi), vol. 1, no. 2, pp. 99–
+105, 2017.
+[4] A. Salsabila, R. Yunita, and C. Rozikin, “Identifikasi Citra Jenis Bunga menggunakan Algoritma
+KNN dengan Ekstrasi Warna HSV dan Tekstur GLCM,” Technomedia Journal, vol. 6, no. 1, pp.
+124–137, 2021.
+[5] N. P. L. Santoso, Y. Durachman, S. Watini, and S. Millah, “Manajemen Kontrol Akses Berbasis
+Blockchain untuk Pendidikan Online Terdesentralisasi,” Technomedia Journal, vol. 6, no. 1, pp.
+111–123, 2021.
+[6] H. Sugiarto, “Penerapan Multimedia Development Life Cycle Pada Aplikasi Pengenalan Abjad Dan
+Angka,” IJCIT (Indonesian Journal on Computer and Information Technology), vol. 3, no. 1, 2018.
+[7] I. Kautsar, R. I. Borman, and A. Sulistyawati, “Aplikasi pembelajaran bahasa isyarat bagi
+penyandang tuna rungu berbasis android dengan metode bisindo,” Semnasteknomedia Online, vol.
+3, no. 1, p. 4, 2015.
+[8] J. K. Hikmalansya, “Aplikasi Pembelajaran Bahasa Isyarat Berbasis Android,” Inform: Jurnal
+Ilmiah Bidang Teknologi Informasi dan Komunikasi, vol. 1, no. 2, 2016.
+[9] H. S. Hopipah and R. Mayasari, “Optimasi Backward Elimination untuk Klasifikasi Kepuasan
+Pelanggan Menggunakan Algoritme k-nearest neighbor (k-NN) and Naive Bayes,” Technomedia
+Journal, vol. 6, no. 1, pp. 99–110, 2021.
+[10] R. Rosyid and M. A. W. Prasetyo, “Robot Peraga 12 Gerakan Pengaturan Lalu Lintas Berbasis
+Arduino Mega 2560,” Technomedia Journal, vol. 5, no. 2, pp. 193–205, 2021.
+
+39
+
+Powered by TCPDF (www.tcpdf.org)
+
+

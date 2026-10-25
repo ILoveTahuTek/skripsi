@@ -1,0 +1,26 @@
+%% G2.1 — Taksonomi pengenalan isyarat dan translasi SIBI (BAB II, Subbab 2.2)
+%% Tipe: flowchart TD, pohon dua cabang (pengenalan dan translasi)
+flowchart TD
+    ROOT["Dua fungsi penerjemah isyarat"]
+
+    A["Pengenalan isyarat<br/>(isyarat menjadi teks/suara)"]
+    B["Translasi balik<br/>(teks/suara menjadi isyarat)"]
+
+    A1["Sensor terpasang:<br/>sarung tangan sensor, IMU"]
+    A2["Visi (kamera):<br/>citra/video, perlu cahaya<br/>dan garis pandang"]
+    A3["Wi-Fi CSI:<br/>SignFi 276 isyarat ASL,<br/>WiSign kalimat kontinu,<br/>Wi-SL, DF-WiSLR"]
+    A4["CSI pada ESP32:<br/>Hernandez-Bulut, RuView;<br/>belum untuk SIBI"]
+
+    B1["Kamus kata-level:<br/>KASIBI, OpenSIBI<br/>(suara/teks menjadi animasi 3D)"]
+    B2["Ejaan jari:<br/>26 huruf + 9 angka,<br/>fallback kosakata"]
+    B3["SLMT penuh:<br/>tata bahasa + non-manual,<br/>masalah terbuka internasional"]
+
+    ROOT --> A
+    ROOT --> B
+    A --> A1
+    A --> A2
+    A --> A3
+    A --> A4
+    B --> B1
+    B --> B2
+    B --> B3

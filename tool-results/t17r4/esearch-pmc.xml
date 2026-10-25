@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE eSearchResult PUBLIC "-//NLM//DTD esearch 20060628//EN" "https://eutils.ncbi.nlm.nih.gov/eutils/dtd/20060628/esearch.dtd">
+<eSearchResult><Count>130</Count><RetMax>8</RetMax><RetStart>0</RetStart><IdList>
+<Id>12788229</Id>
+<Id>6696212</Id>
+<Id>8157398</Id>
+<Id>12599888</Id>
+<Id>11598015</Id>
+<Id>6427776</Id>
+<Id>9830631</Id>
+<Id>8724017</Id>
+</IdList><TranslationSet><Translation>     <From>respiration</From>     <To>"respiration"[MeSH Terms] OR "respiration"[All Fields] OR "cell respiration"[MeSH Terms] OR ("cell"[All Fields] AND "respiration"[All Fields]) OR "cell respiration"[All Fields] OR "respirations"[All Fields] OR "respirational"[All Fields] OR "respirative"[All Fields] OR "respiratively"[All Fields] OR "respire"[All Fields] OR "respired"[All Fields] OR "respirer"[All Fields] OR "respirers"[All Fields] OR "respires"[All Fields] OR "respiring"[All Fields]</To>    </Translation></TranslationSet><QueryTranslation>("WLAN"[All Fields] OR "WiFi"[All Fields] OR "Wi-Fi"[All Fields]) AND "channel state information"[All Fields] AND ("respiration"[MeSH Terms] OR "respiration"[All Fields] OR "cell respiration"[MeSH Terms] OR ("cell"[All Fields] AND "respiration"[All Fields]) OR "cell respiration"[All Fields] OR "respirations"[All Fields] OR "respirational"[All Fields] OR "respirative"[All Fields] OR "respiratively"[All Fields] OR "respire"[All Fields] OR "respired"[All Fields] OR "respirer"[All Fields] OR "respirers"[All Fields] OR "respires"[All Fields] OR "respiring"[All Fields])</QueryTranslation></eSearchResult>

@@ -1,0 +1,932 @@
+     1→/**
+     2→ * @file csi_collector.c
+     3→ * @brief CSI data collection and ADR-018 binary frame serialization.
+     4→ *
+     5→ * Registers the ESP-IDF WiFi CSI callback and serializes incoming CSI data
+     6→ * into the ADR-018 binary frame format for UDP transmission.
+     7→ *
+     8→ * ADR-029 extensions:
+     9→ *   - Channel-hop table for multi-band sensing (channels 1/6/11 by default)
+    10→ *   - Timer-driven channel hopping at configurable dwell intervals
+    11→ *   - NDP frame injection stub for sensing-first TX
+    12→ */
+    13→
+    14→#include "csi_collector.h"
+    15→#include "nvs_config.h"
+    16→#include "stream_sender.h"
+    17→#include "edge_processing.h"
+    18→#include "c6_timesync.h"  /* ADR-110: 802.15.4 epoch for cross-node alignment */
+    19→#include "c6_sync_espnow.h" /* ADR-110 §A0.11: mesh-aligned epoch for sync packet */
+    20→
+    21→#include <string.h>
+    22→#include "esp_log.h"
+    23→#include "esp_wifi.h"
+    24→#include "esp_timer.h"
+    25→#include "sdkconfig.h"
+    26→#include "esp_netif.h"          /* #954: STA gateway lookup for self-ping CSI source */
+    27→#include "ping/ping_sock.h"     /* #954: esp_ping gateway traffic generator */
+    28→#include "lwip/ip_addr.h"       /* #954: ip_addr_t target for esp_ping */
+    29→
+    30→/* ADR-060: Access the global NVS config for MAC filter and channel override. */
+    31→extern nvs_config_t g_nvs_config;
+    32→
+    33→/* Defensive fix (#232, #375, #385, #386, #390): capture NVS config fields into
+    34→ * module-local statics BEFORE wifi_init_sta() runs, because WiFi driver init
+    35→ * can corrupt g_nvs_config (confirmed on device 80:b5:4e:c1:be:b8).
+    36→ * main.c calls csi_collector_set_node_id() immediately after nvs_config_load(),
+    37→ * and all runtime paths use the local copies exclusively. */
+    38→static uint8_t s_node_id = 1;
+    39→static bool s_node_id_early_set = false;
+    40→
+    41→/* Defensive copy of MAC filter config — the CSI callback fires at 100-500 Hz
+    42→ * and reads filter_mac_set + filter_mac on every invocation. If wifi_init_sta()
+    43→ * corrupts g_nvs_config, the callback would read garbage, potentially causing
+    44→ * LoadProhibited panics (observed: Core 0 panic after ~2400 callbacks). */
+    45→static uint8_t s_filter_mac[6] = {0};
+    46→static bool    s_filter_mac_set = false;
+    47→
+    48→/* ADR-057: Build-time guard — fail early if CSI is not enabled in sdkconfig.
+    49→ * Without this, the firmware compiles but crashes at runtime with:
+    50→ *   "E (xxxx) wifi:CSI not enabled in menuconfig!"
+    51→ * which is confusing for users flashing pre-built binaries. */
+    52→#ifndef CONFIG_ESP_WIFI_CSI_ENABLED
+    53→#error "CONFIG_ESP_WIFI_CSI_ENABLED must be set in sdkconfig. " \
+    54→       "Run: idf.py menuconfig -> Component config -> Wi-Fi -> Enable WiFi CSI, " \
+    55→       "or copy sdkconfig.defaults.template to sdkconfig.defaults before building."
+    56→#endif
+    57→
+    58→static const char *TAG = "csi_collector";
+    59→
+    60→static uint32_t s_sequence = 0;
+    61→static uint32_t s_cb_count = 0;
+    62→static uint32_t s_send_ok = 0;
+    63→static uint32_t s_send_fail = 0;
+    64→static uint32_t s_rate_skip = 0;
+    65→
+    66→#ifndef CONFIG_CSI_SELF_PING_HZ
+    67→#define CONFIG_CSI_SELF_PING_HZ 50
+    68→#endif
+    69→
+    70→#if CONFIG_CSI_SELF_PING_HZ < 10 || CONFIG_CSI_SELF_PING_HZ > 50
+    71→#error "CONFIG_CSI_SELF_PING_HZ must stay within the hardware-qualified 10-50 Hz range"
+    72→#endif
+    73→
+    74→#define CSI_SELF_PING_INTERVAL_MS (1000U / CONFIG_CSI_SELF_PING_HZ)
+    75→
+    76→#ifndef CONFIG_EDGE_DSP_SAMPLE_HZ
+    77→#if CONFIG_IDF_TARGET_ESP32C6
+    78→#define CONFIG_EDGE_DSP_SAMPLE_HZ 8
+    79→#else
+    80→#define CONFIG_EDGE_DSP_SAMPLE_HZ 20
+    81→#endif
+    82→#endif
+    83→
+    84→#if CONFIG_EDGE_DSP_SAMPLE_HZ < 8 || CONFIG_EDGE_DSP_SAMPLE_HZ > 50
+    85→#error "CONFIG_EDGE_DSP_SAMPLE_HZ must stay within the supported 8-50 Hz range"
+    86→#endif
+    87→
+    88→#define EDGE_DSP_MIN_INTERVAL_US (1000000U / CONFIG_EDGE_DSP_SAMPLE_HZ)
+    89→static int64_t s_next_edge_enqueue_us = 0;
+    90→static uint32_t s_edge_rate_skip = 0;
+    91→
+    92→/**
+    93→ * Minimum interval between UDP sends in microseconds.
+    94→ * CSI callbacks can fire hundreds of times per second in promiscuous mode.
+    95→ * We cap the send rate to avoid exhausting lwIP packet buffers (ENOMEM).
+    96→ * Default: 20 ms = 50 Hz max send rate.
+    97→ */
+    98→#define CSI_MIN_SEND_INTERVAL_US  (20 * 1000)
+    99→static int64_t s_last_send_us = 0;
+   100→
+   101→/**
+   102→ * Minimum interval between processing ANY CSI callback in microseconds.
+   103→ * Promiscuous MGMT+DATA can fire 100-500+ times/sec. At rates above ~50 Hz,
+   104→ * the WiFi FIQ handler (wDev_ProcessFiq) races with SPI flash cache operations,
+   105→ * causing Core 0 LoadProhibited panics in cache_ll_l1_resume_icache.
+   106→ *
+   107→ * This early gate drops excess callbacks BEFORE any processing (serialization,
+   108→ * UDP, edge enqueue), keeping the effective callback rate at ~50 Hz while
+   109→ * preserving the full MGMT+DATA promiscuous filter and HT-LTF/STBC CSI quality.
+   110→ *
+   111→ * The WiFi hardware still captures all frames and the CSI data is generated,
+   112→ * but we simply discard the excess in software. This reduces the time spent
+   113→ * in callback context per second, giving the WiFi ISR more headroom.
+   114→ */
+   115→#define CSI_MIN_PROCESS_INTERVAL_US  (20 * 1000)  /* 50 Hz */
+   116→static int64_t s_last_process_us = 0;
+   117→/* Mesh-epoch window index of the last accepted frame. UINT64_MAX means "none
+   118→ * yet", which no real bucket can collide with. */
+   119→static uint64_t s_last_gate_bucket = UINT64_MAX;
+   120→static uint32_t s_early_drop = 0;
+   121→
+   122→/* ---- ADR-029: Channel-hop state ---- */
+   123→
+   124→/** Channel hop table (populated from NVS at boot or via set_hop_table). */
+   125→static uint8_t  s_hop_channels[CSI_HOP_CHANNELS_MAX] = {1, 6, 11, 36, 40, 44};
+   126→
+   127→/** Number of active channels in the hop table. 1 = single-channel (no hop). */
+   128→static uint8_t  s_hop_count   = 1;
+   129→
+   130→/** Dwell time per channel in milliseconds. */
+   131→static uint32_t s_dwell_ms    = 50;
+   132→
+   133→/** Current index into s_hop_channels. */
+   134→static uint8_t  s_hop_index   = 0;
+   135→
+   136→/** Handle for the periodic hop timer. NULL when timer is not running. */
+   137→static esp_timer_handle_t s_hop_timer = NULL;
+   138→
+   139→/**
+   140→ * Serialize CSI data into ADR-018 binary frame format.
+   141→ *
+   142→ * Layout:
+   143→ *   [0..3]   Magic: 0xC5110001 (LE)
+   144→ *   [4]      Node ID
+   145→ *   [5]      Number of antennas (rx_ctrl.rx_ant + 1 if available, else 1)
+   146→ *   [6..7]   Number of subcarriers (LE u16) = len / (2 * n_antennas)
+   147→ *   [8..11]  Frequency MHz (LE u32) — derived from channel
+   148→ *   [12..15] Sequence number (LE u32)
+   149→ *   [16]     RSSI (i8)
+   150→ *   [17]     Noise floor (i8)
+   151→ *   [18..19] Reserved
+   152→ *   [20..]   I/Q data (raw bytes from ESP-IDF callback)
+   153→ */
+   154→size_t csi_serialize_frame(const wifi_csi_info_t *info, uint8_t *buf, size_t buf_len)
+   155→{
+   156→    if (info == NULL || buf == NULL || info->buf == NULL) {
+   157→        return 0;
+   158→    }
+   159→
+   160→    uint8_t n_antennas = 1;  /* ESP32-S3 typically reports 1 antenna for CSI */
+   161→    uint16_t iq_len = (uint16_t)info->len;
+   162→    uint16_t n_subcarriers = iq_len / (2 * n_antennas);
+   163→
+   164→    size_t frame_size = CSI_HEADER_SIZE + iq_len;
+   165→    if (frame_size > buf_len) {
+   166→        ESP_LOGW(TAG, "Buffer too small: need %u, have %u", (unsigned)frame_size, (unsigned)buf_len);
+   167→        return 0;
+   168→    }
+   169→
+   170→    /* Derive frequency from channel number */
+   171→    uint8_t channel = info->rx_ctrl.channel;
+   172→    uint32_t freq_mhz;
+   173→    if (channel >= 1 && channel <= 13) {
+   174→        freq_mhz = 2412 + (channel - 1) * 5;
+   175→    } else if (channel == 14) {
+   176→        freq_mhz = 2484;
+   177→    } else if (channel >= 36 && channel <= 177) {
+   178→        freq_mhz = 5000 + channel * 5;
+   179→    } else {
+   180→        freq_mhz = 0;
+   181→    }
+   182→
+   183→    /* Magic (LE) */
+   184→    uint32_t magic = CSI_MAGIC;
+   185→    memcpy(&buf[0], &magic, 4);
+   186→
+   187→    /* Node ID (captured at init into s_node_id to survive memory corruption
+   188→     * that could clobber g_nvs_config.node_id - see #232/#375/#385/#390). */
+   189→    buf[4] = s_node_id;
+   190→
+   191→    /* Number of antennas */
+   192→    buf[5] = n_antennas;
+   193→
+   194→    /* Number of subcarriers (LE u16) */
+   195→    memcpy(&buf[6], &n_subcarriers, 2);
+   196→
+   197→    /* Frequency MHz (LE u32) */
+   198→    memcpy(&buf[8], &freq_mhz, 4);
+   199→
+   200→    /* Sequence number (LE u32) */
+   201→    uint32_t seq = s_sequence++;
+   202→    memcpy(&buf[12], &seq, 4);
+   203→
+   204→    /* RSSI (i8) */
+   205→    buf[16] = (uint8_t)(int8_t)info->rx_ctrl.rssi;
+   206→
+   207→    /* Noise floor (i8) */
+   208→    buf[17] = (uint8_t)(int8_t)info->rx_ctrl.noise_floor;
+   209→
+   210→    /* ADR-110: PPDU type (byte 18) + bandwidth/flags (byte 19).
+   211→     * Previously reserved-zero, now optionally populated when CONFIG_CSI_FRAME_HE_TAGGING.
+   212→     * Readers that don't know about the extension see zeros — backward compatible.
+   213→     *
+   214→     * The struct that backs info->rx_ctrl is target-conditional in IDF v5.4
+   215→     * (esp_wifi/include/local/esp_wifi_types_native.h):
+   216→     *
+   217→     *   CONFIG_SOC_WIFI_HE_SUPPORT=y  (C6/C5)  →  esp_wifi_rxctrl_t with cur_bb_format, second
+   218→     *   otherwise                     (S3 etc) →  legacy struct with sig_mode, cwb, stbc
+   219→     *
+   220→     * Byte-18 PPDU type encoding stays the same across targets:
+   221→     *   0=HT/legacy bucket, 1=HE-SU, 2=HE-MU, 3=HE-TB, 0xFF=unknown
+   222→     */
+   223→#ifdef CONFIG_CSI_FRAME_HE_TAGGING
+   224→    uint8_t ppdu_type = 0xFF;
+   225→    uint8_t flags     = 0;
+   226→#if CONFIG_SOC_WIFI_HE_SUPPORT
+   227→    /* HE-capable chips: read cur_bb_format (0=11b, 1=11g, 2=HT, 3=VHT, 4=HE-SU,
+   228→     * 5=HE-MU, 6=HE-ERSU, 7=HE-TB) and 'second' (40 MHz secondary chan offset). */
+   229→    switch (info->rx_ctrl.cur_bb_format) {
+   230→        case 0:
+   231→        case 1:
+   232→        case 2:  ppdu_type = 0; break;  /* 11b/g/a/HT bucket */
+   233→        case 3:  ppdu_type = 0; break;  /* VHT — rare on 2.4 GHz, HT bucket */
+   234→        case 4:  ppdu_type = 1; break;  /* HE-SU */
+   235→        case 5:  ppdu_type = 2; break;  /* HE-MU */
+   236→        case 6:  ppdu_type = 1; break;  /* HE-ER-SU collapses to HE-SU */
+   237→        case 7:  ppdu_type = 3; break;  /* HE-TB */
+   238→        default: ppdu_type = 0xFF; break;
+   239→    }
+   240→    if (info->rx_ctrl.second != 0) flags |= 0x1;  /* bw 40 MHz */
+   241→#else
+   242→    /* Pre-HE chips (S3 etc): use legacy sig_mode + cwb + stbc fields. */
+   243→    switch (info->rx_ctrl.sig_mode) {
+   244→        case 0: ppdu_type = 0; break;  /* non-HT (11b/g) */
+   245→        case 1: ppdu_type = 0; break;  /* HT (11n) */
+   246→        case 3: ppdu_type = 0; break;  /* VHT — bucket as HT for storage */
+   247→        default: ppdu_type = 0xFF; break;
+   248→    }
+   249→    if (info->rx_ctrl.cwb) flags |= 0x1;            /* bw 40 MHz */
+   250→    if (info->rx_ctrl.stbc) flags |= (1 << 2);      /* STBC */
+   251→#endif  /* CONFIG_SOC_WIFI_HE_SUPPORT */
+   252→    /* ADR-018 byte 19 bit 4 = "cross-node sync valid". Two transports can
+   253→     * set it: the original 802.15.4 c6_timesync (broken in IDF v5.4 — D1)
+   254→     * and the ESP-NOW workaround c6_sync_espnow (measured working in §A0.7-
+   255→     * §A0.10). OR them together so frames signal sync from whichever
+   256→     * transport is alive on this node. Host can pair against the sync
+   257→     * packet (§A0.12) once it sees this bit. */
+   258→#if defined(CONFIG_IDF_TARGET_ESP32C6) && defined(CONFIG_C6_TIMESYNC_ENABLE)
+   259→    if (c6_timesync_is_valid()) flags |= (1 << 4);  /* 15.4 sync valid */
+   260→#endif
+   261→    if (c6_sync_espnow_is_valid()) flags |= (1 << 4);  /* ESP-NOW sync valid (D1 workaround) */
+   262→    buf[18] = ppdu_type;
+   263→    buf[19] = flags;
+   264→#else
+   265→    buf[18] = 0;
+   266→    buf[19] = 0;
+   267→#endif
+   268→
+   269→    /* I/Q data. ESP-IDF documents that the first four CSI bytes are invalid
+   270→     * when first_word_invalid is set. Never let those hardware artifacts feed
+   271→     * either the host or edge DSP path. Preserve the fixed ADR-018 geometry by
+   272→     * zeroing rather than removing bytes, and mark the sanitation in bit 5. */
+   273→    memcpy(&buf[CSI_HEADER_SIZE], info->buf, iq_len);
+   274→    if (info->first_word_invalid && iq_len > 0) {
+   275→        size_t invalid_len = iq_len < 4 ? iq_len : 4;
+   276→        memset(&buf[CSI_HEADER_SIZE], 0, invalid_len);
+   277→        buf[19] |= CSI_FLAG_FIRST_WORD_SANITIZED;
+   278→    }
+   279→
+   280→    return frame_size;
+   281→}
+   282→
+   283→/**
+   284→ * WiFi CSI callback — invoked by ESP-IDF when CSI data is available.
+   285→ */
+   286→static void wifi_csi_callback(void *ctx, wifi_csi_info_t *info)
+   287→{
+   288→    (void)ctx;
+   289→
+   290→    /* Early rate gate: drop excess callbacks to ~50 Hz to prevent
+   291→     * SPI flash cache crash in WiFi ISR (wDev_ProcessFiq).
+   292→     *
+   293→     * HOW the rate is limited decides whether cross-node fusion is possible.
+   294→     *
+   295→     * The original gate is "at least 20 ms since MY last accept". Each node
+   296→     * therefore has an independent phase: node A can accept at t=0,20,40 ms
+   297→     * while node B accepts at 7,27,47. Both are perfectly healthy and both hit
+   298→     * 50 Hz, yet they accept disjoint frames and nothing can be paired.
+   299→     *
+   300→     * MEASURED 2026-08-30, two boards side by side: they HEARD the same
+   301→     * transmissions 72% of the time but only 25% of accepted frames were
+   302→     * common. The frames were there; the gate was throwing away the pairing.
+   303→     *
+   304→     * So gate on a bucket of the MESH-ALIGNED epoch instead: every node takes
+   305→     * the first frame it hears in the same absolute 20 ms window. Two nodes
+   306→     * that heard the same frame now both accept it. Mesh sync is good to
+   307→     * roughly 490 us against a 20 ms bucket -- about 2.5% of a window -- so
+   308→     * boundary disagreements are rare.
+   309→     *
+   310→     * Falls back to the original elapsed-time gate whenever mesh sync is not
+   311→     * valid (no leader heard yet, or a node that just booted), because an
+   312→     * unsynced epoch would otherwise gate on a meaningless number. A node
+   313→     * running unsynced simply gets the old behaviour rather than no gate.
+   314→     *
+   315→     * The half-interval floor below keeps the crash protection honest: bucket
+   316→     * gating alone could accept at the end of one window and the start of the
+   317→     * next, back to back. The floor bounds that to ~100 Hz for a single pair
+   318→     * while the average stays at 50 Hz. Do not remove it; the gate exists for
+   319→     * a crash, not for tidiness. */
+   320→    int64_t now_us = esp_timer_get_time();
+   321→    bool take;
+   322→#ifdef CONFIG_CSI_GATE_MESH_ALIGNED
+   323→    if (c6_sync_espnow_is_valid()) {
+   324→        uint64_t bucket = c6_sync_espnow_get_epoch_us()
+   325→                        / (uint64_t)CSI_MIN_PROCESS_INTERVAL_US;
+   326→        take = (bucket != s_last_gate_bucket)
+   327→            && ((now_us - s_last_process_us) >= CSI_MIN_PROCESS_INTERVAL_US / 2);
+   328→        if (take) {
+   329→            s_last_gate_bucket = bucket;
+   330→        }
+   331→    } else {
+   332→        take = (now_us - s_last_process_us) >= CSI_MIN_PROCESS_INTERVAL_US;
+   333→    }
+   334→#else
+   335→    take = (now_us - s_last_process_us) >= CSI_MIN_PROCESS_INTERVAL_US;
+   336→#endif
+   337→    if (!take) {
+   338→        s_early_drop++;
+   339→        return;
+   340→    }
+   341→    s_last_process_us = now_us;
+   342→
+   343→    /* ADR-060: MAC address filtering — drop frames from non-matching sources.
+   344→     * Uses defensively-copied s_filter_mac instead of g_nvs_config (which can
+   345→     * be corrupted by wifi_init_sta — same root cause as the node_id clobber). */
+   346→    if (s_filter_mac_set) {
+   347→        if (memcmp(info->mac, s_filter_mac, 6) != 0) {
+   348→            return;  /* Source MAC doesn't match filter — skip frame. */
+   349→        }
+   350→    }
+   351→
+   352→    s_cb_count++;
+   353→
+   354→    if (s_cb_count <= 3 || (s_cb_count % 100) == 0) {
+   355→        ESP_LOGI(TAG, "CSI cb #%lu: len=%d rssi=%d ch=%d",
+   356→                 (unsigned long)s_cb_count, info->len,
+   357→                 info->rx_ctrl.rssi, info->rx_ctrl.channel);
+   358→    }
+   359→
+   360→    uint8_t frame_buf[CSI_MAX_FRAME_SIZE];
+   361→    size_t frame_len = csi_serialize_frame(info, frame_buf, sizeof(frame_buf));
+   362→
+   363→    if (frame_len > 0) {
+   364→        /* Rate-limit UDP sends to avoid ENOMEM from lwIP pbuf exhaustion.
+   365→         * In promiscuous mode, CSI callbacks can fire 100-500+ times/sec.
+   366→         * We only need 20-50 Hz for the sensing pipeline. */
+   367→        int64_t now = esp_timer_get_time();
+   368→        if ((now - s_last_send_us) >= CSI_MIN_SEND_INTERVAL_US) {
+   369→            int ret = stream_sender_send(frame_buf, frame_len);
+   370→            if (ret > 0) {
+   371→                s_send_ok++;
+   372→                s_last_send_us = now;
+   373→            } else {
+   374→                s_send_fail++;
+   375→                if (s_send_fail <= 5) {
+   376→                    ESP_LOGW(TAG, "sendto failed (fail #%lu)", (unsigned long)s_send_fail);
+   377→                }
+   378→            }
+   379→        } else {
+   380→            s_rate_skip++;
+   381→        }
+   382→    }
+   383→
+   384→    /* ADR-039 / ADR-347: Raw CSI stays at the independent network cadence,
+   385→     * while the on-device Tier 1/2 pipeline receives a uniform, sustainable
+   386→     * stream. Enqueuing every burst frame overloaded the unicore C6 DSP and
+   387→     * turned 30-40 callback pps into an irregular approximately 8 Hz subset. */
+   388→    if (frame_len > CSI_HEADER_SIZE) {
+   389→        if (s_next_edge_enqueue_us == 0) {
+   390→            s_next_edge_enqueue_us = now_us;
+   391→        }
+   392→
+   393→        if (now_us >= s_next_edge_enqueue_us) {
+   394→            /* Reuse the sanitized ADR-018 payload. Feeding info->buf here
+   395→             * would reintroduce first_word_invalid artifacts on device. */
+   396→            (void)edge_enqueue_csi(&frame_buf[CSI_HEADER_SIZE],
+   397→                                   (uint16_t)(frame_len - CSI_HEADER_SIZE),
+   398→                                   (int8_t)info->rx_ctrl.rssi, info->rx_ctrl.channel);
+   399→
+   400→            /* Preserve the configured sample clock instead of resetting it to
+   401→             * each irregular callback. With roughly 35 raw callbacks per
+   402→             * second, a last-seen 100 ms gate selected every fourth callback
+   403→             * and drifted to roughly 8 Hz. Advancing the deadline by complete
+   404→             * periods alternates the available callbacks around the configured
+   405→             * phase and prevents both drift and catch-up bursts. */
+   406→            int64_t periods = ((now_us - s_next_edge_enqueue_us) /
+   407→                               EDGE_DSP_MIN_INTERVAL_US) + 1;
+   408→            s_next_edge_enqueue_us += periods * EDGE_DSP_MIN_INTERVAL_US;
+   409→        } else {
+   410→            s_edge_rate_skip++;
+   411→        }
+   412→    }
+   413→
+   414→    /* ADR-110 §A0.11/§A0.12 — Emit a sync-packet every N CSI frames so the
+   415→     * host aggregator can pair node-local sequence numbers with the mesh-aligned
+   416→     * epoch coming out of c6_sync_espnow_get_epoch_us(). Backwards-compatible
+   417→     * with the ADR-018 frame format: new packet uses a distinct magic so the
+   418→     * existing CSI parser can dispatch by first 4 bytes.
+   419→     *
+   420→     * Cadence is operator-tunable via CONFIG_C6_SYNC_EVERY_N_FRAMES (default 20).
+   421→     * At 10 Hz observed CSI rate that's ~2 s between sync packets; raise to 50
+   422→     * for ~5 s (less overhead, slower convergence), lower to 5 for ~0.5 s
+   423→     * (heavier wire, tighter ADR-029/030 multistatic alignment window). */
+   424→    {
+   425→#ifndef CONFIG_C6_SYNC_EVERY_N_FRAMES
+   426→#define CONFIG_C6_SYNC_EVERY_N_FRAMES 20
+   427→#endif
+   428→        if ((s_cb_count % CONFIG_C6_SYNC_EVERY_N_FRAMES) == 0) {
+   429→            uint8_t sync[32];
+   430→            uint32_t sync_magic = 0xC511A110u;    /* CSI-ADR-110 sync packet */
+   431→            uint64_t local_us = (uint64_t)esp_timer_get_time();
+   432→            uint64_t epoch_us = c6_sync_espnow_get_epoch_us();
+   433→            int64_t  off_smooth = c6_sync_espnow_get_offset_us_smoothed();
+   434→            uint8_t  flags = 0;
+   435→            if (c6_sync_espnow_is_leader()) flags |= 0x01;
+   436→            if (c6_sync_espnow_is_valid())  flags |= 0x02;
+   437→            if (off_smooth != 0)            flags |= 0x04;
+   438→
+   439→            memcpy(&sync[0],  &sync_magic, 4);
+   440→            sync[4] = s_node_id;
+   441→            sync[5] = 0x01;                       /* protocol version */
+   442→            sync[6] = flags;
+   443→            sync[7] = 0;                          /* reserved */
+   444→            memcpy(&sync[8],  &local_us, 8);
+   445→            memcpy(&sync[16], &epoch_us, 8);
+   446→            memcpy(&sync[24], &s_sequence, 4);    /* high-water seq for pairing */
+   447→            uint32_t zero32 = 0;
+   448→            memcpy(&sync[28], &zero32, 4);        /* reserved (room for leader_id low32) */
+   449→            /* Sync packets are 32 B at ~0.5 Hz — priority path so the CSI
+   450→             * ENOMEM backoff can't starve cross-node time alignment (#1183). */
+   451→            int sr = stream_sender_send_priority(sync, sizeof(sync));
+   452→            static uint32_t s_sync_count = 0;
+   453→            s_sync_count++;
+   454→            if (s_sync_count <= 3 || (s_sync_count % 60) == 0) {
+   455→                ESP_LOGI(TAG, "sync-pkt #%lu (sr=%d) node=%u flags=0x%02x "
+   456→                              "local_us=%llu epoch_us=%llu seq=%lu",
+   457→                         (unsigned long)s_sync_count, sr,
+   458→                         (unsigned)s_node_id, (unsigned)flags,
+   459→                         (unsigned long long)local_us,
+   460→                         (unsigned long long)epoch_us,
+   461→                         (unsigned long)s_sequence);
+   462→            }
+   463→        }
+   464→    }
+   465→}
+   466→
+   467→/**
+   468→ * Promiscuous mode callback — required for CSI to fire on all received frames.
+   469→ * We don't need the packet content, just the CSI triggered by reception.
+   470→ */
+   471→static void wifi_promiscuous_cb(void *buf, wifi_promiscuous_pkt_type_t type)
+   472→{
+   473→    /* No-op: CSI callback is registered separately and fires in parallel. */
+   474→    (void)buf;
+   475→    (void)type;
+   476→}
+   477→
+   478→/* ---- RuView#521/#954: connected-STA CSI traffic source (additive) ----
+   479→ *
+   480→ * The ESP32 CSI engine only produces CSI for received OFDM frames (L-LTF/HT-LTF).
+   481→ * On a quiet network — or on a display-enabled build where the #893 MGMT->MGMT+DATA
+   482→ * promiscuous upgrade is skipped (has_display=true) — the only CSI-eligible frames
+   483→ * are sparse beacons (often non-OFDM DSSS), so wifi_csi_callback can starve to
+   484→ * yield=0pps -> DEGRADED -> motion/presence=0 (#521, #954).
+   485→ *
+   486→ * Ping the STA's gateway to request unicast traffic. Some APs send ICMP replies
+   487→ * at 802.11b rates, which produce no CSI (#2287); this is not a guaranteed
+   488→ * OFDM floor. Such APs need a LAN host sending unicast UDP to the node.
+   489→ * It is ADDITIVE — promiscuous capture (#396/#893) is left fully intact so
+   490→ * multistatic/multi-node sensing still hears other stations' frames. Mirrors
+   491→ * Espressif's esp-csi csi_recv_router reference.
+   492→ */
+   493→static esp_ping_handle_t s_self_ping = NULL;
+   494→static void csi_ping_cb_noop(esp_ping_handle_t hdl, void *args) { (void)hdl; (void)args; }
+   495→
+   496→static void csi_start_self_ping(void)
+   497→{
+   498→    if (s_self_ping != NULL) {
+   499→        return;  /* already running */
+   500→    }
+   501→
+   502→    esp_netif_t *sta = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+   503→    esp_netif_ip_info_t ip;
+   504→    if (sta == NULL || esp_netif_get_ip_info(sta, &ip) != ESP_OK || ip.gw.addr == 0) {
+   505→        ESP_LOGW(TAG, "self-ping: no gateway IP yet; CSI relies on ambient frames (#954)");
+   506→        return;
+   507→    }
+   508→
+   509→    char gw_str[16];
+   510→    esp_ip4addr_ntoa(&ip.gw, gw_str, sizeof(gw_str));
+   511→
+   512→    ip_addr_t target;
+   513→    memset(&target, 0, sizeof(target));
+   514→    ipaddr_aton(gw_str, &target);
+   515→
+   516→    esp_ping_config_t cfg = ESP_PING_DEFAULT_CONFIG();
+   517→    cfg.target_addr     = target;
+   518→    cfg.count           = ESP_PING_COUNT_INFINITE;
+   519→    cfg.interval_ms     = CSI_SELF_PING_INTERVAL_MS;
+   520→    cfg.timeout_ms      = CSI_SELF_PING_INTERVAL_MS;
+   521→    cfg.data_size       = 1;
+   522→    cfg.task_stack_size = 4096;
+   523→
+   524→    esp_ping_callbacks_t cbs = {
+   525→        .cb_args         = NULL,
+   526→        .on_ping_success = csi_ping_cb_noop,
+   527→        .on_ping_timeout = csi_ping_cb_noop,
+   528→        .on_ping_end     = csi_ping_cb_noop,
+   529→    };
+   530→
+   531→    if (esp_ping_new_session(&cfg, &cbs, &s_self_ping) == ESP_OK && s_self_ping != NULL) {
+   532→        esp_ping_start(s_self_ping);
+   533→        ESP_LOGI(TAG, "self-ping started -> %s @%dHz (CSI yield depends on AP reply rate, #2287)",
+   534→                 gw_str, CONFIG_CSI_SELF_PING_HZ);
+   535→    } else {
+   536→        ESP_LOGW(TAG, "self-ping: esp_ping_new_session failed");
+   537→        s_self_ping = NULL;
+   538→    }
+   539→}
+   540→
+   541→void csi_collector_set_node_id(uint8_t node_id)
+   542→{
+   543→    s_node_id = node_id;
+   544→    s_node_id_early_set = true;
+   545→    ESP_LOGI(TAG, "Early capture node_id=%u (before WiFi init, #232/#390)",
+   546→             (unsigned)node_id);
+   547→
+   548→    /* Also capture MAC filter config now — same struct, same corruption risk.
+   549→     * The CSI callback reads filter_mac_set on every invocation (100-500 Hz),
+   550→     * so a corrupted value could cause erratic filtering or crash. */
+   551→    s_filter_mac_set = (g_nvs_config.filter_mac_set != 0);
+   552→    if (s_filter_mac_set) {
+   553→        memcpy(s_filter_mac, g_nvs_config.filter_mac, 6);
+   554→        ESP_LOGI(TAG, "Early capture filter_mac=%02x:%02x:%02x:%02x:%02x:%02x",
+   555→                 s_filter_mac[0], s_filter_mac[1], s_filter_mac[2],
+   556→                 s_filter_mac[3], s_filter_mac[4], s_filter_mac[5]);
+   557→    }
+   558→}
+   559→
+   560→void csi_collector_init(void)
+   561→{
+   562→    if (!s_node_id_early_set) {
+   563→        /* Fallback: no early capture — use current g_nvs_config (may be clobbered). */
+   564→        s_node_id = g_nvs_config.node_id;
+   565→        ESP_LOGW(TAG, "Late capture node_id=%u (no early set_node_id call)",
+   566→                 (unsigned)s_node_id);
+   567→    } else if (g_nvs_config.node_id != s_node_id) {
+   568→        /* Canary: early capture disagrees with current g_nvs_config — corruption
+   569→         * happened between nvs_config_load() and here (likely wifi_init_sta). */
+   570→        ESP_LOGW(TAG, "node_id clobber CONFIRMED: early=%u g_nvs_config=%u "
+   571→                 "(WiFi init likely corrupted struct, using early value)",
+   572→                 (unsigned)s_node_id, (unsigned)g_nvs_config.node_id);
+   573→    } else {
+   574→        ESP_LOGI(TAG, "node_id=%u verified (early capture matches g_nvs_config)",
+   575→                 (unsigned)s_node_id);
+   576→    }
+   577→
+   578→    /* Canary for filter_mac: check if WiFi init corrupted the filter fields. */
+   579→    if (s_node_id_early_set) {
+   580→        bool mac_set_now = (g_nvs_config.filter_mac_set != 0);
+   581→        if (mac_set_now != s_filter_mac_set) {
+   582→            ESP_LOGW(TAG, "filter_mac_set clobber CONFIRMED: early=%d g_nvs_config=%d",
+   583→                     (int)s_filter_mac_set, (int)mac_set_now);
+   584→        } else if (s_filter_mac_set &&
+   585→                   memcmp(s_filter_mac, g_nvs_config.filter_mac, 6) != 0) {
+   586→            ESP_LOGW(TAG, "filter_mac clobber CONFIRMED: bytes differ after WiFi init");
+   587→        }
+   588→    } else {
+   589→        /* No early capture — grab filter config now (may already be corrupted). */
+   590→        s_filter_mac_set = (g_nvs_config.filter_mac_set != 0);
+   591→        if (s_filter_mac_set) {
+   592→            memcpy(s_filter_mac, g_nvs_config.filter_mac, 6);
+   593→        }
+   594→    }
+   595→
+   596→    /* ADR-060: Determine the CSI channel.
+   597→     * Priority: 1) NVS override (--channel), 2) connected AP channel, 3) Kconfig default. */
+   598→    uint8_t csi_channel = (uint8_t)CONFIG_CSI_WIFI_CHANNEL;
+   599→
+   600→    if (g_nvs_config.csi_channel > 0) {
+   601→        /* Explicit NVS override via provision.py --channel */
+   602→        csi_channel = g_nvs_config.csi_channel;
+   603→        ESP_LOGI(TAG, "Using NVS channel override: %u", (unsigned)csi_channel);
+   604→    } else {
+   605→        /* Auto-detect from connected AP */
+   606→        wifi_ap_record_t ap_info;
+   607→        if (esp_wifi_sta_get_ap_info(&ap_info) == ESP_OK && ap_info.primary > 0) {
+   608→            csi_channel = ap_info.primary;
+   609→            ESP_LOGI(TAG, "Auto-detected AP channel: %u", (unsigned)csi_channel);
+   610→        } else {
+   611→            ESP_LOGW(TAG, "Could not detect AP channel, using Kconfig default: %u",
+   612→                     (unsigned)csi_channel);
+   613→        }
+   614→    }
+   615→
+   616→    /* Update the hop table's first channel to match. */
+   617→    s_hop_channels[0] = csi_channel;
+   618→
+   619→    /* Disable WiFi modem sleep — reliable CSI capture needs the radio awake.
+   620→     * The ESP-IDF STA default is WIFI_PS_MIN_MODEM, which lets the modem
+   621→     * sleep between DTIM beacons; with the MGMT-only promiscuous filter
+   622→     * (RuView#396) that starves the CSI callback and the per-second yield
+   623→     * collapses toward 0 pps (RuView#521). Operators who want battery
+   624→     * duty-cycling opt back in via power_mgmt_init() (provision.py
+   625→     * --duty-cycle <N>), which runs after this and re-enables modem sleep. */
+   626→    esp_err_t ps_err = esp_wifi_set_ps(WIFI_PS_NONE);
+   627→    if (ps_err != ESP_OK) {
+   628→        ESP_LOGW(TAG, "esp_wifi_set_ps(WIFI_PS_NONE) failed: %s — CSI yield may be low",
+   629→                 esp_err_to_name(ps_err));
+   630→    } else {
+   631→        ESP_LOGI(TAG, "WiFi modem sleep disabled (WIFI_PS_NONE) for CSI capture");
+   632→    }
+   633→
+   634→    /* Enable promiscuous mode — required for reliable CSI callbacks.
+   635→     * Without this, CSI only fires on frames destined to this station,
+   636→     * which may be very infrequent on a quiet network. */
+   637→    ESP_ERROR_CHECK(esp_wifi_set_promiscuous(true));
+   638→    ESP_ERROR_CHECK(esp_wifi_set_promiscuous_rx_cb(wifi_promiscuous_cb));
+   639→
+   640→    /* MGMT-only promiscuous filter + active probe injection (RuView#396).
+   641→     *
+   642→     * DATA frames cause 100-500+ WiFi HW interrupts/sec which crashes Core 0
+   643→     * in wDev_ProcessFiq (SPI flash cache race in ESP-IDF WiFi blob).
+   644→     * MGMT-only gives ~10 Hz (beacons). Probe request injection at 10 Hz
+   645→     * adds ~10 Hz probe responses from APs → ~20 Hz total, matching the
+   646→     * edge processing designed sample rate of 20 Hz. */
+   647→    wifi_promiscuous_filter_t filt = {
+   648→        .filter_mask = WIFI_PROMIS_FILTER_MASK_MGMT,
+   649→    };
+   650→    ESP_ERROR_CHECK(esp_wifi_set_promiscuous_filter(&filt));
+   651→
+   652→    ESP_LOGI(TAG, "Promiscuous mode enabled (MGMT-only, RuView#396)");
+   653→
+   654→#if CONFIG_SOC_WIFI_HE_SUPPORT
+   655→    /* Wi-Fi 6 targets (e.g. ESP32-C6): wifi_csi_config_t is wifi_csi_acquire_config_t
+   656→     * (bitfields), not the legacy 802.11n bool layout used on ESP32-S3. */
+   657→    wifi_csi_config_t csi_config;
+   658→    memset(&csi_config, 0, sizeof(csi_config));
+   659→    csi_config.enable = 1U;
+   660→    csi_config.acquire_csi_legacy = 1U;
+   661→    csi_config.acquire_csi_ht20 = 1U;
+   662→    csi_config.acquire_csi_ht40 = 1U;
+   663→    csi_config.acquire_csi_su = 1U;
+   664→    csi_config.acquire_csi_mu = 1U;
+   665→    csi_config.acquire_csi_dcm = 1U;
+   666→    csi_config.acquire_csi_beamformed = 1U;
+   667→#if CONFIG_SOC_WIFI_MAC_VERSION_NUM >= 3
+   668→    csi_config.acquire_csi_force_lltf = 1U;
+   669→    csi_config.acquire_csi_vht = 1U;
+   670→    csi_config.acquire_csi_he_stbc_mode = ESP_CSI_ACQUIRE_STBC_SAMPLE_HELTFS;
+   671→    csi_config.val_scale_cfg = 0U;
+   672→#else
+   673→    csi_config.acquire_csi_he_stbc = ESP_CSI_ACQUIRE_STBC_SAMPLE_HELTFS;
+   674→    csi_config.val_scale_cfg = 0U;
+   675→#endif
+   676→    csi_config.dump_ack_en = 0U;
+   677→#else
+   678→    wifi_csi_config_t csi_config = {
+   679→        .lltf_en = true,
+   680→        .htltf_en = true,
+   681→        .stbc_htltf2_en = true,
+   682→        .ltf_merge_en = true,
+   683→        .channel_filter_en = false,
+   684→        .manu_scale = false,
+   685→        .shift = false,
+   686→    };
+   687→#endif
+   688→
+   689→    ESP_ERROR_CHECK(esp_wifi_set_csi_config(&csi_config));
+   690→    ESP_ERROR_CHECK(esp_wifi_set_csi_rx_cb(wifi_csi_callback, NULL));
+   691→    ESP_ERROR_CHECK(esp_wifi_set_csi(true));
+   692→
+   693→    if (g_nvs_config.filter_mac_set) {
+   694→        ESP_LOGI(TAG, "MAC filter active: %02x:%02x:%02x:%02x:%02x:%02x",
+   695→                 g_nvs_config.filter_mac[0], g_nvs_config.filter_mac[1],
+   696→                 g_nvs_config.filter_mac[2], g_nvs_config.filter_mac[3],
+   697→                 g_nvs_config.filter_mac[4], g_nvs_config.filter_mac[5]);
+   698→    }
+   699→
+   700→    ESP_LOGI(TAG, "CSI collection initialized (node_id=%u, channel=%u)",
+   701→             (unsigned)s_node_id, (unsigned)csi_channel);
+   702→    ESP_LOGI(TAG, "edge DSP cadence=%dHz; raw CSI network cadence remains independent",
+   703→             CONFIG_EDGE_DSP_SAMPLE_HZ);
+   704→
+   705→    /* RuView#521/#954: start the connected-STA traffic source so the CSI engine
+   706→     * receives a guaranteed OFDM unicast floor even when promiscuous capture is
+   707→     * starved (display builds / quiet networks). Additive to #396/#893. */
+   708→    csi_start_self_ping();
+   709→}
+   710→
+   711→/* Accessor for other modules that need the authoritative runtime node_id. */
+   712→uint8_t csi_collector_get_node_id(void)
+   713→{
+   714→    return s_node_id;
+   715→}
+   716→
+   717→/* ---- ADR-081: packet yield accessor for the radio abstraction layer ---- */
+   718→
+   719→uint16_t csi_collector_get_pkt_yield_per_sec(void)
+   720→{
+   721→    /* Simple sliding window: record the callback count at ~1 s ago, return
+   722→     * the delta. Called from adaptive_controller's fast loop (200 ms), so
+   723→     * we update the snapshot every ~5 calls. */
+   724→    static int64_t  s_yield_window_start_us = 0;
+   725→    static uint32_t s_yield_window_start_cb = 0;
+   726→    static uint16_t s_last_yield            = 0;
+   727→
+   728→    int64_t now = esp_timer_get_time();
+   729→    if (s_yield_window_start_us == 0) {
+   730→        s_yield_window_start_us = now;
+   731→        s_yield_window_start_cb = s_cb_count;
+   732→        return 0;
+   733→    }
+   734→    int64_t elapsed = now - s_yield_window_start_us;
+   735→    if (elapsed < 1000000LL) {
+   736→        return s_last_yield;
+   737→    }
+   738→    uint32_t delta = s_cb_count - s_yield_window_start_cb;
+   739→    /* Scale back to per-second if the window ran long (shouldn't, but be safe). */
+   740→    uint64_t per_sec = ((uint64_t)delta * 1000000ULL) / (uint64_t)elapsed;
+   741→    if (per_sec > 0xFFFFu) per_sec = 0xFFFFu;
+   742→    s_last_yield            = (uint16_t)per_sec;
+   743→    s_yield_window_start_us = now;
+   744→    s_yield_window_start_cb = s_cb_count;
+   745→    return s_last_yield;
+   746→}
+   747→
+   748→uint16_t csi_collector_get_send_fail_count(void)
+   749→{
+   750→    uint32_t f = s_send_fail;
+   751→    return (f > 0xFFFFu) ? 0xFFFFu : (uint16_t)f;
+   752→}
+   753→
+   754→uint32_t csi_collector_get_send_ok_count(void)
+   755→{
+   756→    return s_send_ok;
+   757→}
+   758→
+   759→/* The gate here is fixed at compile time (mesh-aligned bucketing, falling
+   760→ * back to elapsed time when unsynced), so there is no mode or period to
+   761→ * report. Return the explicit sentinel rather than a number that reads as
+   762→ * a real setting. */
+   763→uint8_t csi_collector_get_gate_mode(void)
+   764→{
+   765→    return CSI_GATE_NOT_CONFIGURABLE;
+   766→}
+   767→
+   768→uint8_t csi_collector_get_gate_seq_period(void)
+   769→{
+   770→    return CSI_GATE_NOT_CONFIGURABLE;
+   771→}
+   772→
+   773→/* ---- ADR-029: Channel hopping ---- */
+   774→
+   775→void csi_collector_set_hop_table(const uint8_t *channels, uint8_t hop_count, uint32_t dwell_ms)
+   776→{
+   777→    if (channels == NULL) {
+   778→        ESP_LOGW(TAG, "csi_collector_set_hop_table: channels is NULL");
+   779→        return;
+   780→    }
+   781→    if (hop_count == 0 || hop_count > CSI_HOP_CHANNELS_MAX) {
+   782→        ESP_LOGW(TAG, "csi_collector_set_hop_table: invalid hop_count=%u (max=%u)",
+   783→                 (unsigned)hop_count, (unsigned)CSI_HOP_CHANNELS_MAX);
+   784→        return;
+   785→    }
+   786→    if (dwell_ms < 10) {
+   787→        ESP_LOGW(TAG, "csi_collector_set_hop_table: dwell_ms=%lu too small, clamping to 10",
+   788→                 (unsigned long)dwell_ms);
+   789→        dwell_ms = 10;
+   790→    }
+   791→
+   792→    memcpy(s_hop_channels, channels, hop_count);
+   793→    s_hop_count = hop_count;
+   794→    s_dwell_ms  = dwell_ms;
+   795→    s_hop_index = 0;
+   796→
+   797→    ESP_LOGI(TAG, "Hop table set: %u channels, dwell=%lu ms", (unsigned)hop_count,
+   798→             (unsigned long)dwell_ms);
+   799→    for (uint8_t i = 0; i < hop_count; i++) {
+   800→        ESP_LOGI(TAG, "  hop[%u] = channel %u", (unsigned)i, (unsigned)channels[i]);
+   801→    }
+   802→}
+   803→
+   804→void csi_hop_next_channel(void)
+   805→{
+   806→    if (s_hop_count <= 1) {
+   807→        /* Single-channel mode: no-op for backward compatibility. */
+   808→        return;
+   809→    }
+   810→
+   811→    s_hop_index = (s_hop_index + 1) % s_hop_count;
+   812→    uint8_t channel = s_hop_channels[s_hop_index];
+   813→
+   814→    /*
+   815→     * esp_wifi_set_channel() changes the primary channel.
+   816→     * The second parameter is the secondary channel offset for HT40;
+   817→     * we use HT20 (no secondary) for sensing.
+   818→     */
+   819→    esp_err_t err = esp_wifi_set_channel(channel, WIFI_SECOND_CHAN_NONE);
+   820→    if (err != ESP_OK) {
+   821→        ESP_LOGW(TAG, "Channel hop to %u failed: %s", (unsigned)channel, esp_err_to_name(err));
+   822→    } else if ((s_cb_count % 200) == 0) {
+   823→        /* Periodic log to confirm hopping is working (not every hop). */
+   824→        ESP_LOGI(TAG, "Hopped to channel %u (index %u/%u)",
+   825→                 (unsigned)channel, (unsigned)s_hop_index, (unsigned)s_hop_count);
+   826→    }
+   827→}
+   828→
+   829→/**
+   830→ * Timer callback for channel hopping.
+   831→ * Called every s_dwell_ms milliseconds from the esp_timer context.
+   832→ */
+   833→static void hop_timer_cb(void *arg)
+   834→{
+   835→    (void)arg;
+   836→    csi_hop_next_channel();
+   837→}
+   838→
+   839→void csi_collector_enable_data_capture(void)
+   840→{
+   841→    /* MGMT-only (RuView#396) starves the CSI callback on display-less boards
+   842→     * (RuView#521/#893): beacons alone are sparse, yield collapses to 0 pps.
+   843→     * Without a display there is no QSPI/SPI-flash cache contention with the
+   844→     * DATA-frame interrupt load, so capture DATA frames too. */
+   845→    wifi_promiscuous_filter_t filt = {
+   846→        .filter_mask = WIFI_PROMIS_FILTER_MASK_MGMT | WIFI_PROMIS_FILTER_MASK_DATA,
+   847→    };
+   848→    esp_err_t err = esp_wifi_set_promiscuous_filter(&filt);
+   849→    if (err == ESP_OK) {
+   850→        ESP_LOGI(TAG, "CSI filter upgraded to MGMT+DATA (no display, RuView#893)");
+   851→    } else {
+   852→        ESP_LOGW(TAG, "Failed to enable DATA-frame CSI capture: %s", esp_err_to_name(err));
+   853→    }
+   854→}
+   855→
+   856→void csi_collector_start_hop_timer(void)
+   857→{
+   858→    if (s_hop_count <= 1) {
+   859→        ESP_LOGI(TAG, "Single-channel mode: hop timer not started");
+   860→        return;
+   861→    }
+   862→
+   863→    if (s_hop_timer != NULL) {
+   864→        ESP_LOGW(TAG, "Hop timer already running");
+   865→        return;
+   866→    }
+   867→
+   868→    esp_timer_create_args_t timer_args = {
+   869→        .callback = hop_timer_cb,
+   870→        .arg      = NULL,
+   871→        .name     = "csi_hop",
+   872→    };
+   873→
+   874→    esp_err_t err = esp_timer_create(&timer_args, &s_hop_timer);
+   875→    if (err != ESP_OK) {
+   876→        ESP_LOGE(TAG, "Failed to create hop timer: %s", esp_err_to_name(err));
+   877→        return;
+   878→    }
+   879→
+   880→    uint64_t period_us = (uint64_t)s_dwell_ms * 1000;
+   881→    err = esp_timer_start_periodic(s_hop_timer, period_us);
+   882→    if (err != ESP_OK) {
+   883→        ESP_LOGE(TAG, "Failed to start hop timer: %s", esp_err_to_name(err));
+   884→        esp_timer_delete(s_hop_timer);
+   885→        s_hop_timer = NULL;
+   886→        return;
+   887→    }
+   888→
+   889→    ESP_LOGI(TAG, "Hop timer started: period=%lu ms, channels=%u",
+   890→             (unsigned long)s_dwell_ms, (unsigned)s_hop_count);
+   891→}
+   892→
+   893→/* ---- ADR-029: NDP frame injection stub ---- */
+   894→
+   895→esp_err_t csi_inject_ndp_frame(void)
+   896→{
+   897→    /*
+   898→     * TODO: Construct a proper 802.11 Null Data Packet frame.
+   899→     *
+   900→     * A real NDP is preamble-only (~24 us airtime, no payload) and is the
+   901→     * sensing-first TX mechanism described in ADR-029. For now we send a
+   902→     * minimal null-data frame as a placeholder so the API is wired up.
+   903→     *
+   904→     * Frame structure (IEEE 802.11 Null Data):
+   905→     *   FC (2) | Duration (2) | Addr1 (6) | Addr2 (6) | Addr3 (6) | SeqCtl (2)
+   906→     *   = 24 bytes total, no body, no FCS (hardware appends FCS).
+   907→     */
+   908→    uint8_t ndp_frame[24];
+   909→    memset(ndp_frame, 0, sizeof(ndp_frame));
+   910→
+   911→    /* Frame Control: Type=Data (0x02), Subtype=Null (0x04) -> 0x0048 */
+   912→    ndp_frame[0] = 0x48;
+   913→    ndp_frame[1] = 0x00;
+   914→
+   915→    /* Duration: 0 (let hardware fill) */
+   916→
+   917→    /* Addr1 (destination): broadcast */
+   918→    memset(&ndp_frame[4], 0xFF, 6);
+   919→
+   920→    /* Addr2 (source): will be overwritten by hardware with own MAC */
+   921→
+   922→    /* Addr3 (BSSID): broadcast */
+   923→    memset(&ndp_frame[16], 0xFF, 6);
+   924→
+   925→    esp_err_t err = esp_wifi_80211_tx(WIFI_IF_STA, ndp_frame, sizeof(ndp_frame), false);
+   926→    if (err != ESP_OK) {
+   927→        ESP_LOGW(TAG, "NDP inject failed: %s", esp_err_to_name(err));
+   928→    }
+   929→
+   930→    return err;
+   931→}
+   932→

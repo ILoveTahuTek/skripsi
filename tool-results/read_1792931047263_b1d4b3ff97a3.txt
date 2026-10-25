@@ -1,0 +1,1172 @@
+     1→# ESP32 CSI Node Firmware
+     2→
+     3→**Turn a $7 microcontroller into a privacy-first human sensing node.**
+     4→
+     5→This firmware captures WiFi Channel State Information (CSI) from an ESP32-S3 (production) or ESP32-C6 (research target — Wi-Fi 6 / 802.15.4 / TWT / LP-core hibernation, see [ADR-110](../../docs/adr/ADR-110-esp32-c6-firmware-extension.md)) and transforms it into real-time presence detection, vital sign monitoring, and programmable sensing -- all without cameras or wearables. Part of the [WiFi-DensePose](../../README.md) project.
+     6→
+     7→[![ESP-IDF v5.4](https://img.shields.io/badge/ESP--IDF-v5.4-blue.svg)](https://docs.espressif.com/projects/esp-idf/en/v5.4/)
+     8→[![Target: ESP32-S3 / ESP32-C6](https://img.shields.io/badge/target-ESP32--S3%20%7C%20ESP32--C6-purple.svg)](https://www.espressif.com/en/products/socs/esp32-s3)
+     9→[![License: MIT OR Apache-2.0](https://img.shields.io/badge/license-MIT%20OR%20Apache--2.0-green.svg)](../../LICENSE)
+    10→[![Binary: up to 1.1 MB](https://img.shields.io/badge/binary-up%20to%201.1%20MB-orange.svg)](#memory-budget)
+    11→[![CI: Docker Build](https://img.shields.io/badge/CI-Docker%20Build-brightgreen.svg)](../../.github/workflows/firmware-ci.yml)
+    12→
+    13→> | Capability | Method | Current contract |
+    14→> |------------|--------|------------------|
+    15→> | **CSI streaming** | Per-subcarrier I/Q capture over UDP | Radio-dependent cadence with a 20 packets-per-second hardware acceptance floor, ADR-018 binary format |
+    16→> | **Breathing estimate** | Bandpass 0.1-0.5 Hz, zero-crossing BPM | Experimental 6-30 BPM output; calibrate against a reference before use |
+    17→> | **Heart-rate estimate** | Bandpass 0.8-2.0 Hz, zero-crossing BPM | Experimental 40-120 BPM output; not a medical measurement |
+    18→> | **Presence indicator** (heuristic) | Phase variance + adaptive threshold (60 s ambient learning) | Fast local indicator; strong RF interference can cause false positives — see [Tier 2 caveats](#what-this-firmware-does-not-do-tier-2-caveats) |
+    19→> | **Fall detection** | Phase acceleration threshold | Configurable sensitivity |
+    20→> | **Programmable sensing** | WASM modules loaded over HTTP | Hot-swap, no reflash |
+    21→
+    22→## Firmware 0.8.15 prerelease: CSI reliability and recoverable configuration
+    23→
+    24→Version 0.8.15 preserves bounded CSI input for ESP32-S3 STBC frames, caps
+    25→gateway ping waits to one probe interval, and prepares IDF 6 USB serial/JTAG
+    26→before onboarding. The authenticated remote configuration endpoint validates
+    27→whole requests before writing and retains a durable rollback bank if a write
+    28→or recovery step fails.
+    29→
+    30→The attached ESP32-C6 booted 0.8.15 from its existing OTA slot after a complete
+    31→read-only flash backup. A 30-second runtime sample received raw CSI, vitals,
+    32→and feature packets with no malformed packets or presence/count contradictions.
+    33→This short transport check does not establish sensing accuracy, long-run
+    34→stability, or the S3-specific STBC behavior. See the
+    35→[candidate validation record](../../docs/validation/2026-10-20-esp32-csi-input-release-candidate.md).
+    36→
+    37→### Firmware 0.8.14 prerelease: device identity and OTA provisioning
+    38→
+    39→Version 0.8.14 fixes the six-byte base-MAC input used for USB onboarding on
+    40→ESP32-C6, where the previous API wrote an eight-byte EUI-64 into that buffer.
+    41→The PSA SHA-256 algorithm and domain remain unchanged. Affected boards now
+    42→report a corrected `device_digest`; rediscover and reselect the physical board
+    43→after updating rather than accepting its old saved digest.
+    44→
+    45→The provisioner can also write the OTA authentication key to `security/ota_psk`
+    46→using `--ota-psk-file`. The key is never cached in host state. See
+    47→[OTA key provisioning](#ota-key-provisioning) before reprovisioning a node.
+    48→
+    49→This prerelease is built from the main source line. CI builds and host tests
+    50→do not establish physical-board qualification or sensing accuracy. The older
+    51→0.8.13 prerelease's unmerged watchdog experiments are not included.
+    52→
+    53→### Guided Mac onboarding (introduced in 0.8.12)
+    54→
+    55→Firmware 0.8.12 adds the protocol used by the RuView macOS Add
+    56→Sensor workflow. A directly attached S3 or C6 can identify itself through a
+    57→nonce bound USB serial receipt, preserve its current WiFi settings, accept an
+    58→unused node ID and private LAN server address, then reboot. The Mac app does
+    59→not report success until the sensing server observes that node as fresh.
+    60→
+    61→This is not a firmware flashing API. A board on 0.8.8 or earlier must receive a
+    62→matching chip build through the documented backup and flash process once. The
+    63→USB protocol rejects public target addresses and invalid identifiers. New WiFi
+    64→credentials are bounded, committed only in NVS, and never included in the
+    65→receipt or diagnostic output. See
+    66→[ADR 363](../../docs/adr/ADR-363-native-macos-usb-node-onboarding.md).
+    67→
+    68→On ESP32 C6, the default optional mmWave UART uses GPIO 4 and GPIO 5. Firmware
+    69→refuses any mmWave configuration that overlaps the active console pins. This
+    70→prevents a sensor probe from taking over UART0 RX and disabling Mac onboarding.
+    71→
+    72→## Low CSI yield despite self-ping (#2287)
+    73→
+    74→Gateway ICMP replies do not guarantee CSI: some access points transmit replies
+    75→using 802.11b DSSS/CCK rates, which provide no CSI. Successful pings alone do
+    76→not establish a healthy sensing stream. The ping timeout is bounded to one
+    77→probe interval so a lost reply cannot stall probing for a full second.
+    78→
+    79→When raw CSI stays low, run the bounded UDP traffic helper from a LAN host,
+    80→preferably wired to the router. Substitute the sensing node's private IPv4
+    81→address and use an unused UDP port on that node:
+    82→
+    83→```bash
+    84→python scripts/csi-udp-poke.py 192.168.1.100 --hz 50 --seconds 60
+    85→```
+    86→
+    87→No UDP service on the node is required. This does not query gateway DNS or
+    88→assume a gateway echo service. AP transmit-rate selection still determines
+    89→CSI cadence; compare actual received frames before and during the helper
+    90→run. The helper stops after the requested duration and caps its requested
+    91→rate at 50 Hz.
+    92→
+    93→On S3, STBC frames can carry 192 I/Q entries. Edge processing uses the first
+    94→128 entries rather than dropping the entire frame (#2286), while raw CSI
+    95→preserves the full payload. This restores DSP input availability; it does
+    96→not establish vital-sign accuracy. Production-code host regressions run via
+    97→`make host_tests` in `firmware/esp32-csi-node/test`.
+    98→
+    99→## Onboarding console transport
+   100→
+   101→The standard C6 configuration uses native USB serial/JTAG for the interactive
+   102→onboarding console. A separate CP210x UART bridge can flash the same chip but
+   103→does not carry that native USB console. Use the board's native USB connector
+   104→for runtime logs and onboarding, or explicitly build a UART-console variant.
+   105→Do not interpret a silent UART bridge as proof of a failed boot.
+   106→
+   107→## Firmware 0.8.8 in plain language
+   108→
+   109→Release 0.8.8 makes the sensing stream more internally consistent and easier
+   110→to diagnose:
+   111→
+   112→1. An empty-room decision can no longer carry a nonzero person count. Older
+   113→   firmware could expose those two contradictory values at the same time.
+   114→2. ESP32-C6 signal processing now uses a stable 8 Hz clock while raw CSI keeps
+   115→   streaming at the faster radio-dependent rate. This prevents temporal
+   116→   filters from silently using the wrong time scale.
+   117→3. The one-second diagnostic reports both raw callback yield and the DSP rate,
+   118→   making slow or overloaded nodes visible.
+   119→4. OTA reports the application slot selected by the board instead of assuming
+   120→   a fixed 900 KB limit.
+   121→
+   122→Two ESP32-C6 boards and one ESP32-S3 completed five-minute physical transport
+   123→runs. The updated nodes had zero steady-state send failures, parser failures,
+   124→watchdogs, panics, or reboots. These results prove timing and transport
+   125→stability, not better heartbeat, pose, identity, or person-count accuracy.
+   126→See the [0.8.8 release notes](../../docs/releases/v0.8.8-esp32.md) and
+   127→[ADR 347](../../docs/adr/ADR-347-rate-aware-esp32-temporal-sensing.md) for the
+   128→measured evidence and limitations.
+   129→
+   130→---
+   131→
+   132→## Quick Start
+   133→
+   134→For users who want to get running fast. Detailed explanations follow in later sections.
+   135→
+   136→### 0. Download a versioned firmware bundle
+   137→
+   138→Use the versioned source tag and binaries on the
+   139→[v0.8.14 ESP32 prerelease page](https://github.com/ruvnet/RuView/releases/tag/v0.8.14-esp32).
+   140→For the previous stable firmware and its hardware evidence, see
+   141→[v0.8.8](https://github.com/ruvnet/RuView/releases/tag/v0.8.8-esp32).
+   142→Choose the package that names both your chip and flash size:
+   143→
+   144→| Package | Use it for |
+   145→|---------|------------|
+   146→| `esp32-csi-node-firmware-8mb.tar.gz` | ESP32-S3 display configuration, 8 MB flash |
+   147→| `esp32-csi-node-firmware-4mb.tar.gz` | ESP32-S3 headless configuration, 4 MB layout |
+   148→| `esp32-csi-node-firmware-c6-4mb.tar.gz` | ESP32-C6 research target, 4 MB layout |
+   149→
+   150→Each bundle contains the matching bootloader, partition table, OTA metadata,
+   151→application, version and checksums. Verify the archive using the release's
+   152→`SHA256SUMS.txt`, extract it into its own directory, then verify the enclosed
+   153→`SHA256SUMS.txt`. Never flash an S3 bundle
+   154→onto a C6, or a C6 bundle onto an S3.
+   155→
+   156→The 4 MB application/partition filenames are `esp32-csi-node-4mb.bin` and
+   157→`partition-table-4mb.bin`; C6 uses `esp32-csi-node-c6.bin` and
+   158→`partition-table-c6.bin`. Do not mix files from different archives.
+   159→Bare 8 MB DevKitC boards need a source build with `sdkconfig.defaults.devkitc`
+   160→as documented below; the 8 MB release bundle enables display support.
+   161→The tracked `release_bins/` files are historical snapshots and must not be
+   162→used as current firmware downloads (see issues #1899 and #2092).
+   163→
+   164→Example for an 8 MB ESP32-S3 after extracting its bundle:
+   165→
+   166→```bash
+   167→python -m esptool --chip esp32s3 --port COM7 --baud 460800 \
+   168→  write_flash --flash_mode dio --flash_size 8MB \
+   169→  0x0     bootloader.bin \
+   170→  0x8000  partition-table.bin \
+   171→  0xf000  ota_data_initial.bin \
+   172→  0x20000 esp32-csi-node.bin
+   173→```
+   174→
+   175→For an existing provisioned node, back up its current application and inspect
+   176→`http://DEVICE_IP:8032/ota/status` before choosing an application-only update.
+   177→Writing only offset `0x20000` is safe only when the status endpoint reports
+   178→`running_partition` as `ota_0` and the downloaded image matches the board.
+   179→
+   180→After an OTA, the same endpoint's `ota_state` must read `valid` before you
+   181→power-cycle the node or push again. `pending_verify` means the image has not
+   182→passed its first-boot health check yet and would revert on reset. A passed
+   183→check means only that the node reached the network and sent CSI. See
+   184→[RUNBOOK §2.1](RUNBOOK.md) and ADR-379.
+   185→
+   186→The full bundles do not include NVS, so the documented four-offset install
+   187→preserves WiFi and node configuration while replacing the boot and application
+   188→images.
+   189→
+   190→### 1. Build (Docker -- the only reliable method)
+   191→
+   192→```bash
+   193→# From the repository root:
+   194→MSYS_NO_PATHCONV=1 docker run --rm \
+   195→  -v "$(pwd)/firmware/esp32-csi-node:/project" -w /project \
+   196→  espressif/idf:v5.4 bash -c \
+   197→  "rm -rf build sdkconfig && idf.py set-target esp32s3 && idf.py build"
+   198→```
+   199→
+   200→> **Display-less boards (ESP32-S3-DevKitC-1 and similar):** build with the
+   201→> `sdkconfig.defaults.devkitc` overlay instead — the default build compiles
+   202→> display support in, and the runtime panel probe false-positives on boards
+   203→> with no panel, which disables the RuView#893 MGMT+DATA CSI upgrade and
+   204→> collapses CSI yield to 0 pps. See the header of
+   205→> [`sdkconfig.defaults.devkitc`](sdkconfig.defaults.devkitc) for the exact
+   206→> build command.
+   207→
+   208→### 2. Flash
+   209→
+   210→Offsets must match `partitions_display.csv` (8 MB) or `partitions_4mb.csv` (4 MB):
+   211→`bootloader=0x0`, `partition-table=0x8000`, `otadata=0xf000`, `app (ota_0)=0x20000`.
+   212→
+   213→```bash
+   214→python -m esptool --chip esp32s3 --port COM7 --baud 460800 \
+   215→  write_flash --flash_mode dio --flash_size 8MB \
+   216→  0x0     firmware/esp32-csi-node/build/bootloader/bootloader.bin \
+   217→  0x8000  firmware/esp32-csi-node/build/partition_table/partition-table.bin \
+   218→  0xf000  firmware/esp32-csi-node/build/ota_data_initial.bin \
+   219→  0x20000 firmware/esp32-csi-node/build/esp32-csi-node.bin
+   220→```
+   221→
+   222→#### Seeed XIAO ESP32-C6 external antenna
+   223→
+   224→The XIAO ESP32-C6 has a hardware RF switch between its internal ceramic
+   225→antenna and U.FL connector. Generic C6 boards do not share this wiring, so the
+   226→firmware leaves GPIO3 and GPIO14 untouched by default. For an XIAO with an
+   227→external antenna already attached while powered off, build with one of the
+   228→opt-in overlays:
+   229→
+   230→```bash
+   231→# Controlled A condition: internal antenna, RF path stated in the boot log.
+   232→idf.py -D SDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.defaults.esp32c6;sdkconfig.defaults.xiao-internal" \
+   233→  set-target esp32c6
+   234→idf.py build
+   235→
+   236→# Controlled B condition: external U.FL antenna.
+   237→idf.py -D SDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.defaults.esp32c6;sdkconfig.defaults.xiao-external" \
+   238→  set-target esp32c6
+   239→idf.py build
+   240→```
+   241→
+   242→The boot log must report the intended `internal ceramic` or `external U.FL`
+   243→path before that measurement is labelled. The standard C6 build keeps the
+   244→board default and emits no antenna-path claim.
+   245→
+   246→### 3. Provision WiFi credentials (no reflash needed)
+   247→
+   248→```bash
+   249→# Keep the WiFi password in an owner-only file, not on the command line.
+   250→printf '%s\n' 'YourPass' > ~/.wifi-pass && chmod 600 ~/.wifi-pass
+   251→python firmware/esp32-csi-node/provision.py --port COM7 \
+   252→  --ssid "YourSSID" --password-file ~/.wifi-pass --target-ip 192.168.1.20
+   253→```
+   254→
+   255→Leave out both `--password` and `--password-file` and the script asks for the
+   256→password when run from a terminal. `--password` still works, but it shows up in
+   257→`ps` and shell history.
+   258→
+   259→### 4. Start the sensing server
+   260→
+   261→```bash
+   262→cd v2
+   263→cargo run -p wifi-densepose-sensing-server -- --http-port 3000 --source auto \
+   264→  --udp-bind 0.0.0.0 --udp-allow 192.168.1.0/24
+   265→```
+   266→
+   267→Use your nodes' subnet for `--udp-allow`. The default UDP listener is loopback
+   268→only, so LAN nodes need both the bind address and an explicit source allowlist.
+   269→
+   270→### 5. Open the UI
+   271→
+   272→Navigate to [http://localhost:3000](http://localhost:3000) in your browser.
+   273→
+   274→### 6. (Optional) Upload a WASM sensing module
+   275→
+   276→```bash
+   277→curl -X POST http://<ESP32_IP>:8032/wasm/upload --data-binary @gesture.rvf
+   278→curl http://<ESP32_IP>:8032/wasm/list
+   279→```
+   280→
+   281→---
+   282→
+   283→## Hardware Requirements
+   284→
+   285→| Component | Specification | Notes |
+   286→|-----------|---------------|-------|
+   287→| **SoC** | ESP32-S3 (QFN56) | Dual-core Xtensa LX7, 240 MHz |
+   288→| **Flash** | 8 MB | ~943 KB used by firmware |
+   289→| **PSRAM** | 8 MB | 640 KB used for WASM arenas |
+   290→| **USB bridge** | Silicon Labs CP210x | Install the [CP210x driver](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers) |
+   291→| **Recommended boards** | ESP32-S3-DevKitC-1, XIAO ESP32-S3 | Any ESP32-S3 with 8 MB flash works |
+   292→| **Deployment** | 3-6 nodes per room | Multistatic mesh for 360-degree coverage |
+   293→
+   294→> **Tip:** A single node is mainly useful for presence and motion along one RF link. Three or more spatially separated links improve geometry and track separation. Location, pose, and multi-person accuracy still require room-specific calibration and held-out ground-truth evaluation.
+   295→
+   296→> **⚠️ Thermal warning — compact boards (ESP32-S3-Zero, SuperMini, other coin-sized clones):** This firmware runs the WiFi radio with modem sleep disabled (`WIFI_PS_NONE`, required for continuous CSI capture) plus a full edge-processing DSP pipeline on Core 1 (`edge_tier=2`) plus, on ADR-183 builds, a continuous 40 Hz onboard LED driver. That's sustained high current draw with no duty-cycling. Full-size dev boards (DevKitC-1, XIAO) have more copper pour and thermal mass around the regulator and tolerate this fine. Coin-sized clones with minimal PCB area and budget regulators may run hot to the touch during normal operation, and in at least one field report, boards that ran hot during a session failed to power on afterward (regulator damage suspected — see issue tracker). Give these boards airflow, don't stack or enclose them, and check them by touch during the first several minutes of a new deployment. If a board is uncomfortably hot (not just warm), power it down and let it cool before continuing.
+   297→
+   298→---
+   299→
+   300→## Firmware Architecture
+   301→
+   302→The firmware implements a tiered processing pipeline. Each tier builds on the previous one. The active tier is selectable at compile time (Kconfig) or at runtime (NVS) without reflashing.
+   303→
+   304→```
+   305→                        ESP32-S3 CSI Node
+   306→+--------------------------------------------------------------------------+
+   307→|  Core 0 (WiFi)              |  Core 1 (DSP)                             |
+   308→|                              |                                            |
+   309→|  WiFi STA + CSI callback     |  SPSC ring buffer consumer                |
+   310→|  Channel hopping (ADR-029)   |  Tier 0: Raw passthrough                  |
+   311→|  NDP injection               |  Tier 1: Phase unwrap, Welford, top-K     |
+   312→|  TDM slot management         |  Tier 2: Vitals, presence, fall detect    |
+   313→|                              |  Tier 3: WASM module dispatch             |
+   314→+--------------------------------------------------------------------------+
+   315→|  NVS config  |  OTA server (8032)  |  UDP sender  |  Power management    |
+   316→+--------------------------------------------------------------------------+
+   317→```
+   318→
+   319→### Tier 0 -- Raw CSI Passthrough (Stable)
+   320→
+   321→The default, production-stable baseline. Captures CSI frames from the WiFi driver and streams them over UDP in the ADR-018 binary format.
+   322→
+   323→- **Magic:** `0xC5110001`
+   324→- **Rate:** ~20 Hz per channel
+   325→- **Payload:** 20-byte header + I/Q pairs (2 bytes per subcarrier per antenna)
+   326→- **Bandwidth:** ~5 KB/s per node (64 subcarriers, 1 antenna)
+   327→
+   328→### Tier 1 -- Basic DSP (Stable)
+   329→
+   330→Adds on-device signal conditioning to reduce bandwidth and improve signal quality.
+   331→
+   332→- **Phase unwrapping** -- removes 2-pi discontinuities
+   333→- **Welford running statistics** -- incremental mean and variance per subcarrier
+   334→- **Top-K subcarrier selection** -- tracks only the K highest-variance subcarriers
+   335→- **Delta compression** -- XOR + RLE encoding reduces bandwidth by ~70%
+   336→
+   337→### Tier 2 -- Full Pipeline (Stable)
+   338→
+   339→Adds real-time health and safety monitoring.
+   340→
+   341→- **Breathing rate** -- biquad IIR bandpass 0.1-0.5 Hz, zero-crossing BPM (6-30 BPM)
+   342→- **Heart rate** -- biquad IIR bandpass 0.8-2.0 Hz, zero-crossing BPM (40-120 BPM)
+   343→- **Presence indicator** -- phase variance vs an adaptively-calibrated threshold (60 s ambient learning at boot). Heuristic, not a learned classifier — strong RF interferers (fans, microwaves, transmit-power swings) can push variance above threshold without anyone in the room. See "What this firmware does NOT do" below.
+   344→- **Fall detection** -- phase acceleration exceeds configurable threshold
+   345→- **Multi-person slot count** -- partitions the top-K subcarriers into `top_k / 2` groups (clamped to `[1, EDGE_MAX_PERSONS]`), computes per-group filtered breathing/heart-rate estimates, and reports the slot count as `pkt.n_persons`. This is a **slot-capacity heuristic**, not a learned counter — the reported count tracks subcarrier diversity, not actual occupancy. See [`edge_processing.c:481-548`](main/edge_processing.c#L481-L548).
+   346→- **Vitals packet** -- 32-byte UDP packet at 1 Hz (magic `0xC5110002`)
+   347→
+   348→### What this firmware does NOT do (Tier 2 caveats)
+   349→
+   350→- It does **not** run a trained neural model. The "person count" is an
+   351→  arithmetic slot-capacity heuristic over the top-K subcarrier groups
+   352→  (`firmware/esp32-csi-node/main/edge_processing.c:481`). It tracks
+   353→  subcarrier diversity, not actual occupancy.
+   354→- It does **not** run pose estimation. Pose-related features in the host
+   355→  UI come from the Rust `wifi-densepose-sensing-server` running a separate
+   356→  pipeline. When no `.rvf` model file is loaded via `--model`, the server
+   357→  drives the on-screen skeleton from signal-based heuristics (amplitude
+   358→  variance, motion-band power), not from learned keypoint inference. The
+   359→  repository does not ship pre-trained weights — see issues
+   360→  [#509](https://github.com/ruvnet/RuView/issues/509) and [#506](https://github.com/ruvnet/RuView/issues/506) for context, and
+   361→  [ADR-079](../../docs/adr/ADR-079-camera-ground-truth-training.md) for
+   362→  the planned training path (phases P7-P9 are `Pending`).
+   363→- The presence indicator is a calibrated variance threshold and **will
+   364→  false-positive** under strong RF interference from non-human sources
+   365→  (fans near the antenna, microwave duty cycles, neighbouring AP power
+   366→  swings) without re-running the 60-second ambient calibration. If you
+   367→  see ghost detections, re-calibrate by power-cycling in an empty room.
+   368→
+   369→### Tier 3 -- WASM Programmable Sensing (Alpha)
+   370→
+   371→Turns the ESP32 from a fixed-function sensor into a programmable sensing computer. Instead of reflashing firmware to change algorithms, you upload new sensing logic as small WASM modules -- compiled from Rust, packaged in signed RVF containers.
+   372→
+   373→See the [WASM Programmable Sensing](#wasm-programmable-sensing-tier-3) section for full details.
+   374→
+   375→---
+   376→
+   377→## Wire Protocols
+   378→
+   379→All packets are sent over UDP to the configured aggregator. The magic number in the first 4 bytes identifies the packet type.
+   380→
+   381→| Magic | Name | Rate | Size | Contents |
+   382→|-------|------|------|------|----------|
+   383→| `0xC5110001` | CSI Frame (ADR-018) | ~20 Hz | Variable | Raw I/Q per subcarrier per antenna |
+   384→| `0xC5110002` | Vitals Packet | 1 Hz | 32 bytes | Presence, breathing BPM, heart rate, fall flag, occupancy |
+   385→| `0xC5110004` | WASM Output | Event-driven | Variable | Custom events from WASM modules (u8 type + f32 value) |
+   386→
+   387→### ADR-018 Binary Frame Format
+   388→
+   389→```
+   390→Offset  Size  Field
+   391→0       4     Magic: 0xC5110001
+   392→4       1     Node ID
+   393→5       1     Number of antennas
+   394→6       2     Number of subcarriers (LE u16)
+   395→8       4     Frequency MHz (LE u32)
+   396→12      4     Sequence number (LE u32)
+   397→16      1     RSSI (i8)
+   398→17      1     Noise floor (i8)
+   399→18      1     PPDU type (ADR-110; zero when tagging is disabled)
+   400→19      1     Flags: bit0=40 MHz, bit2=STBC, bit4=sync valid,
+   401→              bit5=invalid first CSI word zeroed by firmware
+   402→20      N*2   I/Q pairs (n_antennas * n_subcarriers * 2 bytes)
+   403→```
+   404→
+   405→When ESP-IDF marks `first_word_invalid`, the firmware preserves packet geometry,
+   406→zeros the first four CSI bytes, and sets byte 19 bit 5. The same sanitized bytes
+   407→feed the edge DSP path. This prevents a documented hardware artifact from being
+   408→learned as motion while keeping older readers wire compatible.
+   409→
+   410→### Vitals Packet (32 bytes)
+   411→
+   412→```
+   413→Offset  Size  Field
+   414→0       4     Magic: 0xC5110002
+   415→4       1     Node ID
+   416→5       1     Flags (bit0=presence, bit1=fall, bit2=motion)
+   417→6       2     Breathing rate (BPM * 100, fixed-point)
+   418→8       4     Heart rate (BPM * 10000, fixed-point)
+   419→12      1     RSSI (i8)
+   420→13      1     Number of detected persons
+   421→14      2     Reserved
+   422→16      4     Motion energy (f32)
+   423→20      4     Presence score (f32)
+   424→24      4     Timestamp (ms since boot)
+   425→28      4     Reserved
+   426→```
+   427→
+   428→---
+   429→
+   430→## Building
+   431→
+   432→### Prerequisites
+   433→
+   434→| Component | Version | Purpose |
+   435→|-----------|---------|---------|
+   436→| Docker Desktop | 28.x+ | Cross-compile firmware in ESP-IDF container |
+   437→| esptool | 5.x+ | Flash firmware to ESP32 (`pip install esptool`) |
+   438→| Python 3.10+ | 3.10+ | Provisioning script, serial monitor |
+   439→| ESP32-S3 board | -- | Target hardware |
+   440→| CP210x driver | -- | USB-UART bridge driver ([download](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers)) |
+   441→
+   442→> **Why Docker?** ESP-IDF does NOT work from Git Bash/MSYS2 on Windows. The `idf.py` script detects the `MSYSTEM` environment variable and skips `main()`. Even removing `MSYSTEM`, the `cmd.exe` subprocess injects `doskey` aliases that break the ninja linker. Docker is the only reliable cross-platform build method.
+   443→
+   444→### Build Command
+   445→
+   446→```bash
+   447→# From the repository root:
+   448→MSYS_NO_PATHCONV=1 docker run --rm \
+   449→  -v "$(pwd)/firmware/esp32-csi-node:/project" -w /project \
+   450→  espressif/idf:v5.4 bash -c \
+   451→  "rm -rf build sdkconfig && idf.py set-target esp32s3 && idf.py build"
+   452→```
+   453→
+   454→The `MSYS_NO_PATHCONV=1` prefix prevents Git Bash from mangling the `/project` path to `C:/Program Files/Git/project`.
+   455→
+   456→**Build output:**
+   457→- `build/bootloader/bootloader.bin` -- second-stage bootloader
+   458→- `build/partition_table/partition-table.bin` -- flash partition layout
+   459→- `build/esp32-csi-node.bin` -- application firmware
+   460→
+   461→### Release bundles
+   462→
+   463→Firmware downloads are published from dedicated `vX.Y.Z-esp32` tags after all
+   464→S3 and C6 matrix builds pass. Each release contains separate S3 8 MB, S3 4 MB,
+   465→and C6 4 MB archives plus an archive checksum manifest. The repository's
+   466→automated `vNNNN` server releases (for example `v2655`) are not firmware tags;
+   467→do not use their presence or absence of assets as firmware provenance.
+   468→
+   469→### Custom Configuration
+   470→
+   471→To change Kconfig settings before building:
+   472→
+   473→```bash
+   474→MSYS_NO_PATHCONV=1 docker run --rm -it \
+   475→  -v "$(pwd)/firmware/esp32-csi-node:/project" -w /project \
+   476→  espressif/idf:v5.4 bash -c \
+   477→  "idf.py set-target esp32s3 && idf.py menuconfig"
+   478→```
+   479→
+   480→Or create/edit `sdkconfig.defaults` before building:
+   481→
+   482→```ini
+   483→CONFIG_IDF_TARGET="esp32s3"
+   484→CONFIG_ESP_WIFI_CSI_ENABLED=y
+   485→CONFIG_CSI_NODE_ID=1
+   486→CONFIG_CSI_WIFI_SSID="wifi-densepose"
+   487→CONFIG_CSI_WIFI_PASSWORD=""
+   488→CONFIG_CSI_TARGET_IP="192.168.1.100"
+   489→CONFIG_CSI_TARGET_PORT=5005
+   490→CONFIG_EDGE_TIER=2
+   491→CONFIG_WASM_MAX_MODULES=4
+   492→CONFIG_WASM_VERIFY_SIGNATURE=y
+   493→```
+   494→
+   495→---
+   496→
+   497→## Flashing
+   498→
+   499→Find your serial port: `COM7` on Windows, `/dev/ttyUSB0` on Linux, `/dev/cu.SLAB_USBtoUART` on macOS.
+   500→
+   501→```bash
+   502→python -m esptool --chip esp32s3 --port COM7 --baud 460800 \
+   503→  write_flash --flash_mode dio --flash_size 8MB \
+   504→  0x0     firmware/esp32-csi-node/build/bootloader/bootloader.bin \
+   505→  0x8000  firmware/esp32-csi-node/build/partition_table/partition-table.bin \
+   506→  0xf000  firmware/esp32-csi-node/build/ota_data_initial.bin \
+   507→  0x20000 firmware/esp32-csi-node/build/esp32-csi-node.bin
+   508→```
+   509→
+   510→### Serial Monitor
+   511→
+   512→```bash
+   513→python -m serial.tools.miniterm COM7 115200
+   514→```
+   515→
+   516→Expected output after boot:
+   517→
+   518→```
+   519→I (396) csi_collector: Early capture node_id=1 (before WiFi init, #232/#390)
+   520→I (406) main: ESP32-S3 CSI Node (ADR-018) -- v0.6.5 -- Node ID: 1
+   521→I (566) main: WiFi STA initialized, connecting to SSID: wifi-densepose
+   522→I (1023) main: Connected to WiFi
+   523→I (1025) main: CSI streaming active -> 192.168.1.100:5005 (edge_tier=2, OTA=ready, WASM=ready)
+   524→```
+   525→
+   526→---
+   527→
+   528→## Runtime Configuration (NVS)
+   529→
+   530→All settings can be changed at runtime via Non-Volatile Storage (NVS) without reflashing the firmware. NVS values override Kconfig defaults.
+   531→
+   532→### Provisioning Script
+   533→
+   534→The easiest way to write NVS settings:
+   535→
+   536→```bash
+   537→python firmware/esp32-csi-node/provision.py --port COM7 \
+   538→  --ssid "MyWiFi" \
+   539→  --password-file ~/.wifi-pass \
+   540→  --target-ip 192.168.1.20
+   541→```
+   542→
+   543→The password file must be owner-only (`chmod 600`); one trailing newline is
+   544→dropped. Without a password flag the script prompts on a terminal; in scripts
+   545→and CI it doesn't prompt and fails if no password was given now or saved
+   546→earlier for that port.
+   547→
+   548→### Remote Configuration (no USB)
+   549→
+   550→`provision.py` writes NVS over USB and is still how a **new** node is set up.
+   551→Once a node is on the network, `config_push.py` changes the same parameters
+   552→over HTTP, so a node count, server address or threshold no longer needs a
+   553→ladder and a cable.
+   554→
+   555→This is **not** OTA. OTA writes a firmware image to an app partition; this
+   556→writes NVS parameters. They share the port and the PSK, nothing else.
+   557→
+   558→```bash
+   559→# what is this node running?
+   560→python config_push.py --node <node-ip> --get
+   561→
+   562→# change something and let the node restart to apply it
+   563→python config_push.py --node <node-ip> --set tdm_node_count=9
+   564→
+   565→# stage across the fleet, restart on your own schedule
+   566→python config_push.py --fleet nodes.txt --set edge_tier=1 --no-reboot
+   567→```
+   568→
+   569→Config is read only at boot, so a change does nothing until the node restarts.
+   570→`config_push.py` therefore restarts it by default; `--no-reboot` stages instead.
+   571→
+   572→#### Why some parameters reboot-and-prove
+   573→
+   574→Most settings are recoverable: a wrong `target_ip` sends CSI nowhere, but the
+   575→node keeps its association and stays reachable, so the next push fixes it.
+   576→
+   577→`wifi_ssid`, `wifi_password`, `csi_channel`, `channel_hop_count` and `dwell_ms`
+   578→are not. A wrong value there means the node never rejoins the network and no
+   579→push can ever reach it again -- worse than a bad OTA, which at least has a
+   580→second partition to fall back to.
+   581→
+   582→Those go through a **trial**. The node banks its current values, writes the new
+   583→ones, and reboots. It keeps them only once it has actually re-associated; if it
+   584→cannot within `trial_seconds` (default 120, max 900) it restores the bank and
+   585→reboots itself. That is the app-level equivalent of bootloader rollback, and
+   586→unlike bootloader rollback it can be delivered by OTA.
+   587→
+   588→`GET /config` reports which parameters carry that risk, so tooling does not
+   589→keep its own copy of the list to drift out of date.
+   590→
+   591→#### The onboard LED
+   592→
+   593→The WS2812 on the devkit is not a power light. It runs a **40 Hz square-wave
+   594→gamma stimulus** (GENUS) whose colour is live CSI motion energy through a
+   595→viridis colormap -- purple when still, yellow when moving. That makes it a
+   596→useful bench indicator and a bad thing to have in a bedroom.
+   597→
+   598→It used to be compile-time only (`CONFIG_LED_GAMMA_VIZ`), so darkening one node
+   599→meant reflashing all of them. It is now runtime selectable per node:
+   600→
+   601→| `led_mode` | name | behaviour |
+   602→|---|---|---|
+   603→| 0 | `off` | dark |
+   604→| 1 | `steady` | motion colour, no flicker |
+   605→| 2 | `flicker` | 40 Hz gamma stimulus (default) |
+   606→
+   607→`led_brightness` is 0-100 and scales the colormap.
+   608→
+   609→```bash
+   610→python config_push.py --node <node-ip> --set led_mode=off
+   611→python config_push.py --node <node-ip> --set led_mode=steady led_brightness=10
+   612→```
+   613→
+   614→Both are read by the LED callback on every cycle, so they are the one pair of
+   615→parameters that applies **immediately with no restart** -- `config_push.py`
+   616→does not reboot a node when the change is LED-only.
+   617→
+   618→Defaults preserve existing behaviour: a node never told otherwise keeps
+   619→flickering at full brightness exactly as before.
+   620→
+   621→#### Endpoint
+   622→
+   623→| Method | Path | Notes |
+   624→|---|---|---|
+   625→| `GET` | `/config` | Current values; `wifi_password` reported only as `(set)` |
+   626→| `POST` | `/config` | JSON object of parameters to change |
+   627→
+   628→Both require `Authorization: Bearer <ota-psk>` and fail closed when no PSK is
+   629→provisioned. A body is validated in full before anything is committed, so one
+   630→bad field changes nothing, and an unrecognised parameter is an error rather
+   631→than a silently ignored setting.
+   632→
+   633→Control fields, which are not stored: `trial_seconds`, `reboot`.
+   634→
+   635→### OTA key provisioning
+   636→
+   637→Create a random 256-bit key in a private file outside the repository. For
+   638→example, on POSIX:
+   639→
+   640→```bash
+   641→(umask 077; set -C; openssl rand -hex 32 > ~/.ruview-ota-psk)
+   642→python firmware/esp32-csi-node/provision.py --port COM7 \
+   643→  --ssid "MyWiFi" --password-file ~/.wifi-pass --target-ip 192.168.1.20 \
+   644→  --ota-psk-file ~/.ruview-ota-psk
+   645→```
+   646→
+   647→The file must contain exactly 64 hexadecimal characters and optionally one
+   648→trailing newline. The tool rejects symlinks and non-regular files, bounds the
+   649→read, and checks owner-only POSIX permissions. On Windows, protect the file
+   650→with your user ACL; POSIX mode bits cannot enforce Windows ACLs.
+   651→`--ota-psk HEX` is also supported, but exposes the key in process arguments and
+   652→shell history. Key values are never printed by this tool, including `--state
+   653→--show-secrets`, and never saved in the per-board host JSON.
+   654→
+   655→Provisioning rewrites the **whole NVS partition**, not just the key supplied.
+   656→Pass the key again on every later provisioning run. Once this tool records
+   657→that OTA was configured, omission is refused unless `--clear-ota-psk` explicitly
+   658→disables OTA. An older board with no host record cannot be detected this way;
+   659→without a supplied key the tool warns that the rewrite disables OTA. Legacy
+   660→cached OTA keys are hidden from inspection and never reused. A successful
+   661→provisioning run removes them from saved state; read-only inspection leaves
+   662→the existing file unchanged.
+   663→Keep the key backed up securely. A dry-run binary or fallback CSV still
+   664→contains credentials and must remain private and be deleted after use.
+   665→
+   666→This writes `security/ota_psk` through the USB NVS workflow; it does not flash
+   667→application firmware. After reboot, verify the `OTA PSK loaded` log. The HTTP
+   668→server starting alone does not mean OTA authentication is armed. Uploads
+   669→remain fail-closed without a key; see the first-boot health check above after
+   670→an authenticated update.
+   671→
+   672→### NVS Key Reference
+   673→
+   674→#### Network Settings
+   675→
+   676→| Key | Type | Default | Description |
+   677→|-----|------|---------|-------------|
+   678→| `ssid` | string | `wifi-densepose` | WiFi SSID |
+   679→| `password` | string | *(empty)* | WiFi password |
+   680→| `target_ip` | string | `192.168.1.100` | Aggregator server IP address |
+   681→| `target_port` | u16 | `5005` | Aggregator UDP port |
+   682→| `node_id` | u8 | `1` | Unique node identifier (0-255) |
+   683→
+   684→#### Channel Hopping and TDM (ADR-029)
+   685→
+   686→| Key | Type | Default | Description |
+   687→|-----|------|---------|-------------|
+   688→| `hop_count` | u8 | `1` | Number of channels to hop (1 = single-channel mode) |
+   689→| `chan_list` | blob | `[6]` | WiFi channel numbers for hopping |
+   690→| `dwell_ms` | u32 | `50` | Dwell time per channel in milliseconds |
+   691→| `tdm_slot` | u8 | `0` | This node's TDM slot index (0-based) |
+   692→| `tdm_nodes` | u8 | `1` | Total number of nodes in the TDM schedule |
+   693→
+   694→#### Edge Intelligence (ADR-039)
+   695→
+   696→| Key | Type | Default | Description |
+   697→|-----|------|---------|-------------|
+   698→| `edge_tier` | u8 | `2` | Processing tier: 0=raw, 1=basic DSP, 2=full pipeline |
+   699→| `pres_thresh` | u16 | *auto* | Presence threshold (x1000). 0 = auto-calibrate from 60 s ambient |
+   700→| `fall_thresh` | u16 | `2000` | Fall detection threshold (x1000). 2000 = 2.0 rad/s^2 |
+   701→| `vital_win` | u16 | `256` | Phase history window depth (frames) |
+   702→| `vital_int` | u16 | `1000` | Vitals packet send interval (ms) |
+   703→| `subk_count` | u8 | `8` | Top-K subcarrier count for variance tracking |
+   704→| `power_duty` | u8 | `100` | Power duty cycle percentage (10-100). 100 = always on |
+   705→
+   706→#### WASM Programmable Sensing (ADR-040)
+   707→
+   708→| Key | Type | Default | Description |
+   709→|-----|------|---------|-------------|
+   710→| `wasm_max` | u8 | `4` | Maximum concurrent WASM module slots (1-8) |
+   711→| `wasm_verify` | u8 | `1` | Require Ed25519 signature verification for uploads |
+   712→
+   713→---
+   714→
+   715→## Kconfig Menus
+   716→
+   717→Three configuration menus are available via `idf.py menuconfig`:
+   718→
+   719→### "CSI Node Configuration"
+   720→
+   721→Basic WiFi and network settings: SSID, password, channel, node ID, aggregator IP/port.
+   722→
+   723→### "Edge Intelligence (ADR-039)"
+   724→
+   725→Processing tier selection, vitals interval, top-K subcarrier count, fall detection threshold, power duty cycle.
+   726→
+   727→### "WASM Programmable Sensing (ADR-040)"
+   728→
+   729→Maximum module slots, Ed25519 signature verification toggle, timer interval for `on_timer()` callbacks.
+   730→
+   731→---
+   732→
+   733→## WASM Programmable Sensing (Tier 3)
+   734→
+   735→### Overview
+   736→
+   737→Tier 3 turns the ESP32 from a fixed-function sensor into a programmable sensing computer. Instead of reflashing firmware to change algorithms, you upload new sensing logic as small WASM modules. These modules are:
+   738→
+   739→- **Compiled from Rust** using the `wasm32-unknown-unknown` target
+   740→- **Packaged in signed RVF containers** with Ed25519 signatures
+   741→- **Uploaded over HTTP** to the running device (no physical access needed)
+   742→- **Executed per-frame** (~20 Hz) by the WASM3 interpreter after Tier 2 DSP completes
+   743→
+   744→### RVF (RuVector Format)
+   745→
+   746→RVF is a signed container that wraps a WASM binary with metadata for tamper detection and authenticity.
+   747→
+   748→```
+   749→+------------------+-------------------+------------------+------------------+
+   750→| Header (32 B)    | Manifest (96 B)   | WASM payload     | Ed25519 sig (64B)|
+   751→+------------------+-------------------+------------------+------------------+
+   752→```
+   753→
+   754→**Total overhead:** 192 bytes (32-byte header + 96-byte manifest + 64-byte signature).
+   755→
+   756→| Field | Size | Contents |
+   757→|-------|------|----------|
+   758→| **Header** | 32 bytes | Magic (`RVF\x01`), format version, section sizes, flags |
+   759→| **Manifest** | 96 bytes | Module name, author, capabilities bitmask, budget request, SHA-256 build hash, event schema version |
+   760→| **WASM payload** | Variable | The compiled `.wasm` binary (max 128 KB) |
+   761→| **Signature** | 64 bytes | Ed25519 signature covering header + manifest + WASM |
+   762→
+   763→### Host API
+   764→
+   765→WASM modules import functions from the `"csi"` namespace to access sensor data:
+   766→
+   767→| Function | Signature | Description |
+   768→|----------|-----------|-------------|
+   769→| `csi_get_phase` | `(i32) -> f32` | Phase (radians) for subcarrier index |
+   770→| `csi_get_amplitude` | `(i32) -> f32` | Amplitude for subcarrier index |
+   771→| `csi_get_variance` | `(i32) -> f32` | Running variance (Welford) for subcarrier |
+   772→| `csi_get_bpm_breathing` | `() -> f32` | Breathing rate BPM from Tier 2 |
+   773→| `csi_get_bpm_heartrate` | `() -> f32` | Heart rate BPM from Tier 2 |
+   774→| `csi_get_presence` | `() -> i32` | Presence flag (0 = empty, 1 = present) |
+   775→| `csi_get_motion_energy` | `() -> f32` | Motion energy scalar |
+   776→| `csi_get_n_persons` | `() -> i32` | Number of detected persons |
+   777→| `csi_get_timestamp` | `() -> i32` | Milliseconds since boot |
+   778→| `csi_emit_event` | `(i32, f32)` | Emit a typed event to the host (sent over UDP) |
+   779→| `csi_log` | `(i32, i32)` | Debug log from WASM (pointer + length) |
+   780→| `csi_get_phase_history` | `(i32, i32) -> i32` | Copy phase ring buffer into WASM memory |
+   781→
+   782→### Module Lifecycle
+   783→
+   784→Every WASM module must export these three functions:
+   785→
+   786→| Export | Called | Purpose |
+   787→|--------|--------|---------|
+   788→| `on_init()` | Once, when started | Allocate state, initialize algorithms |
+   789→| `on_frame(n_subcarriers: i32)` | Per CSI frame (~20 Hz) | Process sensor data, emit events |
+   790→| `on_timer()` | At configurable interval (default 1 s) | Periodic housekeeping, aggregated output |
+   791→
+   792→### HTTP Management Endpoints
+   793→
+   794→All endpoints are served on **port 8032** (shared with the OTA update server).
+   795→
+   796→| Method | Path | Description |
+   797→|--------|------|-------------|
+   798→| `POST` | `/wasm/upload` | Upload an RVF container or raw `.wasm` binary (max 128 KB) |
+   799→| `GET` | `/wasm/list` | List all module slots with state, telemetry, and RVF metadata |
+   800→| `POST` | `/wasm/start/:id` | Start a loaded module (calls `on_init`) |
+   801→| `POST` | `/wasm/stop/:id` | Stop a running module |
+   802→| `DELETE` | `/wasm/:id` | Unload a module and free its PSRAM arena |
+   803→
+   804→### Included WASM Modules
+   805→
+   806→The `wifi-densepose-wasm-edge` Rust crate provides three flagship modules:
+   807→
+   808→| Module | File | Description |
+   809→|--------|------|-------------|
+   810→| **gesture** | `gesture.rs` | DTW template matching for wave, push, pull, and swipe gestures |
+   811→| **coherence** | `coherence.rs` | Phase phasor coherence monitoring with hysteresis gate |
+   812→| **adversarial** | `adversarial.rs` | Signal anomaly detection (phase jumps, flatlines, energy spikes) |
+   813→
+   814→Build all modules:
+   815→
+   816→```bash
+   817→cargo build -p wifi-densepose-wasm-edge --target wasm32-unknown-unknown --release
+   818→```
+   819→
+   820→### Safety Features
+   821→
+   822→| Protection | Detail |
+   823→|------------|--------|
+   824→| **Memory isolation** | Fixed 160 KB PSRAM arenas per slot (no heap fragmentation) |
+   825→| **Budget guard** | 10 ms per-frame default; auto-stop after 10 consecutive budget faults |
+   826→| **Signature verification** | Ed25519 enabled by default; disable with `wasm_verify=0` in NVS for development |
+   827→| **Hash verification** | SHA-256 of WASM payload checked against RVF manifest |
+   828→| **Slot limit** | Maximum 4 concurrent module slots (configurable to 8) |
+   829→| **Per-module telemetry** | Frame count, event count, mean/max execution time, budget faults |
+   830→
+   831→---
+   832→
+   833→## Memory Budget
+   834→
+   835→| Component | SRAM | PSRAM | Flash |
+   836→|-----------|------|-------|-------|
+   837→| Base firmware (Tier 0) | ~12 KB | -- | ~820 KB |
+   838→| Tier 1-2 DSP pipeline | ~10 KB | -- | ~33 KB |
+   839→| WASM3 interpreter | ~10 KB | -- | ~100 KB |
+   840→| WASM arenas (x4 slots) | -- | 640 KB | -- |
+   841→| Host API + HTTP upload | ~3 KB | -- | ~23 KB |
+   842→| **Total** | **~35 KB** | **640 KB** | **~943 KB** |
+   843→
+   844→- **PSRAM remaining:** 7.36 MB (available for future use)
+   845→- **Flash partition:** 1 MB OTA slot (6% headroom at current binary size)
+   846→- **SRAM remaining:** ~280 KB (FreeRTOS + WiFi stack uses the rest)
+   847→
+   848→---
+   849→
+   850→## Source Files
+   851→
+   852→| File | Description |
+   853→|------|-------------|
+   854→| `main/main.c` | Application entry point: NVS init, WiFi STA, CSI collector, edge pipeline, OTA server, WASM runtime init |
+   855→| `main/csi_collector.c` / `.h` | WiFi CSI frame capture, ADR-018 binary serialization, channel hopping, NDP injection |
+   856→| `main/stream_sender.c` / `.h` | UDP socket management and packet transmission to aggregator |
+   857→| `main/nvs_config.c` / `.h` | Runtime configuration: loads Kconfig defaults, overrides from NVS |
+   858→| `main/edge_processing.c` / `.h` | Tier 0-2 DSP pipeline: SPSC ring buffer, biquad IIR filters, Welford stats, BPM extraction, presence, fall detection |
+   859→| `main/ota_update.c` / `.h` | HTTP OTA firmware update server on port 8032 |
+   860→| `main/ota_health.c` / `.h` | First-boot health check that confirms an OTA'd image or rolls it back (ADR-379) |
+   861→| `main/power_mgmt.c` / `.h` | Battery-aware light sleep duty cycling |
+   862→| `main/wasm_runtime.c` / `.h` | WASM3 interpreter: module slots, host API bindings, budget guard, per-frame dispatch |
+   863→| `main/wasm_upload.c` / `.h` | HTTP endpoints for WASM module upload, list, start, stop, delete |
+   864→| `main/rvf_parser.c` / `.h` | RVF container parser: header validation, manifest extraction, SHA-256 hash verification |
+   865→| `components/wasm3/` | WASM3 interpreter library (MIT license, ~100 KB flash, ~10 KB RAM) |
+   866→
+   867→---
+   868→
+   869→## Architecture Diagram
+   870→
+   871→```
+   872→ESP32-S3 Node                                 Host Machine
+   873→+------------------------------------------+  +---------------------------+
+   874→| Core 0 (WiFi)      Core 1 (DSP)         |  |                           |
+   875→|                                          |  |                           |
+   876→| WiFi STA --------> SPSC Ring Buffer      |  |                           |
+   877→| CSI Callback        |                    |  |                           |
+   878→| Channel Hop         v                    |  |                           |
+   879→| NDP Inject   +-- Tier 0: Raw ADR-018 ---------> UDP/5005               |
+   880→|              |   Tier 1: Phase + Welford |  |   Sensing Server          |
+   881→|              |   Tier 2: Vitals + Fall  ---------> (vitals)             |
+   882→|              |   Tier 3: WASM Dispatch  ---------> (events)             |
+   883→|              +                           |  |     |                     |
+   884→| NVS Config   OTA/WASM HTTP (port 8032)  |  |     v                     |
+   885→| Power Mgmt   POST /ota                  |  |   Web UI (:3000)          |
+   886→|              POST /wasm/upload           |  |   Pose + Vitals + Alerts  |
+   887→+------------------------------------------+  +---------------------------+
+   888→```
+   889→
+   890→---
+   891→
+   892→## CI/CD
+   893→
+   894→The firmware is continuously verified by [`.github/workflows/firmware-ci.yml`](../../.github/workflows/firmware-ci.yml):
+   895→
+   896→| Step | Check | Threshold |
+   897→|------|-------|-----------|
+   898→| **Docker build** | Full compile with ESP-IDF v5.4 container | Must succeed |
+   899→| **Binary size gate** | `esp32-csi-node.bin` file size | Must be < 950 KB |
+   900→| **Flash image integrity** | Partition table magic, bootloader presence, non-padding content | Warnings on failure |
+   901→| **Artifact upload** | Bootloader + partition table + app binary | 30-day retention |
+   902→
+   903→---
+   904→
+   905→## QEMU Testing (ADR-061)
+   906→
+   907→Test the firmware without physical hardware using Espressif's QEMU fork. A compile-time mock CSI generator (`CONFIG_CSI_MOCK_ENABLED=y`) replaces the real WiFi CSI callback with a timer-driven synthetic frame injector that exercises the full edge processing pipeline -- biquad filtering, Welford stats, top-K selection, presence/fall detection, and vitals extraction.
+   908→
+   909→### Prerequisites
+   910→
+   911→- **ESP-IDF v5.4** -- [installation guide](https://docs.espressif.com/projects/esp-idf/en/v5.4/esp32s3/get-started/)
+   912→- **Espressif QEMU fork** -- must be built from source (not in Ubuntu packages):
+   913→
+   914→```bash
+   915→git clone --depth 1 https://github.com/espressif/qemu.git /tmp/qemu
+   916→cd /tmp/qemu
+   917→./configure --target-list=xtensa-softmmu --enable-slirp
+   918→make -j$(nproc)
+   919→sudo cp build/qemu-system-xtensa /usr/local/bin/
+   920→```
+   921→
+   922→### Quick Start
+   923→
+   924→Three commands to go from source to running firmware in QEMU:
+   925→
+   926→```bash
+   927→cd firmware/esp32-csi-node
+   928→
+   929→# 1. Build with mock CSI enabled (replaces real WiFi CSI with synthetic frames)
+   930→idf.py -D SDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.qemu" build
+   931→
+   932→# 2. Create merged flash image
+   933→esptool.py --chip esp32s3 merge_bin -o build/qemu_flash.bin \
+   934→  --flash_mode dio --flash_freq 80m --flash_size 8MB \
+   935→  0x0     build/bootloader/bootloader.bin \
+   936→  0x8000  build/partition_table/partition-table.bin \
+   937→  0x20000 build/esp32-csi-node.bin
+   938→
+   939→# 3. Run in QEMU
+   940→qemu-system-xtensa -machine esp32s3 -nographic \
+   941→  -drive file=build/qemu_flash.bin,if=mtd,format=raw \
+   942→  -serial mon:stdio -no-reboot
+   943→```
+   944→
+   945→The firmware boots FreeRTOS, loads NVS config, starts the mock CSI generator at 20 Hz, and runs all edge processing. UART output shows log lines that can be validated automatically.
+   946→
+   947→### Mock CSI Scenarios
+   948→
+   949→The mock generator cycles through 10 scenarios that exercise every edge processing path:
+   950→
+   951→| ID | Scenario | Duration | Expected Output |
+   952→|----|----------|----------|-----------------|
+   953→| 0 | Empty room | 10 s | `presence=0`, `motion_energy < thresh` |
+   954→| 1 | Static person | 10 s | `presence=1`, `breathing_rate` in [10, 25], `fall=0` |
+   955→| 2 | Walking person | 10 s | `presence=1`, `motion_energy > 0.5`, `fall=0` |
+   956→| 3 | Fall event | 5 s | `fall=1` flag set, `motion_energy` spike |
+   957→| 4 | Multi-person | 15 s | `n_persons=2`, independent breathing rates |
+   958→| 5 | Channel sweep | 5 s | Frames on channels 1, 6, 11 in sequence |
+   959→| 6 | MAC filter test | 5 s | Frames with wrong MAC dropped (counter check) |
+   960→| 7 | Ring buffer overflow | 3 s | 1000 frames in 100 ms burst, graceful drop |
+   961→| 8 | Boundary RSSI | 5 s | RSSI sweeps -127 to 0, no crash |
+   962→| 9 | Zero-length frame | 2 s | `iq_len=0` frames, serialize returns 0 |
+   963→
+   964→### NVS Provisioning Matrix
+   965→
+   966→14 NVS configurations are tested in CI to ensure all config paths work correctly:
+   967→
+   968→| Config | NVS Values | Validates |
+   969→|--------|-----------|-----------|
+   970→| `default` | (empty NVS) | Kconfig fallback paths |
+   971→| `wifi-only` | ssid, password | Basic provisioning |
+   972→| `full-adr060` | channel=6, filter_mac=AA:BB:CC:DD:EE:FF | Channel override + MAC filter |
+   973→| `edge-tier0` | edge_tier=0 | Raw CSI passthrough (no DSP) |
+   974→| `edge-tier1` | edge_tier=1, pres_thresh=100, fall_thresh=2000 | Stats-only mode |
+   975→| `edge-tier2-custom` | edge_tier=2, vital_win=128, vital_int=500, subk_count=16 | Full vitals with custom params |
+   976→| `tdm-3node` | tdm_slot=1, tdm_nodes=3, node_id=1 | TDM mesh timing |
+   977→| `wasm-signed` | wasm_max=4, wasm_verify=1, wasm_pubkey=<32B> | WASM with Ed25519 verification |
+   978→| `wasm-unsigned` | wasm_max=2, wasm_verify=0 | WASM without signature check |
+   979→| `5ghz-channel` | channel=36, filter_mac=... | 5 GHz CSI collection |
+   980→| `boundary-max` | target_port=65535, node_id=255, top_k=32, vital_win=256 | Max-range values |
+   981→| `boundary-min` | target_port=1, node_id=0, top_k=1, vital_win=32 | Min-range values |
+   982→| `power-save` | power_duty=10, edge_tier=0 | Low-power mode |
+   983→| `corrupt-nvs` | (partial/corrupt partition) | Graceful fallback to defaults |
+   984→
+   985→Generate all configs for CI testing:
+   986→
+   987→```bash
+   988→python scripts/generate_nvs_matrix.py
+   989→```
+   990→
+   991→### Validation Checks
+   992→
+   993→The output validation script (`scripts/validate_qemu_output.py`) parses UART logs and checks:
+   994→
+   995→| Check | Pass Criteria | Severity |
+   996→|-------|---------------|----------|
+   997→| Boot | `app_main()` called, no panic/assert | FATAL |
+   998→| NVS load | `nvs_config:` log line present | FATAL |
+   999→| Mock CSI init | `mock_csi: Starting mock CSI generator` | FATAL |
+  1000→| Frame generation | `mock_csi: Generated N frames` where N > 0 | ERROR |
+  1001→| Edge pipeline | `edge_processing: DSP task started on Core 1` | ERROR |
+  1002→| Vitals output | At least one `vitals:` log line with valid BPM | ERROR |
+  1003→| Presence detection | `presence=1` during person scenarios | WARN |
+  1004→| Fall detection | `fall=1` during fall scenario | WARN |
+  1005→| MAC filter | `csi_collector: MAC filter dropped N frames` where N > 0 | WARN |
+  1006→| ADR-018 serialize | `csi_collector: Serialized N frames` where N > 0 | ERROR |
+  1007→| No crash | No `Guru Meditation Error`, no `assert failed`, no `abort()` | FATAL |
+  1008→| Clean exit | Firmware reaches end of scenario sequence | ERROR |
+  1009→| Heap OK | No `HEAP_ERROR` or `out of memory` | FATAL |
+  1010→| Stack OK | No `Stack overflow` detected | FATAL |
+  1011→
+  1012→Exit codes: `0` = all pass, `1` = WARN only, `2` = ERROR, `3` = FATAL.
+  1013→
+  1014→### GDB Debugging
+  1015→
+  1016→QEMU provides a built-in GDB stub for zero-cost breakpoint debugging without JTAG hardware:
+  1017→
+  1018→```bash
+  1019→# Launch QEMU paused, with GDB stub on port 1234
+  1020→qemu-system-xtensa \
+  1021→  -machine esp32s3 -nographic \
+  1022→  -drive file=build/qemu_flash.bin,if=mtd,format=raw \
+  1023→  -serial mon:stdio \
+  1024→  -s -S
+  1025→
+  1026→# In another terminal, attach GDB
+  1027→xtensa-esp-elf-gdb build/esp32-csi-node.elf \
+  1028→  -ex "target remote :1234" \
+  1029→  -ex "b edge_processing.c:dsp_task" \
+  1030→  -ex "b csi_collector.c:csi_serialize_frame" \
+  1031→  -ex "b mock_csi.c:mock_generate_csi_frame" \
+  1032→  -ex "watch g_nvs_config.csi_channel" \
+  1033→  -ex "continue"
+  1034→```
+  1035→
+  1036→Key breakpoints:
+  1037→
+  1038→| Location | Purpose |
+  1039→|----------|---------|
+  1040→| `edge_processing.c:dsp_task` | DSP consumer loop entry |
+  1041→| `edge_processing.c:presence_detect` | Threshold comparison |
+  1042→| `edge_processing.c:fall_detect` | Phase acceleration check |
+  1043→| `csi_collector.c:csi_serialize_frame` | ADR-018 serialization |
+  1044→| `nvs_config.c:nvs_config_load` | NVS parse logic |
+  1045→| `wasm_runtime.c:wasm_on_csi` | WASM module dispatch |
+  1046→| `mock_csi.c:mock_generate_csi_frame` | Synthetic frame generation |
+  1047→
+  1048→VS Code integration -- add to `.vscode/launch.json`:
+  1049→
+  1050→```json
+  1051→{
+  1052→  "name": "QEMU ESP32-S3 Debug",
+  1053→  "type": "cppdbg",
+  1054→  "request": "launch",
+  1055→  "program": "${workspaceFolder}/firmware/esp32-csi-node/build/esp32-csi-node.elf",
+  1056→  "miDebuggerPath": "xtensa-esp-elf-gdb",
+  1057→  "miDebuggerServerAddress": "localhost:1234",
+  1058→  "setupCommands": [
+  1059→    { "text": "set remote hardware-breakpoint-limit 2" },
+  1060→    { "text": "set remote hardware-watchpoint-limit 2" }
+  1061→  ]
+  1062→}
+  1063→```
+  1064→
+  1065→### Code Coverage
+  1066→
+  1067→Build with gcov enabled and collect coverage after a QEMU run:
+  1068→
+  1069→```bash
+  1070→# Build with coverage overlay
+  1071→idf.py -D SDKCONFIG_DEFAULTS="sdkconfig.defaults;sdkconfig.qemu;sdkconfig.coverage" build
+  1072→
+  1073→# After QEMU run, generate HTML report
+  1074→lcov --capture --directory build --output-file coverage.info
+  1075→lcov --remove coverage.info '*/esp-idf/*' '*/test/*' --output-file coverage_filtered.info
+  1076→genhtml coverage_filtered.info --output-directory build/coverage_report
+  1077→```
+  1078→
+  1079→Coverage targets:
+  1080→
+  1081→| Module | Target |
+  1082→|--------|--------|
+  1083→| `edge_processing.c` | >= 80% |
+  1084→| `csi_collector.c` | >= 90% |
+  1085→| `nvs_config.c` | >= 95% |
+  1086→| `mock_csi.c` | >= 95% |
+  1087→| `stream_sender.c` | >= 80% |
+  1088→| `wasm_runtime.c` | >= 70% |
+  1089→
+  1090→### Fuzz Testing
+  1091→
+  1092→Host-native fuzz targets compiled with libFuzzer + AddressSanitizer (no QEMU needed):
+  1093→
+  1094→```bash
+  1095→cd firmware/esp32-csi-node/test
+  1096→
+  1097→# Build fuzz target
+  1098→clang -fsanitize=fuzzer,address -I../main \
+  1099→  fuzz_csi_serialize.c ../main/csi_collector.c \
+  1100→  -o fuzz_serialize
+  1101→
+  1102→# Run for 5 minutes
+  1103→timeout 300 ./fuzz_serialize corpus/ || true
+  1104→```
+  1105→
+  1106→Fuzz targets:
+  1107→
+  1108→| Target | Input | Looking For |
+  1109→|--------|-------|-------------|
+  1110→| `csi_serialize_frame()` | Random `wifi_csi_info_t` | Buffer overflow, NULL deref |
+  1111→| `nvs_config_load()` | Crafted NVS partition binary | No crash, fallback to defaults |
+  1112→| `edge_enqueue_csi()` | Rapid-fire 10,000 frames | Ring overflow, no data corruption |
+  1113→| `rvf_parser.c` | Malformed RVF packets | Parse rejection, no crash |
+  1114→| `wasm_upload.c` | Corrupt WASM blobs | Rejection without crash |
+  1115→
+  1116→### QEMU CI Workflow
+  1117→
+  1118→The GitHub Actions workflow (`.github/workflows/firmware-qemu.yml`) runs on every push or PR touching `firmware/**`:
+  1119→
+  1120→1. Uses the `espressif/idf:v5.4` container image
+  1121→2. Builds Espressif's QEMU fork from source
+  1122→3. Runs a CI matrix across NVS configurations: `default`, `nvs-full`, `nvs-edge-tier0`, `nvs-tdm-3node`
+  1123→4. For each config: provisions NVS, builds with mock CSI, runs in QEMU with timeout, validates UART output
+  1124→5. Uploads QEMU logs as build artifacts for debugging failures
+  1125→
+  1126→No physical ESP32 hardware is needed in CI.
+  1127→
+  1128→---
+  1129→
+  1130→## Troubleshooting
+  1131→
+  1132→| Symptom | Cause | Fix |
+  1133→|---------|-------|-----|
+  1134→| No serial output | Wrong baud rate | Use `115200` in your serial monitor |
+  1135→| WiFi won't connect | Wrong SSID/password | Re-run `provision.py` with correct credentials |
+  1136→| No UDP frames received | Firewall blocking | Allow inbound UDP on port 5005 (see below) |
+  1137→| `idf.py` fails on Windows | Git Bash/MSYS2 incompatibility | Use Docker -- this is the only supported build method on Windows |
+  1138→| CSI callback not firing | Promiscuous mode issue | Verify `esp_wifi_set_promiscuous(true)` in `csi_collector.c` |
+  1139→| WASM upload rejected | Signature verification | Disable with `wasm_verify=0` via NVS for development, or sign with Ed25519 |
+  1140→| High frame drop rate | Ring buffer overflow | Reduce `edge_tier` or increase `dwell_ms` |
+  1141→| Vitals readings unstable | Calibration period | Wait 60 seconds for adaptive threshold to settle |
+  1142→| OTA update fails | Binary too large | Check binary is < 1 MB; current headroom is ~6% |
+  1143→| Docker path error on Windows | MSYS path conversion | Prefix command with `MSYS_NO_PATHCONV=1` |
+  1144→
+  1145→### Windows Firewall Rule
+  1146→
+  1147→```powershell
+  1148→netsh advfirewall firewall add rule name="ESP32 CSI" dir=in action=allow protocol=UDP localport=5005
+  1149→```
+  1150→
+  1151→---
+  1152→
+  1153→## Architecture Decision Records
+  1154→
+  1155→This firmware implements or references the following ADRs:
+  1156→
+  1157→| ADR | Title | Status |
+  1158→|-----|-------|--------|
+  1159→| [ADR-018](../../docs/adr/ADR-018-esp32-dev-implementation.md) | CSI binary frame format | Accepted |
+  1160→| [ADR-029](../../docs/adr/ADR-029-ruvsense-multistatic-sensing-mode.md) | Channel hopping and TDM protocol | Accepted |
+  1161→| [ADR-039](../../docs/adr/ADR-039-esp32-edge-intelligence.md) | Edge intelligence tiers 0-2 | Accepted |
+  1162→| [ADR-040](../../docs/adr/) | WASM programmable sensing (Tier 3) with RVF container format | Alpha |
+  1163→| [ADR-057](../../docs/adr/ADR-057-firmware-csi-build-guard.md) | Build-time CSI guard (`CONFIG_ESP_WIFI_CSI_ENABLED`) | Accepted |
+  1164→| [ADR-060](../../docs/adr/ADR-060-provision-channel-mac-filter.md) | Channel override and MAC address filter | Accepted |
+  1165→| [ADR-061](../../docs/adr/ADR-061-qemu-esp32s3-firmware-testing.md) | QEMU ESP32-S3 emulation for firmware testing | Proposed |
+  1166→
+  1167→---
+  1168→
+  1169→## License
+  1170→
+  1171→This firmware is dual-licensed under [MIT](../../LICENSE-MIT) OR [Apache-2.0](../../LICENSE-APACHE), at your option.
+  1172→

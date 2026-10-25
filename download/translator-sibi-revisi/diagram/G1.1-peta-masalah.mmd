@@ -1,0 +1,26 @@
+%% G1.1 — Peta masalah dan kesenjangan penelitian (BAB I, Subbab 1.1)
+%% Tipe: flowchart TD, 3 lapis (masalah, kesenjangan, posisi penelitian)
+flowchart TD
+    M["Masalah inti:<br/>komunikasi dua arah tunarungu-pendengar<br/>sulit tanpa kemampuan isyarat bersama"]
+
+    K1["Kesenjangan 1:<br/>juru bahasa isyarat terbatas<br/>(±500 untuk ±1,92 juta tunarungu)"]
+    K2["Kesenjangan 2:<br/>aplikasi SIBI satu arah dan kata-level<br/>(kamus/pembelajaran, tanpa umpan balik dua arah)"]
+    K3["Kesenjangan 3:<br/>pengenalan isyarat berbasis kamera<br/>menuntut pencahayaan, garis pandang,<br/>dan kamera menyala terus"]
+    K4["Kesenjangan 4:<br/>pengenalan isyarat dari CSI belum<br/>diterapkan pada SIBI dan belum ada<br/>purwarupa penerjemah dua arah"]
+
+    P1["Posisi penelitian:<br/>purwarupa penerjemah dua arah SIBI<br/>berbasis CSI pada modul ESP32-S3"]
+    P2["Arah 1: SIBI menjadi teks<br/>dan suara Indonesia (TTS)"]
+    P3["Arah 2: teks/ucapan Indonesia<br/>menjadi representasi SIBI di layar"]
+    P4["Produk akhir tanpa kamera;<br/>kamera dan YOLO26-Pose hanya<br/>pada jalur pelabelan riset"]
+
+    M --> K1
+    M --> K2
+    M --> K3
+    M --> K4
+    K1 --> P1
+    K2 --> P1
+    K3 --> P1
+    K4 --> P1
+    P1 --> P2
+    P1 --> P3
+    P1 --> P4

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE eSummaryResult PUBLIC "-//NLM//DTD esummary v1 20041029//EN" "https://eutils.ncbi.nlm.nih.gov/eutils/dtd/20041029/esummary-v1.dtd">
+<eSummaryResult>
+<DocSum>
+	<Id>12788229</Id>
+	<Item Name="PubDate" Type="Date">2025 Dec 29</Item>
+	<Item Name="EPubDate" Type="Date">2025 Dec 29</Item>
+	<Item Name="Source" Type="String">Sensors (Basel)</Item>
+	<Item Name="AuthorList" Type="List">
+		<Item Name="Author" Type="String">Michaelis T</Item>
+		<Item Name="Author" Type="String">Jorge J</Item>
+		<Item Name="Author" Type="String">Bijlani N</Item>
+		<Item Name="Author" Type="String">Villarroel M</Item>
+	</Item>
+	<Item Name="Title" Type="String">VitalCSI: Contactless Respiratory Rate Estimation Using Consumer-Grade Wi-Fi Channel State Information.</Item>
+	<Item Name="Volume" Type="String">26</Item>
+	<Item Name="Issue" Type="String">1</Item>
+	<Item Name="Pages" Type="String"></Item>
+	<Item Name="ArticleIds" Type="List">
+		<Item Name="pmid" Type="String">41516660</Item>
+		<Item Name="pmcid" Type="String">PMC12788229</Item>
+		<Item Name="doi" Type="String">10.3390/s26010225</Item>
+		<Item Name="pii" Type="String">s26010225</Item>
+	</Item>
+	<Item Name="DOI" Type="String">10.3390/s26010225</Item>
+	<Item Name="FullJournalName" Type="String">Sensors (Basel, Switzerland)</Item>
+	<Item Name="SO" Type="String">2025 Dec 29;26(1)</Item>
+</DocSum>
+
+<DocSum>
+	<Id>6696212</Id>
+	<Item Name="PubDate" Type="Date">2019 Jul 29</Item>
+	<Item Name="EPubDate" Type="Date">2019 Jul 29</Item>
+	<Item Name="Source" Type="String">Sensors (Basel)</Item>
+	<Item Name="AuthorList" Type="List">
+		<Item Name="Author" Type="String">Al-Qaness MAA</Item>
+		<Item Name="Author" Type="String">Abd Elaziz M</Item>
+		<Item Name="Author" Type="String">Kim S</Item>
+		<Item Name="Author" Type="String">Ewees AA</Item>
+		<Item Name="Author" Type="String">Abbasi AA</Item>
+		<Item Name="Author" Type="String">Alhaj YA</Item>
+		<Item Name="Author" Type="String">Hawbani A</Item>
+	</Item>
+	<Item Name="Title" Type="String">Channel State Information from Pure Communication to Sense and Track Human Motion: A Survey.</Item>
+	<Item Name="Volume" Type="String">19</Item>
+	<Item Name="Issue" Type="String">15</Item>
+	<Item Name="Pages" Type="String"></Item>
+	<Item Name="ArticleIds" Type="List">
+		<Item Name="pmid" Type="String">31362425</Item>
+		<Item Name="pmcid" Type="String">PMC6696212</Item>
+		<Item Name="doi" Type="String">10.3390/s19153329</Item>
+		<Item Name="pii" Type="String">s19153329</Item>
+	</Item>
+	<Item Name="DOI" Type="String">10.3390/s19153329</Item>
+	<Item Name="FullJournalName" Type="String">Sensors (Basel, Switzerland)</Item>
+	<Item Name="SO" Type="String">2019 Jul 29;19(15)</Item>
+</DocSum>
+
+<DocSum>
+	<Id>8157398</Id>
+	<Item Name="PubDate" Type="Date">2021 May 18</Item>
+	<Item Name="EPubDate" Type="Date">2021 May 18</Item>
+	<Item Name="Source" Type="String">Sensors (Basel)</Item>
+	<Item Name="AuthorList" Type="List">
+		<Item Name="Author" Type="String">Dou C</Item>
+		<Item Name="Author" Type="String">Huan H</Item>
+	</Item>
+	<Item Name="Title" Type="String">Full Respiration Rate Monitoring Exploiting Doppler Information with Commodity Wi-Fi Devices.</Item>
+	<Item Name="Volume" Type="String">21</Item>
+	<Item Name="Issue" Type="String">10</Item>
+	<Item Name="Pages" Type="String"></Item>
+	<Item Name="ArticleIds" Type="List">
+		<Item Name="pmid" Type="String">34069847</Item>
+		<Item Name="pmcid" Type="String">PMC8157398</Item>
+		<Item Name="doi" Type="String">10.3390/s21103505</Item>
+		<Item Name="pii" Type="String">s21103505</Item>
+	</Item>
+	<Item Name="DOI" Type="String">10.3390/s21103505</Item>
+	<Item Name="FullJournalName" Type="String">Sensors (Basel, Switzerland)</Item>
+	<Item Name="SO" Type="String">2021 May 18;21(10)</Item>
+</DocSum>
+
+<DocSum>
+	<Id>12599888</Id>
+	<Item Name="PubDate" Type="Date">2025</Item>
+	<Item Name="EPubDate" Type="Date">2025 Oct 22</Item>
+	<Item Name="Source" Type="String">IEEE J Transl Eng Health Med</Item>
+	<Item Name="AuthorList" Type="List">
+		<Item Name="Author" Type="String">Alzaabi A</Item>
+		<Item Name="Author" Type="String">Saied I</Item>
+		<Item Name="Author" Type="String">Arslan T</Item>
+	</Item>
+	<Item Name="Title" Type="String">Design and Evaluation of Volunteer User Trials of Unobtrusive Vital Signs Monitoring for Older People in Care Using Wi-Fi CSI Sensing.</Item>
+	<Item Name="Volume" Type="String">13</Item>
+	<Item Name="Issue" Type="String"></Item>
+	<Item Name="Pages" Type="String">480-492</Item>
+	<Item Name="ArticleIds" Type="List">
+		<Item Name="pmid" Type="String">41220790</Item>
+		<Item Name="pmcid" Type="String">PMC12599888</Item>
+		<Item Name="doi" Type="String">10.1109/JTEHM.2025.3624469</Item>
+	</Item>
+	<Item Name="DOI" Type="String">10.1109/JTEHM.2025.3624469</Item>
+	<Item Name="FullJournalName" Type="String">IEEE journal of translational engineering in health and medicine</Item>
+	<Item Name="SO" Type="String">2025;13:480-492</Item>
+</DocSum>
+
+<DocSum>
+	<Id>11598015</Id>
+	<Item Name="PubDate" Type="Date">2024 Nov 18</Item>
+	<Item Name="EPubDate" Type="Date">2024 Nov 18</Item>
+	<Item Name="Source" Type="String">Sensors (Basel)</Item>
+	<Item Name="AuthorList" Type="List">
+		<Item Name="Author" Type="String">Zhuang W</Item>
+		<Item Name="Author" Type="String">Lu Y</Item>
+		<Item Name="Author" Type="String">Shen Y</Item>
+		<Item Name="Author" Type="String">Su J</Item>
+	</Item>
+	<Item Name="Title" Type="String">Human Daily Breathing Monitoring via Analysis of CSI Ratio Trajectories for WiFi Link Pairs on the I/Q Plane.</Item>
+	<Item Name="Volume" Type="String">24</Item>
+	<Item Name="Issue" Type="String">22</Item>
+	<Item Name="Pages" Type="String"></Item>
+	<Item Name="ArticleIds" Type="List">
+		<Item Name="pmid" Type="String">39599127</Item>
+		<Item Name="pmcid" Type="String">PMC11598015</Item>
+		<Item Name="doi" Type="String">10.3390/s24227352</Item>
+		<Item Name="pii" Type="String">s24227352</Item>
+	</Item>
+	<Item Name="DOI" Type="String">10.3390/s24227352</Item>
+	<Item Name="FullJournalName" Type="String">Sensors (Basel, Switzerland)</Item>
+	<Item Name="SO" Type="String">2024 Nov 18;24(22)</Item>
+</DocSum>
+
+<DocSum>
+	<Id>6427776</Id>
+	<Item Name="PubDate" Type="Date">2019 Feb 26</Item>
+	<Item Name="EPubDate" Type="Date">2019 Feb 26</Item>
+	<Item Name="Source" Type="String">Sensors (Basel)</Item>
+	<Item Name="AuthorList" Type="List">
+		<Item Name="Author" Type="String">Lee H</Item>
+		<Item Name="Author" Type="String">Ahn CR</Item>
+		<Item Name="Author" Type="String">Choi N</Item>
+		<Item Name="Author" Type="String">Kim T</Item>
+		<Item Name="Author" Type="String">Lee H</Item>
+	</Item>
+	<Item Name="Title" Type="String">The Effects of Housing Environments on the Performance of Activity-Recognition Systems Using Wi-Fi Channel State Information: An Exploratory Study.</Item>
+	<Item Name="Volume" Type="String">19</Item>
+	<Item Name="Issue" Type="String">5</Item>
+	<Item Name="Pages" Type="String"></Item>
+	<Item Name="ArticleIds" Type="List">
+		<Item Name="pmid" Type="String">30813514</Item>
+		<Item Name="pmcid" Type="String">PMC6427776</Item>
+		<Item Name="doi" Type="String">10.3390/s19050983</Item>
+		<Item Name="pii" Type="String">s19050983</Item>
+	</Item>
+	<Item Name="DOI" Type="String">10.3390/s19050983</Item>
+	<Item Name="FullJournalName" Type="String">Sensors (Basel, Switzerland)</Item>
+	<Item Name="SO" Type="String">2019 Feb 26;19(5)</Item>
+</DocSum>
+
+<DocSum>
+	<Id>9830631</Id>
+	<Item Name="PubDate" Type="Date">2022</Item>
+	<Item Name="EPubDate" Type="Date">2022 Dec 22</Item>
+	<Item Name="Source" Type="String">IEEE Access</Item>
+	<Item Name="AuthorList" Type="List">
+		<Item Name="Author" Type="String">Mosleh S</Item>
+		<Item Name="Author" Type="String">Coder JB</Item>
+		<Item Name="Author" Type="String">Scully CG</Item>
+		<Item Name="Author" Type="String">Forsyth K</Item>
+		<Item Name="Author" Type="String">Al Kalaa MO</Item>
+	</Item>
+	<Item Name="Title" Type="String">Monitoring Respiratory Motion With Wi-Fi CSI: Characterizing Performance and the BreatheSmart Algorithm.</Item>
+	<Item Name="Volume" Type="String">10</Item>
+	<Item Name="Issue" Type="String"></Item>
+	<Item Name="Pages" Type="String">131932-131951</Item>
+	<Item Name="ArticleIds" Type="List">
+		<Item Name="pmid" Type="String">36632174</Item>
+		<Item Name="MID" Type="String">NIHMS1862352</Item>
+		<Item Name="pmcid" Type="String">PMC9830631</Item>
+		<Item Name="doi" Type="String">10.1109/access.2022.3230003</Item>
+	</Item>
+	<Item Name="DOI" Type="String">10.1109/access.2022.3230003</Item>
+	<Item Name="FullJournalName" Type="String">IEEE access : practical innovations, open solutions</Item>
+	<Item Name="SO" Type="String">2022;10:131932-131951</Item>
+</DocSum>
+
+<DocSum>
+	<Id>8724017</Id>
+	<Item Name="PubDate" Type="Date">2022 Apr</Item>
+	<Item Name="EPubDate" Type="Date">2022 Jan 4</Item>
+	<Item Name="Source" Type="String">J Pharm Anal</Item>
+	<Item Name="AuthorList" Type="List">
+		<Item Name="Author" Type="String">Saeed U</Item>
+		<Item Name="Author" Type="String">Shah SY</Item>
+		<Item Name="Author" Type="String">Ahmad J</Item>
+		<Item Name="Author" Type="String">Imran MA</Item>
+		<Item Name="Author" Type="String">Abbasi QH</Item>
+		<Item Name="Author" Type="String">Shah SA</Item>
+	</Item>
+	<Item Name="Title" Type="String">Machine learning empowered COVID-19 patient monitoring using non-contact sensing: An extensive review.</Item>
+	<Item Name="Volume" Type="String">12</Item>
+	<Item Name="Issue" Type="String">2</Item>
+	<Item Name="Pages" Type="String">193-204</Item>
+	<Item Name="ArticleIds" Type="List">
+		<Item Name="pmid" Type="String">35003825</Item>
+		<Item Name="pmcid" Type="String">PMC8724017</Item>
+		<Item Name="doi" Type="String">10.1016/j.jpha.2021.12.006</Item>
+		<Item Name="pii" Type="String">S2095-1779(21)00149-0</Item>
+	</Item>
+	<Item Name="DOI" Type="String">10.1016/j.jpha.2021.12.006</Item>
+	<Item Name="FullJournalName" Type="String">Journal of pharmaceutical analysis</Item>
+	<Item Name="SO" Type="String">2022 Apr;12(2):193-204</Item>
+</DocSum>
+
+</eSummaryResult>

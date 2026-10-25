@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>
+		Aplikasi Pembelajaran Sistem Isyarat Bahasa Indonesia (SIBI) Berbasis Voice Menggunakan OpenSIBI
+							| Technomedia Journal
+			</title>
+
+	
+<link rel="icon" href="https://ijc.ilearning.co/public/journals/1/favicon_en.png" />
+<meta name="generator" content="Open Journal Systems 3.5.0.1" />
+<link rel='alternate' hreflang='id' href='https://ijc.ilearning.co/TMJ/id/article/view/1690' />
+<link rel='alternate' hreflang='en' href='https://ijc.ilearning.co/TMJ/en/article/view/1690' />
+<link rel='alternate' hreflang='x-default' href='https://ijc.ilearning.co/TMJ/article/view/1690' />
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.Creator.PersonalName" content="Risa Fatmawati"/>
+<meta name="DC.Creator.PersonalName" content="Rengga Asmara"/>
+<meta name="DC.Creator.PersonalName" content="Yanuar Risah Prayogi"/>
+<meta name="DC.Creator.PersonalName" content="Rizky Yuniar Hakkun"/>
+<meta name="DC.Date.created" scheme="ISO8601" content="2022-02-16"/>
+<meta name="DC.Date.dateSubmitted" scheme="ISO8601" content="2021-07-30"/>
+<meta name="DC.Date.issued" scheme="ISO8601" content="2022-06-01"/>
+<meta name="DC.Date.modified" scheme="ISO8601" content="2022-04-13"/>
+<meta name="DC.Description" xml:lang="en" content="Sign language is one of the means of communication for people who are deaf and speech impaired, especially between normal people and people with disabilities in the wider community. But in reality, not everyone can understand the meaning and purpose of the sign language used so that there is a lack of knowledge of normal people about sign language in Indonesia and there is still a lack of effective and easy-to-understand digital learning media. In this study, we propose a new approach to create a sign language learning application for normal people using voice as input which can later display the results of visualization of sign language movements in the form of 3D animation. The display of 3D animation movements uses data that refers to the SIBI (Indonesian Language Sign System) curriculum. This Sign Language application was built by utilizing the Google Speech to Text API to process voice input, Java as the programming language used, and MySQL to manage the database. Based on system testing and on users (general public and persons with disabilities) using the SUS (System Usability Scale) method, it can be concluded that the sign language learning application with Android-based voice input is successful in facilitating the sign language learning process and in terms of usability or usability of the application getting an assessment that the application can be accepted by users and is suitable for use as a learning support media because its features can be understood well."/>
+<meta name="DC.Description" xml:lang="id" content="Bahasa isyarat merupakan salah satu alat komunikasi bagi penyandang tuna rungu dan tuna wicara, terlebih antara orang normal dengan penyandang dalam masyarakat yang lebih luas. Tetapi pada kenyataan, tidak semua orang dapat mengerti dan memahami maksud dan arti dari bahasa isyarat yang digunakan sehingga kurangnya pengetahuan orang normal tentang bahasa isyarat yang ada di Indonesia dan masih minimnya media pembelajaran digital yang efektif dan mudah dipahami. Pada penelitian ini, kami mengajukan suatu pendekatan baru untuk membuat aplikasi pembelajaran bahasa isyarat untuk orang normal menggunakan voice sebagai masukan yang nantinya dapat menampilkan hasil visualisasi gerakan bahasa isyarat berupa animasi 3D. Tampilan gerakan animasi 3D menggunakan data yang mengacu pada kurikulum SIBI (Sistem Isyarat Bahasa Indonesia). Aplikasi Bahasa Isyarat ini dibangun dengan memanfaatkan Google Speech to Text API untuk mengolah input suara, Java sebagai bahasa pemrograman yang digunakan dan mySQL untuk mengelola basis data. Berdasarkan uji coba terhadap pengguna (masyarakat umum, para tuna rungu, dan tuna wicara) menggunakan metode SUS (System Usability Scale), dapat disimpulkan bahwa Aplikasi Pembelajaran Bahasa Isyarat dengan input suara berbasis Android ini berhasil memproses masukan dari pengguna untuk menampilkan semua animasi gerakan bahasa isyarat, bermanfaat dalam membantu pengguna dalam mempelajari bahasa isyarat dan fitur-fiturnya dapat dimengerti dengan baik."/>
+<meta name="DC.Format" scheme="IMT" content="application/pdf"/>
+<meta name="DC.Identifier" content="1690"/>
+<meta name="DC.Identifier.pageNumber" content="22-39"/>
+<meta name="DC.Identifier.DOI" content="10.33050/tmj.v7i1.1690"/>
+<meta name="DC.Identifier.URI" content="https://ijc.ilearning.co/TMJ/article/view/1690"/>
+<meta name="DC.Language" scheme="rfc5646" content="id"/>
+<meta name="DC.Rights" content="Copyright (c) 2022 Risa Fatmawati, Rengga Asmara, Yanuar Risah Prayogi, Rizky Yuniar Hakkun"/>
+<meta name="DC.Rights" content="https://creativecommons.org/licenses/by/4.0/"/>
+<meta name="DC.Source" content="Technomedia Journal"/>
+<meta name="DC.Source.ISSN" content="2528-6544"/>
+<meta name="DC.Source.Issue" content="1 Juni"/>
+<meta name="DC.Source.Volume" content="7"/>
+<meta name="DC.Source.URI" content="https://ijc.ilearning.co/TMJ/TMJ"/>
+<meta name="DC.Title" content="Aplikasi Pembelajaran Sistem Isyarat Bahasa Indonesia (SIBI) Berbasis Voice Menggunakan OpenSIBI"/>
+<meta name="DC.Type" content="Text.Serial.Journal"/>
+<meta name="DC.Type.articleType" content="Artikel"/>
+<meta name="gs_meta_revision" content="1.1"/>
+<meta name="citation_journal_title" content="Technomedia Journal"/>
+<meta name="citation_journal_abbrev" content="TMJ"/>
+<meta name="citation_issn" content="2528-6544"/> 
+<meta name="citation_author" content="Risa Fatmawati"/>
+<meta name="citation_author_institution" content="Politeknik Elektronika Negeri Surabaya"/>
+<meta name="citation_author" content="Rengga Asmara"/>
+<meta name="citation_author_institution" content="Politeknik Elektronika Negeri Surabaya"/>
+<meta name="citation_author" content="Yanuar Risah Prayogi"/>
+<meta name="citation_author_institution" content="Politeknik Elektronika Negeri Surabaya"/>
+<meta name="citation_author" content="Rizky Yuniar Hakkun"/>
+<meta name="citation_author_institution" content="Politeknik Elektronika Negeri Surabaya"/>
+<meta name="citation_title" content="Aplikasi Pembelajaran Sistem Isyarat Bahasa Indonesia (SIBI) Berbasis Voice Menggunakan OpenSIBI"/>
+<meta name="citation_language" content="id"/>
+<meta name="citation_date" content="2022/02/16"/>
+<meta name="citation_volume" content="7"/>
+<meta name="citation_issue" content="1 Juni"/>
+<meta name="citation_firstpage" content="22"/>
+<meta name="citation_lastpage" content="39"/>
+<meta name="citation_doi" content="10.33050/tmj.v7i1.1690"/>
+<meta name="citation_abstract_html_url" content="https://ijc.ilearning.co/TMJ/article/view/1690"/>
+<meta name="citation_abstract" xml:lang="id" content="Bahasa isyarat merupakan salah satu alat komunikasi bagi penyandang tuna rungu dan tuna wicara, terlebih antara orang normal dengan penyandang dalam masyarakat yang lebih luas. Tetapi pada kenyataan, tidak semua orang dapat mengerti dan memahami maksud dan arti dari bahasa isyarat yang digunakan sehingga kurangnya pengetahuan orang normal tentang bahasa isyarat yang ada di Indonesia dan masih minimnya media pembelajaran digital yang efektif dan mudah dipahami. Pada penelitian ini, kami mengajukan suatu pendekatan baru untuk membuat aplikasi pembelajaran bahasa isyarat untuk orang normal menggunakan voice sebagai masukan yang nantinya dapat menampilkan hasil visualisasi gerakan bahasa isyarat berupa animasi 3D. Tampilan gerakan animasi 3D menggunakan data yang mengacu pada kurikulum SIBI (Sistem Isyarat Bahasa Indonesia). Aplikasi Bahasa Isyarat ini dibangun dengan memanfaatkan Google Speech to Text API untuk mengolah input suara, Java sebagai bahasa pemrograman yang digunakan dan mySQL untuk mengelola basis data. Berdasarkan uji coba terhadap pengguna (masyarakat umum, para tuna rungu, dan tuna wicara) menggunakan metode SUS (System Usability Scale), dapat disimpulkan bahwa Aplikasi Pembelajaran Bahasa Isyarat dengan input suara berbasis Android ini berhasil memproses masukan dari pengguna untuk menampilkan semua animasi gerakan bahasa isyarat, bermanfaat dalam membantu pengguna dalam mempelajari bahasa isyarat dan fitur-fiturnya dapat dimengerti dengan baik."/>
+<meta name="citation_pdf_url" content="https://ijc.ilearning.co/TMJ/article/download/1690/610.pdf"/>
+<meta name="citation_reference" content="B. L. Basyah and F. M. Elvina, “Rancang Bangun Aplikasi Pembelajaran Bahasa Isyarat Berbasis Android”."/>
+<meta name="citation_reference" content="I. Winaldi and A. Setyawan, “Aplikasi Pengenalan Bahasa Isyarat Untuk Penyandang Tuna Tungu Berbasis Android (Studi Kasus: SLB Madina Serang),” JSiI (Jurnal Sistem Informasi), vol. 5, no. 2, 2018."/>
+<meta name="citation_reference" content="F. S. Rahman and Y. Yuhefizar, “Aplikasi Virtual Kata Untuk Komunikasi Penyandang Tunarungu Berbasis Android,” Jurnal RESTI (Rekayasa Sistem dan Teknologi Informasi), vol. 1, no. 2, pp. 99–105, 2017."/>
+<meta name="citation_reference" content="A. Salsabila, R. Yunita, and C. Rozikin, “Identifikasi Citra Jenis Bunga menggunakan Algoritma KNN dengan Ekstrasi Warna HSV dan Tekstur GLCM,” Technomedia Journal, vol. 6, no. 1, pp. 124–137, 2021."/>
+<meta name="citation_reference" content="N. P. L. Santoso, Y. Durachman, S. Watini, and S. Millah, “Manajemen Kontrol Akses Berbasis Blockchain untuk Pendidikan Online Terdesentralisasi,” Technomedia Journal, vol. 6, no. 1, pp. 111–123, 2021."/>
+<meta name="citation_reference" content="H. Sugiarto, “Penerapan Multimedia Development Life Cycle Pada Aplikasi Pengenalan Abjad Dan Angka,” IJCIT (Indonesian Journal on Computer and Information Technology), vol. 3, no. 1, 2018."/>
+<meta name="citation_reference" content="I. Kautsar, R. I. Borman, and A. Sulistyawati, “Aplikasi pembelajaran bahasa isyarat bagi penyandang tuna rungu berbasis android dengan metode bisindo,” Semnasteknomedia Online, vol. 3, no. 1, p. 4, 2015."/>
+<meta name="citation_reference" content="J. K. Hikmalansya, “Aplikasi Pembelajaran Bahasa Isyarat Berbasis Android,” Inform: Jurnal Ilmiah Bidang Teknologi Informasi dan Komunikasi, vol. 1, no. 2, 2016."/>
+<meta name="citation_reference" content="H. S. Hopipah and R. Mayasari, “Optimasi Backward Elimination untuk Klasifikasi Kepuasan Pelanggan Menggunakan Algoritme k-nearest neighbor (k-NN) and Naive Bayes,” Technomedia Journal, vol. 6, no. 1, pp. 99–110, 2021."/>
+<meta name="citation_reference" content="R. Rosyid and M. A. W. Prasetyo, “Robot Peraga 12 Gerakan Pengaturan Lalu Lintas Berbasis Arduino Mega 2560,” Technomedia Journal, vol. 5, no. 2, pp. 193–205, 2021."/>
+<link rel="alternate" type="application/atom+xml" href="https://ijc.ilearning.co/TMJ/en/gateway/plugin/AnnouncementFeedGatewayPlugin/atom">
+<link rel="alternate" type="application/rdf+xml" href="https://ijc.ilearning.co/TMJ/en/gateway/plugin/AnnouncementFeedGatewayPlugin/rss">
+<link rel="alternate" type="application/rss+xml" href="https://ijc.ilearning.co/TMJ/en/gateway/plugin/AnnouncementFeedGatewayPlugin/rss2">
+	<link rel="stylesheet" href="https://ijc.ilearning.co/TMJ/$$$call$$$/page/page/css?name=stylesheet" type="text/css" /><link rel="stylesheet" href="https://ijc.ilearning.co/lib/pkp/styles/fontawesome/fontawesome.css?v=3.5.0.1" type="text/css" /><link rel="stylesheet" href="https://ijc.ilearning.co/plugins/themes/default/js/lib/swiper/swiper-bundle.min.css?v=3.5.0.1" type="text/css" /><link rel="stylesheet" href="https://ijc.ilearning.co/public/journals/1/styleSheet.css?d=2023-10-25+02%3A39%3A44" type="text/css" /><link rel="stylesheet" href="https://ijc.ilearning.co/plugins/generic/citationStyleLanguage/css/citationStyleLanguagePlugin.css?v=3.5.0.1" type="text/css" />
+</head>
+<body class="pkp_page_article pkp_op_view has_site_logo" dir="ltr">
+
+	<div class="pkp_structure_page">
+
+				<header class="pkp_structure_head" id="headerNavigationContainer" role="banner">
+						 <nav class="cmp_skip_to_content" aria-label="Jump to content links">
+	<a href="#pkp_content_main">Skip to main content</a>
+	<a href="#siteNav">Skip to main navigation menu</a>
+		<a href="#pkp_content_footer">Skip to site footer</a>
+</nav>
+
+			<div class="pkp_head_wrapper">
+
+				<div class="pkp_site_name_wrapper">
+					<button class="pkp_site_nav_toggle">
+						<span>Open Menu</span>
+					</button>
+										<div class="pkp_site_name">
+																<a href="						https://ijc.ilearning.co/TMJ/en/index
+					" class="is_img">
+							<img src="https://ijc.ilearning.co/public/journals/1/pageHeaderLogoImage_id_ID.png" width="28850" height="3000"  />
+						</a>
+										</div>
+				</div>
+
+				
+				<nav class="pkp_site_nav_menu" aria-label="Site Navigation">
+					<a id="siteNav"></a>
+					<div class="pkp_navigation_primary_row">
+						<div class="pkp_navigation_primary_wrapper">
+																				<ul id="navigationPrimary" class="pkp_navigation_primary pkp_nav_list">
+								<li class="">
+				<a href="https://ijc.ilearning.co/index.php/TMJ">
+					HOME
+				</a>
+							</li>
+								<li class="">
+				<a href="https://ijc.ilearning.co/index.php/TMJ/about">
+					ABOUT US
+				</a>
+									<ul>
+																					<li class="">
+									<a href="https://ijc.ilearning.co/TMJ/en/about">
+										ABOUT JOURNAL
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ijc.ilearning.co/TMJ/en/Contact">
+										CONTACT
+									</a>
+								</li>
+																		</ul>
+							</li>
+								<li class="">
+				<a href="https://ijc.ilearning.co/TMJ/en/issue">
+					ISSUE
+				</a>
+									<ul>
+																					<li class="">
+									<a href="https://ijc.ilearning.co/TMJ/en/issue/current">
+										CURRENT
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ijc.ilearning.co/index.php/TMJ/issue/archive">
+										ARCHIVES
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ijc.ilearning.co/TMJ/en/specialIssue">
+										Special Issue
+									</a>
+								</li>
+																		</ul>
+							</li>
+								<li class="">
+				<a href="https://ijc.ilearning.co/TMJ/en/pengumuman">
+					ANNOUNCEMENT
+				</a>
+									<ul>
+																					<li class="">
+									<a href="https://ijc.ilearning.co/TMJ/en/articledoubleblind">
+										Announcement Double Blind
+									</a>
+								</li>
+																		</ul>
+							</li>
+								<li class="">
+				<a href="https://ijc.ilearning.co/TMJ/en/editor/peninjau">
+					Editor/Review
+				</a>
+									<ul>
+																					<li class="">
+									<a href="https://ijc.ilearning.co/TMJ/en/daftarsebagaipeninjau">
+										REVIEWER REGISTRATION FORM
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ijc.ilearning.co/TMJ/en/editorialboard">
+										Editorial Board
+									</a>
+								</li>
+																												<li class="">
+									<a href="https://ijc.ilearning.co/index.php/TMJ/peerreviewers">
+										PEER REVIEWERS
+									</a>
+								</li>
+																		</ul>
+							</li>
+								<li class="">
+				<a href="https://ijc.ilearning.co/TMJ/en/blockchainverification">
+					Blockchain Verification
+				</a>
+							</li>
+			</ul>
+
+				
+
+																						<div class="pkp_navigation_search_wrapper">
+									<a href="https://ijc.ilearning.co/TMJ/en/search" class="pkp_search pkp_search_desktop">
+										<span class="fa fa-search" aria-hidden="true"></span>
+										Search
+									</a>
+								</div>
+													</div>
+					</div>
+					<div class="pkp_navigation_user_wrapper" id="navigationUserWrapper">
+							<ul id="navigationUser" class="pkp_navigation_user pkp_nav_list">
+								<li class="profile">
+				<a href="https://ijc.ilearning.co/TMJ/en/user/register">
+					Register
+				</a>
+							</li>
+								<li class="profile">
+				<a href="https://ijc.ilearning.co/TMJ/en/login">
+					Login
+				</a>
+							</li>
+										</ul>
+
+					</div>
+				</nav>
+			</div><!-- .pkp_head_wrapper -->
+		</header><!-- .pkp_structure_head -->
+
+						<div class="pkp_structure_content has_sidebar">
+			<div class="pkp_structure_main" role="main">
+				<a id="pkp_content_main"></a>
+
+<div class="page page_article">
+			<nav class="cmp_breadcrumbs" role="navigation" aria-label="You are here:">
+	<ol>
+		<li>
+			<a href="https://ijc.ilearning.co/TMJ/en/index">
+				Home
+			</a>
+			<span class="separator">/</span>
+		</li>
+		<li>
+			<a href="https://ijc.ilearning.co/TMJ/en/issue/archive">
+				Archives
+			</a>
+			<span class="separator">/</span>
+		</li>
+					<li>
+				<a href="https://ijc.ilearning.co/TMJ/en/issue/view/66">
+					Vol. 7 No. 1 Juni (2022): TMJ (Technomedia Journal)
+				</a>
+				<span class="separator">/</span>
+			</li>
+				<li class="current" aria-current="page">
+			<span aria-current="page">
+									Artikel
+							</span>
+		</li>
+	</ol>
+</nav>
+	
+		  	 <article class="obj_article_details">
+
+		
+	<h1 class="page_title">
+		Aplikasi Pembelajaran Sistem Isyarat Bahasa Indonesia (SIBI) Berbasis Voice Menggunakan OpenSIBI
+	</h1>
+
+	
+	<div class="row">
+		<div class="main_entry">
+
+							<section class="item authors">
+					<h2 class="pkp_screen_reader">Authors</h2>
+					<ul class="authors">
+											<li>
+							<span class="name">
+								Risa Fatmawati
+							</span>
+															<span class="affiliation">
+																			<span>Electronic Engineering Polytechnic Institute of Surabaya</span>
+										<a href="https://ror.org/00cf3sf89"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:i="&amp;ns_ai;"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 23.4225 16.696501"
+   xml:space="preserve"
+   sodipodi:docname="rorId.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   width="23.422501"
+   height="16.696501"><metadata
+   id="metadata93"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs91" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1880"
+   inkscape:window-height="1016"
+   id="namedview89"
+   showgrid="true"
+   showguides="false"
+   inkscape:zoom="1"
+   inkscape:cx="-177.76975"
+   inkscape:cy="13.962506"
+   inkscape:window-x="40"
+   inkscape:window-y="27"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<switch
+   id="switch86"
+   transform="matrix(0.15,0,0,0.15,-0.7305,-0.624)">
+	<foreignObject
+   requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/"
+   x="0"
+   y="0"
+   width="1"
+   height="1">
+
+	</foreignObject>
+	<g
+   i:extraneous="self"
+   id="g84">
+		<polygon
+   class="strorId0"
+   points="68.65,4.16 56.52,22.74 44.38,4.16 "
+   id="polygon72"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="119.41,4.16 107.28,22.74 95.14,4.16 "
+   id="polygon74"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="44.38,115.47 56.52,96.88 68.65,115.47 "
+   id="polygon76"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="95.14,115.47 107.28,96.88 119.41,115.47 "
+   id="polygon78"
+   style="fill:#53baa1" />
+		<g
+   id="g82">
+			<path
+   class="st1"
+   d="m 145.53,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 2.24,-3.01 3.35,-6.67 3.35,-10.96 0,-3.56 -0.62,-6.52 -1.85,-8.9 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 h -23.56 v 18.83 c -0.19,-0.55 -0.39,-1.09 -0.61,-1.63 -1.63,-3.95 -3.91,-7.32 -6.84,-10.1 -2.93,-2.78 -6.39,-4.92 -10.41,-6.41 -4.01,-1.49 -8.4,-2.24 -13.16,-2.24 -4.76,0 -9.14,0.75 -13.16,2.24 -4.01,1.49 -7.48,3.63 -10.41,6.41 -2.62,2.49 -4.72,5.46 -6.3,8.9 -0.23,-2.47 -0.81,-4.61 -1.74,-6.41 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 H 4.87 V 89.42 H 18.28 V 65.08 H 24.9 L 37.63,89.42 H 53.71 L 38.24,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 0.1,-0.14 0.19,-0.29 0.29,-0.43 -0.02,0.47 -0.03,0.94 -0.03,1.42 0,4.87 0.82,9.29 2.45,13.24 1.63,3.95 3.91,7.32 6.84,10.1 2.92,2.78 6.39,4.92 10.41,6.41 4.01,1.49 8.4,2.24 13.16,2.24 4.76,0 9.14,-0.75 13.16,-2.24 4.01,-1.49 7.48,-3.63 10.41,-6.41 2.92,-2.78 5.2,-6.15 6.84,-10.1 0.22,-0.53 0.42,-1.08 0.61,-1.63 v 18.83 h 13.41 V 65.08 h 6.62 l 12.73,24.34 h 16.08 z M 36.39,50.81 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 H 18.29 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z m 62.35,16.04 c -0.89,2.38 -2.16,4.44 -3.83,6.19 -1.66,1.75 -3.65,3.11 -5.98,4.09 -2.32,0.98 -4.92,1.46 -7.78,1.46 -2.87,0 -5.46,-0.49 -7.78,-1.46 -2.32,-0.97 -4.31,-2.34 -5.98,-4.09 -1.66,-1.75 -2.94,-3.81 -3.83,-6.19 -0.89,-2.38 -1.33,-5 -1.33,-7.87 0,-2.81 0.44,-5.42 1.33,-7.83 0.89,-2.41 2.16,-4.48 3.83,-6.23 1.66,-1.75 3.65,-3.11 5.98,-4.09 2.32,-0.97 4.91,-1.46 7.78,-1.46 2.87,0 5.46,0.49 7.78,1.46 2.32,0.97 4.31,2.34 5.98,4.09 1.66,1.75 2.94,3.83 3.83,6.23 0.89,2.41 1.33,5.02 1.33,7.83 0,2.87 -0.44,5.49 -1.33,7.87 z m 44.94,-16.04 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 h -7.91 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z"
+   id="path80"
+   inkscape:connector-curvature="0"
+   style="fill:#202826" />
+		</g>
+	</g>
+</switch>
+</svg>
+</a>																											</span>
+																																		</li>
+											<li>
+							<span class="name">
+								Rengga Asmara
+							</span>
+															<span class="affiliation">
+																			<span>Electronic Engineering Polytechnic Institute of Surabaya</span>
+										<a href="https://ror.org/00cf3sf89"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:i="&amp;ns_ai;"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 23.4225 16.696501"
+   xml:space="preserve"
+   sodipodi:docname="rorId.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   width="23.422501"
+   height="16.696501"><metadata
+   id="metadata93"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs91" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1880"
+   inkscape:window-height="1016"
+   id="namedview89"
+   showgrid="true"
+   showguides="false"
+   inkscape:zoom="1"
+   inkscape:cx="-177.76975"
+   inkscape:cy="13.962506"
+   inkscape:window-x="40"
+   inkscape:window-y="27"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<switch
+   id="switch86"
+   transform="matrix(0.15,0,0,0.15,-0.7305,-0.624)">
+	<foreignObject
+   requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/"
+   x="0"
+   y="0"
+   width="1"
+   height="1">
+
+	</foreignObject>
+	<g
+   i:extraneous="self"
+   id="g84">
+		<polygon
+   class="strorId0"
+   points="68.65,4.16 56.52,22.74 44.38,4.16 "
+   id="polygon72"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="119.41,4.16 107.28,22.74 95.14,4.16 "
+   id="polygon74"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="44.38,115.47 56.52,96.88 68.65,115.47 "
+   id="polygon76"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="95.14,115.47 107.28,96.88 119.41,115.47 "
+   id="polygon78"
+   style="fill:#53baa1" />
+		<g
+   id="g82">
+			<path
+   class="st1"
+   d="m 145.53,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 2.24,-3.01 3.35,-6.67 3.35,-10.96 0,-3.56 -0.62,-6.52 -1.85,-8.9 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 h -23.56 v 18.83 c -0.19,-0.55 -0.39,-1.09 -0.61,-1.63 -1.63,-3.95 -3.91,-7.32 -6.84,-10.1 -2.93,-2.78 -6.39,-4.92 -10.41,-6.41 -4.01,-1.49 -8.4,-2.24 -13.16,-2.24 -4.76,0 -9.14,0.75 -13.16,2.24 -4.01,1.49 -7.48,3.63 -10.41,6.41 -2.62,2.49 -4.72,5.46 -6.3,8.9 -0.23,-2.47 -0.81,-4.61 -1.74,-6.41 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 H 4.87 V 89.42 H 18.28 V 65.08 H 24.9 L 37.63,89.42 H 53.71 L 38.24,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 0.1,-0.14 0.19,-0.29 0.29,-0.43 -0.02,0.47 -0.03,0.94 -0.03,1.42 0,4.87 0.82,9.29 2.45,13.24 1.63,3.95 3.91,7.32 6.84,10.1 2.92,2.78 6.39,4.92 10.41,6.41 4.01,1.49 8.4,2.24 13.16,2.24 4.76,0 9.14,-0.75 13.16,-2.24 4.01,-1.49 7.48,-3.63 10.41,-6.41 2.92,-2.78 5.2,-6.15 6.84,-10.1 0.22,-0.53 0.42,-1.08 0.61,-1.63 v 18.83 h 13.41 V 65.08 h 6.62 l 12.73,24.34 h 16.08 z M 36.39,50.81 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 H 18.29 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z m 62.35,16.04 c -0.89,2.38 -2.16,4.44 -3.83,6.19 -1.66,1.75 -3.65,3.11 -5.98,4.09 -2.32,0.98 -4.92,1.46 -7.78,1.46 -2.87,0 -5.46,-0.49 -7.78,-1.46 -2.32,-0.97 -4.31,-2.34 -5.98,-4.09 -1.66,-1.75 -2.94,-3.81 -3.83,-6.19 -0.89,-2.38 -1.33,-5 -1.33,-7.87 0,-2.81 0.44,-5.42 1.33,-7.83 0.89,-2.41 2.16,-4.48 3.83,-6.23 1.66,-1.75 3.65,-3.11 5.98,-4.09 2.32,-0.97 4.91,-1.46 7.78,-1.46 2.87,0 5.46,0.49 7.78,1.46 2.32,0.97 4.31,2.34 5.98,4.09 1.66,1.75 2.94,3.83 3.83,6.23 0.89,2.41 1.33,5.02 1.33,7.83 0,2.87 -0.44,5.49 -1.33,7.87 z m 44.94,-16.04 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 h -7.91 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z"
+   id="path80"
+   inkscape:connector-curvature="0"
+   style="fill:#202826" />
+		</g>
+	</g>
+</switch>
+</svg>
+</a>																											</span>
+																																		</li>
+											<li>
+							<span class="name">
+								Yanuar Risah Prayogi
+							</span>
+															<span class="affiliation">
+																			<span>Electronic Engineering Polytechnic Institute of Surabaya</span>
+										<a href="https://ror.org/00cf3sf89"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:i="&amp;ns_ai;"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 23.4225 16.696501"
+   xml:space="preserve"
+   sodipodi:docname="rorId.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   width="23.422501"
+   height="16.696501"><metadata
+   id="metadata93"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs91" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1880"
+   inkscape:window-height="1016"
+   id="namedview89"
+   showgrid="true"
+   showguides="false"
+   inkscape:zoom="1"
+   inkscape:cx="-177.76975"
+   inkscape:cy="13.962506"
+   inkscape:window-x="40"
+   inkscape:window-y="27"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<switch
+   id="switch86"
+   transform="matrix(0.15,0,0,0.15,-0.7305,-0.624)">
+	<foreignObject
+   requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/"
+   x="0"
+   y="0"
+   width="1"
+   height="1">
+
+	</foreignObject>
+	<g
+   i:extraneous="self"
+   id="g84">
+		<polygon
+   class="strorId0"
+   points="68.65,4.16 56.52,22.74 44.38,4.16 "
+   id="polygon72"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="119.41,4.16 107.28,22.74 95.14,4.16 "
+   id="polygon74"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="44.38,115.47 56.52,96.88 68.65,115.47 "
+   id="polygon76"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="95.14,115.47 107.28,96.88 119.41,115.47 "
+   id="polygon78"
+   style="fill:#53baa1" />
+		<g
+   id="g82">
+			<path
+   class="st1"
+   d="m 145.53,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 2.24,-3.01 3.35,-6.67 3.35,-10.96 0,-3.56 -0.62,-6.52 -1.85,-8.9 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 h -23.56 v 18.83 c -0.19,-0.55 -0.39,-1.09 -0.61,-1.63 -1.63,-3.95 -3.91,-7.32 -6.84,-10.1 -2.93,-2.78 -6.39,-4.92 -10.41,-6.41 -4.01,-1.49 -8.4,-2.24 -13.16,-2.24 -4.76,0 -9.14,0.75 -13.16,2.24 -4.01,1.49 -7.48,3.63 -10.41,6.41 -2.62,2.49 -4.72,5.46 -6.3,8.9 -0.23,-2.47 -0.81,-4.61 -1.74,-6.41 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 H 4.87 V 89.42 H 18.28 V 65.08 H 24.9 L 37.63,89.42 H 53.71 L 38.24,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 0.1,-0.14 0.19,-0.29 0.29,-0.43 -0.02,0.47 -0.03,0.94 -0.03,1.42 0,4.87 0.82,9.29 2.45,13.24 1.63,3.95 3.91,7.32 6.84,10.1 2.92,2.78 6.39,4.92 10.41,6.41 4.01,1.49 8.4,2.24 13.16,2.24 4.76,0 9.14,-0.75 13.16,-2.24 4.01,-1.49 7.48,-3.63 10.41,-6.41 2.92,-2.78 5.2,-6.15 6.84,-10.1 0.22,-0.53 0.42,-1.08 0.61,-1.63 v 18.83 h 13.41 V 65.08 h 6.62 l 12.73,24.34 h 16.08 z M 36.39,50.81 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 H 18.29 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z m 62.35,16.04 c -0.89,2.38 -2.16,4.44 -3.83,6.19 -1.66,1.75 -3.65,3.11 -5.98,4.09 -2.32,0.98 -4.92,1.46 -7.78,1.46 -2.87,0 -5.46,-0.49 -7.78,-1.46 -2.32,-0.97 -4.31,-2.34 -5.98,-4.09 -1.66,-1.75 -2.94,-3.81 -3.83,-6.19 -0.89,-2.38 -1.33,-5 -1.33,-7.87 0,-2.81 0.44,-5.42 1.33,-7.83 0.89,-2.41 2.16,-4.48 3.83,-6.23 1.66,-1.75 3.65,-3.11 5.98,-4.09 2.32,-0.97 4.91,-1.46 7.78,-1.46 2.87,0 5.46,0.49 7.78,1.46 2.32,0.97 4.31,2.34 5.98,4.09 1.66,1.75 2.94,3.83 3.83,6.23 0.89,2.41 1.33,5.02 1.33,7.83 0,2.87 -0.44,5.49 -1.33,7.87 z m 44.94,-16.04 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 h -7.91 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z"
+   id="path80"
+   inkscape:connector-curvature="0"
+   style="fill:#202826" />
+		</g>
+	</g>
+</switch>
+</svg>
+</a>																											</span>
+																																		</li>
+											<li>
+							<span class="name">
+								Rizky Yuniar Hakkun
+							</span>
+															<span class="affiliation">
+																			<span>Electronic Engineering Polytechnic Institute of Surabaya</span>
+										<a href="https://ror.org/00cf3sf89"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:i="&amp;ns_ai;"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 23.4225 16.696501"
+   xml:space="preserve"
+   sodipodi:docname="rorId.svg"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   width="23.422501"
+   height="16.696501"><metadata
+   id="metadata93"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs91" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1880"
+   inkscape:window-height="1016"
+   id="namedview89"
+   showgrid="true"
+   showguides="false"
+   inkscape:zoom="1"
+   inkscape:cx="-177.76975"
+   inkscape:cy="13.962506"
+   inkscape:window-x="40"
+   inkscape:window-y="27"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<switch
+   id="switch86"
+   transform="matrix(0.15,0,0,0.15,-0.7305,-0.624)">
+	<foreignObject
+   requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/"
+   x="0"
+   y="0"
+   width="1"
+   height="1">
+
+	</foreignObject>
+	<g
+   i:extraneous="self"
+   id="g84">
+		<polygon
+   class="strorId0"
+   points="68.65,4.16 56.52,22.74 44.38,4.16 "
+   id="polygon72"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="119.41,4.16 107.28,22.74 95.14,4.16 "
+   id="polygon74"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="44.38,115.47 56.52,96.88 68.65,115.47 "
+   id="polygon76"
+   style="fill:#53baa1" />
+		<polygon
+   class="strorId0"
+   points="95.14,115.47 107.28,96.88 119.41,115.47 "
+   id="polygon78"
+   style="fill:#53baa1" />
+		<g
+   id="g82">
+			<path
+   class="st1"
+   d="m 145.53,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 2.24,-3.01 3.35,-6.67 3.35,-10.96 0,-3.56 -0.62,-6.52 -1.85,-8.9 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 h -23.56 v 18.83 c -0.19,-0.55 -0.39,-1.09 -0.61,-1.63 -1.63,-3.95 -3.91,-7.32 -6.84,-10.1 -2.93,-2.78 -6.39,-4.92 -10.41,-6.41 -4.01,-1.49 -8.4,-2.24 -13.16,-2.24 -4.76,0 -9.14,0.75 -13.16,2.24 -4.01,1.49 -7.48,3.63 -10.41,6.41 -2.62,2.49 -4.72,5.46 -6.3,8.9 -0.23,-2.47 -0.81,-4.61 -1.74,-6.41 -1.23,-2.38 -2.9,-4.27 -4.99,-5.68 -2.09,-1.4 -4.53,-2.41 -7.31,-3.01 -2.78,-0.6 -5.72,-0.9 -8.81,-0.9 H 4.87 V 89.42 H 18.28 V 65.08 H 24.9 L 37.63,89.42 H 53.71 L 38.24,63.71 c 4.3,-0.8 7.57,-2.71 9.8,-5.72 0.1,-0.14 0.19,-0.29 0.29,-0.43 -0.02,0.47 -0.03,0.94 -0.03,1.42 0,4.87 0.82,9.29 2.45,13.24 1.63,3.95 3.91,7.32 6.84,10.1 2.92,2.78 6.39,4.92 10.41,6.41 4.01,1.49 8.4,2.24 13.16,2.24 4.76,0 9.14,-0.75 13.16,-2.24 4.01,-1.49 7.48,-3.63 10.41,-6.41 2.92,-2.78 5.2,-6.15 6.84,-10.1 0.22,-0.53 0.42,-1.08 0.61,-1.63 v 18.83 h 13.41 V 65.08 h 6.62 l 12.73,24.34 h 16.08 z M 36.39,50.81 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 H 18.29 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z m 62.35,16.04 c -0.89,2.38 -2.16,4.44 -3.83,6.19 -1.66,1.75 -3.65,3.11 -5.98,4.09 -2.32,0.98 -4.92,1.46 -7.78,1.46 -2.87,0 -5.46,-0.49 -7.78,-1.46 -2.32,-0.97 -4.31,-2.34 -5.98,-4.09 -1.66,-1.75 -2.94,-3.81 -3.83,-6.19 -0.89,-2.38 -1.33,-5 -1.33,-7.87 0,-2.81 0.44,-5.42 1.33,-7.83 0.89,-2.41 2.16,-4.48 3.83,-6.23 1.66,-1.75 3.65,-3.11 5.98,-4.09 2.32,-0.97 4.91,-1.46 7.78,-1.46 2.87,0 5.46,0.49 7.78,1.46 2.32,0.97 4.31,2.34 5.98,4.09 1.66,1.75 2.94,3.83 3.83,6.23 0.89,2.41 1.33,5.02 1.33,7.83 0,2.87 -0.44,5.49 -1.33,7.87 z m 44.94,-16.04 c -0.72,0.92 -1.62,1.59 -2.71,2.02 -1.09,0.43 -2.31,0.69 -3.65,0.77 -1.35,0.09 -2.62,0.13 -3.83,0.13 h -7.91 V 39.89 h 8.77 c 1.2,0 2.44,0.09 3.7,0.26 1.26,0.17 2.38,0.5 3.35,0.99 0.97,0.49 1.78,1.19 2.41,2.11 0.63,0.92 0.95,2.15 0.95,3.7 0,1.65 -0.36,2.94 -1.08,3.86 z"
+   id="path80"
+   inkscape:connector-curvature="0"
+   style="fill:#202826" />
+		</g>
+	</g>
+</switch>
+</svg>
+</a>																											</span>
+																																		</li>
+										</ul>
+				</section>
+			
+																	<section class="item doi">
+					<h2 class="label">
+												DOI: 
+					</h2>
+					<span class="value">
+						<a href="https://doi.org/10.33050/tmj.v7i1.1690">
+							https://doi.org/10.33050/tmj.v7i1.1690
+						</a>
+					</span>
+				</section>
+			
+
+						
+										<section class="item abstract">
+					<h2 class="label">Abstract</h2>
+					<p>Sign language is one of the means of communication for people who are deaf and speech impaired, especially between normal people and people with disabilities in the wider community. But in reality, not everyone can understand the meaning and purpose of the sign language used so that there is a lack of knowledge of normal people about sign language in Indonesia and there is still a lack of effective and easy-to-understand digital learning media. In this study, we propose a new approach to create a sign language learning application for normal people using voice as input which can later display the results of visualization of sign language movements in the form of 3D animation. The display of 3D animation movements uses data that refers to the SIBI (Indonesian Language Sign System) curriculum. This Sign Language application was built by utilizing the Google Speech to Text API to process voice input, Java as the programming language used, and MySQL to manage the database. Based on system testing and on users (general public and persons with disabilities) using the SUS (System Usability Scale) method, it can be concluded that the sign language learning application with Android-based voice input is successful in facilitating the sign language learning process and in terms of usability or usability of the application getting an assessment that the application can be accepted by users and is suitable for use as a learning support media because its features can be understood well.</p>
+				</section>
+			
+			
+
+						
+																																								
+										<section class="item references">
+					<h2 class="label">
+						References
+					</h2>
+					<div class="value">
+																					<p>B. L. Basyah and F. M. Elvina, “Rancang Bangun Aplikasi Pembelajaran Bahasa Isyarat Berbasis Android”. </p>
+															<p>I. Winaldi and A. Setyawan, “Aplikasi Pengenalan Bahasa Isyarat Untuk Penyandang Tuna Tungu Berbasis Android (Studi Kasus: SLB Madina Serang),” JSiI (Jurnal Sistem Informasi), vol. 5, no. 2, 2018. </p>
+															<p>F. S. Rahman and Y. Yuhefizar, “Aplikasi Virtual Kata Untuk Komunikasi Penyandang Tunarungu Berbasis Android,” Jurnal RESTI (Rekayasa Sistem dan Teknologi Informasi), vol. 1, no. 2, pp. 99–105, 2017. </p>
+															<p>A. Salsabila, R. Yunita, and C. Rozikin, “Identifikasi Citra Jenis Bunga menggunakan Algoritma KNN dengan Ekstrasi Warna HSV dan Tekstur GLCM,” Technomedia Journal, vol. 6, no. 1, pp. 124–137, 2021. </p>
+															<p>N. P. L. Santoso, Y. Durachman, S. Watini, and S. Millah, “Manajemen Kontrol Akses Berbasis Blockchain untuk Pendidikan Online Terdesentralisasi,” Technomedia Journal, vol. 6, no. 1, pp. 111–123, 2021. </p>
+															<p>H. Sugiarto, “Penerapan Multimedia Development Life Cycle Pada Aplikasi Pengenalan Abjad Dan Angka,” IJCIT (Indonesian Journal on Computer and Information Technology), vol. 3, no. 1, 2018. </p>
+															<p>I. Kautsar, R. I. Borman, and A. Sulistyawati, “Aplikasi pembelajaran bahasa isyarat bagi penyandang tuna rungu berbasis android dengan metode bisindo,” Semnasteknomedia Online, vol. 3, no. 1, p. 4, 2015. </p>
+															<p>J. K. Hikmalansya, “Aplikasi Pembelajaran Bahasa Isyarat Berbasis Android,” Inform: Jurnal Ilmiah Bidang Teknologi Informasi dan Komunikasi, vol. 1, no. 2, 2016. </p>
+															<p>H. S. Hopipah and R. Mayasari, “Optimasi Backward Elimination untuk Klasifikasi Kepuasan Pelanggan Menggunakan Algoritme k-nearest neighbor (k-NN) and Naive Bayes,” Technomedia Journal, vol. 6, no. 1, pp. 99–110, 2021. </p>
+															<p>R. Rosyid and M. A. W. Prasetyo, “Robot Peraga 12 Gerakan Pengaturan Lalu Lintas Berbasis Arduino Mega 2560,” Technomedia Journal, vol. 5, no. 2, pp. 193–205, 2021. </p>
+																		</div>
+				</section>
+			
+		</div><!-- .main_entry -->
+
+		<div class="entry_details">
+
+										<div class="item cover_image">
+					<div class="sub_item">
+													<a href="https://ijc.ilearning.co/TMJ/en/issue/view/66">
+								<img src="https://ijc.ilearning.co/public/journals/1/cover_issue_66_id_ID.png" alt="">
+							</a>
+											</div>
+				</div>
+			
+										<div class="item galleys">
+					<h2 class="pkp_screen_reader">
+						Downloads
+					</h2>
+					<ul class="value galleys_links">
+													<li>
+								
+	
+													
+
+<a class="obj_galley_link pdf" href="https://ijc.ilearning.co/TMJ/en/article/view/1690/610">
+		
+	PDF (Indonesian)
+
+	</a>
+							</li>
+											</ul>
+				</div>
+						
+						<div class="item published">
+				<section class="sub_item">
+					<h2 class="label">
+						Published
+					</h2>
+					<div class="value">
+																			<span>2022-02-16</span>
+																	</div>
+				</section>
+							</div>
+			
+						
+										<div class="item issue">
+
+											<section class="sub_item">
+							<h2 class="label">
+								Issue
+							</h2>
+							<div class="value">
+								<a class="title" href="https://ijc.ilearning.co/TMJ/en/issue/view/66">
+									Vol. 7 No. 1 Juni (2022): TMJ (Technomedia Journal)
+								</a>
+							</div>
+						</section>
+					
+											<section class="sub_item">
+							<h2 class="label">
+								Section
+							</h2>
+							<div class="value">
+								Artikel
+							</div>
+						</section>
+					
+									</div>
+			
+						
+										<div class="item copyright">
+					<h2 class="label">
+						License
+					</h2>
+																										<p>Copyright (c) 2022 Risa Fatmawati, Rengga Asmara, Yanuar Risah Prayogi, Rizky Yuniar Hakkun</p>
+														<a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" src="//i.creativecommons.org/l/by/4.0/88x31.png" /></a><p>This work is licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+																
+				</div>
+			
+				<div class="item citation">
+		<section class="sub_item citation_display">
+			<h2 class="label">
+				How to Cite
+			</h2>
+			<div class="value">
+				<div id="citationOutput" role="region" aria-live="polite">
+					<div class="csl-bib-body">
+  <div class="csl-entry">Aplikasi Pembelajaran Sistem Isyarat Bahasa Indonesia (SIBI) Berbasis Voice Menggunakan OpenSIBI. (2022). <i>Technomedia Journal</i>, <i>7</i>(1 Juni), 22-39. <a href="https://doi.org/10.33050/tmj.v7i1.1690">https://doi.org/10.33050/tmj.v7i1.1690</a></div>
+</div>
+				</div>
+				<div class="citation_formats">
+					<button class="citation_formats_button label" aria-controls="cslCitationFormats" aria-expanded="false" data-csl-dropdown="true">
+						More Citation Formats
+					</button>
+					<div id="cslCitationFormats" class="citation_formats_list" aria-hidden="true">
+						<ul class="citation_formats_styles">
+															<li>
+									<a
+											rel="nofollow"
+											aria-controls="citationOutput"
+											href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/acm-sig-proceedings?submissionId=1690&amp;publicationId=1119&amp;issueId=66"
+											data-load-citation
+											data-json-href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/acm-sig-proceedings?submissionId=1690&amp;publicationId=1119&amp;issueId=66&amp;return=json"
+									>
+										ACM
+									</a>
+								</li>
+															<li>
+									<a
+											rel="nofollow"
+											aria-controls="citationOutput"
+											href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/acs-nano?submissionId=1690&amp;publicationId=1119&amp;issueId=66"
+											data-load-citation
+											data-json-href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/acs-nano?submissionId=1690&amp;publicationId=1119&amp;issueId=66&amp;return=json"
+									>
+										ACS
+									</a>
+								</li>
+															<li>
+									<a
+											rel="nofollow"
+											aria-controls="citationOutput"
+											href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/apa?submissionId=1690&amp;publicationId=1119&amp;issueId=66"
+											data-load-citation
+											data-json-href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/apa?submissionId=1690&amp;publicationId=1119&amp;issueId=66&amp;return=json"
+									>
+										APA
+									</a>
+								</li>
+															<li>
+									<a
+											rel="nofollow"
+											aria-controls="citationOutput"
+											href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/associacao-brasileira-de-normas-tecnicas?submissionId=1690&amp;publicationId=1119&amp;issueId=66"
+											data-load-citation
+											data-json-href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/associacao-brasileira-de-normas-tecnicas?submissionId=1690&amp;publicationId=1119&amp;issueId=66&amp;return=json"
+									>
+										ABNT
+									</a>
+								</li>
+															<li>
+									<a
+											rel="nofollow"
+											aria-controls="citationOutput"
+											href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/chicago-author-date?submissionId=1690&amp;publicationId=1119&amp;issueId=66"
+											data-load-citation
+											data-json-href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/chicago-author-date?submissionId=1690&amp;publicationId=1119&amp;issueId=66&amp;return=json"
+									>
+										Chicago
+									</a>
+								</li>
+															<li>
+									<a
+											rel="nofollow"
+											aria-controls="citationOutput"
+											href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/harvard-cite-them-right?submissionId=1690&amp;publicationId=1119&amp;issueId=66"
+											data-load-citation
+											data-json-href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/harvard-cite-them-right?submissionId=1690&amp;publicationId=1119&amp;issueId=66&amp;return=json"
+									>
+										Harvard
+									</a>
+								</li>
+															<li>
+									<a
+											rel="nofollow"
+											aria-controls="citationOutput"
+											href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/ieee?submissionId=1690&amp;publicationId=1119&amp;issueId=66"
+											data-load-citation
+											data-json-href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/ieee?submissionId=1690&amp;publicationId=1119&amp;issueId=66&amp;return=json"
+									>
+										IEEE
+									</a>
+								</li>
+															<li>
+									<a
+											rel="nofollow"
+											aria-controls="citationOutput"
+											href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/modern-language-association?submissionId=1690&amp;publicationId=1119&amp;issueId=66"
+											data-load-citation
+											data-json-href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/modern-language-association?submissionId=1690&amp;publicationId=1119&amp;issueId=66&amp;return=json"
+									>
+										MLA
+									</a>
+								</li>
+															<li>
+									<a
+											rel="nofollow"
+											aria-controls="citationOutput"
+											href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/turabian-fullnote-bibliography?submissionId=1690&amp;publicationId=1119&amp;issueId=66"
+											data-load-citation
+											data-json-href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/turabian-fullnote-bibliography?submissionId=1690&amp;publicationId=1119&amp;issueId=66&amp;return=json"
+									>
+										Turabian
+									</a>
+								</li>
+															<li>
+									<a
+											rel="nofollow"
+											aria-controls="citationOutput"
+											href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/vancouver?submissionId=1690&amp;publicationId=1119&amp;issueId=66"
+											data-load-citation
+											data-json-href="https://ijc.ilearning.co/TMJ/en/citationstylelanguage/get/vancouver?submissionId=1690&amp;publicationId=1119&amp;issueId=66&amp;return=json"
+									>
+										Vancouver
+									</a>
+								</li>
+													</ul>
+											</div>
+				</div>
+			</div>
+		</section>
+	</div>
+
+
+		</div><!-- .entry_details -->
+	</div><!-- .row -->
+
+</article>
+
+	
+
+</div><!-- .page -->
+
+	</div><!-- pkp_structure_main -->
+
+									<div class="pkp_structure_sidebar left" role="complementary">
+				<div class="pkp_block block_custom" id="customblock-submmission">
+	<h2 class="title"></h2>
+	<div class="content">
+		<pre style="background-color: #ffffff; text-align: center;">&nbsp;<a href="http://ijc.ilearning.co/index.php/TMJ/about/submissions"><img src="/public/site/images/shofiyulmillah/WhatsApp_Image_2021-01-31_at_18.48_.24_.png"></a></pre>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-sidebaar">
+	<h2 class="title pkp_screen_reader">sidebaar</h2>
+	<div class="content">
+		<table class="hover" style="width: 100%; max-width: 250px; border-collapse: collapse; height: 490px;">
+<tbody>
+<tr style="background-color: #006400; height: 35px;">
+<td style="color: #ffffff; text-align: center; font-weight: bold;">SIDE MENU</td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/focusandscope" target="_blank" rel="noopener">FOCUS &amp; SCOPE</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/about/submissions" target="_blank" rel="noopener">SUBMISSION OF MANUSCRIPT</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/indexing" target="_blank" rel="noopener">INDEXING</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/publicationethics" target="_blank" rel="noopener">PUBLICATION ETHICS</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/en/EditorialPolicies/#PeerReviewProcess" target="_blank" rel="noopener">PEER REVIEW PROCESS</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/en/EditorialPolicies/#PublicationFrequency" target="_blank" rel="noopener">PUBLISHING FREQUENCY</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/authorguidelines" target="_blank" rel="noopener">AUTHOR GUIDELINES</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/authorfees" target="_blank" rel="noopener">AUTHOR FEES</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/about/submissions#privacyStatement">PRIVACY STATEMENT</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/plagiarism" target="_blank" rel="noopener">PLAGIARISM</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/copyrightstatement" target="_blank" rel="noopener">COPYRIGHT STATEMENT</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;"><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/licensestatement" target="_blank" rel="noopener">LICENSE STATEMENT</a></td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;">
+<p><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/openaccessstatement" target="_blank" rel="noopener">OPEN ACCESS STATEMENT</a></p>
+</td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;">
+<p><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/generativeaipolicies" target="_blank" rel="noopener">GENERATIVE AI POLICIES</a></p>
+</td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;">
+<p><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/contacttmj" target="_blank" rel="noopener">CONTACT</a></p>
+</td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;">
+<p><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/typesofmanuscripts" target="_blank" rel="noopener">TYPES OF MANUSCRIPTS</a></p>
+</td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;">
+<p><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/articlewithdrawal" target="_blank" rel="noopener">ARTICLE WITHDRAWAL</a></p>
+</td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;">
+<p><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/conflictofinterest" target="_blank" rel="noopener">CONFLICT OF INTEREST</a></p>
+</td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;">
+<p><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/ownershipandmanagementinformation" target="_blank" rel="noopener">OWNERSHIP AND MANAGEMENT INFORMATION</a></p>
+</td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;">
+<p><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/postpublicationdiscussion" target="_blank" rel="noopener">POST-PUBLICATION DISCUSSION</a></p>
+</td>
+</tr>
+<tr style="background-color: #3bb143; height: 35px;">
+<td style="text-align: center;">
+<p><a style="color: #ffffff; text-decoration: none;" href="https://ijc.ilearning.co/index.php/TMJ/allegationofresearchmisconduct" target="_blank" rel="noopener">ALLEGATION OF RESEARCH MISCONDUCT</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-template">
+	<h2 class="title pkp_screen_reader">template</h2>
+	<div class="content">
+		<pre style="background-color: #006400; text-align: center;"><span style="color: #ffffff;">TEMPLATE</span></pre>
+<p>&nbsp; &nbsp;<a title="Template Latex" href="https://drive.usercontent.google.com/u/0/uc?id=1UhvDJRuy3CTxJ7DM5vJOleGrBd-YxN9c&amp;export=download"><img src="https://ijc.ilearning.co/public/site/images/admin/templatelatex.png" alt="" width="398" height="203"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-sponsorship">
+	<h2 class="title pkp_screen_reader">sponsorship</h2>
+	<div class="content">
+		<pre style="background-color: #006400; text-align: center;"><span style="color: #ffffff;">SUPPORTED BY</span></pre>
+<p align="center"><a href="https://alphabetincubator.id/"><img src="https://drive.pastibisa.app/15_logo ADI Eng.png" width="162" height="150"></a></p>
+	</div>
+</div>
+<div class="pkp_block block_custom" id="customblock-visitor">
+	<h2 class="title pkp_screen_reader"></h2>
+	<div class="content">
+		<pre style="background-color: #006400; text-align: center;"><span style="color: #ffffff;">VISITOR TMJ</span></pre>
+<p><a href="https://info.flagcounter.com/6RFy">&nbsp;<img src="https://s01.flagcounter.com/count2/6RFy/bg_ECECED/txt_000000/border_CCCCCC/columns_3/maxflags_15/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" width="400" height="500" aria-hidden="false"></a></p>
+<p>&nbsp;</p>
+	</div>
+</div>
+
+			</div><!-- pkp_sidebar.left -->
+			</div><!-- pkp_structure_content -->
+
+<div class="pkp_structure_footer_wrapper" role="contentinfo">
+	<a id="pkp_content_footer"></a>
+
+	<div class="pkp_structure_footer">
+
+					<div class="pkp_footer_content">
+				<div class="table-container">
+<table style="height: 239px;" width="986">
+<tbody>
+<tr>
+<td style="width: 235.8px;"><img src="https://aipicturestorage.s3.ap-southeast-3.amazonaws.com/1702018424_6572bd78cc0ae.png" width="200" height="200"></td>
+<td style="height: 214px; width: 743px;" width="743">
+<p><strong>TMJ (Technomedia Journal)<br>ISSN:</strong> <a href="https://issn.perpusnas.go.id/terbit/detail/1465980555" target="_blank" rel="noopener">2620-3383</a> (online), <a href="https://issn.perpusnas.go.id/terbit/detail/1517984325" target="_blank" rel="noopener">2528-6544 </a> (print)<br>Published by Pandawan Sejahtera Indonesia<br>Supported by Indonesian Lecturers Associations<br>Website : <a href="https://ijc.ilearning.co/index.php/TMJ">https://ijc.ilearning.co/index.php/TMJ</a><br>Email : <a href="mailto:tmj@raharja.info">tmj@raharja.info</a> </p>
+<p><a href="http://creativecommons.org/licenses/by/4.0/" rel="license"><img style="border-width: 0;" src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Lisensi Creative Commons" width="85" height="30"></a> This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Creative Commons Attribution 4.0</a> <strong>(CC BY 4.0)</strong></p>
+<a title="Web Analytics" href="https://statcounter.com/" target="_blank" rel="noopener"><img src="https://c.statcounter.com/11879382/0/778171c3/0/" alt="Web Analytics"></a> <a href="https://statcounter.com/p11879382/?guest=1">View TMJ Stats</a> </td>
+</tr>
+</tbody>
+</table>
+&lt;</div>
+			</div>
+		
+		<div class="pkp_brand_footer">
+			<a href="https://ijc.ilearning.co/TMJ/en/about/aboutThisPublishingSystem">
+				<img alt="More information about the publishing system, Platform and Workflow by OJS/PKP." src="https://ijc.ilearning.co/templates/images/ojs_brand.png">
+			</a>
+		</div>
+	</div>
+</div><!-- pkp_structure_footer_wrapper -->
+
+</div><!-- pkp_structure_page -->
+
+<script src="https://ijc.ilearning.co/js/build/jquery/jquery.min.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ijc.ilearning.co/js/build/jquery-ui/jquery-ui.min.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ijc.ilearning.co/plugins/themes/default/js/lib/popper/popper.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ijc.ilearning.co/plugins/themes/default/js/lib/bootstrap/util.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ijc.ilearning.co/plugins/themes/default/js/lib/bootstrap/dropdown.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ijc.ilearning.co/plugins/themes/default/js/lib/swiper/swiper-bundle.min.js?v=3.5.0.1" type="text/javascript"></script><script type="text/javascript">var pkpDefaultThemeI18N = {"nextSlide":"Next slide","prevSlide":"Previous slide"}</script><script src="https://ijc.ilearning.co/plugins/themes/default/js/main.js?v=3.5.0.1" type="text/javascript"></script><script src="https://ijc.ilearning.co/plugins/generic/citationStyleLanguage/js/articleCitation.js?v=3.5.0.1" type="text/javascript"></script><script type="text/javascript">
+(function (w, d, s, l, i) { w[l] = w[l] || []; var f = d.getElementsByTagName(s)[0],
+j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true;
+j.src = 'https://www.googletagmanager.com/gtag/js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+function gtag(){dataLayer.push(arguments)}; gtag('js', new Date()); gtag('config', i); })
+(window, document, 'script', 'dataLayer', 'UA-83856215-1');
+</script>
+
+
+</body>
+</html>

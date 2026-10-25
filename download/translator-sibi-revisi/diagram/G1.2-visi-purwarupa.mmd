@@ -1,0 +1,29 @@
+%% G1.2 — Visi purwarupa penerjemah dua arah tanpa kamera (BAB I, Subbab 1.1)
+%% Tipe: flowchart LR, dua arah berlawanan
+flowchart LR
+    subgraph SIBI["Sisi pengisyarat SIBI (tunarungu)"]
+        T["Modul TX ESP32-S3<br/>(pemancar ESP-NOW)"]
+        Z["Zona isyarat<br/>satu pengisyarat"]
+        R["Modul RX ESP32-S3<br/>CSI + inferensi int8 di perangkat"]
+    end
+
+    subgraph SRV["Server lokal (laptop)"]
+        N["Pemrosesan bahasa:<br/>kamus label menjadi teks"]
+        T2S["TTS Bahasa Indonesia"]
+        S2T["ASR Bahasa Indonesia"]
+        MAP["Pemetaan teks ke<br/>representasi SIBI"]
+    end
+
+    subgraph DGR["Sisi pendengar"]
+        SPK["Speaker modul<br/>(suara hasil TTS)"]
+        MIC["Mikrofon modul I2S"]
+        LCD["Layar modul<br/>(representasi SIBI)"]
+    end
+
+    T -- "sinyal Wi-Fi melintasi zona isyarat" --> R
+    R -- "label isyarat + skor keyakinan" --> N
+    N --> T2S
+    T2S -- "audio" --> SPK
+    MIC -- "audio" --> S2T
+    S2T -- "teks Indonesia" --> MAP
+    MAP -- "glos, gambar, ejaan jari" --> LCD

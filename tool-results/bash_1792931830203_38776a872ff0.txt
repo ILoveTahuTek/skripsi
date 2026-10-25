@@ -1,0 +1,435 @@
+145 elemen data-amount
+>> ...ce Live and voice agents support multiple AI models. For the latest list of supported models, see the documentation . Category Features Price Voice Live Pro (per m token billing) VL1 Text Input: <span class='price-data '
+   US: [('us-east', '4.000'), ('us-west-2', '4.000')]  unit: 
+
+>> ... agents support multiple AI models. For the latest list of supported models, see the documentation . Category Features Price Voice Live Pro (per m token billing) VL1 Text Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.4000'), ('us-west-2', '0.4000')]  unit: 
+
+>> ...le--pricing"> Category Features Price Voice Live Pro (per m token billing) VL1 Text Input: $- Cached Input: $- Output 1 (gpt-realtime, gpt-4o, gpt-4.1, gpt-5, gpt-5-chat): <span class='price-data '
+   US: [('us-east', '16.000'), ('us-west-2', '16.000')]  unit: 
+
+>> ...region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output 1 (gpt-realtime, gpt-4o, gpt-4.1, gpt-5, gpt-5-chat): $- Output 2 (gpt-realtime-2, gpt-realtime-2.1): <span class='price-data '
+   US: [('us-east', '24.000'), ('us-west-2', '24.000')]  unit: 
+
+>> ...vailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output 1 (gpt-realtime, gpt-4o, gpt-4.1, gpt-5, gpt-5-chat): $- Output 2 (gpt-realtime-2, gpt-realtime-2.1): $- Audio - Standard Input: <span class='price-data '
+   US: [('us-east', '17.000'), ('us-west-2', '17.000')]  unit: 
+
+>> ...aimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output 2 (gpt-realtime-2, gpt-realtime-2.1): $- Audio - Standard Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.4000'), ('us-west-2', '0.4000')]  unit: 
+
+>> ....000,"us-west-3":24.000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Audio - Standard Input: $- Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '31.000'), ('us-west-2', '31.000')]  unit: 
+
+>> ...00,"us-west-3":17.000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output: $- Audio - Custom VL2 Input: <span class='price-data '
+   US: [('us-east', '40.00'), ('us-west-2', '40.00')]  unit: 
+
+>> ...00,"us-west-3":0.4000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Audio - Custom VL2 Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.4000'), ('us-west-2', '0.4000')]  unit: 
+
+>> ...00,"us-west-3":31.000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Audio - Custom VL2 Input: $- Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '55.000'), ('us-west-2', '55.000')]  unit: 
+
+>> ...sclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output: $- Native audio with speech-to-speech real-time model Input: <span class='price-data '
+   US: [('us-east', '32.000'), ('us-west-2', '32.000')]  unit: 
+
+>> ...sclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Native audio with speech-to-speech real-time model Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.4000'), ('us-west-2', '0.4000')]  unit: 
+
+>> ...sclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Native audio with speech-to-speech real-time model Input: $- Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '64.000'), ('us-west-2', '64.000')]  unit: 
+
+>> ...-west-2":32.000,"us-west-3":32.000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output: $- Image Input: <span class='price-data '
+   US: [('us-east', '5.000'), ('us-west-2', '5.000')]  unit: 
+
+>> ...-west-2":0.4000,"us-west-3":0.4000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Image Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.5000'), ('us-west-2', '0.5000')]  unit: 
+
+>> ...mer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Image Input: $- Cached Input: $- Voice Live Standard (per m token billing) VL1 Text Input: <span class='price-data '
+   US: [('us-east', '0.66000'), ('us-west-2', '0.66000')]  unit: 
+
+>> ...er='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Voice Live Standard (per m token billing) VL1 Text Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.33000'), ('us-west-2', '0.33000')]  unit: 
+
+>> ...sclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Voice Live Standard (per m token billing) VL1 Text Input: $- Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '2.64000'), ('us-west-2', '2.64000')]  unit: 
+
+>> ...000,"us-west-3":0.66000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output: $- Audio - Standard Input: <span class='price-data '
+   US: [('us-east', '15.000'), ('us-west-2', '15.000')]  unit: 
+
+>> ...000,"us-west-3":0.33000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Audio - Standard Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.33000'), ('us-west-2', '0.33000')]  unit: 
+
+>> ...000,"us-west-3":2.64000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Audio - Standard Input: $- Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '26.000'), ('us-west-2', '26.000')]  unit: 
+
+>> ...00,"us-west-3":15.000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output: $- Audio - Custom VL2 Input: <span class='price-data '
+   US: [('us-east', '39.000'), ('us-west-2', '39.000')]  unit: 
+
+>> ...0,"us-west-3":0.33000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Audio - Custom VL2 Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.33000'), ('us-west-2', '0.33000')]  unit: 
+
+>> ...00,"us-west-3":26.000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Audio - Custom VL2 Input: $- Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '50.00'), ('us-west-2', '50.00')]  unit: 
+
+>> ...sclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output: $- Native audio with speech-to-speech real-time model Input: <span class='price-data '
+   US: [('us-east', '11.000'), ('us-west-2', '11.000')]  unit: 
+
+>> ...sclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Native audio with speech-to-speech real-time model Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.33000'), ('us-west-2', '0.33000')]  unit: 
+
+>> ...sclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Native audio with speech-to-speech real-time model Input: $- Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '22.000'), ('us-west-2', '22.000')]  unit: 
+
+>> ...a-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output: $- Voice Live Lite (per m token billing) VL1 Text Input: <span class='price-data '
+   US: [('us-east', '0.11000'), ('us-west-2', '0.11000')]  unit: 
+
+>> ...a-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Voice Live Lite (per m token billing) VL1 Text Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.04000'), ('us-west-2', '0.04000')]  unit: 
+
+>> ...a-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Voice Live Lite (per m token billing) VL1 Text Input: $- Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '0.44000'), ('us-west-2', '0.44000')]  unit: 
+
+>> ...000,"us-west-3":0.11000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output: $- Audio - Standard Input: <span class='price-data '
+   US: [('us-east', '15.000'), ('us-west-2', '15.000')]  unit: 
+
+>> ...000,"us-west-3":0.04000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Audio - Standard Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.04000'), ('us-west-2', '0.04000')]  unit: 
+
+>> ...000,"us-west-3":0.44000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Audio - Standard Input: $- Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '25.000'), ('us-west-2', '25.000')]  unit: 
+
+>> ...west-3":15.000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output: $- Audio - Custom VL2 Cached Input: <span class='price-data '
+   US: [('us-east', '0.04000'), ('us-west-2', '0.04000')]  unit: 
+
+>> ...,"us-west-3":0.04000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Audio - Custom VL2 Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '50.00'), ('us-west-2', '50.00')]  unit: 
+
+>> ...ta-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Audio - Custom VL2 Cached Input: $- Output: $- Native audio with speech-to-speech real-time model Input: <span class='price-data '
+   US: [('us-east', '4.000'), ('us-west-2', '4.000')]  unit: 
+
+>> ...sclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Native audio with speech-to-speech real-time model Input: $- Cached Input: <span class='price-data '
+   US: [('us-east', '0.04000'), ('us-west-2', '0.04000')]  unit: 
+
+>> ...sclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Native audio with speech-to-speech real-time model Input: $- Cached Input: $- Output: <span class='price-data '
+   US: [('us-east', '12.000'), ('us-west-2', '12.000')]  unit: 
+
+>> ...r='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Cached Input: $- Output: $- Voice Live BYO (per m token billing) VL1 Audio - Standard Input: <span class='price-data '
+   US: [('us-east', '12.5000'), ('us-west-2', '12.5000')]  unit: 
+
+>> ...claimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Voice Live BYO (per m token billing) VL1 Audio - Standard Input: $- Output: <span class='price-data '
+   US: [('us-east', '23.000'), ('us-west-2', '23.000')]  unit: 
+
+>> ...ta-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Voice Live BYO (per m token billing) VL1 Audio - Standard Input: $- Output: $- Audio - Custom VL2 Input: <span class='price-data '
+   US: [('us-east', '36.000'), ('us-west-2', '36.000')]  unit: 
+
+>> ...12.5000,"us-west-3":12.5000}}' data-disclaimer='False' data-decimals="4" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Output: $- Audio - Custom VL2 Input: $- Output: <span class='price-data '
+   US: [('us-east', '47.000'), ('us-west-2', '47.000')]  unit: 
+
+>> ...voices .When using MAI-Transcribe, Standard-Audio pricing applies. Speech Model Prices Category Features Price Speech to Text (per second billing) Standard Transcription Real-time Transcription: <span class='price-data '
+   US: [('us-east', '1.0'), ('us-west-2', '1.0')]  unit: per hour
+
+>> ...e, Standard-Audio pricing applies. Speech Model Prices Category Features Price Speech to Text (per second billing) Standard Transcription Real-time Transcription: $- per hour Fast Transcription: <span class='price-data '
+   US: [('us-east', '0.36'), ('us-west-2', '0.36')]  unit: per hour
+
+>> ...Category Features Price Speech to Text (per second billing) Standard Transcription Real-time Transcription: $- per hour Fast Transcription: $- per hour 8 MAI Transcribe-2: <span class='price-data '
+   US: [('us-east', '0.1'), ('us-west-2', '0.1')]  unit: per hour
+
+>> ...False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour Fast Transcription: $- per hour 8 MAI Transcribe-2: $- per hour 10 MAI Transcribe-1.5: <span class='price-data '
+   US: [('us-east', '0.36'), ('us-west-2', '0.36')]  unit: per hour
+
+>> ...alse' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour 8 MAI Transcribe-2: $- per hour 10 MAI Transcribe-1.5: $- per hour Batch Transcription: <span class='price-data '
+   US: [('us-east', '0.18'), ('us-west-2', '0.18')]  unit: per hour
+
+>> ...ata-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour 10 MAI Transcribe-1.5: $- per hour Batch Transcription: $- per hour 1 LLM Speech Transcription <span class='price-data '
+   US: [('us-east', '0.36'), ('us-west-2', '0.36')]  unit: per hour
+
+>> ...egion-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour Batch Transcription: $- per hour 1 LLM Speech Transcription $- per hour Custom Transcription Real-time Transcription: <span class='price-data '
+   US: [('us-east', '1.2'), ('us-west-2', '1.2')]  unit: per hour
+
+>> ...egion-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour 1 LLM Speech Transcription $- per hour Custom Transcription Real-time Transcription: $- per hour Batch Transcription: <span class='price-data '
+   US: [('us-east', '0.225'), ('us-west-2', '0.225')]  unit: per hour
+
+>> ... data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour Custom Transcription Real-time Transcription: $- per hour Batch Transcription: $- per hour 1 Endpoint hosting: <span class='price-data '
+   US: [('us-east', '0.05375'), ('us-west-2', '0.05375')]  unit: per model per hour
+
+>> ...imals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour Batch Transcription: $- per hour 1 Endpoint hosting: $- per model per hour Custom Speech Training 5 : <span class='price-data '
+   US: [('us-east', '10.0'), ('us-west-2', '10.0')]  unit: per compute hour
+
+>> ...true'> $- per model per hour Custom Speech Training 5 : $- per compute hour Enhanced add-on features: Continuous Language identification Diarization Pronunciation Assessment (prosody) Real-time: <span class='price-data '
+   US: [('us-east', '0.3'), ('us-west-2', '0.3')]  unit: per hour per feature
+
+>> ...ntinuous Language identification Diarization Pronunciation Assessment (prosody) Real-time: $- per hour per feature Speech Translation (per second billing) Real-time Speech Translation (Standard) <span class='price-data '
+   US: [('us-east', '2.5'), ('us-west-2', '2.5')]  unit: per audio hour
+
+>> ...Real-time: $- per hour per feature Speech Translation (per second billing) Real-time Speech Translation (Standard) $- per audio hour 3 Realtime Speech Translation (Live Interpreter) Input audio: <span class='price-data '
+   US: [('us-east', '1.0'), ('us-west-2', '1.0')]  unit: per audio hour
+
+>> ...ure Speech Translation (per second billing) Real-time Speech Translation (Standard) $- per audio hour 3 Realtime Speech Translation (Live Interpreter) Input audio: $- per audio hour Output text: <span class='price-data '
+   US: [('us-east', '10.0'), ('us-west-2', '10.0')]  unit: per 1M characters
+
+>> ...-meter-type-if-no-price='true'> $- per audio hour 3 Realtime Speech Translation (Live Interpreter) Input audio: $- per audio hour Output text: $- per 1M characters Output audio (Standard voice): <span class='price-data '
+   US: [('us-east', '1.5'), ('us-west-2', '1.5')]  unit: per audio hour
+
+>> ...Input audio: $- per audio hour Output text: $- per 1M characters Output audio (Standard voice): $- per audio hour LI Output audio (Custom voice): <span class='price-data '
+   US: [('us-east', '2.0'), ('us-west-2', '2.0')]  unit: per audio hour
+
+>> ...e="N/A" data-hide-meter-type-if-no-price='true'> $- per 1M characters Output audio (Standard voice): $- per audio hour LI Output audio (Custom voice): $- per audio hour LI LLM Speech Translation <span class='price-data '
+   US: [('us-east', '0.36'), ('us-west-2', '0.36')]  unit: per hour
+
+>> ...navailable="N/A" data-hide-meter-type-if-no-price='true'> $- per audio hour LI Output audio (Custom voice): $- per audio hour LI LLM Speech Translation $- per hour Video Translation Input video: <span class='price-data '
+   US: [('us-east', '5.0'), ('us-west-2', '5.0')]  unit: per hour
+
+>> ...Output audio (Custom voice): $- per audio hour LI LLM Speech Translation $- per hour Video Translation Input video: $- per hour Output video (Standard voice): <span class='price-data '
+   US: [('us-east', '15.0'), ('us-west-2', '15.0')]  unit: per hour
+
+>> ...e-if-no-price='true'> $- per audio hour LI LLM Speech Translation $- per hour Video Translation Input video: $- per hour Output video (Standard voice): $- per hour Output video (Personal voice): <span class='price-data '
+   US: [('us-east', '20.0'), ('us-west-2', '20.0')]  unit: per hour
+
+>> ...ation Input video: $- per hour Output video (Standard voice): $- per hour Output video (Personal voice): $- per hour Text to Speech 7 Standard Voice Neural/Neural HD Flash (real-time and batch): <span class='price-data '
+   US: [('us-east', '15.0'), ('us-west-2', '15.0')]  unit: per 1M characters
+
+>> ...ce): $- per hour Output video (Personal voice): $- per hour Text to Speech 7 Standard Voice Neural/Neural HD Flash (real-time and batch): $- per 1M characters Neural HD (real-time and batch) 4 : <span class='price-data '
+   US: [('us-east', '22.0'), ('us-west-2', '22.0')]  unit: per 1M characters
+
+>> ...ersonal voice): $- per hour Text to Speech 7 Standard Voice Neural/Neural HD Flash (real-time and batch): $- per 1M characters Neural HD (real-time and batch) 4 : $- per 1M characters MAI-Voice: <span class='price-data '
+   US: [('us-east', '22.0'), ('us-west-2', '22.0')]  unit: per 1M characters
+
+>> ...f-no-price='true'> $- per 1M characters Neural HD (real-time and batch) 4 : $- per 1M characters MAI-Voice: $- per 1M characters Custom Voice Professional Voice: Synthesis (real-time and batch): <span class='price-data '
+   US: [('us-east', '24.0'), ('us-west-2', '24.0')]  unit: per 1M characters
+
+>> ...ice='true'> $- per 1M characters MAI-Voice: $- per 1M characters Custom Voice Professional Voice: Synthesis (real-time and batch): $- per 1M characters Synthesis (neural HD real-time and batch): <span class='price-data '
+   US: [('us-east', '48.0'), ('us-west-2', '48.0')]  unit: per 1M characters
+
+>> ... $- per 1M characters Custom Voice Professional Voice: Synthesis (real-time and batch): $- per 1M characters Synthesis (neural HD real-time and batch): $- per 1M characters Voice model training: <span class='price-data '
+   US: [('us-east', '52.0'), ('us-west-2', '52.0')]  unit: per compute hour
+
+>> ...-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per 1M characters Synthesis (neural HD real-time and batch): $- per 1M characters Voice model training: $- per compute hour , up to <span class='price-data '
+   US: [('us-east', '936.0'), ('us-west-2', '936.0')]  unit: per training
+
+>> ... data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per 1M characters Voice model training: $- per compute hour , up to $- per training Endpoint hosting: <span class='price-data '
+   US: [('us-east', '4.032'), ('us-west-2', '4.032')]  unit: per model per hour
+
+>> ...='true'> $- per compute hour , up to $- per training Endpoint hosting: $- per model per hour Personal Voice 6 : Synthesis (real-time and batch): <span class='price-data '
+   US: [('us-east', '24.0'), ('us-west-2', '24.0')]  unit: per 1M characters
+
+>> ...e-if-no-price='true'> $- per training Endpoint hosting: $- per model per hour Personal Voice 6 : Synthesis (real-time and batch): $- per 1M characters Voice creation: Free Voice profile storage: <span class='price-data '
+   US: [('us-east', '600.0'), ('us-west-2', '600.0')]  unit: per 1,000 voice profiles per month
+
+>> ... and batch): $- per 1M characters Voice creation: Free Voice profile storage: $- per 1,000 voice profiles per month Text to Speech Add-on feature: Avatar Standard Avatar Real-time (Interactive): <span class='price-data '
+   US: [('us-east', '0.5'), ('us-west-2', '0.5')]  unit: per minute
+
+>> ...M characters Voice creation: Free Voice profile storage: $- per 1,000 voice profiles per month Text to Speech Add-on feature: Avatar Standard Avatar Real-time (Interactive): $- per minute Batch: <span class='price-data '
+   US: [('us-east', '1.0'), ('us-west-2', '1.0')]  unit: per minute
+
+>> ...00 voice profiles per month Text to Speech Add-on feature: Avatar Standard Avatar Real-time (Interactive): $- per minute Batch: $- per minute Custom Avatar Photo Avatar: Real-time (Interactive): <span class='price-data '
+   US: [('us-east', '0.6'), ('us-west-2', '0.6')]  unit: per minute
+
+>> ...Text to Speech Add-on feature: Avatar Standard Avatar Real-time (Interactive): $- per minute Batch: $- per minute Custom Avatar Photo Avatar: Real-time (Interactive): $- per minute Batch: <span class='price-data '
+   US: [('us-east', '2.0'), ('us-west-2', '2.0')]  unit: per minute
+
+>> ...e="N/A" data-hide-meter-type-if-no-price='true'> $- per minute Batch: $- per minute Custom Avatar Photo Avatar: Real-time (Interactive): $- per minute Batch: $- per minute Photo Avatar Creation: <span class='price-data '
+   US: [('us-east', '2.0'), ('us-west-2', '2.0')]  unit: per avatar
+
+>> ...no-price='true'> $- per minute Custom Avatar Photo Avatar: Real-time (Interactive): $- per minute Batch: $- per minute Photo Avatar Creation: $- per avatar Video Avatar: Real-time (Interactive): <span class='price-data '
+   US: [('us-east', '0.6'), ('us-west-2', '0.6')]  unit: per minute
+
+>> ...Real-time (Interactive): $- per minute Batch: $- per minute Photo Avatar Creation: $- per avatar Video Avatar: Real-time (Interactive): $- per minute Batch: <span class='price-data '
+   US: [('us-east', '2.0'), ('us-west-2', '2.0')]  unit: per minute
+
+>> ...per minute Batch: $- per minute Photo Avatar Creation: $- per avatar Video Avatar: Real-time (Interactive): $- per minute Batch: $- per minute Interactive 4K avatar (real-time): <span class='price-data '
+   US: [('us-east', '0.8'), ('us-west-2', '0.8')]  unit: per minute
+
+>> ...er minute Photo Avatar Creation: $- per avatar Video Avatar: Real-time (Interactive): $- per minute Batch: $- per minute Interactive 4K avatar (real-time): $- per minute 4K avatar video (batch): <span class='price-data '
+   US: [('us-east', '2.7'), ('us-west-2', '2.7')]  unit: per minute
+
+>> ...er avatar Video Avatar: Real-time (Interactive): $- per minute Batch: $- per minute Interactive 4K avatar (real-time): $- per minute 4K avatar video (batch): $- per minute Avatar model training: <span class='price-data '
+   US: [('us-west-2', '15.0')]  unit: per compute hour
+
+>> ...ce='true'> $- per minute Batch: $- per minute Interactive 4K avatar (real-time): $- per minute 4K avatar video (batch): $- per minute Avatar model training: $- per compute hour Endpoint hosting: <span class='price-data '
+   US: [('us-east', '0.6'), ('us-west-2', '0.6')]  unit: per model per hour
+
+>> ...ranscription. 10 Limited-time promotional offer till 12/31/2026 LI This price includes text output Commitment Tiers – Standard Category Features Price (per month) Overage Speech to Text Standard <span class='price-data '
+   US: [('us-east', '1600.0'), ('us-west-2', '1600.0')]  unit: 
+
+>> ...mited-time promotional offer till 12/31/2026 LI This price includes text output Commitment Tiers – Standard Category Features Price (per month) Overage Speech to Text Standard $- for 2,000 hours <span class='price-data '
+   US: [('us-east', '0.8'), ('us-west-2', '0.8')]  unit: per hour
+
+>> ...Speech to Text Standard $- for 2,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '6500.0'), ('us-west-2', '6500.0')]  unit: 
+
+>> ...able="N/A" data-hide-meter-type-if-no-price='true'> $- for 2,000 hours $- per hour $- for 10,000 hours <span class='price-data '
+   US: [('us-east', '0.65'), ('us-west-2', '0.65')]  unit: per hour
+
+>> ...r hour $- for 10,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '25000.0'), ('us-west-2', '25000.0')]  unit: 
+
+>> ...ue'>$- for 10,000 hours $- per hour $- for 50,000 hours <span class='price-data '
+   US: [('us-east', '0.5'), ('us-west-2', '0.5')]  unit: per hour
+
+>> ...$- for 50,000 hours $- per hour Custom <span class='price-data '
+   US: [('us-east', '1920.0'), ('us-west-2', '1920.0')]  unit: 
+
+>> ...$- per hour Custom $- for 2,000 hours <span class='price-data '
+   US: [('us-east', '0.96'), ('us-west-2', '0.96')]  unit: per hour
+
+>> ...t":1920.0,"us-west-2":1920.0,"us-west-3":1920.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 2,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '7800.0'), ('us-west-2', '7800.0')]  unit: 
+
+>> ...s-west":0.96,"us-west-2":0.96,"us-west-3":0.96}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour $- for 10,000 hours <span class='price-data '
+   US: [('us-east', '0.78'), ('us-west-2', '0.78')]  unit: per hour
+
+>> ...":7800.0,"us-west-2":7800.0,"us-west-3":7800.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 10,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '30000.0'), ('us-west-2', '30000.0')]  unit: 
+
+>> ...s-west":0.78,"us-west-2":0.78,"us-west-3":0.78}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour $- for 50,000 hours <span class='price-data '
+   US: [('us-east', '0.6'), ('us-west-2', '0.6')]  unit: per hour
+
+>> ...lable="N/A" data-hide-meter-type-if-no-price='true'> $- for 50,000 hours $- per hour Enhanced add-on features: 2 Continuous Language identification Diarization Pronunciation Assessment (prosody) <span class='price-data '
+   US: [('us-east', '480.0'), ('us-west-2', '480.0')]  unit: 
+
+>> ...ilable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour Enhanced add-on features: 2 Continuous Language identification Diarization Pronunciation Assessment (prosody) $- for 2,000 hours <span class='price-data '
+   US: [('us-east', '0.24'), ('us-west-2', '0.24')]  unit: per hour
+
+>> ...west":480.0,"us-west-2":480.0,"us-west-3":480.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 2,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '1950.0'), ('us-west-2', '1950.0')]  unit: 
+
+>> ...s-west":0.24,"us-west-2":0.24,"us-west-3":0.24}}' data-disclaimer='False' data-decimals="2" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour $- for 10,000 hours <span class='price-data '
+   US: [('us-east', '0.195'), ('us-west-2', '0.195')]  unit: per hour
+
+>> ...":1950.0,"us-west-2":1950.0,"us-west-3":1950.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 10,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '7500.0'), ('us-west-2', '7500.0')]  unit: 
+
+>> ...est":0.195,"us-west-2":0.195,"us-west-3":0.195}}' data-disclaimer='False' data-decimals="2" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour $- for 50,000 hours <span class='price-data '
+   US: [('us-east', '0.15'), ('us-west-2', '0.15')]  unit: per hour
+
+>> ...0.0,"us-west-3":7500.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 50,000 hours $- per hour Text to Speech Neural 1 <span class='price-data '
+   US: [('us-east', '960.0'), ('us-west-2', '960.0')]  unit: 
+
+>> ....15,"us-west-3":0.15}}' data-disclaimer='False' data-decimals="2" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour Text to Speech Neural 1 $- for 80M characters <span class='price-data '
+   US: [('us-east', '12.0'), ('us-west-2', '12.0')]  unit: per 1M characters
+
+>> ...Text to Speech Neural 1 $- for 80M characters $- per 1M characters <span class='price-data '
+   US: [('us-east', '3900.0'), ('us-west-2', '3900.0')]  unit: 
+
+>> ...'> $- for 80M characters $- per 1M characters $- for 400M characters <span class='price-data '
+   US: [('us-east', '9.75'), ('us-west-2', '9.75')]  unit: per 1M characters
+
+>> ...$- for 400M characters $- per 1M characters <span class='price-data '
+   US: [('us-east', '15000.0'), ('us-west-2', '15000.0')]  unit: 
+
+>> ...r 400M characters $- per 1M characters $- for 2,000M characters <span class='price-data '
+   US: [('us-east', '7.5'), ('us-west-2', '7.5')]  unit: per 1M characters
+
+>> ...ge Identification and Diarization add-on features included with batch speech to text. Commitment Tiers – Connected container Category Features Price (per month) Overage Speech to Text 2 Standard <span class='price-data '
+   US: [('us-east', '1520.0'), ('us-west-2', '1520.0')]  unit: 
+
+>> ...nd Diarization add-on features included with batch speech to text. Commitment Tiers – Connected container Category Features Price (per month) Overage Speech to Text 2 Standard $- for 2,000 hours <span class='price-data '
+   US: [('us-east', '0.76'), ('us-west-2', '0.76')]  unit: per hour
+
+>> ...Speech to Text 2 Standard $- for 2,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '6175.0'), ('us-west-2', '6175.0')]  unit: 
+
+>> ...-price='true'> $- for 2,000 hours $- per hour $- for 10,000 hours <span class='price-data '
+   US: [('us-east', '0.62'), ('us-west-2', '0.62')]  unit: per hour
+
+>> ...our $- for 10,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '23750.0'), ('us-west-2', '23750.0')]  unit: 
+
+>> ...ue'>$- for 10,000 hours $- per hour $- for 50,000 hours <span class='price-data '
+   US: [('us-east', '0.48'), ('us-west-2', '0.48')]  unit: per hour
+
+>> ...$- for 50,000 hours $- per hour Custom <span class='price-data '
+   US: [('us-east', '1824.0'), ('us-west-2', '1824.0')]  unit: 
+
+>> ...> $- per hour Custom $- for 2,000 hours <span class='price-data '
+   US: [('us-east', '0.9086'), ('us-west-2', '0.9086')]  unit: per hour
+
+>> ...t":1824.0,"us-west-2":1824.0,"us-west-3":1824.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 2,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '7410.0'), ('us-west-2', '7410.0')]  unit: 
+
+>> ...":0.9086,"us-west-2":0.9086,"us-west-3":0.9086}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour $- for 10,000 hours <span class='price-data '
+   US: [('us-east', '0.7372'), ('us-west-2', '0.7372')]  unit: per hour
+
+>> ...":7410.0,"us-west-2":7410.0,"us-west-3":7410.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 10,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '28500.0'), ('us-west-2', '28500.0')]  unit: 
+
+>> ...":0.7372,"us-west-2":0.7372,"us-west-3":0.7372}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour $- for 50,000 hours <span class='price-data '
+   US: [('us-east', '0.565'), ('us-west-2', '0.565')]  unit: per hour
+
+>> ...r='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 50,000 hours $- per hour Enhanced add-on features: 2 Language identification Diarization <span class='price-data '
+   US: [('us-east', '456.0'), ('us-west-2', '456.0')]  unit: 
+
+>> ...er='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour Enhanced add-on features: 2 Language identification Diarization $- for 2,000 hours <span class='price-data '
+   US: [('us-east', '0.228'), ('us-west-2', '0.228')]  unit: per hour
+
+>> ...west":456.0,"us-west-2":456.0,"us-west-3":456.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 2,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '1852.5'), ('us-west-2', '1852.5')]  unit: 
+
+>> ...est":0.228,"us-west-2":0.228,"us-west-3":0.228}}' data-disclaimer='False' data-decimals="2" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour $- for 10,000 hours <span class='price-data '
+   US: [('us-east', '0.1853'), ('us-west-2', '0.1853')]  unit: per hour
+
+>> ...":1852.5,"us-west-2":1852.5,"us-west-3":1852.5}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 10,000 hours $- per hour <span class='price-data '
+   US: [('us-east', '7125.0'), ('us-west-2', '7125.0')]  unit: 
+
+>> ...":0.1853,"us-west-2":0.1853,"us-west-3":0.1853}}' data-disclaimer='False' data-decimals="2" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour $- for 50,000 hours <span class='price-data '
+   US: [('us-east', '0.1425'), ('us-west-2', '0.1425')]  unit: per hour
+
+>> ...5.0,"us-west-3":7125.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 50,000 hours $- per hour Text to Speech Neural 1 <span class='price-data '
+   US: [('us-east', '912.0'), ('us-west-2', '912.0')]  unit: 
+
+>> ...5,"us-west-3":0.1425}}' data-disclaimer='False' data-decimals="2" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per hour Text to Speech Neural 1 $- for 80M characters <span class='price-data '
+   US: [('us-east', '11.4'), ('us-west-2', '11.4')]  unit: per 1M characters
+
+>> ...type-if-no-price='true'> $- per hour Text to Speech Neural 1 $- for 80M characters $- per 1M characters <span class='price-data '
+   US: [('us-east', '3705.0'), ('us-west-2', '3705.0')]  unit: 
+
+>> ...est-3":912.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 80M characters $- per 1M characters $- for 400M characters <span class='price-data '
+   US: [('us-east', '9.2625'), ('us-west-2', '9.2625')]  unit: per 1M characters
+
+>> ...ls="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- per 1M characters $- for 400M characters $- per 1M characters <span class='price-data '
+   US: [('us-east', '14250.0'), ('us-west-2', '14250.0')]  unit: 
+
+>> ...3":3705.0}}' data-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- for 400M characters $- per 1M characters $- for 2,000M characters <span class='price-data '
+   US: [('us-east', '7.125'), ('us-west-2', '7.125')]  unit: per 1M characters
+
+>> ... up to access speech in disconnected containers, or learn more Category Features Price (per year) Max usage (per year) Projected usage (per month) Speech to Text 2 Standard: Realtime &amp; Batch <span class='price-data '
+   US: [('us-east', '74100.0'), ('us-west-2', '74100.0')]  unit: 
+
+>> ... to access speech in disconnected containers, or learn more Category Features Price (per year) Max usage (per year) Projected usage (per month) Speech to Text 2 Standard: Realtime &amp; Batch $- <span class='price-data '
+   US: [('us-east', '285000.0'), ('us-west-2', '285000.0')]  unit: 
+
+>> ..." data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- $- Sign up to get access Learn more 120,000 hours 600,000 hours 10,000 hours 50,000 hours Standard: Fast Transcription <span class='price-data '
+   US: [('us-east', '41040.0')]  unit: 
+
+>> ...t access Learn more 120,000 hours 600,000 hours 10,000 hours 50,000 hours Standard: Fast Transcription $- Sign up to get access Learn more 120,000 hours 10,000 hours Custom: Realtime &amp; Batch <span class='price-data '
+   US: [('us-east', '88920.0'), ('us-west-2', '88920.0')]  unit: 
+
+>> ...er='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- Sign up to get access Learn more 120,000 hours 10,000 hours Custom: Realtime &amp; Batch $- <span class='price-data '
+   US: [('us-east', '342000.0'), ('us-west-2', '342000.0')]  unit: 
+
+>> ...e'> $- $- Sign up to get access Learn more 120,000 hours 600,000 hours 10,000 hours 50,000 hours Enhanced add-on features: Language identification Diarization <span class='price-data '
+   US: [('us-east', '22230.0'), ('us-west-2', '22230.0')]  unit: 
+
+>> ...ice='true'> $- Sign up to get access Learn more 120,000 hours 600,000 hours 10,000 hours 50,000 hours Enhanced add-on features: Language identification Diarization $- <span class='price-data '
+   US: [('us-east', '85500.0'), ('us-west-2', '85500.0')]  unit: 
+
+>> ...ta-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- $- 120,000 hours 600,000 hours 10,000 hours 50,000 hours Text to Speech Neural 1 <span class='price-data '
+   US: [('us-east', '47424.0'), ('us-west-2', '47424.0')]  unit: 
+
+>> ...ta-disclaimer='False' data-decimals="3" data-region-unavailable="N/A" data-hide-meter-type-if-no-price='true'> $- 120,000 hours 600,000 hours 10,000 hours 50,000 hours Text to Speech Neural 1 $- <span class='price-data '
+   US: [('us-east', '182400.0'), ('us-west-2', '182400.0')]  unit: 
+
+>> ...characters free per month Endpoint hosting: 1 model free per month Standard - Web/Container 100 concurrent requests for Base model 20 concurrent requests for Custom model Text to Speech Standard <span class='price-data '
+   US: [('us-east', '4.0'), ('us-west-2', '4.0')]  unit: per 1M characters
+
+>> ...dpoint hosting: 1 model free per month Standard - Web/Container 100 concurrent requests for Base model 20 concurrent requests for Custom model Text to Speech Standard $- per 1M characters Custom <span class='price-data '
+   US: [('us-east', '6.0'), ('us-west-2', '6.0')]  unit: per 1M characters
+
+>> ...nt requests for Base model 20 concurrent requests for Custom model Text to Speech Standard $- per 1M characters Custom $- per 1M characters Endpoint hosting: <span class='price-data '
+   US: [('us-east', '0.0537'), ('us-west-2', '0.0537')]  unit: per model per hour
+
+>> ...te pronunciation of multiple speakers in real time. Visit docs to learn more. It is charged as standard Speech to Text, example: For evaluation of 8 seconds of speech, you will be charged around <span class='price-data '
+   US: [('us-east', '0.0022222222222222222222222224'), ('us-west-2', '0.0022222222222222222222222224')]  unit: 
+
+>> ...eter-type-if-no-price='true'> $- Talk to a sales specialist for a walk-through of Azure pricing. Understand pricing for your cloud solution. Request a pricing quote Get free cloud services and a <span class='price-data '
+   US: []  unit: 
