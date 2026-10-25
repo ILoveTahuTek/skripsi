@@ -288,3 +288,22 @@ Work Log:
 Stage Summary:
 - Semua file kini terverifikasi bisa diakses di GitHub main: materials/sempro/dpj4-sibi-csi/ (materi lengkap) dan 13-sempro-docx/ (deliverable docx+md+assets+generator+materi-asal+verifikasi-rujukan-2026-10-24).
 - Tidak ada perubahan konten materi/deliverable di sesi ini; hanya sinkronisasi push + verifikasi akses.
+
+---
+Task ID: 15
+Agent: Super Z (main agent, sesi web)
+Task: Atas perintah pemilik ("revisi gambar diagram.. terlalu kecil jika dilihat dari dokumen. perjelas mana saja yang masih kurang di proposal"): perbesar kejelasan Gambar 3.1 & 3.2 di docx + rincikan bagian yang masih kurang.
+
+Work Log:
+- Diagnosis: font dalam figur HTML hanya 13,5-14 px pada kanvas 1560-1660 px -> saat dilekatkan selebar teks (14 cm), teks cetak hanya +/-3,2-3,4 pt. Ukuran sematan di docx sudah maksimal (529 px = lebar konten penuh); masalahnya rasio font:kanvas.
+- Tulis ulang fig31.html (kanvas 1560x1420 -> 1440x2085; font node 13,5->26 px, gerbang 12,5->22 px, temuan 12->20 px, label 13->21 px; garis 2,5 px) dan fig32.html (1660x1060 -> 1300x1480; font 14->26 px, SYN/DIAG 24 px, judul panel 28 px) - tata letak kolom/baris dan seluruh simpul/teks/jalur/label identik Mermaid sumber.
+- Render ulang via shoot_figs.js (Playwright dsf 2): G3.1 2880x4170 (cetak 14x20,3 cm, teks +/-7,2 pt), G3.2 2600x2960 (14x15,9 cm, +/-7,9 pt).
+- QA iteratif: VLM iterasi 1 menemukan node "Umpan balik di dashboard" mepet + garis koridor menempel border -> tulis check_overflow.js (ukur scrollHeight vs clientHeight Playwright, deterministik) -> temukan 3 overflow (S1 fig31, UB & VER fig32) -> tinggikan kotak -> 0 overflow; geser 3 garis koridor tengah fig32 (x600/625/645) agar berjarak dari border.
+- Koreksi kesetiaan kecil: rel kanan G3.1 kini hanya S0 -> T5 sesuai mmd (versi lama juga menggambar sambungan S1 padahal S1 dead-end di sumber); dicatat di catatan-pengemasan bagian 7.
+- generate_docx.js: figureBlock diberi pengaman MAXH_PX 780 px (~20,6 cm) agar gambar + keterangan selalu muat satu halaman.
+- Rebuild pipeline: generate -> patch_footer (roman/arabic + pgNumType) -> verify_sync 596/596 unit -> postcheck 0 error (2 warning lama: spasi tabel by design + TOC yang lalu difix add_toc_placeholders 55 entri) -> PDF 55 hal -> VLM hal 29 (G3.1) & 34 (G3.2): utuh satu halaman, teks jelas, keterangan tepat di bawah.
+- catatan-pengemasan.md +bagian 7 (revisi gambar, tabel sebelum/sesudah, koreksi rel S1); mirror 13-sempro-docx disinkronkan rsync (generator + assets + docx + catatan).
+
+Stage Summary:
+- Kedua diagram kini terbaca jelas saat dicetak (teks efektif naik ~2x: 3,4 pt -> 7,2-7,9 pt; G3.1 memanfaatkan tinggi halaman penuh 20,3 cm); struktur 100% setia Mermaid.
+- Rincian "yang masih kurang" disampaikan ke pemilik di chat (38 penanda PERLU DATA = keputusan pembimbing/data pribadi/parameter Tabel 3.6, identitas sampul, 8 keputusan terbuka catatan.md, Update Field TOC, 1 koma-sehingga opsional).

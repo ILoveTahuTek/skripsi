@@ -226,8 +226,15 @@ function pngSize(p) {
 
 function figureBlock(block) {
   const { w, h } = pngSize(block.png);
-  const dispW = CONTENT_W_PX; // 529
-  const dispH = Math.round(dispW * h / w);
+  let dispW = CONTENT_W_PX; // 529
+  let dispH = Math.round(dispW * h / w);
+  // Pengaman: tinggi tampil maksimum ~20,6 cm (780 px @96dpi) agar gambar +
+  // keterangan selalu muat satu halaman; jika lebih, kecilkan proporsional.
+  const MAXH_PX = 780;
+  if (dispH > MAXH_PX) {
+    dispH = MAXH_PX;
+    dispW = Math.round(dispH * w / h);
+  }
   const m = block.caption.match(/^(Gambar \d+\.\d+)\s+(.*)$/);
   return [
     new Paragraph({

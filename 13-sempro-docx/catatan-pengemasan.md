@@ -11,7 +11,7 @@ Dibuat 24 Oktober 2026. Pekerjaan: **pengemasan/kompilasi** — menyusun materi
 |---|---|
 | `Proposal-Sempro-DPJ4-SIBI-CSI.docx` | Dokumen utuh: sampul → daftar isi (romawi kecil i–iii) → BAB I–III + Daftar Pustaka (arab mulai 1); 49 halaman A4 |
 | `Proposal-Sempro-DPJ4-SIBI-CSI.md` | Markdown terpadu: blok identitas + BAB I–III + Daftar Pustaka, konten identik verbatim dengan DOCX |
-| `assets/gambar-3.1.png`, `assets/gambar-3.2.png` | Kedua diagram BAB III siap cetak (hasil gambar ulang, struktur dan teks simpul sama dengan kode Mermaid sumber) |
+| `assets/gambar-3.1.png`, `assets/gambar-3.2.png` | Kedua diagram BAB III siap cetak (hasil gambar ulang, struktur dan teks simpul sama dengan kode Mermaid sumber). Revisi 25 Okt: font diperbesar ±2× agar terbaca jelas (lihat bagian 7) |
 | `catatan-pengemasan.md` | Berkas ini |
 
 ## 2. Keputusan pengemasan (docx)
@@ -21,7 +21,7 @@ Dibuat 24 Oktober 2026. Pekerjaan: **pengemasan/kompilasi** — menyusun materi
 - **Daftar isi**: bidang TOC otomatis kedalaman BAB–subbab–anak subbab (55 entri). Nomor halaman pada berkas masih **estimasi placeholder** — di Word klik kanan daftar isi → *Update Field* → *Update entire table* agar mutakhir.
 - **Nomor halaman**: sampul tanpa nomor; daftar isi romawi kecil (i, ii, iii) rata tengah; isi arab mulai 1 rata kanan.
 - **Tabel** (8 buah): tiga-garis akademik — keterangan di atas rata kiri (nomor tebal), kepala 9pt tebal tengah, isi 9pt; baris tidak terpotong halaman, kepala berulang lintas halaman.
-- **Gambar** (2 buah): dua jalur tata letak ulang dari kode Mermaid (perataan otomatis Mermaid menghasilkan rasio 1:7,7 yang tak muat halaman; sesuai catatan materi, "untuk Word, gambar ulang … dengan struktur yang sama"). Simpul, teks, jalur, dan label lolos/gagal/pelatihan identik.
+- **Gambar** (2 buah): dua jalur tata letak ulang dari kode Mermaid (perataan otomatis Mermaid menghasilkan rasio 1:7,7 yang tak muat halaman; sesuai catatan materi, "untuk Word, gambar ulang … dengan struktur yang sama"). Simpul, teks, jalur, dan label lolos/gagal/pelatihan identik. Revisi 25 Oktober 2026: tata letak dipadatkan dan font dalam gambar dinaikkan dari 13,5–14 px menjadi 20–26 px sehingga ukuran teks cetak naik dari ±3,4 pt menjadi ±7 pt (rincian di bagian 7).
 - **Penanda** `[PERLU DATA: …]`: 38 kemunculan (semua keputusan pembimbing/data pribadi/parameter rancangan), **tersorot kuning** agar mudah dicari (Ctrl+F "PERLU"). Seluruh 60 kemunculan lain telah diisi dari sumber terverifikasi pada 24 Oktober 2026 (lihat bagian 6).
 - **Sitasi IEEE `[n]`** dan **daftar pustaka 62 entri** (indentasi gantung) apa adanya; 28 rujukan baru ditambahkan pada putaran kedua dengan DOI terverifikasi Crossref.
 
@@ -62,3 +62,18 @@ Atas perintah pemilik, 60 kemunculan penanda diisi/dijawab dan 28 rujukan baru d
 **Dijawab jujur (tidak ada di literatur — dinyatakan eksplisit, tanpa fabrikasi):** proporsi Indonesia anak tunarungu dari orang tua pendengar; proporsi kosakata Kamus SIBI berbasis lintasan gerak + jumlah kandidat (ditetapkan saat kurasi T1); studi khusus kebutuhan pembelajar pendengar SIBI; orientasi pembelajaran pada kelompok WiFi-SLR; kursus SIBI bagi keluarga. Klaim batas resolusi spasial CSI ditata ulang: fakta perangkat multi-antena + asumsi eksplisit yang diperiksa lewat uji Delta-CSI.
 
 **Rincian lengkap:** `catatan.md` materi bagian 5b; arsip verifikasi JSON di `13-sempro-docx/verifikasi-rujukan-2026-10-24/`.
+
+## 7. Revisi gambar — perbesaran kejelasan (25 Oktober 2026)
+
+Atas perintah pemilik ("terlalu kecil jika dilihat dari dokumen"), kedua diagram dirender ulang dengan tata letak yang sama tetapi lebih padat dan font lebih besar:
+
+| Aspek | Sebelum | Sesudah |
+|---|---|---|
+| Font teks simpul | 13,5–14 px (±3,2–3,4 pt saat cetak) | 20–26 px (±5,5–7,9 pt saat cetak) |
+| Gambar 3.1 | 1560×1420 px kanvas, tinggi cetak 12,7 cm | 1440×2085 px kanvas, tinggi cetak 20,3 cm (memanfaatkan tinggi halaman) |
+| Gambar 3.2 | 1660×1060 px, tinggi cetak 8,9 cm | 1300×1480 px, tinggi cetak 15,9 cm |
+
+- Simpul, teks, jalur panah, dan label *gagal/lolos/pelatihan* tetap identik dengan kode Mermaid sumber (`generator/gambar-3.1.mmd`, `gambar-3.2.mmd`).
+- **Koreksi kecil kesetiaan sumber:** rel kanan kini hanya mengalir dari S0 ke T5, sesuai kode Mermaid (`S0 --> T5`); versi sebelumnya ikut menggambar sambungan S1 ke rel tersebut padahal `S1` tidak memiliki keluaran di sumber.
+- Generator kini memasang pengaman tinggi tampil maksimum 20,6 cm (`MAXH_PX`) agar gambar + keterangan selalu muat satu halaman.
+- QA: pemeriksaan overflow otomatis via Playwright (`generator/check_overflow.js`) = 0 overflow pada kedua figur (tiga kotak sempit ditinggikan setelah terdeteksi); inspeksi VLM halaman PDF 29 (G3.1) dan 34 (G3.2) = tampil utuh satu halaman, teks terbaca jelas, keterangan tepat di bawah gambar; postcheck 0 error; sinkron pandoc 596/596 unit; PDF 55 halaman.
