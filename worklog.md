@@ -396,3 +396,27 @@ Stage Summary:
 - Keputusan kunci yang diambil: (a) kebaruan dibatasi kombinatif (CSI untuk SIBI + inferensi tepi + integrasi dua arah TTS/ASR) karena WiSign sudah kalimat kontinu ASL; (b) TTS utama = MMS-TTS-ind lokal (lisensi nonkomersial dicatat), ASR = faster-whisper; (c) arah 2 = kamus kata-level + ejaan jari 26 huruf+9 angka ala OpenSIBI, bukan SLMT penuh; (d) cadangan A-D eksplisit di 3.11; (e) 6 rujukan lama dikeluarkan (kerangka latihan), 21 baru masuk.
 - Sisa human-owned: 41 penanda (Tabel 3.6 + identitas sampul), konfirmasi pembimbing atas gaya sitasi + frasa judul, keputusan final TTS/ASR di T4.
 - Catatan operasional: subagent general-purpose berat (riset web panjang) rentan "context deadline exceeded" (3/6 panggilan gagal 2x) — untuk riset berat berikutnya pecah cakupan lebih kecil atau kerjakan langsung.
+
+---
+Task ID: 18
+Agent: Super Z (main agent, sesi web)
+Task: Eksekusi bahan (bukan tulis ulang draft) dengan topik yang diperbarui memakai 3 skill Drive: sempro-mepet (1dzISJm), naskah-id (1aK3y8Ah), dan GEPA BARU gepa-optimize-anything (1KZiprY — diunduh sesi ini). Keluaran: dossier bahan penerus DPJ-4_Bahan-Proposal-SIBI.md dengan topik penerjemah dua arah, dioptimalkan lewat optimize_anything.
+
+Work Log:
+- Unduh skill ketiga (gdown gagal; sukses via curl drive.usercontent.google.com) → ZIP gepa-optimize-anything (SKILL.md + 4 referensi + preflight.py), dibaca penuh; sempro-mepet (7 berkas) + naskah-id (SKILL + sitasi + bagian-naskah) dibaca ulang penuh.
+- Baca ulang lengkap: dossier bahan lama 391 baris (templat struktural), Proposal-Revisi 993 baris (rujukan topik — TIDAK diubah), Audit 10 vonis, Matriks 8 kelompok, Rencana-Visual, T17-R1.
+- Pasang gepa 0.1.4 (API beda dari dokumen skill: kandidat dict, protokol LM __call__, tanpa OptimizeAnythingConfig; dipetakan via inspeksi sumber: OptimizeAnythingAdapter, StatelessReflectionLM, InstructionProposalSignature parser ```; GEPAResult tanpa best_score).
+- Bangun dossier dua lapis: 8 komponen mudah-mutasi (benih_komponen.py + benih_lanjutan.py, ditulis langsung register korpus) + bagian tetap terlindungi (bagian_tetap.py: header keputusan pemilik, bank fakta F1–F45, bank rujukan A–H → nomor [1]–[79], perangkat keras/lunak, aset RuView, peta 10 diagram, tabel G0–G4, risiko cadangan A–D, lampiran jejak).
+- Kontrak jangkar (jangkar.py): 38 jangkar fakta per komponen + klaim terlarang bertuas-negasi (jendela 60 karakter, pengecualian pertanyaan sidang) + frasa AI mutlak + batas kemunculan + penanda PERLU DATA min + panjang min. Benih divalidasi 3 putaran sampai 0 masalah (perbaikan: negasi klaim pada daftar kutipan, jangkar subcarrier/G3/Menyiapkan/bailenson, salah ketik BISINDC).
+- Evaluator hibrida (evaluator_bahan.py): skor = fraksi komponen bersih × rata-juri/10; juri = z-ai glm-4-plus, rubrik D1–D5 JSON + kritik per bagian dirutekan via {komp}_specific_info. Uji benih: 0,80 (objektif 8/8; juri 8,0/7,5/8,0/8,5/8,0; 13 detik/panggilan).
+- Lari GEPA latar belakang (jalankan_gepa.py; templat refleksi kustom Indonesia; round_robin; maks 14 proposal; TimeoutStopCondition 50 menit; perbaikan awal: objective/background eksklusif vs templat kustom — dihapus). Hasil: 14 iterasi ~13 menit; 6 proposal lolos subsampel (0,50–0,81), 8 ditolak subsampel (0,68–0,81); benih 0,82 TIDAK TERKALAHKAN → kandidat terbaik = benih (pola jenuh gotcha #9, dilaporkan jujur); 1 proposal iterasi-14 diterima subsampel tapi ditolak evaluasi penuh 0,50 (jatuhkan kontrak) — penjagaan terbukti.
+- Pelari sempat crash di akhir (GEPAResult 0.1.4 tanpa best_score) — TIDAK kehilangan hasil karena terbaik = benih; ekor skrip diperbaiki (val_aggregate_scores); artefak run_dir (candidates.json 278KB, run_log.txt, candidate_tree.html) terselamatkan lengkap.
+- Penyemiran akhir pasca-GEPA (QC sempro-mepet): perluasan kepanjangan pemakaian pertama (CSI, TTS, ASR, UDP, I2S, ASL, MMS, BRIN, BISINDO, SIBI di header), pemecahan 6 kalimat 36–48 kata, perbaikan 1 temuan K (koma sebelum sehingga). Validasi ulang: 0 masalah objektif; lint periksa.py: 0 K tersisa; temuan G diterima-dilaporkan (nama merek, CC-BY-NC false positive, kalimat butir panjang).
+- Paketkan.py → download/translator-sibi-bahan/: Bahan-Proposal-Translator-SIBI.md (57.578 karakter, 380 baris, 20 penanda PERLU DATA, 69 nomor rujukan unik), catatan.md, gepa/ (8 skrip + log + kolam kandidat). Spot-check 38 angka/istilah kunci vs Matriks: seluruhnya hadir.
+
+Stage Summary:
+- Deliverable: download/translator-sibi-bahan/ — dossier bahan topik baru lengkap + jejak GEPA; draft Proposal-Revisi tidak disentuh sesuai perintah.
+- Keputusan teknis: bagian tetap (tabel/fakta) dilindungi dari mutasi; GEPA berperan validasi adversarial 14 ronde (hasil jujur: benih tak terkalahkan, 0 mutasi diterima); nomor rujukan mengikuti Daftar Pustaka Proposal-Revisi sehingga kit siap tempel.
+- Skill ketiga (gepa) kini terpasang di /home/z/my-project/skills-drive-baru/extracted/ dan terpakai nyata (pip gepa 0.1.4 + z-ai CLI sebagai LM kustom).
+- Sisa human-owned: 20 penanda PERLU DATA (pembimbing/T0/T4/validator/mitra) + 5 konfirmasi pembimbing seksi 12.
+- Catatan operasional: gdown gagal untuk tautan Drive ini (pakai curl drive.usercontent.google.com); API gepa 0.1.4 menyimpang dari dokumen skill — pemetaan via inspeksi sumber wajib.

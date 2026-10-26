@@ -1,0 +1,252 @@
+     1→     1→# Purwarupa Penerjemah Dua Arah Isyarat SIBI Berbasis Wi-Fi Channel State Information pada Modul ESP32-S3 dengan Inferensi Tepi dan Pemrosesan Bahasa pada Server: Studi Kelayakan Kosakata Terbatas
+     2→     2→
+     3→     3→**PROPOSAL PENELITIAN**
+     4→     4→
+     5→     5→| Identitas | Keterangan |
+     6→     6→|---|---|
+     7→     7→| Judul | Purwarupa Penerjemah Dua Arah Isyarat SIBI Berbasis Wi-Fi *Channel State Information* pada Modul ESP32-S3 dengan Inferensi Tepi dan Pemrosesan Bahasa pada Server: Studi Kelayakan Kosakata Terbatas |
+     8→     8→| Jenis dokumen | Proposal penelitian (seminar proposal), BAB I–III + Daftar Pustaka |
+     9→     9→| Disusun oleh | [PERLU DATA: nama penulis] |
+    10→    10→| NIM | [PERLU DATA: NIM penulis] |
+    11→    11→| Program studi | [PERLU DATA: program studi] |
+    12→    12→| Universitas | [PERLU DATA: nama universitas] |
+    13→    13→| Pembimbing | [PERLU DATA: nama pembimbing, bila sudah ditetapkan] |
+    14→    14→| Tahun | [PERLU DATA: tahun penyusunan] |
+    15→    15→
+    16→    16→> Catatan penyusunan: dokumen ini adalah revisi menyeluruh dari `Proposal-Sempro-DPJ4-SIBI-CSI.md` (revisi YOLO26, 25 Oktober 2026) sesuai visi produk terbaru pemilik penelitian, yaitu perangkat penerjemah dua arah yang portabel berbasis 2–3 modul ESP32-S3. Sumber diagram tersimpan sebagai berkas Mermaid pada folder `diagram/`. Penanda `[PERLU DATA: ...]` menandai keputusan yang menunggu pemilik penelitian, pembimbing, atau hasil tahap sebelumnya.
+    17→    17→
+    18→    18→---
+    19→    19→
+    20→    20→# BAB I PENDAHULUAN
+    21→    21→
+    22→    22→## 1.1 Latar Belakang
+    23→    23→
+    24→    24→Sebagian besar anak tunarungu lahir di tengah keluarga pendengar. Mitchell dan Karchmer [1], [2] menunjukkan kondisi tersebut melalui data siswa tunarungu di Amerika Serikat sekaligus membantah anggapan lama bahwa sekitar 10% anak tunarungu memiliki orang tua tunarungu; proporsi anak tunarungu dengan orang tua pendengar berkisar 90–95%. Angka sebanding untuk Indonesia belum ditemukan dalam penelusuran penelitian ini (Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026) sehingga angka dari Amerika Serikat itu dipakai sebagai gambaran umum. Keluarga pendengar dari anak yang berkomunikasi dengan isyarat perlu ikut mempelajari bahasa isyarat, padahal proses belajarnya membutuhkan dukungan yang terstruktur [3] dan menghadapi hambatan praktis sehari-hari [4]. Kondisi tersebut menandakan bahwa komunikasi antara tunarungu dan pendengar di lingkungan keluarga tidak dapat dianggap terjadi dengan sendirinya.
+    25→    25→
+    26→    26→Komunikasi yang dimaksud bersifat dua arah. Penutur tunarungu menyampaikan pikiran melalui isyarat, sedangkan lawan bicara pendengar membalasnya melalui ucapan atau tulisan; kedua arah sama-sama tersendat apabila salah satu pihak tidak menguasai moda lawannya. Di Indonesia, juru bahasa isyarat yang dapat menjembatani kedua arah masih terbatas, yaitu sekitar 500 orang untuk sekitar 1,92 juta penyandang tunarungu atau kira-kira satu juru bahasa untuk 3.840 orang [5]. Secara hukum, Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas mengakui bahasa isyarat dan mewajibkan aksesibilitas komunikasi [6]. Kewajiban itu sulit dipenuhi bila kemampuan menjembatani dua arah hanya dimiliki segelintir juru bahasa sehingga teknologi bantu komunikasi yang murah dan tersedia menjadi salah satu jalur pelengkap [7].
+    27→    27→
+    28→    28→Sistem Isyarat Bahasa Indonesia (SIBI) dipilih sebagai objek penelitian meskipun bukan moda yang paling banyak dipakai komunitas tunarungu dalam keseharian. Survei ekosistem bahasa isyarat yang dilaporkan Badan Riset dan Inovasi Nasional mencatat penggunaan Bahasa Isyarat Indonesia (BISINDO) sebesar 77,7%, SIBI 1,9%, campuran 14,9%, dan lainnya 5,6% [8]. Survei serupa pada 100 responden tunarungu di Jawa dan Bali melaporkan 91% memakai BISINDO untuk komunikasi sehari-hari [9]. Kedua survei tersebut menegaskan bahwa komunitas tunarungu lebih dekat ke BISINDO, tetapi juga menunjukkan tempat SIBI hidup: jalur pendidikan formal. Melalui Surat Pemberitahuan Direktorat Pendidikan Dasar Nomor 868/C/U/95, sekolah luar biasa yang menerapkan komunikasi total diwajibkan memakai sistem isyarat yang telah dibakukan [10], dan penelitian di SLB Negeri Ogan Ilir menunjukkan murid tunarungu memakai SIBI dalam pembelajaran sehari-hari di sekolah [11]. Dengan demikian, purwarupa penerjemah dua arah yang dibangun untuk konteks pendidikan formal lebih tepat memakai SIBI, sedangkan perluasan ke BISINDO menuntut penggantian kosakata dan validasi ulang bersama penuturnya.
+    29→    29→
+    30→    30→Teknologi yang telah tersedia untuk kebutuhan tersebut masih terbagi menurut arah dan belum menyatu. Pada arah ucapan atau teks menjadi isyarat, aplikasi yang ada berbentuk kamus kata-level: KASIBI mengubah suara menjadi teks lalu menampilkan animasi peraga tiga dimensi dari basis data kosakata [12], sedangkan OpenSIBI memakai layanan pengenal ucapan lalu mencocokkan kata ke model tiga dimensi yang juga dianimasikan di layar [13]; keduanya mengakui cakupan kosakatanya sangat terbatas. Pada arah isyarat menjadi teks, penelitian di Indonesia bertumpu pada citra atau video dari kamera [14], [15], termasuk penerapan berbasis *smartphone* untuk huruf SIBI statis [16], [17]. Pendekatan berbasis kamera menuntut pencahayaan dan garis pandang tertentu sehingga ketangguhannya menurun saat kondisi berubah [18], sedangkan kehadiran kamera yang terus menyala selama percakapan diduga memengaruhi kenyamanan pengguna dan dikaitkan dengan kelelahan nonverbal [19]. Gambar 1.1 memeringkas kesenjangan tersebut sebagai peta masalah yang menjadi titik berangkat penelitian ini.
+    31→    31→
+    32→    32→```mermaid
+    33→    33→flowchart TD
+    34→    34→    M["Masalah inti:<br/>komunikasi dua arah tunarungu-pendengar<br/>sulit tanpa kemampuan isyarat bersama"]
+    35→    35→
+    36→    36→    K1["Kesenjangan 1:<br/>juru bahasa isyarat terbatas<br/>(±500 untuk ±1,92 juta tunarungu)"]
+    37→    37→    K2["Kesenjangan 2:<br/>aplikasi SIBI satu arah dan kata-level<br/>(kamus/pembelajaran, tanpa umpan balik dua arah)"]
+    38→    38→    K3["Kesenjangan 3:<br/>pengenalan isyarat berbasis kamera<br/>menuntut pencahayaan, garis pandang,<br/>dan kamera menyala terus"]
+    39→    39→    K4["Kesenjangan 4:<br/>pengenalan isyarat dari CSI belum<br/>diterapkan pada SIBI dan belum ada<br/>purwarupa penerjemah dua arah"]
+    40→    40→
+    41→    41→    P1["Posisi penelitian:<br/>purwarupa penerjemah dua arah SIBI<br/>berbasis CSI pada modul ESP32-S3"]
+    42→    42→    P2["Arah 1: SIBI menjadi teks<br/>dan suara Indonesia (TTS)"]
+    43→    43→    P3["Arah 2: teks/ucapan Indonesia<br/>menjadi representasi SIBI di layar"]
+    44→    44→    P4["Produk akhir tanpa kamera;<br/>kamera dan YOLO26-Pose hanya<br/>pada jalur pelabelan riset"]
+    45→    45→
+    46→    46→    M --> K1
+    47→    47→    M --> K2
+    48→    48→    M --> K3
+    49→    49→    M --> K4
+    50→    50→    K1 --> P1
+    51→    51→    K2 --> P1
+    52→    52→    K3 --> P1
+    53→    53→    K4 --> P1
+    54→    54→    P1 --> P2
+    55→    55→    P1 --> P3
+    56→    56→    P1 --> P4
+    57→    57→```
+    58→    58→
+    59→    59→Gambar 1.1 Peta masalah dan kesenjangan penelitian
+    60→    60→
+    61→    61→Penginderaan berbasis Wi-Fi *Channel State Information* (CSI) menjadi kandidat pengganti kamera pada arah isyarat menjadi teks. CSI memuat informasi amplitudo dan fase pada setiap *subcarrier* yang berubah ketika gerak tubuh mengganggu jalur propagasi sinyal [20]. Ma dkk. [21] membangun SignFi yang mengenali 276 isyarat *American Sign Language* (ASL) dari CSI, sedangkan DF-WiSLR mengenali 49 gestur tanpa perangkat yang dikenakan pengguna [22] dan pendekatan serupa telah dicoba pada *Filipino Sign Language* [23]. Preseden terbaru, WiSign, bahkan mengenali kalimat ASL kontinu dari CSI perangkat Wi-Fi komersial [24]. Kepekaan CSI terhadap gerak halus juga telah terbukti pada gerak yang jauh lebih kecil daripada gerak lengan: WiKey mengenali ketukan tombol dengan akurasi klasifikasi 96,4% untuk kunci tunggal pada kondisi terkendali [25], dan pemantauan napas dari CSI berhasil mengklasifikasikan pola pernapasan dengan akurasi 99,54% [26]. Meskipun demikian, dalam batas penelusuran literatur penelitian ini hingga Oktober 2026 dengan kata kunci bahasa Inggris dan bahasa Indonesia (Subbab 2.11), belum ditemukan publikasi yang memakai CSI untuk mengenali isyarat SIBI maupun purwarupa penerjemah dua arah yang memadukan penginderaan CSI dengan pemrosesan bahasa Indonesia.
+    62→    62→
+    63→    63→Perangkat penginderaan yang dipakai penelitian ini adalah modul ESP32-S3, yaitu mikrokontroler murah dengan radio Wi-Fi 2,4 GHz yang mendukung perolehan CSI secara resmi [27] dan direkomendasikan platform RuView untuk node penangkap CSI [28]. ESP32-S3 memiliki inti ganda 240 MHz, SRAM 512 KB, dan PSRAM terpasang hingga 8 MB [29]. Dua fakta teknis menjadi dasar kelayakan rancangan. Pertama, satu chip ESP32-S3 terbukti mampu menjalankan penangkapan CSI, koneksi station ke *access point*, dan pengiriman data secara serentak sebagaimana dijalankan firmware RuView, dengan syarat seluruh perangkat berada pada satu kanal dan radio tidak memasuki mode hemat daya [28]. Kedua, inferensi model terkuantisasi pada perangkat didukung tolok ukur resmi: pustaka ESP-NN mempercepat model pendeteksi orang dari 2.300 ms menjadi 54 ms pada ESP32-S3 [30], dan pustaka ESP-DL menyediakan model contoh pengenalan gestur tangan dengan waktu inferensi 69,2 ms [31]. Dengan demikian, purwarupa dirancang agar pengenalan isyarat berjalan langsung pada modul sementara hasilnya dikirim ke server untuk diolah menjadi teks dan suara.
+    64→    64→
+    65→    65→Purwarupa yang dirancang terdiri atas 2–3 modul ESP32-S3 yang portabel dan direncanakan memiliki layar, baterai, *speaker*, dan mikrofon, sebagaimana ditunjukkan pada Gambar 1.2. Pada arah pertama, modul pemancar dan modul penerima mengapit zona isyarat; modul penerima menangkap CSI, mengenali isyarat melalui model yang berjalan pada perangkat, lalu mengirim label hasil ke server. Pada arah kedua, ucapan dari mikrofon modul dikirim ke server untuk dienali menjadi teks, kemudian teks dipetakan ke representasi SIBI dan ditampilkan di layar modul. Server prototipe berupa laptop ASUS TUF Dash F15 FX516PR (Intel Core i7-11370H, GPU RTX 3070 Laptop 8 GB VRAM, RAM 16 GB) yang menjadi mesin pengembangan, pelatihan, dan server lokal sekaligus; layanan *cloud* jarak jauh dibahas sebagai alternatif, tetapi tidak diuji pada prototipe. Teknologi pemrosesan bahasanya telah diaudit kelayakannya: pengenal ucapan Whisper mendukung lebih dari 100 bahasa termasuk Indonesia [32] dan implementasi faster-whisper terbukti jauh lebih cepat daripada waktu nyata pada GPU kelas 8 GB [33]; untuk sintesis suara, model MMS menyediakan checkpoint Bahasa Indonesia yang dapat dijalankan lokal [34], [35], sedangkan layanan *cloud* Google dan Azure menyediakan suara Indonesia tersertifikasi [36], [37], dan model ringan Kokoro justru tidak mencakup Bahasa Indonesia sehingga tidak dipakai [38].
+    66→    66→
+    67→    67→```mermaid
+    68→    68→flowchart LR
+    69→    69→    subgraph SIBI["Sisi pengisyarat SIBI (tunarungu)"]
+    70→    70→        T["Modul TX ESP32-S3<br/>(pemancar ESP-NOW)"]
+    71→    71→        Z["Zona isyarat<br/>satu pengisyarat"]
+    72→    72→        R["Modul RX ESP32-S3<br/>CSI + inferensi int8 di perangkat"]
+    73→    73→    end
+    74→    74→
+    75→    75→    subgraph SRV["Server lokal (laptop)"]
+    76→    76→        N["Pemrosesan bahasa:<br/>kamus label menjadi teks"]
+    77→    77→        T2S["TTS Bahasa Indonesia"]
+    78→    78→        S2T["ASR Bahasa Indonesia"]
+    79→    79→        MAP["Pemetaan teks ke<br/>representasi SIBI"]
+    80→    80→    end
+    81→    81→
+    82→    82→    subgraph DGR["Sisi pendengar"]
+    83→    83→        SPK["Speaker modul<br/>(suara hasil TTS)"]
+    84→    84→        MIC["Mikrofon modul I2S"]
+    85→    85→        LCD["Layar modul<br/>(representasi SIBI)"]
+    86→    86→    end
+    87→    87→
+    88→    88→    T -- "sinyal Wi-Fi melintasi zona isyarat" --> R
+    89→    89→    R -- "label isyarat + skor keyakinan" --> N
+    90→    90→    N --> T2S
+    91→    91→    T2S -- "audio" --> SPK
+    92→    92→    MIC -- "audio" --> S2T
+    93→    93→    S2T -- "teks Indonesia" --> MAP
+    94→    94→    MAP -- "glos, gambar, ejaan jari" --> LCD
+    95→    95→```
+    96→    96→
+    97→    97→Gambar 1.2 Visi purwarupa penerjemah dua arah tanpa kamera
+    98→    98→
+    99→    99→Sebagai studi kelayakan, penelitian ini tidak mengklaim penerjemahan kontinu kosakata penuh. Kosakata dibatasi pada 5–8 isyarat SIBI terisolasi yang dibedakan lintasan lengan, tubuh atas, atau kepala, bukan oleh bentuk jari, dengan alasan resolusi spasial CSI pada satu tautan antarmodu (Subbab 2.3). Model berbasis CSI juga mudah *overfitting* terhadap orang dan ruang tempat data direkam [39] sehingga kinerja diukur lintas partisipan dan lintas ruang dengan acuan strategi Widar3.0 [40]. Kamera dan model pose YOLO26 hanya dipakai pada jalur pelabelan selama pembuatan *dataset* riset, mengikuti pola yang telah ditetapkan revisi sebelumnya, dan tidak menjadi bagian produk akhir [41], [42]. Pemetaan teks ke representasi SIBI pada arah kedua dibatasi menjadi kamus kata-level dengan *fallback* ejaan jari sebagaimana preseden KASIBI dan OpenSIBI, bukan penerjemahan tata bahasa penuh yang masih menjadi masalah terbuka internasional [43], [44]. Setiap tahapan ditutup gerbang keputusan sehingga kegagalan tetap dilaporkan sebagai temuan kelayakan. Berdasarkan uraian tersebut, penelitian ini merancang bangun purwarupa penerjemah dua arah isyarat SIBI berbasis Wi-Fi CSI pada modul ESP32-S3 dan menguji kelayakannya sebagai alat bantu komunikasi kosakata terbatas pada konteks pendidikan formal.
+   100→   100→
+   101→   101→## 1.2 Rumusan Masalah
+   102→   102→
+   103→   103→Berdasarkan latar belakang yang telah dipaparkan, masalah yang dikaji dalam penelitian ini dapat dirumuskan sebagai berikut.
+   104→   104→
+   105→   105→1. Bagaimana merancang purwarupa penerjemah dua arah SIBI berbasis dua hingga tiga modul ESP32-S3 yang menangkap CSI, melakukan inferensi pada perangkat, dan berkomunikasi dengan server lokal, termasuk protokol perekaman *dataset* isyarat terisolasi dengan pelabelan berbantuan model pose YOLO26?
+   106→   106→2. Bagaimana kinerja pengenalan 5–8 isyarat SIBI terisolasi dari CSI melalui inferensi pada perangkat, serta kinerja jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI, pada skenario dalam sesi, lintas partisipan, dan lintas ruang?
+   107→   107→3. Bagaimana kelayakan purwarupa sebagai alat bantu komunikasi dua arah kosakata terbatas ditinjau dari latensi ujung ke ujung, cakupan kosakata, keandalan operasional, dan penilaian validator penutur tunarungu?
+   108→   108→
+   109→   109→## 1.3 Tujuan Penelitian
+   110→   110→
+   111→   111→Berdasarkan rumusan masalah tersebut, penelitian ini bertujuan untuk:
+   112→   112→
+   113→   113→1. Merancang purwarupa penerjemah dua arah SIBI berbasis dua hingga tiga modul ESP32-S3 yang menangkap CSI, melakukan inferensi pada perangkat, dan berkomunikasi dengan server lokal, termasuk protokol perekaman *dataset* isyarat terisolasi dengan pelabelan berbantuan model pose YOLO26.
+   114→   114→2. Mengukur kinerja pengenalan 5–8 isyarat SIBI terisolasi dari CSI melalui inferensi pada perangkat, serta kinerja jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI, pada skenario dalam sesi, lintas partisipan, dan lintas ruang.
+   115→   115→3. Menguji kelayakan purwarupa sebagai alat bantu komunikasi dua arah kosakata terbatas berdasarkan latensi ujung ke ujung, cakupan kosakata, keandalan operasional, dan penilaian validator penutur tunarungu.
+   116→   116→
+   117→   117→## 1.4 Batasan Masalah
+   118→   118→
+   119→   119→Ruang lingkup penelitian ini dibatasi sebagai berikut.
+   120→   120→
+   121→   121→1. Objek pengenalan adalah 5–8 isyarat SIBI terisolasi yang lolos dua saringan, yaitu separabilitas fisik (isyarat dibedakan lintasan lengan, tubuh atas, atau kepala, bukan bentuk jari) dan validitas pedagogis (disetujui validator penutur tunarungu dan dicocokkan dengan *Kamus SIBI* [45]). Sistem yang dibangun bukan penerjemah kalimat dan tidak menangani pengenalan isyarat kontinu.
+   122→   122→2. Konfigurasi jari dan ekspresi wajah tidak dikenali; batas ini mengikat kedua arah sehingga keluaran arah pertama hanya menyangkut lintasan gerak, sedangkan arah kedua menampilkan representasi tingkat kata dan ejaan jari, bukan tata bahasa isyarat penuh beserta penanda nonmanual.
+   123→   123→3. Perangkat keras terdiri atas 2–3 modul ESP32-S3 (masing-masing direncanakan memiliki layar kecil, baterai, *speaker*, dan mikrofon I2S) serta satu laptop ASUS TUF Dash F15 FX516PR (Intel Core i7-11370H, RTX 3070 Laptop 8 GB VRAM, RAM 16 GB) sebagai mesin pengembangan, pelatihan, dan server lokal prototipe; layanan *cloud* jarak jauh dibahas sebagai alternatif arsitektur tanpa diuji.
+   124→   124→4. Kamera dan model pose YOLO26 hanya dipakai pada jalur pelabelan selama perekaman *dataset* riset di laptop; produk akhir tidak memakai kamera maupun citra, dan modul tidak menjalankan model visi.
+   125→   125→5. Pemrosesan bahasa memakai teknologi yang terverifikasi mendukung Bahasa Indonesia: ASR berbasis Whisper pada server lokal, dan TTS lokal MMS-TTS-ind dengan layanan *cloud* berbahasa Indonesia sebagai pembanding; pilihan final ditetapkan pada T4 (Tabel 3.6).
+   126→   126→6. Arah kedua dibatasi menjadi kamus kata-level dengan *fallback* ejaan jari (26 huruf dan angka 1–9) sebagaimana preseden OpenSIBI; cakupan kamus diukur dan dilaporkan, tidak dijanjikan mencakup kosakata kamus SIBI penuh.
+   127→   127→7. Setiap sesi melibatkan satu pengisyarat pada zona akuisisi; sistem tidak mengidentifikasi individu, dan pengujian dilakukan di sedikitnya dua ruang mitra yang dikalibrasi dalam penelitian ini.
+   128→   128→8. Uji pengguna dilakukan dalam skala kecil dengan 3–5 pengguna dan dianalisis secara deskriptif tanpa statistik inferensial.
+   129→   129→9. Penelitian ini tidak membahas pengenalan isyarat kontinu, penerjemahan kalimat dengan tata bahasa isyarat penuh beserta penanda nonmanual, penggunaan BISINDO, maupun penerapan layanan *cloud* jarak jauh pada prototipe.
+   130→   130→
+   131→   131→## 1.5 Manfaat Penelitian
+   132→   132→
+   133→   133→Manfaat penelitian ini dibedakan menjadi manfaat teoretis dan manfaat praktis.
+   134→   134→
+   135→   135→### 1.5.1 Manfaat Teoretis
+   136→   136→
+   137→   137→Penelitian ini diharapkan memberikan bukti awal kelayakan pengenalan sekelompok kecil isyarat SIBI terisolasi dari CSI satu tautan antarmodul ESP32-S3, disertai bukti kelayakan inferensi model terkuantisasi pada perangkat untuk tugas tersebut. Bukti itu tidak berlaku bagi kosakata yang dibedakan oleh bentuk jari. Penelitian ini juga menyediakan *dataset* CSI isyarat SIBI berlabel beserta protokol perekamannya sehingga dapat menjadi pembanding bagi penelitian penginderaan nirkabel berbahasa isyarat lain, termasuk perluasan ke BISINDO. Kajian integrasi penginderaan CSI dengan jalur TTS dan ASR Bahasa Indonesia pada satu purwarupa memberikan contoh dokumentasi arsitektur tepi-awan yang dapat ditelusuri ulang peneliti berikutnya.
+   138→   138→
+   139→   139→### 1.5.2 Manfaat Praktis
+   140→   140→
+   141→   141→Bagi lembaga pendidikan mitra, penelitian ini memberikan gambaran kelayakan purwarupa alat bantu komunikasi dua arah berbahasa SIBI yang dapat dipakai guru dan keluarga pada kegiatan pembelajaran, bersama protokol kurasi kosakata yang disusun bersama validator penutur tunarungu. Bila tahapan penelitian mencapai gerbang terakhir, dihasilkan purwarupa yang menampilkan teks dan menyuarakan isyarat SIBI yang dikenali serta menampilkan representasi isyarat bagi lawan bicara pendengar; bila penelitian berhenti lebih awal, artefak berupa laporan karakterisasi sinyal, protokol, atau *dataset* berlabel tetap dihasilkan. Bagi keluarga siswa tunarungu, kosakata yang divalidasi penutur tunarungu memastikan bentuk isyarat yang ditampilkan baku sesuai jalur pendidikan formal. Bagi komunitas riset, *dataset* dan rancangan yang tidak terikat pada satu bahasa isyarat memudahkan replikasi dan pembandingan metode.
+   142→   142→
+   143→   143→## 1.6 Sistematika Penulisan
+   144→   144→
+   145→   145→Proposal penelitian ini terdiri atas tiga bab dengan sistematika sebagai berikut.
+   146→   146→
+   147→   147→**BAB I Pendahuluan** memuat latar belakang, rumusan masalah, tujuan penelitian, batasan masalah, manfaat penelitian, dan sistematika penulisan.
+   148→   148→
+   149→   149→**BAB II Kajian Pustaka** memuat kajian tentang bahasa isyarat dan SIBI, kebutuhan komunikasi dua arah dan sistem terdahulu, Wi-Fi CSI, modul ESP32-S3 dan platform RuView beserta koeksistensi radionya, peran model pose YOLO26 sebagai alat bantu pelabelan riset, pengenalan isyarat dan gestur berbasis CSI serta inferensi pada perangkat, TTS dan ASR Bahasa Indonesia, pemetaan teks ke representasi SIBI di layar, komunikasi perangkat dan server, evaluasi kelayakan, serta penelitian terdahulu yang relevan.
+   150→   150→
+   151→   151→**BAB III Metode Penelitian** memuat desain penelitian; tahapan penelitian beserta gerbang keputusan; waktu dan lokasi penelitian; alat dan bahan; perancangan sistem; protokol perekaman *dataset* beserta partisipan dan etika; pengolahan sinyal, ekstraksi fitur, klasifikasi, dan deployment; skenario pengujian dan metrik evaluasi; jadwal penelitian; parameter rancangan yang ditetapkan kemudian; serta risiko dan alternatif cadangan.
+   152→   152→
+   153→   153→# BAB II KAJIAN PUSTAKA
+   154→   154→
+   155→   155→## 2.1 Bahasa Isyarat dan Sistem Isyarat Bahasa Indonesia
+   156→   156→
+   157→   157→Bahasa isyarat merupakan bahasa visual yang menyampaikan makna melalui gerak tangan, lengan, tubuh, dan ekspresi wajah [46], [47]. Secara struktural, sebuah isyarat tersusun atas bentuk tangan, lokasi, gerak, orientasi telapak tangan, dan komponen nonmanual seperti ekspresi wajah; perbedaan pada satu parameter saja dapat membedakan makna dua isyarat [46], [47]. Dalam penelitian ini, parameter tersebut menjadi acuan untuk memisahkan bagian isyarat yang dapat dinilai mesin dari bagian yang tetap memerlukan penilaian manusia (Subbab 2.3 dan 2.8).
+   158→   158→
+   159→   159→Pemakaian bahasa isyarat di Indonesia tidak seragam. Survei ekosistem bahasa isyarat menunjukkan BISINDO jauh lebih banyak dipakai respondennya daripada SIBI, sedangkan SIBI berkembang di jalur pendidikan formal [8]; angka pemakaian dan keterbatasan sampel survei tersebut telah dipaparkan pada Subbab 1.1. Survei pada responden tunarungu di Jawa dan Bali melaporkan bahwa 91% responden memakai BISINDO untuk komunikasi sehari-hari karena konsep SIBI dianggap sulit [9]. SIBI sendiri merupakan sistem isyarat baku yang dikembangkan untuk keperluan pendidikan formal, sedangkan BISINDO berkembang secara alami di komunitas tunarungu; kajian pada mahasiswa tunarungu [48] dan pada siswa SLB [49] memerikan perbedaan pemakaian keduanya. Bentuk baku isyarat SIBI didokumentasikan dalam *Kamus Sistem Isyarat Bahasa Indonesia* yang selanjutnya disebut *Kamus SIBI* [45], dan bentuk digitalnya tersedia melalui Kamus SIBI Digital [10].
+   160→   160→
+   161→   161→Pemilihan SIBI dalam penelitian ini didasarkan pada jalur pendidikan formal yang menjadi konteks pemakaian purwarupa, bukan pada jumlah penuturnya (Subbab 1.1). Alat yang dirancang tidak dimaksudkan menggantikan BISINDO dalam komunikasi komunitas tunarungu sehari-hari. Rancangan sistem tidak terikat pada satu bahasa isyarat tertentu sehingga perluasan ke BISINDO pada prinsipnya dapat dilakukan dengan mengganti *dataset*, menyeleksi ulang kosakata dengan kriteria yang sama, dan melakukan validasi bersama validator penutur BISINDO; kelayakan perluasan tersebut tidak diuji dalam penelitian ini dan diusulkan sebagai penelitian lanjutan.
+   162→   162→
+   163→   163→## 2.2 Kebutuhan Komunikasi Dua Arah dan Sistem Terdahulu
+   164→   164→
+   165→   165→Komunikasi antara penutur isyarat dan pendengar menuntut kemampuan pada kedua arah, yaitu memahami isyarat yang diperagakan dan membalasnya dengan moda yang dapat dipahami lawan bicara. Sebagian besar anak tunarungu lahir dari orang tua pendengar [1] sehingga keluarga pendengar berada di barisan pertama yang merasakan kebutuhan tersebut; mereka yang belajar bahasa isyarat membutuhkan dukungan belajar terstruktur serta menghadapi hambatan praktis [3], [4]. Juru bahasa isyarat profesional yang dapat menjembatani kedua arah jumlahnya terbatas [5] sehingga teknologi bantu komunikasi berperan sebagai pelengkap [7]. Dalam penelitian ini, kebutuhan tersebut diterjemahkan menjadi purwarupa yang bekerja dua arah, bukan sekadar kamus satu arah.
+   166→   166→
+   167→   167→Sistem terdahulu di Indonesia dapat dikelompokkan menurut arah kerjanya, sebagaimana dirangkum pada taksonomi Gambar 2.1. Pada arah ucapan atau teks menjadi isyarat, KASIBI mengubah suara menjadi teks melalui layanan pengenal ucapan, mencocokkan kata pada basis data, lalu menampilkan animasi peraga tiga dimensi; sistem tersebut diuji sebagai media pembelajaran dan memperoleh rata-rata skor 3,362 dari 4 [12]. OpenSIBI memakai mekanisme serupa dengan menyimpan model tiga dimensi format Collada pada *application programming interface* (API) sehingga aplikasi Android dapat menganimasikannya; cakupannya 50 kosakata yang terdiri atas 9 angka, 26 huruf, dan 15 kata, dan penulisnya mengakui keterbatasan kosakata sebagai kelemahan utama [13]. Kedua sistem tersebut membuktikan bahwa arah balik kata-level secara teknis dapat dibangun, tetapi sekaligus menandai biaya pembuatan aset per isyarat yang tinggi. Aplikasi pembelajaran dasar lain menyasar arah manusia belajar isyarat [50].
+   168→   168→
+   169→   169→```mermaid
+   170→   170→flowchart TD
+   171→   171→    ROOT["Dua fungsi penerjemah isyarat"]
+   172→   172→
+   173→   173→    A["Pengenalan isyarat<br/>(isyarat menjadi teks/suara)"]
+   174→   174→    B["Translasi balik<br/>(teks/suara menjadi isyarat)"]
+   175→   175→
+   176→   176→    A1["Sensor terpasang:<br/>sarung tangan sensor, IMU"]
+   177→   177→    A2["Visi (kamera):<br/>citra/video, perlu cahaya<br/>dan garis pandang"]
+   178→   178→    A3["Wi-Fi CSI:<br/>SignFi 276 isyarat ASL,<br/>WiSign kalimat kontinu,<br/>Wi-SL, DF-WiSLR"]
+   179→   179→    A4["CSI pada ESP32:<br/>Hernandez-Bulut, RuView;<br/>belum untuk SIBI"]
+   180→   180→
+   181→   181→    B1["Kamus kata-level:<br/>KASIBI, OpenSIBI<br/>(suara/teks menjadi animasi 3D)"]
+   182→   182→    B2["Ejaan jari:<br/>26 huruf + 9 angka,<br/>fallback kosakata"]
+   183→   183→    B3["SLMT penuh:<br/>tata bahasa + non-manual,<br/>masalah terbuka internasional"]
+   184→   184→
+   185→   185→    ROOT --> A
+   186→   186→    ROOT --> B
+   187→   187→    A --> A1
+   188→   188→    A --> A2
+   189→   189→    A --> A3
+   190→   190→    A --> A4
+   191→   191→    B --> B1
+   192→   192→    B --> B2
+   193→   193→    B --> B3
+   194→   194→```
+   195→   195→
+   196→   196→Gambar 2.1 Taksonomi pengenalan isyarat dan translasi SIBI
+   197→   197→
+   198→   198→Pada arah isyarat menjadi teks, riset Indonesia umumnya bertumpu pada citra atau video dari kamera [14]. Dwijayanti dkk. [15] memakai *convolutional neural network* (CNN) untuk citra huruf dan angka BISINDO, Kindy dkk. [51] menyusun *dataset* video BISINDO tingkat kata, Wiguna dan Rojali [52] mengenali kalimat BISINDO dari video, dan Sebastian dkk. [53] memakai pengenalan gestur tubuh yang memperhitungkan informasi spasial. Khusus SIBI, Soekarta dkk. [16] membangun aplikasi Android berbasis MediaPipe untuk 24 huruf statis, disusul aplikasi pengenalan alfabet statis berbasis TensorFlow Lite [17]. Seluruh kelompok ini memerlukan kamera saat sistem dipakai sehingga keberhasilannya bergantung pada pencahayaan dan garis pandang [18], [47].
+   199→   199→
+   200→   200→Pendekatan lain yang tidak memerlukan kamera adalah sensor yang dikenakan pada tangan, seperti sarung tangan sensor dan sensor inersia, yang dapat menangkap konfigurasi jari; namun, perangkatnya harus dikenakan dan dikalibrasi setiap kali dipakai [47], [23] sehingga tidak cocok untuk percakapan yang berlangsung santai. Paparan kamera yang terus menyala selama percakapan juga dikaitkan dengan kelelahan nonverbal [19]. Oleh karena itu, penelitian ini menelusari penginderaan berbasis sinyal Wi-Fi yang bekerja tanpa kamera dan tanpa perangkat yang dikenakan, sementara sistem terdahulu yang paling dekat dengan arah balik, yaitu KASIBI dan OpenSIBI, menjadi preseden perancangan jalur kedua purwarupa (Subbab 2.8).
+   201→   201→
+   202→   202→## 2.3 Wi-Fi Channel State Information
+   203→   203→
+   204→   204→Wi-Fi *Channel State Information* (CSI) merupakan informasi amplitudo dan fase pada setiap *subcarrier* yang menggambarkan kondisi kanal propagasi antara pemancar dan penerima Wi-Fi [20]. Sinyal Wi-Fi tiba di penerima melalui beberapa jalur, yaitu jalur langsung dan jalur pantulan dari dinding, perabot, serta tubuh manusia. Ketika tubuh bergerak di antara pemancar dan penerima, panjang jalur pantulan berubah sehingga amplitudo dan fase pada setiap *subcarrier* ikut berubah; perubahan itulah yang dimanfaatkan untuk mengenali gerak tanpa sensor yang dikenakan di tubuh [20].
+   205→   205→
+   206→   206→Amplitudo dan fase memuat informasi yang berbeda tentang perubahan kanal. Cai dkk. [54] memanfaatkan keduanya sebagai informasi yang saling melengkapi untuk pengenalan gestur. Setiap *subcarrier* menempati frekuensi yang sedikit berbeda sehingga satu gerak yang sama menghasilkan perubahan yang tidak identik pada setiap *subcarrier* [20]. Dengan demikian, CSI menyediakan banyak kanal pengamatan dari satu pasang pemancar dan penerima.
+   207→   207→
+   208→   208→Gerak lengan juga menghasilkan komponen Doppler, yaitu pergeseran frekuensi yang sebanding dengan laju perubahan panjang jalur pantulan [20], [40]. Komponen tersebut dapat diukur dari deret CSI dan mencerminkan kecepatan gerak. Penelitian ini memusatkan analisis Doppler pada pita frekuensi gerak 1–60 Hz; agar pita tersebut terwakili, laju pencuplikan CSI harus sekurang-kurangnya dua kali frekuensi tertingginya, yaitu 120 Hz, sesuai kriteria Nyquist [55], [56]. *Firmware* RuView membatasi pengiriman bingkai CSI paling sering setiap 20 ms, yang setara laju maksimum 50 bingkai per detik, menurut kode sumber *firmware*-nya [28]; laju aktual pada konfigurasi penelitian diukur pada tahap replikasi (BAB III). Bila laju terukur lebih rendah daripada 120 Hz, pita Doppler yang dapat diamati menyempit hingga setengah laju pencuplikan aktual dan pembatasan itu dilaporkan.
+   209→   209→
+   210→   210→Kepekaan CSI terhadap gerak halus telah dibuktikan pada gerak yang jauh lebih kecil daripada gerak lengan. WiKey mengenali ketukan tombol dari CSI dengan tingkat deteksi lebih dari 97,5% dan akurasi klasifikasi 96,4% untuk kunci tunggal pada lingkungan terkendali [25]. Pemantauan pernapasan dari Wi-Fi CSI berhasil mengklasifikasikan pola pernapasan dengan akurasi 99,54% dan laju napas dengan akurasi 98,69% pada kanal yang cukup baik [26], padahal gerak dada akibat napas berada pada orde milimeter. Kedua preseden tersebut menunjukkan bahwa CSI peka terhadap gerak skala sentimeter hingga milimeter pada kondisi jarak dekat dan pengguna tunggal. Meskipun demikian, keduanya bekerja pada kondisi terkendali sehingga keberhasilannya tidak serta-merta berlaku pada konfigurasi penelitian ini; bukti itu dipakai sebagai dasar hipotesis kerja, bukan jaminan hasil.
+   211→   211→
+   212→   212→Pola CSI tidak hanya dipengaruhi oleh gerak isyarat, tetapi juga oleh pengisyarat yang memperagakannya dan ruang tempat perekaman. Akibatnya, model berbasis CSI mudah mengalami *overfitting* terhadap orang dan ruang tempat data pelatihan direkam [39]. Chen dkk. merangkum strategi generalisasi lintas domain untuk mengatasi persoalan tersebut, sedangkan Zhang dkk. mengusulkan Widar3.0 yang mengenali gestur lintas domain tanpa pelatihan ulang dengan profil kecepatan yang diturunkan dari Doppler [40]. Dalam penelitian ini, strategi lintas domain dijadikan acuan rancangan fitur, sedangkan kemampuan generalisasi sistem diukur langsung melalui skenario pengujian (Subbab 2.10 dan 3.8).
+   213→   213→
+   214→   214→Panjang gelombang Wi-Fi pada pita 2,4 GHz berkisar 12,5 cm dan membatasi resolusi spasial CSI. Sejumlah penelitian melaporkan pengenalan isyarat dan gestur tangan dari CSI dengan perangkat riset multi-antena: SignFi memakai NIC Intel 5300 dengan tiga antena penerima [21], Wi-SL memakai router dengan dua antena pemancar dan tiga antena penerima pada kanal 40 MHz dengan laju cuplik 400 Hz [57], dan HandFi memakai NIC Intel 5300 sebagai penerima dari router Wi-Fi komersial [58]. Penelitian ini tidak mengasumsikan kemampuan tersebut juga dimiliki perangkat yang digunakan. Dengan satu tautan antara dua modul ESP32-S3 yang masing-masing berantena tunggal, perbedaan konfigurasi jari dan ekspresi wajah diasumsikan terlalu halus untuk dibedakan secara andal; asumsi tersebut diperiksa melalui uji Delta-CSI (BAB III) sehingga cakupan pengenalan dibatasi pada lintasan lengan, tubuh atas, dan kepala. Batas resolusi tersebut menentukan saringan separabilitas fisik pada kurasi kosakata (Subbab 3.6) dan makna keluaran sistem pada kedua arah.
+   215→   215→
+   216→   216→## 2.4 Modul ESP32-S3, Platform RuView, dan Koeksistensi Radio
+   217→   217→
+   218→   218→ESP32-S3 merupakan mikrokontroler dengan radio Wi-Fi 802.11 b/g/n pada pita 2,4 GHz dan tautan tunggal satu antena (1T1R) [29]. Inti prosesornya ganda Xtensa LX7 berjalan pada 240 MHz dengan instruksi vektor; memorinya terdiri atas SRAM internal 512 KB, ROM 384 KB, dan PSRAM terpasang hingga 8 MB sesuai varian chip [29]. Dukungan CSI tersedia resmi untuk seluruh seri ESP32 termasuk ESP32-S3 melalui repositori esp-csi [27]; pada kanal 20 MHz 802.11n, CSI yang dilaporkan mencakup 56 *subcarrier* yang terdiri atas 52 *subcarrier* data dan 4 *subcarrier* pilot [27]. Basis akuisisi CSI mandiri pada keluarga ESP32 dikembangkan oleh Hernandez dan Bulut [59], dan varian ESP32-S3 adalah varian yang direkomendasikan dokumentasi RuView untuk node penangkap CSI [28].
+   219→   219→
+   220→   220→RuView merupakan proyek sumber terbuka yang menyediakan rantai akuisisi dan pengolahan CSI pada ESP32. Komponennya meliputi *firmware* ESP32 penangkap CSI dengan format bingkai ADR-018 yang dikirim melalui *User Datagram Protocol* (UDP), *server* pengolahan sinyal, kalibrasi ruang bawaan, segmentasi berbasis energi gerak, *dashboard* web, mode privasi, dan *pipeline* akuisisi tersinkron kamera–CSI melalui skrip `scripts/collect-ground-truth.py` (ADR-079) [28]. ADR atau *architecture decision record* adalah catatan keputusan arsitektur yang dipakai repositori tersebut untuk mendokumentasikan keputusan desain [28]. Kalibrasi ruang bawaan memakai 600 bingkai dan 8 *anchor* selama kurang lebih empat menit, sedangkan mode privasi menekan fitur biometrik agar tidak diterbitkan keluar dari *server* [28].
+   221→   221→
+   222→   222→Fakta teknis yang paling menentukan arsitektur purwarupa adalah koeksistensi radio pada satu chip. *Firmware* RuView menjalankan tiga fungsi radio secara serentak pada satu ESP32-S3: menangkap CSI melalui mode promiscuous, terhubung sebagai station ke *access point* untuk mengirim data melalui UDP, dan menerima sinkronisasi ESP-NOW dari modul pemancar [28]. ESP-NOW sendiri merupakan protokol komunikasi tanpa *access point* yang memuat hingga 250 bita per paket dan dipakai RuView sebagai sumber bingkai bersama antarmodul [28]. Tiga syarat wajib menyertai pola tersebut: seluruh perangkat berada pada satu kanal mengikuti kanal *access point*, penyaringan paket mode promiscuous dibatasi pada kelompok paket manajemen agar beban interupsi terkendali, dan mode hemat daya radio dimatikan karena CSI menuntut radio tetap terjaga [28]. Dengan bukti itu, purwarupa tidak memerlukan modul gerbang khusus; setiap modul dapat menjalankan peran ganda sekaligus, dan topologi lengkapnya diuraikan pada Subbab 3.5. Tabel 2.1 memetakan fitur RuView terhadap perannya dalam penelitian ini.
+   223→   223→
+   224→   224→Tabel 2.1 Pemetaan fitur RuView terhadap peran dalam penelitian ini
+   225→   225→
+   226→   226→| Fitur RuView | Peran dalam penelitian ini |
+   227→   227→|---|---|
+   228→   228→| *Firmware* ESP32 penangkap CSI (format bingkai ADR-018, *streaming* UDP) | Mengalirkan CSI dan label hasil inferensi dari modul ke *server* lokal |
+   229→   229→| Koneksi station + UDP + CSI promiscuous + sinkronisasi ESP-NOW pada satu chip | Dasar topologi satu kanal purwarupa (Subbab 3.5) |
+   230→   230→| Kalibrasi ruang bawaan (600 bingkai + 8 *anchor*) | Mengkalibrasi ruang mitra pada awal setiap sesi |
+   231→   231→| Segmentasi berbasis energi gerak | Memotong deret CSI menjadi segmen isyarat terisolasi |
+   232→   232→| *Dashboard* web | Pemantauan sesi riset; tampilan pengguna akhir ada di layar modul |
+   233→   233→| Mode privasi | Membuang fitur biometrik selama penelitian |
+   234→   234→| *Pipeline* akuisisi tersinkron kamera–CSI (ADR-079) | Jalur pelabelan riset dengan estimator diganti model pose YOLO26 |
+   235→   235→| Modul estimasi pose *on-device* | Tidak dipakai |
+   236→   236→
+   237→   237→Modul estimasi pose *on-device* RuView tidak dipakai karena pengenalan isyarat dilakukan langsung dari fitur CSI (Subbab 2.6). Karena RuView bersumber dari repositori perangkat lunak dan tidak melalui telaah sejawat, fungsi yang dipakai diverifikasi lebih dulu pada tahap replikasi melalui gerbang keputusan G0 sebelum dipakai untuk perekaman (BAB III).
+   238→   238→
+   239→   239→## 2.5 Estimasi Pose Berbasis Visi sebagai Alat Bantu Pelabelan Riset
+   240→   240→
+   241→   241→Estimasi pose merupakan tugas visi komputer untuk memperkirakan posisi *keypoint* tubuh manusia dari citra atau video [60]. YOLO26 merupakan keluarga model visi waktu nyata terbaru dari Ultralytics yang mendukung deteksi, segmentasi, klasifikasi, dan estimasi pose dalam satu kerangka [41]. Model pose YOLO26 dilatih pada *dataset keypoint* COCO dan menghasilkan 17 *keypoint* tubuh per orang, mencakup titik wajah, bahu, siku, dan pergelangan tangan, tanpa *keypoint* jari [42]. Analisis independen atas YOLO26 menunjukkan bahwa model ini dirancang untuk efisiensi inferensi dan kesiapan penerapan pada perangkat tepi [61].
+   242→   242→
+   243→   243→Dalam penelitian ini, model pose YOLO26 dipakai sebagai estimator terlatih tanpa pelatihan ulang hanya pada jalur pelabelan riset. *Pipeline* akuisisi tersinkron mengikuti pola ADR-079 RuView yang aslinya memakai MediaPipe PoseLandmarker [62] dengan estimator diganti model pose YOLO26 yang keluarannya juga 17 *keypoint* format COCO sehingga formatnya setara dengan skrip asli. Pemakaian visi sebagai pemberi supervisi bagi pelatihan model Wi-Fi telah memiliki preseden: Person-in-WiFi memperoleh persepsi tubuh dari sinyal Wi-Fi dengan supervisi kamera [63], dan DensePose from WiFi memetakan sinyal Wi-Fi ke koordinat permukaan tubuh dengan jaringan visi sebagai guru [64]. Namun, dalam penelitian ini kamera tidak mengajarkan pose kepada model CSI; label kelas berasal dari kartu pemandu pada protokol elisitasi, sedangkan deret *keypoint* hanya dipakai untuk verifikasi batas segmen, penyaringan segmen buruk, dan diagnosis kesalahan klasifikator secara luring (Subbab 3.8). Distilasi pengetahuan pose secara penuh diusulkan sebagai penelitian lanjutan.
+   244→   244→
+   245→   245→Peran kamera dengan demikian terbatas pada tahap riset dan tidak pernah menyala pada produk akhir. Batas ini penting karena keluaran model hanya mencakup tubuh tanpa *keypoint* jari; batas tersebut sejalan dengan cakupan pengenalan yang memang dibatasi pada lintasan lengan, tubuh atas, dan kepala (Subbab 2.3). Setelah model CSI dilatih dan di-*deploy* ke modul, seluruh jalur operasional berjalan tanpa kamera dan tanpa citra sehingga klaim produk tanpa kamera dapat diuji langsung pada purwarupa.
+   246→   246→
+   247→   247→## 2.6 Pengenalan Isyarat dan Gestur Berbasis CSI serta Inferensi pada Perangkat
+   248→   248→
+   249→   249→Pengenalan bahasa isyarat dari CSI telah diteliti pada beberapa bahasa isyarat di luar Indonesia. SignFi mengenali 276 isyarat ASL [21], sistem multi-perangkat yang tangguh diajukan Shang dan Wu [65], DF-WiSLR mengenali 49 gestur tanpa perangkat yang dikenakan [22], model deret waktu berbasis *Long Short-Term Memory* dikembangkan Ahmed dkk. [66], WiASL mengenali tulisan ASL dengan perangkat Wi-Fi komersial [67], dan pendekatan CSI dicoba pada *Filipino Sign Language* [23]. WiSign memperluas arah tersebut dengan mengenali kalimat ASL kontinu dari CSI dengan segmentasi berbasis kepadatan spektrum [24]; keberadaannya menunjukkan bahwa pengenalan kontinu bukan wilayah yang sama sekali belum disentuh sehingga kebaruan penelitian ini tidak diklaim pada pengenalan kontinu, melainkan pada penerapan CSI untuk SIBI dan pada integrasinya dengan jalur pemrosesan bahasa dua arah (Subbab 2.11).
+   250→   250→
+   251→
+   252→[showing lines 1-250 of 994; use offset=251 with limit to continue reading]
