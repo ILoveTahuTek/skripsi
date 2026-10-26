@@ -420,3 +420,24 @@ Stage Summary:
 - Skill ketiga (gepa) kini terpasang di /home/z/my-project/skills-drive-baru/extracted/ dan terpakai nyata (pip gepa 0.1.4 + z-ai CLI sebagai LM kustom).
 - Sisa human-owned: 20 penanda PERLU DATA (pembimbing/T0/T4/validator/mitra) + 5 konfirmasi pembimbing seksi 12.
 - Catatan operasional: gdown gagal untuk tautan Drive ini (pakai curl drive.usercontent.google.com); API gepa 0.1.4 menyimpang dari dokumen skill — pemetaan via inspeksi sumber wajib.
+
+---
+Task ID: 19
+Agent: Super Z (main agent, sesi web)
+Task: Revisi gambar putaran ketiga pada DOCX Proposal Sempro DPJ-4 SIBI-CSI atas umpan balik pemilik "gambar terlalu besar, teks pada gambar tidak terlihat".
+
+Work Log:
+- Diagnosis: G3.1 cetak 14×19,9 cm (nyaris 1 halaman) dan G3.2 14×15,9 cm dengan teks cetak hanya 5,6–7,9 pt; akar masalah = kanvas tinggi + belah ketupat yang membuang ±50% kotaknya untuk teks.
+- Redesain fig31.html: gerbang G0–G4/G0U/G1U diganti HEKSAGON datar (clip-path, AABB = kotak, ruang teks ±84%), 5 baris tahap dipadatkan + baris T5; kanvas 1560×1424 → cetak 14×12,8 cm; font simpul 28–32 px (cetak 7,1–8,1 pt).
+- Redesain fig32.html: kedua jalur disusun alur ular dua kolom per panel (JO: TX,ZI,RX,CSI turun + SEG,FIT,KLS,UB naik; JP: KP,LBL,DS + CAM,YOLO26,KEY,VER); DIAG kiri-bawah, SYN kanan-bawah; kanvas 1560×990 → cetak 14×8,9 cm; lajur putus-putus tetap (x14/385/650/745/790/1025/1552); 2 persilangan bersih 90° antartautan bantu didokumentasikan (tak terhindarkan topologis).
+- Teks simpul/jalur/label tetap verbatim vs kode Mermaid sumber; ralat YOLO26 dipertahankan; rel kanan tetap hanya S0→T5.
+- check_layout.js diperluas (dukungan heksagon data-hex); iterasi 4 putaran hingga BERSIH keduanya (perbaikan: tinggi T0/T2/T3/P1/UB, geser kolom-2 JO ke x400 w350, UB display:block — artefak overflow flex).
+- shoot_figs.js → PNG 3120×2848 & 3120×1980; generate_docx.js → DOCX 989 KB; gambar terpasang terverifikasi 14,0×12,8 cm & 14,0×8,9 cm.
+- QA: postcheck 0 error (2 warning lama yang sudah dikenal: spasi tabel 9pt + TOC updateFields); sinkron pandoc 596/596 unit (13.238 kata); PDF 52 halaman (turun dari 55); VLM glm-5v-turbo inspeksi hlm 28 & 32 = teks terbaca jelas, 0 tumpang tindih, ukuran proporsional (layanan visi normal kembali, putaran lalu 401).
+- catatan-pengemasan.md: baris aset & butir Gambar di bagian 1–2 dimutakhirkan + bagian 9 baru (tabel sebelum/sesudah, keputusan heksagon & alur ular, QA).
+- Mirror 13-sempro-docx/ disinkronkan (generator rsync --delete, assets, docx, catatan); commit + push origin/main (85cac30..27374ce).
+
+Stage Summary:
+- Deliverable terbarui: download/sempro-dpj4-sibi-csi/Proposal-Sempro-DPJ4-SIBI-CSI.docx (52 hlm PDF) + assets/gambar-3.1.png & gambar-3.2.png baru; mirror & GitHub sinkron.
+- Keputusan kunci: heksagon menggantikan belah ketupat demi keterbacaan (dijelaskan di catatan bagian 9 agar bisa dipertanggungjawabkan ke pembimbing); ukuran gambar sengaja tidak lagi memenuhi halaman.
+- Sisa human-owned: tidak ada baru; penanda [PERLU DATA] dan identitas sampul tetap seperti sebelumnya.

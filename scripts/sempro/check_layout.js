@@ -76,12 +76,20 @@ function clipSegPoly(a, b, pts) { // Liang–Barsky umum untuk poligon cembung
       document.querySelectorAll('.panel-title').forEach(el => shapes.push({ kind: 'rect', cls: 'title', ...R(el), label: el.textContent.trim() }));
       document.querySelectorAll('.panel').forEach(el => shapes.push({ kind: 'panel', cls: 'panel', ...R(el) }));
       document.querySelectorAll('.gate').forEach(el => {
-        const r = el.getBoundingClientRect(); // AABB setelah rotasi
-        const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
-        const w = parseFloat(el.style.width) / 2, h = parseFloat(el.style.height) / 2;
-        const c = Math.SQRT1_2, pts = [[-w, -h], [w, -h], [w, h], [-w, h]]
-          .map(([x, y]) => [cx + (x - y) * c, cy + (x + y) * c]); // rotasi 45deg
-        shapes.push({ kind: 'poly', cls: 'gate', pts, label: el.textContent.trim(), aabb: { x: r.left, y: r.top, w: r.width, h: r.height } });
+        const r = el.getBoundingClientRect(); // AABB
+        const label = el.textContent.trim();
+        if (el.dataset.hex !== undefined) {
+          // Heksagon clip-path polygon(0 50%, 6% 0, 94% 0, 100% 50%, 94% 100%, 6% 100%)
+          const pts = [[0, 0.5], [0.06, 0], [0.94, 0], [1, 0.5], [0.94, 1], [0.06, 1]]
+            .map(([fx, fy]) => [r.left + fx * r.width, r.top + fy * r.height]);
+          shapes.push({ kind: 'poly', cls: 'gate', pts, label, aabb: { x: r.left, y: r.top, w: r.width, h: r.height } });
+        } else {
+          const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          const w = parseFloat(el.style.width) / 2, h = parseFloat(el.style.height) / 2;
+          const c = Math.SQRT1_2, pts = [[-w, -h], [w, -h], [w, h], [-w, h]]
+            .map(([x, y]) => [cx + (x - y) * c, cy + (x + y) * c]); // rotasi 45deg
+          shapes.push({ kind: 'poly', cls: 'gate', pts, label, aabb: { x: r.left, y: r.top, w: r.width, h: r.height } });
+        }
       });
       document.querySelectorAll('svg.edges line, svg.edges path').forEach(el => {
         const d = el.getAttribute('d');
