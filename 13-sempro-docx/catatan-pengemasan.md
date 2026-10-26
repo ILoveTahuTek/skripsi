@@ -11,7 +11,7 @@ Dibuat 24 Oktober 2026. Pekerjaan: **pengemasan/kompilasi** — menyusun materi
 |---|---|
 | `Proposal-Sempro-DPJ4-SIBI-CSI.docx` | Dokumen utuh: sampul → daftar isi (romawi kecil i–iii) → BAB I–III + Daftar Pustaka (arab mulai 1); 49 halaman A4 |
 | `Proposal-Sempro-DPJ4-SIBI-CSI.md` | Markdown terpadu: blok identitas + BAB I–III + Daftar Pustaka, konten identik verbatim dengan DOCX |
-| `assets/gambar-3.1.png`, `assets/gambar-3.2.png` | Kedua diagram BAB III siap cetak (hasil gambar ulang, struktur dan teks simpul sama dengan kode Mermaid sumber). Revisi 25 Okt: font diperbesar ±2× agar terbaca jelas (lihat bagian 7) |
+| `assets/gambar-3.1.png`, `assets/gambar-3.2.png` | Kedua diagram BAB III siap cetak (hasil gambar ulang, struktur dan teks simpul sama dengan kode Mermaid sumber). Revisi 26 Okt: gambar dikecilkan (12,8 cm & 8,9 cm) dengan font diperbesar (lihat bagian 9) |
 | `catatan-pengemasan.md` | Berkas ini |
 
 ## 2. Keputusan pengemasan (docx)
@@ -21,7 +21,7 @@ Dibuat 24 Oktober 2026. Pekerjaan: **pengemasan/kompilasi** — menyusun materi
 - **Daftar isi**: bidang TOC otomatis kedalaman BAB–subbab–anak subbab (55 entri). Nomor halaman pada berkas masih **estimasi placeholder** — di Word klik kanan daftar isi → *Update Field* → *Update entire table* agar mutakhir.
 - **Nomor halaman**: sampul tanpa nomor; daftar isi romawi kecil (i, ii, iii) rata tengah; isi arab mulai 1 rata kanan.
 - **Tabel** (8 buah): tiga-garis akademik — keterangan di atas rata kiri (nomor tebal), kepala 9pt tebal tengah, isi 9pt; baris tidak terpotong halaman, kepala berulang lintas halaman.
-- **Gambar** (2 buah): dua jalur tata letak ulang dari kode Mermaid (perataan otomatis Mermaid menghasilkan rasio 1:7,7 yang tak muat halaman; sesuai catatan materi, "untuk Word, gambar ulang … dengan struktur yang sama"). Simpul, teks, jalur, dan label lolos/gagal/pelatihan identik. Revisi 25 Oktober 2026: tata letak dipadatkan dan font dalam gambar dinaikkan dari 13,5–14 px menjadi 20–26 px sehingga ukuran teks cetak naik dari ±3,4 pt menjadi ±7 pt (rincian di bagian 7).
+- **Gambar** (2 buah): dua jalur tata letak ulang dari kode Mermaid (perataan otomatis Mermaid menghasilkan rasio 1:7,7 yang tak muat halaman; sesuai catatan materi, "untuk Word, gambar ulang … dengan struktur yang sama"). Simpul, teks, jalur, dan label lolos/gagal/pelatihan identik. Revisi 26 Oktober 2026: gambar dikecilkan menjadi 14×12,8 cm dan 14×8,9 cm dengan teks cetak 7,1–8,1 pt (rincian di bagian 9).
 - **Penanda** `[PERLU DATA: …]`: 38 kemunculan (semua keputusan pembimbing/data pribadi/parameter rancangan), **tersorot kuning** agar mudah dicari (Ctrl+F "PERLU"). Seluruh 60 kemunculan lain telah diisi dari sumber terverifikasi pada 24 Oktober 2026 (lihat bagian 6).
 - **Sitasi IEEE `[n]`** dan **daftar pustaka 62 entri** (indentasi gantung) apa adanya; 28 rujukan baru ditambahkan pada putaran kedua dengan DOI terverifikasi Crossref.
 
@@ -98,3 +98,24 @@ Atas perintah pemilik ("ralat, aku tidak menggunakan mediapipe tapi yolo26 pose 
 **B. Perbaikan tumpang tindih blok pada kedua gambar.** Akar masalah G3.1: *diamond* gerbang dibuat dengan rotasi CSS 45° atas persegi panjang 280×340 sehingga *bounding box* sebenarnya 440×440 — puncak diamond menabrak kotak T/P (±39 px), *diamond* GU menabrak P dan S, dan label "gagal/lolos" jatuh di dalam *diamond*. Perbaikan: *diamond* kini persegi (rotasi = belah ketupat simetris; AABB terkontrol 354 px untuk G, 212 px untuk GU), seluruh kolom/jalur/label disusun ulang di kanvas 1550×2200 (G3.1) dan 1300×1480 (G3.2); pada G3.2 node kolom B digeser agar tidak menempel border panel, koridor putus-putus diberi lajur terpisah, label "pelatihan" dipindah dari atas border panel ke sisi kiri garis.
 
 **QA putaran ini:** pemeriksa geometri deterministik baru `generator/check_layout.js` (luapan teks + irisan blok termasuk *diamond* rotasi + garis menembus blok + batas kanvas + node menempel border panel) = **BERSIH keduanya**; postcheck 0 error; sinkron pandoc 596/596 unit; PDF 55 halaman; spot-check pdftotext: 13 kemunculan YOLO26, 0 kemunculan BlazePose/MediaPipe Hands/humanoid, gambar terpasang benar di halaman 29 (G3.1, rasio 1:1,42) dan 34 (G3.2, 1:1,14). Catatan: inspeksi visual VLM halaman tidak dapat dijalankan putaran ini (layanan visi menjawab 401) — penggantinya, pemeriksaan geometri deterministik atas DOM sumber, justru lebih ketat karena menghitung koordinat pasti dan bukan persepsi gambar.
+
+## 9. Revisi gambar putaran ketiga — gambar dikecilkan, teks diperbesar (26 Oktober 2026)
+
+Atas perintah pemilik ("gambar terlalu besar, teks pada gambar tidak terlihat"), kedua diagram dirender ulang dengan pendekatan berbeda dari putaran 1–2: bukan sekadar menaikkan font, tetapi **mengubah tata letak agar rasio font-terhadap-ukuran-cetak naik drastis**. Akar masalah: kanvas tinggi (2200 px / 1480 px) yang saat dipaskan ke lebar halaman 14 cm menghasilkan teks cetak hanya 5,6–7,9 pt — dan gambar hampir memenuhi satu halaman penuh (19,9 cm / 15,9 cm).
+
+| Aspek | Sebelum (25 Okt) | Sesudah (26 Okt) |
+|---|---|---|
+| Gambar 3.1 (cetak) | 14×19,9 cm — nyaris 1 halaman penuh | **14×12,8 cm** (−36%) |
+| Gambar 3.2 (cetak) | 14×15,9 cm | **14×8,9 cm** (−44%) |
+| Teks simpul utama | 26 px → ±6,7 pt | 32 px → **±8,1 pt** |
+| Teks gerbang | 20–22 px → ±5,6 pt | 28–32 px → **±7,1–8,1 pt** |
+| Teks sekunder (P/S/label) | 21–25 px → ±5,9 pt | 28–30 px → **±7,1–7,6 pt** |
+
+Keputusan desain:
+
+- **Gerbang digambar heksagon datar, bukan belah ketupat** (G0–G4, G0U, G1U). Belah ketupat membuang ±50% kotaknya untuk teks, sehingga kriteria gerbang yang panjang (74 karakter) memaksa kanvas sangat tinggi. Heksagon (bentuk baku "gerbang/persiapan" pada bagan alur) menyisakan ±84% kotak untuk teks — kanvas langsung memendek. Pembeda visual gerbang vs proses tetap terjaga (heksagon abu-abu vs kotak putih; simpul temuan abu-abu tua; T5 final bercetak tebal).
+- **Gambar 3.2 disusun alur ular (snake) dua kolom per panel**: kolom 1 turun (TX→ZI→RX→CSI), kolom 2 naik dari dasar (SEG→FIT→KLS→UB) sehingga panel menjadi lebar-rendah; panel pelabelan serupa (KP→LBL→DS dan CAM→YOLO26→KEY→VER, dasar DS sejajar VER). DIAG pindah ke kiri-bawah, SYN kanan-bawah, dekat node yang bersambungan dengannya.
+- Simpul, teks, jalur, dan label *lolos/gagal/pelatihan* **tetap identik** dengan kode Mermaid sumber; ralat YOLO26 dipertahankan; rel kanan tetap hanya S0→T5.
+- Tautan bantu putus-putus diberi lajur tetap (x14, x385, x650, x745, x790, x1025, x1552). Dua **persilangan bersih 90° antartautan bantu** (SEG→DS dan DS→KLS masing-masing × KEY→DIAG di y406) tidak terhindarkan secara topologis pada kanvas ringkas — keduanya garis bantu bergaya sama dan tetap terbaca.
+
+**QA putaran ini:** pemeriksa geometri deterministik `check_layout.js` diperluas (dukungan heksagon `clip-path`) = **BERSIH keduanya** (0 luapan, 0 irisan, 0 garis menembus, 0 di luar kanvas); postcheck 0 error; sinkron pandoc 596/596 unit; PDF 52 halaman (turun dari 55); gambar terpasang 14,0×12,8 cm (hlm 28) dan 14,0×8,9 cm (hlm 32); inspeksi visual VLM kedua halaman = teks terbaca jelas, tidak ada tumpang tindih, ukuran proporsional tidak memenuhi halaman.
