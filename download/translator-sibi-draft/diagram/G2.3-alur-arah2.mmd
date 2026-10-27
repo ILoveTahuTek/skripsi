@@ -1,0 +1,17 @@
+%% G2.3 — Alur arah kedua: teks/ucapan menjadi representasi SIBI (BAB II, Subbab 2.8)
+%% Tipe: flowchart TD, dua pintu masuk (teks dan suara) menuju layar
+flowchart TD
+    IN1["Pintu teks:<br/>ketikan langsung"]
+    IN2["Pintu suara:<br/>mikrofon I2S modul"]
+    SRV["Server lokal:<br/>ASR faster-whisper<br/>(dukungan bahasa Indonesia)"]
+    NRM["Normalisasi teks:<br/>huruf kecil, pisah token"]
+    DIC{"Kata ada di<br/>kamus isyarat?"}
+    SHOW["Tampilkan representasi isyarat:<br/>glos + gambar konfigurasi<br/>atau animasi dari server"]
+    FSP["Ejaan jari:<br/>urutan huruf A-Z dan angka 1-9"]
+    LCD["Layar modul"]
+
+    IN1 --> NRM
+    IN2 --> SRV --> NRM
+    NRM --> DIC
+    DIC -- "ya" --> SHOW --> LCD
+    DIC -- "tidak" --> FSP --> LCD

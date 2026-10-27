@@ -1,0 +1,466 @@
+     1→# BAB III METODE PENELITIAN
+     2→
+     3→## 3.1 Desain Penelitian
+     4→
+     5→Penelitian ini dirancang sebagai studi kelayakan kuantitatif bergerbang yang menghasilkan purwarupa penerjemah dua arah. Bagian kuantitatif mengukur sejauh mana Wi-Fi CSI dari tautan antarmodul ESP32-S3 dapat membedakan 5–8 isyarat SIBI terisolasi. Bagian itu juga mengukur sejauh mana model terkuantisasi berjalan pada perangkat serta sejauh mana jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI bekerja pada skenario yang ditetapkan. Setelah komponen diuji, purwarupa dikemas lalu dikaji kelayakannya sebagai alat bantu komunikasi kosakata terbatas melalui uji operasional, uji kegunaan skala kecil, dan penilaian validator penutur tunarungu. Struktur bergerbang dipilih karena kemampuan CSI membedakan isyarat SIBI belum dapat dipastikan sebelum data dikumpulkan; setiap tahap menghasilkan artefak tetap, kegagalan gerbang dicatat sebagai temuan, dan kriteria akurasi dirumuskan relatif terhadap peluang acak (Subbab 2.10).
+     6→
+     7→Rumusan masalah pertama dijawab pada tahap replikasi platform, perancangan arsitektur, serta kurasi isyarat dan protokol. Rumusan masalah kedua dijawab melalui uji klasifikasi, uji *deployment*, dan uji jalur bahasa pada tahap perekaman dan generalisasi. Rumusan masalah ketiga ditinjau melalui uji operasional, uji kegunaan, dan penilaian validator pada tahap pengemasan purwarupa.
+     8→
+     9→## 3.2 Tahapan Penelitian
+    10→
+    11→Penelitian berlangsung selama empat belas minggu (M1–M14) dalam enam tahap. Tahapan dimulai dari replikasi platform dan uji karakterisasi (T0), kemudian kurasi isyarat dan protokol (T1), perekaman *dataset* dan pelatihan model (T2), uji generalisasi (T3), pengemasan purwarupa dua arah dan uji kegunaan (T4), hingga analisis dan penulisan (T5). Lima tahap pertama ditutup gerbang keputusan G0–G4 seperti ditunjukkan pada Gambar 3.1. Kriteria lolos dan tindakan bila gagal direncanakan ditetapkan sebelum gerbang terkait dinilai; parameter yang belum ditetapkan dihimpun pada Tabel 3.6.
+    12→
+    13→```mermaid
+    14→flowchart TD
+    15→    T0["T0 Replikasi platform, uji Delta-CSI,<br/>dan uji koeksistensi radio, M1-M2"]
+    16→    G0{"G0 akhir M2: akuisisi stabil, pola gerak<br/>terpisah dari diam dan kosong,<br/>CSI + STA + ESP-NOW berjalan serentak"}
+    17→    P0["Perbaikan penempatan modul satu kali"]
+    18→    G0U{"G0 diuji ulang"}
+    19→    S0["Jalur CSI dihentikan,<br/>dilaporkan sebagai temuan karakterisasi"]
+    20→
+    21→    T1["T1 Kurasi isyarat, kalibrasi ruang,<br/>protokol, dan etika, M2-M4"]
+    22→    G1{"G1 M3: separabilitas awal<br/>2-3 isyarat (nearest-centroid)"}
+    23→    P1["Perubahan penempatan atau<br/>orientasi modul satu kali"]
+    24→    G1U{"G1 diuji ulang"}
+    25→    S1["Tindakan sesuai Tabel 3.6,<br/>dicatat sebagai temuan"]
+    26→
+    27→    T2["T2 Perekaman dataset dan pelatihan, M4-M8<br/>kartu pemandu + webcam + YOLO26 (17 keypoint COCO)<br/>disinkronkan dengan CSI (pola ADR-079)"]
+    28→    G2{"G2 M6-M7: akurasi dalam sesi<br/>jauh di atas peluang acak"}
+    29→    P2["Pemangkasan ke 3-5 isyarat<br/>yang bertumpu pada lintasan"]
+    30→
+    31→    T2B["Kuantisasi int8 dan uji deployment<br/>model ke modul ESP32-S3"]
+    32→    T3["T3 Uji generalisasi:<br/>lintas sesi, partisipan, ruang,<br/>dan pengguna baru, M8-M10"]
+    33→    G3{"G3 M10: kinerja lintas domain<br/>di atas peluang acak"}
+    34→    P3["Cakupan menjadi personalisasi<br/>per pengguna, ditulis sebagai temuan"]
+    35→
+    36→    T4["T4 Pengemasan purwarupa dua arah<br/>dan uji kegunaan, M10-M12"]
+    37→    G4{"G4 M12: kelengkapan uji dan<br/>persetujuan validator"}
+    38→    P4["Hasil negatif dilaporkan<br/>sebagai temuan kelayakan"]
+    39→    T5["T5 Analisis dan penulisan, M12-M14"]
+    40→
+    41→    T0 --> G0
+    42→    G0 -- "lolos" --> T1
+    43→    G0 -- "gagal" --> P0 --> G0U
+    44→    G0U -- "lolos" --> T1
+    45→    G0U -- "gagal" --> S0 --> T5
+    46→    T1 --> G1
+    47→    G1 -- "lolos" --> T2
+    48→    G1 -- "gagal" --> P1 --> G1U
+    49→    G1U -- "lolos" --> T2
+    50→    G1U -- "gagal" --> S1
+    51→    T2 --> G2
+    52→    G2 -- "lolos" --> T2B
+    53→    G2 -- "gagal" --> P2 --> T2B
+    54→    T2B --> T3
+    55→    T3 --> G3
+    56→    G3 -- "lolos" --> T4
+    57→    G3 -- "gagal" --> P3 --> T4
+    58→    T4 --> G4
+    59→    G4 -- "lolos" --> T5
+    60→    G4 -- "gagal" --> P4 --> T5
+    61→```
+    62→
+    63→Gambar 3.1 Tahapan penelitian T0–T5 dengan gerbang keputusan G0–G4
+    64→
+    65→### 3.2.1 Tahap T0: Replikasi Platform dan Uji Karakterisasi (M1–M2)
+    66→
+    67→Dua modul ESP32-S3 disiapkan dengan *firmware* RuView [28], lalu *pipeline* akuisisi tersinkron diuji tanpa partisipan. Tiga uji dilakukan pada tahap ini. Pertama, uji Delta-CSI (Subbab 3.8.1) untuk mengetahui apakah pola CSI saat bergerak terpisah dari kondisi diam dan ruang kosong. Kedua, uji koeksistensi radio: modul penerima dijalankan dengan penangkapan CSI, koneksi *station* ke *access point*, dan pengiriman UDP secara serentak, lalu laju CSI aktual dan kehilangan paket diukur, termasuk ketika streaming audio dari mikrofon diaktifkan. Ketiga, pengukuran laju pencuplikan aktual sebagai dasar penetapan pita Doppler (Subbab 3.7.1). Keluaran tahap ini adalah laporan karakterisasi sinyal sebagai bahan G0.
+    68→
+    69→### 3.2.2 Tahap T1: Kurasi Isyarat, Kalibrasi Ruang, dan Protokol (M2–M4)
+    70→
+    71→T1 mencakup kurasi 5–8 isyarat bersama validator penutur tunarungu, kalibrasi ruang mitra, penyusunan protokol perekaman dan etika, serta perizinan (Subbab 3.6). Kurasi juga menetapkan himpunan tampilan arah kedua, yaitu isyarat terpilih ditambah 26 huruf dan 9 angka sebagai kosakata ejaan jari (Subbab 2.8). G1 menguji separabilitas awal 2–3 isyarat dengan uji *nearest-centroid* sederhana yang rata-ratanya dihitung tanpa repetisi yang sedang diuji.
+    72→
+    73→### 3.2.3 Tahap T2: Perekaman Dataset, Pelatihan, dan Uji Deployment (M4–M8)
+    74→
+    75→*Dataset* direkam dengan kurang lebih 30 repetisi per isyarat per sesi disertai video tersinkron (Subbab 3.6). Fitur dari segmen yang lolos penyaringan dipakai melatih SVM sebagai pembanding dasar dan 1D-CNN berukuran kecil (Subbab 3.7). Setelah pelatihan, model terpilih dikuantisasi int8, di-*deploy* ke modul penerima, lalu diukur waktu inferensi dan pemakaian memorinya pada laju bingkai aktual. Keluaran T2 adalah *dataset* CSI berlabel, model terlatih, dan laporan *deployment*; bila G2 gagal, cakupan dipangkas menjadi 3–5 isyarat yang pembedanya paling bertumpu pada lintasan (Tabel 3.6).
+    76→
+    77→### 3.2.4 Tahap T3: Uji Generalisasi (M8–M10)
+    78→
+    79→Model mudah *overfitting* pada orang dan ruang tempat data latih direkam [39] sehingga model diuji lintas sesi, lintas partisipan, lintas ruang, dan pada satu pengguna baru tanpa pelatihan ulang (Subbab 3.7.5). Strategi lintas domain Widar3.0 [40] dijadikan acuan tanpa mengasumsikan hasil yang sama pada isyarat SIBI. Bila G3 gagal, cakupan menjadi personalisasi per pengguna yang memerlukan data latih singkat dari setiap pengguna dan perubahan itu dilaporkan sebagai temuan.
+    80→
+    81→### 3.2.5 Tahap T4: Pengemasan Purwarupa Dua Arah dan Uji Kegunaan (M10–M12)
+    82→
+    83→Model yang telah berjalan di modul dikemas menjadi purwarupa dua arah (Subbab 3.5) dengan menambahkan jalur server: kamus label menjadi teks, TTS lokal, ASR faster-whisper, pemetaan teks ke representasi SIBI, serta tampilan layar modul dan pemutaran audio pada *speaker*. Selanjutnya dilakukan uji operasional, uji jalur ucapan, uji cakupan kamus, uji kegunaan dengan 3–5 pengguna, dan penilaian validator (Subbab 3.8). G4 menilai kelengkapan data uji dan persetujuan validator atas kewajaran keluaran.
+    84→
+    85→### 3.2.6 Tahap T5: Analisis dan Penulisan (M12–M14)
+    86→
+    87→Seluruh artefak dianalisis dan disusun menjadi laporan kelayakan beserta rekomendasi berdasarkan gerbang yang lolos dan yang gagal. Laporan memuat keterbatasan secara eksplisit, yaitu konfigurasi jari dan ekspresi wajah tidak dikenali, arah kedua berbentuk kamus kata-level dan ejaan jari, serta seluruh klaim terikat pada kosakata terbatas (Subbab 1.4).
+    88→
+    89→## 3.3 Waktu dan Lokasi Penelitian
+    90→
+    91→Penelitian dilaksanakan pada [PERLU DATA: bulan dan tahun pelaksanaan penelitian] di [PERLU DATA: nama sekolah/lembaga mitra]. Perekaman dan pengujian dilakukan di sedikitnya dua ruang, yaitu jumlah minimum bagi skema *leave-one-room-out*, dan setiap ruang dikalibrasi sebelum perekaman (Subbab 3.5.4). Penyiapan sistem secara mandiri oleh pengguna di luar lembaga mitra berada di luar cakupan.
+    92→
+    93→## 3.4 Alat dan Bahan
+    94→
+    95→Perangkat keras penelitian disajikan pada Tabel 3.1. Dua modul ESP32-S3 berperan sebagai modul pemancar dan modul penerima, sedangkan modul ketiga direncanakan sebagai modul pengguna yang memuat layar, *speaker*, dan mikrofon; pemakaian dua atau tiga modul ditetapkan sesuai hasil uji beban pada T0.
+    96→
+    97→Tabel 3.1 Perangkat keras penelitian
+    98→
+    99→| No. | Nama | Spesifikasi | Jumlah | Keterangan |
+   100→|---|---|---|---|---|
+   101→| 1 | Modul ESP32-S3 | Papan pengembangan ESP32-S3 dengan PSRAM, varian yang direkomendasikan RuView [28] | 3 unit | Modul TX, modul RX, dan modul pengguna (dapat dipakai bergilir dengan cadangan) |
+   102→| 2 | Layar modul | Layar SPI/TFT kecil (1,8–2,8 inci) [PERLU DATA: model final] | 1–2 unit | Tampilan representasi SIBI pada modul pengguna |
+   103→| 3 | Antarmuka audio modul | Mikrofon I2S dan *speaker* dengan penguat I2S; contoh model yang umum adalah INMP441 dan MAX98357A [PERLU DATA: model final] | 1 set | Pintu suara arah kedua dan pemutaran TTS |
+   104→| 4 | Baterai modul | Baterai Li-ion atau Li-Po dengan regulator daya [PERLU DATA: kapasitas target berdasarkan hasil uji arus] | 1–2 set | Ketahanan modul diukur pada uji operasional |
+   105→| 5 | Laptop | ASUS TUF Dash F15 FX516PR: Intel Core i7-11370H, RTX 3070 Laptop 8 GB VRAM, RAM 16 GB | 1 unit | Mesin pelatihan, server lokal prototipe, dan jalur pelabelan |
+   106→| 6 | *Access point* | Router Wi-Fi 2,4 GHz atau fitur hotspot laptop [PERLU DATA: pilihan final] | 1 unit | Seluruh modul dan server berada pada satu kanal |
+   107→| 7 | *Webcam* | Bawaan laptop | 1 unit | Hanya menyala pada jalur pelabelan *dataset* riset |
+   108→
+   109→Perangkat lunak penelitian disajikan pada Tabel 3.2. Versi setiap perangkat lunak dicatat bersama log konfigurasi pelatihan agar eksperimen dapat diulang.
+   110→
+   111→Tabel 3.2 Perangkat lunak penelitian
+   112→
+   113→| No. | Nama | Fungsi dalam penelitian |
+   114→|---|---|---|
+   115→| 1 | *Firmware* dan *server* RuView | Menangkap CSI pada modul, mengirimkannya melalui UDP, mengalibrasi ruang, dan menyegmentasi deret saat riset |
+   116→| 2 | `scripts/collect-ground-truth.py` (ADR-079, diadaptasi) | Menyinkronkan akuisisi kamera dan CSI; estimator pose asli diganti model pose YOLO26 |
+   117→| 3 | Model pose YOLO26 | Menghasilkan deret 17 *keypoint* format COCO pada jalur pelabelan riset |
+   118→| 4 | Python, scikit-learn, PyTorch | Ekstraksi fitur, pelatihan SVM dan 1D-CNN, serta evaluasi |
+   119→| 5 | TensorFlow Lite Micro dan ESP-DL | Menjalankan model int8 pada modul penerima |
+   120→| 6 | faster-whisper | ASR Bahasa Indonesia pada server lokal |
+   121→| 7 | MMS-TTS-ind | TTS Bahasa Indonesia pada server lokal |
+   122→| 8 | Layanan TTS awan (opsional) | Pembanding kualitas dan latensi sintesis |
+   123→| 9 | Kamus label-teks dan teks-isyarat | Dikembangkan sendiri sebagai bagian purwarupa |
+   124→
+   125→Bahan penelitian meliputi *dataset* CSI hasil perekaman sendiri, lembar definisi isyarat, aset tampilan arah kedua (gambar huruf, angka, dan isyarat terpilih), formulir persetujuan partisipan, instrumen uji, serta kuesioner persepsi. *Dataset* direkam sendiri karena penelitian yang mengenali isyarat SIBI dari CSI belum ditemukan dalam penelusuran literatur (Subbab 2.11).
+   126→
+   127→## 3.5 Perancangan Sistem
+   128→
+   129→### 3.5.1 Arsitektur Dua Arah
+   130→
+   131→Sistem dirancang dalam dua jalur operasional tanpa kamera dan satu jalur pelabelan yang hanya aktif saat riset, seperti ditunjukkan pada Gambar 3.2. Pada jalur arah pertama, modul pemancar memancarkan bingkai bersama; gerak pengisyarat mengubah deret CSI pada modul penerima; model int8 berjalan pada modul dan menghasilkan label beserta skor keyakinan; label dikirim ke server; server mencocokkan label ke teks, menyintesis suara, dan mengirim audio ke *speaker* modul. Pada jalur arah kedua, mikrofon modul mengalirkan audio ke server; server mengenali ucapan menjadi teks, memetakan teks ke representasi SIBI, lalu mengirim data tampilan ke layar modul. Jalur pelabelan memakai *webcam* dan model pose YOLO26 untuk verifikasi batas segmen, penyaringan segmen buruk, dan diagnosis kesalahan secara luring; jalur ini bukan bagian produk akhir.
+   132→
+   133→```mermaid
+   134→flowchart TD
+   135→    subgraph JALUR1["Arah 1: SIBI menjadi teks dan suara (tanpa kamera)"]
+   136→        TX["Modul TX ESP32-S3<br/>pemancar ESP-NOW"]
+   137→        ZN["Zona isyarat,<br/>satu pengisyarat"]
+   138→        RX["Modul RX ESP32-S3:<br/>penangkap CSI + inferensi int8"]
+   139→        NET["Kirim label via UDP<br/>pada kanal AP"]
+   140→        SRV1["Server lokal:<br/>kamus label, penyusun teks"]
+   141→        TTS["TTS Indonesia"]
+   142→        AUD["Audio ke speaker modul"]
+   143→    end
+   144→
+   145→    subgraph JALUR2["Arah 2: teks/ucapan menjadi representasi SIBI (tanpa kamera)"]
+   146→        MIC["Mikrofon I2S modul"]
+   147→        STREAM["Streaming audio<br/>via WiFi ke server"]
+   148→        ASR["ASR Indonesia (faster-whisper)"]
+   149→        MAP["Pemetaan teks ke kamus isyarat<br/>+ ejaan jari"]
+   150→        LCD["Tampilan di layar modul:<br/>glos, gambar, animasi"]
+   151→    end
+   152→
+   153→    subgraph LAB["Jalur pelabelan: hanya saat riset, di luar produk akhir"]
+   154→        CAM["Webcam laptop"]
+   155→        Y26["Model pose YOLO26:<br/>17 keypoint COCO"]
+   156→        VER["Verifikasi batas segmen,<br/>saring segmen buruk, diagnosis"]
+   157→        DS["Dataset CSI berlabel"]
+   158→    end
+   159→
+   160→    SYN["Sinkronisasi waktu kamera-CSI<br/>collect-ground-truth.py (ADR-079)"]
+   161→
+   162→    TX --> ZN --> RX --> NET --> SRV1 --> TTS --> AUD
+   163→    MIC --> STREAM --> ASR --> MAP --> LCD
+   164→    CAM --> Y26 --> VER
+   165→    VER -.-> DS
+   166→    SYN -.-> DS
+   167→    DS -. "melatih" .-> RX
+   168→```
+   169→
+   170→Gambar 3.2 Arsitektur produk akhir tanpa kamera
+   171→
+   172→### 3.5.2 Topologi Modul dan Jaringan
+   173→
+   174→Topologi jaringan purwarupa ditunjukkan pada Gambar 3.3. Seluruh perangkat, yaitu 2–3 modul dan server laptop, terhubung ke satu *access point* pada kanal yang sama sehingga penangkapan CSI dan komunikasi data berjalan serentak (Subbab 2.4). Modul pemancar dan modul penerima berkomunikasi melalui ESP-NOW untuk bingkai bersama, modul penerima mengirim label melalui UDP, dan modul pengguna mengalirkan audio mikrofon serta menerima audio TTS dan data tampilan dari server. Server menjalankan *server* RuView untuk keperluan riset, faster-whisper untuk ASR, TTS MMS untuk sintesis, dan layanan kamus untuk pemetaan dua arah. Laptop dapat berperan sebagai *access point* melalui hotspot sehingga purwarupa dapat dijalankan tanpa router tambahan.
+   175→
+   176→```mermaid
+   177→flowchart LR
+   178→    subgraph MODS["2-3 modul ESP32-S3 (baterai)"]
+   179→        MA["Modul A (TX)<br/>pemancar ESP-NOW"]
+   180→        MB["Modul B (RX)<br/>CSI + inferensi int8"]
+   181→        MC["Modul C (pengguna)<br/>layar + speaker + mikrofon I2S"]
+   182→    end
+   183→
+   184→    AP["Access point:<br/>router atau hotspot laptop<br/>(semua perangkat satu kanal)"]
+   185→
+   186→    subgraph SERVER["Server lokal laptop (RTX 3070 8 GB)"]
+   187→        RUVR["Server RuView:<br/>kalibrasi ruang, segmentasi dataset"]
+   188→        ASR["ASR faster-whisper"]
+   189→        TTS["TTS Indonesia"]
+   190→        KAMUS["Kamus label dan isyarat"]
+   191→    end
+   192→
+   193→    CLOUD["Cloud jarak jauh<br/>(alternatif, tidak diuji<br/>pada prototipe)"]
+   194→
+   195→    MA -- "ESP-NOW beacon<br/>sumber CSI" --> MB
+   196→    MB -- "UDP: label dan skor" --> AP
+   197→    AP --> RUVR
+   198→    MC -- "streaming audio" --> AP --> ASR
+   199→    AP --> TTS
+   200→    TTS -- "audio" --> MC
+   201→    KAMUS -- "glos/gambar/ejaan jari" --> MC
+   202→    AP -.-> CLOUD
+   203→```
+   204→
+   205→Gambar 3.3 Topologi perangkat, komunikasi antarmodul, dan server
+   206→
+   207→### 3.5.3 Penempatan Modul dan Zona Isyarat
+   208→
+   209→Modul pemancar dan modul penerima dipasang pada dudukan setinggi dada pengisyarat dan mengapit zona isyarat agar gerak lengan dan tubuh atas berada di antara keduanya; kesesuaiannya diperiksa melalui uji Delta-CSI. Zona isyarat hanya ditempati satu pengisyarat dalam setiap sesi dan sistem tidak mengidentifikasi individu. Jarak antarmodul, ukuran zona, dan penempatan modul pengguna ditetapkan pada T0 dan dicatat dalam metadata sesi (Tabel 3.6).
+   210→
+   211→### 3.5.4 Kalibrasi Ruang
+   212→
+   213→Setiap sesi diawali kalibrasi ruang bawaan RuView selama kurang lebih empat menit dengan 600 bingkai dan 8 *anchor* karena CSI peka terhadap perubahan kondisi ruang [28], [39]. Posisi perabot, kipas angin atau pendingin ruangan yang menyala, dan orang yang lewat dicatat sebagai kovariat untuk menganalisis perbedaan kinerja antarsesi dan antarruang.
+   214→
+   215→## 3.6 Protokol Perekaman Dataset, Partisipan, dan Etika
+   216→
+   217→### 3.6.1 Partisipan
+   218→
+   219→Partisipan terdiri atas 3–4 pengisyarat kompeten, sedikitnya satu validator penutur tunarungu, dan 3–5 pengguna uji. Pengisyarat kompeten adalah guru atau pembina SIBI yang memperagakan isyarat untuk *dataset*; validator menentukan pemilihan kosakata, memeriksa sampel segmen, dan menilai kewajaran keluaran purwarupa; pengguna uji mencoba purwarupa dua arah pada uji kegunaan. Kriteria inklusi dan rekrutmen tercantum pada Tabel 3.6. Setiap pengisyarat direkam dalam sedikitnya dua sesi agar skema lintas sesi dapat dijalankan, dan skema lintas ruang hanya memisahkan pengaruh ruang dari pengaruh orang bila pengisyarat yang sama direkam di setiap ruang.
+   220→
+   221→### 3.6.2 Kurasi Isyarat dan Kosakata Tampilan
+   222→
+   223→Isyarat pengenalan dipilih melalui dua saringan (Subbab 1.4) dengan acuan *Kamus SIBI* [45], sedangkan kosakata tampilan arah kedua mencakup isyarat terpilih tersebut ditambah 26 huruf dan 9 angka sebagai landasan ejaan jari [13]. Hasilnya adalah daftar 5–8 isyarat terisolasi [PERLU DATA: daftar isyarat SIBI terpilih] yang dideskripsikan dalam lembar definisi isyarat sebagai acuan perekaman dan penilaian.
+   224→
+   225→### 3.6.3 Prosedur Perekaman
+   226→
+   227→Perekaman memakai *elisitasi* terisolasi, yaitu satu isyarat per segmen dengan jeda antarrepetisi. Adapun prosedur perekaman setiap sesi adalah sebagai berikut.
+   228→
+   229→1. Menyiapkan peralatan yang digunakan.
+   230→2. Memasang modul pemancar dan modul penerima, lalu menghubungkan seluruh perangkat ke *access point* pada satu kanal.
+   231→3. Menjalankan kalibrasi ruang dan mencatat metadata sesi, yaitu tanggal, ruang, kode pengisyarat, posisi modul, dan kondisi latar.
+   232→4. Menjalankan `scripts/collect-ground-truth.py` agar perekaman CSI dan *webcam* tersinkron.
+   233→5. Menampilkan kartu pemandu isyarat target, merekam satu repetisi, memberi jeda, dan mengulanginya hingga setiap isyarat mencapai kurang lebih 30 repetisi.
+   234→6. Membuang segmen bila orang tidak terdeteksi model pose, *jitter* *keypoint* ekstrem, atau segmen terpotong, lalu mencatat tingkat segmen terbuang per isyarat dan per pengisyarat.
+   235→7. Meminta validator mengambil sampel segmen untuk memeriksa kebenaran bentuk isyarat yang diperagakan.
+   236→
+   237→### 3.6.4 Etika Penelitian
+   238→
+   239→Perekaman dimulai setelah persetujuan institusi mitra dan persetujuan tertulis setiap partisipan diperoleh [PERLU DATA: lembaga atau komisi pemberi persetujuan etik]. Partisipan berhak mengundurkan diri kapan saja tanpa konsekuensi. Formulir persetujuan menyatakan bahwa kamera hanya menyala pada sesi pelabelan *dataset*, bahwa produk akhir bebas kamera, dan bahwa mode privasi RuView aktif selama penelitian. Video hanya dipakai untuk verifikasi batas segmen, penyaringan kualitas, dan diagnosis; video disimpan terbatas dan tidak dipublikasikan. *Dataset* publik hanya memuat CSI, label, dan *keypoint* tanpa identitas partisipan. Token apresiasi validator tercantum pada Tabel 3.6.
+   240→
+   241→## 3.7 Pengolahan Sinyal, Ekstraksi Fitur, Klasifikasi, dan Deployment
+   242→
+   243→### 3.7.1 Laju Pencuplikan
+   244→
+   245→*Firmware* RuView membatasi pengiriman bingkai CSI paling sering setiap 20 ms sehingga laju maksimumnya 50 bingkai per detik [28]; laju aktual diukur pada T0. Pita Doppler 1–60 Hz hanya terwakili bila laju pencuplikan sedikitnya 120 Hz (Subbab 2.3). Bila laju terukur lebih rendah, pita yang dianalisis dibatasi hingga setengah laju aktual dan pembatasan itu dilaporkan.
+   246→
+   247→### 3.7.2 Segmentasi
+   248→
+   249→Deret CSI dipotong menjadi segmen isyarat dengan segmentasi berbasis energi gerak RuView [28]. Batas segmen diverifikasi dengan deret *keypoint* hanya selama perekaman *dataset*; pada purwarupa, segmentasi berjalan pada modul tanpa kamera.
+   250→
+   251→### 3.7.3 Ekstraksi Fitur
+   252→
+   253→Fitur setiap segmen terdiri atas amplitudo dan fase *subcarrier* terpilih yang saling melengkapi [54], spektrum Doppler pada pita yang ditetapkan setelah T0 [40], serta statistik ringkas berupa energi, entropi, dan lintasan puncak [20]. Kriteria pemilihan *subcarrier* dan definisi lintasan puncak tercantum pada Tabel 3.6. Fitur diringkas menjadi satu vektor untuk SVM dan disusun sebagai deret per langkah waktu untuk 1D-CNN.
+   254→
+   255→### 3.7.4 Klasifikasi
+   256→
+   257→SVM dilatih dengan scikit-learn sebagai pembanding dasar [68], [69], sedangkan 1D-CNN kecil dilatih dengan PyTorch [70]. Hiperparameter dipilih berdasarkan data validasi yang terpisah dari data uji. Evaluasi pembanding dijalankan pada server; model yang dipilih untuk purwarupa adalah model dengan keseimbangan terbaik antara kinerja validasi dan biaya inferensi pada perangkat.
+   258→
+   259→### 3.7.5 Skema Pembagian Data
+   260→
+   261→Kinerja diukur dengan lima skema pembagian data pada Tabel 3.3. Skema dalam sesi memakai pembagian data temporal per blok, yaitu blok repetisi awal untuk pelatihan dan blok akhir untuk pengujian; pembagian acak tidak dipakai karena repetisi berurutan cenderung mirip sehingga informasi dapat bocor dari data latih ke data uji.
+   262→
+   263→Tabel 3.3 Skema pembagian data
+   264→
+   265→| No. | Skema | Data latih | Data uji | Aspek yang diukur |
+   266→|---|---|---|---|---|
+   267→| 1 | Dalam sesi (blok temporal) | Blok awal satu sesi | Blok akhir sesi yang sama | Separabilitas pada orang, ruang, dan sesi yang sama |
+   268→| 2 | Lintas sesi | Sebagian sesi pengisyarat di satu ruang | Sesi lain pengisyarat dan ruang yang sama | Ketahanan terhadap perubahan antarsesi |
+   269→| 3 | Lintas partisipan (*leave-one-subject-out*) | Semua pengisyarat kecuali satu | Pengisyarat yang ditinggalkan, bergiliran | Ketahanan terhadap pergantian orang |
+   270→| 4 | Lintas ruang (*leave-one-room-out*) | Semua ruang kecuali satu | Ruang yang ditinggalkan, bergiliran | Ketahanan terhadap pergantian ruang |
+   271→| 5 | Pengguna baru | Seluruh pengisyarat *dataset* | Satu pengguna baru tanpa pelatihan ulang | Kesiapan dipakai orang baru tanpa perekaman tambahan |
+   272→
+   273→Skema kedua sampai kelima mengukur ketahanan terhadap perubahan domain [39]; karena jumlah pengisyarat dan ruang kecil, hasil lintas partisipan dan lintas ruang dilaporkan untuk setiap putaran. Data validasi hanya diambil dari data latih sehingga data uji tidak dipakai untuk memilih *subcarrier*, menormalkan fitur, memilih hiperparameter, atau menetapkan ambang (Tabel 3.6).
+   274→
+   275→### 3.7.6 Keluaran dengan Penolakan
+   276→
+   277→Keluaran klasifikator dilengkapi skor keyakinan [71]. Segmen dengan skor di bawah ambang menghasilkan status penolakan pada kedua arah: pada arah pertama, *speaker* tidak mengucapkan apa pun dan sistem menampilkan pesan isyarat tidak dikenali; pada purwarupa ini penolakan lebih aman daripada menebak kelas yang salah. Ambang ditetapkan dari data validasi dan kecukupannya diperiksa melalui laju deteksi palsu serta penilaian validator (Subbab 3.8).
+   278→
+   279→### 3.7.7 Kuantisasi dan Deployment ke Modul
+   280→
+   281→Model terpilih dikuantisasi int8 lalu dijalankan pada modul penerima melalui TensorFlow Lite Micro atau ESP-DL dengan penyangga pada PSRAM. Alur inferensi pada perangkat ditunjukkan pada Gambar 3.4: bingkai CSI dari mode promiscuous masuk ke penyangga geser, segmen terdeteksi dari energi gerak, fitur dihitung, model int8 menghasilkan kelas beserta skor, dan keluaran di atas ambang dikirim melalui UDP. Waktu inferensi per segmen, pemakaian memori, dan pengaruhnya terhadap laju pemrosesan bingkai diukur dan dilaporkan; bila model terbukti terlalu berat untuk dijalankan pada perangkat, klasifikasi dipindahkan ke server sesuai jalur cadangan (Subbab 3.11).
+   282→
+   283→```mermaid
+   284→flowchart LR
+   285→    CSI["Callback CSI<br/>mode promiscuous,<br/>filter MGMT"]
+   286→    BUF["Penyangga geser<br/>deret CSI di PSRAM"]
+   287→    SEG["Segmentasi energi gerak<br/>di perangkat"]
+   288→    FT["Fitur ringkas:<br/>amplitudo-fase terpilih,<br/>Doppler, statistik"]
+   289→    MOD["Model int8 TFLM / ESP-DL:<br/>5-8 kelas, ukuran kecil,<br/>arena tetap di PSRAM"]
+   290→    DEC{"Skor keyakinan<br/>di atas ambang?"}
+   291→    OUT["Label + skor<br/>dikirim via UDP"]
+   292→    RJ["Label ditolak:<br/>isyarat tidak dikenali"]
+   293→
+   294→    CSI --> BUF --> SEG --> FT --> MOD --> DEC
+   295→    DEC -- "ya" --> OUT
+   296→    DEC -- "tidak" --> RJ
+   297→
+   298→    NOTE["Batas perangkat (datasheet ESP32-S3):<br/>SRAM 512 KB, PSRAM sampai 8 MB octal,<br/>CPU dual-core LX7 240 MHz,<br/>WiFi 2,4 GHz 1T1R, satu kanal<br/>dengan WIFI_PS_NONE"]
+   299→    MOD -.- NOTE
+   300→```
+   301→
+   302→Gambar 3.4 Inferensi langsung pada ESP32-S3
+   303→
+   304→## 3.8 Skenario Pengujian dan Metrik Evaluasi
+   305→
+   306→Uji Delta-CSI dan koeksistensi mendasari G0, uji *nearest-centroid* mendasari G1, uji klasifikasi mendasari G2 dan G3, serta uji kegunaan dan penilaian validator mendasari G4. Uji operasional, uji jalur ucapan, dan uji cakupan kamus melengkapi analisis tanpa menjadi syarat gerbang. Rantai lengkap dari *dataset* hingga pengemasan ditunjukkan pada Gambar 3.5.
+   307→
+   308→```mermaid
+   309→flowchart TD
+   310→    REC["Perekaman dataset:<br/>5-8 isyarat x ±30 repetisi x sesi,<br/>3-4 pengisyarat, sedikitnya 2 ruang"]
+   311→    FLT["Penyaringan segmen via keypoint YOLO26:<br/>buang segmen orang hilang,<br/>jitter ekstrem, segmen terpotong"]
+   312→    DS["Dataset CSI berlabel"]
+   313→    SPLIT["Pembagian data 5 skema:<br/>dalam sesi (blok temporal), lintas sesi,<br/>lintas partisipan, lintas ruang, pengguna baru"]
+   314→    MET["Metrik klasifikasi: akurasi, presisi, recall,<br/>skor F1 makro, confusion matrix,<br/>selalu dibandingkan peluang acak"]
+   315→    DEP["Kuantisasi int8 dan deployment<br/>ke modul ESP32-S3"]
+   316→    OP["Uji operasional: latensi ujung-ke-ujung per arah,<br/>laju deteksi palsu per jam, konsumsi arus modul"]
+   317→    COVER["Metrik arah 2: cakupan kamus<br/>(proporsi kata uji yang terwakili)"]
+   318→    USE["Uji kegunaan 3-5 pengguna<br/>+ penilaian validator tunarungu"]
+   319→    ARTE["Laporan kelayakan + purwarupa<br/>+ dataset + protokol"]
+   320→
+   321→    REC --> FLT --> DS --> SPLIT --> MET --> DEP --> OP
+   322→    DEP --> COVER
+   323→    OP --> USE --> ARTE
+   324→    COVER --> ARTE
+   325→```
+   326→
+   327→Gambar 3.5 Alur dataset, eksperimen, evaluasi, dan deployment
+   328→
+   329→### 3.8.1 Uji Delta-CSI dan Koeksistensi
+   330→
+   331→Uji Delta-CSI dilakukan untuk mengetahui apakah gerak tubuh menghasilkan perubahan CSI yang terpisah jelas dari kondisi tanpa gerak, dengan ukuran keterpisahan pada Tabel 3.6. Adapun prosedurnya adalah sebagai berikut.
+   332→
+   333→1. Memasang kedua modul pada posisi awal yang mengapit zona isyarat.
+   334→2. Merekam CSI pada kondisi ruang kosong, pengisyarat diam, dan pengisyarat bergerak di zona isyarat.
+   335→3. Menjalankan modul penerima dengan CSI, koneksi station, dan UDP aktif secara serentak, termasuk saat streaming audio dinyalakan, lalu mencatat laju CSI aktual dan paket yang hilang.
+   336→4. Membandingkan pola antarkondisi, lalu mencatat dan menganalisis hasilnya sebagai bahan G0.
+   337→
+   338→### 3.8.2 Uji Klasifikasi
+   339→
+   340→Uji klasifikasi pada kelima skema memakai metrik pada Subbab 2.10. Setiap metrik dilaporkan bersama peluang acak, yaitu 20% untuk lima kelas dan 12,5% untuk delapan kelas, serta 33,3% bila cakupan dipangkas menjadi tiga isyarat. Tingkat penolakan dilaporkan, dan akurasi dilaporkan dalam dua bentuk, yaitu akurasi tanpa penolakan atas seluruh segmen uji dan akurasi dengan penolakan atas segmen yang diterima saja.
+   341→
+   342→### 3.8.3 Uji Operasional
+   343→
+   344→Uji operasional mengukur laju deteksi palsu per jam saat tidak ada peragaan, latensi ujung ke ujung setiap arah, dan konsumsi arus modul. Adapun prosedurnya adalah sebagai berikut.
+   345→
+   346→1. Menjalankan purwarupa di ruang yang telah dikalibrasi.
+   347→2. Merekam kondisi tanpa peragaan isyarat, termasuk saat ada gangguan berupa orang lewat dan kipas angin menyala, lalu mencatat setiap isyarat yang terdeteksi.
+   348→3. Meminta pengisyarat memperagakan isyarat target, mencatat waktu selesainya isyarat dan waktu suara tampil; pada arah kedua, meminta pengguna mengucapkan frasa uji dan mencatat waktu representasi tampil.
+   349→4. Mengukur arus modul lengkap dengan alat ukur arus pada beberapa kondisi kerja, lalu menghitung estimasi ketahanan baterai.
+   350→5. Menghitung laju deteksi palsu, latensi kedua arah, dan estimasi ketahanan baterai, lalu menganalisisnya terhadap indikator layak (Tabel 3.6).
+   351→
+   352→### 3.8.4 Uji Jalur Ucapan
+   353→
+   354→Uji jalur ucapan menilai komponen bahasa pada pemakaian mikrofon modul. Adapun prosedurnya adalah sebagai berikut.
+   355→
+   356→1. Menyiapkan daftar frasa uji Bahasa Indonesia pendek [PERLU DATA: daftar frasa uji dan jumlah penutur] yang diucapkan ke mikrofon modul.
+   357→2. Merekam teks hasil ASR faster-whisper, lalu menghitung akurasi kata terhadap teks acuan.
+   358→3. Mengukur waktu pengenalan per frasa, waktu pemetaan, dan waktu sintesis TTS lokal, serta waktu total ujung ke ujung.
+   359→4. Membandingkan hasil dengan layanan TTS awan bila dipakai sebagai pembanding, lalu menganalisis keseimbangan antara mutu dan latensi.
+   360→
+   361→### 3.8.5 Uji Cakupan Kamus Arah Kedua
+   362→
+   363→Cakupan kamus dihitung sebagai proporsi frasa uji yang kata-katanya terwakili representasi tersedia; kata yang tidak terwakili jatuh ke ejaan jari dan dilaporkan terpisah. Adapun prosedurnya adalah sebagai berikut.
+   364→
+   365→1. Menyiapkan daftar frasa uji yang mencakup kata dalam kamus dan kata di luar kamus.
+   366→2. Menjalankan setiap frasa melalui pintu teks dan pintu suara.
+   367→3. Mencatat proporsi kata yang tampil sebagai representasi isyarat, sebagai ejaan jari, dan yang gagal tampil, lalu menganalisisnya.
+   368→
+   369→### 3.8.6 Uji Kegunaan
+   370→
+   371→Uji kegunaan dengan 3–5 pengguna menelaah keterpakaian purwarupa sebagai alat bantu komunikasi kosakata terbatas pada skenario tugas terbimbing, yaitu saling menyampaikan pesan pendek dari kosakata yang tersedia. Adapun langkah uji untuk setiap pengguna adalah sebagai berikut.
+   372→
+   373→1. Menjelaskan tujuan uji, batas kosakata, kondisi kamera yang tidak menyala pada purwarupa, dan hak mundur, lalu meminta persetujuan tertulis.
+   374→2. Memberi waktu berlatih singkat dengan kamus tampilan agar pengguna mengenal kosakata yang tersedia.
+   375→3. Menjalankan skenario tugas komunikasi dua arah bersama lawan bicara, mencatat keberhasilan pesan tersampaikan, waktu penyelesaian, dan kejadian keluaran yang menyesatkan.
+   376→4. Meminta pengguna mengisi kuesioner persepsi skala Likert tentang kegunaan, kejelasan keluaran, dan keinginan memakai ulang.
+   377→5. Merekapitulasi hasil, lalu menganalisisnya secara deskriptif tanpa klaim kausal.
+   378→
+   379→Data dianalisis secara deskriptif karena pengguna sedikit dan tidak ada kelompok pembanding; perubahan apa pun dilaporkan sebagai gambaran capaian, bukan pengaruh yang diuji.
+   380→
+   381→### 3.8.7 Penilaian Validator dan Diagnosis Kesalahan
+   382→
+   383→Validator penutur tunarungu menilai kewajaran keluaran purwarupa, yaitu kesesuaian teks hasil pengenalan dengan isyarat yang diperagakan serta kewajaran representasi yang ditampilkan pada arah kedua. Untuk setiap percobaan, keluaran sistem dan penilaian independen validator dicatat dalam tabel silang; kasus keluaran sistem yang dinilai keliru oleh validator dilaporkan tersendiri karena dapat menyesatkan pengguna. Sebagai analisis sekunder, kesalahan klasifikator dikaitkan secara luring dengan kemiripan lintasan tubuh dari deret *keypoint* YOLO26 untuk membedakan kesalahan akibat lintasan yang mirip dari kesalahan akibat sinyal CSI yang lemah.
+   384→
+   385→### 3.8.8 Kriteria Gerbang Keputusan
+   386→
+   387→Kriteria setiap gerbang beserta tindakan bila gagal disajikan pada Tabel 3.4. Kelayakan pada rumusan masalah ketiga ditinjau per dimensi, yaitu latensi kedua arah, cakupan kamus, keandalan operasional, persepsi pengguna, dan penilaian validator, bukan dari lolosnya G4 semata.
+   388→
+   389→Tabel 3.4 Kriteria gerbang keputusan
+   390→
+   391→| Gerbang | Waktu | Ukuran | Kriteria lolos | Tindakan bila gagal |
+   392→|---|---|---|---|---|
+   393→| G0 | Akhir M2 | Uji Delta-CSI dan koeksistensi | Pola CSI bergerak terpisah dari diam dan kosong; CSI, koneksi station, dan UDP berjalan serentak dengan kehilangan paket terkendali (ambang pada Tabel 3.6) | Penempatan modul diperbaiki satu kali; bila gagal lagi, jalur CSI dihentikan dan dilaporkan sebagai temuan karakterisasi |
+   394→| G1 | M3 | Separabilitas awal 2–3 isyarat (*nearest-centroid*) | Repetisi isyarat yang sama lebih dekat satu sama lain daripada ke isyarat lain | Penempatan atau orientasi modul diubah satu kali; bila gagal lagi, tindakan mengikuti Tabel 3.6 |
+   395→| G2 | M6–M7 | Akurasi skema dalam sesi | Jauh di atas peluang acak; ambang pada Tabel 3.6 | Cakupan dipangkas menjadi 3–5 isyarat yang bertumpu pada lintasan |
+   396→| G3 | M10 | Kinerja lintas partisipan dan lintas ruang | Di atas peluang acak; ambang pada Tabel 3.6 | Cakupan menjadi personalisasi per pengguna dan ditulis sebagai temuan |
+   397→| G4 | M12 | Kelengkapan uji dan persetujuan validator | Data uji operasional, jalur ucapan, cakupan kamus, dan kegunaan tercatat; validator menyetujui kewajaran keluaran | Hasil negatif tetap dilaporkan sebagai temuan kelayakan |
+   398→
+   399→## 3.9 Jadwal Penelitian
+   400→
+   401→Jadwal empat belas minggu disajikan pada Tabel 3.5. Tanda ■ menunjukkan minggu pelaksanaan; minggu yang ditempati dua tahap menandai peralihan antartahap.
+   402→
+   403→Tabel 3.5 Jadwal penelitian
+   404→
+   405→| No. | Kegiatan | M1 | M2 | M3 | M4 | M5 | M6 | M7 | M8 | M9 | M10 | M11 | M12 | M13 | M14 | Gerbang |
+   406→|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+   407→| 1 | T0 Replikasi platform, uji Delta-CSI, dan uji koeksistensi | ■ | ■ | | | | | | | | | | | | | G0 (akhir M2) |
+   408→| 2 | T1 Kurasi isyarat dan kosakata tampilan, kalibrasi ruang, protokol, perizinan | | ■ | ■ | ■ | | | | | | | | | | | G1 (M3) |
+   409→| 3 | T2 Perekaman *dataset*, pelatihan SVM dan 1D-CNN, kuantisasi, uji *deployment* | | | | ■ | ■ | ■ | ■ | ■ | | | | | | | G2 (M6–M7) |
+   410→| 4 | T3 Uji lintas sesi, lintas partisipan, lintas ruang, dan pengguna baru | | | | | | | | ■ | ■ | ■ | | | | | | G3 (M10) |
+   411→| 5 | T4 Pengemasan purwarupa dua arah, uji operasional, jalur ucapan, cakupan kamus, kegunaan, validator | | | | | | | | | | ■ | ■ | ■ | | | G4 (M12) |
+   412→| 6 | T5 Analisis dan penulisan | | | | | | | | | | | | ■ | ■ | ■ | — |
+   413→
+   414→## 3.10 Parameter Rancangan yang Ditetapkan Kemudian
+   415→
+   416→Parameter yang bergantung pada kesepakatan pembimbing, hasil tahap sebelumnya, atau data validasi dihimpun pada Tabel 3.6. Setiap parameter direncanakan ditetapkan sebelum dipakai untuk menilai data uji atau gerbang terkait.
+   417→
+   418→Tabel 3.6 Parameter rancangan yang ditetapkan kemudian
+   419→
+   420→| No. | Parameter | Waktu atau dasar penetapan | Status |
+   421→|---|---|---|---|
+   422→| 1 | Kriteria G0 | Sebelum T0 | [PERLU DATA: ukuran keterpisahan Delta-CSI dan ambang kehilangan paket pada uji koeksistensi] |
+   423→| 2 | Tindakan bila G1 gagal kedua kalinya | Sebelum eksperimen | [PERLU DATA: tindakan, disepakati bersama pembimbing] |
+   424→| 3 | Inklusi dan rekrutmen partisipan | Sebelum dipakai | [PERLU DATA: kriteria kompetensi pengisyarat, kefasihan validator, kriteria pengguna uji, dan teknik rekrutmen] |
+   425→| 4 | Sesi per ruang | Sebelum dipakai | [PERLU DATA: jumlah sesi per pengisyarat dan per ruang] |
+   426→| 5 | Publikasi *dataset* | Sebelum dipakai | [PERLU DATA: izin publikasi, repositori, dan lisensi *dataset*] |
+   427→| 6 | Token apresiasi validator | Sebelum dipakai | [PERLU DATA: bentuk token, dikonfirmasi pembimbing] |
+   428→| 7 | Ambang G2 | Sebelum eksperimen | [PERLU DATA: ambang, disepakati bersama pembimbing] |
+   429→| 8 | Kriteria pemangkasan isyarat | Sebelum G2 dinilai | [PERLU DATA: kriteria pemangkasan yang tidak memakai data uji] |
+   430→| 9 | Pemilihan *subcarrier* | Sebelum dipakai | [PERLU DATA: kriteria pemilihan subcarrier] |
+   431→| 10 | Definisi lintasan puncak | Sebelum dipakai | [PERLU DATA: definisi operasional] |
+   432→| 11 | Pembagian data | Sebelum dipakai | [PERLU DATA: ukuran blok dan proporsi data latih, validasi, uji] |
+   433→| 12 | Perlakuan data uji | Sebelum dipakai | [PERLU DATA: segmen tersaring kamera atau hasil segmentasi tanpa koreksi] |
+   434→| 13 | Ambang skor keyakinan | Dari data validasi | [PERLU DATA: ambang, ditetapkan dari data validasi] |
+   435→| 14 | Profil pengguna baru | Sebelum T3 | [PERLU DATA: profil dan jumlah repetisi uji] |
+   436→| 15 | Strategi Widar3.0 yang diadopsi | Sebelum dipakai | [PERLU DATA: komponen strategi yang diadopsi] |
+   437→| 16 | Ambang G3 | Sebelum T3 | [PERLU DATA: ambang, disepakati bersama pembimbing] |
+   438→| 17 | Personalisasi bila G3 gagal | Sebelum T4 | [PERLU DATA: prosedur perekaman data latih pengguna] |
+   439→| 18 | Indikator layak operasional | Sebelum T4 | [PERLU DATA: batas latensi ujung ke ujung tiap arah, batas laju deteksi palsu, dan ketahanan baterai minimum] |
+   440→| 19 | Lama pengamatan deteksi palsu | Sebelum T4 | [PERLU DATA: durasi perekaman tanpa isyarat] |
+   441→| 20 | Kanal, jarak antarmodul, dan zona isyarat | Pada T0 | [PERLU DATA: penetapan dan catatan pengukuran] |
+   442→| 21 | Model layar, audio, dan kapasitas baterai | Sebelum T4 | [PERLU DATA: penetapan model final dan kapasitas berdasar uji arus] |
+   443→| 22 | Ukuran model ASR dan pilihan TTS final | Pada T4 | [PERLU DATA: keputusan berdasarkan hasil uji jalur ucapan] |
+   444→| 23 | Daftar frasa uji ucapan | Sebelum T4 | [PERLU DATA: daftar frasa dan jumlah penutur uji] |
+   445→| 24 | Kuesioner dan rubrik validator | Sebelum T4 | [PERLU DATA: butir kuesioner dan rubrik penilaian] |
+   446→| 25 | Batas kesesuaian validator G4 | Sebelum T4 | [PERLU DATA: batas kesesuaian minimum, disepakati bersama pembimbing] |
+   447→
+   448→## 3.11 Risiko dan Alternatif Cadangan
+   449→
+   450→Risiko utama beserta mitigasinya dirangkum pada Tabel 3.7. Alternatif cadangan disusun bertingkat sesuai titik kegagalan sehingga kegagalan salah satu komponen tidak menghentikan penelitian, melainkan mempersempit klaimnya.
+   451→
+   452→Tabel 3.7 Risiko dan mitigasi
+   453→
+   454→| No. | Risiko | Dampak | Mitigasi dan cadangan |
+   455→|---|---|---|---|
+   456→| 1 | Pola CSI isyarat tidak terpisah pada konfigurasi dua modul | G0 gagal; jalur CSI tidak layak | Perbaikan penempatan satu kali; bila tetap gagal, dihentikan dan dilaporkan sebagai temuan karakterisasi |
+   457→| 2 | Akurasi lintas partisipan atau lintas ruang rendah | Klaim pengguna baru tidak dapat dibuat | Personalisasi per pengguna (cadangan A); dilaporkan sebagai temuan |
+   458→| 3 | Model int8 terlalu berat atau lambat di modul | Inferensi tepi tidak tercapai | Klasifikasi dipindahkan ke server dengan modul hanya mengirim fitur (cadangan B); klaim inferensi tepi diturunkan menjadi hasil uji banding |
+   459→| 4 | Beban radio gabungan CSI, UDP, dan audio bermasalah | Purwarupa dua arah tidak stabil | Pemisahan peran modul menjadi modul CSI dan modul pengguna (cadangan C) |
+   460→| 5 | TTS atau ASR lokal terlalu lambat untuk frasa pendek | Latensi arah melebihi indikator | Ukuran model ASR diturunkan atau layanan awan diuji sebagai pembanding (cadangan D) |
+   461→| 6 | Aset representasi isyarat mahal dibuat | Cakupan arah kedua sempit | Batasi tampilan ke glos dan gambar konfigurasi plus ejaan jari; animasi menjadi pengayaan |
+   462→| 7 | Ketahanan baterai di bawah target | Klaim portabilitas melemah | Ukur arus tiap kondisi, sesuaikan target atau parameter hemat daya, laporkan apa adanya |
+   463→| 8 | Rekrutmen partisipan atau persetujuan etika terlambat | Jadwal T2 mundur | T1 memuat dua ruang dan pengisyarat cadangan; jadwal transisi satu minggu |
+   464→
+   465→Cadangan A sampai D tidak mengubah rumusan masalah, tetapi mempersempit klaim sehingga konsistensi antara tujuan, metode, dan laporan tetap terjaga. Setiap pemakaian cadangan dicatat dalam laporan akhir beserta alasannya agar pembaca dapat menilai posisi klaim akhir penelitian terhadap rancangan awal.
+   466→

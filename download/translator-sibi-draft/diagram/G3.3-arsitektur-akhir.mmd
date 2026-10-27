@@ -1,0 +1,39 @@
+%% G3.3 — Arsitektur produk akhir tanpa kamera (BAB III, Subbab 3.5.1)
+%% Tipe: flowchart TD, dua jalur operasional (TTS/ASR awan) + jalur guru saat riset + cadangan lokal
+flowchart TD
+    subgraph ARAH1["Arah 1: isyarat menjadi teks dan suara (tanpa kamera)"]
+        TX["Modul TX ESP32-S3:<br/>pemancar ESP-NOW"]
+        ZN["Zona isyarat,<br/>satu pengisyarat"]
+        RX["Modul RX ESP32-S3:<br/>penangkap CSI,<br/>inferensi murid int8"]
+        MAPL["Pemetaan label-teks<br/>di modul (kamus kecil)"]
+        DSP1["Layar modul pengguna:<br/>teks hasil pengenalan"]
+        TTS["Layanan TTS awan"]
+        SPK["Speaker modul,<br/>volume rotary encoder"]
+    end
+
+    subgraph ARAH2["Arah 2: ucapan menjadi representasi SIBI (tanpa kamera)"]
+        BTN["Tombol tekan-untuk-bicara<br/>di modul pengguna"]
+        MIC["Mikrofon I2S modul"]
+        STT["Layanan ASR awan"]
+        DSP2["Layar modul:<br/>teks lalu representasi SIBI"]
+        AST["Aset modul: glos, gambar,<br/>ejaan jari (Subbab 2.8)"]
+    end
+
+    subgraph GURU["Jalur guru: hanya saat akuisisi dan pelatihan, di luar produk akhir"]
+        CAM["Webcam laptop"]
+        Y26P["YOLO26-Pose:<br/>17 keypoint COCO"]
+        SUP["Supervisi tambahan<br/>pelatihan murid (Subbab 3.7)"]
+    end
+
+    LOK["Server lokal laptop (cadangan):<br/>ASR faster-whisper, TTS MMS,<br/>server riset RuView"]
+
+    TX --> ZN --> RX --> MAPL --> DSP1
+    MAPL -- "teks via Wi-Fi" --> TTS
+    TTS -- "audio" --> SPK
+    BTN --> MIC
+    MIC -- "audio via Wi-Fi" --> STT
+    STT -- "teks" --> DSP2
+    AST --> DSP2
+    CAM --> Y26P --> SUP
+    TTS -. "tanpa internet: TTS lokal" .-> LOK
+    STT -. "tanpa internet: ASR lokal" .-> LOK

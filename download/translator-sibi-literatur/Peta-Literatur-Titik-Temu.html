@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<title>Peta Literatur → Titik Temu Permasalahan</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #FFFFFF; color: #111827;
+  font-family: 'Carlito', 'Liberation Sans', 'DejaVu Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased; }
+#root { width: fit-content; min-width: 2400px; padding: 44px 48px 36px; background: #FFFFFF; }
+
+/* ---------- Kepala papan ---------- */
+.board-title { font-size: 27px; font-weight: 700; color: #1E293B; text-align: center; }
+.board-sub   { font-size: 14.5px; color: #475569; text-align: center; margin-top: 6px; font-weight: 600; }
+.board-meta  { font-size: 11.5px; color: #94A3B8; text-align: center; margin-top: 6px;
+  padding-bottom: 18px; border-bottom: 1px solid #E2E8F0; margin-bottom: 20px; }
+
+/* ---------- Strip konvergensi (titik temu) ---------- */
+.strip { display: flex; align-items: stretch; gap: 0; margin-bottom: 10px; }
+.strip-box { border-radius: 12px; padding: 16px 18px; flex-shrink: 0; }
+.strip-box.masalah { background: #FFFFFF; border: 2px solid #64748B; width: 360px; }
+.strip-box.temu { background: linear-gradient(135deg, #1E3A5F, #2D4A6F);
+  box-shadow: 0 4px 12px rgba(30,58,95,0.25); width: 400px; }
+.strip-label { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; margin-bottom: 7px; }
+.masalah .strip-label { color: #64748B; }
+.temu .strip-label { color: #93C5FD; }
+.masalah .strip-text { font-size: 13px; color: #334155; line-height: 1.5; }
+.temu .strip-text { font-size: 13.5px; color: #FFFFFF; line-height: 1.5; font-weight: 600; }
+.strip-arrow { display: flex; align-items: center; justify-content: center;
+  width: 44px; color: #94A3B8; font-size: 24px; flex-shrink: 0; }
+.gaps-wrap { flex: 1; border: 1.5px dashed #CBD5E1; border-radius: 12px;
+  padding: 12px 14px; background: #F8FAFC; display: flex; flex-direction: column; }
+.gaps-title { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; color: #64748B; margin-bottom: 8px; }
+.gaps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; flex: 1; }
+.gap-chip { background: #FFFFFF; border: 1px solid #E2E8F0; border-left: 3px solid #F59E0B;
+  border-radius: 7px; padding: 7px 10px; font-size: 11.5px; color: #475569; line-height: 1.4;
+  display: flex; align-items: center; gap: 8px; }
+.gap-k { font-size: 10.5px; font-weight: 700; color: #B45309; background: #FEF3C7;
+  border-radius: 10px; padding: 1px 8px; flex-shrink: 0; }
+.strip-note { font-size: 12px; color: #64748B; text-align: center; margin: 10px 0 22px; line-height: 1.5; }
+
+/* ---------- Kanban ---------- */
+.kanban { display: flex; gap: 13px; align-items: flex-start; }
+.col { width: 254px; flex-shrink: 0; background: #F8FAFC; border: 1px solid #E2E8F0;
+  border-radius: 11px; padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.col-head { border-radius: 8px; padding: 10px 11px; }
+.col-no { font-size: 10.5px; font-weight: 700; letter-spacing: 1.5px; color: #64748B; }
+.col-tanya { font-size: 13.5px; font-weight: 700; line-height: 1.35; margin-top: 3px; }
+.col-meta { font-size: 10.5px; color: #64748B; margin-top: 5px; line-height: 1.4;
+  padding-top: 6px; border-top: 1px solid rgba(100,116,139,0.18); }
+.col-count { font-size: 10.5px; font-weight: 700; color: #475569; }
+
+/* progresi satu rona biru-abu (terang -> gelap), 9 kolom */
+.h1 { background: #F4F7FA; color: #334155; border-left: 4px solid #94A3B8; }
+.h2 { background: #F0F4F8; color: #2F4256; border-left: 4px solid #8497AC; }
+.h3 { background: #ECF1F6; color: #2B3E52; border-left: 4px solid #7489A1; }
+.h4 { background: #E8EDF2; color: #273A4E; border-left: 4px solid #64748B; }
+.h5 { background: #E4EAEF; color: #23364A; border-left: 4px solid #5B7A99; }
+.h6 { background: #E0E7EF; color: #1F3050; border-left: 4px solid #4A6B8A; }
+.h7 { background: #DCE3EC; color: #1B2A46; border-left: 4px solid #3E5E80; }
+.h8 { background: #D8E0EA; color: #172540; border-left: 4px solid #345276; }
+.h9 { background: #D4DDE8; color: #13203A; border-left: 4px solid #2B5473; }
+
+/* ---------- Kartu ---------- */
+.card { background: #FFFFFF; border: 1px solid #E2E8F0; border-radius: 8px;
+  padding: 9px 10px 8px; box-shadow: 0 1px 2px rgba(15,23,42,0.04); }
+.card-top { display: flex; align-items: baseline; gap: 7px; }
+.ref-no { font-size: 11px; font-weight: 700; color: #FFFFFF; background: #475569;
+  border-radius: 5px; padding: 1px 6px; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.card-author { font-size: 12.5px; font-weight: 700; color: #1E293B; }
+.card-year { font-size: 11px; color: #94A3B8; font-weight: 600; }
+.card-grp { margin-left: auto; font-size: 10px; font-weight: 700; color: #CBD5E1; flex-shrink: 0; }
+.card-venue { font-size: 10.5px; color: #94A3B8; font-style: italic; margin-top: 2px; }
+.card-claim { font-size: 11.5px; color: #475569; line-height: 1.42; margin-top: 5px; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
+.tag { font-size: 10px; font-weight: 700; padding: 1.5px 7px; border-radius: 9px; border: 1px solid; }
+.tag-type { background: #F8FAFC; color: #64748B; border-color: #E2E8F0; font-weight: 600; }
+
+/* ---------- Catatan celah ---------- */
+.gap-note { border: 1.5px dashed #F59E0B; background: #FFFBF3; border-radius: 8px;
+  padding: 9px 10px; font-size: 11px; color: #92400E; line-height: 1.45; }
+.gap-note b { font-size: 10px; letter-spacing: 1px; }
+
+/* ---------- Kaki papan ---------- */
+.board-footer { margin-top: 24px; border-top: 1px solid #E2E8F0; padding-top: 14px; }
+.legend-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.legend-title { font-size: 11px; font-weight: 700; color: #64748B; width: 130px; flex-shrink: 0; }
+.foot-note { font-size: 11px; color: #64748B; line-height: 1.55; margin-top: 6px; max-width: 1500px; }
+.foot-note b { color: #475569; }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="board-title">Peta Literatur → Titik Temu Permasalahan</div>
+  <div class="board-sub">Purwarupa Penerjemah Dua Arah Isyarat SIBI Berbasis Wi-Fi CSI pada Modul ESP32-S3</div>
+  <div class="board-meta">79 rujukan terverifikasi (24–25 Okt 2026) · nomor [n] = Daftar Pustaka Draft-Proposal-Translator-SIBI.md · huruf grup (A–H) = kelompok pada Matriks-Literatur-dan-Bukti.md</div>
+
+  <div class="strip">
+    <div class="strip-box masalah">
+      <div class="strip-label">MASALAH INTI</div>
+      <div class="strip-text">Komunikasi dua arah tunarungu–pendengar sulit terjadi tanpa kemampuan isyarat bersama; juru bahasa sangat langka.</div>
+    </div>
+    <div class="strip-arrow">&#10132;</div>
+    <div class="gaps-wrap">
+      <div class="gaps-title">EMPAT KESENJANGAN (PETA MASALAH)</div>
+      <div class="gaps-grid">
+          <div class="gap-chip"><span class="gap-k">K1</span><span>Juru bahasa isyarat terbatas: ±500 untuk ±1,92 juta tunarungu</span></div>
+          <div class="gap-chip"><span class="gap-k">K2</span><span>Aplikasi SIBI yang ada satu arah dan kata-level (kamus/pembelajaran)</span></div>
+          <div class="gap-chip"><span class="gap-k">K3</span><span>Pengenalan berbasis kamera menuntut cahaya, garis pandang, dan kamera terus menyala</span></div>
+          <div class="gap-chip"><span class="gap-k">K4</span><span>CSI belum diterapkan pada SIBI; belum ada purwarupa dua arah CSI + TTS/ASR</span></div>
+      </div>
+    </div>
+    <div class="strip-arrow">&#10132;</div>
+    <div class="strip-box temu">
+      <div class="strip-label">TITIK TEMU PENELITIAN</div>
+      <div class="strip-text">Purwarupa dua arah SIBI tanpa kamera: CSI + inferensi tepi pada 2–3 modul ESP32-S3, TTS/ASR Indonesia di server lokal</div>
+    </div>
+  </div>
+  <div class="strip-note">Sembilan kolom di bawah adalah pertanyaan-pertanyaan yang harus terjawab agar posisi penelitian berdiri — baca kiri → kanan mengikuti alur argumen; setiap kartu menunjukkan apa yang dibuktikan rujukan itu bagi pertanyaannya.</div>
+
+  <div class="kanban">
+    <div class="col">
+      <div class="col-head h1">
+        <div class="col-no">KOLOM 01</div>
+        <div class="col-tanya">Mengapa komunikasi tunarungu–pendengar menjadi masalah?</div>
+        <div class="col-meta">Konteks tunarungu, SIBI vs BISINDO, regulasi · dipakai di §1.1, 2.1<br/><span class="col-count">16 rujukan</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[1]</span><span class="card-author">Mitchell &amp; Karchmer</span> <span class="card-year">(2004)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">Sign Language Studies</div>
+        <div class="card-claim">90–95% anak tunarungu lahir dari orang tua pendengar (data AS)</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[2]</span><span class="card-author">Mitchell &amp; Karchmer</span> <span class="card-year">(2005)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">Sign Language Studies</div>
+        <div class="card-claim">Status pendengaran orang tua berkaitan dengan pemakaian isyarat siswa</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[3]</span><span class="card-author">Lieberman dkk.</span> <span class="card-year">(2022)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">Appl. Linguistics Review</div>
+        <div class="card-claim">Orang tua pendengar butuh dukungan terstruktur untuk belajar bahasa isyarat</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[4]</span><span class="card-author">Ritmeester dkk.</span> <span class="card-year">(2025)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">J. Deaf Stud. Deaf Educ.</div>
+        <div class="card-claim">Hambatan praktis yang dihadapi orang tua saat mempelajari isyarat</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[5]</span><span class="card-author">Kemenko PMK</span> <span class="card-year">(2025)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">Situs resmi</div>
+        <div class="card-claim">±500 juru bahasa isyarat untuk ±1,92 juta tunarungu (1 : 3.840)</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Dok. resmi</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[6]</span><span class="card-author">Republik Indonesia</span> <span class="card-year">(2016)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">UU No. 8/2016</div>
+        <div class="card-claim">Hukum mengakui bahasa isyarat dan mewajibkan aksesibilitas komunikasi</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Regulasi</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[7]</span><span class="card-author">Rodríguez-Correa dkk.</span> <span class="card-year">(2023)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">Frontiers in Education</div>
+        <div class="card-claim">Tinjauan sistematis teknologi bantu komunikasi penyandang tunarungu</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[8]</span><span class="card-author">BRIN</span> <span class="card-year">(2026)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">Siaran pers</div>
+        <div class="card-claim">Survei 26 provinsi: BISINDO 77,7%, SIBI 1,9%, campuran 14,9%</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Dok. resmi</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[9]</span><span class="card-author">Mursita</span> <span class="card-year">(2015)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">INKLUSI</div>
+        <div class="card-claim">91% dari 100 responden tunarungu memakai BISINDO sehari-hari</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[10]</span><span class="card-author">Kemendikbud</span> <span class="card-year">(2020)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">Kamus SIBI Digital</div>
+        <div class="card-claim">Acuan bentuk baku SIBI; SK 0190/P/1994; Surat 868/C/U/95</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Kamus resmi</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[11]</span><span class="card-author">As Satillah dkk.</span> <span class="card-year">(2024)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">AUDHI</div>
+        <div class="card-claim">Murid SLB N Ogan Ilir memakai SIBI dalam pembelajaran harian</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[45]</span><span class="card-author">Depdikbud</span> <span class="card-year">(1994)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">Kamus SIBI (edisi pertama)</div>
+        <div class="card-claim">Dokumen baku pertama bentuk isyarat SIBI (verifikasi entri pustaka)</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Kamus resmi</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[46]</span><span class="card-author">Stokoe</span> <span class="card-year">(2005)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">J. Deaf Stud. Deaf Educ.</div>
+        <div class="card-claim">Isyarat tersusun parameter: bentuk tangan, lokasi, gerak, orientasi, nonmanual</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[47]</span><span class="card-author">Ong &amp; Ranganath</span> <span class="card-year">(2005)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">IEEE TPAMI</div>
+        <div class="card-claim">Survei klasik pengenalan isyarat bersensor dan berbasis visi</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[48]</span><span class="card-author">Nugraheni dkk.</span> <span class="card-year">(2023)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">Jurnal Holistika</div>
+        <div class="card-claim">Pemakaian SIBI/BISINDO oleh mahasiswa tunarungu di kampus</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[49]</span><span class="card-author">Malika &amp; Berlianti</span> <span class="card-year">(2025)</span><span class="card-grp">grup A</span></div>
+        <div class="card-venue">Concept</div>
+        <div class="card-claim">Pemakaian SIBI/BISINDO oleh siswa SLB Negeri Pembina Medan</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="gap-note"><b>CELAH / IMPLIKASI</b><br/>Benang merah: SIBI hidup di jalur pendidikan formal (bukan keseharian) — purwarupa diarahkan ke konteks pendidikan, bukan pengganti BISINDO.</div>
+    </div>
+    <div class="col">
+      <div class="col-head h2">
+        <div class="col-no">KOLOM 02</div>
+        <div class="col-tanya">Apa yang sudah dicoba lewat kamera &amp; kenapa kurang?</div>
+        <div class="col-meta">SLR visi Indonesia, dataset, alat pelabelan riset · dipakai di §1.1, 2.2, 2.5, 2.8<br/><span class="col-count">15 rujukan</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[14]</span><span class="card-author">Sanjaya &amp; Ilone</span> <span class="card-year">(2023)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">IJCS</div>
+        <div class="card-claim">Tinjauan SLR deep learning BISINDO berbasis citra</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[15]</span><span class="card-author">Dwijayanti dkk.</span> <span class="card-year">(2021)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">IJACSA</div>
+        <div class="card-claim">CNN mengenali 26 huruf + 10 angka BISINDO dari citra</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[16]</span><span class="card-author">Soekarta dkk.</span> <span class="card-year">(2024)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">INSECT</div>
+        <div class="card-claim">MediaPipe di Android; 24 huruf statis SIBI; akurasi 90,85%</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[17]</span><span class="card-author">Maulana dkk.</span> <span class="card-year">(2026)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">DBESTI</div>
+        <div class="card-claim">Android + TensorFlow Lite untuk alfabet SIBI statis (UAT 91,3%)</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[18]</span><span class="card-author">Sadeghzadeh dkk.</span> <span class="card-year">(2024)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">ISWA</div>
+        <div class="card-claim">MLMSign membuat SLR tahan perubahan pencahayaan — bukti kamera lemah pada cahaya</div>
+        <div class="card-tags"><span class="tag" style="background:#FFF7ED;color:#92400E;border-color:#FCD34D;">Keterbatasan & risiko</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[19]</span><span class="card-author">Bailenson</span> <span class="card-year">(2021)</span><span class="card-grp">grup F</span></div>
+        <div class="card-venue">Technology, Mind &amp; Behavior</div>
+        <div class="card-claim">Kamera terus menyala selama percakapan dikaitkan dengan kelelahan nonverbal</div>
+        <div class="card-tags"><span class="tag" style="background:#FFF7ED;color:#92400E;border-color:#FCD34D;">Keterbatasan & risiko</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[41]</span><span class="card-author">Jocher dkk.</span> <span class="card-year">(2026)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">arXiv · YOLO26</div>
+        <div class="card-claim">YOLO26: keluarga model visi waktu nyata multi-tugas termasuk pose</div>
+        <div class="card-tags"><span class="tag" style="background:#ECFEFF;color:#155E75;border-color:#67E8F9;">Alat & sumber teknis</span><span class="tag tag-type">arXiv</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[42]</span><span class="card-author">Ultralytics</span> <span class="card-year"></span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">Dok. resmi · tasks/pose</div>
+        <div class="card-claim">YOLO26 pose terlatih COCO menghasilkan 17 keypoint tubuh</div>
+        <div class="card-tags"><span class="tag" style="background:#ECFEFF;color:#155E75;border-color:#67E8F9;">Alat & sumber teknis</span><span class="tag tag-type">Dok. resmi</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[61]</span><span class="card-author">Sapkota dkk.</span> <span class="card-year">(2025)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">arXiv</div>
+        <div class="card-claim">Analisis YOLO26: efisiensi inferensi &amp; kesiapan perangkat tepi</div>
+        <div class="card-tags"><span class="tag" style="background:#ECFEFF;color:#155E75;border-color:#67E8F9;">Alat & sumber teknis</span><span class="tag tag-type">arXiv</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[60]</span><span class="card-author">Zheng dkk.</span> <span class="card-year">(2023)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">ACM CSUR</div>
+        <div class="card-claim">Survei estimasi pose berbasis pembelajaran dalam</div>
+        <div class="card-tags"><span class="tag" style="background:#ECFEFF;color:#155E75;border-color:#67E8F9;">Alat & sumber teknis</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[62]</span><span class="card-author">Lugaresi dkk.</span> <span class="card-year">(2019)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">arXiv · MediaPipe</div>
+        <div class="card-claim">Kerangka pipeline persepsi; dipakai skrip ADR-079 RuView</div>
+        <div class="card-tags"><span class="tag" style="background:#ECFEFF;color:#155E75;border-color:#67E8F9;">Alat & sumber teknis</span><span class="tag tag-type">arXiv</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[51]</span><span class="card-author">Kindy dkk.</span> <span class="card-year">(2025)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">Procedia CS</div>
+        <div class="card-claim">Dataset video BISINDO tingkat kata beserta baseline</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[52]</span><span class="card-author">Wiguna &amp; Rojali</span> <span class="card-year">(2025)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">IJACSA</div>
+        <div class="card-claim">Kalimat BISINDO dari video dengan 3D CNN-LSTM</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[53]</span><span class="card-author">Sebastian dkk.</span> <span class="card-year">(2025)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">Procedia CS</div>
+        <div class="card-claim">Pengenalan gestur tubuh sadar-spasial untuk BISINDO</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[73]</span><span class="card-author">Safrida dkk.</span> <span class="card-year">(2026)</span><span class="card-grp">grup E</span></div>
+        <div class="card-venue">Rabit</div>
+        <div class="card-claim">Dataset citra alfabet SIBI 24 kelas (A–Y); MobileNetV2 97,10%</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="gap-note"><b>CELAH / IMPLIKASI</b><br/>Semua sistem visi Indonesia mengarah ke pengenalan atau kamus statis. Penelitian ini memakai kamera + pose YOLO26 hanya di jalur pelabelan riset — produk akhir tanpa kamera.</div>
+    </div>
+    <div class="col">
+      <div class="col-head h3">
+        <div class="col-no">KOLOM 03</div>
+        <div class="col-tanya">Bisakah isyarat dikenali tanpa kamera (Wi-Fi CSI)?</div>
+        <div class="col-meta">Kelompok B — SLR dari CSI · dipakai di §2.6, 2.11<br/><span class="col-count">9 rujukan</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[21]</span><span class="card-author">Ma dkk.</span> <span class="card-year">(2018)</span><span class="card-grp">grup B</span></div>
+        <div class="card-venue">IMWUT · SignFi</div>
+        <div class="card-claim">276 isyarat ASL dari CSI Intel 5300; dalam sesi 98,01% (lab)</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[65]</span><span class="card-author">Shang &amp; Wu</span> <span class="card-year">(2017)</span><span class="card-grp">grup B</span></div>
+        <div class="card-venue">MobiArch</div>
+        <div class="card-claim">Sistem SLR tangguh dengan banyak perangkat Wi-Fi komersial</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[22]</span><span class="card-author">Ahmed dkk.</span> <span class="card-year">(2020)</span><span class="card-grp">grup B</span></div>
+        <div class="card-venue">PMC · DF-WiSLR</div>
+        <div class="card-claim">49 gestur dikenali tanpa perangkat yang dikenakan pengguna</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[66]</span><span class="card-author">Ahmed dkk.</span> <span class="card-year">(2021)</span><span class="card-grp">grup B</span></div>
+        <div class="card-venue">IAICT</div>
+        <div class="card-claim">Model LSTM mengenali isyarat dari deret CSI</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[67]</span><span class="card-author">Qin dkk.</span> <span class="card-year">(2023)</span><span class="card-grp">grup B</span></div>
+        <div class="card-venue">Measurement · WiASL</div>
+        <div class="card-claim">Pengenalan tulisan ASL dengan perangkat Wi-Fi komersial</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[23]</span><span class="card-author">Baldeo dkk.</span> <span class="card-year">(2024)</span><span class="card-grp">grup B</span></div>
+        <div class="card-venue">IEEE TENCON</div>
+        <div class="card-claim">Pengenalan Filipino Sign Language dari CSI</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[57]</span><span class="card-author">Hao dkk.</span> <span class="card-year">(2020)</span><span class="card-grp">grup B</span></div>
+        <div class="card-venue">Sensors · Wi-SL</div>
+        <div class="card-claim">Gestur halus dari CSI; perangkat 2TX–3RX 40 MHz 400 Hz</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[58]</span><span class="card-author">Sruthi dkk.</span> <span class="card-year">(2024)</span><span class="card-grp">grup B</span></div>
+        <div class="card-venue">Procedia CS · HandFi</div>
+        <div class="card-claim">Gestur tangan dari CSI Intel 5300 + router komersial</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[24]</span><span class="card-author">Zhang dkk.</span> <span class="card-year">(2020)</span><span class="card-grp">grup B</span></div>
+        <div class="card-venue">ACM TIST · WiSign</div>
+        <div class="card-claim">Kalimat ASL kontinu dari CSI komersial — batas atas klaim kebaruan kontinu</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="gap-note"><b>CELAH / IMPLIKASI</b><br/>Celah riset: belum ada publikasi CSI untuk SIBI, apalagi purwarupa dua arah CSI + TTS/ASR Indonesia (penelusuran Scholar, Crossref, OpenAlex — Okt 2026).</div>
+    </div>
+    <div class="col">
+      <div class="col-head h4">
+        <div class="col-no">KOLOM 04</div>
+        <div class="col-tanya">Seberapa peka CSI &amp; apa risiko lintas domain?</div>
+        <div class="col-meta">Kelompok C — sensitivitas &amp; generalisasi · dipakai di §2.3<br/><span class="col-count">5 rujukan</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[25]</span><span class="card-author">Ali dkk.</span> <span class="card-year">(2015)</span><span class="card-grp">grup C</span></div>
+        <div class="card-venue">MobiCom · WiKey</div>
+        <div class="card-claim">Ketukan tombol (skala sentimeter): deteksi 97,5%; kunci tunggal 96,4% (terkendali)</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[26]</span><span class="card-author">Mosleh dkk.</span> <span class="card-year">(2022)</span><span class="card-grp">grup C</span></div>
+        <div class="card-venue">IEEE Access</div>
+        <div class="card-claim">Gerak napas (skala milimeter): pola 99,54% pada kanal cukup baik</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[20]</span><span class="card-author">Ma dkk.</span> <span class="card-year">(2019)</span><span class="card-grp">grup C</span></div>
+        <div class="card-venue">ACM CSUR</div>
+        <div class="card-claim">Survei penginderaan CSI: amplitudo, fase, komponen Doppler</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[39]</span><span class="card-author">Chen dkk.</span> <span class="card-year">(2023)</span><span class="card-grp">grup C</span></div>
+        <div class="card-venue">ACM CSUR</div>
+        <div class="card-claim">Model CSI mudah overfitting terhadap orang dan ruang; strategi lintas domain</div>
+        <div class="card-tags"><span class="tag" style="background:#FFF7ED;color:#92400E;border-color:#FCD34D;">Keterbatasan & risiko</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[40]</span><span class="card-author">Zhang dkk.</span> <span class="card-year">(2022)</span><span class="card-grp">grup C</span></div>
+        <div class="card-venue">IEEE TPAMI · Widar3.0</div>
+        <div class="card-claim">Generalisasi gestur lintas domain dengan profil kecepatan Doppler</div>
+        <div class="card-tags"><span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="gap-note"><b>CELAH / IMPLIKASI</b><br/>Implikasi rancangan: kinerja wajib diukur lintas partisipan &amp; lintas ruang (gerbang G3); kalibrasi/personalisasi disiapkan sebagai mitigasi.</div>
+    </div>
+    <div class="col">
+      <div class="col-head h5">
+        <div class="col-no">KOLOM 05</div>
+        <div class="col-tanya">Bagaimana melatih model CSI tanpa label manual?</div>
+        <div class="col-meta">Kelompok D — supervisi visi untuk data Wi-Fi · dipakai di §2.5<br/><span class="col-count">2 rujukan</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[63]</span><span class="card-author">Wang dkk.</span> <span class="card-year">(2019)</span><span class="card-grp">grup D</span></div>
+        <div class="card-venue">ICCV · Person-in-WiFi</div>
+        <div class="card-claim">Persepsi tubuh dari Wi-Fi dengan supervisi kamera</div>
+        <div class="card-tags"><span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[64]</span><span class="card-author">Geng dkk.</span> <span class="card-year">(2023)</span><span class="card-grp">grup D</span></div>
+        <div class="card-venue">arXiv · DensePose from WiFi</div>
+        <div class="card-claim">Pemetaan permukaan tubuh dari Wi-Fi; jaringan visi sebagai guru</div>
+        <div class="card-tags"><span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span><span class="tag tag-type">arXiv</span></div>
+      </div>
+      <div class="gap-note"><b>CELAH / IMPLIKASI</b><br/>Celah: supervisi pose belum pernah dipakai untuk ground-truth isyarat SIBI pada CSI ESP32-S3 — dasar jalur pelabelan YOLO26 pada riset ini.</div>
+    </div>
+    <div class="col">
+      <div class="col-head h6">
+        <div class="col-no">KOLOM 06</div>
+        <div class="col-tanya">Bisakah semuanya berjalan di modul kecil?</div>
+        <div class="col-meta">Kelompok H (platform) — ESP32-S3 &amp; RuView · dipakai di §2.4, 3.2<br/><span class="col-count">7 rujukan</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[29]</span><span class="card-author">Espressif</span> <span class="card-year">(2026)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Datasheet S3 v2.2</div>
+        <div class="card-claim">Dual-core LX7 240 MHz; SRAM 512 KB; PSRAM s.d. 8 MB; RX 88–91 mA</div>
+        <div class="card-tags"><span class="tag" style="background:#ECFEFF;color:#155E75;border-color:#67E8F9;">Alat & sumber teknis</span><span class="tag tag-type">Dok. resmi</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[27]</span><span class="card-author">Espressif</span> <span class="card-year"></span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Repo esp-csi</div>
+        <div class="card-claim">CSI didukung resmi seluruh seri ESP32 termasuk S3; 56 subcarrier HT20</div>
+        <div class="card-tags"><span class="tag" style="background:#ECFEFF;color:#155E75;border-color:#67E8F9;">Alat & sumber teknis</span><span class="tag tag-type">Repo</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[28]</span><span class="card-author">ruvnet</span> <span class="card-year"></span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Repo RuView</div>
+        <div class="card-claim">Firmware CSI + UDP, kalibrasi 600 frame + 8 anchor; CSI + STA + ESP-NOW serentak satu chip</div>
+        <div class="card-tags"><span class="tag" style="background:#ECFEFF;color:#155E75;border-color:#67E8F9;">Alat & sumber teknis</span><span class="tag tag-type">Repo</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[59]</span><span class="card-author">Hernandez &amp; Bulut</span> <span class="card-year">(2020)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">WoWMoM</div>
+        <div class="card-claim">Basis akuisisi CSI mandiri berbasis IoT pada keluarga ESP32</div>
+        <div class="card-tags"><span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[30]</span><span class="card-author">Espressif</span> <span class="card-year"></span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Repo esp-nn</div>
+        <div class="card-claim">Person detection 2.300 → 54 ms di S3 (model int8 293,5 KB)</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Repo</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[31]</span><span class="card-author">Espressif</span> <span class="card-year"></span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Repo esp-dl</div>
+        <div class="card-claim">MobileNetV2 437,9 ms; pengenalan gestur tangan 69,2 ms di S3</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Repo</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[72]</span><span class="card-author">Espressif</span> <span class="card-year"></span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Repo tflite-micro-esp</div>
+        <div class="card-claim">Contoh TFLM: micro_speech 18,4 KB; person detection</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Repo</span></div>
+      </div>
+      <div class="gap-note"><b>CELAH / IMPLIKASI</b><br/>Belum teruji (diukur pada T0): benchmark model CSI-isyarat di S3; koeksistensi streaming audio I2S + CSI; arus total modul berperiferal.</div>
+    </div>
+    <div class="col">
+      <div class="col-head h7">
+        <div class="col-no">KOLOM 07</div>
+        <div class="col-tanya">Bagaimana arah balik teks/ucapan → isyarat?</div>
+        <div class="col-meta">Kelompok F — representasi balik &amp; struktur SIBI · dipakai di §1.1, 2.2, 2.8<br/><span class="col-count">8 rujukan</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[12]</span><span class="card-author">Zikky &amp; Akbar</span> <span class="card-year">(2019)</span><span class="card-grp">grup F</span></div>
+        <div class="card-venue">JST · KASIBI</div>
+        <div class="card-claim">Suara → STT → basis data → animasi peraga 3D; uji kelayakan 3,362/4</div>
+        <div class="card-tags"><span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[13]</span><span class="card-author">Fatmawati dkk.</span> <span class="card-year">(2022)</span><span class="card-grp">grup F</span></div>
+        <div class="card-venue">TMJ · OpenSIBI</div>
+        <div class="card-claim">Google STT → API model Collada 3D; 50 kosakata (9 angka, 26 huruf, 15 kata)</div>
+        <div class="card-tags"><span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[50]</span><span class="card-author">Rodhiyah &amp; Wulandari</span> <span class="card-year">(2024)</span><span class="card-grp">grup F</span></div>
+        <div class="card-venue">INTECOMS</div>
+        <div class="card-claim">Aplikasi mobile pembelajaran dasar isyarat SIBI</div>
+        <div class="card-tags"><span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[76]</span><span class="card-author">Sagawa &amp; Takeuchi</span> <span class="card-year">(2002)</span><span class="card-grp">grup F</span></div>
+        <div class="card-venue">ACM Multimedia</div>
+        <div class="card-claim">Sistem pengajaran JSL: pengenalan + pembangkitan isyarat (dua arah)</div>
+        <div class="card-tags"><span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[74]</span><span class="card-author">Rakun dkk.</span> <span class="card-year">(2015)</span><span class="card-grp">grup F</span></div>
+        <div class="card-venue">IEEE TIME-E</div>
+        <div class="card-claim">Kata berinfleksi SIBI dikenali dengan HMM — bukti struktur kata jadian SIBI</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[75]</span><span class="card-author">Anggraini dkk.</span> <span class="card-year">(2019)</span><span class="card-grp">grup F</span></div>
+        <div class="card-venue">ICEEI</div>
+        <div class="card-claim">Komponen gestur kata berinfleksi SIBI dianalisis lebih lanjut</div>
+        <div class="card-tags"><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[43]</span><span class="card-author">Picron dkk.</span> <span class="card-year">(2024)</span><span class="card-grp">grup F</span></div>
+        <div class="card-venue">Springer (bab buku)</div>
+        <div class="card-claim">Penerjemahan mesin bahasa isyarat penuh masih masalah terbuka (metadata)</div>
+        <div class="card-tags"><span class="tag" style="background:#FFF7ED;color:#92400E;border-color:#FCD34D;">Keterbatasan & risiko</span><span class="tag tag-type">Buku/bab</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[44]</span><span class="card-author">Hakozaki dkk.</span> <span class="card-year">(2025)</span><span class="card-grp">grup F</span></div>
+        <div class="card-venue">ACM ASSETS</div>
+        <div class="card-claim">Avatar JSL dengan mouthing: isu nonmanual kelas satu (metadata)</div>
+        <div class="card-tags"><span class="tag" style="background:#FFF7ED;color:#92400E;border-color:#FCD34D;">Keterbatasan & risiko</span><span class="tag tag-type">Prosiding</span></div>
+      </div>
+      <div class="gap-note"><b>CELAH / IMPLIKASI</b><br/>Konsekuensi MVP: arah kedua = kamus kata-level + fallback ejaan jari (26 huruf, angka 1–9) mengikuti preseden OpenSIBI — bukan tata bahasa penuh.</div>
+    </div>
+    <div class="col">
+      <div class="col-head h8">
+        <div class="col-no">KOLOM 08</div>
+        <div class="col-tanya">Dari mana suara Bahasa Indonesia (TTS/ASR)?</div>
+        <div class="col-meta">Kelompok G — TTS &amp; ASR Indonesia · dipakai di §2.7, 3.4<br/><span class="col-count">7 rujukan</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[38]</span><span class="card-author">hexgrad</span> <span class="card-year"></span><span class="card-grp">grup G</span></div>
+        <div class="card-venue">Model card · Kokoro-82M</div>
+        <div class="card-claim">8 bahasa tanpa Indonesia (82 juta parameter) → tidak dipakai; bukti disiplin pemilihan teknologi</div>
+        <div class="card-tags"><span class="tag" style="background:#FFF7ED;color:#92400E;border-color:#FCD34D;">Keterbatasan & risiko</span><span class="tag tag-type">Model card</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[34]</span><span class="card-author">Pratap dkk.</span> <span class="card-year">(2023)</span><span class="card-grp">grup G</span></div>
+        <div class="card-venue">arXiv · MMS</div>
+        <div class="card-claim">Skala teknologi ucapan ke 1.000+ bahasa termasuk Indonesia</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">arXiv</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[35]</span><span class="card-author">Meta AI</span> <span class="card-year"></span><span class="card-grp">grup G</span></div>
+        <div class="card-venue">Model card · mms-tts-ind</div>
+        <div class="card-claim">Checkpoint TTS Indonesia (VITS); CC-BY-NC 4.0; dapat dijalankan lokal</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Model card</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[32]</span><span class="card-author">Radford dkk.</span> <span class="card-year">(2022)</span><span class="card-grp">grup G</span></div>
+        <div class="card-venue">arXiv · Whisper</div>
+        <div class="card-claim">ASR 100+ bahasa termasuk Indonesia; dilatih 5 juta jam data</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">arXiv</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[33]</span><span class="card-author">SYSTRAN</span> <span class="card-year"></span><span class="card-grp">grup G</span></div>
+        <div class="card-venue">Repo faster-whisper</div>
+        <div class="card-claim">int8 ±2,9 GB VRAM; 13 menit audio → 59 detik pada RTX 3070 Ti 8 GB</div>
+        <div class="card-tags"><span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span><span class="tag tag-type">Repo</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[36]</span><span class="card-author">Google Cloud</span> <span class="card-year"></span><span class="card-grp">grup G</span></div>
+        <div class="card-venue">Dok. resmi · TTS</div>
+        <div class="card-claim">Suara id-ID Standard &amp; Premium; Standard ±US$4 per juta karakter</div>
+        <div class="card-tags"><span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span><span class="tag tag-type">Dok. resmi</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[37]</span><span class="card-author">Microsoft</span> <span class="card-year"></span><span class="card-grp">grup G</span></div>
+        <div class="card-venue">Azure AI Speech</div>
+        <div class="card-claim">Suara id-ID-GadisNeural dan id-ID-ArdiNeural</div>
+        <div class="card-tags"><span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span><span class="tag tag-type">Dok. resmi</span></div>
+      </div>
+      <div class="gap-note"><b>CELAH / IMPLIKASI</b><br/>Keputusan final TTS/ASR ditetapkan pada T4 (Tabel 3.6); jalur utama = faster-whisper + MMS-TTS lokal dengan catatan lisensi nonkomersial.</div>
+    </div>
+    <div class="col">
+      <div class="col-head h9">
+        <div class="col-no">KOLOM 09</div>
+        <div class="col-tanya">Dengan metode &amp; tolok ukur apa dibuktikan?</div>
+        <div class="col-meta">Kelompok H (metode) · dipakai di §2.3, 2.6, 2.10, 3.8<br/><span class="col-count">10 rujukan</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[68]</span><span class="card-author">Cortes &amp; Vapnik</span> <span class="card-year">(1995)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Machine Learning</div>
+        <div class="card-claim">SVM margin maksimum — kandidat klasifikasi data kecil</div>
+        <div class="card-tags"><span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[69]</span><span class="card-author">Mountrakis dkk.</span> <span class="card-year">(2011)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">ISPRS</div>
+        <div class="card-claim">SVM terbukti kuat pada dataset kecil — alasan pemilihan baseline</div>
+        <div class="card-tags"><span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[70]</span><span class="card-author">Kiranyaz dkk.</span> <span class="card-year">(2021)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">MSSP</div>
+        <div class="card-claim">1D-CNN untuk deret waktu — kandidat arsitektur model CSI</div>
+        <div class="card-tags"><span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[71]</span><span class="card-author">Chow</span> <span class="card-year">(1970)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">IEEE TIT</div>
+        <div class="card-claim">Pertukaran galat–penolakan optimal — dasar ambang penolakan</div>
+        <div class="card-tags"><span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[54]</span><span class="card-author">Cai dkk.</span> <span class="card-year">(2024)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Sensors</div>
+        <div class="card-claim">Amplitudo dan fase CSI saling melengkapi sebagai fitur</div>
+        <div class="card-tags"><span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[55]</span><span class="card-author">Nyquist</span> <span class="card-year">(1928)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Trans. AIEE</div>
+        <div class="card-claim">Kriteria pencuplikan — menentukan laju akuisisi pita Doppler</div>
+        <div class="card-tags"><span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[56]</span><span class="card-author">Shannon</span> <span class="card-year">(1949)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Proc. IRE</div>
+        <div class="card-claim">Kapasitas kanal dalam derau — dasar teoretis kanal nirkabel</div>
+        <div class="card-tags"><span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[77]</span><span class="card-author">Bowen dkk.</span> <span class="card-year">(2009)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Am. J. Prev. Med.</div>
+        <div class="card-claim">Kerangka desain studi kelayakan — rancangan penelitian ini</div>
+        <div class="card-tags"><span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[78]</span><span class="card-author">Sokolova &amp; Lapalme</span> <span class="card-year">(2009)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Inf. Processing &amp; Mgmt.</div>
+        <div class="card-claim">Analisis sistematis metrik klasifikasi (presisi, galat, F1 makro)</div>
+        <div class="card-tags"><span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-top"><span class="ref-no">[79]</span><span class="card-author">Likert</span> <span class="card-year">(1932)</span><span class="card-grp">grup H</span></div>
+        <div class="card-venue">Archives of Psychology</div>
+        <div class="card-claim">Skala pengukuran sikap — dasar kuesioner uji kegunaan</div>
+        <div class="card-tags"><span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span><span class="tag tag-type">Jurnal</span></div>
+      </div>
+      <div class="gap-note"><b>CELAH / IMPLIKASI</b><br/>Semua tolok ukur diukur dan dilaporkan; tidak ada angka kinerja yang dijanjikan di muka (disiplin klaim studi kelayakan).</div>
+    </div>
+  </div>
+
+  <div class="board-footer">
+    <div class="legend-row"><span class="legend-title">Peran rujukan:</span><span class="tag" style="background:#EFF6FF;color:#1E40AF;border-color:#93C5FD;">Konteks & eksisting</span> <span class="tag" style="background:#F0FDF4;color:#065F46;border-color:#6EE7B7;">Bukti kelayakan</span> <span class="tag" style="background:#FFF7ED;color:#92400E;border-color:#FCD34D;">Keterbatasan & risiko</span> <span class="tag" style="background:#F5F3FF;color:#5B21B6;border-color:#C4B5FD;">Preseden desain</span> <span class="tag" style="background:#ECFEFF;color:#155E75;border-color:#67E8F9;">Alat & sumber teknis</span> <span class="tag" style="background:#F1F5F9;color:#334155;border-color:#CBD5E1;">Metode & evaluasi</span></div>
+    <div class="legend-row"><span class="legend-title">Jenis sumber:</span><span class="tag tag-type">Jurnal</span><span class="tag tag-type">Prosiding</span><span class="tag tag-type">arXiv</span><span class="tag tag-type">Buku/bab</span><span class="tag tag-type">Dok. resmi</span><span class="tag tag-type">Model card</span><span class="tag tag-type">Repo</span><span class="tag tag-type">Regulasi</span><span class="tag tag-type">Kamus resmi</span></div>
+    <div class="foot-note">1. Seluruh 79 rujukan berstatus DIVERIFIKASI pada 24–25 Oktober 2026 (halaman resmi/PDF/kode sumber dibaca langsung, metadata DOI dikonfirmasi via Crossref). Kualifikasi kedalaman verifikasi — PDF penuh, kode dibaca, metadata, entri pustaka — tercantum per rujukan pada Matriks-Literatur-dan-Bukti.md §3.</div>
+    <div class="foot-note">2. Angka akurasi dari literatur dikutip apa adanya untuk konteks sistem sumbernya (mis. SignFi = dalam sesi, perangkat multi-antena) dan tidak diproyeksikan ke kinerja ESP32-S3; klaim kebaruan penelitian dibatasi kombinatif karena WiSign telah mengenali kalimat ASL kontinu.</div>
+    <div class="foot-note">3. Cara pakai: pilih kolom sesuai bagian proposal yang sedang dibaca (§ pada kepala kolom) → buka kartu → telusuri rujukan [n] lengkap di daftar pustaka draft. Kotak putus-putus kuning menandai batas bukti yang menjadi ruang kontribusi riset.</div>
+  </div>
+</div>
+</body>
+</html>

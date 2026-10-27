@@ -1,0 +1,26 @@
+%% G3.5 — Inferensi langsung pada ESP32-S3 (BAB III, Subbab 3.7.8)
+%% VARIAN TATA LETAK DOCX (pola ular 2 baris): flowchart TB + 2 subgraf baris (direction LR).
+%% Sisi antarbaris diwakili sisi klaster R1-->R2 (FT -> MOD). Seluruh node, label sisi,
+%% dan teks identik dengan diagram/sandbox G3.5-inferensi-tepi.mmd.
+flowchart TB
+    subgraph R1[" "]
+        direction LR
+        CSI["Callback CSI<br/>mode promiscuous,<br/>filter MGMT"]
+        BUF["Penyangga geser<br/>deret CSI di PSRAM"]
+        SEG["Segmentasi energi gerak<br/>di perangkat"]
+        FT["Fitur ringkas:<br/>amplitudo-fase terpilih,<br/>Doppler, statistik"]
+        CSI --> BUF --> SEG --> FT
+    end
+    subgraph R2[" "]
+        direction LR
+        MOD["Model murid int8 TFLM / ESP-DL:<br/>5-8 kelas, ukuran kecil,<br/>arena tetap di PSRAM"]
+        DEC{"Skor keyakinan<br/>di atas ambang?"}
+        OUT["Label + skor<br/>dikirim via UDP"]
+        RJ["Label ditolak:<br/>isyarat tidak dikenali"]
+        NOTE["Batas perangkat (datasheet ESP32-S3):<br/>SRAM 512 KB, PSRAM sampai 8 MB octal,<br/>CPU dual-core LX7 240 MHz,<br/>WiFi 2,4 GHz 1T1R, satu kanal<br/>dengan WIFI_PS_NONE"]
+        MOD --> DEC
+        DEC -- "ya" --> OUT
+        DEC -- "tidak" --> RJ
+        MOD -.- NOTE
+    end
+    R1 --> R2

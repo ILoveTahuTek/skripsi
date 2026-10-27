@@ -1,0 +1,37 @@
+%% G3.2 — Alur pelatihan guru-murid YOLO26-Pose dan CSI hingga deployment (BAB III, Subbab 3.2.3)
+%% VARIAN TATA LETAK DOCX: flowchart LR + 2 kolom (direction TB); sisi antarkolom diwakili
+%% sisi klaster KA--"ya"-->KB (DQ "ya" -> SD). Seluruh node, label sisi dalam kolom, dan
+%% teks identik dengan diagram/sandbox G3.2-alur-teacher-student.mmd.
+flowchart LR
+    subgraph KA[" "]
+        direction TB
+        REC["Perekaman tersinkron (Subbab 3.6):<br/>video webcam + CSI 3 modul + label kelas<br/>dari kartu pemandu, satu penanda waktu"]
+        TT["Latih lanjutan dan evaluasi model guru<br/>YOLO26-Pose pada data visual SIBI<br/>di server GPU Kaggle"]
+        TQ{"Kualitas keypoint guru<br/>memadai?"}
+        Y26["Ekstraksi deret keypoint guru<br/>di laptop: 17 titik COCO<br/>beserta penanda waktu"]
+        PAIR["Penyandingan berbasis waktu:<br/>jendela CSI + label kelas + deret pose guru"]
+        DQ{"Cakupan data dan<br/>sinkronisasi memadai?"}
+        REC --> TT --> TQ
+        TQ -- "belum" --> TT
+        TQ -- "ya" --> Y26 --> PAIR
+        REC --> PAIR
+        PAIR --> DQ
+        DQ -- "belum" --> REC
+    end
+    subgraph KB[" "]
+        direction TB
+        SD["Dataset murid: masukan jendela CSI,<br/>target label kelas SIBI,<br/>supervisi tambahan deret pose guru"]
+        STU["Latih murid 1D-CNN di server GPU Kaggle:<br/>kerugian klasifikasi + suku supervisi guru"]
+        BASE["Pembanding: SVM fitur dan<br/>murid ablasi tanpa supervisi guru"]
+        EQ{"Kinerja memadai sesuai<br/>gerbang G2 dan G3?"}
+        OPT["Optimasi untuk ESP32-S3:<br/>kuantisasi int8, uji ukuran,<br/>RAM, dan latensi"]
+        DEP["Ekspor dan pemasangan model murid<br/>pada modul penerima ESP32-S3"]
+        DEV["Perangkat akhir: inferensi CSI-SIBI<br/>lokal tanpa kamera (Gambar 3.3)"]
+        SD --> STU
+        SD --> BASE
+        STU --> EQ
+        BASE --> EQ
+        EQ -- "belum: tindakan Tabel 3.4" --> SD
+        EQ -- "ya" --> OPT --> DEP --> DEV
+    end
+    KA -- "ya" --> KB

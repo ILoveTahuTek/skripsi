@@ -1,0 +1,18 @@
+%% G2.2 — Alur arah pertama: SIBI menjadi teks dan suara (BAB II, Subbab 2.7)
+%% Tipe: flowchart LR, pipeline linear dengan gerbang keputusan
+flowchart LR
+    TX["Modul TX<br/>ESP-NOW"]
+    ZN["Zona isyarat:<br/>gerak lengan mengubah<br/>amplitudo, fase, Doppler"]
+    RX["Modul RX ESP32-S3:<br/>CSI 56 subcarrier HT20,<br/>laju sampai 50 fps"]
+    SEG["Segmentasi berbasis<br/>energi gerak"]
+    FT["Fitur ringkas:<br/>subcarrier terpilih,<br/>spektrum Doppler, statistik"]
+    INF["Inferensi di perangkat:<br/>model int8 (TFLM/ESP-DL),<br/>klasifikasi + skor keyakinan"]
+    LBL{"Skor di atas ambang?"}
+    NET["Kirim label<br/>via UDP ke server"]
+    T2T["Kamus label menjadi<br/>teks Indonesia"]
+    TTS["TTS Indonesia:<br/>MMS-TTS-ind / Azure / Google"]
+    SPK["Speaker modul"]
+
+    TX --> ZN --> RX --> SEG --> FT --> INF --> LBL
+    LBL -- "ya" --> NET --> T2T --> TTS --> SPK
+    LBL -- "tidak" --> RJ["Tampilkan:<br/>isyarat tidak dikenali"]

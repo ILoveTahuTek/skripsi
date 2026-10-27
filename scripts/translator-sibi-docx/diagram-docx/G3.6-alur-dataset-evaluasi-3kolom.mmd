@@ -1,0 +1,33 @@
+%% G3.6 — Alur dataset, pelatihan guru-murid, evaluasi, dan deployment (BAB III, Subbab 3.8)
+%% VARIAN TATA LETAK DOCX (3 kolom): flowchart LR + subgraf kolom (direction TB).
+%% Sisi antarkolom diwakili sisi klaster: C1-->C2 (DS -> STU), C2-->C3 (DEP -> OP dan
+%% DEP -> COVER). Seluruh node, label sisi dalam kolom, dan teks identik dengan
+%% diagram/sandbox G3.6-alur-dataset-evaluasi.mmd.
+flowchart LR
+    subgraph C1[" "]
+        direction TB
+        REC["Perekaman dataset:<br/>5-8 isyarat x ±30 repetisi x sesi,<br/>3-4 pengisyarat, sedikitnya 2 ruang"]
+        FLT["Penyaringan segmen via keypoint YOLO26-Pose:<br/>buang segmen orang hilang,<br/>jitter ekstrem, segmen terpotong"]
+        TT["Latih dan evaluasi model guru YOLO26-Pose<br/>pada data visual SIBI (GPU Kaggle);<br/>kualitas keypoint diperiksa"]
+        DS["Dataset murid: jendela CSI + label kelas SIBI<br/>+ deret pose guru (supervisi tambahan)"]
+        REC --> FLT --> TT --> DS
+    end
+    subgraph C2[" "]
+        direction TB
+        STU["Latih murid 1D-CNN (GPU Kaggle):<br/>kerugian klasifikasi + suku supervisi guru;<br/>pembanding SVM dan ablasi tanpa supervisi guru"]
+        SPLIT["Pembagian data 5 skema:<br/>dalam sesi (blok temporal), lintas sesi,<br/>lintas partisipan, lintas ruang, pengguna baru"]
+        MET["Metrik klasifikasi: akurasi, presisi, recall,<br/>skor F1 makro, confusion matrix,<br/>selalu dibandingkan peluang acak"]
+        DEP["Kuantisasi int8 dan deployment<br/>murid ke modul ESP32-S3"]
+        STU --> SPLIT --> MET --> DEP
+    end
+    subgraph C3[" "]
+        direction TB
+        OP["Uji operasional: latensi ujung-ke-ujung per arah,<br/>laju deteksi palsu per jam, konsumsi arus modul"]
+        COVER["Metrik arah 2: cakupan kamus<br/>(proporsi kata uji yang terwakili)"]
+        USE["Uji kegunaan 3-5 pengguna<br/>+ penilaian validator tunarungu"]
+        ARTE["Laporan kelayakan + purwarupa<br/>+ dataset + protokol"]
+        OP --> USE --> ARTE
+        COVER --> ARTE
+    end
+    C1 --> C2
+    C2 --> C3

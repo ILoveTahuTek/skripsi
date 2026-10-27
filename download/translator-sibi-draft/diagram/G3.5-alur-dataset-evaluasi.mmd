@@ -1,0 +1,18 @@
+%% G3.5 — Alur dataset, eksperimen, evaluasi, dan deployment (BAB III, Subbab 3.8)
+%% Tipe: flowchart TD, rantai artefak dari data ke pengemasan
+flowchart TD
+    REC["Perekaman dataset:<br/>5-8 isyarat x ±30 repetisi x sesi,<br/>3-4 pengisyarat, sedikitnya 2 ruang"]
+    FLT["Penyaringan segmen via keypoint YOLO26:<br/>buang segmen orang hilang,<br/>jitter ekstrem, segmen terpotong"]
+    DS["Dataset CSI berlabel"]
+    SPLIT["Pembagian data 5 skema:<br/>dalam sesi (blok temporal), lintas sesi,<br/>lintas partisipan, lintas ruang, pengguna baru"]
+    MET["Metrik klasifikasi: akurasi, presisi, recall,<br/>skor F1 makro, confusion matrix,<br/>selalu dibandingkan peluang acak"]
+    DEP["Kuantisasi int8 dan deployment<br/>ke modul ESP32-S3"]
+    OP["Uji operasional: latensi ujung-ke-ujung per arah,<br/>laju deteksi palsu per jam, konsumsi arus modul"]
+    COVER["Metrik arah 2: cakupan kamus<br/>(proporsi kata uji yang terwakili)"]
+    USE["Uji kegunaan 3-5 pengguna<br/>+ penilaian validator tunarungu"]
+    ARTE["Laporan kelayakan + purwarupa<br/>+ dataset + protokol"]
+
+    REC --> FLT --> DS --> SPLIT --> MET --> DEP --> OP
+    DEP --> COVER
+    OP --> USE --> ARTE
+    COVER --> ARTE

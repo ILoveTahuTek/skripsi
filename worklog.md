@@ -441,3 +441,34 @@ Stage Summary:
 - Deliverable terbarui: download/sempro-dpj4-sibi-csi/Proposal-Sempro-DPJ4-SIBI-CSI.docx (52 hlm PDF) + assets/gambar-3.1.png & gambar-3.2.png baru; mirror & GitHub sinkron.
 - Keputusan kunci: heksagon menggantikan belah ketupat demi keterbacaan (dijelaskan di catatan bagian 9 agar bisa dipertanggungjawabkan ke pembimbing); ukuran gambar sengaja tidak lagi memenuhi halaman.
 - Sisa human-owned: tidak ada baru; penanda [PERLU DATA] dan identitas sampul tetap seperti sebelumnya.
+
+---
+Task ID: 20–22 (backfill — pemulihan catatan yang hilang saat konteks sesi terkompresi; tahun 2026-10-26)
+Agent: Super Z (main agent, sesi web)
+Task: Tiga paket kerja berurutan atas perintah pemilik — (20) peta literatur visual, (21) draft proposal utuh penerjemah dua arah + revisi metodologi distilasi guru–murid, (22) pengemasan DOCX. Catatan worklog asli hilang karena kompresi konteks; entri ini direkonstruksi dari catatan.md tiap paket (penomoran tugas pada catatan DOCX: "Task 21 — draft final").
+
+Work Log:
+- Task 20 — download/translator-sibi-literatur/: Peta-Literatur-Titik-Temu (PNG 3729×4068 + HTML sumber) — 79 kartu rujukan pada 9 kolom titik temu mengikuti alur argumen proposal; strip konvergensi masalah→4 kesenjangan→titik temu; seluruh klaim bersumber Matriks-Literatur (tanpa klaim baru); kartu [43][44] diberi kualifikasi "(metadata)"; skrip buat_peta_literatur.py + data_literatur.py + verifikasi_peta.py.
+- Task 21 — download/translator-sibi-draft/: draft proposal utuh BAB I–III + Daftar Pustaka (Draft-Proposal-Translator-SIBI.md ±16.800 kata, 80 rujukan, 6 diagram BAB III). Revisi sesi 1: kelima diagram BAB I–II dikeluarkan dari naskah atas permintaan pemilik (berkas .mmd tetap di diagram/ sebagai konteks). Revisi sesi 2 atas permintaan pemilik + diagram yang diberikan pemilik: distilasi guru–murid menjadi METODOLOGI UTAMA — YOLO26-Pose = guru kamera (fine-tune di Kaggle), murid CSI berjalan di ESP32-S3, kamera hanya akuisisi/pelatihan; jendela deret CSI; supervisi guru = suku tambahan + ablasi murid tanpa guru; layanan TTS/ASR awan jalur utama + server lokal cadangan; tombol tekan-untuk-bicara + rotary encoder; kamus label-teks kecil di modul; istilah "YOLO26-Pose" mengikuti pemilik; rujukan [80] Hinton dkk. (distilasi, arXiv:1503.02531 terverifikasi); Gambar 3.2 baru (alur teacher–student); Tabel 3.6 jadi 27 butir, Tabel 3.7 jadi 9 risiko. Verifikasi: rakit_draft.py LOLOS 13 OK (80/80 rujukan dikutip, cermin rumusan↔tujuan, 6 mermaid + 6 keterangan); periksa.py 2 positif palsu diterima; 11/11 mmd lolos.
+- Task 22 — download/translator-sibi-docx/ + scripts/translator-sibi-docx/: pengemasan DOCX murni (isi tak diubah) — Proposal-Penerjemah-Dua-Arah-SIBI-CSI-ESP32S3.docx (66 hlm A4, 2,9 MB; TNR 12pt, spasi 1,5, margin 4-3-3-3, TOC 64 entri, DP 80 entri [1]–[80], 44 penanda PERLU DATA tersorot) + Pratinjau PDF. Keenam diagram dirender ulang dari varian tata letak khusus DOCX (diagram-docx/: 3.1 tiga kolom, 3.2 dua kolom, 3.5 alur ular, dst.) karena rantai TD aspek 1:5–1:9 tak terbaca di A4; sisi antarkolom digambar sbg sisi klaster (keterbatasan mermaid #2539, dua generalisasi didokumentasikan utk ditinjau pemilik); .mmd sandbox tak tersentuh. QA: postcheck 0 galat; 6 gambar sehalaman dengan keterangan (keepNext); VLM glm-5v-turbo PASS utk sampul/TOC/BAB I/6 hlm diagram/DP; verifikasi isian .docx sesudah generate: judul sampul 3 baris utuh.
+
+Stage Summary:
+- Proposal penerjemah dua arah SIBI kini utuh: peta literatur + draft 80 rujukan + DOCX 66 halaman; metodologi utama = distilasi guru–murid YOLO26-Pose → murid CSI → inferensi tepi ESP32-S3; awan hanya TTS/ASR; tanpa kamera pada perangkat akhir.
+- Sisa human-owned: 44 penanda PERLU DATA, 7 konfirmasi pembimbing (lihat draft catatan §7), tinjauan 2 generalisasi sisi klaster G3.1/G3.6.
+- Catatan operasional: entri worklog 20–22 hilang karena kompresi konteks — catatan.md per paket adalah sumber kebenaran primer.
+
+---
+Task ID: 23
+Agent: Super Z (main agent, sesi web)
+Task: Finalisasi judul atas perintah pemilik ("Finalisasi judul. Kamu sudah paham judulku") — kunci judul proposal penerjemah dua arah sebagai JUDUL FINAL tanpa mengubah isi naskah.
+
+Work Log:
+- Verifikasi konsistensi judul di seluruh artefak: Draft-Proposal-Translator-SIBI.md (baris judul + tabel identitas), scripts/translator-sibi-docx/generate_docx.js (fullTitle sampul, toUpperCase 3 baris), Proposal-Revisi-Translator-SIBI.md, Bahan-Proposal-Translator-SIBI.md, Audit/Matriks/Rencana-Visual — semuanya identik; tidak perlu render ulang DOCX.
+- Judul dikunci FINAL: "Purwarupa Penerjemah Dua Arah Isyarat SIBI Berbasis Wi-Fi Channel State Information pada Modul ESP32-S3 dengan Inferensi Tepi dan Pemrosesan Bahasa pada Server: Studi Kelayakan Kosakata Terbatas".
+- download/translator-sibi-draft/catatan.md: header + tanggal keputusan (27 Okt 2026); §7 butir 2 (frasa judul "purwarupa" & "kosakata terbatas" sbg penanda klaim) ditandai TUNTAS — sisa konfirmasi pembimbing 6 butir.
+- download/translator-sibi-docx/catatan-pengemasan.md §4: pembaruan butir konfirmasi + catatan bahwa sampul DOCX sudah sesuai judul final.
+- Commit + push seluruh artefak translator-sibi (literatur/draft/docx + skrip generator) yang sebelumnya belum ter-track ke GitHub (backup anti-reset), termasuk kedua catatan yang dimutakhirkan + worklog ini.
+
+Stage Summary:
+- Judul final terkunci dan konsisten di seluruh dokumen; tidak ada perubahan isi naskah, tidak ada render ulang.
+- Sisa human-owned: 44 penanda PERLU DATA (identitas sampul, Tabel 3.6, spesifikasi perangkat, dst.) + 6 konfirmasi pembimbing + tinjauan 2 generalisasi sisi klaster + Update Field TOC di Word.

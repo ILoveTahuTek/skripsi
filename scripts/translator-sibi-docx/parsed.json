@@ -1,0 +1,4580 @@
+{
+ "bab1": [
+  {
+   "t": "h1",
+   "text": "BAB I PENDAHULUAN"
+  },
+  {
+   "t": "h2",
+   "text": "1.1 Latar Belakang"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Sebagian besar anak tunarungu lahir di tengah keluarga pendengar. Mitchell dan Karchmer [1], [2] mencatat proporsi tersebut sebesar 90–95% pada data siswa tunarungu di Amerika Serikat sekaligus membantah anggapan lama bahwa sekitar 10% anak tunarungu memiliki orang tua tunarungu. Angka sebanding untuk Indonesia belum ditemukan dalam penelusuran penelitian ini pada Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 sehingga angka dari Amerika Serikat dipakai sebagai gambaran umum. Keluarga pendengar dari anak yang berkomunikasi dengan isyarat perlu ikut mempelajari bahasa isyarat, padahal proses belajarnya membutuhkan dukungan yang terstruktur [3] dan menghadapi hambatan praktis sehari-hari [4]. Kondisi tersebut menandakan bahwa komunikasi antara tunarungu dan pendengar di lingkungan keluarga tidak dapat dianggap terjadi dengan sendirinya."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Komunikasi yang dimaksud bersifat dua arah. Penutur tunarungu menyampaikan pikiran melalui isyarat, sedangkan lawan bicara pendengar membalasnya melalui ucapan atau tulisan; kedua arah sama-sama tersendat apabila salah satu pihak tidak menguasai moda lawannya. Di Indonesia, juru bahasa isyarat yang dapat menjembatani kedua arah masih terbatas, yaitu sekitar 500 orang untuk sekitar 1,92 juta penyandang tunarungu atau kira-kira satu juru bahasa untuk 3.840 orang [5]. Secara hukum, Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas mengakui bahasa isyarat dan mewajibkan aksesibilitas komunikasi [6]. Kewajiban itu sulit dipenuhi bila kemampuan menjembatani dua arah hanya dimiliki segelintir juru bahasa sehingga teknologi bantu komunikasi yang murah dan tersedia menjadi salah satu jalur pelengkap [7]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Sistem Isyarat Bahasa Indonesia (SIBI) dipilih sebagai objek penelitian meskipun bukan moda yang paling banyak dipakai komunitas tunarungu dalam keseharian. Survei ekosistem bahasa isyarat yang dilaporkan Badan Riset dan Inovasi Nasional mencatat penggunaan Bahasa Isyarat Indonesia (BISINDO) sebesar 77,7%, SIBI 1,9%, campuran 14,9%, dan lainnya 5,6% [8]. Survei serupa pada 100 responden tunarungu di Jawa dan Bali melaporkan 91% memakai BISINDO untuk komunikasi sehari-hari [9]. Kedua survei tersebut menegaskan bahwa komunitas tunarungu lebih dekat ke BISINDO, tetapi juga menunjukkan tempat SIBI hidup, yaitu jalur pendidikan formal. Melalui Surat Pemberitahuan Direktorat Pendidikan Dasar Nomor 868/C/U/95, sekolah luar biasa yang menerapkan komunikasi total diwajibkan memakai sistem isyarat yang telah dibakukan [10]. Penelitian di SLB Negeri Ogan Ilir juga menunjukkan murid tunarungu memakai SIBI dalam pembelajaran sehari-hari di sekolah [11]. Dengan demikian, purwarupa penerjemah dua arah yang dibangun untuk konteks pendidikan formal lebih tepat memakai SIBI, sedangkan perluasan ke BISINDO menuntut penggantian kosakata dan validasi ulang bersama penuturnya."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Teknologi yang telah tersedia untuk kebutuhan tersebut masih terbagi menurut arah dan belum menyatu. Pada arah ucapan atau teks menjadi isyarat, aplikasi yang ada berbentuk kamus kata-level. KASIBI mengubah suara menjadi teks lalu menampilkan animasi peraga tiga dimensi dari basis data kosakata [12], sedangkan OpenSIBI memakai layanan pengenal ucapan lalu mencocokkan kata ke model tiga dimensi yang juga dianimasikan di layar [13]. Keduanya mengakui cakupan kosakatanya sangat terbatas. Pada arah isyarat menjadi teks, penelitian di Indonesia bertumpu pada citra atau video dari kamera [14], [15], termasuk penerapan berbasis "
+    },
+    {
+     "text": "smartphone",
+     "italics": true
+    },
+    {
+     "text": " untuk huruf SIBI statis [16], [17]. Pendekatan berbasis kamera menuntut pencahayaan dan garis pandang tertentu sehingga ketangguhannya menurun saat kondisi berubah [18], sedangkan kehadiran kamera yang terus menyala selama percakapan diduga memengaruhi kenyamanan pengguna dan dikaitkan dengan kelelahan nonverbal [19]. Kesenjangan-kesenjangan tersebut menjadi titik berangkat penelitian ini."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Penginderaan berbasis Wi-Fi "
+    },
+    {
+     "text": "Channel State Information",
+     "italics": true
+    },
+    {
+     "text": " (CSI) menjadi kandidat pengganti kamera pada arah isyarat menjadi teks. CSI memuat informasi amplitudo dan fase pada setiap "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " yang berubah ketika gerak tubuh mengganggu jalur propagasi sinyal [20]. Ma dkk. [21] membangun SignFi yang mengenali 276 isyarat "
+    },
+    {
+     "text": "American Sign Language",
+     "italics": true
+    },
+    {
+     "text": " (ASL) dari CSI. Sistem DF-WiSLR mengenali 49 gestur tanpa perangkat yang dikenakan pengguna [22], dan pendekatan serupa telah dicoba pada "
+    },
+    {
+     "text": "Filipino Sign Language",
+     "italics": true
+    },
+    {
+     "text": " [23]. Preseden terbaru, WiSign, bahkan mengenali kalimat ASL kontinu dari CSI perangkat Wi-Fi komersial [24]. Kepekaan CSI terhadap gerak halus juga telah terbukti pada gerak yang jauh lebih kecil daripada gerak lengan: WiKey mengenali ketukan tombol dengan akurasi klasifikasi 96,4% untuk kunci tunggal pada kondisi terkendali [25]. Pemantauan napas dari CSI juga berhasil mengklasifikasikan pola pernapasan dengan akurasi 99,54% [26]. Meskipun demikian, belum ditemukan publikasi yang memakai CSI untuk mengenali isyarat SIBI maupun purwarupa penerjemah dua arah yang memadukan penginderaan CSI dengan pemrosesan bahasa Indonesia. Penelusuran tersebut mencakup Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 dengan kata kunci bahasa Inggris dan bahasa Indonesia (Subbab 2.11)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Perangkat penginderaan yang dipakai penelitian ini adalah modul ESP32-S3, yaitu mikrokontroler murah dengan radio Wi-Fi 2,4 GHz yang mendukung perolehan CSI secara resmi [27] dan direkomendasikan platform RuView untuk modul penangkap CSI [28]. ESP32-S3 memiliki inti ganda 240 MHz, SRAM 512 KB, dan PSRAM terpasang hingga 8 MB [29]. Dua fakta teknis menjadi dasar kelayakan rancangan. Pertama, satu chip ESP32-S3 terbukti mampu menjalankan penangkapan CSI, koneksi "
+    },
+    {
+     "text": "station",
+     "italics": true
+    },
+    {
+     "text": " ke "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": ", dan pengiriman data secara serentak sebagaimana dijalankan "
+    },
+    {
+     "text": "firmware",
+     "italics": true
+    },
+    {
+     "text": " RuView [28]; koeksistensi itu mensyaratkan seluruh perangkat berada pada satu kanal serta radio tidak memasuki mode hemat daya. Kedua, inferensi model terkuantisasi pada perangkat didukung tolok ukur resmi: pustaka ESP-NN mempercepat model pendeteksi orang dari 2.300 ms menjadi 54 ms pada ESP32-S3 [30]. Pustaka ESP-DL juga menyediakan model contoh pengenalan gestur tangan dengan waktu inferensi 69,2 ms [31]. Dengan demikian, purwarupa dirancang agar pengenalan isyarat berjalan langsung pada modul sementara keluarannya diteruskan ke layanan ucapan awan untuk disuarakan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Purwarupa yang dirancang terdiri atas 2–3 modul ESP32-S3 yang portabel dan direncanakan memiliki layar, baterai, "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": ", mikrofon, tombol tekan-untuk-bicara, dan rotary encoder volume. Pada arah pertama, modul pemancar dan modul penerima mengapit zona isyarat; modul penerima menangkap CSI, mengenali isyarat melalui model murid yang berjalan pada perangkat, memetakan label menjadi teks pada kamus kecil modul, lalu mengirim teks ke layanan sintesis ucapan "
+    },
+    {
+     "text": "cloud",
+     "italics": true
+    },
+    {
+     "text": " dan menampilkannya di layar. Pada arah kedua, tombol pada modul mengaktifkan mikrofon; ucapan dikirim ke layanan pengenal ucapan "
+    },
+    {
+     "text": "cloud",
+     "italics": true
+    },
+    {
+     "text": " untuk dienali menjadi teks, kemudian teks dipetakan ke representasi SIBI dan ditampilkan di layar modul. Laptop ASUS TUF Dash F15 FX516PR (Intel Core i7-11370H, GPU RTX 3070 Laptop 8 GB VRAM, RAM 16 GB) menjadi mesin akuisisi jalur guru, mesin pengembangan, dan server lokal cadangan; pelatihan model guru dan model murid dijalankan pada layanan server GPU Kaggle. Teknologi pemrosesan bahasanya telah diaudit ke sumber primernya. Pengenal ucapan Whisper mendukung lebih dari 100 bahasa termasuk Indonesia [32], dan implementasi faster-whisper terbukti jauh lebih cepat daripada waktu nyata pada GPU kelas 8 GB [33]. Untuk sintesis suara, model MMS menyediakan "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " Bahasa Indonesia yang dapat dijalankan lokal [34], [35], sedangkan layanan "
+    },
+    {
+     "text": "cloud",
+     "italics": true
+    },
+    {
+     "text": " Google dan Azure menyediakan suara Indonesia [36], [37]. Model ringan Kokoro justru tidak mencakup Bahasa Indonesia sehingga tidak dipakai [38]. Pada purwarupa, jalur ucapan memakai layanan "
+    },
+    {
+     "text": "cloud",
+     "italics": true
+    },
+    {
+     "text": " berbahasa Indonesia dengan server lokal sebagai jalur cadangan dan pembanding."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Sebagai studi kelayakan, penelitian ini tidak mengklaim penerjemahan kontinu kosakata penuh. Kosakata dibatasi pada 5–8 isyarat SIBI terisolasi yang dibedakan lintasan lengan, tubuh atas, atau kepala, bukan oleh bentuk jari, dengan alasan resolusi spasial CSI pada satu tautan antarmodul (Subbab 2.3). Model berbasis CSI juga mudah "
+    },
+    {
+     "text": "overfitting",
+     "italics": true
+    },
+    {
+     "text": " terhadap orang dan ruang tempat data direkam [39] sehingga kinerja diukur lintas partisipan dan lintas ruang dengan acuan strategi Widar3.0 [40]. Model murid CSI dilatih dengan distilasi guru–murid ("
+    },
+    {
+     "text": "teacher–student",
+     "italics": true
+    },
+    {
+     "text": "): model guru kamera YOLO26-Pose mengekstrak deret pose gerakan SIBI dari video perekaman, sedangkan label kelas tetap berasal dari anotasi protokol (Subbab 2.5). Model murid belajar mengenali isyarat dari jendela CSI dengan supervisi tambahan deret pose guru, lalu berjalan sendiri pada modul tanpa kamera sehingga kamera dan model guru hanya aktif pada tahap akuisisi data dan pelatihan [41], [42]. Pemetaan teks ke representasi SIBI pada arah kedua dibatasi menjadi kamus kata-level dengan "
+    },
+    {
+     "text": "fallback",
+     "italics": true
+    },
+    {
+     "text": " ejaan jari sebagaimana preseden KASIBI dan OpenSIBI. Penerjemahan tata bahasa penuh masih menjadi masalah terbuka internasional [43], [44]. Setiap tahapan ditutup gerbang keputusan sehingga kegagalan tetap dilaporkan sebagai temuan kelayakan. Berdasarkan uraian tersebut, penelitian ini merancang bangun purwarupa penerjemah dua arah isyarat SIBI berbasis Wi-Fi CSI pada modul ESP32-S3 dan menguji kelayakannya sebagai alat bantu komunikasi kosakata terbatas pada konteks pendidikan formal."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "1.2 Rumusan Masalah"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Berdasarkan latar belakang yang telah dipaparkan, masalah yang dikaji dalam penelitian ini dapat dirumuskan sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Bagaimana merancang purwarupa penerjemah dua arah SIBI berbasis dua hingga tiga modul ESP32-S3 yang menangkap CSI, melakukan inferensi pada perangkat, dan berkomunikasi dengan layanan ucapan awan, termasuk protokol perekaman "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " isyarat terisolasi serta pelatihan model murid CSI dengan supervisi model guru YOLO26-Pose?"
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Bagaimana kinerja pengenalan 5–8 isyarat SIBI terisolasi dari CSI melalui inferensi pada perangkat, serta kinerja jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI, pada skenario dalam sesi, lintas partisipan, dan lintas ruang?"
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Bagaimana kelayakan purwarupa sebagai alat bantu komunikasi dua arah kosakata terbatas ditinjau dari latensi ujung ke ujung, cakupan kosakata, keandalan operasional, dan penilaian validator penutur tunarungu?"
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "1.3 Tujuan Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Berdasarkan rumusan masalah tersebut, penelitian ini bertujuan untuk:"
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Merancang purwarupa penerjemah dua arah SIBI berbasis dua hingga tiga modul ESP32-S3 yang menangkap CSI, melakukan inferensi pada perangkat, dan berkomunikasi dengan layanan ucapan awan, termasuk protokol perekaman "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " isyarat terisolasi serta pelatihan model murid CSI dengan supervisi model guru YOLO26-Pose."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Mengukur kinerja pengenalan 5–8 isyarat SIBI terisolasi dari CSI melalui inferensi pada perangkat, serta kinerja jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI, pada skenario dalam sesi, lintas partisipan, dan lintas ruang."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Menguji kelayakan purwarupa sebagai alat bantu komunikasi dua arah kosakata terbatas berdasarkan latensi ujung ke ujung, cakupan kosakata, keandalan operasional, dan penilaian validator penutur tunarungu."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "1.4 Batasan Masalah"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Ruang lingkup penelitian ini dibatasi sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Objek pengenalan adalah 5–8 isyarat SIBI terisolasi yang lolos dua saringan, yaitu separabilitas fisik (isyarat dibedakan lintasan lengan, tubuh atas, atau kepala, bukan bentuk jari) dan validitas pedagogis (disetujui validator penutur tunarungu dan dicocokkan dengan "
+    },
+    {
+     "text": "Kamus SIBI",
+     "italics": true
+    },
+    {
+     "text": " [45]). Sistem yang dibangun bukan penerjemah kalimat dan tidak menangani pengenalan isyarat kontinu."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Konfigurasi jari dan ekspresi wajah tidak dikenali; batas ini mengikat kedua arah sehingga keluaran arah pertama hanya menyangkut lintasan gerak, sedangkan arah kedua menampilkan representasi tingkat kata dan ejaan jari, bukan tata bahasa isyarat penuh beserta penanda nonmanual."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Perangkat keras terdiri atas 2–3 modul ESP32-S3 (masing-masing direncanakan memiliki layar kecil, baterai, "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": ", mikrofon I2S, tombol tekan-untuk-bicara, dan rotary encoder volume) serta satu laptop ASUS TUF Dash F15 FX516PR (Intel Core i7-11370H, RTX 3070 Laptop 8 GB VRAM, RAM 16 GB) sebagai mesin akuisisi jalur guru, mesin pengembangan, dan server lokal cadangan; pelatihan model guru dan murid memakai layanan server GPU Kaggle."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Kamera dan YOLO26-Pose hanya dipakai sebagai model guru pada tahap akuisisi data dan pelatihan di laptop dan layanan server GPU Kaggle; label kelas isyarat berasal dari anotasi protokol, bukan keluaran model guru, dan produk akhir tidak memakai kamera maupun citra."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "5.",
+   "runs": [
+    {
+     "text": "Pemrosesan bahasa memakai teknologi yang terverifikasi mendukung Bahasa Indonesia: layanan sintesis ucapan dan pengenalan ucapan otomatis awan menjadi jalur utama, sedangkan Whisper dan MMS-TTS-ind pada server lokal menjadi cadangan dan pembanding; pilihan final ditetapkan pada T4 (Tabel 3.6)."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "6.",
+   "runs": [
+    {
+     "text": "Arah kedua dibatasi menjadi kamus kata-level dengan "
+    },
+    {
+     "text": "fallback",
+     "italics": true
+    },
+    {
+     "text": " ejaan jari (26 huruf dan angka 1–9) sebagaimana preseden OpenSIBI; cakupan kamus diukur dan dilaporkan, tidak dijanjikan mencakup kosakata kamus SIBI penuh."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "7.",
+   "runs": [
+    {
+     "text": "Setiap sesi melibatkan satu pengisyarat pada zona akuisisi; sistem tidak mengidentifikasi individu, dan pengujian dilakukan di sedikitnya dua ruang mitra yang dikalibrasi dalam penelitian ini."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "8.",
+   "runs": [
+    {
+     "text": "Uji pengguna dilakukan dalam skala kecil dengan 3–5 pengguna dan dianalisis secara deskriptif tanpa statistik inferensial."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "9.",
+   "runs": [
+    {
+     "text": "Penelitian ini tidak membahas pengenalan isyarat kontinu, penerjemahan kalimat dengan tata bahasa isyarat penuh beserta penanda nonmanual, penggunaan BISINDO, maupun klasifikasi gerakan otomatis dari video oleh model guru."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "1.5 Manfaat Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Manfaat penelitian ini dibedakan menjadi manfaat teoretis dan manfaat praktis."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "1.5.1 Manfaat Teoretis"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Penelitian ini diharapkan memberikan bukti awal kelayakan pengenalan sekelompok kecil isyarat SIBI terisolasi dari CSI satu tautan antarmodul ESP32-S3, disertai bukti kelayakan inferensi model terkuantisasi pada perangkat untuk tugas tersebut. Bukti itu tidak berlaku bagi kosakata yang dibedakan oleh bentuk jari. Penelitian ini juga menyediakan "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " CSI isyarat SIBI berlabel beserta deret pose model guru dan protokol perekamannya sehingga dapat menjadi pembanding bagi penelitian penginderaan nirkabel berbahasa isyarat lain, termasuk perluasan ke BISINDO. Kajian integrasi penginderaan CSI dengan jalur sintesis ucapan dan pengenalan ucapan otomatis Bahasa Indonesia pada satu purwarupa memberikan contoh dokumentasi arsitektur tepi-awan yang dapat ditelusuri ulang peneliti berikutnya."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "1.5.2 Manfaat Praktis"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Bagi lembaga pendidikan mitra, penelitian ini memberikan gambaran kelayakan purwarupa alat bantu komunikasi dua arah berbahasa SIBI yang dapat dipakai guru dan keluarga pada kegiatan pembelajaran, bersama protokol kurasi kosakata yang disusun bersama validator penutur tunarungu. Bila tahapan penelitian mencapai gerbang terakhir, dihasilkan purwarupa yang menampilkan teks dan menyuarakan isyarat SIBI yang dikenali serta menampilkan representasi isyarat bagi lawan bicara pendengar; bila penelitian berhenti lebih awal, artefak berupa laporan karakterisasi sinyal, protokol, atau "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " berlabel tetap dihasilkan. Bagi keluarga siswa tunarungu, kosakata yang divalidasi penutur tunarungu memastikan bentuk isyarat yang ditampilkan baku sesuai jalur pendidikan formal. Bagi komunitas riset, "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " dan rancangan yang tidak terikat pada satu bahasa isyarat memudahkan replikasi dan pembandingan metode."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "1.6 Sistematika Penulisan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Proposal penelitian ini terdiri atas tiga bab dengan sistematika sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "BAB I Pendahuluan",
+     "bold": true
+    },
+    {
+     "text": " memuat latar belakang, rumusan masalah, tujuan penelitian, batasan masalah, manfaat penelitian, dan sistematika penulisan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "BAB II Kajian Pustaka",
+     "bold": true
+    },
+    {
+     "text": " memuat kajian teori dan penelitian terdahulu yang menjadi dasar perancangan. Kajian mencakup bahasa isyarat dan SIBI, kebutuhan komunikasi dua arah dan sistem terdahulu, Wi-Fi CSI, modul ESP32-S3 dan platform RuView beserta koeksistensi radionya, peran YOLO26-Pose sebagai model guru kamera dalam distilasi guru–murid, pengenalan isyarat dan gestur berbasis CSI serta inferensi pada perangkat, sintesis ucapan dan pengenalan ucapan otomatis Bahasa Indonesia, pemetaan teks ke representasi SIBI di layar, komunikasi perangkat dan server, evaluasi kelayakan, serta penelitian terdahulu yang relevan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "BAB III Metode Penelitian",
+     "bold": true
+    },
+    {
+     "text": " memuat desain penelitian; tahapan penelitian beserta gerbang keputusan; waktu dan lokasi penelitian; alat dan bahan; perancangan sistem; protokol perekaman "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " beserta partisipan dan etika; pengolahan sinyal, ekstraksi fitur, pelatihan guru–murid, dan "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": "; skenario pengujian dan metrik evaluasi; jadwal penelitian; parameter rancangan yang ditetapkan kemudian; serta risiko dan alternatif cadangan."
+    }
+   ]
+  }
+ ],
+ "bab2": [
+  {
+   "t": "h1",
+   "text": "BAB II KAJIAN PUSTAKA"
+  },
+  {
+   "t": "h2",
+   "text": "2.1 Bahasa Isyarat dan Sistem Isyarat Bahasa Indonesia"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Bahasa isyarat merupakan bahasa visual yang menyampaikan makna melalui gerak tangan, lengan, tubuh, dan ekspresi wajah [46], [47]. Secara struktural, sebuah isyarat tersusun atas bentuk tangan, lokasi, gerak, orientasi telapak tangan, dan komponen nonmanual seperti ekspresi wajah; perbedaan pada satu parameter saja dapat membedakan makna dua isyarat [46], [47]. Dalam penelitian ini, parameter tersebut menjadi acuan untuk memisahkan bagian isyarat yang dapat dinilai mesin dari bagian yang tetap memerlukan penilaian manusia (Subbab 2.3 dan 2.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pemakaian bahasa isyarat di Indonesia tidak seragam. Survei ekosistem bahasa isyarat menunjukkan BISINDO jauh lebih banyak dipakai respondennya daripada SIBI, sedangkan SIBI berkembang di jalur pendidikan formal [8]; angka pemakaian dan keterbatasan sampel survei tersebut telah dipaparkan pada Subbab 1.1. Survei pada responden tunarungu di Jawa dan Bali melaporkan bahwa 91% responden memakai BISINDO untuk komunikasi sehari-hari karena konsep SIBI dianggap sulit [9]. SIBI sendiri merupakan sistem isyarat baku yang dikembangkan untuk keperluan pendidikan formal, sedangkan BISINDO berkembang secara alami di komunitas tunarungu; kajian pada mahasiswa tunarungu [48] dan pada siswa SLB [49] menjelaskan perbedaan pemakaian keduanya. Bentuk baku isyarat SIBI didokumentasikan dalam "
+    },
+    {
+     "text": "Kamus Sistem Isyarat Bahasa Indonesia",
+     "italics": true
+    },
+    {
+     "text": " yang selanjutnya disebut "
+    },
+    {
+     "text": "Kamus SIBI",
+     "italics": true
+    },
+    {
+     "text": " [45], dan bentuk digitalnya tersedia melalui Kamus SIBI Digital [10]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pemilihan SIBI dalam penelitian ini didasarkan pada jalur pendidikan formal yang menjadi konteks pemakaian purwarupa, bukan pada jumlah penuturnya (Subbab 1.1). Alat yang dirancang tidak dimaksudkan menggantikan BISINDO dalam komunikasi komunitas tunarungu sehari-hari. Rancangan sistem tidak terikat pada satu bahasa isyarat tertentu sehingga perluasan ke BISINDO pada prinsipnya dapat dilakukan dengan mengganti "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": ", menyeleksi ulang kosakata dengan kriteria yang sama, dan melakukan validasi bersama validator penutur BISINDO; kelayakan perluasan tersebut tidak diuji dalam penelitian ini dan diusulkan sebagai penelitian lanjutan."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.2 Kebutuhan Komunikasi Dua Arah dan Sistem Terdahulu"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Komunikasi antara penutur isyarat dan pendengar menuntut kemampuan pada kedua arah, yaitu memahami isyarat yang diperagakan dan membalasnya dengan moda yang dapat dipahami lawan bicara. Sebagian besar anak tunarungu lahir dari orang tua pendengar [1] sehingga keluarga pendengar berada di barisan pertama yang merasakan kebutuhan tersebut; mereka yang belajar bahasa isyarat membutuhkan dukungan belajar terstruktur serta menghadapi hambatan praktis [3], [4]. Juru bahasa isyarat profesional yang dapat menjembatani kedua arah jumlahnya terbatas [5] sehingga teknologi bantu komunikasi berperan sebagai pelengkap [7]. Dalam penelitian ini, kebutuhan tersebut diterjemahkan menjadi purwarupa yang bekerja dua arah, bukan sekadar kamus satu arah."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Sistem terdahulu di Indonesia dapat dikelompokkan menurut arah kerjanya. Pada arah ucapan atau teks menjadi isyarat, KASIBI mengubah suara menjadi teks melalui layanan pengenal ucapan, mencocokkan kata pada basis data, lalu menampilkan animasi peraga tiga dimensi; sistem tersebut diuji sebagai media pembelajaran dan memperoleh rata-rata skor 3,362 dari 4 [12]. OpenSIBI memakai mekanisme serupa dengan menyimpan model tiga dimensi format Collada pada "
+    },
+    {
+     "text": "application programming interface",
+     "italics": true
+    },
+    {
+     "text": " (API) sehingga aplikasi Android dapat menganimasikannya; cakupannya 50 kosakata yang terdiri atas 9 angka, 26 huruf, dan 15 kata, dan penulisnya mengakui keterbatasan kosakata sebagai kelemahan utama [13]. Kedua sistem tersebut membuktikan bahwa arah balik kata-level secara teknis dapat dibangun, tetapi sekaligus menandai biaya pembuatan aset per isyarat yang tinggi. Aplikasi pembelajaran dasar lain menyasar arah manusia belajar isyarat [50]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pada arah isyarat menjadi teks, riset Indonesia umumnya bertumpu pada citra atau video dari kamera [14]. Dwijayanti dkk. [15] memakai "
+    },
+    {
+     "text": "convolutional neural network",
+     "italics": true
+    },
+    {
+     "text": " (CNN) untuk citra huruf dan angka BISINDO, Kindy dkk. [51] menyusun "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " video BISINDO tingkat kata, Wiguna dan Rojali [52] mengenali kalimat BISINDO dari video, dan Sebastian dkk. [53] memakai pengenalan gestur tubuh yang memperhitungkan informasi spasial. Khusus SIBI, Soekarta dkk. [16] membangun aplikasi Android berbasis MediaPipe untuk 24 huruf statis, disusul aplikasi pengenalan alfabet statis berbasis TensorFlow Lite [17]. Seluruh kelompok ini memerlukan kamera saat sistem dipakai sehingga keberhasilannya bergantung pada pencahayaan dan garis pandang [18], [47]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pendekatan lain yang tidak memerlukan kamera adalah sensor yang dikenakan pada tangan, seperti sarung tangan sensor dan sensor inersia, yang dapat menangkap konfigurasi jari; namun, perangkatnya harus dikenakan dan dikalibrasi setiap kali dipakai [47], [23] sehingga tidak cocok untuk percakapan yang berlangsung santai. Paparan kamera yang terus menyala selama percakapan juga dikaitkan dengan kelelahan nonverbal [19]. Oleh karena itu, penelitian ini menelusuri penginderaan berbasis sinyal Wi-Fi yang bekerja tanpa kamera dan tanpa perangkat yang dikenakan, sementara sistem terdahulu yang paling dekat dengan arah balik, yaitu KASIBI dan OpenSIBI, menjadi preseden perancangan jalur kedua purwarupa (Subbab 2.8)."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.3 Wi-Fi Channel State Information"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Wi-Fi "
+    },
+    {
+     "text": "Channel State Information",
+     "italics": true
+    },
+    {
+     "text": " (CSI) merupakan informasi amplitudo dan fase pada setiap "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " yang menggambarkan kondisi kanal propagasi antara pemancar dan penerima Wi-Fi [20]. Sinyal Wi-Fi tiba di penerima melalui beberapa jalur, yaitu jalur langsung dan jalur pantulan dari dinding, perabot, serta tubuh manusia. Ketika tubuh bergerak di antara pemancar dan penerima, panjang jalur pantulan berubah sehingga amplitudo dan fase pada setiap "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " ikut berubah; perubahan itulah yang dimanfaatkan untuk mengenali gerak tanpa sensor yang dikenakan di tubuh [20]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Amplitudo dan fase memuat informasi yang berbeda tentang perubahan kanal. Cai dkk. [54] memanfaatkan keduanya sebagai informasi yang saling melengkapi untuk pengenalan gestur. Setiap "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " menempati frekuensi yang sedikit berbeda sehingga satu gerak yang sama menghasilkan perubahan yang tidak identik pada setiap "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " [20]. Dengan demikian, CSI menyediakan banyak kanal pengamatan dari satu pasang pemancar dan penerima."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Gerak lengan juga menghasilkan komponen Doppler, yaitu pergeseran frekuensi yang sebanding dengan laju perubahan panjang jalur pantulan [20], [40]. Komponen tersebut dapat diukur dari deret CSI dan mencerminkan kecepatan gerak. Penelitian ini memusatkan analisis Doppler pada pita frekuensi gerak 1–60 Hz; agar pita tersebut terwakili, laju pencuplikan CSI harus sekurang-kurangnya dua kali frekuensi tertingginya, yaitu 120 Hz, sesuai kriteria Nyquist [55], [56]. "
+    },
+    {
+     "text": "Firmware",
+     "italics": true
+    },
+    {
+     "text": " RuView membatasi pengiriman bingkai CSI paling sering setiap 20 ms, yang setara laju maksimum 50 bingkai per detik, menurut kode sumber "
+    },
+    {
+     "text": "firmware",
+     "italics": true
+    },
+    {
+     "text": "-nya [28]; laju aktual pada konfigurasi penelitian diukur pada tahap replikasi (BAB III). Bila laju terukur lebih rendah daripada 120 Hz, pita Doppler yang dapat diamati menyempit hingga setengah laju pencuplikan aktual dan pembatasan itu dilaporkan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kepekaan CSI terhadap gerak halus telah dibuktikan pada gerak yang jauh lebih kecil daripada gerak lengan. WiKey mengenali ketukan tombol dari CSI dengan tingkat deteksi lebih dari 97,5% dan akurasi klasifikasi 96,4% untuk kunci tunggal pada lingkungan terkendali [25]. Pemantauan pernapasan dari Wi-Fi CSI berhasil mengklasifikasikan pola pernapasan dengan akurasi 99,54% dan laju napas dengan akurasi 98,69% pada kanal yang cukup baik [26], padahal gerak dada akibat napas berada pada orde milimeter. Kedua preseden tersebut menunjukkan bahwa CSI peka terhadap gerak skala sentimeter hingga milimeter pada kondisi jarak dekat dan pengguna tunggal. Meskipun demikian, keduanya bekerja pada kondisi terkendali sehingga keberhasilannya tidak serta-merta berlaku pada konfigurasi penelitian ini; bukti itu dipakai sebagai dasar hipotesis kerja, bukan jaminan hasil."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pola CSI tidak hanya dipengaruhi oleh gerak isyarat, tetapi juga oleh pengisyarat yang memperagakannya dan ruang tempat perekaman. Akibatnya, model berbasis CSI mudah mengalami "
+    },
+    {
+     "text": "overfitting",
+     "italics": true
+    },
+    {
+     "text": " terhadap orang dan ruang tempat data pelatihan direkam [39]. Chen dkk. merangkum strategi generalisasi lintas domain untuk mengatasi persoalan tersebut, sedangkan Zhang dkk. mengusulkan Widar3.0 yang mengenali gestur lintas domain tanpa pelatihan ulang dengan profil kecepatan yang diturunkan dari Doppler [40]. Dalam penelitian ini, strategi lintas domain dijadikan acuan rancangan fitur, sedangkan kemampuan generalisasi sistem diukur langsung melalui skenario pengujian (Subbab 2.10 dan 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Panjang gelombang Wi-Fi pada pita 2,4 GHz berkisar 12,5 cm dan membatasi resolusi spasial CSI. Sejumlah penelitian melaporkan pengenalan isyarat dan gestur tangan dari CSI dengan perangkat riset multi-antena. SignFi memakai NIC Intel 5300 dengan tiga antena penerima [21]. Wi-SL memakai router dengan dua antena pemancar dan tiga antena penerima pada kanal 40 MHz dengan laju cuplik 400 Hz [57]. HandFi memakai NIC Intel 5300 sebagai penerima dari router Wi-Fi komersial [58]. Penelitian ini tidak mengasumsikan kemampuan tersebut juga dimiliki perangkat yang digunakan. Dengan satu tautan antara dua modul ESP32-S3 yang masing-masing berantena tunggal, perbedaan konfigurasi jari dan ekspresi wajah diasumsikan terlalu halus untuk dibedakan secara andal; asumsi tersebut diperiksa melalui uji Delta-CSI (BAB III) sehingga cakupan pengenalan dibatasi pada lintasan lengan, tubuh atas, dan kepala. Batas resolusi tersebut menentukan saringan separabilitas fisik pada kurasi kosakata (Subbab 3.6) dan makna keluaran sistem pada kedua arah."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.4 Modul ESP32-S3, Platform RuView, dan Koeksistensi Radio"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "ESP32-S3 merupakan mikrokontroler dengan radio Wi-Fi 802.11 b/g/n pada pita 2,4 GHz dan tautan tunggal satu antena (1T1R) [29]. Inti prosesornya ganda Xtensa LX7 berjalan pada 240 MHz dengan instruksi vektor; memorinya terdiri atas SRAM internal 512 KB, ROM 384 KB, dan PSRAM terpasang hingga 8 MB sesuai varian chip [29]. Dukungan CSI tersedia resmi untuk seluruh seri ESP32 termasuk ESP32-S3 melalui repositori esp-csi [27]; pada kanal 20 MHz 802.11n, CSI yang dilaporkan mencakup 56 "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " yang terdiri atas 52 "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " data dan 4 "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " pilot [27]. Basis akuisisi CSI mandiri pada keluarga ESP32 dikembangkan oleh Hernandez dan Bulut [59], dan varian ESP32-S3 adalah varian yang direkomendasikan dokumentasi RuView untuk modul penangkap CSI [28]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "RuView merupakan proyek sumber terbuka yang menyediakan rantai akuisisi dan pengolahan CSI pada ESP32. Komponennya meliputi "
+    },
+    {
+     "text": "firmware",
+     "italics": true
+    },
+    {
+     "text": " ESP32 penangkap CSI dengan format bingkai ADR-018 yang dikirim melalui "
+    },
+    {
+     "text": "User Datagram Protocol",
+     "italics": true
+    },
+    {
+     "text": " (UDP), "
+    },
+    {
+     "text": "server",
+     "italics": true
+    },
+    {
+     "text": " pengolahan sinyal, kalibrasi ruang bawaan, segmentasi berbasis energi gerak, "
+    },
+    {
+     "text": "dashboard",
+     "italics": true
+    },
+    {
+     "text": " web, mode privasi, dan "
+    },
+    {
+     "text": "pipeline",
+     "italics": true
+    },
+    {
+     "text": " akuisisi tersinkron kamera–CSI melalui skrip "
+    },
+    {
+     "text": "scripts/collect-ground-truth.py",
+     "code": true
+    },
+    {
+     "text": " (ADR-079) [28]. ADR atau "
+    },
+    {
+     "text": "architecture decision record",
+     "italics": true
+    },
+    {
+     "text": " adalah catatan keputusan arsitektur yang dipakai repositori tersebut untuk mendokumentasikan keputusan desain [28]. Kalibrasi ruang bawaan memakai 600 bingkai dan 8 "
+    },
+    {
+     "text": "anchor",
+     "italics": true
+    },
+    {
+     "text": " selama kurang lebih empat menit, sedangkan mode privasi menekan fitur biometrik agar tidak diterbitkan keluar dari "
+    },
+    {
+     "text": "server",
+     "italics": true
+    },
+    {
+     "text": " [28]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Fakta teknis yang paling menentukan arsitektur purwarupa adalah koeksistensi radio pada satu chip. "
+    },
+    {
+     "text": "Firmware",
+     "italics": true
+    },
+    {
+     "text": " RuView menjalankan tiga fungsi radio secara serentak pada satu ESP32-S3: menangkap CSI melalui mode promiscuous, terhubung sebagai "
+    },
+    {
+     "text": "station",
+     "italics": true
+    },
+    {
+     "text": " ke "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " untuk mengirim data melalui UDP, dan menerima sinkronisasi ESP-NOW dari modul pemancar [28]. ESP-NOW sendiri merupakan protokol komunikasi tanpa "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " yang memuat hingga 250 bita per paket dan dipakai RuView sebagai sumber bingkai bersama antarmodul [28]. Tiga syarat wajib menyertai pola tersebut. Seluruh perangkat berada pada satu kanal mengikuti kanal "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": ", penyaringan paket mode promiscuous dibatasi pada kelompok paket manajemen agar beban interupsi terkendali, dan mode hemat daya radio dimatikan karena CSI menuntut radio tetap terjaga [28]. Dengan bukti itu, purwarupa tidak memerlukan modul gerbang khusus; setiap modul dapat menjalankan peran ganda sekaligus, dan topologi lengkapnya diuraikan pada Subbab 3.5. Tabel 2.1 memetakan fitur RuView terhadap perannya dalam penelitian ini."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 2.1 Pemetaan fitur RuView terhadap peran dalam penelitian ini",
+   "header": [
+    "Fitur RuView",
+    "Peran dalam penelitian ini"
+   ],
+   "rows": [
+    [
+     "*Firmware* ESP32 penangkap CSI (format bingkai ADR-018, *streaming* UDP)",
+     "Mengalirkan CSI dan label hasil inferensi dari modul ke *server* lokal"
+    ],
+    [
+     "Koneksi station + UDP + CSI promiscuous + sinkronisasi ESP-NOW pada satu chip",
+     "Dasar topologi satu kanal purwarupa (Subbab 3.5)"
+    ],
+    [
+     "Kalibrasi ruang bawaan (600 bingkai + 8 *anchor*)",
+     "Mengkalibrasi ruang mitra pada awal setiap sesi"
+    ],
+    [
+     "Segmentasi berbasis energi gerak",
+     "Memotong deret CSI menjadi segmen isyarat terisolasi"
+    ],
+    [
+     "*Dashboard* web",
+     "Pemantauan sesi riset; tampilan pengguna akhir ada di layar modul"
+    ],
+    [
+     "Mode privasi",
+     "Membuang fitur biometrik selama penelitian"
+    ],
+    [
+     "*Pipeline* akuisisi tersinkron kamera–CSI (ADR-079)",
+     "Jalur guru riset dengan estimator diganti YOLO26-Pose"
+    ],
+    [
+     "Modul estimasi pose *on-device*",
+     "Tidak dipakai"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Modul estimasi pose "
+    },
+    {
+     "text": "on-device",
+     "italics": true
+    },
+    {
+     "text": " RuView tidak dipakai karena pengenalan isyarat dilakukan langsung dari fitur CSI (Subbab 2.6). Karena RuView bersumber dari repositori perangkat lunak dan tidak melalui telaah sejawat, fungsi yang dipakai diverifikasi lebih dulu pada tahap replikasi melalui gerbang keputusan G0 sebelum dipakai untuk perekaman (BAB III)."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.5 Estimasi Pose Berbasis Visi sebagai Model Guru Kamera"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Estimasi pose merupakan tugas visi komputer untuk memperkirakan posisi "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " tubuh manusia dari citra atau video [60]. YOLO26 merupakan keluarga model visi waktu nyata terbaru dari Ultralytics yang mendukung deteksi, segmentasi, klasifikasi, dan estimasi pose dalam satu kerangka [41]. YOLO26-Pose dilatih pada "
+    },
+    {
+     "text": "dataset keypoint",
+     "italics": true
+    },
+    {
+     "text": " COCO dan menghasilkan 17 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " tubuh per orang, mencakup titik wajah, bahu, siku, dan pergelangan tangan, tanpa "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " jari [42]. Analisis independen atas YOLO26 menunjukkan bahwa model ini dirancang untuk efisiensi inferensi dan kesiapan penerapan pada perangkat tepi [61]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Dalam penelitian ini, YOLO26-Pose dipakai sebagai model guru kamera ("
+    },
+    {
+     "text": "camera teacher",
+     "italics": true
+    },
+    {
+     "text": ") pada tahap akuisisi data dan pelatihan. "
+    },
+    {
+     "text": "Pipeline",
+     "italics": true
+    },
+    {
+     "text": " akuisisi tersinkron mengikuti pola ADR-079 RuView yang aslinya memakai MediaPipe PoseLandmarker [62]; estimatornya diganti YOLO26-Pose yang keluarannya juga 17 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " format COCO sehingga formatnya setara dengan skrip asli. Pemakaian visi sebagai pemberi supervisi bagi pelatihan model Wi-Fi telah memiliki preseden: Person-in-WiFi memperoleh persepsi tubuh dari sinyal Wi-Fi dengan supervisi kamera [63], dan DensePose from WiFi memetakan sinyal Wi-Fi ke koordinat permukaan tubuh dengan jaringan visi sebagai guru [64]. Teknik umum di baliknya, yaitu distilasi pengetahuan, melatih model murid yang ringan agar meniru keluaran atau representasi model guru yang lebih kuat [80]. Label kelas SIBI tetap berasal dari kartu pemandu pada protokol "
+    },
+    {
+     "text": "elisitasi",
+     "italics": true
+    },
+    {
+     "text": " sehingga model guru tidak mengklasifikasikan isyarat; klasifikasi gerakan otomatis dari video menuntut pengklasifikasi temporal di atas deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " dan menjadi pengembangan lanjutan di luar cakupan. Deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " guru juga tetap dipakai untuk verifikasi batas segmen, penyaringan segmen buruk, dan diagnosis kesalahan secara luring (Subbab 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Peran kamera dengan demikian terbatas pada tahap akuisisi data dan pelatihan serta tidak pernah menyala pada produk akhir. Batas ini penting karena keluaran model hanya mencakup tubuh tanpa "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " jari; batas tersebut sejalan dengan cakupan pengenalan yang memang dibatasi pada lintasan lengan, tubuh atas, dan kepala (Subbab 2.3). Setelah model murid dilatih dan di-"
+    },
+    {
+     "text": "deploy",
+     "italics": true
+    },
+    {
+     "text": " ke modul, seluruh jalur operasional berjalan tanpa kamera dan tanpa citra sehingga klaim produk tanpa kamera dapat diuji langsung pada purwarupa."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.6 Pengenalan Isyarat dan Gestur Berbasis CSI serta Inferensi pada Perangkat"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pengenalan bahasa isyarat dari CSI telah diteliti pada beberapa bahasa isyarat di luar Indonesia. SignFi mengenali 276 isyarat ASL [21], sistem multi-perangkat yang tangguh diajukan Shang dan Wu [65], DF-WiSLR mengenali 49 gestur tanpa perangkat yang dikenakan [22], model deret waktu berbasis "
+    },
+    {
+     "text": "Long Short-Term Memory",
+     "italics": true
+    },
+    {
+     "text": " dikembangkan Ahmed dkk. [66], WiASL mengenali tulisan ASL dengan perangkat Wi-Fi komersial [67], dan pendekatan CSI dicoba pada "
+    },
+    {
+     "text": "Filipino Sign Language",
+     "italics": true
+    },
+    {
+     "text": " [23]. WiSign memperluas arah tersebut dengan mengenali kalimat ASL kontinu dari CSI dengan segmentasi berbasis kepadatan spektrum [24]; keberadaannya menunjukkan bahwa pengenalan kontinu bukan wilayah yang sama sekali belum disentuh sehingga kebaruan penelitian ini tidak diklaim pada pengenalan kontinu, melainkan pada penerapan CSI untuk SIBI dan pada integrasinya dengan jalur pemrosesan bahasa dua arah (Subbab 2.11)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Rancangan fitur mengikuti praktik kelompok penelitian tersebut: amplitudo dan fase "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " terpilih yang saling melengkapi [54], spektrum Doppler pada pita 1–60 Hz [40], serta statistik ringkas berupa energi, entropi, dan lintasan puncak [20], [58]. "
+    },
+    {
+     "text": "Support Vector Machine",
+     "italics": true
+    },
+    {
+     "text": " (SVM) mencari batas pemisah antarkelas dengan margin terbesar [68] dan dipilih sebagai pembanding dasar karena kuat pada "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " berukuran kecil [69]. Model utamanya adalah "
+    },
+    {
+     "text": "one-dimensional Convolutional Neural Network",
+     "italics": true
+    },
+    {
+     "text": " (1D-CNN) berukuran kecil yang menerapkan konvolusi sepanjang sumbu waktu dan cocok untuk data deret waktu [70]; dalam penelitian ini 1D-CNN berperan sebagai model murid yang dilatih dari jendela CSI dengan supervisi tambahan deret pose guru (Subbab 3.7)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Klasifikator himpunan tertutup selalu memilih salah satu kelas, termasuk ketika gerak yang diperagakan bukan bagian kosakata; mekanisme penolakan dilengkapi agar keluaran berkeyakinan rendah tidak dipaksakan menjadi kelas tertentu [71]. Keluaran klasifikator dilengkapi skor keyakinan; bila skor berada di bawah ambang, sistem menampilkan pesan isyarat tidak dikenali. Ambang ditetapkan dari data validasi (Tabel 3.6) dan kecukupannya ditelusuri melalui laju deteksi palsu serta penilaian validator (Subbab 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Inferensi pada penelitian ini dirancang berjalan langsung pada modul penerima, bukan pada "
+    },
+    {
+     "text": "server",
+     "italics": true
+    },
+    {
+     "text": ". Kelayakannya ditopang tiga tolok ukur resmi pada perangkat ESP32-S3. Pertama, pustaka ESP-NN mempercepat model pendeteksi orang berukuran 293,5 KB dari 2.300 ms menjadi 54 ms pada ESP32-S3 [30]. Kedua, pustaka ESP-DL menyediakan model contoh terkuantisasi int8, termasuk model pengenalan gestur tangan dengan waktu inferensi 69,2 ms dan MobileNetV2 dengan 437,9 ms [31]. Ketiga, contoh TensorFlow Lite Micro pada ESP32, seperti "
+    },
+    {
+     "text": "micro speech",
+     "italics": true
+    },
+    {
+     "text": " berukuran 18,4 KB, menunjukkan bahwa model kecil berjalan dengan penyangga terkendali [72]. Masukan klasifikasi CSI berupa vektor fitur deret pendek yang jauh lebih kecil daripada citra sehingga klasifikasi 5–8 kelas berada pada kelas kompleksitas yang lebih rendah daripada contoh-contoh tersebut. Meskipun demikian, karena belum ada publikasi tolok ukur model CSI-isyarat pada ESP32-S3, waktu inferensi aktual tetap diukur pada tahap "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": " (Subbab 3.7). Model murid dilatih dengan PyTorch pada layanan server GPU Kaggle, dikuantisasi int8, lalu dijalankan melalui TensorFlow Lite Micro atau ESP-DL dengan penyangga pada PSRAM."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.7 TTS dan ASR Bahasa Indonesia"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Purwarupa memerlukan dua teknologi ucapan: "
+    },
+    {
+     "text": "text-to-speech",
+     "italics": true
+    },
+    {
+     "text": " (TTS) untuk mengubah teks hasil pengenalan menjadi suara pada arah pertama, dan "
+    },
+    {
+     "text": "automatic speech recognition",
+     "italics": true
+    },
+    {
+     "text": " (ASR) untuk mengubah ucapan menjadi teks pada arah kedua. Kriteria pemilihannya ada tiga: dukungan Bahasa Indonesia yang terverifikasi dari sumber resmi, ketersediaan jalur awan dan jalur lokal, serta biaya yang berkelanjutan untuk prototipe. Audit teknologi dilakukan dengan memeriksa langsung "
+    },
+    {
+     "text": "model card",
+     "italics": true
+    },
+    {
+     "text": " resmi dan dokumentasi layanan (Subbab 2.7 ini) sehingga pilihan tidak didasarkan pada klaim pihak ketiga."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Untuk TTS, model ringan Kokoro-82M sering menjadi rujukan hemat sumber daya, tetapi "
+    },
+    {
+     "text": "model card",
+     "italics": true
+    },
+    {
+     "text": " resminya mencantumkan delapan bahasa dan 54 suara tanpa Bahasa Indonesia sehingga Kokoro tidak dapat dipakai [38]. Pilihan yang terverifikasi mendukung Indonesia ada tiga. Pertama, proyek Massively Multilingual Speech (MMS) menyediakan "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " TTS Bahasa Indonesia facebook/mms-tts-ind berbasis arsitektur VITS yang dapat diunduh dan dijalankan lokal dengan lisensi CC-BY-NC 4.0 [34], [35]. Kedua, layanan Google Cloud TTS menyediakan suara id-ID tingkat Standard dan Premium dengan biaya sekitar empat dolar AS per juta karakter untuk tingkat Standard setelah jatah gratis bulanan [36]. Ketiga, layanan Azure menyediakan suara neural Indonesia id-ID-GadisNeural dan id-ID-ArdiNeural [37]. Dalam penelitian ini, layanan awan menjadi jalur utama purwarupa, sedangkan TTS lokal MMS menjadi jalur cadangan saat koneksi internet tidak tersedia sekaligus pembanding mutu dan latensi; lisensi nonkomersial MMS dicatat sebagai batas pemakaian di luar penelitian."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Untuk ASR, Whisper adalah model terbuka yang dilatih pada lima juta jam data dan mendukung lebih dari 100 bahasa termasuk Indonesia [32]. Implementasi faster-whisper berbasis CTranslate2 mencatat tolok ukur pada GPU RTX 3070 Ti 8 GB yang sekelas dengan server penelitian ini. Pada tolok ukur tersebut, model large-v3 dalam mode int8 memakai sekitar 2,9 GB VRAM dan menyelesaikan 13 menit audio dalam 59 detik, atau sekitar tiga belas kali lebih cepat daripada waktu nyata [33]. Dengan anggaran 8 GB VRAM, server cadangan dapat menjalankan faster-whisper dan TTS MMS secara bersamaan. Layanan pengenal ucapan awan juga menyediakan dukungan Bahasa Indonesia [37]; pilihan jalur awan atau lokal ditetapkan dari uji banding pada T4 (Tabel 3.6). Tingkat galat kata Whisper untuk ucapan Indonesia pada domain percakapan pendek belum terverifikasi dari sumber primer sehingga akurasi kata pada pemakaian nyata diukur sendiri pada tahap pengujian (Subbab 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pada arah pertama, modul pemancar memancarkan bingkai bersama melalui ESP-NOW; gerak pengisyarat di zona isyarat mengubah amplitudo, fase, dan komponen Doppler pada deret CSI; modul penerima melakukan segmentasi, ekstraksi fitur, dan inferensi model int8 pada perangkat. Label beserta skor keyakinannya dipetakan menjadi teks Indonesia melalui kamus kecil pada modul, lalu teks dikirim ke layanan TTS awan dan audio hasilnya diputar pada "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": " modul. Segmen dengan skor di bawah ambang tidak diproses sebagai label, melainkan dilaporkan sebagai status penolakan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Alur arah kedua dimulai ketika tombol tekan-untuk-bicara pada modul mengaktifkan mikrofon. Ucapan ditangkap mikrofon, dikirim ke layanan ASR awan, dienali menjadi teks Indonesia, kemudian teks diproses untuk dipetakan ke representasi SIBI sebagaimana diuraikan pada Subbab 2.8. Saat koneksi internet tidak tersedia, kedua arah beralih ke server lokal yang menjalankan faster-whisper dan MMS. Latensi setiap komponen jalur ucapan, yaitu pengenalan, pemetaan, dan sintesis, diukur pada tahap pengujian operasional dan dibandingkan dengan indikator layak yang ditetapkan sebelum pengukuran (Tabel 3.6)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pembagian jalur awan dan server lokal ditetapkan sebagai berikut. Jalur ucapan purwarupa memakai layanan "
+    },
+    {
+     "text": "cloud",
+     "italics": true
+    },
+    {
+     "text": " berbahasa Indonesia sehingga modul hanya mengirim teks atau audio singkat dan tidak menjalankan pemrosesan bahasa; server lokal laptop menjadi jalur cadangan saat koneksi internet tidak tersedia sekaligus pembanding pengukuran. Latensi layanan ucapan awan dari Indonesia belum terdokumentasi pada sumber yang diinspeksi sehingga seluruh angka latensi diukur sendiri pada tahap pengujian dan tidak dijadikan dasar klaim apa pun sebelum terukur."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.8 Pemetaan Teks ke Representasi SIBI di Layar"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pemetaan teks Bahasa Indonesia menjadi representasi isyarat tidak dapat dilakukan dengan substitusi kata demi kata. Bahasa isyarat memiliki tata bahasa yang berbeda dari bahasa lisan, termasuk penggunaan ruang dan penanda nonmanual sehingga penerjemahan mesin bahasa isyarat tingkat kalimat masih menjadi masalah terbuka dalam literatur internasional [43]. Evaluasi avatar bahasa isyarat Jepang menunjukkan bahwa komponen "
+    },
+    {
+     "text": "mouthing",
+     "italics": true
+    },
+    {
+     "text": ", yaitu gerak mulut yang menyertai isyarat, merupakan isu kelas satu pada keterbacaan avatar [44]. Oleh karena itu, arah kedua purwarupa dirancang pada tingkat yang lebih rendah dan lebih dapat dipertanggungjawabkan, yaitu kamus kata-level dengan mekanisme ejaan jari sebagai cadangan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Struktur SIBI sendiri mendukung pendekatan bertingkat tersebut. SIBI memiliki alfabet manual satu tangan yang lengkap: sistem pembelajarannya mencakup 26 huruf A sampai Z dan 9 angka [13], sedangkan "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " riset citra statis hanya memuat 24 kelas huruf tanpa J dan Z karena keduanya melibatkan gerakan [73], [16]. SIBI juga memiliki kata berinfleksi: Rakun dkk. mengenali kata jadian SIBI dengan model "
+    },
+    {
+     "text": "Hidden Markov Model",
+     "italics": true
+    },
+    {
+     "text": " [74] dan karya lanjutannya mengurai komponen gestur kata berinfleksi tersebut [75]. Keberadaan struktur ini menandakan bahwa pemetaan teks ke isyarat SIBI secara sistematis mungkin dikembangkan lebih jauh, tetapi mekanisme lengkap pembentukan kata jadian belum terdokumentasi pada sumber yang dapat diakses penelitian ini sehingga tidak dirinci dalam rancangan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Preseden arah kedua di Indonesia berbentuk kamus kata-level. KASIBI memetakan setiap kata hasil pengenalan ucapan ke satu animasi peraga tiga dimensi [12], sedangkan OpenSIBI menyimpan model tiga dimensi format Collada pada API dan menganimasikannya di aplikasi; cakupan OpenSIBI hanya 50 kosakata dan penulisnya menyebut banyaknya kosakata sebagai keterbatasan utama [13]. Preseden internasional yang memadukan pengenalan dengan pembangkitan isyarat untuk pembelajaran telah ada sejak Sagawa dan Takeuchi [76]. Kedua preseden Indonesia menunjukkan dua fakta sekaligus: arah kedua secara teknis layak dibangun, dan biaya aset per isyarat adalah hambatan utama cakupan kosakata."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Berdasarkan bukti tersebut, tampilan arah kedua purwarupa dirancang dua lapis. Lapis utama menampilkan glos teks dan gambar konfigurasi tangan untuk kosakata yang tersedia, termasuk 26 huruf dan 9 angka; estimasi internal menunjukkan sekitar dua puluh hingga tiga puluh kilobita per gambar kecil sehingga himpunan aset tingkat ini muat di penyimpanan modul. Lapis kedua, yang diaktifkan bila waktu pengembangan memungkinkan, menampilkan animasi per isyarat yang dirender atau dialirkan dari server karena video tidak muat disimpan utuh pada memori modul. Kata yang tidak terdapat pada kamus dijatuhkan ke ejaan jari, yaitu urutan gambar huruf, sebagaimana semangat cakupan OpenSIBI yang menjadikan huruf sebagai bagian inti kosakata. Notasi tulis isyarat seperti SignWriting tidak dipakai karena tidak ditemukan penerapannya untuk SIBI dan keterbacaannya bagi pengguna awam rendah."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Dengan rancangan tersebut, keluaran arah kedua adalah representasi tingkat kata dan ejaan jari, bukan kalimat isyarat bertata bahasa lengkap. Cakupan kamus, yaitu proporsi kata uji yang terwakili representasi tersedia, diukur dan dilaporkan sebagai metrik utama arah ini (Subbab 3.8); penelitian ini tidak mengklaim cakupan kosakata kamus SIBI penuh karena angka kosakata kamus itu sendiri belum terverifikasi dari sumber yang layak kutip."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.9 Komunikasi Modul, Server, dan Topologi Jaringan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Seluruh komunikasi purwarupa berlangsung pada satu kanal Wi-Fi mengikuti kanal "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " sehingga modul dapat menjalankan penangkapan CSI dan komunikasi data secara serentak (Subbab 2.4). Sinkronisasi antarmodul memakai ESP-NOW yang memuat hingga 250 bita per paket [28]. Dari modul ke "
+    },
+    {
+     "text": "server",
+     "italics": true
+    },
+    {
+     "text": ", aliran data memakai UDP sebagaimana "
+    },
+    {
+     "text": "firmware",
+     "italics": true
+    },
+    {
+     "text": " RuView [28], sedangkan aliran audio dari mikrofon dan audio hasil TTS ke modul memakai protokol tingkat aplikasi yang dipilih pada tahap perancangan detail; dokumentasi resmi menyediakan contoh protokol tersebut pada platform ESP32 sehingga pemilihannya bukan risiko kelayakan, melainkan keputusan rekayasa."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Server lokal menjalankan komponen riset dan cadangan: "
+    },
+    {
+     "text": "server",
+     "italics": true
+    },
+    {
+     "text": " RuView untuk kalibrasi ruang dan pemrosesan sesi riset, faster-whisper dan TTS MMS sebagai jalur ucapan cadangan, serta penyimpan aset animasi arah kedua bila lapis animasi diaktifkan. Anggaran VRAM 8 GB pada mode cadangan tetap memadai karena faster-whisper int8 memakai sekitar 2,9 GB [33] dan model TTS MMS berukuran jauh lebih kecil. Jalur ucapan utama berupa layanan TTS dan ASR awan menempuh internet melalui "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " yang sama; kamus label-teks dimuat sebagai salinan kecil pada modul, sedangkan aset representasi kata tersimpan pada penyimpanan modul (Subbab 2.8). Laptop juga dapat berperan sebagai "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " melalui fitur hotspot ketika purwarupa berjalan penuh pada mode cadangan lokal."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.10 Evaluasi Kelayakan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Studi kelayakan digunakan untuk menilai apakah suatu pendekatan dapat dijalankan sebelum dikembangkan lebih jauh [77]. Dalam penelitian ini, kelayakan dinilai bertahap melalui gerbang keputusan G0–G4 (BAB III). Kriteria gerbang yang menyangkut kinerja klasifikasi dirumuskan relatif terhadap peluang acak, bukan sebagai target akurasi. Setiap tahap menghasilkan artefak tetap berupa laporan karakterisasi sinyal, protokol perekaman, "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " berlabel, model ter-"
+    },
+    {
+     "text": "deploy",
+     "italics": true
+    },
+    {
+     "text": ", atau laporan kelayakan sehingga kegagalan pada suatu gerbang tetap dilaporkan sebagai temuan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kinerja klasifikasi diukur dengan akurasi, presisi, "
+    },
+    {
+     "text": "recall",
+     "italics": true
+    },
+    {
+     "text": ", skor F1 makro, dan "
+    },
+    {
+     "text": "confusion matrix",
+     "italics": true
+    },
+    {
+     "text": " per isyarat [78]. Skor F1 makro merata-ratakan skor setiap isyarat tanpa pembobotan sehingga setiap isyarat berbobot sama, sedangkan "
+    },
+    {
+     "text": "confusion matrix",
+     "italics": true
+    },
+    {
+     "text": " memperlihatkan pasangan isyarat yang saling tertukar. Setiap metrik dilaporkan bersama peluang acak, yaitu satu dibagi jumlah kelas. Pengujian mencakup skenario dalam sesi, lintas sesi, lintas partisipan, dan lintas ruang; pembagian acak tidak dipakai pada skenario dalam sesi karena repetisi yang berurutan cenderung mirip sehingga informasi dapat bocor dari data latih ke data uji."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kelayakan purwarupa sebagai alat komunikasi dinilai dari tiga dimensi tambahan di luar klasifikasi. Pertama, latensi ujung ke ujung diukur untuk setiap arah, yaitu selang dari selesainya isyarat hingga suara tampil pada arah pertama dan selang dari selesainya ucapan hingga representasi tampil pada arah kedua. Kedua, cakupan kamus arah kedua diukur sebagai proporsi kata uji yang terwakili. Ketiga, keandalan operasional ditinjau dari laju deteksi palsu per jam saat tidak ada isyarat dan konsumsi arus modul sebagai indikator ketahanan baterai. Persepsi pengguna diukur dengan kuesioner skala Likert [79] dan dianalisis secara deskriptif tanpa statistik inferensial, sedangkan kewajaran keluaran sistem dinilai validator penutur tunarungu."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.11 Penelitian Terdahulu"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Penelitian ini disusun dengan mempertimbangkan penelitian terdahulu pada empat topik, yaitu pengenalan bahasa isyarat dari sinyal Wi-Fi, kepekaan CSI terhadap gerak halus, transfer visi ke Wi-Fi, dan sistem isyarat SIBI atau BISINDO di Indonesia pada kedua arah. Tabel 2.2 membandingkan penelitian tersebut berdasarkan modalitas, arah kerja, bahasa isyarat, kebebasan dari kamera saat sistem dipakai, dan fokus penelitian."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 2.2 Perbandingan penelitian terdahulu",
+   "header": [
+    "No.",
+    "Peneliti (Tahun)",
+    "Modalitas dan arah",
+    "Bahasa isyarat",
+    "Bebas kamera saat dipakai",
+    "Fokus penelitian"
+   ],
+   "rows": [
+    [
+     "1",
+     "Ma dkk. (2018) [21]",
+     "CSI; isyarat menjadi teks",
+     "ASL, 276 isyarat",
+     "Ya",
+     "Pengenalan isyarat berskala besar"
+    ],
+    [
+     "2",
+     "Zhang dkk. (2020) [24]",
+     "CSI; isyarat menjadi teks",
+     "ASL, kalimat kontinu",
+     "Ya",
+     "Pengenalan kalimat kontinu"
+    ],
+    [
+     "3",
+     "Shang dan Wu (2017) [65]",
+     "Wi-Fi multi-perangkat; isyarat menjadi teks",
+     "Tidak disebutkan",
+     "Ya",
+     "Ketangguhan sistem"
+    ],
+    [
+     "4",
+     "Ahmed dkk. (2020) [22]",
+     "CSI; isyarat menjadi teks",
+     "49 gestur",
+     "Ya",
+     "Pengenalan tanpa perangkat dikenakan"
+    ],
+    [
+     "5",
+     "Baldeo dkk. (2024) [23]",
+     "CSI; isyarat menjadi teks",
+     "Filipino Sign Language",
+     "Ya",
+     "Pengenalan bahasa isyarat"
+    ],
+    [
+     "6",
+     "Ali dkk. (2015) [25]",
+     "CSI; ketukan menjadi identitas tombol",
+     "Bukan bahasa isyarat",
+     "Ya",
+     "Bukti kepekaan gerak jari"
+    ],
+    [
+     "7",
+     "Mosleh dkk. (2022) [26]",
+     "CSI; pola napas",
+     "Bukan bahasa isyarat",
+     "Ya",
+     "Bukti kepekaan gerak milimeter"
+    ],
+    [
+     "8",
+     "Wang dkk. (2019) [63]",
+     "Wi-Fi dengan supervisi kamera saat pelatihan",
+     "Bukan bahasa isyarat",
+     "Ya",
+     "Persepsi tubuh dari Wi-Fi"
+    ],
+    [
+     "9",
+     "Geng dkk. (2023) [64]",
+     "Wi-Fi dengan jaringan visi sebagai guru",
+     "Bukan bahasa isyarat",
+     "Ya",
+     "Pose padat per bagian tubuh"
+    ],
+    [
+     "10",
+     "Dwijayanti dkk. (2021) [15]",
+     "Citra; isyarat menjadi teks",
+     "BISINDO (huruf dan angka)",
+     "Tidak",
+     "CNN pengenalan citra"
+    ],
+    [
+     "11",
+     "Kindy dkk. (2025) [51]",
+     "Video; isyarat menjadi teks",
+     "BISINDO tingkat kata",
+     "Tidak",
+     "Dataset dan baseline"
+    ],
+    [
+     "12",
+     "Wiguna dan Rojali (2025) [52]",
+     "Video; isyarat menjadi teks",
+     "BISINDO tingkat kalimat",
+     "Tidak",
+     "Pengenalan kalimat"
+    ],
+    [
+     "13",
+     "Soekarta dkk. (2024) [16]",
+     "Citra; isyarat menjadi teks",
+     "SIBI, 24 huruf statis",
+     "Tidak",
+     "Aplikasi Android berbasis MediaPipe"
+    ],
+    [
+     "14",
+     "Zikky dan Akbar (2019) [12]",
+     "Suara menjadi animasi 3D",
+     "SIBI",
+     "Ya",
+     "Kamus suara-isyarat"
+    ],
+    [
+     "15",
+     "Fatmawati dkk. (2022) [13]",
+     "Suara menjadi animasi 3D",
+     "SIBI, 50 kosakata",
+     "Ya",
+     "Aplikasi pembelajaran OpenSIBI"
+    ],
+    [
+     "16",
+     "Rakun dkk. (2015) [74]",
+     "Citra; isyarat menjadi teks",
+     "SIBI, kata berinfleksi",
+     "Tidak",
+     "HMM kata jadian SIBI"
+    ],
+    [
+     "17",
+     "Penelitian ini",
+     "CSI dua-tiga modul ESP32-S3, distilasi guru–murid YOLO26-Pose ke CSI, inferensi tepi; dua arah",
+     "SIBI",
+     "Ya",
+     "Purwarupa penerjemah dua arah kosakata terbatas"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tabel 2.2 memperlihatkan empat kelompok penelitian. Kelompok pertama mengenali bahasa isyarat dari sinyal Wi-Fi [21], [24], [65], [22], [23] dan membuktikan bahwa isyarat dapat dikenali tanpa kamera saat sistem dipakai, termasuk pengenalan kalimat kontinu oleh WiSign [24]; kelompok ini tidak menjangkau SIBI dan tidak memadukan hasilnya dengan jalur pemrosesan bahasa. Kelompok kedua membuktikan kepekaan CSI terhadap gerak halus [25], [26] sehingga asumsi kelayakan penginderaan gerak lengan memiliki dasar, tetapi keduanya bukan sistem isyarat. Kelompok ketiga memindahkan pengetahuan visi ke Wi-Fi [63], [64] dan menjadi preseden langsung distilasi guru–murid pada penelitian ini: kamera hanya aktif saat akuisisi data dan pelatihan, sedangkan perangkat akhir mengenali isyarat dari CSI saja. Kelompok keempat menjangkau SIBI dan BISINDO [15], [51], [52], [16], [74], tetapi hampir seluruhnya berbasis kamera pada arah isyarat menjadi teks; hanya dua kamus suara menjadi animasi yang bekerja pada arah balik [12], [13] dan keduanya satu arah dengan kosakata sangat terbatas."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Dalam batas penelusuran literatur penelitian ini, belum ditemukan publikasi yang mengenali isyarat SIBI dari CSI maupun purwarupa penerjemah dua arah yang memadukan penginderaan CSI dengan TTS dan ASR Bahasa Indonesia pada perangkat ESP32-S3. Penelusuran tersebut mencakup Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 dengan kata kunci bahasa Inggris dan bahasa Indonesia (Subbab 1.1). Kebaruan penelitian ini dengan demikian bersifat kombinatif, yaitu menggabungkan penginderaan CSI satu tautan antarmodul untuk SIBI, distilasi guru–murid dari YOLO26-Pose ke model CSI, inferensi pada perangkat, dan integrasi dua arah dengan pemrosesan bahasa Indonesia berbasis layanan awan. Penelitian ini tidak mengklaim kebaruan pada pengenalan kontinu yang telah dijangkau WiSign untuk ASL [24]. Penelitian ini juga tidak mengklaim kebaruan pada arah balik kata-level yang telah dibangun KASIBI dan OpenSIBI [12], [13] maupun penerjemahan kalimat penuh yang masih menjadi masalah terbuka [43]."
+    }
+   ]
+  }
+ ],
+ "bab3": [
+  {
+   "t": "h1",
+   "text": "BAB III METODE PENELITIAN"
+  },
+  {
+   "t": "h2",
+   "text": "3.1 Desain Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Penelitian ini dirancang sebagai studi kelayakan kuantitatif bergerbang yang menghasilkan purwarupa penerjemah dua arah. Bagian kuantitatif mengukur sejauh mana Wi-Fi CSI dari tautan antarmodul ESP32-S3 dapat membedakan 5–8 isyarat SIBI terisolasi. Bagian itu juga mengukur sejauh mana model terkuantisasi berjalan pada perangkat serta sejauh mana jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI bekerja pada skenario yang ditetapkan. Setelah komponen diuji, purwarupa dikemas lalu dikaji kelayakannya sebagai alat bantu komunikasi kosakata terbatas melalui uji operasional, uji kegunaan skala kecil, dan penilaian validator penutur tunarungu. Struktur bergerbang dipilih karena kemampuan CSI membedakan isyarat SIBI belum dapat dipastikan sebelum data dikumpulkan; setiap tahap menghasilkan artefak tetap, kegagalan gerbang dicatat sebagai temuan, dan kriteria akurasi dirumuskan relatif terhadap peluang acak (Subbab 2.10). Inti metodologi pelatihannya berbentuk distilasi guru–murid. Model guru kamera YOLO26-Pose mengekstrak deret pose gerakan SIBI dari video perekaman; deret tersebut menjadi supervisi tambahan bagi model murid yang mengenali isyarat dari jendela CSI dan berjalan langsung pada modul (Subbab 3.7)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Rumusan masalah pertama dijawab pada tahap replikasi platform, perancangan arsitektur, kurasi isyarat dan protokol, serta penerapan distilasi guru–murid. Rumusan masalah kedua dijawab melalui uji klasifikasi, uji "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": ", dan uji jalur bahasa pada tahap perekaman dan generalisasi. Rumusan masalah ketiga ditinjau melalui uji operasional, uji kegunaan, dan penilaian validator pada tahap pengemasan purwarupa."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.2 Tahapan Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Penelitian berlangsung selama empat belas minggu (M1–M14) dalam enam tahap. Tahapan dimulai dari replikasi platform dan uji karakterisasi (T0), kemudian kurasi isyarat dan protokol (T1), perekaman "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " serta pelatihan guru–murid (T2), uji generalisasi (T3), pengemasan purwarupa dua arah dan uji kegunaan (T4), hingga analisis dan penulisan (T5). Lima tahap pertama ditutup gerbang keputusan G0–G4 seperti ditunjukkan pada Gambar 3.1. Kriteria lolos dan tindakan bila gagal direncanakan ditetapkan sebelum gerbang terkait dinilai; parameter yang belum ditetapkan dihimpun pada Tabel 3.6."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.1 Tahapan penelitian T0–T5 dengan gerbang keputusan G0–G4",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.1.png"
+  },
+  {
+   "t": "h3",
+   "text": "3.2.1 Tahap T0: Replikasi Platform dan Uji Karakterisasi (M1–M2)"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Dua modul ESP32-S3 disiapkan dengan "
+    },
+    {
+     "text": "firmware",
+     "italics": true
+    },
+    {
+     "text": " RuView [28], lalu "
+    },
+    {
+     "text": "pipeline",
+     "italics": true
+    },
+    {
+     "text": " akuisisi tersinkron diuji tanpa partisipan. Tiga uji dilakukan pada tahap ini. Pertama, uji Delta-CSI (Subbab 3.8.1) untuk mengetahui apakah pola CSI saat bergerak terpisah dari kondisi diam dan ruang kosong. Kedua, uji koeksistensi radio: modul penerima dijalankan dengan penangkapan CSI, koneksi "
+    },
+    {
+     "text": "station",
+     "italics": true
+    },
+    {
+     "text": " ke "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": ", dan pengiriman UDP secara serentak, lalu laju CSI aktual dan kehilangan paket diukur, termasuk ketika streaming audio dari mikrofon diaktifkan. Ketiga, pengukuran laju pencuplikan aktual sebagai dasar penetapan pita Doppler (Subbab 3.7.1). Keluaran tahap ini adalah laporan karakterisasi sinyal sebagai bahan G0."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.2.2 Tahap T1: Kurasi Isyarat, Kalibrasi Ruang, dan Protokol (M2–M4)"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "T1 mencakup kurasi 5–8 isyarat bersama validator penutur tunarungu, kalibrasi ruang mitra, penyusunan protokol perekaman dan etika, serta perizinan (Subbab 3.6). Kurasi juga menetapkan himpunan tampilan arah kedua, yaitu isyarat terpilih ditambah 26 huruf dan 9 angka sebagai kosakata ejaan jari (Subbab 2.8). G1 menguji separabilitas awal 2–3 isyarat dengan uji "
+    },
+    {
+     "text": "nearest-centroid",
+     "italics": true
+    },
+    {
+     "text": " sederhana yang rata-ratanya dihitung tanpa repetisi yang sedang diuji."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.2.3 Tahap T2: Perekaman Dataset, Pelatihan Guru–Murid, dan Uji Deployment (M4–M8)"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Dataset",
+     "italics": true
+    },
+    {
+     "text": " direkam dengan kurang lebih 30 repetisi per isyarat per sesi disertai video tersinkron (Subbab 3.6). Alur pelatihan pada tahap ini berbentuk distilasi guru–murid yang ditunjukkan pada Gambar 3.2. Model guru YOLO26-Pose dilatih lanjutan pada data visual SIBI di layanan server GPU Kaggle, lalu kualitas "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": "-nya dievaluasi sebelum dipakai (Subbab 3.7.4). Jendela CSI, label kelas dari anotasi protokol, dan deret pose guru diselaraskan berdasarkan penanda waktu untuk membentuk "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " murid; kemudian murid 1D-CNN dilatih dengan supervisi label dan deret pose guru (Subbab 3.7.5). Dua pembanding dilatih pada data yang sama, yaitu SVM dan murid ablasi tanpa supervisi guru. Setelah pelatihan, model terpilih dikuantisasi int8, di-"
+    },
+    {
+     "text": "deploy",
+     "italics": true
+    },
+    {
+     "text": " ke modul penerima, lalu diukur waktu inferensi dan pemakaian memorinya pada laju bingkai aktual. Keluaran T2 adalah "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " murid berlabel, model guru dan murid terlatih, serta laporan "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": "; bila G2 gagal, cakupan dipangkas menjadi 3–5 isyarat yang pembedanya paling bertumpu pada lintasan (Tabel 3.6)."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.2 Alur pelatihan guru–murid dari perekaman tersinkron hingga deployment",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.2.png"
+  },
+  {
+   "t": "h3",
+   "text": "3.2.4 Tahap T3: Uji Generalisasi (M8–M10)"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Model mudah "
+    },
+    {
+     "text": "overfitting",
+     "italics": true
+    },
+    {
+     "text": " pada orang dan ruang tempat data latih direkam [39] sehingga model diuji lintas sesi, lintas partisipan, lintas ruang, dan pada satu pengguna baru tanpa pelatihan ulang (Subbab 3.7.6). Strategi lintas domain Widar3.0 [40] dijadikan acuan tanpa mengasumsikan hasil yang sama pada isyarat SIBI. Bila G3 gagal, cakupan menjadi personalisasi per pengguna yang memerlukan data latih singkat dari setiap pengguna dan perubahan itu dilaporkan sebagai temuan."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.2.5 Tahap T4: Pengemasan Purwarupa Dua Arah dan Uji Kegunaan (M10–M12)"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Model murid yang telah berjalan di modul dikemas menjadi purwarupa dua arah (Subbab 3.5) dengan mengaktifkan layanan ucapan awan pada kedua arah. Pengemasan menambahkan tombol tekan-untuk-bicara dan rotary encoder volume pada modul pengguna, pemetaan teks ke representasi SIBI, serta tampilan layar modul dan pemutaran audio pada "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": ". Selanjutnya dilakukan uji operasional, uji jalur ucapan, uji cakupan kamus, uji kegunaan dengan 3–5 pengguna, dan penilaian validator (Subbab 3.8). G4 menilai kelengkapan data uji dan persetujuan validator atas kewajaran keluaran."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.2.6 Tahap T5: Analisis dan Penulisan (M12–M14)"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Seluruh artefak dianalisis dan disusun menjadi laporan kelayakan beserta rekomendasi berdasarkan gerbang yang lolos dan yang gagal. Laporan memuat keterbatasan secara eksplisit, yaitu konfigurasi jari dan ekspresi wajah tidak dikenali, arah kedua berbentuk kamus kata-level dan ejaan jari, serta seluruh klaim terikat pada kosakata terbatas (Subbab 1.4)."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.3 Waktu dan Lokasi Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Penelitian dilaksanakan pada "
+    },
+    {
+     "text": "[PERLU DATA: bulan dan tahun pelaksanaan penelitian]",
+     "highlight": true
+    },
+    {
+     "text": " di "
+    },
+    {
+     "text": "[PERLU DATA: nama sekolah/lembaga mitra]",
+     "highlight": true
+    },
+    {
+     "text": ". Perekaman dan pengujian dilakukan di sedikitnya dua ruang, yaitu jumlah minimum bagi skema "
+    },
+    {
+     "text": "leave-one-room-out",
+     "italics": true
+    },
+    {
+     "text": ", dan setiap ruang dikalibrasi sebelum perekaman (Subbab 3.5.4). Penyiapan sistem secara mandiri oleh pengguna di luar lembaga mitra berada di luar cakupan."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.4 Alat dan Bahan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Perangkat keras penelitian disajikan pada Tabel 3.1. Dua modul ESP32-S3 berperan sebagai modul pemancar dan modul penerima, sedangkan modul ketiga direncanakan sebagai modul pengguna yang memuat layar, "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": ", mikrofon, tombol tekan-untuk-bicara, dan rotary encoder volume; pemakaian dua atau tiga modul ditetapkan sesuai hasil uji beban pada T0."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.1 Perangkat keras penelitian",
+   "header": [
+    "No.",
+    "Nama",
+    "Spesifikasi",
+    "Jumlah",
+    "Keterangan"
+   ],
+   "rows": [
+    [
+     "1",
+     "Modul ESP32-S3",
+     "Papan pengembangan ESP32-S3 dengan PSRAM, varian yang direkomendasikan RuView [28]",
+     "3 unit",
+     "Modul TX, modul RX, dan modul pengguna (dapat dipakai bergilir dengan cadangan)"
+    ],
+    [
+     "2",
+     "Layar modul",
+     "Layar SPI/TFT kecil (1,8–2,8 inci) [PERLU DATA: model final]",
+     "1–2 unit",
+     "Tampilan representasi SIBI pada modul pengguna"
+    ],
+    [
+     "3",
+     "Antarmuka audio modul",
+     "Mikrofon I2S dan *speaker* dengan penguat I2S; contoh model yang umum adalah INMP441 dan MAX98357A [PERLU DATA: model final]",
+     "1 set",
+     "Pintu suara arah kedua dan pemutaran TTS"
+    ],
+    [
+     "4",
+     "Tombol dan rotary encoder",
+     "Tombol sesaat untuk mengaktifkan mikrofon dan rotary encoder untuk pengaturan volume *speaker*",
+     "1 set",
+     "Antarmuka pengguna pada modul pengguna"
+    ],
+    [
+     "5",
+     "Baterai modul",
+     "Baterai Li-ion atau Li-Po dengan regulator daya [PERLU DATA: kapasitas target berdasarkan hasil uji arus]",
+     "1–2 set",
+     "Ketahanan modul diukur pada uji operasional"
+    ],
+    [
+     "6",
+     "Laptop",
+     "ASUS TUF Dash F15 FX516PR: Intel Core i7-11370H, RTX 3070 Laptop 8 GB VRAM, RAM 16 GB",
+     "1 unit",
+     "Mesin akuisisi jalur guru, pengembangan, dan server lokal cadangan"
+    ],
+    [
+     "7",
+     "*Access point*",
+     "Router Wi-Fi 2,4 GHz dengan akses internet atau fitur hotspot laptop [PERLU DATA: pilihan final]",
+     "1 unit",
+     "Seluruh modul berada pada satu kanal; akses internet menopang layanan ucapan awan"
+    ],
+    [
+     "8",
+     "*Webcam*",
+     "Bawaan laptop",
+     "1 unit",
+     "Hanya menyala pada jalur guru saat akuisisi dan pelatihan"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Perangkat lunak penelitian disajikan pada Tabel 3.2. Versi setiap perangkat lunak dicatat bersama log konfigurasi pelatihan agar eksperimen dapat diulang."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.2 Perangkat lunak penelitian",
+   "header": [
+    "No.",
+    "Nama",
+    "Fungsi dalam penelitian"
+   ],
+   "rows": [
+    [
+     "1",
+     "*Firmware* dan *server* RuView",
+     "Menangkap CSI pada modul, mengirimkannya melalui UDP, mengalibrasi ruang, dan menyegmentasi deret saat riset"
+    ],
+    [
+     "2",
+     "`scripts/collect-ground-truth.py` (ADR-079, diadaptasi)",
+     "Menyinkronkan akuisisi kamera dan CSI; estimator pose asli diganti YOLO26-Pose"
+    ],
+    [
+     "3",
+     "Model guru YOLO26-Pose",
+     "Mengekstrak deret 17 *keypoint* format COCO pada jalur guru; hasilnya menjadi supervisi tambahan pelatihan murid dan dasar penyaringan segmen"
+    ],
+    [
+     "4",
+     "Layanan server GPU Kaggle",
+     "Melatih model guru YOLO26-Pose dan model murid CSI"
+    ],
+    [
+     "5",
+     "Python, scikit-learn, PyTorch",
+     "Ekstraksi fitur, pelatihan SVM dan murid 1D-CNN, serta evaluasi"
+    ],
+    [
+     "6",
+     "TensorFlow Lite Micro dan ESP-DL",
+     "Menjalankan murid int8 pada modul penerima"
+    ],
+    [
+     "7",
+     "faster-whisper",
+     "ASR Bahasa Indonesia cadangan pada server lokal dan pembanding jalur awan"
+    ],
+    [
+     "8",
+     "MMS-TTS-ind",
+     "TTS Bahasa Indonesia cadangan pada server lokal dan pembanding jalur awan"
+    ],
+    [
+     "9",
+     "Layanan TTS awan",
+     "Jalur utama sintesis pada arah pertama [PERLU DATA: layanan final hasil uji banding]"
+    ],
+    [
+     "10",
+     "Layanan ASR awan",
+     "Jalur utama pengenalan ucapan pada arah kedua [PERLU DATA: layanan final hasil uji banding]"
+    ],
+    [
+     "11",
+     "Kamus label-teks dan teks-isyarat",
+     "Dikembangkan sendiri sebagai bagian purwarupa; salinan kamus label-teks dimuat pada modul"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Bahan penelitian meliputi "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " CSI beserta deret pose guru hasil perekaman sendiri, lembar definisi isyarat, aset tampilan arah kedua (gambar huruf, angka, dan isyarat terpilih), formulir persetujuan partisipan, instrumen uji, serta kuesioner persepsi. "
+    },
+    {
+     "text": "Dataset",
+     "italics": true
+    },
+    {
+     "text": " direkam sendiri karena penelitian yang mengenali isyarat SIBI dari CSI belum ditemukan dalam penelusuran literatur (Subbab 2.11)."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.5 Perancangan Sistem"
+  },
+  {
+   "t": "h3",
+   "text": "3.5.1 Arsitektur Dua Arah"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Sistem dirancang dalam dua jalur operasional tanpa kamera dan satu jalur guru yang hanya aktif saat akuisisi data dan pelatihan, seperti ditunjukkan pada Gambar 3.3. Pada jalur arah pertama, modul pemancar memancarkan bingkai bersama; gerak pengisyarat mengubah deret CSI pada modul penerima; model murid int8 berjalan pada modul dan menghasilkan label beserta skor keyakinan; label dipetakan menjadi teks Indonesia melalui kamus kecil pada modul; teks tampil di layar modul pengguna, lalu dikirim ke layanan TTS awan; audio hasil sintesis diputar pada "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": " modul dengan volume yang diatur rotary encoder. Pada jalur arah kedua, tombol tekan-untuk-bicara pada modul pengguna mengaktifkan mikrofon; ucapan dikirim ke layanan ASR awan; teks hasil pengenalan tampil di layar, lalu dipetakan ke representasi SIBI dari aset yang tersimpan pada modul (Subbab 2.8). Saat koneksi internet tidak tersedia, kedua jalur beralih ke server lokal laptop yang menjalankan MMS-TTS-ind dan faster-whisper sebagai cadangan. Jalur guru memakai "
+    },
+    {
+     "text": "webcam",
+     "italics": true
+    },
+    {
+     "text": " dan YOLO26-Pose untuk mengekstrak deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " yang menjadi supervisi tambahan pelatihan murid serta dasar penyaringan segmen; jalur ini bukan bagian produk akhir."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.3 Arsitektur produk akhir tanpa kamera",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.3.png"
+  },
+  {
+   "t": "h3",
+   "text": "3.5.2 Topologi Modul dan Jaringan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Topologi jaringan purwarupa ditunjukkan pada Gambar 3.4. Seluruh perangkat, yaitu 2–3 modul dan server laptop, terhubung ke satu "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " pada kanal yang sama sehingga penangkapan CSI dan komunikasi data berjalan serentak (Subbab 2.4). "
+    },
+    {
+     "text": "Access point",
+     "italics": true
+    },
+    {
+     "text": " tersebut juga menyediakan akses internet yang menopang layanan ucapan awan pada kedua arah. Modul pemancar dan modul penerima berkomunikasi melalui ESP-NOW untuk bingkai bersama, modul penerima mengirim label dan skor melalui UDP sebagai telemetri riset, dan modul pengguna mengirim teks atau audio singkat ke layanan ucapan awan. Server lokal menjalankan "
+    },
+    {
+     "text": "server",
+     "italics": true
+    },
+    {
+     "text": " RuView untuk keperluan riset serta faster-whisper dan TTS MMS sebagai jalur ucapan cadangan; kamus label-teks dimuat sebagai salinan kecil pada modul. Laptop dapat berperan sebagai "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " melalui hotspot ketika purwarupa berjalan penuh pada mode cadangan lokal tanpa layanan awan."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.4 Topologi perangkat, komunikasi antarmodul, layanan awan, dan server",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.4.png"
+  },
+  {
+   "t": "h3",
+   "text": "3.5.3 Penempatan Modul dan Zona Isyarat"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Modul pemancar dan modul penerima dipasang pada dudukan setinggi dada pengisyarat dan mengapit zona isyarat agar gerak lengan dan tubuh atas berada di antara keduanya; kesesuaiannya diperiksa melalui uji Delta-CSI. Zona isyarat hanya ditempati satu pengisyarat dalam setiap sesi dan sistem tidak mengidentifikasi individu. Jarak antarmodul, ukuran zona, dan penempatan modul pengguna ditetapkan pada T0 dan dicatat dalam metadata sesi (Tabel 3.6)."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.5.4 Kalibrasi Ruang"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Setiap sesi diawali kalibrasi ruang bawaan RuView selama kurang lebih empat menit dengan 600 bingkai dan 8 "
+    },
+    {
+     "text": "anchor",
+     "italics": true
+    },
+    {
+     "text": " karena CSI peka terhadap perubahan kondisi ruang [28], [39]. Posisi perabot, kipas angin atau pendingin ruangan yang menyala, dan orang yang lewat dicatat sebagai kovariat untuk menganalisis perbedaan kinerja antarsesi dan antarruang."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.6 Protokol Perekaman Dataset, Partisipan, dan Etika"
+  },
+  {
+   "t": "h3",
+   "text": "3.6.1 Partisipan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Partisipan terdiri atas 3–4 pengisyarat kompeten, sedikitnya satu validator penutur tunarungu, dan 3–5 pengguna uji. Pengisyarat kompeten adalah guru atau pembina SIBI yang memperagakan isyarat untuk "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": "; validator menentukan pemilihan kosakata, memeriksa sampel segmen, dan menilai kewajaran keluaran purwarupa; pengguna uji mencoba purwarupa dua arah pada uji kegunaan. Kriteria inklusi dan rekrutmen tercantum pada Tabel 3.6. Setiap pengisyarat direkam dalam sedikitnya dua sesi agar skema lintas sesi dapat dijalankan, dan skema lintas ruang hanya memisahkan pengaruh ruang dari pengaruh orang bila pengisyarat yang sama direkam di setiap ruang."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.6.2 Kurasi Isyarat dan Kosakata Tampilan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Isyarat pengenalan dipilih melalui dua saringan (Subbab 1.4) dengan acuan "
+    },
+    {
+     "text": "Kamus SIBI",
+     "italics": true
+    },
+    {
+     "text": " [45], sedangkan kosakata tampilan arah kedua mencakup isyarat terpilih tersebut ditambah 26 huruf dan 9 angka sebagai landasan ejaan jari [13]. Hasilnya adalah daftar 5–8 isyarat terisolasi "
+    },
+    {
+     "text": "[PERLU DATA: daftar isyarat SIBI terpilih]",
+     "highlight": true
+    },
+    {
+     "text": " yang dideskripsikan dalam lembar definisi isyarat sebagai acuan perekaman dan penilaian."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.6.3 Prosedur Perekaman"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Perekaman memakai "
+    },
+    {
+     "text": "elisitasi",
+     "italics": true
+    },
+    {
+     "text": " terisolasi, yaitu satu isyarat per segmen dengan jeda antarrepetisi. Adapun prosedur perekaman setiap sesi adalah sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Menyiapkan peralatan yang digunakan."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Memasang modul pemancar dan modul penerima, lalu menghubungkan seluruh perangkat ke "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " pada satu kanal."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Menjalankan kalibrasi ruang dan mencatat metadata sesi, yaitu tanggal, ruang, kode pengisyarat, posisi modul, dan kondisi latar."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Menjalankan "
+    },
+    {
+     "text": "scripts/collect-ground-truth.py",
+     "code": true
+    },
+    {
+     "text": " agar perekaman CSI dan "
+    },
+    {
+     "text": "webcam",
+     "italics": true
+    },
+    {
+     "text": " tersinkron."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "5.",
+   "runs": [
+    {
+     "text": "Menampilkan kartu pemandu isyarat target, merekam satu repetisi, memberi jeda, dan mengulanginya hingga setiap isyarat mencapai kurang lebih 30 repetisi."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "6.",
+   "runs": [
+    {
+     "text": "Membuang segmen bila orang tidak terdeteksi YOLO26-Pose, "
+    },
+    {
+     "text": "jitter",
+     "italics": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " ekstrem, atau segmen terpotong, lalu mencatat tingkat segmen terbuang per isyarat dan per pengisyarat."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "7.",
+   "runs": [
+    {
+     "text": "Meminta validator mengambil sampel segmen untuk memeriksa kebenaran bentuk isyarat yang diperagakan."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.6.4 Etika Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Perekaman dimulai setelah persetujuan institusi mitra dan persetujuan tertulis setiap partisipan diperoleh "
+    },
+    {
+     "text": "[PERLU DATA: lembaga atau komisi pemberi persetujuan etik]",
+     "highlight": true
+    },
+    {
+     "text": ". Partisipan berhak mengundurkan diri kapan saja tanpa konsekuensi. Formulir persetujuan menyatakan bahwa kamera hanya menyala pada sesi akuisisi dan pelatihan jalur guru, bahwa produk akhir bebas kamera, dan bahwa mode privasi RuView aktif selama penelitian. Video hanya dipakai untuk verifikasi batas segmen, penyaringan kualitas, dan diagnosis; video disimpan terbatas dan tidak dipublikasikan. Audio ucapan pada arah kedua dikirim ke layanan awan sehingga tujuan pengiriman tersebut diungkapkan pada formulir persetujuan dan kebijakan penyimpanan layanan final diperiksa sebelum layanan dipakai. "
+    },
+    {
+     "text": "Dataset",
+     "italics": true
+    },
+    {
+     "text": " publik hanya memuat CSI, label, dan "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " tanpa identitas partisipan. Token apresiasi validator tercantum pada Tabel 3.6."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.7 Pengolahan Sinyal, Ekstraksi Fitur, Pelatihan Guru–Murid, dan Deployment"
+  },
+  {
+   "t": "h3",
+   "text": "3.7.1 Laju Pencuplikan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Firmware",
+     "italics": true
+    },
+    {
+     "text": " RuView membatasi pengiriman bingkai CSI paling sering setiap 20 ms sehingga laju maksimumnya 50 bingkai per detik [28]; laju aktual diukur pada T0. Pita Doppler 1–60 Hz hanya terwakili bila laju pencuplikan sedikitnya 120 Hz (Subbab 2.3). Bila laju terukur lebih rendah, pita yang dianalisis dibatasi hingga setengah laju aktual dan pembatasan itu dilaporkan."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.7.2 Segmentasi"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Deret CSI dipotong menjadi segmen isyarat dengan segmentasi berbasis energi gerak RuView [28]. Batas segmen diverifikasi dengan deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " hanya selama perekaman "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": "; pada purwarupa, segmentasi berjalan pada modul tanpa kamera."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.7.3 Ekstraksi Fitur"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Fitur setiap segmen terdiri atas amplitudo dan fase "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " terpilih yang saling melengkapi [54], spektrum Doppler pada pita yang ditetapkan setelah T0 [40], serta statistik ringkas berupa energi, entropi, dan lintasan puncak [20]. Kriteria pemilihan "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " dan definisi lintasan puncak tercantum pada Tabel 3.6. Fitur diringkas menjadi satu vektor untuk SVM dan disusun sebagai deret per langkah waktu untuk 1D-CNN."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.7.4 Model Guru Kamera YOLO26-Pose"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Distilasi pengetahuan merupakan teknik melatih model murid yang ringan agar meniru keluaran atau representasi model guru yang lebih kuat [80]. Metode ini dipilih karena CSI tidak memuat citra tubuh sehingga posisi tubuh tidak dapat dilabeli langsung dari data CSI, sedangkan kamera memilikinya secara alami; preseden pemindahan pengetahuan visi ke model Wi-Fi telah ada pada Person-in-WiFi [63] dan DensePose from WiFi [64] (Subbab 2.5). Dalam penelitian ini, YOLO26-Pose berperan sebagai model guru kamera yang mengekstrak deret 17 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " format COCO dari video perekaman dan hasilnya menjadi supervisi tambahan bagi model murid CSI."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Guru dilatih lanjutan ("
+    },
+    {
+     "text": "fine-tuning",
+     "italics": true
+    },
+    {
+     "text": ") pada data visual SIBI hasil perekaman T2 dan pelatihannya dijalankan pada layanan server GPU Kaggle. Pelatihan lanjutan dipilih agar deteksi orang dan kestabilan "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " pada gerakan tangan SIBI meningkat dibandingkan model awal. Kualitas guru dievaluasi sebelum dipakai melalui tiga ukuran, yaitu proporsi bingkai dengan orang terdeteksi, tingkat "
+    },
+    {
+     "text": "jitter",
+     "italics": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": ", dan pemeriksaan sampel bingkai oleh peneliti; kriteria lolos ketiganya tercantum pada Tabel 3.6. Deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " hasil guru disertai penanda waktu sehingga dapat disandingkan dengan jendela CSI dan label kelas."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Model guru tidak mengklasifikasikan isyarat. Label kelas SIBI berasal dari anotasi protokol "
+    },
+    {
+     "text": "elisitasi",
+     "italics": true
+    },
+    {
+     "text": ", yaitu kartu pemandu yang menentukan isyarat pada setiap segmen (Subbab 3.6) sehingga makna isyarat tidak bergantung pada dugaan model visi. Klasifikasi gerakan otomatis dari video menuntut pengklasifikasi temporal di atas deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " dan berada di luar cakupan penelitian ini karena label kelas telah tersedia dari protokol."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.7.5 Dataset Murid dan Pelatihan Distilasi Guru–Murid"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Dataset murid dibentuk dengan menyelaraskan tiga deret berdasarkan penanda waktu, yaitu jendela CSI hasil segmentasi, label kelas dari anotasi protokol, dan deret pose guru. Masukan murid berupa jendela deret CSI, bukan cuplikan tunggal, karena gerakan SIBI bersifat temporal sehingga polanya hanya tampak pada urutan waktu (Subbab 2.3). Target pelatihan berupa label kelas, sedangkan deret pose guru menjadi supervisi tambahan yang melengkapi label."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Model murid 1D-CNN dilatih dengan PyTorch [70] pada layanan server GPU Kaggle memakai fungsi kerugian gabungan: kerugian klasifikasi kelas ditambah suku supervisi guru yang mengikat representasi internal murid pada deret pose guru. Bentuk dan bobot suku supervisi ditetapkan dari data validasi dan dicatat pada Tabel 3.6. Dua pembanding dilatih pada data yang sama, yaitu SVM atas fitur ringkas sebagai pembanding dasar [68], [69] dan murid ablasi tanpa suku supervisi guru. Pembanding ablasi memungkinkan manfaat supervisi guru dinilai langsung dari data penelitian ini alih-alih diasumsikan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Setelah pelatihan, murid memprediksi kelas isyarat dari jendela CSI saja tanpa kamera dan tanpa deret pose. Hiperparameter dipilih berdasarkan data validasi yang terpisah dari data uji, dan model yang dipilih untuk purwarupa adalah model dengan keseimbangan terbaik antara kinerja validasi dan biaya inferensi pada perangkat. Kinerja murid beserta kedua pembandingnya dievaluasi pada lima skema pembagian data (Subbab 3.7.6)."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.7.6 Skema Pembagian Data"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kinerja diukur dengan lima skema pembagian data pada Tabel 3.3. Skema dalam sesi memakai pembagian data temporal per blok, yaitu blok repetisi awal untuk pelatihan dan blok akhir untuk pengujian; pembagian acak tidak dipakai karena repetisi berurutan cenderung mirip sehingga informasi dapat bocor dari data latih ke data uji."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.3 Skema pembagian data",
+   "header": [
+    "No.",
+    "Skema",
+    "Data latih",
+    "Data uji",
+    "Aspek yang diukur"
+   ],
+   "rows": [
+    [
+     "1",
+     "Dalam sesi (blok temporal)",
+     "Blok awal satu sesi",
+     "Blok akhir sesi yang sama",
+     "Separabilitas pada orang, ruang, dan sesi yang sama"
+    ],
+    [
+     "2",
+     "Lintas sesi",
+     "Sebagian sesi pengisyarat di satu ruang",
+     "Sesi lain pengisyarat dan ruang yang sama",
+     "Ketahanan terhadap perubahan antarsesi"
+    ],
+    [
+     "3",
+     "Lintas partisipan (*leave-one-subject-out*)",
+     "Semua pengisyarat kecuali satu",
+     "Pengisyarat yang ditinggalkan, bergiliran",
+     "Ketahanan terhadap pergantian orang"
+    ],
+    [
+     "4",
+     "Lintas ruang (*leave-one-room-out*)",
+     "Semua ruang kecuali satu",
+     "Ruang yang ditinggalkan, bergiliran",
+     "Ketahanan terhadap pergantian ruang"
+    ],
+    [
+     "5",
+     "Pengguna baru",
+     "Seluruh pengisyarat *dataset*",
+     "Satu pengguna baru tanpa pelatihan ulang",
+     "Kesiapan dipakai orang baru tanpa perekaman tambahan"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Skema kedua sampai kelima mengukur ketahanan terhadap perubahan domain [39]; karena jumlah pengisyarat dan ruang kecil, hasil lintas partisipan dan lintas ruang dilaporkan untuk setiap putaran. Data validasi hanya diambil dari data latih sehingga data uji tidak dipakai untuk memilih "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": ", menormalkan fitur, memilih hiperparameter, atau menetapkan ambang (Tabel 3.6)."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.7.7 Keluaran dengan Penolakan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Keluaran klasifikator dilengkapi skor keyakinan [71]. Segmen dengan skor di bawah ambang menghasilkan status penolakan pada kedua arah: pada arah pertama, "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": " tidak mengucapkan apa pun dan sistem menampilkan pesan isyarat tidak dikenali; pada purwarupa ini penolakan lebih aman daripada menebak kelas yang salah. Ambang ditetapkan dari data validasi dan kecukupannya diperiksa melalui laju deteksi palsu serta penilaian validator (Subbab 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.7.8 Kuantisasi dan Deployment ke Modul"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Model murid terpilih dikuantisasi int8 lalu dijalankan pada modul penerima melalui TensorFlow Lite Micro atau ESP-DL dengan penyangga pada PSRAM. Alur inferensi pada perangkat ditunjukkan pada Gambar 3.5: bingkai CSI dari mode promiscuous masuk ke penyangga geser, segmen terdeteksi dari energi gerak, fitur dihitung, model int8 menghasilkan kelas beserta skor, dan keluaran di atas ambang dikirim melalui UDP. Waktu inferensi per segmen, pemakaian memori, dan pengaruhnya terhadap laju pemrosesan bingkai diukur dan dilaporkan; bila model terbukti terlalu berat untuk dijalankan pada perangkat, klasifikasi dipindahkan ke server sesuai jalur cadangan (Subbab 3.11)."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.5 Inferensi langsung pada ESP32-S3",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.5.png"
+  },
+  {
+   "t": "h2",
+   "text": "3.8 Skenario Pengujian dan Metrik Evaluasi"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Uji Delta-CSI dan koeksistensi mendasari G0, uji "
+    },
+    {
+     "text": "nearest-centroid",
+     "italics": true
+    },
+    {
+     "text": " mendasari G1, uji klasifikasi mendasari G2 dan G3, serta uji kegunaan dan penilaian validator mendasari G4. Uji operasional, uji jalur ucapan, dan uji cakupan kamus melengkapi analisis tanpa menjadi syarat gerbang. Rantai lengkap dari "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " hingga pengemasan ditunjukkan pada Gambar 3.6."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.6 Alur dataset, pelatihan guru–murid, evaluasi, dan deployment",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.6.png"
+  },
+  {
+   "t": "h3",
+   "text": "3.8.1 Uji Delta-CSI dan Koeksistensi"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Uji Delta-CSI dilakukan untuk mengetahui apakah gerak tubuh menghasilkan perubahan CSI yang terpisah jelas dari kondisi tanpa gerak, dengan ukuran keterpisahan pada Tabel 3.6. Adapun prosedurnya adalah sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Memasang kedua modul pada posisi awal yang mengapit zona isyarat."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Merekam CSI pada kondisi ruang kosong, pengisyarat diam, dan pengisyarat bergerak di zona isyarat."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Menjalankan modul penerima dengan CSI, koneksi station, dan UDP aktif secara serentak, termasuk saat streaming audio dinyalakan, lalu mencatat laju CSI aktual dan paket yang hilang."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Membandingkan pola antarkondisi, lalu mencatat dan menganalisis hasilnya sebagai bahan G0."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.2 Uji Klasifikasi"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Uji klasifikasi pada kelima skema memakai metrik pada Subbab 2.10. Setiap metrik dilaporkan bersama peluang acak, yaitu 20% untuk lima kelas dan 12,5% untuk delapan kelas, serta 33,3% bila cakupan dipangkas menjadi tiga isyarat. Tingkat penolakan dilaporkan, dan akurasi dilaporkan dalam dua bentuk, yaitu akurasi tanpa penolakan atas seluruh segmen uji dan akurasi dengan penolakan atas segmen yang diterima saja. Sebagai pembanding internal, murid ablasi tanpa supervisi guru dilaporkan berdampingan dengan murid utama sehingga manfaat supervisi guru dinilai langsung dari data; SVM dilaporkan sebagai pembanding dasar."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.3 Uji Operasional"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Uji operasional mengukur laju deteksi palsu per jam saat tidak ada peragaan, latensi ujung ke ujung setiap arah, dan konsumsi arus modul. Adapun prosedurnya adalah sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Menjalankan purwarupa di ruang yang telah dikalibrasi."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Merekam kondisi tanpa peragaan isyarat, termasuk saat ada gangguan berupa orang lewat dan kipas angin menyala, lalu mencatat setiap isyarat yang terdeteksi."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Meminta pengisyarat memperagakan isyarat target, mencatat waktu selesainya isyarat dan waktu suara tampil; pada arah kedua, meminta pengguna mengucapkan frasa uji dan mencatat waktu representasi tampil."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Mengukur arus modul lengkap dengan alat ukur arus pada beberapa kondisi kerja, lalu menghitung estimasi ketahanan baterai."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "5.",
+   "runs": [
+    {
+     "text": "Menghitung laju deteksi palsu, latensi kedua arah, dan estimasi ketahanan baterai, lalu menganalisisnya terhadap indikator layak (Tabel 3.6)."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.4 Uji Jalur Ucapan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Uji jalur ucapan menilai komponen bahasa pada kedua arah, termasuk pembandingan jalur awan dan jalur lokal. Adapun prosedurnya adalah sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Menyiapkan daftar frasa uji Bahasa Indonesia pendek "
+    },
+    {
+     "text": "[PERLU DATA: daftar frasa uji dan jumlah penutur]",
+     "highlight": true
+    },
+    {
+     "text": " yang diucapkan ke mikrofon modul."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Merekam teks hasil layanan ASR awan, lalu menghitung akurasi kata terhadap teks acuan."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Mengukur waktu pengenalan per frasa, waktu pemetaan, waktu sintesis layanan TTS awan, serta waktu total ujung ke ujung kedua arah."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Mengulang pengukuran pada jalur lokal cadangan yang menjalankan faster-whisper dan MMS-TTS-ind, lalu membandingkan mutu dan latensi kedua jalur."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "5.",
+   "runs": [
+    {
+     "text": "Menganalisis keseimbangan antara mutu, latensi, dan ketergantungan koneksi internet sebagai bahan penetapan pilihan final (Tabel 3.6)."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.5 Uji Cakupan Kamus Arah Kedua"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Cakupan kamus dihitung sebagai proporsi frasa uji yang kata-katanya terwakili representasi tersedia; kata yang tidak terwakili jatuh ke ejaan jari dan dilaporkan terpisah. Adapun prosedurnya adalah sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Menyiapkan daftar frasa uji yang mencakup kata dalam kamus dan kata di luar kamus."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Menjalankan setiap frasa melalui pintu teks dan pintu suara."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Mencatat proporsi kata yang tampil sebagai representasi isyarat, sebagai ejaan jari, dan yang gagal tampil, lalu menganalisisnya."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.6 Uji Kegunaan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Uji kegunaan dengan 3–5 pengguna menelaah keterpakaian purwarupa sebagai alat bantu komunikasi kosakata terbatas pada skenario tugas terbimbing, yaitu saling menyampaikan pesan pendek dari kosakata yang tersedia. Adapun langkah uji untuk setiap pengguna adalah sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Menjelaskan tujuan uji, batas kosakata, kondisi kamera yang tidak menyala pada purwarupa, dan hak mundur, lalu meminta persetujuan tertulis."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Memberi waktu berlatih singkat dengan kamus tampilan agar pengguna mengenal kosakata yang tersedia."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Menjalankan skenario tugas komunikasi dua arah bersama lawan bicara, mencatat keberhasilan pesan tersampaikan, waktu penyelesaian, dan kejadian keluaran yang menyesatkan."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Meminta pengguna mengisi kuesioner persepsi skala Likert tentang kegunaan, kejelasan keluaran, dan keinginan memakai ulang."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "5.",
+   "runs": [
+    {
+     "text": "Merekapitulasi hasil, lalu menganalisisnya secara deskriptif tanpa klaim kausal."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Data dianalisis secara deskriptif karena pengguna sedikit dan tidak ada kelompok pembanding; perubahan apa pun dilaporkan sebagai gambaran capaian, bukan pengaruh yang diuji."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.7 Penilaian Validator dan Diagnosis Kesalahan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Validator penutur tunarungu menilai kewajaran keluaran purwarupa, yaitu kesesuaian teks hasil pengenalan dengan isyarat yang diperagakan serta kewajaran representasi yang ditampilkan pada arah kedua. Untuk setiap percobaan, keluaran sistem dan penilaian independen validator dicatat dalam tabel silang; kasus keluaran sistem yang dinilai keliru oleh validator dilaporkan tersendiri karena dapat menyesatkan pengguna. Sebagai analisis sekunder, kesalahan klasifikator dikaitkan secara luring dengan kemiripan lintasan tubuh dari deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " YOLO26-Pose untuk membedakan kesalahan akibat lintasan yang mirip dari kesalahan akibat sinyal CSI yang lemah."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.8 Kriteria Gerbang Keputusan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kriteria setiap gerbang beserta tindakan bila gagal disajikan pada Tabel 3.4. Kelayakan pada rumusan masalah ketiga ditinjau per dimensi, yaitu latensi kedua arah, cakupan kamus, keandalan operasional, persepsi pengguna, dan penilaian validator, bukan dari lolosnya G4 semata."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.4 Kriteria gerbang keputusan",
+   "header": [
+    "Gerbang",
+    "Waktu",
+    "Ukuran",
+    "Kriteria lolos",
+    "Tindakan bila gagal"
+   ],
+   "rows": [
+    [
+     "G0",
+     "Akhir M2",
+     "Uji Delta-CSI dan koeksistensi",
+     "Pola CSI bergerak terpisah dari diam dan kosong; CSI, koneksi station, dan UDP berjalan serentak dengan kehilangan paket terkendali (ambang pada Tabel 3.6)",
+     "Penempatan modul diperbaiki satu kali; bila gagal lagi, jalur CSI dihentikan dan dilaporkan sebagai temuan karakterisasi"
+    ],
+    [
+     "G1",
+     "M3",
+     "Separabilitas awal 2–3 isyarat (*nearest-centroid*)",
+     "Repetisi isyarat yang sama lebih dekat satu sama lain daripada ke isyarat lain",
+     "Penempatan atau orientasi modul diubah satu kali; bila gagal lagi, tindakan mengikuti Tabel 3.6"
+    ],
+    [
+     "G2",
+     "M6–M7",
+     "Akurasi skema dalam sesi",
+     "Jauh di atas peluang acak; ambang pada Tabel 3.6",
+     "Cakupan dipangkas menjadi 3–5 isyarat yang bertumpu pada lintasan"
+    ],
+    [
+     "G3",
+     "M10",
+     "Kinerja lintas partisipan dan lintas ruang",
+     "Di atas peluang acak; ambang pada Tabel 3.6",
+     "Cakupan menjadi personalisasi per pengguna dan ditulis sebagai temuan"
+    ],
+    [
+     "G4",
+     "M12",
+     "Kelengkapan uji dan persetujuan validator",
+     "Data uji operasional, jalur ucapan, cakupan kamus, dan kegunaan tercatat; validator menyetujui kewajaran keluaran",
+     "Hasil negatif tetap dilaporkan sebagai temuan kelayakan"
+    ]
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.9 Jadwal Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Jadwal empat belas minggu disajikan pada Tabel 3.5. Tanda ■ menunjukkan minggu pelaksanaan; minggu yang ditempati dua tahap menandai peralihan antartahap."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.5 Jadwal penelitian",
+   "header": [
+    "No.",
+    "Kegiatan",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7",
+    "M8",
+    "M9",
+    "M10",
+    "M11",
+    "M12",
+    "M13",
+    "M14",
+    "Gerbang"
+   ],
+   "rows": [
+    [
+     "1",
+     "T0 Replikasi platform, uji Delta-CSI, dan uji koeksistensi",
+     "■",
+     "■",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "G0 (akhir M2)"
+    ],
+    [
+     "2",
+     "T1 Kurasi isyarat dan kosakata tampilan, kalibrasi ruang, protokol, perizinan",
+     "",
+     "■",
+     "■",
+     "■",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "G1 (M3)"
+    ],
+    [
+     "3",
+     "T2 Perekaman *dataset*, pelatihan guru–murid dan pembanding, kuantisasi, uji *deployment*",
+     "",
+     "",
+     "",
+     "■",
+     "■",
+     "■",
+     "■",
+     "■",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "G2 (M6–M7)"
+    ],
+    [
+     "4",
+     "T3 Uji lintas sesi, lintas partisipan, lintas ruang, dan pengguna baru",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "■",
+     "■",
+     "■",
+     "",
+     "",
+     "",
+     "",
+     "G3 (M10)"
+    ],
+    [
+     "5",
+     "T4 Pengemasan purwarupa dua arah, uji operasional, jalur ucapan, cakupan kamus, kegunaan, validator",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "■",
+     "■",
+     "■",
+     "",
+     "",
+     "G4 (M12)"
+    ],
+    [
+     "6",
+     "T5 Analisis dan penulisan",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "■",
+     "■",
+     "■",
+     "—"
+    ]
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.10 Parameter Rancangan yang Ditetapkan Kemudian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Parameter yang bergantung pada kesepakatan pembimbing, hasil tahap sebelumnya, atau data validasi dihimpun pada Tabel 3.6. Setiap parameter direncanakan ditetapkan sebelum dipakai untuk menilai data uji atau gerbang terkait."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.6 Parameter rancangan yang ditetapkan kemudian",
+   "header": [
+    "No.",
+    "Parameter",
+    "Waktu atau dasar penetapan",
+    "Status"
+   ],
+   "rows": [
+    [
+     "1",
+     "Kriteria G0",
+     "Sebelum T0",
+     "[PERLU DATA: ukuran keterpisahan Delta-CSI dan ambang kehilangan paket pada uji koeksistensi]"
+    ],
+    [
+     "2",
+     "Tindakan bila G1 gagal kedua kalinya",
+     "Sebelum eksperimen",
+     "[PERLU DATA: tindakan, disepakati bersama pembimbing]"
+    ],
+    [
+     "3",
+     "Inklusi dan rekrutmen partisipan",
+     "Sebelum dipakai",
+     "[PERLU DATA: kriteria kompetensi pengisyarat, kefasihan validator, kriteria pengguna uji, dan teknik rekrutmen]"
+    ],
+    [
+     "4",
+     "Sesi per ruang",
+     "Sebelum dipakai",
+     "[PERLU DATA: jumlah sesi per pengisyarat dan per ruang]"
+    ],
+    [
+     "5",
+     "Publikasi *dataset*",
+     "Sebelum dipakai",
+     "[PERLU DATA: izin publikasi, repositori, dan lisensi *dataset*]"
+    ],
+    [
+     "6",
+     "Token apresiasi validator",
+     "Sebelum dipakai",
+     "[PERLU DATA: bentuk token, dikonfirmasi pembimbing]"
+    ],
+    [
+     "7",
+     "Ambang G2",
+     "Sebelum eksperimen",
+     "[PERLU DATA: ambang, disepakati bersama pembimbing]"
+    ],
+    [
+     "8",
+     "Kriteria pemangkasan isyarat",
+     "Sebelum G2 dinilai",
+     "[PERLU DATA: kriteria pemangkasan yang tidak memakai data uji]"
+    ],
+    [
+     "9",
+     "Pemilihan *subcarrier*",
+     "Sebelum dipakai",
+     "[PERLU DATA: kriteria pemilihan subcarrier]"
+    ],
+    [
+     "10",
+     "Definisi lintasan puncak",
+     "Sebelum dipakai",
+     "[PERLU DATA: definisi operasional]"
+    ],
+    [
+     "11",
+     "Pembagian data",
+     "Sebelum dipakai",
+     "[PERLU DATA: ukuran blok dan proporsi data latih, validasi, uji]"
+    ],
+    [
+     "12",
+     "Perlakuan data uji",
+     "Sebelum dipakai",
+     "[PERLU DATA: segmen tersaring kamera atau hasil segmentasi tanpa koreksi]"
+    ],
+    [
+     "13",
+     "Ambang skor keyakinan",
+     "Dari data validasi",
+     "[PERLU DATA: ambang, ditetapkan dari data validasi]"
+    ],
+    [
+     "14",
+     "Profil pengguna baru",
+     "Sebelum T3",
+     "[PERLU DATA: profil dan jumlah repetisi uji]"
+    ],
+    [
+     "15",
+     "Strategi Widar3.0 yang diadopsi",
+     "Sebelum dipakai",
+     "[PERLU DATA: komponen strategi yang diadopsi]"
+    ],
+    [
+     "16",
+     "Ambang G3",
+     "Sebelum T3",
+     "[PERLU DATA: ambang, disepakati bersama pembimbing]"
+    ],
+    [
+     "17",
+     "Personalisasi bila G3 gagal",
+     "Sebelum T4",
+     "[PERLU DATA: prosedur perekaman data latih pengguna]"
+    ],
+    [
+     "18",
+     "Indikator layak operasional",
+     "Sebelum T4",
+     "[PERLU DATA: batas latensi ujung ke ujung tiap arah, batas laju deteksi palsu, dan ketahanan baterai minimum]"
+    ],
+    [
+     "19",
+     "Lama pengamatan deteksi palsu",
+     "Sebelum T4",
+     "[PERLU DATA: durasi perekaman tanpa isyarat]"
+    ],
+    [
+     "20",
+     "Kanal, jarak antarmodul, dan zona isyarat",
+     "Pada T0",
+     "[PERLU DATA: penetapan dan catatan pengukuran]"
+    ],
+    [
+     "21",
+     "Model layar, audio, dan kapasitas baterai",
+     "Sebelum T4",
+     "[PERLU DATA: penetapan model final dan kapasitas berdasar uji arus]"
+    ],
+    [
+     "22",
+     "Pilihan layanan ucapan awan dan ukuran model lokal",
+     "Pada T4",
+     "[PERLU DATA: keputusan berdasarkan hasil uji banding jalur awan dan jalur lokal]"
+    ],
+    [
+     "23",
+     "Daftar frasa uji ucapan",
+     "Sebelum T4",
+     "[PERLU DATA: daftar frasa dan jumlah penutur uji]"
+    ],
+    [
+     "24",
+     "Kuesioner dan rubrik validator",
+     "Sebelum T4",
+     "[PERLU DATA: butir kuesioner dan rubrik penilaian]"
+    ],
+    [
+     "25",
+     "Batas kesesuaian validator G4",
+     "Sebelum T4",
+     "[PERLU DATA: batas kesesuaian minimum, disepakati bersama pembimbing]"
+    ],
+    [
+     "26",
+     "Kriteria kualitas model guru",
+     "Sebelum pelatihan murid",
+     "[PERLU DATA: ambang proporsi deteksi orang, batas *jitter* *keypoint*, dan prosedur pemeriksaan sampel]"
+    ],
+    [
+     "27",
+     "Bentuk dan bobot suku supervisi guru",
+     "Dari data validasi",
+     "[PERLU DATA: bentuk suku distilasi dan bobotnya, ditetapkan dari data validasi]"
+    ]
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.11 Risiko dan Alternatif Cadangan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Risiko utama beserta mitigasinya dirangkum pada Tabel 3.7. Alternatif cadangan disusun bertingkat sesuai titik kegagalan sehingga kegagalan salah satu komponen tidak menghentikan penelitian, melainkan mempersempit klaimnya."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.7 Risiko dan mitigasi",
+   "header": [
+    "No.",
+    "Risiko",
+    "Dampak",
+    "Mitigasi dan cadangan"
+   ],
+   "rows": [
+    [
+     "1",
+     "Pola CSI isyarat tidak terpisah pada konfigurasi dua modul",
+     "G0 gagal; jalur CSI tidak layak",
+     "Perbaikan penempatan satu kali; bila tetap gagal, dihentikan dan dilaporkan sebagai temuan karakterisasi"
+    ],
+    [
+     "2",
+     "Akurasi lintas partisipan atau lintas ruang rendah",
+     "Klaim pengguna baru tidak dapat dibuat",
+     "Personalisasi per pengguna (cadangan A); dilaporkan sebagai temuan"
+    ],
+    [
+     "3",
+     "Model int8 terlalu berat atau lambat di modul",
+     "Inferensi tepi tidak tercapai",
+     "Klasifikasi dipindahkan ke server dengan modul hanya mengirim fitur (cadangan B); klaim inferensi tepi diturunkan menjadi hasil uji banding"
+    ],
+    [
+     "4",
+     "Beban radio gabungan CSI, UDP, dan audio bermasalah",
+     "Purwarupa dua arah tidak stabil",
+     "Pemisahan peran modul menjadi modul CSI dan modul pengguna (cadangan C)"
+    ],
+    [
+     "5",
+     "Latensi atau mutu layanan ucapan awan tidak memadai, atau koneksi internet tidak tersedia saat penggunaan",
+     "Jalur ucapan purwarupa terganggu",
+     "Beralih ke server lokal laptop yang menjalankan faster-whisper dan MMS-TTS sebagai jalur cadangan; mutu dan latensi kedua jalur dilaporkan (cadangan D)"
+    ],
+    [
+     "6",
+     "Aset representasi isyarat mahal dibuat",
+     "Cakupan arah kedua sempit",
+     "Batasi tampilan ke glos dan gambar konfigurasi plus ejaan jari; animasi menjadi pengayaan"
+    ],
+    [
+     "7",
+     "Ketahanan baterai di bawah target",
+     "Klaim portabilitas melemah",
+     "Ukur arus tiap kondisi, sesuaikan target atau parameter hemat daya, laporkan apa adanya"
+    ],
+    [
+     "8",
+     "Rekrutmen partisipan atau persetujuan etika terlambat",
+     "Jadwal T2 mundur",
+     "T1 memuat dua ruang dan pengisyarat cadangan; jadwal transisi satu minggu"
+    ],
+    [
+     "9",
+     "Kuota atau aksesibilitas layanan server GPU Kaggle terbatas saat pelatihan",
+     "Jadwal pelatihan guru dan murid mundur",
+     "Lingkungan pelatihan dan data disiapkan terkompresi agar sesi efisien; pelatihan murid yang ringan dapat dipindahkan ke laptop; jadwal disesuaikan"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Cadangan A sampai D tidak mengubah rumusan masalah, tetapi mempersempit klaim sehingga konsistensi antara tujuan, metode, dan laporan tetap terjaga. Setiap pemakaian cadangan dicatat dalam laporan akhir beserta alasannya agar pembaca dapat menilai posisi klaim akhir penelitian terhadap rancangan awal."
+    }
+   ]
+  }
+ ],
+ "dp": [
+  {
+   "t": "h1",
+   "text": "DAFTAR PUSTAKA"
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[1] R. E. Mitchell and M. A. Karchmer, \"Chasing the mythical ten percent: Parental hearing status of deaf and hard of hearing students in the United States,\" "
+    },
+    {
+     "text": "Sign Language Studies",
+     "italics": true
+    },
+    {
+     "text": ", vol. 4, no. 2, pp. 138–163, 2004, doi: 10.1353/sls.2004.0005."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[2] R. E. Mitchell and M. A. Karchmer, \"Parental hearing status and signing among deaf and hard of hearing students,\" "
+    },
+    {
+     "text": "Sign Language Studies",
+     "italics": true
+    },
+    {
+     "text": ", vol. 5, no. 2, pp. 231–244, 2005, doi: 10.1353/sls.2005.0004."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[3] A. M. Lieberman, J. Mitchiner, and E. Pontecorvo, \"Hearing parents learning American Sign Language with their deaf children: A mixed-methods survey,\" "
+    },
+    {
+     "text": "Applied Linguistics Review",
+     "italics": true
+    },
+    {
+     "text": ", vol. 15, no. 1, pp. 309–333, 2022, doi: 10.1515/applirev-2021-0120."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[4] J. Ritmeester, B. Sümer, M. Boonstra, M. de Meulder, B. van der Aa, and F. Roelofsen, \"Navigating sign language learning: Insights from hearing parents of deaf and hard-of-hearing children,\" "
+    },
+    {
+     "text": "Journal of Deaf Studies and Deaf Education",
+     "italics": true
+    },
+    {
+     "text": ", vol. 31, no. 1, pp. 85–103, 2025, doi: 10.1093/jdsade/enaf059."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[5] Kementerian Koordinator Bidang Pembangunan Manusia dan Kebudayaan, \"Kemenko PMK bergerak bersama wujudkan selaras bahasa isyarat,\" 3 Okt. 2025. [Online]. Available: https://www.kemenkopmk.go.id/kemenko-pmk-bergerak-bersama-wujudkan-selaras-bahasa-isyarat, diakses 24 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[6] Republik Indonesia, "
+    },
+    {
+     "text": "Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas",
+     "italics": true
+    },
+    {
+     "text": ". Jakarta, Indonesia, 2016."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[7] P. A. Rodríguez-Correa, A. Valencia-Arias, O. N. Patiño-Toro, Y. Oblitas Díaz, and R. Teodori De la Puente, \"Benefits and development of assistive technologies for Deaf people's communication: A systematic review,\" "
+    },
+    {
+     "text": "Frontiers in Education",
+     "italics": true
+    },
+    {
+     "text": ", vol. 8, Art. no. 1121597, 2023, doi: 10.3389/feduc.2023.1121597."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[8] Badan Riset dan Inovasi Nasional, \"BRIN dorong penguatan ekosistem bahasa isyarat, BISINDO dominan digunakan penyandang tuli,\" 26 Agu. 2026. [Online]. Available: https://brin.go.id/news/130095, diakses 24 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[9] R. A. Mursita, \"Respon tunarungu terhadap penggunaan Sistem Bahasa Isyarat Indonesia (SIBI) dan Bahasa Isyarat Indonesia (BISINDO) dalam komunikasi,\" "
+    },
+    {
+     "text": "INKLUSI",
+     "italics": true
+    },
+    {
+     "text": ", vol. 2, no. 2, p. 221, 2015, doi: 10.14421/ijds.2202."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[10] Lembaga Penelitian dan Pengembangan Sistem Isyarat Bahasa Indonesia, \"Kamus SIBI Digital,\" Direktorat Pendidikan Masyarakat dan Pendidikan Khusus, Kementerian Pendidikan dan Kebudayaan RI, 2020. [Online]. Available: https://pkplk.kemendikdasmen.go.id/sibi, diakses 24 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[11] S. As Satillah, K. Khotimah, N. N. Muslihah, R. Rahmayanti, W. Mirip, Y. D. Suryani, and L. D. A. Pagarwati, \"Ragam bahasa anak tunarungu dengan SIBI di SLB N Ogan Ilir,\" "
+    },
+    {
+     "text": "Jurnal Anak Usia Dini Holistik Integratif (AUDHI)",
+     "italics": true
+    },
+    {
+     "text": ", vol. 7, no. 1, pp. 31–43, 2024, doi: 10.36722/jaudhi.v7i1.2876."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[12] M. Zikky and Z. F. Akbar, \"Kamus sistem isyarat bahasa Indonesia (KASIBI) dengan voice recognition sebagai pendukung belajar bahasa isyarat berbasis Android,\" "
+    },
+    {
+     "text": "Jurnal Sains Terapan",
+     "italics": true
+    },
+    {
+     "text": ", vol. 5, no. 2, 2019, doi: 10.32487/jst.v5i2.732."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[13] R. Fatmawati, R. Asmara, Y. R. Prayogi, and R. Y. Hakkun, \"Aplikasi pembelajaran sistem isyarat bahasa Indonesia (SIBI) berbasis voice menggunakan OpenSIBI,\" "
+    },
+    {
+     "text": "Technomedia Journal",
+     "italics": true
+    },
+    {
+     "text": ", vol. 7, no. 1, pp. 22–39, 2022, doi: 10.33050/tmj.v7i1.1690."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[14] S. A. Sanjaya and H. F. Ilone, \"BISINDO sign language recognition: A systematic literature review of deep learning techniques for image processing,\" "
+    },
+    {
+     "text": "Indonesian Journal of Computer Science",
+     "italics": true
+    },
+    {
+     "text": ", vol. 12, no. 6, 2023, doi: 10.33022/ijcs.v12i6.3539."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[15] S. Dwijayanti, Hermawati, S. I. Taqiyyah, H. Hikmarika, and B. Y. Suprapto, \"Indonesia sign language recognition using convolutional neural network,\" "
+    },
+    {
+     "text": "International Journal of Advanced Computer Science and Applications",
+     "italics": true
+    },
+    {
+     "text": ", vol. 12, no. 10, 2021, doi: 10.14569/IJACSA.2021.0121046."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[16] R. Soekarta, S. Aras, R. Rezki, and N. K. D. P. Ainun, \"Sistem deteksi simbol isyarat pada SIBI (Sistem Isyarat Bahasa Indonesia) menggunakan Mediapipe berbasis Android,\" "
+    },
+    {
+     "text": "Insect (Informatics and Security): Jurnal Teknik Informatika",
+     "italics": true
+    },
+    {
+     "text": ", vol. 10, no. 2, pp. 90–100, 2024, doi: 10.33506/insect.v10i2.4079."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[17] R. A. Maulana, A. R. Adriansyah, and Z. Imaduddin, \"Integrasi model deep learning pada pengembangan aplikasi Android pendeteksi bahasa isyarat SIBI menggunakan Jetpack Compose,\" "
+    },
+    {
+     "text": "DBESTI: Journal of Digital Business and Technology Innovation",
+     "italics": true
+    },
+    {
+     "text": ", vol. 3, no. 1, pp. 78–85, 2026, doi: 10.54914/dbesti.v3i1.2081."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[18] A. Sadeghzadeh, A. F. M. Shahen Shah, and M. B. Islam, \"MLMSign: Multi-lingual multi-modal illumination-invariant sign language recognition,\" "
+    },
+    {
+     "text": "Intelligent Systems with Applications",
+     "italics": true
+    },
+    {
+     "text": ", vol. 22, Art. no. 200384, 2024, doi: 10.1016/j.iswa.2024.200384."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[19] J. N. Bailenson, \"Nonverbal overload: A theoretical argument for the causes of Zoom fatigue,\" "
+    },
+    {
+     "text": "Technology, Mind, and Behavior",
+     "italics": true
+    },
+    {
+     "text": ", vol. 2, no. 1, 2021, doi: 10.1037/tmb0000030."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[20] Y. Ma, G. Zhou, and S. Wang, \"WiFi sensing with channel state information: A survey,\" "
+    },
+    {
+     "text": "ACM Computing Surveys",
+     "italics": true
+    },
+    {
+     "text": ", vol. 52, no. 3, pp. 1–36, 2019, doi: 10.1145/3310194."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[21] Y. Ma, G. Zhou, S. Wang, H. Zhao, and W. Jung, \"SignFi: Sign language recognition using WiFi,\" "
+    },
+    {
+     "text": "Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies",
+     "italics": true
+    },
+    {
+     "text": ", vol. 2, no. 1, pp. 1–21, 2018, doi: 10.1145/3191755."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[22] H. F. Thariq Ahmed, H. Ahmad, K. Narasingamurthi, H. Harkat, and S. K. Phang, \"DF-WiSLR: Device-free Wi-Fi-based sign language recognition,\" "
+    },
+    {
+     "text": "Pervasive and Mobile Computing",
+     "italics": true
+    },
+    {
+     "text": ", vol. 69, Art. no. 101289, 2020, doi: 10.1016/j.pmcj.2020.101289."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[23] J. M. E. G. Baldeo, J. A. P. Canlas, K. D. C. Clata, D. C. C. Flores, J. J. D. Surot, and J. M. R. Reyes, \"Filipino sign language recognition using Wi-Fi channel state information,\" in "
+    },
+    {
+     "text": "Proc. TENCON 2024 – 2024 IEEE Region 10 Conf.",
+     "italics": true
+    },
+    {
+     "text": ", 2024, pp. 1026–1029, doi: 10.1109/TENCON61640.2024.10903008."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[24] L. Zhang, Y. Zhang, and X. Zheng, \"WiSign: Ubiquitous American Sign Language recognition using commercial Wi-Fi devices,\" "
+    },
+    {
+     "text": "ACM Transactions on Intelligent Systems and Technology",
+     "italics": true
+    },
+    {
+     "text": ", vol. 11, no. 3, pp. 1–24, 2020, doi: 10.1145/3377553."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[25] K. Ali, A. X. Liu, W. Wang, and M. Shahzad, \"Keystroke recognition using WiFi signals,\" in "
+    },
+    {
+     "text": "Proc. 21st Annual Int. Conf. Mobile Computing and Networking (MobiCom)",
+     "italics": true
+    },
+    {
+     "text": ", 2015, pp. 90–102, doi: 10.1145/2789168.2790109."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[26] S. Mosleh, J. B. Coder, C. G. Scully, K. Forsyth, and M. O. Al Kalaa, \"Monitoring respiratory motion with Wi-Fi CSI: Characterizing performance and the BreatheSmart algorithm,\" "
+    },
+    {
+     "text": "IEEE Access",
+     "italics": true
+    },
+    {
+     "text": ", vol. 10, pp. 131932–131951, 2022, doi: 10.1109/ACCESS.2022.3230003."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[27] Espressif Systems, \"esp-csi: Wi-Fi channel state information based sensing,\" repositori GitHub. [Online]. Available: https://github.com/espressif/esp-csi, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[28] ruvnet, \"RuView,\" repositori GitHub. [Online]. Available: https://github.com/ruvnet/RuView, commit fefb0f9, diakses 24 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[29] Espressif Systems, "
+    },
+    {
+     "text": "ESP32-S3 Series Datasheet",
+     "italics": true
+    },
+    {
+     "text": ", versi 2.2, 2026. [Online]. Available: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[30] Espressif Systems, \"esp-nn: Neural network kernel library for Espressif chips,\" repositori GitHub. [Online]. Available: https://github.com/espressif/esp-nn, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[31] Espressif Systems, \"esp-dl: Espressif deep-learning library for ESP32-S3,\" repositori GitHub. [Online]. Available: https://github.com/espressif/esp-dl, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[32] A. Radford "
+    },
+    {
+     "text": "et al.",
+     "italics": true
+    },
+    {
+     "text": ", \"Robust speech recognition via large-scale weak supervision,\" arXiv:2212.04356, 2022, doi: 10.48550/arXiv.2212.04356."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[33] SYSTRAN, \"faster-whisper: Whisper transcription with CTranslate2,\" repositori GitHub. [Online]. Available: https://github.com/SYSTRAN/faster-whisper, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[34] V. Pratap "
+    },
+    {
+     "text": "et al.",
+     "italics": true
+    },
+    {
+     "text": ", \"Scaling speech technology to 1,000+ languages,\" arXiv:2305.13516, 2023, doi: 10.48550/arXiv.2305.13516."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[35] Meta AI, \"Massively Multilingual Speech (MMS): Indonesian text-to-speech,\" model card Hugging Face facebook/mms-tts-ind. [Online]. Available: https://huggingface.co/facebook/mms-tts-ind, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[36] Google Cloud, \"Supported voices and languages for Text-to-Speech\" dan \"Text-to-Speech pricing,\" dokumentasi resmi. [Online]. Available: https://cloud.google.com/text-to-speech/docs/list-voices-and-types dan https://cloud.google.com/text-to-speech/pricing, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[37] Microsoft, \"Language and voice support for Azure AI Speech service,\" Microsoft Learn. [Online]. Available: https://learn.microsoft.com/azure/ai-services/speech-service/language-support, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[38] hexgrad, \"Kokoro-82M,\" model card Hugging Face. [Online]. Available: https://huggingface.co/hexgrad/Kokoro-82M dan https://doi.org/10.57967/hf/4329, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[39] C. Chen, G. Zhou, and Y. Lin, \"Cross-domain WiFi sensing with channel state information: A survey,\" "
+    },
+    {
+     "text": "ACM Computing Surveys",
+     "italics": true
+    },
+    {
+     "text": ", vol. 55, no. 11, pp. 1–37, 2023, doi: 10.1145/3570325."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[40] Y. Zhang, Y. Zheng, K. Qian, G. Zhang, Y. Liu, C. Wu, and Z. Yang, \"Widar3.0: Zero-effort cross-domain gesture recognition with Wi-Fi,\" "
+    },
+    {
+     "text": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+     "italics": true
+    },
+    {
+     "text": ", vol. 44, no. 11, pp. 8671–8685, 2022, doi: 10.1109/TPAMI.2021.3105387."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[41] G. Jocher, J. Qiu, M. Liu, S. Lyu, F. C. Akyon, and M. E. Kalfaoglu, \"Ultralytics YOLO26: Unified real-time end-to-end vision models,\" arXiv:2606.03748, 2026, doi: 10.48550/arXiv.2606.03748."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[42] Ultralytics, \"Pose estimation,\" Ultralytics YOLO Docs. [Online]. Available: https://docs.ultralytics.com/tasks/pose/, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[43] F. Picron, D. Van Landuyt, and R. Omardeen, \"(Towards) Sign language machine translation in practice,\" in "
+    },
+    {
+     "text": "Machine Translation: Technologies and Applications",
+     "italics": true
+    },
+    {
+     "text": ". Cham, Switzerland: Springer, 2024, pp. 327–343, doi: 10.1007/978-3-031-47362-3_14."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[44] K. Hakozaki, T. Murakami, T. Uchida, and H. Kaneko, \"Evaluation of Japanese Sign Language avatar with mouthing in news content,\" in "
+    },
+    {
+     "text": "Proc. 27th Int. ACM SIGACCESS Conf. Computers and Accessibility (ASSETS)",
+     "italics": true
+    },
+    {
+     "text": ", 2025, pp. 1–5, doi: 10.1145/3663547.3759693."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[45] Departemen Pendidikan dan Kebudayaan, "
+    },
+    {
+     "text": "Kamus Sistem Isyarat Bahasa Indonesia",
+     "italics": true
+    },
+    {
+     "text": " (edisi pertama). Jakarta, Indonesia: Departemen Pendidikan dan Kebudayaan, 1994."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[46] W. C. Stokoe, \"Sign language structure: An outline of the visual communication systems of the American deaf,\" "
+    },
+    {
+     "text": "Journal of Deaf Studies and Deaf Education",
+     "italics": true
+    },
+    {
+     "text": ", vol. 10, no. 1, pp. 3–37, 2005, doi: 10.1093/deafed/eni001 (cetak ulang monograf 1960)."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[47] S. C. W. Ong and S. Ranganath, \"Automatic sign language analysis: A survey and the future beyond lexical meaning,\" "
+    },
+    {
+     "text": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+     "italics": true
+    },
+    {
+     "text": ", vol. 27, no. 6, pp. 873–891, 2005, doi: 10.1109/TPAMI.2005.112."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[48] A. S. Nugraheni, A. P. Husain, and H. Unayah, \"Optimalisasi penggunaan bahasa isyarat dengan SIBI dan BISINDO pada mahasiswa difabel tunarungu di Prodi PGMI UIN Sunan Kalijaga,\" "
+    },
+    {
+     "text": "Jurnal Holistika",
+     "italics": true
+    },
+    {
+     "text": ", vol. 5, no. 1, pp. 28–33, 2023, doi: 10.24853/holistika.5.1.28-33."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[49] M. Malika and Berlianti, \"Penggunaan bahasa isyarat SIBI dan BISINDO untuk siswa tuli di Sekolah Luar Biasa Negeri Pembina Medan,\" "
+    },
+    {
+     "text": "Concept: Journal of Social Humanities and Education",
+     "italics": true
+    },
+    {
+     "text": ", vol. 4, no. 3, pp. 78–87, 2025, doi: 10.55606/concept.v4i3.2178."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[50] B. I. Rodhiyah and S. Wulandari, \"Aplikasi berbasis mobile sebagai sarana pembelajaran dasar bahasa isyarat,\" "
+    },
+    {
+     "text": "INTECOMS: Journal of Information Technology and Computer Science",
+     "italics": true
+    },
+    {
+     "text": ", vol. 7, no. 1, pp. 58–63, 2024, doi: 10.31539/intecoms.v7i1.8326."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[51] G. O. Kindy, G. Leonali, and H. Lucky, \"Word-level BISINDO: A novel video Indonesian sign language dataset and baseline methods,\" "
+    },
+    {
+     "text": "Procedia Computer Science",
+     "italics": true
+    },
+    {
+     "text": ", vol. 269, pp. 249–258, 2025, doi: 10.1016/j.procs.2025.08.277."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[52] K. L. Wiguna and Rojali, \"Sentence-level Indonesian sign language (BISINDO) recognition using 3D CNN-LSTM and 3D CNN-BiLSTM models,\" "
+    },
+    {
+     "text": "International Journal of Advanced Computer Science and Applications",
+     "italics": true
+    },
+    {
+     "text": ", vol. 16, no. 9, 2025, doi: 10.14569/IJACSA.2025.0160941."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[53] C. Sebastian, J. Limanza, L. Laurentia, J. Harefa, and K. Jingga, \"Indonesian sign language (BISINDO) recognition using spatially aware body gesture recognition,\" "
+    },
+    {
+     "text": "Procedia Computer Science",
+     "italics": true
+    },
+    {
+     "text": ", vol. 269, pp. 1002–1011, 2025, doi: 10.1016/j.procs.2025.09.042."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[54] Z. Cai, Z. Li, Z. Chen, H. Zhuo, L. Zheng, X. Wu, and Y. Liu, \"Device-free wireless sensing for gesture recognition based on complementary CSI amplitude and phase,\" "
+    },
+    {
+     "text": "Sensors",
+     "italics": true
+    },
+    {
+     "text": ", vol. 24, no. 11, Art. no. 3414, 2024, doi: 10.3390/s24113414."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[55] H. Nyquist, \"Certain topics in telegraph transmission theory,\" "
+    },
+    {
+     "text": "Transactions of the American Institute of Electrical Engineers",
+     "italics": true
+    },
+    {
+     "text": ", vol. 47, no. 2, pp. 617–644, 1928, doi: 10.1109/T-AIEE.1928.5055024."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[56] C. E. Shannon, \"Communication in the presence of noise,\" "
+    },
+    {
+     "text": "Proceedings of the IRE",
+     "italics": true
+    },
+    {
+     "text": ", vol. 37, no. 1, pp. 10–21, 1949, doi: 10.1109/JRPROC.1949.232969."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[57] Z. Hao, Y. Duan, X. Dang, Y. Liu, and D. Zhang, \"Wi-SL: Contactless fine-grained gesture recognition uses channel state information,\" "
+    },
+    {
+     "text": "Sensors",
+     "italics": true
+    },
+    {
+     "text": ", vol. 20, no. 14, Art. no. 4025, 2020, doi: 10.3390/s20144025."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[58] P. Sruthi, S. Satapathy, and S. K. Udgata, \"HandFi: WiFi sensing based hand gesture recognition using channel state information,\" "
+    },
+    {
+     "text": "Procedia Computer Science",
+     "italics": true
+    },
+    {
+     "text": ", vol. 235, pp. 426–435, 2024, doi: 10.1016/j.procs.2024.04.042."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[59] S. M. Hernandez and E. Bulut, \"Lightweight and standalone IoT based WiFi sensing for active repositioning and mobility,\" in "
+    },
+    {
+     "text": "Proc. 2020 IEEE 21st Int. Symp. \"A World of Wireless, Mobile and Multimedia Networks\" (WoWMoM)",
+     "italics": true
+    },
+    {
+     "text": ", 2020, pp. 277–286, doi: 10.1109/WoWMoM49955.2020.00056."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[60] C. Zheng "
+    },
+    {
+     "text": "et al.",
+     "italics": true
+    },
+    {
+     "text": ", \"Deep learning-based human pose estimation: A survey,\" "
+    },
+    {
+     "text": "ACM Computing Surveys",
+     "italics": true
+    },
+    {
+     "text": ", vol. 56, no. 1, pp. 1–37, 2023, doi: 10.1145/3603618."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[61] R. Sapkota, R. H. Cheppally, A. Sharda, and M. Karkee, \"YOLO26: Key architectural enhancements and performance benchmarking for real-time object detection,\" arXiv:2509.25164, 2025, doi: 10.48550/arXiv.2509.25164."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[62] C. Lugaresi "
+    },
+    {
+     "text": "et al.",
+     "italics": true
+    },
+    {
+     "text": ", \"MediaPipe: A framework for building perception pipelines,\" arXiv:1906.08172, 2019, doi: 10.48550/arXiv.1906.08172."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[63] F. Wang, S. Zhou, S. Panev, J. Han, and D. Huang, \"Person-in-WiFi: Fine-grained person perception using WiFi,\" in "
+    },
+    {
+     "text": "Proc. IEEE/CVF Int. Conf. Computer Vision (ICCV)",
+     "italics": true
+    },
+    {
+     "text": ", 2019, pp. 5451–5460, doi: 10.1109/ICCV.2019.00555."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[64] J. Geng, D. Huang, and F. De la Torre, \"DensePose from WiFi,\" arXiv:2301.00250, 2023, doi: 10.48550/arXiv.2301.00250."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[65] J. Shang and J. Wu, \"A robust sign language recognition system with multiple Wi-Fi devices,\" in "
+    },
+    {
+     "text": "Proc. Workshop on Mobility in the Evolving Internet Architecture (MobiArch)",
+     "italics": true
+    },
+    {
+     "text": ", 2017, pp. 19–24, doi: 10.1145/3097620.3097624."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[66] H. F. Thariq Ahmed, H. Ahmad, S. K. Phang, H. Harkat, and K. Narasingamurthi, \"Wi-Fi CSI based human sign language recognition using LSTM network,\" in "
+    },
+    {
+     "text": "Proc. 2021 IEEE Int. Conf. Industry 4.0, Artificial Intelligence, and Communications Technology (IAICT)",
+     "italics": true
+    },
+    {
+     "text": ", 2021, pp. 51–57, doi: 10.1109/IAICT52856.2021.9532548."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[67] Y. Qin, S. Pan, W. Zhou, D. Pan, and Z. Li, \"WiASL: American Sign Language writing recognition system using commercial WiFi devices,\" "
+    },
+    {
+     "text": "Measurement",
+     "italics": true
+    },
+    {
+     "text": ", vol. 218, Art. no. 113125, 2023, doi: 10.1016/j.measurement.2023.113125."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[68] C. Cortes and V. Vapnik, \"Support-vector networks,\" "
+    },
+    {
+     "text": "Machine Learning",
+     "italics": true
+    },
+    {
+     "text": ", vol. 20, no. 3, pp. 273–297, 1995, doi: 10.1007/BF00994018."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[69] G. Mountrakis, J. Im, and C. Ogole, \"Support vector machines in remote sensing: A review,\" "
+    },
+    {
+     "text": "ISPRS Journal of Photogrammetry and Remote Sensing",
+     "italics": true
+    },
+    {
+     "text": ", vol. 66, no. 3, pp. 247–259, 2011, doi: 10.1016/j.isprsjprs.2010.11.001."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[70] S. Kiranyaz, O. Avci, O. Abdeljaber, T. Ince, M. Gabbouj, and D. J. Inman, \"1D convolutional neural networks and applications: A survey,\" "
+    },
+    {
+     "text": "Mechanical Systems and Signal Processing",
+     "italics": true
+    },
+    {
+     "text": ", vol. 151, Art. no. 107398, 2021, doi: 10.1016/j.ymssp.2020.107398."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[71] C. K. Chow, \"On optimum recognition error and reject tradeoff,\" "
+    },
+    {
+     "text": "IEEE Transactions on Information Theory",
+     "italics": true
+    },
+    {
+     "text": ", vol. 16, no. 1, pp. 41–46, 1970, doi: 10.1109/TIT.1970.1054406."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[72] Espressif Systems, \"tflite-micro-esp-examples,\" repositori GitHub. [Online]. Available: https://github.com/espressif/tflite-micro-esp-examples, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[73] A. Safrida, E. Mulyanto, and M. Naufal, \"Optimasi klasifikasi citra alfabet Sistem Isyarat Bahasa Indonesia (SIBI) menggunakan augmentasi data dan fine-tuning MobileNetV2,\" "
+    },
+    {
+     "text": "Rabit: Jurnal Teknologi dan Sistem Informasi Univrab",
+     "italics": true
+    },
+    {
+     "text": ", vol. 11, no. 2, pp. 4377–4391, 2026, doi: 10.36341/rabit.v11i2.8340."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[74] E. Rakun, M. I. Fanany, I. W. Wisesa, and A. Tjandra, \"A heuristic Hidden Markov Model to recognize inflectional words in sign system for Indonesian language known as SIBI (Sistem Isyarat Bahasa Indonesia),\" in "
+    },
+    {
+     "text": "Proc. 2015 Int. Conf. Technology, Informatics, Management, Engineering and Environment (TIME-E)",
+     "italics": true
+    },
+    {
+     "text": ", 2015, pp. 53–58, doi: 10.1109/TIME-E.2015.7389747."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[75] K. Anggraini, E. Rakun, and L. Y. Stefanus, \"Recognizing the components of inflectional word gestures in Indonesian Sign System known as SIBI (Sistem Isyarat Bahasa Indonesia) by using lip motion,\" in "
+    },
+    {
+     "text": "Proc. 2019 Int. Conf. Electrical Engineering and Informatics (ICEEI)",
+     "italics": true
+    },
+    {
+     "text": ", 2019, pp. 384–389, doi: 10.1109/ICEEI47359.2019.8988806."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[76] H. Sagawa and M. Takeuchi, \"A teaching system of Japanese sign language using sign language recognition and generation methods,\" in "
+    },
+    {
+     "text": "Proc. 10th ACM Int. Conf. Multimedia",
+     "italics": true
+    },
+    {
+     "text": ", 2002, pp. 137–145, doi: 10.1145/641007.641035."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[77] D. J. Bowen, M. Kreuter, B. Spring, L. Cofta-Woerpel, L. Linnan, D. Weiner, S. Bakken, C. P. Kaplan, L. Squiers, C. Fabrizio, and M. Fernandez, \"How we design feasibility studies,\" "
+    },
+    {
+     "text": "American Journal of Preventive Medicine",
+     "italics": true
+    },
+    {
+     "text": ", vol. 36, no. 5, pp. 452–457, 2009, doi: 10.1016/j.amepre.2009.02.002."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[78] M. Sokolova and G. Lapalme, \"A systematic analysis of performance measures for classification tasks,\" "
+    },
+    {
+     "text": "Information Processing & Management",
+     "italics": true
+    },
+    {
+     "text": ", vol. 45, no. 4, pp. 427–437, 2009, doi: 10.1016/j.ipm.2009.03.002."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[79] R. Likert, \"A technique for the measurement of attitudes,\" "
+    },
+    {
+     "text": "Archives of Psychology",
+     "italics": true
+    },
+    {
+     "text": ", no. 140, pp. 5–55, 1932."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[80] G. Hinton, O. Vinyals, and J. Dean, \"Distilling the knowledge in a neural network,\" arXiv:1503.02531, 2015, doi: 10.48550/arXiv.1503.02531."
+    }
+   ]
+  }
+ ]
+}
