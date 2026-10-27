@@ -8,59 +8,96 @@ Rumusan masalah pertama dijawab pada tahap replikasi platform, perancangan arsit
 
 ## 3.2 Tahapan Penelitian
 
-Penelitian berlangsung selama empat belas minggu (M1–M14) dalam enam tahap. Tahapan dimulai dari replikasi platform dan uji karakterisasi (T0), kemudian kurasi isyarat dan protokol (T1), perekaman *dataset* serta pelatihan guru–murid (T2), uji generalisasi (T3), pengemasan purwarupa dua arah dan uji kegunaan (T4), hingga analisis dan penulisan (T5). Lima tahap pertama ditutup gerbang keputusan G0–G4 seperti ditunjukkan pada Gambar 3.1. Kriteria lolos dan tindakan bila gagal direncanakan ditetapkan sebelum gerbang terkait dinilai; parameter yang belum ditetapkan dihimpun pada Tabel 3.6.
+Penelitian berlangsung selama empat belas minggu (M1–M14) dalam enam tahap. Tahapan dimulai dari replikasi platform dan uji karakterisasi (T0), kemudian kurasi isyarat dan protokol (T1), perekaman *dataset* serta pelatihan guru–murid (T2), uji generalisasi (T3), pengemasan purwarupa dua arah dan uji kegunaan (T4), hingga analisis dan penulisan (T5). Lima tahap pertama ditutup gerbang keputusan G0–G4: jalur lolos dirangkum pada Gambar 3.1, sedangkan jalur gagal, tindakan korektif, dan uji ulang tiap gerbang dirinci pada Gambar 3.2. Bila G0 gagal kedua kali setelah perbaikan, jalur CSI dihentikan dan dilaporkan sebagai temuan karakterisasi, lalu penelitian lanjut ke T5; bila G1 gagal kedua kali, tindakan mengikuti Tabel 3.6 dan dicatat sebagai temuan. Kriteria lolos dan tindakan bila gagal direncanakan ditetapkan sebelum gerbang terkait dinilai; parameter yang belum ditetapkan dihimpun pada Tabel 3.6.
 
 ```mermaid
-flowchart TD
-    T0["T0 Replikasi platform, uji Delta-CSI,<br/>dan uji koeksistensi radio, M1-M2"]
-    G0{"G0 akhir M2: akuisisi stabil, pola gerak<br/>terpisah dari diam dan kosong,<br/>CSI + STA + ESP-NOW berjalan serentak"}
-    P0["Perbaikan penempatan modul satu kali"]
-    G0U{"G0 diuji ulang"}
-    S0["Jalur CSI dihentikan,<br/>dilaporkan sebagai temuan karakterisasi"]
-
-    T1["T1 Kurasi isyarat, kalibrasi ruang,<br/>protokol, dan etika, M2-M4"]
-    G1{"G1 M3: separabilitas awal<br/>2-3 isyarat (nearest-centroid)"}
-    P1["Perubahan penempatan atau<br/>orientasi modul satu kali"]
-    G1U{"G1 diuji ulang"}
-    S1["Tindakan sesuai Tabel 3.6,<br/>dicatat sebagai temuan"]
-
-    T2["T2 Perekaman dataset dan pelatihan guru-murid, M4-M8<br/>webcam + YOLO26-Pose tersinkron dengan CSI<br/>(pola ADR-079), latih di server GPU Kaggle"]
-    G2{"G2 M6-M7: akurasi dalam sesi<br/>jauh di atas peluang acak"}
-    P2["Pemangkasan ke 3-5 isyarat<br/>yang bertumpu pada lintasan"]
-
-    T2B["Kuantisasi int8 dan uji deployment<br/>murid ke modul ESP32-S3"]
-    T3["T3 Uji generalisasi:<br/>lintas sesi, partisipan, ruang,<br/>dan pengguna baru, M8-M10"]
-    G3{"G3 M10: kinerja lintas domain<br/>di atas peluang acak"}
-    P3["Cakupan menjadi personalisasi<br/>per pengguna, ditulis sebagai temuan"]
-
-    T4["T4 Pengemasan purwarupa dua arah<br/>dan uji kegunaan, M10-M12"]
-    G4{"G4 M12: kelengkapan uji dan<br/>persetujuan validator"}
-    P4["Hasil negatif dilaporkan<br/>sebagai temuan kelayakan"]
-    T5["T5 Analisis dan penulisan, M12-M14"]
-
-    T0 --> G0
-    G0 -- "lolos" --> T1
-    G0 -- "gagal" --> P0 --> G0U
-    G0U -- "lolos" --> T1
-    G0U -- "gagal" --> S0 --> T5
-    T1 --> G1
-    G1 -- "lolos" --> T2
-    G1 -- "gagal" --> P1 --> G1U
-    G1U -- "lolos" --> T2
-    G1U -- "gagal" --> S1
-    T2 --> G2
-    G2 -- "lolos" --> T2B
-    G2 -- "gagal" --> P2 --> T2B
-    T2B --> T3
-    T3 --> G3
-    G3 -- "lolos" --> T4
-    G3 -- "gagal" --> P3 --> T4
-    T4 --> G4
-    G4 -- "lolos" --> T5
-    G4 -- "gagal" --> P4 --> T5
+flowchart LR
+    subgraph KA[" "]
+        direction TB
+        T0["T0 Replikasi platform,<br/>uji Delta-CSI dan<br/>koeksistensi radio (M1–M2)"]
+        G0("G0 akhir M2: akuisisi stabil,<br/>gerak terpisah dari diam/kosong")
+        T1["T1 Kurasi isyarat, kalibrasi<br/>ruang, protokol,<br/>etika (M2–M4)"]
+        G1("G1 M3: separabilitas awal<br/>2–3 isyarat (nearest-centroid)")
+        T2["T2 Perekaman dataset dan<br/>pelatihan guru–murid<br/>(M4–M8)"]
+        G2("G2 M6–M7: akurasi dalam sesi<br/>jauh di atas peluang acak")
+        T0 --> G0
+        G0 -- "lolos" --> T1
+        T1 --> G1
+        G1 -- "lolos" --> T2
+        T2 --> G2
+    end
+    subgraph KB[" "]
+        direction TB
+        T2B["Kuantisasi int8 dan uji<br/>deployment murid ke<br/>modul ESP32-S3"]
+        T3["T3 Uji generalisasi: lintas<br/>sesi, partisipan, ruang,<br/>pengguna baru (M8–M10)"]
+        G3("G3 M10: kinerja lintas domain<br/>di atas peluang acak")
+        T4["T4 Pengemasan purwarupa<br/>dua arah dan uji kegunaan<br/>(M10–M12)"]
+        G4("G4 M12: kelengkapan uji<br/>dan persetujuan validator")
+        T5["T5 Analisis dan penulisan<br/>(M12–M14)"]
+        T2B --> T3
+        T3 --> G3
+        G3 -- "lolos" --> T4
+        T4 --> G4
+        G4 -- "lolos" --> T5
+    end
+    KA -- "lolos" --> KB
 ```
 
-Gambar 3.1 Tahapan penelitian T0–T5 dengan gerbang keputusan G0–G4
+Gambar 3.1 Tahapan penelitian T0–T5 dan gerbang keputusan G0–G4 (jalur lolos; jalur gagal dirinci pada Gambar 3.2)
+
+```mermaid
+flowchart TB
+    subgraph R0[" "]
+        direction LR
+        G0{"G0 gagal"}
+        P0["Perbaikan penempatan modul<br/>(satu kali), lalu G0 diuji ulang"]
+        O0((" "))
+        B0(("temuan"))
+        G0 -- "gagal" --> P0
+        P0 -- "lolos: T1" --> O0
+        P0 -- "gagal lagi" --> B0
+    end
+    subgraph R1[" "]
+        direction LR
+        G1{"G1 gagal"}
+        P1["Perubahan penempatan atau<br/>orientasi modul (satu kali),<br/>lalu G1 diuji ulang"]
+        O1((" "))
+        B1(("temuan"))
+        G1 -- "gagal" --> P1
+        P1 -- "lolos: T2" --> O1
+        P1 -- "gagal lagi" --> B1
+    end
+    subgraph R2[" "]
+        direction LR
+        G2{"G2 gagal"}
+        P2["Pemangkasan ke 3–5 isyarat<br/>yang bertumpu pada lintasan"]
+        O2((" "))
+        G2 -- "gagal" --> P2
+        P2 -- "lanjut T2B" --> O2
+    end
+    subgraph R3[" "]
+        direction LR
+        G3{"G3 gagal"}
+        P3["Cakupan menjadi personalisasi<br/>per pengguna, ditulis<br/>sebagai temuan"]
+        O3((" "))
+        G3 -- "gagal" --> P3
+        P3 -- "lanjut T4" --> O3
+    end
+    subgraph R4[" "]
+        direction LR
+        G4{"G4 gagal"}
+        P4["Hasil negatif dilaporkan<br/>sebagai temuan kelayakan"]
+        O4((" "))
+        G4 -- "gagal" --> P4
+        P4 -- "lanjut T5" --> O4
+    end
+    R0 ~~~ R1
+    R1 ~~~ R2
+    R2 ~~~ R3
+    R3 ~~~ R4
+```
+
+Gambar 3.2 Jalur gagal dan remediasi gerbang keputusan G0–G4. Lingkaran kosong = lanjut ke tahap yang tertera pada label sisi; lingkaran "temuan" = penelitian berlanjut dengan hasil dilaporkan sebagai temuan. Kriteria lengkap tiap gerbang diuraikan pada Subbab 3.2.1–3.2.5 dan parameter yang menyertai pada Tabel 3.6.
 
 ### 3.2.1 Tahap T0: Replikasi Platform dan Uji Karakterisasi (M1–M2)
 
@@ -72,40 +109,57 @@ T1 mencakup kurasi 5–8 isyarat bersama validator penutur tunarungu, kalibrasi 
 
 ### 3.2.3 Tahap T2: Perekaman Dataset, Pelatihan Guru–Murid, dan Uji Deployment (M4–M8)
 
-*Dataset* direkam dengan kurang lebih 30 repetisi per isyarat per sesi disertai video tersinkron (Subbab 3.6). Alur pelatihan pada tahap ini berbentuk distilasi guru–murid yang ditunjukkan pada Gambar 3.2. Model guru YOLO26-Pose dilatih lanjutan pada data visual SIBI di layanan server GPU Kaggle, lalu kualitas *keypoint*-nya dievaluasi sebelum dipakai (Subbab 3.7.4). Jendela CSI, label kelas dari anotasi protokol, dan deret pose guru diselaraskan berdasarkan penanda waktu untuk membentuk *dataset* murid; kemudian murid 1D-CNN dilatih dengan supervisi label dan deret pose guru (Subbab 3.7.5). Dua pembanding dilatih pada data yang sama, yaitu SVM dan murid ablasi tanpa supervisi guru. Setelah pelatihan, model terpilih dikuantisasi int8, di-*deploy* ke modul penerima, lalu diukur waktu inferensi dan pemakaian memorinya pada laju bingkai aktual. Keluaran T2 adalah *dataset* murid berlabel, model guru dan murid terlatih, serta laporan *deployment*; bila G2 gagal, cakupan dipangkas menjadi 3–5 isyarat yang pembedanya paling bertumpu pada lintasan (Tabel 3.6).
+*Dataset* direkam dengan kurang lebih 30 repetisi per isyarat per sesi disertai video tersinkron (Subbab 3.6). Alur pelatihan pada tahap ini berbentuk distilasi guru–murid: tahap perekaman, penyaringan segmen, pelatihan guru, dan penyandingan data ditunjukkan pada Gambar 3.3, sedangkan pelatihan murid, pembanding, dan deployment ditunjukkan pada Gambar 3.4. Model guru YOLO26-Pose dilatih lanjutan pada data visual SIBI di layanan server GPU Kaggle, lalu kualitas *keypoint*-nya dievaluasi sebelum dipakai (Subbab 3.7.4). Jendela CSI, label kelas dari anotasi protokol, dan deret pose guru diselaraskan berdasarkan penanda waktu untuk membentuk *dataset* murid; kemudian murid 1D-CNN dilatih dengan supervisi label dan deret pose guru (Subbab 3.7.5). Dua pembanding dilatih pada data yang sama, yaitu SVM dan murid ablasi tanpa supervisi guru. Setelah pelatihan, model terpilih dikuantisasi int8, di-*deploy* ke modul penerima, lalu diukur waktu inferensi dan pemakaian memorinya pada laju bingkai aktual. Keluaran T2 adalah *dataset* murid berlabel, model guru dan murid terlatih, serta laporan *deployment*; bila G2 gagal, cakupan dipangkas menjadi 3–5 isyarat yang pembedanya paling bertumpu pada lintasan (Tabel 3.6).
+
+```mermaid
+flowchart LR
+    subgraph KA[" "]
+        direction TB
+        REC["Perekaman tersinkron<br/>(Subbab 3.6): video + CSI<br/>+ label, satu penanda waktu"]
+        FLT["Penyaringan segmen via<br/>keypoint YOLO26-Pose: buang<br/>orang hilang, jitter, terpotong"]
+        TT["Latih lanjutan dan evaluasi<br/>guru YOLO26-Pose pada data<br/>visual SIBI (GPU Kaggle)"]
+        TQ{"Kualitas keypoint<br/>guru memadai?"}
+        REC --> FLT
+        FLT --> TT
+        TT --> TQ
+        TQ -- "belum" --> TT
+    end
+    subgraph KB[" "]
+        direction TB
+        Y26["Ekstraksi deret keypoint<br/>guru di laptop: 17 titik<br/>COCO + penanda waktu"]
+        PAIR["Penyandingan berbasis waktu:<br/>jendela CSI + label kelas<br/>+ deret pose guru"]
+        DQ{"Cakupan data dan<br/>sinkronisasi memadai?"}
+        Y26 --> PAIR
+        PAIR --> DQ
+        DQ -- "ya: ke Gambar 3.4" --> EXIT((" "))
+    end
+    KA -- "ya" --> KB
+    KA -- "video + CSI" --> KB
+    KB -- "belum" --> KA
+```
+
+Gambar 3.3 Distilasi guru–murid tahap data: perekaman tersinkron, penyaringan segmen, model guru, dan penyandingan berbasis waktu
 
 ```mermaid
 flowchart TD
-    REC["Perekaman tersinkron (Subbab 3.6):<br/>video webcam + CSI 3 modul + label kelas<br/>dari kartu pemandu, satu penanda waktu"]
-    TT["Latih lanjutan dan evaluasi model guru<br/>YOLO26-Pose pada data visual SIBI<br/>di server GPU Kaggle"]
-    TQ{"Kualitas keypoint guru<br/>memadai?"}
-    Y26["Ekstraksi deret keypoint guru<br/>di laptop: 17 titik COCO<br/>beserta penanda waktu"]
-    PAIR["Penyandingan berbasis waktu:<br/>jendela CSI + label kelas + deret pose guru"]
-    DQ{"Cakupan data dan<br/>sinkronisasi memadai?"}
-    SD["Dataset murid: masukan jendela CSI,<br/>target label kelas SIBI,<br/>supervisi tambahan deret pose guru"]
-    STU["Latih murid 1D-CNN di server GPU Kaggle:<br/>kerugian klasifikasi + suku supervisi guru"]
-    BASE["Pembanding: SVM fitur dan<br/>murid ablasi tanpa supervisi guru"]
-    EQ{"Kinerja memadai sesuai<br/>gerbang G2 dan G3?"}
+    SD["Dataset murid: jendela CSI,<br/>label kelas SIBI,<br/>supervisi deret pose guru"]
+    STU["Latih murid 1D-CNN di server<br/>GPU Kaggle: kerugian klasifikasi<br/>+ suku supervisi guru"]
+    BASE["Pembanding: SVM fitur dan<br/>murid ablasi tanpa<br/>supervisi guru"]
+    EQ{"Kinerja memadai<br/>(gerbang G2, G3)?"}
     OPT["Optimasi untuk ESP32-S3:<br/>kuantisasi int8, uji ukuran,<br/>RAM, dan latensi"]
-    DEP["Ekspor dan pemasangan model murid<br/>pada modul penerima ESP32-S3"]
-    DEV["Perangkat akhir: inferensi CSI-SIBI<br/>lokal tanpa kamera (Gambar 3.3)"]
-
-    REC --> TT --> TQ
-    TQ -- "belum" --> TT
-    TQ -- "ya" --> Y26 --> PAIR
-    REC --> PAIR
-    PAIR --> DQ
-    DQ -- "belum" --> REC
-    DQ -- "ya" --> SD
+    DEP["Ekspor dan pemasangan model<br/>murid pada modul penerima<br/>ESP32-S3"]
+    DEV["Perangkat akhir: inferensi<br/>CSI-SIBI lokal tanpa kamera<br/>(Gambar 3.5)"]
     SD --> STU
     SD --> BASE
     STU --> EQ
     BASE --> EQ
-    EQ -- "belum: tindakan Tabel 3.4" --> SD
-    EQ -- "ya" --> OPT --> DEP --> DEV
+    EQ -- "belum (Tabel 3.4)" --> SD
+    EQ -- "ya" --> OPT
+    OPT --> DEP
+    DEP --> DEV
 ```
 
-Gambar 3.2 Alur pelatihan guru–murid dari perekaman tersinkron hingga deployment
+Gambar 3.4 Distilasi guru–murid tahap pelatihan: dataset murid ber-supervisi guru, pembanding, gerbang kinerja, dan deployment
 
 ### 3.2.4 Tahap T3: Uji Generalisasi (M8–M10)
 
@@ -164,85 +218,79 @@ Bahan penelitian meliputi *dataset* CSI beserta deret pose guru hasil perekaman 
 
 ### 3.5.1 Arsitektur Dua Arah
 
-Sistem dirancang dalam dua jalur operasional tanpa kamera dan satu jalur guru yang hanya aktif saat akuisisi data dan pelatihan, seperti ditunjukkan pada Gambar 3.3. Pada jalur arah pertama, modul pemancar memancarkan bingkai bersama; gerak pengisyarat mengubah deret CSI pada modul penerima; model murid int8 berjalan pada modul dan menghasilkan label beserta skor keyakinan; label dipetakan menjadi teks Indonesia melalui kamus kecil pada modul; teks tampil di layar modul pengguna, lalu dikirim ke layanan TTS awan; audio hasil sintesis diputar pada *speaker* modul dengan volume yang diatur rotary encoder. Pada jalur arah kedua, tombol tekan-untuk-bicara pada modul pengguna mengaktifkan mikrofon; ucapan dikirim ke layanan ASR awan; teks hasil pengenalan tampil di layar, lalu dipetakan ke representasi SIBI dari aset yang tersimpan pada modul (Subbab 2.8). Saat koneksi internet tidak tersedia, kedua jalur beralih ke server lokal laptop yang menjalankan MMS-TTS-ind dan faster-whisper sebagai cadangan. Jalur guru memakai *webcam* dan YOLO26-Pose untuk mengekstrak deret *keypoint* yang menjadi supervisi tambahan pelatihan murid serta dasar penyaringan segmen; jalur ini bukan bagian produk akhir.
+Sistem dirancang dalam dua jalur operasional tanpa kamera dan satu jalur guru yang hanya aktif saat akuisisi data dan pelatihan, seperti ditunjukkan pada Gambar 3.5. Pada jalur arah pertama, modul pemancar memancarkan bingkai bersama; gerak pengisyarat mengubah deret CSI pada modul penerima; model murid int8 berjalan pada modul dan menghasilkan label beserta skor keyakinan; label dipetakan menjadi teks Indonesia melalui kamus kecil pada modul; teks tampil di layar modul pengguna, lalu dikirim ke layanan TTS awan; audio hasil sintesis diputar pada *speaker* modul dengan volume yang diatur rotary encoder. Pada jalur arah kedua, tombol tekan-untuk-bicara pada modul pengguna mengaktifkan mikrofon; ucapan dikirim ke layanan ASR awan; teks hasil pengenalan tampil di layar, lalu dipetakan ke representasi SIBI dari aset yang tersimpan pada modul (Subbab 2.8). Saat koneksi internet tidak tersedia, kedua jalur beralih ke server lokal laptop yang menjalankan MMS-TTS-ind dan faster-whisper sebagai cadangan. Jalur guru memakai *webcam* dan YOLO26-Pose untuk mengekstrak deret *keypoint* yang menjadi supervisi tambahan pelatihan murid serta dasar penyaringan segmen; jalur ini bukan bagian produk akhir.
 
 ```mermaid
 flowchart TD
-    subgraph ARAH1["Arah 1: isyarat menjadi teks dan suara (tanpa kamera)"]
-        TX["Modul TX ESP32-S3:<br/>pemancar ESP-NOW"]
-        ZN["Zona isyarat,<br/>satu pengisyarat"]
-        RX["Modul RX ESP32-S3:<br/>penangkap CSI,<br/>inferensi murid int8"]
-        MAPL["Pemetaan label-teks<br/>di modul (kamus kecil)"]
-        DSP1["Layar modul pengguna:<br/>teks hasil pengenalan"]
-        TTS["Layanan TTS awan"]
-        SPK["Speaker modul,<br/>volume rotary encoder"]
-    end
-
-    subgraph ARAH2["Arah 2: ucapan menjadi representasi SIBI (tanpa kamera)"]
-        BTN["Tombol tekan-untuk-bicara<br/>di modul pengguna"]
-        MIC["Mikrofon I2S modul"]
-        STT["Layanan ASR awan"]
-        DSP2["Layar modul:<br/>teks lalu representasi SIBI"]
-        AST["Aset modul: glos, gambar,<br/>ejaan jari (Subbab 2.8)"]
-    end
-
-    subgraph GURU["Jalur guru: hanya saat akuisisi dan pelatihan, di luar produk akhir"]
-        CAM["Webcam laptop"]
-        Y26P["YOLO26-Pose:<br/>17 keypoint COCO"]
-        SUP["Supervisi tambahan<br/>pelatihan murid (Subbab 3.7)"]
-    end
-
-    LOK["Server lokal laptop (cadangan):<br/>ASR faster-whisper, TTS MMS,<br/>server riset RuView"]
-
-    TX --> ZN --> RX --> MAPL --> DSP1
+    TX["Modul TX<br/>(ESP-NOW)"]
+    ZN["Zona isyarat<br/>(satu pengisyarat)"]
+    RX["Modul RX: CSI +<br/>inferensi murid int8"]
+    MAPL["Kamus label–teks<br/>di modul"]
+    DSP1["Layar modul:<br/>teks hasil"]
+    TTS["Layanan<br/>TTS awan"]
+    SPK["Speaker +<br/>rotary encoder"]
+    TX --> ZN
+    ZN --> RX
+    RX --> MAPL
+    MAPL --> DSP1
     MAPL -- "teks via Wi-Fi" --> TTS
     TTS -- "audio" --> SPK
+
+    BTN["Tombol<br/>tekan-untuk-bicara"]
+    MIC["Mikrofon<br/>I2S"]
+    STT["Layanan<br/>ASR awan"]
+    DSP2["Layar modul: teks lalu<br/>representasi SIBI"]
+    AST["Aset SIBI: glos,<br/>gambar, ejaan jari<br/>(Subbab 2.8)"]
     BTN --> MIC
     MIC -- "audio via Wi-Fi" --> STT
     STT -- "teks" --> DSP2
     AST --> DSP2
-    CAM --> Y26P --> SUP
-    TTS -. "tanpa internet: TTS lokal" .-> LOK
-    STT -. "tanpa internet: ASR lokal" .-> LOK
+
+    CAM["Webcam laptop"]
+    Y26P["YOLO26-Pose:<br/>17 keypoint COCO"]
+    SUP["Supervisi pelatihan<br/>murid (Subbab 3.7)"]
+    CAM --> Y26P
+    Y26P --> SUP
+
+    LOK["Server lokal (cadangan):<br/>ASR faster-whisper,<br/>TTS MMS, server RuView"]
+    TTS -. "TTS lokal" .-> LOK
+    STT -. "ASR lokal" .-> LOK
 ```
 
-Gambar 3.3 Arsitektur produk akhir tanpa kamera
+Gambar 3.5 Arsitektur produk akhir tanpa kamera. Rantai kiri = arah 1 (isyarat menjadi teks dan suara); rantai tengah = arah 2 (ucapan menjadi representasi SIBI); rantai kanan = jalur guru yang hanya aktif saat akuisisi data dan pelatihan; garis putus-putus = beralih ke server lokal ketika internet tidak tersedia.
 
 ### 3.5.2 Topologi Modul dan Jaringan
 
-Topologi jaringan purwarupa ditunjukkan pada Gambar 3.4. Seluruh perangkat, yaitu 2–3 modul dan server laptop, terhubung ke satu *access point* pada kanal yang sama sehingga penangkapan CSI dan komunikasi data berjalan serentak (Subbab 2.4). *Access point* tersebut juga menyediakan akses internet yang menopang layanan ucapan awan pada kedua arah. Modul pemancar dan modul penerima berkomunikasi melalui ESP-NOW untuk bingkai bersama, modul penerima mengirim label dan skor melalui UDP sebagai telemetri riset, dan modul pengguna mengirim teks atau audio singkat ke layanan ucapan awan. Server lokal menjalankan *server* RuView untuk keperluan riset serta faster-whisper dan TTS MMS sebagai jalur ucapan cadangan; kamus label-teks dimuat sebagai salinan kecil pada modul. Laptop dapat berperan sebagai *access point* melalui hotspot ketika purwarupa berjalan penuh pada mode cadangan lokal tanpa layanan awan.
+Topologi jaringan purwarupa ditunjukkan pada Gambar 3.6. Seluruh perangkat, yaitu 2–3 modul dan server laptop, terhubung ke satu *access point* pada kanal yang sama sehingga penangkapan CSI dan komunikasi data berjalan serentak (Subbab 2.4). *Access point* tersebut juga menyediakan akses internet yang menopang layanan ucapan awan pada kedua arah. Modul pemancar dan modul penerima berkomunikasi melalui ESP-NOW untuk bingkai bersama, modul penerima mengirim label dan skor melalui UDP sebagai telemetri riset, dan modul pengguna mengirim teks atau audio singkat ke layanan ucapan awan. Server lokal menjalankan *server* RuView untuk keperluan riset serta faster-whisper dan TTS MMS sebagai jalur ucapan cadangan; kamus label-teks dimuat sebagai salinan kecil pada modul. Laptop dapat berperan sebagai *access point* melalui hotspot ketika purwarupa berjalan penuh pada mode cadangan lokal tanpa layanan awan.
 
 ```mermaid
-flowchart LR
-    subgraph MODS["2-3 modul ESP32-S3 (baterai)"]
-        MA["Modul A (TX)<br/>pemancar ESP-NOW"]
-        MB["Modul B (RX)<br/>CSI + inferensi murid int8"]
-        MC["Modul C (pengguna)<br/>layar + speaker + mikrofon I2S<br/>+ tombol + rotary encoder"]
+flowchart TB
+    subgraph MODS["2–3 modul ESP32-S3 (baterai)"]
+        MA["Modul A (TX):<br/>pemancar ESP-NOW"]
+        MB["Modul B (RX):<br/>CSI + inferensi murid int8"]
+        MC["Modul C (pengguna):<br/>layar, speaker, mikrofon I2S,<br/>tombol, rotary"]
     end
-
-    AP["Access point dengan akses internet:<br/>router mitra, semua perangkat satu kanal"]
-
+    AP["Access point + internet<br/>(router mitra, satu kanal)"]
     subgraph AWAN["Layanan ucapan awan (jalur utama)"]
         TTSA["TTS Indonesia"]
         STTA["ASR Indonesia"]
     end
-
     subgraph SERVER["Server lokal laptop (riset dan cadangan)"]
         RUVR["Server RuView:<br/>kalibrasi ruang, segmentasi"]
         ASRL["ASR faster-whisper<br/>(cadangan)"]
         TTSL["TTS MMS<br/>(cadangan)"]
     end
-
-    MA -- "ESP-NOW beacon,<br/>sumber CSI" --> MB
+    MA -- "ESP-NOW beacon<br/>(sumber CSI)" --> MB
     MB -- "UDP: label dan skor" --> AP
-    MC -- "teks hasil isyarat (arah 1)" --> TTSA
+    MC -- "teks hasil isyarat<br/>(arah 1)" --> TTSA
     TTSA -- "audio hasil sintesis" --> MC
-    MC -- "audio ucapan (arah 2)" --> STTA
+    MC -- "audio ucapan<br/>(arah 2)" --> STTA
     STTA -- "teks" --> MC
     AP -. "riset dan mode cadangan" .-> SERVER
+    AWAN ~~~ SERVER
 ```
 
-Gambar 3.4 Topologi perangkat, komunikasi antarmodul, layanan awan, dan server
+Gambar 3.6 Topologi perangkat, komunikasi antarmodul, layanan awan, dan server
 
 ### 3.5.3 Penempatan Modul dan Zona Isyarat
 
@@ -330,55 +378,60 @@ Keluaran klasifikator dilengkapi skor keyakinan [71]. Segmen dengan skor di bawa
 
 ### 3.7.8 Kuantisasi dan Deployment ke Modul
 
-Model murid terpilih dikuantisasi int8 lalu dijalankan pada modul penerima melalui TensorFlow Lite Micro atau ESP-DL dengan penyangga pada PSRAM. Alur inferensi pada perangkat ditunjukkan pada Gambar 3.5: bingkai CSI dari mode promiscuous masuk ke penyangga geser, segmen terdeteksi dari energi gerak, fitur dihitung, model int8 menghasilkan kelas beserta skor, dan keluaran di atas ambang dikirim melalui UDP. Waktu inferensi per segmen, pemakaian memori, dan pengaruhnya terhadap laju pemrosesan bingkai diukur dan dilaporkan; bila model terbukti terlalu berat untuk dijalankan pada perangkat, klasifikasi dipindahkan ke server sesuai jalur cadangan (Subbab 3.11).
+Model murid terpilih dikuantisasi int8 lalu dijalankan pada modul penerima melalui TensorFlow Lite Micro atau ESP-DL dengan penyangga pada PSRAM. Selama penangkapan CSI, radio modul terikat pada satu kanal bersama *access point* dengan *power save* dimatikan (WIFI_PS_NONE) [28], sebagaimana dipakai *firmware* RuView. Alur inferensi pada perangkat ditunjukkan pada Gambar 3.7: bingkai CSI dari mode promiscuous masuk ke penyangga geser, segmen terdeteksi dari energi gerak, fitur dihitung, model int8 menghasilkan kelas beserta skor, dan keluaran di atas ambang dikirim melalui UDP. Waktu inferensi per segmen, pemakaian memori, dan pengaruhnya terhadap laju pemrosesan bingkai diukur dan dilaporkan; bila model terbukti terlalu berat untuk dijalankan pada perangkat, klasifikasi dipindahkan ke server sesuai jalur cadangan (Subbab 3.11).
 
 ```mermaid
 flowchart LR
-    CSI["Callback CSI<br/>mode promiscuous,<br/>filter MGMT"]
-    BUF["Penyangga geser<br/>deret CSI di PSRAM"]
-    SEG["Segmentasi energi gerak<br/>di perangkat"]
-    FT["Fitur ringkas:<br/>amplitudo-fase terpilih,<br/>Doppler, statistik"]
-    MOD["Model murid int8 TFLM / ESP-DL:<br/>5-8 kelas, ukuran kecil,<br/>arena tetap di PSRAM"]
-    DEC{"Skor keyakinan<br/>di atas ambang?"}
-    OUT["Label + skor<br/>dikirim via UDP"]
-    RJ["Label ditolak:<br/>isyarat tidak dikenali"]
-
-    CSI --> BUF --> SEG --> FT --> MOD --> DEC
-    DEC -- "ya" --> OUT
-    DEC -- "tidak" --> RJ
-
-    NOTE["Batas perangkat (datasheet ESP32-S3):<br/>SRAM 512 KB, PSRAM sampai 8 MB octal,<br/>CPU dual-core LX7 240 MHz,<br/>WiFi 2,4 GHz 1T1R, satu kanal<br/>dengan WIFI_PS_NONE"]
-    MOD -.- NOTE
+    subgraph R1[" "]
+        direction TB
+        CSI["Callback CSI,<br/>mode promiscuous,<br/>filter MGMT"]
+        BUF["Penyangga geser<br/>CSI di PSRAM"]
+        SEG["Segmentasi energi<br/>gerak (perangkat)"]
+        FT["Fitur ringkas:<br/>Doppler, amplitudo/fase"]
+        CSI --> BUF
+        BUF --> SEG
+        SEG --> FT
+    end
+    subgraph R2[" "]
+        direction TB
+        MOD["Model murid int8<br/>TFLM/ESP-DL: 5–8 kelas,<br/>arena tetap di PSRAM"]
+        DEC{"Skor keyakinan<br/>di atas ambang?"}
+        OUT["Label + skor<br/>dikirim via UDP"]
+        RJ["Label ditolak:<br/>isyarat tidak dikenali"]
+        MOD --> DEC
+        DEC -- "ya" --> OUT
+        DEC -- "tidak" --> RJ
+    end
+    R1 --> R2
 ```
 
-Gambar 3.5 Inferensi langsung pada ESP32-S3
+Gambar 3.7 Inferensi langsung pada ESP32-S3
 
 ## 3.8 Skenario Pengujian dan Metrik Evaluasi
 
-Uji Delta-CSI dan koeksistensi mendasari G0, uji *nearest-centroid* mendasari G1, uji klasifikasi mendasari G2 dan G3, serta uji kegunaan dan penilaian validator mendasari G4. Uji operasional, uji jalur ucapan, dan uji cakupan kamus melengkapi analisis tanpa menjadi syarat gerbang. Rantai lengkap dari *dataset* hingga pengemasan ditunjukkan pada Gambar 3.6.
+Uji Delta-CSI dan koeksistensi mendasari G0, uji *nearest-centroid* mendasari G1, uji klasifikasi mendasari G2 dan G3, serta uji kegunaan dan penilaian validator mendasari G4. Uji operasional, uji jalur ucapan, dan uji cakupan kamus melengkapi analisis tanpa menjadi syarat gerbang. Rantai perekaman hingga pelatihan telah ditunjukkan pada Gambar 3.3 dan Gambar 3.4, sedangkan rantai evaluasi dari model terpilih hingga artefak akhir ditunjukkan pada Gambar 3.8.
 
 ```mermaid
 flowchart TD
-    REC["Perekaman dataset:<br/>5-8 isyarat x ±30 repetisi x sesi,<br/>3-4 pengisyarat, sedikitnya 2 ruang"]
-    FLT["Penyaringan segmen via keypoint YOLO26-Pose:<br/>buang segmen orang hilang,<br/>jitter ekstrem, segmen terpotong"]
-    TT["Latih dan evaluasi model guru YOLO26-Pose<br/>pada data visual SIBI (GPU Kaggle);<br/>kualitas keypoint diperiksa"]
-    DS["Dataset murid: jendela CSI + label kelas SIBI<br/>+ deret pose guru (supervisi tambahan)"]
-    STU["Latih murid 1D-CNN (GPU Kaggle):<br/>kerugian klasifikasi + suku supervisi guru;<br/>pembanding SVM dan ablasi tanpa supervisi guru"]
-    SPLIT["Pembagian data 5 skema:<br/>dalam sesi (blok temporal), lintas sesi,<br/>lintas partisipan, lintas ruang, pengguna baru"]
-    MET["Metrik klasifikasi: akurasi, presisi, recall,<br/>skor F1 makro, confusion matrix,<br/>selalu dibandingkan peluang acak"]
+    MULAI["Model guru, murid, dan pembanding<br/>terlatih (Gambar 3.4)"]
+    SPLIT["Pembagian data 5 skema: dalam sesi<br/>(blok temporal), lintas sesi,<br/>lintas partisipan, lintas ruang,<br/>pengguna baru"]
+    MET["Metrik klasifikasi: akurasi, presisi,<br/>recall, skor F1 makro, confusion matrix,<br/>selalu dibandingkan peluang acak"]
     DEP["Kuantisasi int8 dan deployment<br/>murid ke modul ESP32-S3"]
-    OP["Uji operasional: latensi ujung-ke-ujung per arah,<br/>laju deteksi palsu per jam, konsumsi arus modul"]
-    COVER["Metrik arah 2: cakupan kamus<br/>(proporsi kata uji yang terwakili)"]
-    USE["Uji kegunaan 3-5 pengguna<br/>+ penilaian validator tunarungu"]
-    ARTE["Laporan kelayakan + purwarupa<br/>+ dataset + protokol"]
-
-    REC --> FLT --> TT --> DS --> STU --> SPLIT --> MET --> DEP --> OP
+    OP["Uji operasional: latensi ujung-ke-ujung<br/>per arah, laju deteksi palsu per jam,<br/>konsumsi arus modul"]
+    COVER["Metrik arah 2: cakupan kamus<br/>(proporsi kata uji terwakili)"]
+    USE["Uji kegunaan 3–5 pengguna<br/>+ penilaian validator tunarungu"]
+    ARTE["Artefak: laporan kelayakan +<br/>purwarupa + dataset + protokol"]
+    MULAI --> SPLIT
+    SPLIT --> MET
+    MET --> DEP
+    DEP --> OP
     DEP --> COVER
-    OP --> USE --> ARTE
+    OP --> USE
+    USE --> ARTE
     COVER --> ARTE
 ```
 
-Gambar 3.6 Alur dataset, pelatihan guru–murid, evaluasi, dan deployment
+Gambar 3.8 Alur evaluasi: pembagian data, metrik, uji operasional, uji kegunaan, dan artefak akhir
 
 ### 3.8.1 Uji Delta-CSI dan Koeksistensi
 

@@ -1,0 +1,18 @@
+%% G3.4 — Distilasi guru-murid tahap pelatihan: dataset murid, pembanding, deployment (BAB III, Subbab 3.2.3)
+%% Tipe: flowchart TD percabangan alami; loop EQ--belum(Tabel 3.4)-->SD; sisi klaster KA--ya-->KB mewakili EQ-->OPT
+flowchart TD
+    SD["Dataset murid: jendela CSI,<br/>label kelas SIBI,<br/>supervisi deret pose guru"]
+    STU["Latih murid 1D-CNN di server<br/>GPU Kaggle: kerugian klasifikasi<br/>+ suku supervisi guru"]
+    BASE["Pembanding: SVM fitur dan<br/>murid ablasi tanpa<br/>supervisi guru"]
+    EQ{"Kinerja memadai<br/>(gerbang G2, G3)?"}
+    OPT["Optimasi untuk ESP32-S3:<br/>kuantisasi int8, uji ukuran,<br/>RAM, dan latensi"]
+    DEP["Ekspor dan pemasangan model<br/>murid pada modul penerima<br/>ESP32-S3"]
+    DEV["Perangkat akhir: inferensi<br/>CSI-SIBI lokal tanpa kamera<br/>(Gambar 3.5)"]
+    SD --> STU
+    SD --> BASE
+    STU --> EQ
+    BASE --> EQ
+    EQ -- "belum (Tabel 3.4)" --> SD
+    EQ -- "ya" --> OPT
+    OPT --> DEP
+    DEP --> DEV

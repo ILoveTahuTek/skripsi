@@ -1,0 +1,32 @@
+%% G3.1 — Tahapan penelitian T0-T5 dan gerbang keputusan G0-G4, jalur utama (BAB III, Subbab 3.2)
+%% Tipe: flowchart LR parent + dua kolom TB (ular); sisi klaster KA--lolos-->KB mewakili G2-->T2B; pasangan: G3.2-remediasi-gerbang
+flowchart LR
+    subgraph KA[" "]
+        direction TB
+        T0["T0 Replikasi platform,<br/>uji Delta-CSI dan<br/>koeksistensi radio (M1–M2)"]
+        G0("G0 akhir M2: akuisisi stabil,<br/>gerak terpisah dari diam/kosong")
+        T1["T1 Kurasi isyarat, kalibrasi<br/>ruang, protokol,<br/>etika (M2–M4)"]
+        G1("G1 M3: separabilitas awal<br/>2–3 isyarat (nearest-centroid)")
+        T2["T2 Perekaman dataset dan<br/>pelatihan guru–murid<br/>(M4–M8)"]
+        G2("G2 M6–M7: akurasi dalam sesi<br/>jauh di atas peluang acak")
+        T0 --> G0
+        G0 -- "lolos" --> T1
+        T1 --> G1
+        G1 -- "lolos" --> T2
+        T2 --> G2
+    end
+    subgraph KB[" "]
+        direction TB
+        T2B["Kuantisasi int8 dan uji<br/>deployment murid ke<br/>modul ESP32-S3"]
+        T3["T3 Uji generalisasi: lintas<br/>sesi, partisipan, ruang,<br/>pengguna baru (M8–M10)"]
+        G3("G3 M10: kinerja lintas domain<br/>di atas peluang acak")
+        T4["T4 Pengemasan purwarupa<br/>dua arah dan uji kegunaan<br/>(M10–M12)"]
+        G4("G4 M12: kelengkapan uji<br/>dan persetujuan validator")
+        T5["T5 Analisis dan penulisan<br/>(M12–M14)"]
+        T2B --> T3
+        T3 --> G3
+        G3 -- "lolos" --> T4
+        T4 --> G4
+        G4 -- "lolos" --> T5
+    end
+    KA -- "lolos" --> KB

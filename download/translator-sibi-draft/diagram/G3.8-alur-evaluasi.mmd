@@ -1,0 +1,19 @@
+%% G3.8 — Alur evaluasi: pembagian data, metrik, uji operasional, uji kegunaan, artefak (BAB III, Subbab 3.8)
+%% Tipe: flowchart TD percabangan alami; rantai perekaman-pelatihan dirujuk ke Gambar 3.3-3.4; seluruh sisi evaluasi sumber dipertahankan
+flowchart TD
+    MULAI["Model guru, murid, dan pembanding<br/>terlatih (Gambar 3.4)"]
+    SPLIT["Pembagian data 5 skema: dalam sesi<br/>(blok temporal), lintas sesi,<br/>lintas partisipan, lintas ruang,<br/>pengguna baru"]
+    MET["Metrik klasifikasi: akurasi, presisi,<br/>recall, skor F1 makro, confusion matrix,<br/>selalu dibandingkan peluang acak"]
+    DEP["Kuantisasi int8 dan deployment<br/>murid ke modul ESP32-S3"]
+    OP["Uji operasional: latensi ujung-ke-ujung<br/>per arah, laju deteksi palsu per jam,<br/>konsumsi arus modul"]
+    COVER["Metrik arah 2: cakupan kamus<br/>(proporsi kata uji terwakili)"]
+    USE["Uji kegunaan 3–5 pengguna<br/>+ penilaian validator tunarungu"]
+    ARTE["Artefak: laporan kelayakan +<br/>purwarupa + dataset + protokol"]
+    MULAI --> SPLIT
+    SPLIT --> MET
+    MET --> DEP
+    DEP --> OP
+    DEP --> COVER
+    OP --> USE
+    USE --> ARTE
+    COVER --> ARTE

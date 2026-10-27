@@ -72,13 +72,13 @@ else: ok('Seluruh 80 entri DP dikutip minimal sekali')
 
 # 3. Blok mermaid + caption gambar (revisi 26 Okt 2026: diagram BAB I-II dikeluarkan dari naskah,
 #    berkas .mmd tetap di folder diagram/ sebagai konteks. Revisi sesi 2 (26 Okt 2026): metodologi
-#    utama = distilasi guru-murid; BAB III memuat Gambar 3.1-3.6 (G3.2 baru: alur teacher-student).
-EXP_CAPS = ['3.1', '3.2', '3.3', '3.4', '3.5', '3.6']
+#    utama = distilasi guru-murid; BAB III memuat Gambar 3.1-3.8 (redesain 27 Okt: 3.1 jalur utama + 3.2 remediasi; 3.3-3.4 distilasi terpecah; 3.5-3.8 arsitektur/topologi/inferensi/evaluasi).
+EXP_CAPS = ['3.1', '3.2', '3.3', '3.4', '3.5', '3.6', '3.7', '3.8']
 n_mmd = len(re.findall(r'```mermaid', body))
 caps = re.findall(r'^Gambar (\d+\.\d+) ', body, re.M)
-if n_mmd == 6: ok('6 blok mermaid pada tubuh (BAB III saja)')
-else: err(f'Blok mermaid = {n_mmd}, harusnya 6')
-if caps == EXP_CAPS: ok('6 caption Gambar 3.1-3.6 urut')
+if n_mmd == 8: ok('8 blok mermaid pada tubuh (BAB III saja)')
+else: err(f'Blok mermaid = {n_mmd}, harusnya 8')
+if caps == EXP_CAPS: ok('8 caption Gambar 3.1-3.8 urut')
 else: err(f'Caption Gambar = {len(caps)}: {caps} (harusnya {EXP_CAPS})')
 # setiap Gambar X.Y dirujuk di prosa (di luar caption)
 for g in caps:

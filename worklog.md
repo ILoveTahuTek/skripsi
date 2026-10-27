@@ -472,3 +472,23 @@ Work Log:
 Stage Summary:
 - Judul final terkunci dan konsisten di seluruh dokumen; tidak ada perubahan isi naskah, tidak ada render ulang.
 - Sisa human-owned: 44 penanda PERLU DATA (identitas sampul, Tabel 3.6, spesifikasi perangkat, dst.) + 6 konfirmasi pembimbing + tinjauan 2 generalisasi sisi klaster + Update Field TOC di Word.
+
+---
+Task ID: 24
+Agent: Super Z (main agent, sesi web)
+Task: Audit dan redesain seluruh diagram dokumen penelitian (master prompt scientific information designer) atas dua gambar contoh pemilik — diperluas ke seluruh diagram BAB III proposal Penerjemah Dua Arah SIBI; hasil harus dapat diedit, terintegrasi, dan tervalidasi pada ekspor akhir.
+
+Work Log:
+- Audit terukur: 6 diagram eksisting dirender ulang dan diukur — huruf efektif cetak hanya 3,2–6,4 pt pada sematan 14 cm (Gambar 3.1 terpangkas: aspek 1,78 → lebar tampil 12,0 cm); akar masalah = kepadatan simpul per figur + uraian 3 baris di dalam simpul + membesarkan font tak menolong (kanvas ikut membesar).
+- Debug infrastruktur: mermaid 12 look "neo" membungkus label di max-width 120px (menyusutkan seluruh layout) — diatasi config `wrappingWidth: 700` + `markdownAutoWrap: false`; pola kolom/subgraf yang stabil dipetakan empiris (parent LR + kolom TB + sisi klaster; TD cabang alami; ular baris).
+- Deliv. A+B: `download/translator-sibi-docx/Audit-dan-Rencana-Diagram.md` — audit 6 figur (8 kolom per figur) + inventaris 5 diagram konteks di luar naskah + arsitektur baru Level 1/2/3 (8 figur) + sistem desain bersama + temuan kesesuaian diagram↔prosa.
+- Deliv. C+D: 8 sumber .mmd baru ditulis + diiterasi 5 putaran pengukuran (bangun_diagram.py) hingga seluruhnya ≥ 9,2 pt / aspek ≤ 1,34; sumber lama diarsip diagram/lama-20261026/. Struktur: 3.1 jalur utama T0-T5 (12 simpul) + 3.2 remediasi gerbang BARU (5 baris urut via subgraf LR + sisi taklihat; keputusan uji ulang → label sisi; S0/S1 → prosa); distilasi dipecah 3.3 (data+guru+penyandingan; FLT disisip dari 3.6 lama; keluaran DQ-ya → 3.4) + 3.4 (murid+pembanding+deployment, TD cabang alami); 3.5 arsitektur 3 rantai sejajar tanpa kotak kelompok; 3.6 topologi (sisi taklihat penata AWAN~~~SERVER); 3.7 inferensi 2 kolom (NOTE → prosa §3.7.8 + BAB II [29]); 3.8 evaluasi terfokus (rantai pelatihan dirujuk 3.3-3.4; sisi DEP→OP/COVER utuh — generalisasi klaster lama hilang).
+- Integritas: cek_integritas.py — 76 simpul & 64 sisi sumber seluruhnya terwakili/terdokumentasi; 1 cabang hilang tertangkap saat audit (DQ-ya → dataset murid) dan diperbaiki sebelum integrasi.
+- Deliv. E: bab3 diintegrasikan (integrasi_bab3.py: 8 blok + 8 caption + seluruh rujukan silang diperbarui; WIFI_PS_NONE + makna S0/S1 masuk prosa); sinkron_diagram.py → 8/8 identik + mmdc valid; rakit_draft.py LOLOS 13 OK / 0 galat; DOCX dibangun ulang (parse_md → generate_docx → patch_footer → TOC 64 entri) → 68 halaman.
+- Validasi ekspor: qa_ekspor.py — 8 gambar di hlm 31/32/34/35/40/42/49/50, semua 14,0 cm tanpa pemangkasan; 16 pemeriksaan teks OK; postcheck 0 galat; caption 3.2 awalnya tumpah 2 halaman → makna dipindah ke prosa sehingga figur+caption utuh sehalaman (terinspeksi visual); render_diagrams.sh ditulis ulang (sumber tunggal, varian docx pensiun).
+- Deliv. F: catatan-pengemasan.md diperbarui (bagian 2b + verifikasi + regenerasi); laporan audit ditutup bagian hasil akhir.
+
+Stage Summary:
+- Deliverable: DOCX 68 hlm dengan 8 diagram baru (huruf cetak 9,2-11,8 pt, naik dari 3,2-6,4 pt), 8 sumber Mermaid dapat diedit, laporan audit+rencana, pemeriksa otomatis permanen (bangun_diagram/cek_integritas/qa_ekspor).
+- Logika ilmiah utuh: seluruh tahap, gerbang, cabang gagal, loop umpan balik, pembanding, dan terminologi sumber dipertahankan; perubahan = lokasi informasi + notasi, semuanya tercatat di laporan audit bagian 2b/5.
+- Sisa human-owned: sama seperti sebelumnya (44 penanda PERLU DATA, 6 konfirmasi pembimbing, Update Field TOC di Word).

@@ -1,0 +1,26 @@
+%% G3.6 — Topologi perangkat, komunikasi antarmodul, layanan awan, dan server (BAB III, Subbab 3.5.2)
+%% Tipe: flowchart TB; sisi taklihat AWAN~~~SERVER hanya penata
+flowchart TB
+    subgraph MODS["2–3 modul ESP32-S3 (baterai)"]
+        MA["Modul A (TX):<br/>pemancar ESP-NOW"]
+        MB["Modul B (RX):<br/>CSI + inferensi murid int8"]
+        MC["Modul C (pengguna):<br/>layar, speaker, mikrofon I2S,<br/>tombol, rotary"]
+    end
+    AP["Access point + internet<br/>(router mitra, satu kanal)"]
+    subgraph AWAN["Layanan ucapan awan (jalur utama)"]
+        TTSA["TTS Indonesia"]
+        STTA["ASR Indonesia"]
+    end
+    subgraph SERVER["Server lokal laptop (riset dan cadangan)"]
+        RUVR["Server RuView:<br/>kalibrasi ruang, segmentasi"]
+        ASRL["ASR faster-whisper<br/>(cadangan)"]
+        TTSL["TTS MMS<br/>(cadangan)"]
+    end
+    MA -- "ESP-NOW beacon<br/>(sumber CSI)" --> MB
+    MB -- "UDP: label dan skor" --> AP
+    MC -- "teks hasil isyarat<br/>(arah 1)" --> TTSA
+    TTSA -- "audio hasil sintesis" --> MC
+    MC -- "audio ucapan<br/>(arah 2)" --> STTA
+    STTA -- "teks" --> MC
+    AP -. "riset dan mode cadangan" .-> SERVER
+    AWAN ~~~ SERVER

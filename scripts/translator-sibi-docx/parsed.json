@@ -1668,14 +1668,19 @@
      "italics": true
     },
     {
-     "text": " serta pelatihan guru–murid (T2), uji generalisasi (T3), pengemasan purwarupa dua arah dan uji kegunaan (T4), hingga analisis dan penulisan (T5). Lima tahap pertama ditutup gerbang keputusan G0–G4 seperti ditunjukkan pada Gambar 3.1. Kriteria lolos dan tindakan bila gagal direncanakan ditetapkan sebelum gerbang terkait dinilai; parameter yang belum ditetapkan dihimpun pada Tabel 3.6."
+     "text": " serta pelatihan guru–murid (T2), uji generalisasi (T3), pengemasan purwarupa dua arah dan uji kegunaan (T4), hingga analisis dan penulisan (T5). Lima tahap pertama ditutup gerbang keputusan G0–G4: jalur lolos dirangkum pada Gambar 3.1, sedangkan jalur gagal, tindakan korektif, dan uji ulang tiap gerbang dirinci pada Gambar 3.2. Bila G0 gagal kedua kali setelah perbaikan, jalur CSI dihentikan dan dilaporkan sebagai temuan karakterisasi, lalu penelitian lanjut ke T5; bila G1 gagal kedua kali, tindakan mengikuti Tabel 3.6 dan dicatat sebagai temuan. Kriteria lolos dan tindakan bila gagal direncanakan ditetapkan sebelum gerbang terkait dinilai; parameter yang belum ditetapkan dihimpun pada Tabel 3.6."
     }
    ]
   },
   {
    "t": "figure",
-   "caption": "Gambar 3.1 Tahapan penelitian T0–T5 dengan gerbang keputusan G0–G4",
+   "caption": "Gambar 3.1 Tahapan penelitian T0–T5 dan gerbang keputusan G0–G4 (jalur lolos; jalur gagal dirinci pada Gambar 3.2)",
    "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.1.png"
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.2 Jalur gagal dan remediasi gerbang keputusan G0–G4. Lingkaran kosong = lanjut ke tahap yang tertera pada label sisi; lingkaran \"temuan\" = penelitian berlanjut dengan hasil dilaporkan sebagai temuan. Kriteria lengkap tiap gerbang diuraikan pada Subbab 3.2.1–3.2.5 dan parameter yang menyertai pada Tabel 3.6.",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.2.png"
   },
   {
    "t": "h3",
@@ -1748,7 +1753,7 @@
      "italics": true
     },
     {
-     "text": " direkam dengan kurang lebih 30 repetisi per isyarat per sesi disertai video tersinkron (Subbab 3.6). Alur pelatihan pada tahap ini berbentuk distilasi guru–murid yang ditunjukkan pada Gambar 3.2. Model guru YOLO26-Pose dilatih lanjutan pada data visual SIBI di layanan server GPU Kaggle, lalu kualitas "
+     "text": " direkam dengan kurang lebih 30 repetisi per isyarat per sesi disertai video tersinkron (Subbab 3.6). Alur pelatihan pada tahap ini berbentuk distilasi guru–murid: tahap perekaman, penyaringan segmen, pelatihan guru, dan penyandingan data ditunjukkan pada Gambar 3.3, sedangkan pelatihan murid, pembanding, dan deployment ditunjukkan pada Gambar 3.4. Model guru YOLO26-Pose dilatih lanjutan pada data visual SIBI di layanan server GPU Kaggle, lalu kualitas "
     },
     {
      "text": "keypoint",
@@ -1789,8 +1794,13 @@
   },
   {
    "t": "figure",
-   "caption": "Gambar 3.2 Alur pelatihan guru–murid dari perekaman tersinkron hingga deployment",
-   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.2.png"
+   "caption": "Gambar 3.3 Distilasi guru–murid tahap data: perekaman tersinkron, penyaringan segmen, model guru, dan penyandingan berbasis waktu",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.3.png"
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.4 Distilasi guru–murid tahap pelatihan: dataset murid ber-supervisi guru, pembanding, gerbang kinerja, dan deployment",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.4.png"
   },
   {
    "t": "h3",
@@ -2071,7 +2081,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Sistem dirancang dalam dua jalur operasional tanpa kamera dan satu jalur guru yang hanya aktif saat akuisisi data dan pelatihan, seperti ditunjukkan pada Gambar 3.3. Pada jalur arah pertama, modul pemancar memancarkan bingkai bersama; gerak pengisyarat mengubah deret CSI pada modul penerima; model murid int8 berjalan pada modul dan menghasilkan label beserta skor keyakinan; label dipetakan menjadi teks Indonesia melalui kamus kecil pada modul; teks tampil di layar modul pengguna, lalu dikirim ke layanan TTS awan; audio hasil sintesis diputar pada "
+     "text": "Sistem dirancang dalam dua jalur operasional tanpa kamera dan satu jalur guru yang hanya aktif saat akuisisi data dan pelatihan, seperti ditunjukkan pada Gambar 3.5. Pada jalur arah pertama, modul pemancar memancarkan bingkai bersama; gerak pengisyarat mengubah deret CSI pada modul penerima; model murid int8 berjalan pada modul dan menghasilkan label beserta skor keyakinan; label dipetakan menjadi teks Indonesia melalui kamus kecil pada modul; teks tampil di layar modul pengguna, lalu dikirim ke layanan TTS awan; audio hasil sintesis diputar pada "
     },
     {
      "text": "speaker",
@@ -2098,8 +2108,8 @@
   },
   {
    "t": "figure",
-   "caption": "Gambar 3.3 Arsitektur produk akhir tanpa kamera",
-   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.3.png"
+   "caption": "Gambar 3.5 Arsitektur produk akhir tanpa kamera. Rantai kiri = arah 1 (isyarat menjadi teks dan suara); rantai tengah = arah 2 (ucapan menjadi representasi SIBI); rantai kanan = jalur guru yang hanya aktif saat akuisisi data dan pelatihan; garis putus-putus = beralih ke server lokal ketika internet tidak tersedia.",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.5.png"
   },
   {
    "t": "h3",
@@ -2109,7 +2119,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Topologi jaringan purwarupa ditunjukkan pada Gambar 3.4. Seluruh perangkat, yaitu 2–3 modul dan server laptop, terhubung ke satu "
+     "text": "Topologi jaringan purwarupa ditunjukkan pada Gambar 3.6. Seluruh perangkat, yaitu 2–3 modul dan server laptop, terhubung ke satu "
     },
     {
      "text": "access point",
@@ -2143,8 +2153,8 @@
   },
   {
    "t": "figure",
-   "caption": "Gambar 3.4 Topologi perangkat, komunikasi antarmodul, layanan awan, dan server",
-   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.4.png"
+   "caption": "Gambar 3.6 Topologi perangkat, komunikasi antarmodul, layanan awan, dan server",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.6.png"
   },
   {
    "t": "h3",
@@ -2662,14 +2672,35 @@
    "t": "p",
    "runs": [
     {
-     "text": "Model murid terpilih dikuantisasi int8 lalu dijalankan pada modul penerima melalui TensorFlow Lite Micro atau ESP-DL dengan penyangga pada PSRAM. Alur inferensi pada perangkat ditunjukkan pada Gambar 3.5: bingkai CSI dari mode promiscuous masuk ke penyangga geser, segmen terdeteksi dari energi gerak, fitur dihitung, model int8 menghasilkan kelas beserta skor, dan keluaran di atas ambang dikirim melalui UDP. Waktu inferensi per segmen, pemakaian memori, dan pengaruhnya terhadap laju pemrosesan bingkai diukur dan dilaporkan; bila model terbukti terlalu berat untuk dijalankan pada perangkat, klasifikasi dipindahkan ke server sesuai jalur cadangan (Subbab 3.11)."
+     "text": "Model murid terpilih dikuantisasi int8 lalu dijalankan pada modul penerima melalui TensorFlow Lite Micro atau ESP-DL dengan penyangga pada PSRAM. Selama penangkapan CSI, radio modul terikat pada satu kanal bersama "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " dengan "
+    },
+    {
+     "text": "power save",
+     "italics": true
+    },
+    {
+     "text": " dimatikan (WIFI_PS_NONE) [28], sebagaimana dipakai "
+    },
+    {
+     "text": "firmware",
+     "italics": true
+    },
+    {
+     "text": " RuView. Alur inferensi pada perangkat ditunjukkan pada Gambar 3.7: bingkai CSI dari mode promiscuous masuk ke penyangga geser, segmen terdeteksi dari energi gerak, fitur dihitung, model int8 menghasilkan kelas beserta skor, dan keluaran di atas ambang dikirim melalui UDP. Waktu inferensi per segmen, pemakaian memori, dan pengaruhnya terhadap laju pemrosesan bingkai diukur dan dilaporkan; bila model terbukti terlalu berat untuk dijalankan pada perangkat, klasifikasi dipindahkan ke server sesuai jalur cadangan (Subbab 3.11)."
     }
    ]
   },
   {
    "t": "figure",
-   "caption": "Gambar 3.5 Inferensi langsung pada ESP32-S3",
-   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.5.png"
+   "caption": "Gambar 3.7 Inferensi langsung pada ESP32-S3",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.7.png"
   },
   {
    "t": "h2",
@@ -2686,21 +2717,14 @@
      "italics": true
     },
     {
-     "text": " mendasari G1, uji klasifikasi mendasari G2 dan G3, serta uji kegunaan dan penilaian validator mendasari G4. Uji operasional, uji jalur ucapan, dan uji cakupan kamus melengkapi analisis tanpa menjadi syarat gerbang. Rantai lengkap dari "
-    },
-    {
-     "text": "dataset",
-     "italics": true
-    },
-    {
-     "text": " hingga pengemasan ditunjukkan pada Gambar 3.6."
+     "text": " mendasari G1, uji klasifikasi mendasari G2 dan G3, serta uji kegunaan dan penilaian validator mendasari G4. Uji operasional, uji jalur ucapan, dan uji cakupan kamus melengkapi analisis tanpa menjadi syarat gerbang. Rantai perekaman hingga pelatihan telah ditunjukkan pada Gambar 3.3 dan Gambar 3.4, sedangkan rantai evaluasi dari model terpilih hingga artefak akhir ditunjukkan pada Gambar 3.8."
     }
    ]
   },
   {
    "t": "figure",
-   "caption": "Gambar 3.6 Alur dataset, pelatihan guru–murid, evaluasi, dan deployment",
-   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.6.png"
+   "caption": "Gambar 3.8 Alur evaluasi: pembagian data, metrik, uji operasional, uji kegunaan, dan artefak akhir",
+   "png": "/home/z/my-project/download/translator-sibi-docx/assets/gambar-3.8.png"
   },
   {
    "t": "h3",

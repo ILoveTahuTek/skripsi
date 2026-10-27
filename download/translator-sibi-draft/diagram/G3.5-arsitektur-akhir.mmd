@@ -1,0 +1,36 @@
+%% G3.5 — Arsitektur produk akhir tanpa kamera (BAB III, Subbab 3.5.1)
+%% Tipe: flowchart TD tiga rantai sejajar (arah 1, arah 2, jalur guru) + server lokal; kotak kelompok dihapus demi keterbacaan, pengelompokan di caption
+flowchart TD
+    TX["Modul TX<br/>(ESP-NOW)"]
+    ZN["Zona isyarat<br/>(satu pengisyarat)"]
+    RX["Modul RX: CSI +<br/>inferensi murid int8"]
+    MAPL["Kamus label–teks<br/>di modul"]
+    DSP1["Layar modul:<br/>teks hasil"]
+    TTS["Layanan<br/>TTS awan"]
+    SPK["Speaker +<br/>rotary encoder"]
+    TX --> ZN
+    ZN --> RX
+    RX --> MAPL
+    MAPL --> DSP1
+    MAPL -- "teks via Wi-Fi" --> TTS
+    TTS -- "audio" --> SPK
+
+    BTN["Tombol<br/>tekan-untuk-bicara"]
+    MIC["Mikrofon<br/>I2S"]
+    STT["Layanan<br/>ASR awan"]
+    DSP2["Layar modul: teks lalu<br/>representasi SIBI"]
+    AST["Aset SIBI: glos,<br/>gambar, ejaan jari<br/>(Subbab 2.8)"]
+    BTN --> MIC
+    MIC -- "audio via Wi-Fi" --> STT
+    STT -- "teks" --> DSP2
+    AST --> DSP2
+
+    CAM["Webcam laptop"]
+    Y26P["YOLO26-Pose:<br/>17 keypoint COCO"]
+    SUP["Supervisi pelatihan<br/>murid (Subbab 3.7)"]
+    CAM --> Y26P
+    Y26P --> SUP
+
+    LOK["Server lokal (cadangan):<br/>ASR faster-whisper,<br/>TTS MMS, server RuView"]
+    TTS -. "TTS lokal" .-> LOK
+    STT -. "ASR lokal" .-> LOK

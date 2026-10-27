@@ -1,0 +1,51 @@
+%% G3.2 — Jalur gagal dan remediasi gerbang keputusan G0-G4 (BAB III, Subbab 3.2)
+%% Tipe: flowchart TB lima baris (subgraf LR; sisi taklihat antarbaris hanya penata); lingkaran = keluaran baris; rincian S0/S1 dan kriteria gerbang di caption
+flowchart TB
+    subgraph R0[" "]
+        direction LR
+        G0{"G0 gagal"}
+        P0["Perbaikan penempatan modul<br/>(satu kali), lalu G0 diuji ulang"]
+        O0((" "))
+        B0(("temuan"))
+        G0 -- "gagal" --> P0
+        P0 -- "lolos: T1" --> O0
+        P0 -- "gagal lagi" --> B0
+    end
+    subgraph R1[" "]
+        direction LR
+        G1{"G1 gagal"}
+        P1["Perubahan penempatan atau<br/>orientasi modul (satu kali),<br/>lalu G1 diuji ulang"]
+        O1((" "))
+        B1(("temuan"))
+        G1 -- "gagal" --> P1
+        P1 -- "lolos: T2" --> O1
+        P1 -- "gagal lagi" --> B1
+    end
+    subgraph R2[" "]
+        direction LR
+        G2{"G2 gagal"}
+        P2["Pemangkasan ke 3–5 isyarat<br/>yang bertumpu pada lintasan"]
+        O2((" "))
+        G2 -- "gagal" --> P2
+        P2 -- "lanjut T2B" --> O2
+    end
+    subgraph R3[" "]
+        direction LR
+        G3{"G3 gagal"}
+        P3["Cakupan menjadi personalisasi<br/>per pengguna, ditulis<br/>sebagai temuan"]
+        O3((" "))
+        G3 -- "gagal" --> P3
+        P3 -- "lanjut T4" --> O3
+    end
+    subgraph R4[" "]
+        direction LR
+        G4{"G4 gagal"}
+        P4["Hasil negatif dilaporkan<br/>sebagai temuan kelayakan"]
+        O4((" "))
+        G4 -- "gagal" --> P4
+        P4 -- "lanjut T5" --> O4
+    end
+    R0 ~~~ R1
+    R1 ~~~ R2
+    R2 ~~~ R3
+    R3 ~~~ R4

@@ -1,0 +1,26 @@
+%% G3.3 — Distilasi guru-murid tahap data: perekaman, penyaringan, guru, penyandingan (BAB III, Subbab 3.2.3)
+%% Tipe: flowchart LR parent + dua kolom TB; sisi klaster ya / video+CSI / belum; keluaran DQ-ya menuju Gambar 3.4; node FLT berasal dari G3.6 lama
+flowchart LR
+    subgraph KA[" "]
+        direction TB
+        REC["Perekaman tersinkron<br/>(Subbab 3.6): video + CSI<br/>+ label, satu penanda waktu"]
+        FLT["Penyaringan segmen via<br/>keypoint YOLO26-Pose: buang<br/>orang hilang, jitter, terpotong"]
+        TT["Latih lanjutan dan evaluasi<br/>guru YOLO26-Pose pada data<br/>visual SIBI (GPU Kaggle)"]
+        TQ{"Kualitas keypoint<br/>guru memadai?"}
+        REC --> FLT
+        FLT --> TT
+        TT --> TQ
+        TQ -- "belum" --> TT
+    end
+    subgraph KB[" "]
+        direction TB
+        Y26["Ekstraksi deret keypoint<br/>guru di laptop: 17 titik<br/>COCO + penanda waktu"]
+        PAIR["Penyandingan berbasis waktu:<br/>jendela CSI + label kelas<br/>+ deret pose guru"]
+        DQ{"Cakupan data dan<br/>sinkronisasi memadai?"}
+        Y26 --> PAIR
+        PAIR --> DQ
+        DQ -- "ya: ke Gambar 3.4" --> EXIT((" "))
+    end
+    KA -- "ya" --> KB
+    KA -- "video + CSI" --> KB
+    KB -- "belum" --> KA

@@ -1,0 +1,49 @@
+%% G3.1 — Tahapan penelitian T0-T5 dengan gerbang keputusan G0-G4 (BAB III, Subbab 3.2)
+%% Tipe: flowchart TD, tahapan T0-T5 dengan gerbang G0-G4; T2 memuat distilasi guru-murid
+flowchart TD
+    T0["T0 Replikasi platform, uji Delta-CSI,<br/>dan uji koeksistensi radio, M1-M2"]
+    G0{"G0 akhir M2: akuisisi stabil, pola gerak<br/>terpisah dari diam dan kosong,<br/>CSI + STA + ESP-NOW berjalan serentak"}
+    P0["Perbaikan penempatan modul satu kali"]
+    G0U{"G0 diuji ulang"}
+    S0["Jalur CSI dihentikan,<br/>dilaporkan sebagai temuan karakterisasi"]
+
+    T1["T1 Kurasi isyarat, kalibrasi ruang,<br/>protokol, dan etika, M2-M4"]
+    G1{"G1 M3: separabilitas awal<br/>2-3 isyarat (nearest-centroid)"}
+    P1["Perubahan penempatan atau<br/>orientasi modul satu kali"]
+    G1U{"G1 diuji ulang"}
+    S1["Tindakan sesuai Tabel 3.6,<br/>dicatat sebagai temuan"]
+
+    T2["T2 Perekaman dataset dan pelatihan guru-murid, M4-M8<br/>webcam + YOLO26-Pose tersinkron dengan CSI<br/>(pola ADR-079), latih di server GPU Kaggle"]
+    G2{"G2 M6-M7: akurasi dalam sesi<br/>jauh di atas peluang acak"}
+    P2["Pemangkasan ke 3-5 isyarat<br/>yang bertumpu pada lintasan"]
+
+    T2B["Kuantisasi int8 dan uji deployment<br/>murid ke modul ESP32-S3"]
+    T3["T3 Uji generalisasi:<br/>lintas sesi, partisipan, ruang,<br/>dan pengguna baru, M8-M10"]
+    G3{"G3 M10: kinerja lintas domain<br/>di atas peluang acak"}
+    P3["Cakupan menjadi personalisasi<br/>per pengguna, ditulis sebagai temuan"]
+
+    T4["T4 Pengemasan purwarupa dua arah<br/>dan uji kegunaan, M10-M12"]
+    G4{"G4 M12: kelengkapan uji dan<br/>persetujuan validator"}
+    P4["Hasil negatif dilaporkan<br/>sebagai temuan kelayakan"]
+    T5["T5 Analisis dan penulisan, M12-M14"]
+
+    T0 --> G0
+    G0 -- "lolos" --> T1
+    G0 -- "gagal" --> P0 --> G0U
+    G0U -- "lolos" --> T1
+    G0U -- "gagal" --> S0 --> T5
+    T1 --> G1
+    G1 -- "lolos" --> T2
+    G1 -- "gagal" --> P1 --> G1U
+    G1U -- "lolos" --> T2
+    G1U -- "gagal" --> S1
+    T2 --> G2
+    G2 -- "lolos" --> T2B
+    G2 -- "gagal" --> P2 --> T2B
+    T2B --> T3
+    T3 --> G3
+    G3 -- "lolos" --> T4
+    G3 -- "gagal" --> P3 --> T4
+    T4 --> G4
+    G4 -- "lolos" --> T5
+    G4 -- "gagal" --> P4 --> T5

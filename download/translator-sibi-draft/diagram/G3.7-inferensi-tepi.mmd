@@ -1,0 +1,24 @@
+%% G3.7 — Inferensi langsung pada ESP32-S3 (BAB III, Subbab 3.7.8)
+%% Tipe: flowchart LR parent + dua kolom TB; sisi klaster R1-->R2 mewakili FT-->MOD; batas perangkat pindah ke prosa/BAB II
+flowchart LR
+    subgraph R1[" "]
+        direction TB
+        CSI["Callback CSI,<br/>mode promiscuous,<br/>filter MGMT"]
+        BUF["Penyangga geser<br/>CSI di PSRAM"]
+        SEG["Segmentasi energi<br/>gerak (perangkat)"]
+        FT["Fitur ringkas:<br/>Doppler, amplitudo/fase"]
+        CSI --> BUF
+        BUF --> SEG
+        SEG --> FT
+    end
+    subgraph R2[" "]
+        direction TB
+        MOD["Model murid int8<br/>TFLM/ESP-DL: 5–8 kelas,<br/>arena tetap di PSRAM"]
+        DEC{"Skor keyakinan<br/>di atas ambang?"}
+        OUT["Label + skor<br/>dikirim via UDP"]
+        RJ["Label ditolak:<br/>isyarat tidak dikenali"]
+        MOD --> DEC
+        DEC -- "ya" --> OUT
+        DEC -- "tidak" --> RJ
+    end
+    R1 --> R2
