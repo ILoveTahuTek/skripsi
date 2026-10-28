@@ -510,3 +510,22 @@ Stage Summary:
 - Keputusan kunci: (a) misi Claude dibatasi penyuntingan akhir (whitelist bahasa/konsistensi/kohesi/format) dengan blacklist keras (angka, klaim, sitasi, DP, blok mermaid, PERLU DATA, judul, struktur); (b) 8 figur dinyatakan tervalidasi dan dikunci — tugas Claude terhadap figur = verifikasi rujukan silang + 1 koreksi wajib (catatan penyusunan 3.1–3.6 → 3.1–3.8) + laporkan temuan tanpa sunting senyap; (c) output Claude distandarkan (draft-final.md + log + temuan + pernyataan verifikasi, pemisah eksplisit) agar dapat diverifikasi otomatis di sisi asisten.
 - Berikutnya (menunggu pemilik): pemilik menjalankan paket di Claude → mengembalikan draft-final.md → asisten memverifikasi (44/80/8/judul/angka jangkar) → memulihkan pelanggaran bila ada → sinkron diagram → rakit ulang → bangun DOCX (TNR 12pt, spasi 1,5, margin 4-3-3-3) → PDF pratinjau → push.
 - Sisa human-owned: tidak berubah (44 penanda PERLU DATA, 6+1 konfirmasi pembimbing, Update Field TOC di Word).
+
+---
+Task ID: 26
+Agent: Super Z (main agent, sesi web)
+Task: Atas permintaan pemilik ("aku kan minta untuk kamu kompresi semua itu agar aku mudah mengunduhnya") — kemas paket bahan Claude menjadi unduhan tunggal + varian satu-file satu-tempel, tanpa mengubah substansi.
+
+Work Log:
+- Verifikasi ulang paket Task 25 sebelum disentuh: 53 pemeriksaan → SEMUA LOLOS (naskah 981 baris/16.906 kata identik byte-per-byte, 44 penanda PERLU DATA, 8 mermaid, caption 3.1–3.8 urut, DP [1]–[80]).
+- Skrip baru `scripts/translator-sibi-bahan-claude/buat_satu_file.py` → `download/translator-sibi-bahan-claude/PROMPT-SATU-FILE-LENGKAP.md` (131.522 byte, 1.075 baris) = catatan pengiriman + `PROMPT-SATU-PESAN.md` UTUH + penanda `MULAI NASKAH SUMBER` + `naskah-sumber.md` UTUH + penanda `SELESAI NASKAH SUMBER`. Tujuan: salin isi satu berkas → tempel sekali ke Claude, tanpa lampiran.
+- `0-CARA-PAKAI.md` dimutakhirkan: +1 baris tabel (varian satu-file, kolom "Termudah"); Cara A kini menyarankan `PROMPT-SATU-FILE-LENGKAP.md` tanpa lampiran, dengan `PROMPT-SATU-PESAN.md` + lampiran `naskah-sumber.md` sebagai fallback bila tempel terpotong.
+- `verifikasi_paket.py` diperluas 53 → 57 pemeriksaan: keberadaan berkas ke-10; satu-file memuat prompt UTUH; memuat naskah UTUH; penanda MULAI/SELESAI hadir; 0-CARA-PAKAI memuat "tanpa lampiran". Hasil jalankan ulang: SEMUA LOLOS.
+- ZIP unduhan tunggal: `download/Paket-Bahan-Claude-SIBI.zip` (100 KB, 10 berkas markdown) — satu unduhan berisi seluruh paket.
+- Commit + push seluruh perubahan ke GitHub.
+
+Stage Summary:
+- Deliverable: (1) `download/Paket-Bahan-Claude-SIBI.zip` — SATU unduhan berisi seluruh paket; (2) `download/translator-sibi-bahan-claude/PROMPT-SATU-FILE-LENGKAP.md` — varian termudah pakai: satu berkas, satu tempel, tanpa lampiran.
+- Tidak ada perubahan substansi: prompt dan naskah tetap verbatim, hanya digabung dengan penanda jelas; semua pemeriksaan tetap hijau.
+- Berikutnya (menunggu pemilik): pemilik menjalankan paket di Claude → mengembalikan draft-final.md → asisten memverifikasi (44/80/8/judul/angka jangkar) → bangun DOCX (TNR 12pt, spasi 1,5, margin 4-3-3-3) → PDF pratinjau → push.
+- Sisa human-owned: tidak berubah (44 penanda PERLU DATA, 6+1 konfirmasi pembimbing, Update Field TOC di Word).

@@ -28,6 +28,7 @@ berkas_wajib = [
     "0-CARA-PAKAI.md", "1-PERAN-DAN-MISI.md", "2-KONTEKS-PROYEK.md",
     "3-STANDAR-BAHASA-DAN-KEJUJURAN.md", "4-ATURAN-DIAGRAM.md", "5-HAL-TERBUKA.md",
     "6-FORMAT-OUTPUT-FINAL.md", "naskah-sumber.md", "PROMPT-SATU-PESAN.md",
+    "PROMPT-SATU-FILE-LENGKAP.md",
 ]
 for b in berkas_wajib:
     periksa(f"berkas {b}", (PAKET / b).is_file() and (PAKET / b).stat().st_size > 500)
@@ -84,7 +85,17 @@ for nama, kunci in cek_aturan.items():
     for k in kunci:
         periksa(f"{nama} memuat: {k[:52]}", k in teks)
 
-# 9. Tidak ada sisa salah ketik 'naskah-source'
+# 9. Varian satu file: prompt + naskah utuh tergabung, penanda jelas
+satu_file = (PAKET / "PROMPT-SATU-FILE-LENGKAP.md").read_text(encoding="utf-8")
+prompt_teks = (PAKET / "PROMPT-SATU-PESAN.md").read_text(encoding="utf-8").rstrip("\n")
+periksa("satu-file memuat prompt satu-pesan UTUH", prompt_teks in satu_file)
+periksa("satu-file memuat naskah sumber UTUH", naskah.rstrip("\n") in satu_file)
+periksa("satu-file memuat penanda MULAI/SELESAI NASKAH SUMBER",
+        "MULAI NASKAH SUMBER" in satu_file and "SELESAI NASKAH SUMBER" in satu_file)
+periksa("satu-file memuat catatan pengiriman tanpa lampiran",
+        "tanpa lampiran" in (PAKET / "0-CARA-PAKAI.md").read_text(encoding="utf-8"))
+
+# 10. Tidak ada sisa salah ketik 'naskah-source'
 sisa = [b.name for b in PAKET.glob("*.md") if "naskah-source" in b.read_text(encoding="utf-8")]
 periksa("tidak ada 'naskah-source' tersisa", not sisa, ", ".join(sisa))
 
