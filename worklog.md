@@ -529,3 +529,21 @@ Stage Summary:
 - Tidak ada perubahan substansi: prompt dan naskah tetap verbatim, hanya digabung dengan penanda jelas; semua pemeriksaan tetap hijau.
 - Berikutnya (menunggu pemilik): pemilik menjalankan paket di Claude → mengembalikan draft-final.md → asisten memverifikasi (44/80/8/judul/angka jangkar) → bangun DOCX (TNR 12pt, spasi 1,5, margin 4-3-3-3) → PDF pratinjau → push.
 - Sisa human-owned: tidak berubah (44 penanda PERLU DATA, 6+1 konfirmasi pembimbing, Update Field TOC di Word).
+
+---
+Task ID: 27
+Agent: Super Z (main agent, sesi web)
+Task: Permintaan pemilik "SEMUAA" — kemas SELURUH artefak proyek SIBI (semua folder di download/) menjadi satu ZIP induk untuk unduhan sekali klik.
+
+Work Log:
+- Inventaris download/: 7 folder artefak (sempro-dpj4-sibi-csi 2,1M · translator-sibi-bahan-claude 296K · translator-sibi-bahan 584K · translator-sibi-docx 8,0M · translator-sibi-draft 448K · translator-sibi-literatur 1,8M · translator-sibi-revisi 220K) + README.md (placeholder) + ZIP kecil Task 26 — total 14 MB.
+- Buat `download/Semua-Artefak-SIBI-20261028.zip` (11 MB, 119 berkas) dengan `-x '*.zip'` agar ZIP Task 26 tidak bertumpuk di dalamnya; isi = 7 folder lengkap + README.
+- Verifikasi struktur: 7 folder + README semuanya hadir di dalam arsip (bahan-claude = folder + 10 berkas markdown).
+- Insiden sunting worklog: penyisipan Task 27 pertama menelan header "Task ID: 26" — dipulihkan via `git restore worklog.md` (state commit 93f8455) lalu Task 27 disisipkan ulang di akhir secara benar.
+- Commit + push ke GitHub.
+
+Stage Summary:
+- Deliverable: `download/Semua-Artefak-SIBI-20261028.zip` — SATU unduhan berisi SELURUH artefak proyek: DOCX utama 68 hlm + PDF pratinjau + draft markdown + diagram .mmd + dossier bahan + peta literatur + proposal revisi + sempro DPJ-4 + paket bahan Claude (10 berkas, termasuk varian satu-file).
+- Tidak ada perubahan substansi artefak apa pun; hanya pengemasan.
+- Berikutnya: tetap menunggu draft-final.md dari Claude (via pemilik) untuk langkah verifikasi + konversi DOCX.
+- Sisa human-owned: tidak berubah (44 penanda PERLU DATA, 6+1 konfirmasi pembimbing, Update Field TOC di Word).
