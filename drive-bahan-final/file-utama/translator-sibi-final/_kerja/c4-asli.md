@@ -1,0 +1,174 @@
+# BAB III METODE PENELITIAN
+
+## 3.1 Desain Penelitian
+
+Penelitian ini dirancang sebagai studi kelayakan kuantitatif bergerbang yang menghasilkan purwarupa penerjemah dua arah. Bagian kuantitatif mengukur sejauh mana Wi-Fi CSI dari tautan antarmodul ESP32-S3 dapat membedakan 5–8 isyarat SIBI terisolasi. Bagian itu juga mengukur sejauh mana model terkuantisasi berjalan pada perangkat serta sejauh mana jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI bekerja pada skenario yang ditetapkan. Setelah komponen diuji, purwarupa dikemas lalu dikaji kelayakannya sebagai alat bantu komunikasi kosakata terbatas melalui uji operasional, uji kegunaan skala kecil, dan penilaian validator penutur tunarungu. Struktur bergerbang dipilih karena kemampuan CSI membedakan isyarat SIBI belum dapat dipastikan sebelum data dikumpulkan; setiap tahap menghasilkan artefak tetap, kegagalan gerbang dicatat sebagai temuan, dan kriteria akurasi dirumuskan relatif terhadap peluang acak (Subbab 2.10). Inti metodologi pelatihannya berbentuk distilasi guru–murid. Model guru kamera YOLO26-Pose mengekstrak deret pose gerakan SIBI dari video perekaman; deret tersebut menjadi supervisi tambahan bagi model murid yang mengenali isyarat dari jendela CSI dan berjalan langsung pada modul (Subbab 3.7).
+
+Rumusan masalah pertama dijawab pada tahap replikasi platform, perancangan arsitektur, kurasi isyarat dan protokol, serta penerapan distilasi guru–murid. Rumusan masalah kedua dijawab melalui uji klasifikasi, uji *deployment*, dan uji jalur bahasa pada tahap perekaman dan generalisasi. Rumusan masalah ketiga ditinjau melalui uji operasional, uji kegunaan, dan penilaian validator pada tahap pengemasan purwarupa.
+
+## 3.2 Tahapan Penelitian
+
+Penelitian berlangsung selama empat belas minggu (M1–M14) dalam enam tahap. Tahapan dimulai dari replikasi platform dan uji karakterisasi (T0), kemudian kurasi isyarat dan protokol (T1), perekaman *dataset* serta pelatihan guru–murid (T2), uji generalisasi (T3), pengemasan purwarupa dua arah dan uji kegunaan (T4), hingga analisis dan penulisan (T5). Lima tahap pertama ditutup gerbang keputusan G0–G4: jalur lolos dirangkum pada Gambar 3.1, sedangkan jalur gagal, tindakan korektif, dan uji ulang tiap gerbang dirinci pada Gambar 3.2. Bila G0 gagal kedua kali setelah perbaikan, jalur CSI dihentikan dan dilaporkan sebagai temuan karakterisasi, lalu penelitian lanjut ke T5; bila G1 gagal kedua kali, tindakan mengikuti Tabel 3.6 dan dicatat sebagai temuan. Kriteria lolos dan tindakan bila gagal direncanakan ditetapkan sebelum gerbang terkait dinilai; parameter yang belum ditetapkan dihimpun pada Tabel 3.6.
+
+```mermaid
+flowchart LR
+    subgraph KA[" "]
+        direction TB
+        T0["T0 Replikasi platform,<br/>uji Delta-CSI dan<br/>koeksistensi radio (M1–M2)"]
+        G0("G0 akhir M2: akuisisi stabil,<br/>gerak terpisah dari diam/kosong")
+        T1["T1 Kurasi isyarat, kalibrasi<br/>ruang, protokol,<br/>etika (M2–M4)"]
+        G1("G1 M3: separabilitas awal<br/>2–3 isyarat (nearest-centroid)")
+        T2["T2 Perekaman dataset dan<br/>pelatihan guru–murid<br/>(M4–M8)"]
+        G2("G2 M6–M7: akurasi dalam sesi<br/>jauh di atas peluang acak")
+        T0 --> G0
+        G0 -- "lolos" --> T1
+        T1 --> G1
+        G1 -- "lolos" --> T2
+        T2 --> G2
+    end
+    subgraph KB[" "]
+        direction TB
+        T2B["Kuantisasi int8 dan uji<br/>deployment murid ke<br/>modul ESP32-S3"]
+        T3["T3 Uji generalisasi: lintas<br/>sesi, partisipan, ruang,<br/>pengguna baru (M8–M10)"]
+        G3("G3 M10: kinerja lintas domain<br/>di atas peluang acak")
+        T4["T4 Pengemasan purwarupa<br/>dua arah dan uji kegunaan<br/>(M10–M12)"]
+        G4("G4 M12: kelengkapan uji<br/>dan persetujuan validator")
+        T5["T5 Analisis dan penulisan<br/>(M12–M14)"]
+        T2B --> T3
+        T3 --> G3
+        G3 -- "lolos" --> T4
+        T4 --> G4
+        G4 -- "lolos" --> T5
+    end
+    KA -- "lolos" --> KB
+```
+
+Gambar 3.1 Tahapan penelitian T0–T5 dan gerbang keputusan G0–G4 (jalur lolos; jalur gagal dirinci pada Gambar 3.2)
+
+```mermaid
+flowchart TB
+    subgraph R0[" "]
+        direction LR
+        G0{"G0 gagal"}
+        P0["Perbaikan penempatan modul<br/>(satu kali), lalu G0 diuji ulang"]
+        O0((" "))
+        B0(("temuan"))
+        G0 -- "gagal" --> P0
+        P0 -- "lolos: T1" --> O0
+        P0 -- "gagal lagi" --> B0
+    end
+    subgraph R1[" "]
+        direction LR
+        G1{"G1 gagal"}
+        P1["Perubahan penempatan atau<br/>orientasi modul (satu kali),<br/>lalu G1 diuji ulang"]
+        O1((" "))
+        B1(("temuan"))
+        G1 -- "gagal" --> P1
+        P1 -- "lolos: T2" --> O1
+        P1 -- "gagal lagi" --> B1
+    end
+    subgraph R2[" "]
+        direction LR
+        G2{"G2 gagal"}
+        P2["Pemangkasan ke 3–5 isyarat<br/>yang bertumpu pada lintasan"]
+        O2((" "))
+        G2 -- "gagal" --> P2
+        P2 -- "lanjut T2B" --> O2
+    end
+    subgraph R3[" "]
+        direction LR
+        G3{"G3 gagal"}
+        P3["Cakupan menjadi personalisasi<br/>per pengguna, ditulis<br/>sebagai temuan"]
+        O3((" "))
+        G3 -- "gagal" --> P3
+        P3 -- "lanjut T4" --> O3
+    end
+    subgraph R4[" "]
+        direction LR
+        G4{"G4 gagal"}
+        P4["Hasil negatif dilaporkan<br/>sebagai temuan kelayakan"]
+        O4((" "))
+        G4 -- "gagal" --> P4
+        P4 -- "lanjut T5" --> O4
+    end
+    R0 ~~~ R1
+    R1 ~~~ R2
+    R2 ~~~ R3
+    R3 ~~~ R4
+```
+
+Gambar 3.2 Jalur gagal dan remediasi gerbang keputusan G0–G4. Lingkaran kosong = lanjut ke tahap yang tertera pada label sisi; lingkaran "temuan" = penelitian berlanjut dengan hasil dilaporkan sebagai temuan. Kriteria lengkap tiap gerbang diuraikan pada Subbab 3.2.1–3.2.5 dan parameter yang menyertai pada Tabel 3.6.
+
+### 3.2.1 Tahap T0: Replikasi Platform dan Uji Karakterisasi (M1–M2)
+
+Dua modul ESP32-S3 disiapkan dengan *firmware* RuView [28], lalu *pipeline* akuisisi tersinkron diuji tanpa partisipan. Tiga uji dilakukan pada tahap ini. Pertama, uji Delta-CSI (Subbab 3.8.1) untuk mengetahui apakah pola CSI saat bergerak terpisah dari kondisi diam dan ruang kosong. Kedua, uji koeksistensi radio: modul penerima dijalankan dengan penangkapan CSI, koneksi *station* ke *access point*, dan pengiriman UDP secara serentak, lalu laju CSI aktual dan kehilangan paket diukur, termasuk ketika streaming audio dari mikrofon diaktifkan. Ketiga, pengukuran laju pencuplikan aktual sebagai dasar penetapan pita Doppler (Subbab 3.7.1). Keluaran tahap ini adalah laporan karakterisasi sinyal sebagai bahan G0.
+
+### 3.2.2 Tahap T1: Kurasi Isyarat, Kalibrasi Ruang, dan Protokol (M2–M4)
+
+T1 mencakup kurasi 5–8 isyarat bersama validator penutur tunarungu, kalibrasi ruang mitra, penyusunan protokol perekaman dan etika, serta perizinan (Subbab 3.6). Kurasi juga menetapkan himpunan tampilan arah kedua, yaitu isyarat terpilih ditambah 26 huruf dan 9 angka sebagai kosakata ejaan jari (Subbab 2.8). G1 menguji separabilitas awal 2–3 isyarat dengan uji *nearest-centroid* sederhana yang rata-ratanya dihitung tanpa repetisi yang sedang diuji.
+
+### 3.2.3 Tahap T2: Perekaman Dataset, Pelatihan Guru–Murid, dan Uji Deployment (M4–M8)
+
+*Dataset* direkam dengan kurang lebih 30 repetisi per isyarat per sesi disertai video tersinkron (Subbab 3.6). Alur pelatihan pada tahap ini berbentuk distilasi guru–murid: tahap perekaman, penyaringan segmen, pelatihan guru, dan penyandingan data ditunjukkan pada Gambar 3.3, sedangkan pelatihan murid, pembanding, dan deployment ditunjukkan pada Gambar 3.4. Model guru YOLO26-Pose dilatih lanjutan pada data visual SIBI di layanan server GPU Kaggle, lalu kualitas *keypoint*-nya dievaluasi sebelum dipakai (Subbab 3.7.4). Jendela CSI, label kelas dari anotasi protokol, dan deret pose guru diselaraskan berdasarkan penanda waktu untuk membentuk *dataset* murid; kemudian murid 1D-CNN dilatih dengan supervisi label dan deret pose guru (Subbab 3.7.5). Dua pembanding dilatih pada data yang sama, yaitu SVM dan murid ablasi tanpa supervisi guru. Setelah pelatihan, model terpilih dikuantisasi int8, di-*deploy* ke modul penerima, lalu diukur waktu inferensi dan pemakaian memorinya pada laju bingkai aktual. Keluaran T2 adalah *dataset* murid berlabel, model guru dan murid terlatih, serta laporan *deployment*; bila G2 gagal, cakupan dipangkas menjadi 3–5 isyarat yang pembedanya paling bertumpu pada lintasan (Tabel 3.6).
+
+```mermaid
+flowchart LR
+    subgraph KA[" "]
+        direction TB
+        REC["Perekaman tersinkron<br/>(Subbab 3.6): video + CSI<br/>+ label, satu penanda waktu"]
+        FLT["Penyaringan segmen via<br/>keypoint YOLO26-Pose: buang<br/>orang hilang, jitter, terpotong"]
+        TT["Latih lanjutan dan evaluasi<br/>guru YOLO26-Pose pada data<br/>visual SIBI (GPU Kaggle)"]
+        TQ{"Kualitas keypoint<br/>guru memadai?"}
+        REC --> FLT
+        FLT --> TT
+        TT --> TQ
+        TQ -- "belum" --> TT
+    end
+    subgraph KB[" "]
+        direction TB
+        Y26["Ekstraksi deret keypoint<br/>guru di laptop: 17 titik<br/>COCO + penanda waktu"]
+        PAIR["Penyandingan berbasis waktu:<br/>jendela CSI + label kelas<br/>+ deret pose guru"]
+        DQ{"Cakupan data dan<br/>sinkronisasi memadai?"}
+        Y26 --> PAIR
+        PAIR --> DQ
+        DQ -- "ya: ke Gambar 3.4" --> EXIT((" "))
+    end
+    KA -- "ya" --> KB
+    KA -- "video + CSI" --> KB
+    KB -- "belum" --> KA
+```
+
+Gambar 3.3 Distilasi guru–murid tahap data: perekaman tersinkron, penyaringan segmen, model guru, dan penyandingan berbasis waktu
+
+```mermaid
+flowchart TD
+    SD["Dataset murid: jendela CSI,<br/>label kelas SIBI,<br/>supervisi deret pose guru"]
+    STU["Latih murid 1D-CNN di server<br/>GPU Kaggle: kerugian klasifikasi<br/>+ suku supervisi guru"]
+    BASE["Pembanding: SVM fitur dan<br/>murid ablasi tanpa<br/>supervisi guru"]
+    EQ{"Kinerja memadai<br/>(gerbang G2, G3)?"}
+    OPT["Optimasi untuk ESP32-S3:<br/>kuantisasi int8, uji ukuran,<br/>RAM, dan latensi"]
+    DEP["Ekspor dan pemasangan model<br/>murid pada modul penerima<br/>ESP32-S3"]
+    DEV["Perangkat akhir: inferensi<br/>CSI-SIBI lokal tanpa kamera<br/>(Gambar 3.5)"]
+    SD --> STU
+    SD --> BASE
+    STU --> EQ
+    BASE --> EQ
+    EQ -- "belum (Tabel 3.4)" --> SD
+    EQ -- "ya" --> OPT
+    OPT --> DEP
+    DEP --> DEV
+```
+
+Gambar 3.4 Distilasi guru–murid tahap pelatihan: dataset murid ber-supervisi guru, pembanding, gerbang kinerja, dan deployment
+
+### 3.2.4 Tahap T3: Uji Generalisasi (M8–M10)
+
+Model mudah *overfitting* pada orang dan ruang tempat data latih direkam [39] sehingga model diuji lintas sesi, lintas partisipan, lintas ruang, dan pada satu pengguna baru tanpa pelatihan ulang (Subbab 3.7.6). Strategi lintas domain Widar3.0 [40] dijadikan acuan tanpa mengasumsikan hasil yang sama pada isyarat SIBI. Bila G3 gagal, cakupan menjadi personalisasi per pengguna yang memerlukan data latih singkat dari setiap pengguna dan perubahan itu dilaporkan sebagai temuan.
+
+### 3.2.5 Tahap T4: Pengemasan Purwarupa Dua Arah dan Uji Kegunaan (M10–M12)
+
+Model murid yang telah berjalan di modul dikemas menjadi purwarupa dua arah (Subbab 3.5) dengan mengaktifkan layanan ucapan awan pada kedua arah. Pengemasan menambahkan tombol tekan-untuk-bicara dan rotary encoder volume pada modul pengguna, pemetaan teks ke representasi SIBI, serta tampilan layar modul dan pemutaran audio pada *speaker*. Selanjutnya dilakukan uji operasional, uji jalur ucapan, uji cakupan kamus, uji kegunaan dengan 3–5 pengguna, dan penilaian validator (Subbab 3.8). G4 menilai kelengkapan data uji dan persetujuan validator atas kewajaran keluaran.
+
+### 3.2.6 Tahap T5: Analisis dan Penulisan (M12–M14)
+
+Seluruh artefak dianalisis dan disusun menjadi laporan kelayakan beserta rekomendasi berdasarkan gerbang yang lolos dan yang gagal. Laporan memuat keterbatasan secara eksplisit, yaitu konfigurasi jari dan ekspresi wajah tidak dikenali, arah kedua berbentuk kamus kata-level dan ejaan jari, serta seluruh klaim terikat pada kosakata terbatas (Subbab 1.4).
