@@ -1,13 +1,15 @@
 // parse_md.js — Parsing draft proposal Translator SIBI (markdown) menjadi blok JSON terstruktur.
 // Adaptasi dari scripts/sempro/parse_md.js (pipeline DPJ-4 yang sudah terbukti).
+// Sejak Task 28: membaca split hasil Claude (download/translator-sibi-final/_kerja/split/)
+// dan menulis parsed-final.json.
 // Mendukung: heading 1-3, paragraf dengan run inline (miring/tebal/kode/penanda PERLU),
 // butir bernomor, tabel markdown + keterangan, blok mermaid -> gambar, entri daftar pustaka.
 const fs = require('fs');
 const path = require('path');
 
-const SRC = '/home/z/my-project/download/translator-sibi-draft';
+const SRC = '/home/z/my-project/download/translator-sibi-final/_kerja/split';
 const ASSETS = '/home/z/my-project/download/translator-sibi-docx/assets';
-const OUTJSON = '/home/z/my-project/scripts/translator-sibi-docx/parsed.json';
+const OUTJSON = '/home/z/my-project/scripts/translator-sibi-docx/parsed-final.json';
 
 // ---------- Inline tokenizer ----------
 // Jalankan token khusus dulu (PERLU), lalu tebal, miring, kode, lalu teks biasa.

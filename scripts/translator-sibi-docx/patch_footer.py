@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Patch footer PAGE field dengan format switch (WPS compat) + hapus pgNumType kosong.
 Footer romawi (rata tengah) -> PAGE \\* roman; footer arab (rata kanan) -> PAGE \\* arabic."""
-import re, shutil, zipfile
+import re, shutil, sys, zipfile
 
-path = '/home/z/my-project/download/translator-sibi-docx/Proposal-Penerjemah-Dua-Arah-SIBI-CSI-ESP32S3.docx'
+path = sys.argv[1] if len(sys.argv) > 1 else '/home/z/my-project/download/translator-sibi-docx/Proposal-Penerjemah-Dua-Arah-SIBI-CSI-ESP32S3.docx'
 tmp = path + '.tmp'
 
 zin = zipfile.ZipFile(path, 'r')

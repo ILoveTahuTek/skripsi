@@ -1,0 +1,1109 @@
+[
+ {
+  "potongan": 1,
+  "isi": "BAB I Pendahuluan (1.1–1.6)",
+  "perubahan": [
+   {
+    "lokasi": "1.1 ¶5",
+    "sebelum": "Pemantauan napas dari CSI juga berhasil mengklasifikasikan",
+    "sesudah": "Pemantauan napas dari CSI berhasil mengklasifikasikan",
+    "alasan": "Kohesi: kalimat tepat sebelumnya sudah memakai \"juga\" (\"juga telah terbukti\"), jadi \"juga\" yang kedua dibuang."
+   },
+   {
+    "lokasi": "1.1 ¶5",
+    "sebelum": "untuk kunci tunggal pada kondisi terkendali [25]",
+    "sesudah": "untuk tombol tunggal pada kondisi terkendali [25]",
+    "alasan": "Konsistensi istilah dalam satu kalimat (\"ketukan tombol\" ... \"tombol tunggal\"). \"Kunci tunggal\" adalah kalke dari \"single key\". Angka dan sitasi tidak berubah."
+   },
+   {
+    "lokasi": "1.1 ¶6",
+    "sebelum": "satu chip ESP32-S3",
+    "sesudah": "satu *chip* ESP32-S3",
+    "alasan": "Istilah asing wajib dimiringkan (berkas 3). Kata aslinya dipertahankan dan tidak diganti dengan serapan \"cip\" agar intervensi seminimal mungkin."
+   },
+   {
+    "lokasi": "1.1 ¶6",
+    "sebelum": "sebagaimana dijalankan *firmware* RuView [28]; koeksistensi itu mensyaratkan",
+    "sesudah": "sebagaimana dijalankan *firmware* RuView [28]. Koeksistensi itu mensyaratkan",
+    "alasan": "Kalimat efektif: kalimat sepanjang sekitar 39 kata dipecah pada titik koma. Isi dan posisi sitasi tetap."
+   },
+   {
+    "lokasi": "1.1 ¶6",
+    "sebelum": "berjalan langsung pada modul sementara keluarannya diteruskan",
+    "sesudah": "berjalan langsung pada modul, sementara keluarannya diteruskan",
+    "alasan": "EYD V: di sini \"sementara\" menghubungkan dua klausa setara yang berkontras (sama dengan \"sedangkan\"), jadi diawali koma."
+   },
+   {
+    "lokasi": "1.1 ¶7",
+    "sebelum": "mengapit zona isyarat; modul penerima menangkap CSI, ... memetakan label menjadi teks pada kamus kecil modul,",
+    "sesudah": "mengapit zona isyarat. Modul penerima menangkap CSI, ... memetakan label menjadi teks melalui kamus label-teks kecil pada modul,",
+    "alasan": "Kalimat sepanjang sekitar 44 kata dipecah pada titik koma. Istilahnya diseragamkan dengan istilah inti \"kamus label-teks\" (berkas 2, keputusan 7: \"Kamus label-teks kecil dimuat di modul\"). Kata \"kecil\" dipertahankan agar informasinya tidak hilang."
+   },
+   {
+    "lokasi": "1.1 ¶7",
+    "sebelum": "layanan sintesis ucapan *cloud* / layanan pengenal ucapan *cloud* / layanan *cloud* Google dan Azure / memakai layanan *cloud* berbahasa Indonesia",
+    "sesudah": "layanan sintesis ucapan awan / layanan pengenal ucapan awan / layanan awan Google dan Azure / memakai layanan awan berbahasa Indonesia",
+    "alasan": "Konsistensi istilah inti (\"layanan ucapan awan\", TTS/ASR awan) yang sudah dipakai di ¶6, 1.2, 1.3, dan 1.4. Ada empat kemunculan."
+   },
+   {
+    "lokasi": "1.1 ¶7",
+    "sebelum": "untuk dienali menjadi teks",
+    "sesudah": "untuk diubah menjadi teks",
+    "alasan": "Memperbaiki salah ketik \"dienali\". Bentuk \"dikenali menjadi teks\" juga janggal (kalke \"recognized into text\") dan mengulang \"pengenal\" dalam frasa yang sama, jadi dipakai \"diubah menjadi teks\"."
+   },
+   {
+    "lokasi": "1.1 ¶7",
+    "sebelum": "server lokal cadangan; pelatihan model guru dan model murid dijalankan",
+    "sesudah": "server lokal cadangan. Pelatihan model guru dan model murid dijalankan",
+    "alasan": "Kalimat sepanjang lebih dari 40 kata dipecah pada titik koma. Isi dan spesifikasi tetap."
+   },
+   {
+    "lokasi": "1.1 ¶7",
+    "sebelum": "Teknologi pemrosesan bahasanya telah diaudit ke sumber primernya.",
+    "sesudah": "Teknologi pemrosesan bahasanya telah dicocokkan dengan sumber primernya.",
+    "alasan": "Kolokasi \"diaudit ke\" tidak lazim (kalke \"audited against\"). Subjek kalimat tidak diubah. Usulan peninjau \"Dukungan ...\" tidak dipakai karena menggeser subjek klaim."
+   },
+   {
+    "lokasi": "1.1 ¶8",
+    "sebelum": "yang dibedakan lintasan lengan, tubuh atas, atau kepala, bukan oleh bentuk jari",
+    "sesudah": "yang dibedakan oleh lintasan lengan, tubuh atas, atau kepala, bukan oleh bentuk jari",
+    "alasan": "Kesejajaran: ruas kedua sudah memakai \"oleh\", jadi ruas pertama juga diberi \"oleh\"."
+   },
+   {
+    "lokasi": "1.1 ¶8",
+    "sebelum": "Model berbasis CSI juga mudah *overfitting* terhadap",
+    "sesudah": "Model berbasis CSI juga mudah mengalami *overfitting* terhadap",
+    "alasan": "Kalimat efektif: *overfitting* adalah nomina asing, jadi tidak bisa langsung menjadi predikat setelah \"mudah\"."
+   },
+   {
+    "lokasi": "1.1 ¶8",
+    "sebelum": "dibatasi menjadi kamus kata-level dengan *fallback* ejaan jari",
+    "sesudah": "dibatasi pada kamus kata-level dengan *fallback* ejaan jari",
+    "alasan": "\"dibatasi pada\" lebih idiomatis dan sudah dipakai dalam paragraf yang sama (\"Kosakata dibatasi pada\"). Istilah \"kata-level\" sengaja tidak diubah (lihat temuan)."
+   },
+   {
+    "lokasi": "1.1 ¶8",
+    "sebelum": "penelitian ini merancang bangun purwarupa",
+    "sesudah": "penelitian ini merancang dan membangun purwarupa",
+    "alasan": "\"Rancang bangun\" adalah nomina, sedangkan bentuk verba \"merancang bangun\" tidak baku."
+   },
+   {
+    "lokasi": "1.3 kalimat pengantar",
+    "sebelum": "penelitian ini bertujuan untuk:",
+    "sesudah": "penelitian ini bertujuan:",
+    "alasan": "Kalimat efektif: \"bertujuan\" langsung diikuti verba pada butir (Merancang/Mengukur/Menguji), jadi \"untuk\" mubazir."
+   },
+   {
+    "lokasi": "1.4 butir 1",
+    "sebelum": "(isyarat dibedakan lintasan lengan, tubuh atas, atau kepala, bukan bentuk jari)",
+    "sesudah": "(isyarat dibedakan oleh lintasan lengan, tubuh atas, atau kepala, bukan oleh bentuk jari)",
+    "alasan": "Kesejajaran, diseragamkan dengan rumusan yang sama di 1.1 ¶8 dan 1.5.1."
+   },
+   {
+    "lokasi": "1.4 butir 2",
+    "sebelum": "tidak dikenali; batas ini mengikat kedua arah",
+    "sesudah": "tidak dikenali. Batas ini mengikat kedua arah",
+    "alasan": "Kalimat sepanjang sekitar 37 kata dipecah pada titik koma tanpa mengubah isi."
+   },
+   {
+    "lokasi": "1.4 butir 3",
+    "sebelum": "server lokal cadangan; pelatihan model guru dan murid memakai",
+    "sesudah": "server lokal cadangan. Pelatihan model guru dan murid memakai",
+    "alasan": "Kalimat sepanjang sekitar 55 kata dipecah pada titik koma. Spesifikasi tidak berubah."
+   },
+   {
+    "lokasi": "1.4 butir 4",
+    "sebelum": "layanan server GPU Kaggle; label kelas isyarat berasal",
+    "sesudah": "layanan server GPU Kaggle. Label kelas isyarat berasal",
+    "alasan": "Kalimat yang menggabungkan tiga klausa dipecah pada titik koma. Isi tetap."
+   },
+   {
+    "lokasi": "1.4 butir 6",
+    "sebelum": "Arah kedua dibatasi menjadi kamus kata-level",
+    "sesudah": "Arah kedua dibatasi pada kamus kata-level",
+    "alasan": "Disamakan dengan suntingan di 1.1 ¶8 (\"dibatasi pada\")."
+   },
+   {
+    "lokasi": "1.5.1 ¶1",
+    "sebelum": "pembanding bagi penelitian penginderaan nirkabel berbahasa isyarat lain,",
+    "sesudah": "pembanding bagi penelitian penginderaan nirkabel untuk bahasa isyarat lain,",
+    "alasan": "\"berbahasa isyarat\" diganti \"untuk bahasa isyarat\" karena yang dimaksud adalah penelitian untuk bahasa isyarat, bukan penelitian yang berbahasa isyarat. Kata \"lain\" tetap menerangkan bahasa isyarat (selain SIBI) agar \"termasuk perluasan ke BISINDO\" tetap punya induk. Suntingan sebelumnya (\"penelitian lain tentang ...\") dibatalkan sesuai temuan tinjauan KESETIAAN."
+   },
+   {
+    "lokasi": "1.5.1 ¶1",
+    "sebelum": "arsitektur tepi-awan",
+    "sesudah": "arsitektur tepi–awan",
+    "alasan": "Diseragamkan dengan pasangan relasional lain dalam naskah dan daftar istilah inti, yang memakai tanda pisah pendek (guru–murid)."
+   },
+   {
+    "lokasi": "1.5.2 ¶1",
+    "sebelum": "pada kegiatan pembelajaran, bersama protokol kurasi kosakata yang disusun bersama validator",
+    "sesudah": "pada kegiatan pembelajaran, beserta protokol kurasi kosakata yang disusun bersama validator",
+    "alasan": "Kata \"bersama\" muncul dua kali dengan fungsi berbeda. Yang pertama diganti \"beserta\"."
+   },
+   {
+    "lokasi": "1.5.2 ¶1",
+    "sebelum": "bagi lawan bicara pendengar; bila penelitian berhenti lebih awal,",
+    "sesudah": "bagi lawan bicara pendengar. Bila penelitian berhenti lebih awal,",
+    "alasan": "Kalimat yang memuat dua pengandaian dipecah pada titik koma. Isi tetap."
+   }
+  ],
+  "temuan": [
+   {
+    "lokasi": "1.1 ¶8 (kalimat penutup latar belakang)",
+    "temuan": "Kalimat penutup masih mengikuti pola judul lama (\"purwarupa penerjemah dua arah isyarat SIBI berbasis Wi-Fi CSI pada modul ESP32-S3 ... kosakata terbatas\"). Kalimat ini belum memuat kata kunci judul baru: \"sistem penerjemahan dua arah antara SIBI dan teks atau ujaran Bahasa Indonesia\", \"inferensi model pada ESP32-S3\", dan \"pemrosesan bahasa pada server\".",
+    "usulan": "Usulan redaksi, keputusan ada pada pemilik: \"Berdasarkan uraian tersebut, penelitian ini merancang dan membangun purwarupa sistem penerjemahan dua arah antara SIBI dan teks atau ujaran bahasa Indonesia berbasis Wi-Fi CSI, dengan inferensi model pada modul ESP32-S3 dan pemrosesan bahasa pada server, lalu menguji kelayakannya sebagai alat bantu komunikasi kosakata terbatas pada konteks pendidikan formal.\""
+   },
+   {
+    "lokasi": "1.2 butir 1 dan 1.3 butir 1",
+    "temuan": "Rumusan masalah 1 dan tujuan 1 menyebut \"purwarupa penerjemah dua arah SIBI\" dan \"berkomunikasi dengan layanan ucapan awan\". Keduanya belum memuat frasa judul baru \"sistem penerjemahan dua arah antara SIBI dan teks atau ujaran\" dan \"pemrosesan bahasa pada server\".",
+    "usulan": "Contoh RM1: \"Bagaimana merancang purwarupa sistem penerjemahan dua arah antara SIBI dan teks atau ujaran bahasa Indonesia berbasis dua hingga tiga modul ESP32-S3 yang menangkap CSI dan menjalankan inferensi model pada perangkat, dengan pemrosesan bahasa pada server (layanan ucapan awan sebagai jalur utama), termasuk ...\". Tujuan 1 dirumuskan sejajar dengan RM1 tersebut."
+   },
+   {
+    "lokasi": "1.1 ¶7, 1.4 butir 5, dan judul baru",
+    "temuan": "Judul baru memakai \"pemrosesan bahasa pada server\", sedangkan naskah menetapkan layanan ucapan awan sebagai jalur utama dan server lokal sebagai cadangan. Pembaca bisa mengira \"server\" pada judul hanya berarti server lokal.",
+    "usulan": "Pada kemunculan pertama di 1.1 ¶7 atau 1.4 butir 5, pemilik dapat menegaskan bahwa \"server\" mencakup layanan ucapan awan (jalur utama) dan server lokal (cadangan). Bagian ini tidak diubah tanpa persetujuan pemilik karena menyangkut metodologi terkunci."
+   },
+   {
+    "lokasi": "1.1 ¶5, ¶7; 1.4 butir 5; 1.5.1; 1.6 (temuan tinjauan 'Bahasa Indonesia' DITOLAK untuk diterapkan di potongan ini)",
+    "temuan": "Kapitalisasi tidak seragam: \"bahasa Indonesia\" muncul di ¶5, sedangkan \"Bahasa Indonesia\" muncul di ¶7 (dua kali), 1.4 butir 5, 1.5.1, dan 1.6. Menurut EYD V, bentuk yang benar adalah \"bahasa Indonesia\". Saya tidak menerapkannya di potongan ini karena berkas konteks pemilik (berkas 2) dan kemungkinan bab-bab lain memakai \"Bahasa Indonesia\". Bila hanya BAB I yang diubah, ketidakseragaman berpindah ke tingkat antarbab.",
+    "usulan": "Orkestrator menetapkan satu bentuk untuk seluruh naskah, sebaiknya \"bahasa Indonesia\" sesuai EYD V, lalu menerapkannya serentak di semua bab. Nama diri \"Sistem Isyarat Bahasa Indonesia\" dan judul tetap ditulis kapital."
+   },
+   {
+    "lokasi": "1.1 ¶4, ¶8; 1.4 butir 2, 6 (temuan tinjauan 'kata-level' DITOLAK SEBAGIAN)",
+    "temuan": "Ada dua istilah untuk satu konsep: \"kamus kata-level\" (¶4, ¶8, 1.4 butir 6) dan \"representasi tingkat kata\" (1.4 butir 2). Bagian \"dibatasi menjadi\" → \"dibatasi pada\" sudah diterapkan. Penggantian \"kata-level\" → \"tingkat kata\" belum diterapkan karena berkas konteks pemilik memakai \"kata-level\", dan istilah ini kemungkinan muncul juga di BAB II dan III.",
+    "usulan": "Bila pemilik setuju, seragamkan menjadi \"kamus tingkat kata\" serentak di seluruh naskah."
+   },
+   {
+    "lokasi": "1.1 ¶7; 1.4 butir 3",
+    "temuan": "\"rotary encoder\" ditulis tegak, padahal aturan berkas 3 meminta istilah asing dimiringkan. Daftar istilah inti juga menuliskannya tanpa miring.",
+    "usulan": "Pemilik memilih antara *rotary encoder* (miring) atau tetap tegak, lalu bentuk itu dipakai di seluruh naskah."
+   },
+   {
+    "lokasi": "1.4 butir 7",
+    "temuan": "Butir ini memakai \"zona akuisisi\", sedangkan istilah inti dan 1.1 ¶7 memakai \"zona isyarat\". Belum jelas apakah keduanya konsep yang sama.",
+    "usulan": "Bila konsepnya sama, ganti menjadi \"zona isyarat\". Bila berbeda, biarkan."
+   },
+   {
+    "lokasi": "1.1 ¶7",
+    "temuan": "Urutan \"lalu mengirim teks ke layanan sintesis ucapan awan dan menampilkannya di layar\" dapat dibaca seolah-olah teks dikirim lebih dulu. Keputusan terkunci no. 7 menyatakan teks tampil di layar sebelum dikirim ke TTS.",
+    "usulan": "Pertimbangkan \"..., lalu menampilkan teks di layar dan mengirimkannya ke layanan sintesis ucapan awan.\" Perlu konfirmasi pemilik karena menyangkut urutan proses."
+   },
+   {
+    "lokasi": "1.5.2 ¶1",
+    "temuan": "Klaim \"kosakata yang divalidasi penutur tunarungu memastikan bentuk isyarat yang ditampilkan baku\" cukup kuat untuk sebuah studi kelayakan. Frasa \"berbahasa SIBI\" juga kurang tepat karena SIBI adalah sistem isyarat. Keduanya tidak diubah karena termasuk klaim atau kualifikasi.",
+    "usulan": "Pemilik dapat mempertimbangkan \"membantu memastikan\" serta \"berbasis SIBI\" sebagai pengganti \"berbahasa SIBI\"."
+   },
+   {
+    "lokasi": "1.2 butir 2 dan 1.3 butir 2",
+    "temuan": "Frasa \"jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi ...\" memuat \"dan\" ganda sehingga batas kedua jalur kabur. Selain itu, \"ucapan\" di naskah berbeda dengan \"ujaran\" pada judul baru.",
+    "usulan": "Contoh: \"kinerja jalur isyarat menjadi teks dan suara serta jalur teks atau ucapan menjadi representasi SIBI\". Kata \"serta\" yang sudah ada sebelumnya perlu ikut ditata. Pemilik juga memutuskan apakah \"ucapan\" diseragamkan menjadi \"ujaran\"."
+   },
+   {
+    "lokasi": "Temuan tinjauan 'chip' (1.1 ¶6), diterapkan sebagian",
+    "temuan": "Peninjau menawarkan dua pilihan: serapan \"cip\" atau *chip* miring. Yang dipilih *chip* miring karena paling minimal dan istilah ini kemungkinan muncul juga di bab lain.",
+    "usulan": "Bila pemilik lebih suka serapan KBBI \"cip\", seragamkan di seluruh naskah."
+   },
+   {
+    "lokasi": "Temuan tinjauan 'diaudit ke' (1.1 ¶7), diterapkan dengan redaksi lain",
+    "temuan": "Usulan peninjau \"Dukungan teknologi pemrosesan bahasa tersebut telah diperiksa terhadap ...\" ditolak karena menambah kata \"Dukungan\", yang menggeser subjek klaim, dan \"diperiksa terhadap\" masih berupa kalke. Redaksi yang diterapkan: \"telah dicocokkan dengan sumber primernya\".",
+    "usulan": "Pemilik dapat memilih \"diverifikasi pada sumber primernya\" bila ingin istilah yang lebih teknis."
+   },
+   {
+    "lokasi": "Verifikasi",
+    "temuan": "Pada putaran ini Jev (jev_compare/jev_gate) tidak dipanggil ulang. Kesetiaan 1.5.1 dipulihkan langsung sesuai perbaikan peninjau, yang sudah didukung jev_compare dari tinjauan (contradicts, 0,85, auto). Invarian diperiksa dengan cek.py.",
+    "usulan": "Bila diperlukan, jalankan jev_compare antara kalimat asli dan hasil sunting 1.5.1 untuk konfirmasi akhir."
+   }
+  ],
+  "cek": "LOLOS"
+ },
+ {
+  "potongan": 2,
+  "isi": "BAB II 2.1–2.5",
+  "perubahan": [
+   {
+    "lokasi": "2.1 ¶3",
+    "sebelum": "Alat yang dirancang tidak dimaksudkan menggantikan BISINDO",
+    "sesudah": "Alat yang dirancang tidak dimaksudkan untuk menggantikan BISINDO",
+    "alasan": "Kaidah dan kealamian: verba \"dimaksudkan\" lazim diikuti \"untuk\" sebelum verba tujuan."
+   },
+   {
+    "lokasi": "2.1 ¶3",
+    "sebelum": "melakukan validasi bersama validator penutur BISINDO; kelayakan perluasan tersebut tidak diuji",
+    "sesudah": "melakukan validasi bersama validator penutur BISINDO. Kelayakan perluasan tersebut tidak diuji",
+    "alasan": "Kalimat efektif: kalimat 47 kata dipecah di titik koma menjadi dua kalimat utuh. Isi dan kualifikasi (\"tidak diuji\", \"penelitian lanjutan\") tidak berubah. Usulan tinjauan."
+   },
+   {
+    "lokasi": "2.2 ¶3",
+    "sebelum": "yang dapat menangkap konfigurasi jari; namun, perangkatnya harus dikenakan",
+    "sesudah": "yang dapat menangkap konfigurasi jari. Namun, perangkatnya harus dikenakan",
+    "alasan": "Kalimat efektif: pertentangan yang diawali \"namun\" dijadikan kalimat sendiri sehingga kalimat induk 43 kata terpecah. Sitasi [47], [23] tetap pada klaimnya. Usulan tinjauan."
+   },
+   {
+    "lokasi": "2.3 ¶3",
+    "sebelum": "yang setara laju maksimum 50 bingkai per detik",
+    "sesudah": "yang setara dengan laju maksimum 50 bingkai per detik",
+    "alasan": "Kaidah: \"setara\" berpasangan dengan preposisi \"dengan\" (KBBI)."
+   },
+   {
+    "lokasi": "2.3 ¶6",
+    "sebelum": "Panjang gelombang Wi-Fi pada pita 2,4 GHz berkisar 12,5 cm",
+    "sesudah": "Panjang gelombang Wi-Fi pada pita 2,4 GHz sekitar 12,5 cm",
+    "alasan": "Diksi: \"berkisar\" menyiratkan rentang, padahal yang disebut satu nilai perkiraan. Angka tetap. Usulan tinjauan."
+   },
+   {
+    "lokasi": "2.3 ¶6",
+    "sebelum": "perangkat riset multi-antena",
+    "sesudah": "perangkat riset multiantena",
+    "alasan": "EYD V: unsur terikat \"multi\" ditulis serangkai dengan kata dasar."
+   },
+   {
+    "lokasi": "2.3 ¶6",
+    "sebelum": "dengan laju cuplik 400 Hz [57]",
+    "sesudah": "dengan laju pencuplikan 400 Hz [57]",
+    "alasan": "Konsistensi istilah: konsep yang sama ditulis \"laju pencuplikan\" pada 2.3 ¶3 dan 4 kali di seluruh naskah, sedangkan \"laju cuplik\" hanya muncul di sini."
+   },
+   {
+    "lokasi": "2.3 ¶6",
+    "sebelum": "terlalu halus untuk dibedakan secara andal; asumsi tersebut diperiksa melalui uji Delta-CSI (BAB III)",
+    "sesudah": "terlalu halus untuk dibedakan secara andal. Asumsi tersebut diperiksa melalui uji Delta-CSI (BAB III)",
+    "alasan": "Kalimat efektif: kalimat 43 kata dipecah di titik koma. Isi tidak berubah. Usulan tinjauan. Masalah logika \"diperiksa ... sehingga dibatasi\" tetap dicatat sebagai temuan."
+   },
+   {
+    "lokasi": "2.4 ¶1",
+    "sebelum": "Inti prosesornya ganda Xtensa LX7 berjalan pada 240 MHz dengan instruksi vektor",
+    "sesudah": "Prosesornya berinti ganda Xtensa LX7 yang berjalan pada 240 MHz dengan instruksi vektor",
+    "alasan": "Kalimat efektif: struktur \"Inti prosesornya ganda ... berjalan\" kaku dan predikatnya kabur. Fakta (Xtensa LX7, 240 MHz, instruksi vektor) tidak berubah."
+   },
+   {
+    "lokasi": "2.4 ¶1",
+    "sebelum": "Dukungan CSI tersedia resmi untuk seluruh seri ESP32 termasuk ESP32-S3 melalui repositori esp-csi [27]",
+    "sesudah": "Dukungan CSI tersedia secara resmi untuk seluruh seri ESP32, termasuk ESP32-S3, melalui repositori esp-csi [27]",
+    "alasan": "Ragam baku: keterangan cara memakai \"secara resmi\". Tanda koma mengapit keterangan tambahan \"termasuk ESP32-S3\". Posisi sitasi tetap."
+   },
+   {
+    "lokasi": "2.4 ¶1",
+    "sebelum": "dan varian ESP32-S3 adalah varian yang direkomendasikan dokumentasi RuView",
+    "sesudah": "dan ESP32-S3 adalah varian yang direkomendasikan dokumentasi RuView",
+    "alasan": "Redundansi: kata \"varian\" muncul dua kali dalam satu klausa."
+   },
+   {
+    "lokasi": "2.4 ¶2",
+    "sebelum": "*server* pengolahan sinyal",
+    "sesudah": "server pengolahan sinyal",
+    "alasan": "Konsistensi istilah: daftar istilah inti dan mayoritas naskah (sekitar 30 kemunculan di BAB I–III) menulis \"server\" tegak. Usulan tinjauan. Sel Tabel 2.1 (\"*server* lokal\") tidak disentuh."
+   },
+   {
+    "lokasi": "2.4 ¶2",
+    "sebelum": "agar tidak diterbitkan keluar dari *server* [28]",
+    "sesudah": "agar tidak diterbitkan keluar dari server [28]",
+    "alasan": "Konsistensi istilah, sama seperti butir sebelumnya. Posisi sitasi tetap."
+   },
+   {
+    "lokasi": "2.4 ¶3",
+    "sebelum": "menangkap CSI melalui mode promiscuous, terhubung sebagai *station*",
+    "sesudah": "menangkap CSI melalui mode *promiscuous*, terhubung sebagai *station*",
+    "alasan": "EYD V: istilah asing dimiringkan, sejajar dengan *station* dan *access point* dalam kalimat yang sama dan dengan prosa BAB III (\"mode *promiscuous*\"). Usulan tinjauan. Tabel, caption, dan Mermaid tidak disentuh."
+   },
+   {
+    "lokasi": "2.4 ¶3",
+    "sebelum": "penyaringan paket mode promiscuous dibatasi",
+    "sesudah": "penyaringan paket mode *promiscuous* dibatasi",
+    "alasan": "EYD V: istilah asing dimiringkan, sama seperti butir sebelumnya."
+   },
+   {
+    "lokasi": "2.5 ¶2",
+    "sebelum": "estimatornya diganti YOLO26-Pose yang keluarannya",
+    "sesudah": "estimatornya diganti dengan YOLO26-Pose yang keluarannya",
+    "alasan": "Kaidah: \"diganti\" yang menyatakan pengganti memerlukan \"dengan\". Baris Tabel 2.1 (\"estimator diganti YOLO26-Pose\") tidak disentuh sesuai larangan."
+   }
+  ],
+  "temuan": [
+   {
+    "lokasi": "2.2 ¶2",
+    "temuan": "\"arah balik kata-level\" adalah kalke dari bahasa Inggris. Dalam subbab yang sama (¶3) dipakai \"tingkat kata\". Namun, \"kata-level\" muncul 8 kali di seluruh naskah, sedangkan \"tingkat kata\" hanya 4 kali.",
+    "usulan": "TINJAUAN DITOLAK: usulan tinjauan (\"pada tingkat kata\" hanya di BAB II) justru membuat istilah tidak seragam di BAB I–III. Putuskan satu istilah untuk seluruh naskah, misalnya \"tingkat kata\" (\"kamus tingkat kata\", \"arah balik tingkat kata\"), lalu ganti serentak."
+   },
+   {
+    "lokasi": "2.4 ¶1, 2.4 ¶3, dan Tabel 2.1",
+    "temuan": "\"chip\" ditulis tegak (\"sesuai varian chip\", \"pada satu chip\", sel Tabel 2.1). Padanan KBBI-nya \"cip\". Di BAB I (\"satu chip ESP32-S3\") kata ini juga tegak.",
+    "usulan": "TINJAUAN DITOLAK untuk saat ini: memiringkan atau mengganti kata ini hanya di BAB II membuatnya tidak seragam dengan BAB I dan sel tabel. Pilih \"*chip*\" (miring) atau \"cip\", lalu terapkan serentak di seluruh naskah."
+   },
+   {
+    "lokasi": "2.3 ¶6",
+    "temuan": "\"router\" (2 kali) ditulis tegak. Padanan KBBI-nya \"ruter\". Bila istilah asing yang dipakai, kata ini seharusnya dimiringkan.",
+    "usulan": "Pilih \"*router*\" (miring) atau \"ruter\", lalu terapkan seragam di seluruh naskah."
+   },
+   {
+    "lokasi": "2.4 ¶3, Tabel 2.1, caption Gambar 3.7, Mermaid",
+    "temuan": "Prosa BAB II kini memakai *promiscuous* miring. Sel Tabel 2.1 (\"CSI promiscuous\", \"Koneksi station\"), caption Gambar 3.7, dan Mermaid masih tegak. Bagian itu tidak boleh disentuh.",
+    "usulan": "Pada tahap tata letak, miringkan juga \"promiscuous\" dan \"station\" di sel tabel dan caption bila pemilik setuju."
+   },
+   {
+    "lokasi": "BAB III (c3, c5)",
+    "temuan": "Prosa BAB II kini menulis \"server\" tegak, sesuai daftar istilah inti dan mayoritas naskah. Di potongan lain masih ada \"*server*\" miring di prosa (mis. \"bukan pada *server*\", \"Dari modul ke *server*\", \"*server* RuView\"). Sel Tabel 2.1 juga memuat \"*server* lokal\".",
+    "usulan": "Seragamkan menjadi \"server\" tegak di prosa BAB III. Untuk sel tabel, sesuaikan pada tahap tata letak."
+   },
+   {
+    "lokasi": "2.3 ¶5",
+    "temuan": "\"Chen dkk. merangkum strategi generalisasi lintas domain\" tidak diikuti sitasi [n] langsung. Sitasi terdekat adalah [39] pada kalimat sebelumnya. Sitasi tidak boleh ditambah atau dipindah.",
+    "usulan": "Pemilik perlu memastikan bahwa [39] memang karya Chen dkk. Bila ya, pertimbangkan menulis \"Chen dkk. [39]\"."
+   },
+   {
+    "lokasi": "2.3 ¶6",
+    "temuan": "Setelah dipecah, kalimat \"Asumsi tersebut diperiksa melalui uji Delta-CSI (BAB III) sehingga cakupan pengenalan dibatasi …\" masih bermasalah secara logika: pembatasan cakupan berasal dari asumsi itu, bukan dari pemeriksaannya. Memperbaikinya berarti menyusun ulang klaim.",
+    "usulan": "Misalnya: \"…diasumsikan terlalu halus untuk dibedakan secara andal sehingga cakupan pengenalan dibatasi pada lintasan lengan, tubuh atas, dan kepala. Asumsi tersebut diperiksa melalui uji Delta-CSI (BAB III).\""
+   },
+   {
+    "lokasi": "2.2 ¶2",
+    "temuan": "Frasa \"menyasar arah manusia belajar isyarat [50]\" janggal: \"arah\" dipakai di luar pengertian arah penerjemahan yang digunakan sepanjang subbab.",
+    "usulan": "Misalnya: \"Aplikasi pembelajaran dasar lain menyasar kebutuhan orang yang belajar isyarat [50].\" Pemilik perlu memastikan rumusan ini sesuai dengan isi [50]."
+   },
+   {
+    "lokasi": "2.2 ¶1",
+    "temuan": "Rujukan \"mereka\" pada \"mereka yang belajar bahasa isyarat\" ambigu: bisa merujuk ke keluarga pendengar atau ke orang tua secara umum.",
+    "usulan": "Bila sesuai dengan [3], [4], tulis \"orang tua pendengar yang belajar bahasa isyarat …\"."
+   },
+   {
+    "lokasi": "2.1–2.5 (judul baru)",
+    "temuan": "Tidak ada kalimat yang menyebut judul lama secara harfiah. Bagian ini bukan rumusan, tujuan, atau penutup latar belakang, jadi tidak wajib memetakan kata kunci judul baru.",
+    "usulan": "Tidak perlu tindakan di 2.1–2.5. Periksa pemetaan kata kunci judul baru di BAB I."
+   }
+  ],
+  "cek": "LOLOS"
+ },
+ {
+  "potongan": 3,
+  "isi": "BAB II 2.6–2.11",
+  "perubahan": [
+   {
+    "lokasi": "2.6 ¶1",
+    "sebelum": "[24]; keberadaannya menunjukkan bahwa pengenalan kontinu bukan wilayah yang sama sekali belum disentuh sehingga kebaruan penelitian ini tidak diklaim",
+    "sesudah": "[24]. Keberadaan WiSign menunjukkan bahwa pengenalan kontinu bukan wilayah yang sama sekali belum disentuh. Oleh karena itu, kebaruan penelitian ini tidak diklaim",
+    "alasan": "Kalimat ini terlalu panjang dan berantai (titik koma, 'sehingga', lalu 'melainkan'), jadi dipecah. Rujukan 'keberadaannya' diperjelas menjadi 'Keberadaan WiSign'. Sitasi [24] tetap di belakang klaim WiSign."
+   },
+   {
+    "lokasi": "2.6 ¶1",
+    "sebelum": "sistem multi-perangkat yang tangguh diajukan Shang dan Wu [65]",
+    "sesudah": "sistem multiperangkat yang tangguh diajukan Shang dan Wu [65]",
+    "alasan": "Menurut EYD V, bentuk terikat 'multi' ditulis serangkai dengan kata dasarnya (contoh: multiguna). Ini temuan tinjauan dan sahih. Sel tabel baris 3 tidak disentuh."
+   },
+   {
+    "lokasi": "2.6 ¶2",
+    "sebelum": "cocok untuk data deret waktu [70]; dalam penelitian ini 1D-CNN berperan sebagai model murid",
+    "sesudah": "cocok untuk data deret waktu [70]. Dalam penelitian ini, 1D-CNN berperan sebagai model murid",
+    "alasan": "Kalimat 44 kata berisi dua klausa bebas, jadi dipecah di titik koma (temuan tinjauan). Sitasi [70] tetap di belakang klaimnya. Paragraf menjadi empat kalimat."
+   },
+   {
+    "lokasi": "2.6 ¶3",
+    "sebelum": "mekanisme penolakan dilengkapi agar",
+    "sesudah": "mekanisme penolakan ditambahkan agar",
+    "alasan": "Salah kolokasi: mekanisme tidak 'dilengkapi'. Maksudnya, mekanisme itu ditambahkan pada klasifikator."
+   },
+   {
+    "lokasi": "2.6 ¶4; 2.9 ¶1; 2.9 ¶2",
+    "sebelum": "bukan pada *server*; Dari modul ke *server*; *server* RuView",
+    "sesudah": "bukan pada server; Dari modul ke server; server RuView",
+    "alasan": "Penulisan diseragamkan tegak, mengikuti daftar istilah inti ('server lokal', 'layanan server GPU Kaggle') dan tujuh kemunculan tegak lainnya di potongan ini (temuan tinjauan)."
+   },
+   {
+    "lokasi": "2.7 ¶1",
+    "sebelum": "biaya yang berkelanjutan untuk prototipe",
+    "sesudah": "biaya yang berkelanjutan untuk purwarupa",
+    "alasan": "Konsistensi istilah inti: purwarupa."
+   },
+   {
+    "lokasi": "2.7 ¶1, ¶2 (3x), ¶3 (2x); 2.8 ¶1; 2.11 ¶3",
+    "sebelum": "dukungan Bahasa Indonesia; tanpa Bahasa Indonesia; mendukung Bahasa Indonesia; TTS Bahasa Indonesia; termasuk Bahasa Indonesia; dukungan Bahasa Indonesia [37]; teks Bahasa Indonesia; ASR Bahasa Indonesia",
+    "sesudah": "dukungan bahasa Indonesia; tanpa bahasa Indonesia; mendukung bahasa Indonesia; TTS bahasa Indonesia; termasuk bahasa Indonesia; dukungan bahasa Indonesia [37]; teks bahasa Indonesia; ASR bahasa Indonesia",
+    "alasan": "EYD V: kata 'bahasa' pada nama bahasa ditulis dengan huruf kecil di tengah kalimat (contoh: bahasa Bali). Penulisan ini menyelaraskan potongan dengan 'bahasa Inggris dan bahasa Indonesia' dan 'pemrosesan bahasa Indonesia' di 2.11 ¶3 (temuan tinjauan). Heading 2.7 dibiarkan."
+   },
+   {
+    "lokasi": "2.7 ¶2",
+    "sebelum": "Pilihan yang terverifikasi mendukung Indonesia ada tiga.",
+    "sesudah": "Pilihan yang terverifikasi mendukung bahasa Indonesia ada tiga.",
+    "alasan": "Yang didukung adalah bahasanya, bukan negaranya. Huruf kecil 'bahasa' mengikuti EYD V."
+   },
+   {
+    "lokasi": "2.7 ¶2",
+    "sebelum": "dapat diunduh dan dijalankan lokal",
+    "sesudah": "dapat diunduh dan dijalankan secara lokal",
+    "alasan": "Keterangan cara ditulis lengkap sesuai ragam baku."
+   },
+   {
+    "lokasi": "2.7 ¶3",
+    "sebelum": "lebih dari 100 bahasa termasuk Indonesia [32]",
+    "sesudah": "lebih dari 100 bahasa, termasuk bahasa Indonesia [32]",
+    "alasan": "Koma ditambahkan sebelum keterangan tambahan 'termasuk'. 'Indonesia' diperjelas sebagai nama bahasa dengan huruf kecil 'bahasa' sesuai EYD V."
+   },
+   {
+    "lokasi": "2.7 ¶3",
+    "sebelum": "Dengan anggaran 8 GB VRAM, server cadangan dapat",
+    "sesudah": "Dengan anggaran 8 GB VRAM, server lokal dapat",
+    "alasan": "Konsistensi istilah inti: server lokal (cadangan + riset)."
+   },
+   {
+    "lokasi": "2.7 ¶3",
+    "sebelum": "Layanan pengenal ucapan awan juga menyediakan",
+    "sesudah": "Layanan ASR awan juga menyediakan",
+    "alasan": "Konsistensi istilah inti: layanan ucapan awan (TTS/ASR awan). ASR sudah didefinisikan pada ¶1."
+   },
+   {
+    "lokasi": "2.7 ¶4",
+    "sebelum": "melalui kamus kecil pada modul",
+    "sesudah": "melalui kamus label-teks kecil pada modul",
+    "alasan": "Konsistensi istilah inti: kamus label-teks (salinan kecil di modul)."
+   },
+   {
+    "lokasi": "2.7 ¶5",
+    "sebelum": "dienali menjadi teks Indonesia",
+    "sesudah": "dikenali menjadi teks Indonesia",
+    "alasan": "Salah ketik."
+   },
+   {
+    "lokasi": "2.7 ¶6",
+    "sebelum": "memakai layanan *cloud* berbahasa Indonesia",
+    "sesudah": "memakai layanan ucapan awan berbahasa Indonesia",
+    "alasan": "Istilah asing diganti padanan 'awan' yang sudah dipakai di seluruh naskah, sesuai istilah inti 'layanan ucapan awan'."
+   },
+   {
+    "lokasi": "2.8 ¶1, ¶3; 2.11 ¶3",
+    "sebelum": "kamus kata-level (dua kali); arah balik kata-level",
+    "sesudah": "kamus tingkat kata; arah balik tingkat kata",
+    "alasan": "'Kata-level' adalah kalke struktur bahasa Inggris. Penulisan diselaraskan dengan 'representasi tingkat kata' (2.8 ¶5) dan 'BISINDO tingkat kata' (Tabel 2.2)."
+   },
+   {
+    "lokasi": "2.8 ¶2",
+    "sebelum": "mengenali kata jadian SIBI dengan model *Hidden Markov Model* [74]",
+    "sesudah": "mengenali kata jadian SIBI dengan *Hidden Markov Model* [74]",
+    "alasan": "Redundansi: kata 'model' muncul dua kali."
+   },
+   {
+    "lokasi": "2.8 ¶3",
+    "sebelum": "arah kedua secara teknis layak dibangun, dan biaya aset",
+    "sesudah": "arah kedua secara teknis layak dibangun dan biaya aset",
+    "alasan": "EYD V tidak memakai koma sebelum 'dan' pada perincian dua unsur."
+   },
+   {
+    "lokasi": "2.8 ¶4",
+    "sebelum": "termasuk 26 huruf dan 9 angka; estimasi internal menunjukkan",
+    "sesudah": "termasuk 26 huruf dan 9 angka. Estimasi internal menunjukkan",
+    "alasan": "Kalimat 41 kata dipecah di titik koma (temuan tinjauan). Paragraf menjadi lima kalimat, masih dalam batas 3–5. Angka dan bentuk tulisannya ('dua puluh hingga tiga puluh') tidak berubah."
+   },
+   {
+    "lokasi": "2.8 ¶4",
+    "sebelum": "himpunan aset tingkat ini muat",
+    "sesudah": "himpunan aset lapis ini muat",
+    "alasan": "Paragraf ini memakai istilah 'lapis utama/lapis kedua', jadi 'tingkat' diganti 'lapis' agar konsisten."
+   },
+   {
+    "lokasi": "2.8 ¶4",
+    "sebelum": "animasi per isyarat yang dirender atau dialirkan dari server",
+    "sesudah": "animasi per isyarat yang di-*render* atau dialirkan dari server",
+    "alasan": "EYD V: kata asing yang diberi imbuhan Indonesia ditulis dengan tanda hubung dan dimiringkan. Pola ini sama dengan 'ter-*deploy*' di 2.10 (temuan tinjauan)."
+   },
+   {
+    "lokasi": "2.8 ¶4",
+    "sebelum": "Kata yang tidak terdapat pada kamus dijatuhkan ke ejaan jari",
+    "sesudah": "Kata yang tidak terdapat pada kamus dialihkan ke ejaan jari",
+    "alasan": "'Dijatuhkan' adalah kalke dari 'fall back', jadi diganti kata yang alami."
+   },
+   {
+    "lokasi": "2.8 ¶5",
+    "sebelum": "proporsi kata uji yang terwakili representasi tersedia",
+    "sesudah": "proporsi kata uji yang terwakili oleh representasi yang tersedia",
+    "alasan": "Struktur pasif dilengkapi agar gramatikal dengan menambahkan 'oleh' dan 'yang'."
+   },
+   {
+    "lokasi": "2.8 ¶5",
+    "sebelum": "metrik utama arah ini (Subbab 3.8); penelitian ini tidak mengklaim cakupan kosakata kamus SIBI penuh",
+    "sesudah": "metrik utama arah ini (Subbab 3.8). Penelitian ini tidak mengklaim cakupan kosakata kamus SIBI penuh",
+    "alasan": "Kalimat 44 kata yang menggabungkan dua gagasan (metrik dan batas klaim) dipecah di titik koma (temuan tinjauan). Kualifikasi kejujuran tetap utuh dan tetap tajam."
+   },
+   {
+    "lokasi": "2.8 ¶5",
+    "sebelum": "karena angka kosakata kamus itu sendiri",
+    "sesudah": "karena jumlah kosakata kamus itu sendiri",
+    "alasan": "Pilihan kata: yang dimaksud adalah jumlah kosakata. Tidak ada angka numerik yang berubah."
+   },
+   {
+    "lokasi": "2.9 ¶1",
+    "sebelum": "satu kanal Wi-Fi mengikuti kanal *access point*",
+    "sesudah": "satu kanal Wi-Fi yang mengikuti kanal *access point*",
+    "alasan": "Penghubung 'yang' ditambahkan sebagai pewatas agar frasa tidak terbaca sebagai predikat ganda."
+   },
+   {
+    "lokasi": "2.9 ¶1",
+    "sebelum": "yang dipilih pada tahap perancangan detail; dokumentasi resmi menyediakan contoh protokol tersebut",
+    "sesudah": "yang dipilih pada tahap perancangan detail. Dokumentasi resmi menyediakan contoh protokol tersebut",
+    "alasan": "Kalimat 50 kata dipecah di titik koma tanpa mengubah isi (temuan tinjauan). Sitasi [28] tidak bergeser."
+   },
+   {
+    "lokasi": "2.9 ¶2",
+    "sebelum": "layanan TTS dan ASR awan menempuh internet melalui",
+    "sesudah": "layanan TTS dan ASR awan mengakses internet melalui",
+    "alasan": "'Menempuh internet' tidak lazim, jadi diganti kolokasi yang alami."
+   },
+   {
+    "lokasi": "2.9 ¶2",
+    "sebelum": "melalui fitur hotspot ketika",
+    "sesudah": "melalui fitur *hotspot* ketika",
+    "alasan": "Istilah asing dicetak miring."
+   },
+   {
+    "lokasi": "2.10 ¶3",
+    "sebelum": "hingga suara tampil pada arah pertama",
+    "sesudah": "hingga suara diputar pada arah pertama",
+    "alasan": "Kolokasi: suara tidak 'tampil'. Kata diselaraskan dengan 'audio hasilnya diputar' (2.7 ¶4). Titik akhir pengukuran tetap sama."
+   },
+   {
+    "lokasi": "2.10 ¶3",
+    "sebelum": "kewajaran keluaran sistem dinilai validator penutur tunarungu",
+    "sesudah": "kewajaran keluaran sistem dinilai oleh validator penutur tunarungu",
+    "alasan": "'Oleh' ditambahkan pada pasif yang pelakunya tidak langsung mengikuti verba, agar kalimat lebih jelas."
+   },
+   {
+    "lokasi": "2.11 ¶3",
+    "sebelum": "Kebaruan penelitian ini dengan demikian bersifat kombinatif",
+    "sesudah": "Dengan demikian, kebaruan penelitian ini bersifat kombinatif",
+    "alasan": "Penghubung antarkalimat dipindah ke awal kalimat dan diberi koma agar kohesi lebih alami."
+   }
+  ],
+  "temuan": [
+   {
+    "lokasi": "2.11 Tabel 2.2 baris 17 dan 2.11 ¶3",
+    "temuan": "Prosa dan tabel masih memakai rumusan judul lama: 'purwarupa penerjemah dua arah', 'inferensi tepi', dan 'Purwarupa penerjemah dua arah kosakata terbatas'. Judul baru memakai 'sistem penerjemahan dua arah antara SIBI dan teks atau ujaran Bahasa Indonesia' dan 'inferensi model pada ESP32-S3'. Baris tabel tidak boleh disunting.",
+    "usulan": "Pemilik dapat menyelaraskan sel tabel, misalnya menjadi 'Purwarupa sistem penerjemahan dua arah SIBI–teks/ujaran bahasa Indonesia untuk kosakata terbatas', dan sel modalitas menjadi '... inferensi model pada ESP32-S3; dua arah'. Pada 2.11 ¶3, 'purwarupa penerjemah dua arah' dapat diganti 'purwarupa sistem penerjemahan dua arah'."
+   },
+   {
+    "lokasi": "2.11 ¶3, 2.7 ¶6, 2.9 ¶2",
+    "temuan": "Judul baru menyebut 'pemrosesan bahasa pada server', tetapi naskah menempatkan jalur utama TTS/ASR pada layanan ucapan awan. Server lokal hanya berperan sebagai cadangan dan pembanding (keputusan terkunci no. 5). Kalimat kebaruan di 2.11 ¶3 berbunyi 'pemrosesan bahasa Indonesia berbasis layanan awan'. Judul dan isi berpotensi tidak sinkron.",
+    "usulan": "Pemilik perlu memutuskan apakah 'server' pada judul mencakup layanan awan dan server lokal. Bila ya, tambahkan satu frasa penegas di BAB I/III, misalnya 'pemrosesan bahasa pada server, yaitu layanan ucapan awan sebagai jalur utama dan server lokal sebagai cadangan'. Bila tidak, revisi judul. Isi BAB II tidak diubah."
+   },
+   {
+    "lokasi": "Seluruh 2.6–2.11",
+    "temuan": "Judul baru memakai 'ujaran', sedangkan naskah konsisten memakai 'ucapan' (jalur ucapan, layanan ucapan awan, ASR = pengenal ucapan). Kata ini tidak diubah karena 'ucapan' termasuk daftar istilah inti.",
+    "usulan": "Pertahankan 'ucapan' di prosa. Bila pemilik ingin selaras dengan judul, tambahkan satu kali penegasan di BAB I, misalnya 'ujaran (ucapan) bahasa Indonesia'."
+   },
+   {
+    "lokasi": "2.6 ¶1 vs Tabel 2.2 baris 4",
+    "temuan": "Prosa menyebut DF-WiSLR [22] mengenali 49 gestur dan menyebut model LSTM 'Ahmed dkk. [66]', sedangkan tabel mencantumkan 'Ahmed dkk. (2020) [22]' dengan 49 gestur. Kemungkinan ada ketaksesuaian penulis antara [22] dan [66].",
+    "usulan": "Periksa penulis [22] dan [66] di Daftar Pustaka, lalu selaraskan prosa atau baris tabel. Baris tabel dan sitasi tidak disentuh."
+   },
+   {
+    "lokasi": "Tabel 2.2 baris 3 vs 2.6 ¶1",
+    "temuan": "Prosa kini memakai 'multiperangkat' sesuai EYD V, tetapi sel tabel baris 3 masih 'Wi-Fi multi-perangkat' karena baris tabel tidak boleh disunting. Naskah sumber juga memuat 'multi-antena' dan 'multi-modal' di potongan lain.",
+    "usulan": "Pemilik dapat menyeragamkan sel tabel menjadi 'Wi-Fi multiperangkat', dan potongan lain menjadi 'multiantena' dan 'multimodal'."
+   },
+   {
+    "lokasi": "Lintas potongan: 'bahasa Indonesia' dan 'server'",
+    "temuan": "Di potongan ini, 'Bahasa Indonesia' sudah diseragamkan menjadi 'bahasa Indonesia' (EYD V) dan '*server*' menjadi tegak. Di naskah sumber secara keseluruhan masih ada 24 'Bahasa Indonesia' (dan 8 'bahasa Indonesia') serta 8 '*server*' miring. Heading 2.7 'TTS dan ASR Bahasa Indonesia' dibiarkan.",
+    "usulan": "Terapkan konvensi yang sama di potongan lain agar naskah gabungan konsisten. Bila pemilik justru memilih 'Bahasa Indonesia' berhuruf kapital sebagai konvensi rumah, kembalikan suntingan di potongan ini."
+   },
+   {
+    "lokasi": "2.8 ¶1 (temuan tinjauan: 'isu kelas satu' -> 'isu utama') — DITOLAK",
+    "temuan": "'Isu kelas satu' memang kalke dari 'first-class issue'. Namun 'isu utama' dapat terbaca sebagai 'satu-satunya isu terpenting', sehingga berisiko menggeser kekuatan klaim terhadap sumber [44]. Suntingan ini sudah pernah diterapkan lalu dikembalikan karena alasan tersebut.",
+    "usulan": "Ditolak karena prinsip minimal-intervensi dan larangan mengubah kekuatan klaim. Bila pemilik setuju setelah memeriksa [44], ganti dengan 'isu pokok' atau 'isu utama'."
+   },
+   {
+    "lokasi": "2.8 ¶3 (temuan tinjauan: pecah '...di aplikasi; cakupan OpenSIBI...') — DITOLAK",
+    "temuan": "Sitasi [13] berada di akhir kalimat dan menopang dua klaim: OpenSIBI menyimpan model Collada pada API, dan cakupannya 50 kosakata. Bila kalimat dipecah di titik koma, klaim pertama menjadi kalimat tanpa sitasi, sehingga posisi sitasi relatif terhadap klaim berubah.",
+    "usulan": "Ditolak karena melanggar aturan posisi sitasi. Bila pemilik tetap ingin memecah kalimat, sitasi [13] harus muncul di kedua kalimat, dan itu keputusan pemilik karena berarti menambah sitasi."
+   },
+   {
+    "lokasi": "2.11 ¶2 (dua temuan tinjauan: pecah kalimat 'Kelompok pertama...' dan 'Kelompok keempat...') — DITOLAK",
+    "temuan": "Paragraf ini sudah lima kalimat: satu kalimat pengantar dan satu kalimat paralel untuk tiap kelompok. Satu pemecahan saja membuatnya enam kalimat, dua pemecahan membuatnya tujuh, sehingga melampaui standar paragraf 3–5 kalimat (berkas 3) dan merusak pola satu kalimat per kelompok. Titik koma di kedua kalimat itu juga sahih menurut EYD V.",
+    "usulan": "Ditolak. Biarkan seperti sekarang. Bila pemilik ingin kalimat lebih pendek, paragraf perlu dipecah, dan itu perubahan struktur yang menjadi keputusan pemilik."
+   },
+   {
+    "lokasi": "2.7 ¶1",
+    "temuan": "Rujukan diri '(Subbab 2.7 ini)' terasa janggal karena kalimat itu sendiri berada di Subbab 2.7.",
+    "usulan": "Pertimbangkan 'sebagaimana diuraikan pada subbab ini' atau hapus tanda kurungnya (keputusan pemilik)."
+   },
+   {
+    "lokasi": "2.7 ¶4–¶6",
+    "temuan": "Tiga paragraf tentang alur arah pertama/kedua dan pembagian jalur awan–server lokal berada di bawah judul 'TTS dan ASR Bahasa Indonesia', padahal isinya arsitektur alur sistem. Paragraf 2.7 ¶6 juga tumpang-tindih dengan 2.7 ¶2 dan 2.9 ¶2.",
+    "usulan": "Struktur tidak diubah. Pemilik dapat mempertimbangkan subjudul tersendiri atau memindahkan paragraf itu ke 2.9."
+   },
+   {
+    "lokasi": "2.6 ¶3",
+    "temuan": "Frasa 'menampilkan pesan isyarat tidak dikenali' dapat terbaca ambigu karena isi pesan tidak ditandai.",
+    "usulan": "Bila konvensi naskah mengizinkan, beri tanda petik: 'menampilkan pesan \"isyarat tidak dikenali\"'."
+   },
+   {
+    "lokasi": "Verifikasi jev",
+    "temuan": "Pada putaran sebelumnya, jev_review atas ringkasan suntingan mengembalikan action 'escalate' (safe_to_apply 0,21; keyakinan rubrik 0,00–0,07). Rubrik jev berorientasi pada kode sehingga tidak informatif untuk penyuntingan prosa. Putaran ini tidak memanggil jev lagi. Verifikasi dilakukan dengan cek.py dan pemeriksaan manual atas posisi sitasi dan jumlah kalimat per paragraf. jevgrep tidak tersambung (CONNECTION_CLOSED).",
+    "usulan": "Pemilik sebaiknya meninjau langsung butir yang menyentuh definisi metrik (2.10 ¶3 'suara diputar'), istilah 'server lokal' (2.7 ¶3), dan konvensi huruf kecil 'bahasa Indonesia'."
+   }
+  ],
+  "cek": "LOLOS"
+ },
+ {
+  "potongan": 4,
+  "isi": "BAB III 3.1–3.2 (memuat Gambar 3.1–3.4)",
+  "perubahan": [
+   {
+    "lokasi": "3.1 ¶1",
+    "sebelum": "Bagian itu juga mengukur sejauh mana model terkuantisasi berjalan pada perangkat serta sejauh mana jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI bekerja pada skenario yang ditetapkan.",
+    "sesudah": "Bagian itu juga mengukur sejauh mana model terkuantisasi berjalan pada perangkat. Selain itu, diukur sejauh mana jalur isyarat menjadi teks dan suara serta jalur teks atau ucapan menjadi representasi SIBI bekerja pada skenario yang ditetapkan.",
+    "alasan": "Kalimat asal memuat dua \"dan\" beruntun dan tiga ukuran sekaligus, sehingga batas antarjalur kabur. Suntingan sebelumnya memakai \"juga\" kedua yang tidak sejajar dengan \"serta\". Kalimat kini dipecah menjadi dua (temuan tinjauan 1). Isinya tetap, dan \"serta\" memisahkan kedua jalur dengan jelas."
+   },
+   {
+    "lokasi": "3.2 ¶1",
+    "sebelum": "Bila G0 gagal kedua kali setelah perbaikan",
+    "sesudah": "Bila G0 gagal untuk kedua kalinya setelah perbaikan",
+    "alasan": "Ini bentuk baku. Kata bilangan \"kedua\" tetap ada dan tetap sejalan dengan Tabel 3.6 (\"gagal kedua kalinya\")."
+   },
+   {
+    "lokasi": "3.2 ¶1",
+    "sebelum": "lalu penelitian lanjut ke T5; bila G1 gagal kedua kali,",
+    "sesudah": "lalu penelitian berlanjut ke T5; bila G1 gagal untuk kedua kalinya,",
+    "alasan": "\"Lanjut\" berkelas adjektiva, sedangkan kalimat ini memerlukan verba baku \"berlanjut\". \"Kedua kalinya\" diseragamkan dengan klausa G0."
+   },
+   {
+    "lokasi": "3.2 ¶1",
+    "sebelum": "Kriteria lolos dan tindakan bila gagal direncanakan ditetapkan sebelum gerbang terkait dinilai",
+    "sesudah": "Kriteria lolos dan tindakan bila gagal direncanakan untuk ditetapkan sebelum gerbang terkait dinilai",
+    "alasan": "Tanpa \"untuk\", \"gagal direncanakan\" mudah terbaca sebagai satu frasa. Penambahan \"untuk\" mencegah salah baca itu."
+   },
+   {
+    "lokasi": "3.2.1 ¶1",
+    "sebelum": "Pertama, uji Delta-CSI (Subbab 3.8.1) untuk mengetahui apakah",
+    "sesudah": "Pertama, uji Delta-CSI (Subbab 3.8.1) dilakukan untuk mengetahui apakah",
+    "alasan": "Kalimat asal tidak berpredikat. Penambahan \"dilakukan\" menjadikannya kalimat lengkap."
+   },
+   {
+    "lokasi": "3.2.1 ¶1",
+    "sebelum": "Kedua, uji koeksistensi radio: modul penerima dijalankan dengan penangkapan CSI, koneksi *station* ke *access point*, dan pengiriman UDP secara serentak, lalu laju CSI aktual dan kehilangan paket diukur, termasuk ketika streaming audio dari mikrofon diaktifkan.",
+    "sesudah": "Kedua, uji koeksistensi radio dilakukan dengan menjalankan penangkapan CSI, koneksi *station* ke *access point*, dan pengiriman UDP secara serentak pada modul penerima. Laju CSI aktual dan kehilangan paket kemudian diukur, termasuk ketika *streaming* audio dari mikrofon diaktifkan.",
+    "alasan": "Kalimat asal panjang (sekitar 35 kata) dan memuat dua langkah prosedur. Kalimat kini dipecah menjadi dua dengan pola \"uji ... dilakukan\" yang sejajar dengan butir Pertama dan Ketiga (temuan tinjauan 2). Urutan langkah, perangkat, dan ukurannya tetap. \"*streaming*\" dimiringkan sebagai istilah asing."
+   },
+   {
+    "lokasi": "3.2.1 ¶1",
+    "sebelum": "Ketiga, pengukuran laju pencuplikan aktual sebagai dasar penetapan pita Doppler",
+    "sesudah": "Ketiga, laju pencuplikan aktual diukur sebagai dasar penetapan pita Doppler",
+    "alasan": "Kalimat asal tidak berpredikat. Kalimat kini memakai predikat pasif \"diukur\" yang sejajar dengan butir lain."
+   },
+   {
+    "lokasi": "3.2.3 ¶1",
+    "sebelum": "lalu diukur waktu inferensi dan pemakaian memorinya pada laju bingkai aktual.",
+    "sesudah": "lalu waktu inferensi dan pemakaian memorinya diukur pada laju bingkai aktual.",
+    "alasan": "Urutan subjek dan predikat dibalik agar subjek klausa jelas dan sejajar dengan klausa sebelumnya."
+   },
+   {
+    "lokasi": "3.2.3 ¶1 (tipografi)",
+    "sebelum": "sedangkan pelatihan murid, pembanding, dan deployment ditunjukkan pada Gambar 3.4",
+    "sesudah": "sedangkan pelatihan murid, pembanding, dan *deployment* ditunjukkan pada Gambar 3.4",
+    "alasan": "Daftar istilah inti pada berkas 3 menetapkan *deployment* dicetak miring."
+   },
+   {
+    "lokasi": "3.2.4 ¶1",
+    "sebelum": "Model mudah *overfitting* pada orang dan ruang",
+    "sesudah": "Model mudah mengalami *overfitting* pada orang dan ruang",
+    "alasan": "\"*Overfitting*\" adalah nomina, jadi kalimat memerlukan verba. Verba \"mengalami\" ditambahkan."
+   },
+   {
+    "lokasi": "3.2.4 ¶1",
+    "sebelum": "dari setiap pengguna dan perubahan itu dilaporkan sebagai temuan.",
+    "sesudah": "dari setiap pengguna, dan perubahan itu dilaporkan sebagai temuan.",
+    "alasan": "Kedua klausa bersubjek berbeda. Koma ditambahkan agar \"pengguna dan perubahan\" tidak terbaca sebagai satu frasa."
+   }
+  ],
+  "temuan": [
+   {
+    "lokasi": "Gambar 3.2 (caption)",
+    "temuan": "Caption menyatakan bahwa kriteria lengkap tiap gerbang diuraikan pada Subbab 3.2.1–3.2.5. Kriteria lengkap beserta tindakan bila gagal justru ada pada Tabel 3.4 (Subbab 3.8.8). Subbab 3.2.1 juga tidak merinci kriteria G0.",
+    "usulan": "Pemilik dapat menimbang redaksi berikut: \"Kriteria lengkap tiap gerbang disajikan pada Tabel 3.4 dan parameter yang menyertai pada Tabel 3.6.\" Caption tidak diubah karena terkunci."
+   },
+   {
+    "lokasi": "3.2 ¶1 vs Gambar 3.2 (subgraf R0)",
+    "temuan": "Menurut prosa, bila G0 gagal kedua kalinya, jalur CSI dihentikan lalu penelitian berlanjut ke T5. Di diagram, lingkaran \"temuan\" pada R0 hanya bermakna umum \"penelitian berlanjut\", tanpa tujuan T5 dan tanpa keterangan bahwa jalur CSI dihentikan. Keduanya tidak bertentangan, tetapi isinya tidak setara.",
+    "usulan": "Diagram dibiarkan karena terkunci. Bila perlu, pemilik dapat menambah \"(lanjut T5)\" pada label sisi R0 di berkas .mmd sumber."
+   },
+   {
+    "lokasi": "3.1 ¶1 (pemetaan judul baru)",
+    "temuan": "Desain penelitian sudah memuat kata kunci \"dua arah\", \"kosakata terbatas\", dan model yang berjalan pada modul. Desain ini belum menyebut \"pemrosesan bahasa pada server\". Prosa memakai \"ucapan\", sedangkan judul baru memakai \"ujaran\".",
+    "usulan": "Pemilik dapat menimbang tambahan frasa pada kalimat ketiga, misalnya: \"Selain itu, diukur sejauh mana jalur isyarat menjadi teks dan suara serta jalur teks atau ucapan menjadi representasi SIBI, dengan pemrosesan bahasa pada server, bekerja ...\". Pilihan antara \"ucapan\" dan \"ujaran\" perlu diseragamkan di seluruh naskah. Tidak diubah sendiri."
+   },
+   {
+    "lokasi": "3.2 ¶1 (temuan tinjauan 3, DITOLAK)",
+    "temuan": "Peninjau mengusulkan agar kalimat \"Bila G0 gagal untuk kedua kalinya ... ; bila G1 gagal untuk kedua kalinya, ...\" dipecah di titik koma karena panjangnya sekitar 35 kata.",
+    "usulan": "Ditolak. Titik koma di antara dua klausa setara yang berkaitan (dua ketentuan gerbang yang sejajar) sah menurut EYD V. Panjang kalimat tidak berlebihan, dan pemecahan hanya soal selera gaya. Asas minimal-intervensi berlaku: bila ragu, jangan ubah. Pemilik tetap boleh memecahnya bila menghendaki."
+   },
+   {
+    "lokasi": "3.2.6 ¶1 (temuan tinjauan 4, DITOLAK untuk diterapkan di potongan ini)",
+    "temuan": "Frasa \"kamus kata-level\" adalah kalke susunan Inggris (word-level). Padanan bakunya \"kamus tingkat kata\".",
+    "usulan": "Tidak diterapkan di potongan ini. Frasa \"kata-level\" muncul berulang di bab lain (Bab I/II pada naskah-sumber.md) dan di dokumen konteks (2-KONTEKS-PROYEK.md) sebagai rumusan kualifikasi kejujuran. Mengubahnya hanya di sini akan menimbulkan dua istilah untuk satu konsep. Penggantian ke \"kamus tingkat kata\" dianjurkan, asal dilakukan serentak di seluruh naskah atas keputusan pemilik."
+   },
+   {
+    "lokasi": "3.2.5 ¶1 (temuan tinjauan 5, DITOLAK)",
+    "temuan": "Peninjau mengusulkan agar \"rotary encoder\" dicetak miring sebagai istilah asing, seperti *speaker* dalam kalimat yang sama.",
+    "usulan": "Ditolak. Daftar istilah inti pada berkas 3 menandai setiap istilah yang harus miring dengan keterangan \"(miring)\", tetapi \"rotary encoder\" dicantumkan tanpa keterangan itu. Seluruh naskah sumber dan dokumen konteks juga menulisnya tegak secara konsisten. Penerapan di sini saja akan merusak konsistensi. Bila pemilik ingin istilah ini miring, ubah daftar istilah dan seluruh naskah sekaligus."
+   },
+   {
+    "lokasi": "3.2.2 ¶1",
+    "temuan": "Frasa \"uji *nearest-centroid* sederhana yang rata-ratanya dihitung tanpa repetisi yang sedang diuji\" agak kabur, karena \"rata-ratanya\" merujuk ke *centroid*, bukan ke uji.",
+    "usulan": "Redaksi alternatif: \"...dengan uji *nearest-centroid* sederhana; *centroid* tiap isyarat dihitung tanpa repetisi yang sedang diuji.\" Tidak diubah karena ada risiko pergeseran makna teknis."
+   }
+  ],
+  "cek": "LOLOS"
+ },
+ {
+  "potongan": 5,
+  "isi": "BAB III 3.3–3.6 (memuat Gambar 3.5–3.6)",
+  "perubahan": [
+   {
+    "lokasi": "3.3 ¶1",
+    "sebelum": "Penyiapan sistem secara mandiri oleh pengguna di luar lembaga mitra berada di luar cakupan.",
+    "sesudah": "Penyiapan sistem secara mandiri oleh pengguna di luar lembaga mitra berada di luar cakupan penelitian.",
+    "alasan": "Melengkapi frasa yang menggantung (cakupan apa); maknanya tidak berubah."
+   },
+   {
+    "lokasi": "3.4 ¶1",
+    "sebelum": "... dan rotary encoder volume; pemakaian dua atau tiga modul ditetapkan sesuai hasil uji beban pada T0.",
+    "sesudah": "... dan rotary encoder volume. Pemakaian dua atau tiga modul ditetapkan sesuai hasil uji beban pada T0.",
+    "alasan": "Kalimat dipecah: susunan modul dan penetapan jumlah modul adalah dua gagasan yang berbeda. Kalimat sebelumnya terlalu panjang."
+   },
+   {
+    "lokasi": "3.5.1 ¶1",
+    "sebelum": "label dipetakan menjadi teks Indonesia melalui kamus kecil pada modul;",
+    "sesudah": "label dipetakan menjadi teks Indonesia melalui kamus label-teks kecil pada modul.",
+    "alasan": "Menyesuaikan dengan istilah inti \"kamus label-teks\" yang dipakai di Tabel 3.2, 3.5.2, dan Gambar 3.5. Kata \"kecil\" tetap dipertahankan. Titik koma diganti titik karena pemecahan kalimat (butir berikut)."
+   },
+   {
+    "lokasi": "3.5.1 ¶1",
+    "sebelum": "... melalui kamus label-teks kecil pada modul; teks tampil di layar modul pengguna, lalu dikirim ke layanan TTS awan; audio hasil sintesis diputar ...",
+    "sesudah": "... melalui kamus label-teks kecil pada modul. Teks tampil di layar modul pengguna, lalu dikirim ke layanan TTS awan; audio hasil sintesis diputar ...",
+    "alasan": "Kalimat alur arah pertama sekitar 70 kata dengan enam klausa bertitik koma. Kalimat dipecah menjadi dua: tahap pengenalan dan tahap keluaran. Isi dan urutan tidak berubah."
+   },
+   {
+    "lokasi": "3.5.2 ¶1",
+    "sebelum": "Seluruh perangkat, yaitu 2–3 modul dan server laptop, terhubung",
+    "sesudah": "Seluruh perangkat, yaitu 2–3 modul dan server lokal laptop, terhubung",
+    "alasan": "Konsistensi dengan istilah inti \"server lokal\" dan dengan \"server lokal laptop\" di 3.5.1."
+   },
+   {
+    "lokasi": "3.5.2 ¶1",
+    "sebelum": "Server lokal menjalankan *server* RuView untuk keperluan riset",
+    "sesudah": "Server lokal menjalankan server RuView untuk keperluan riset",
+    "alasan": "Kata \"server\" ditulis tegak di semua bagian prosa, termasuk \"Server lokal\" dalam kalimat yang sama, sesuai daftar istilah inti. Sel Tabel 3.2 baris 1 tidak disentuh."
+   },
+   {
+    "lokasi": "3.5.2 ¶1",
+    "sebelum": "serta faster-whisper dan TTS MMS sebagai jalur ucapan cadangan",
+    "sesudah": "serta faster-whisper dan MMS-TTS-ind sebagai jalur ucapan cadangan",
+    "alasan": "Nama model diseragamkan dengan Tabel 3.2 dan 3.5.1 (MMS-TTS-ind). Label simpul Mermaid \"TTS MMS\" tidak disentuh."
+   },
+   {
+    "lokasi": "3.5.2 ¶1",
+    "sebelum": "*access point* melalui hotspot ketika",
+    "sesudah": "*access point* melalui *hotspot* ketika",
+    "alasan": "EYD V: istilah asing ditulis miring. Sel Tabel 3.1 baris 7 yang juga memuat \"hotspot\" tegak tidak disentuh."
+   },
+   {
+    "lokasi": "3.6.1 ¶1",
+    "sebelum": "validator menentukan pemilihan kosakata,",
+    "sesudah": "validator menentukan kosakata,",
+    "alasan": "Verba \"menentukan\" dan nominalisasi \"pemilihan\" bertumpuk. Bentuk \"menentukan kosakata\" dipilih, bukan \"memilih kosakata\", agar peran validator tetap sama."
+   },
+   {
+    "lokasi": "3.6.1 ¶1",
+    "sebelum": "... agar skema lintas sesi dapat dijalankan, dan skema lintas ruang hanya memisahkan pengaruh ruang dari pengaruh orang bila ...",
+    "sesudah": "... agar skema lintas sesi dapat dijalankan. Skema lintas ruang hanya memisahkan pengaruh ruang dari pengaruh orang bila ...",
+    "alasan": "Kalimat dipecah: dua gagasan yang setara dan cukup panjang lebih jelas jika berdiri sendiri. Kualifikasi \"hanya ... bila\" tetap utuh."
+   },
+   {
+    "lokasi": "3.6.3 butir 4",
+    "sebelum": "agar perekaman CSI dan *webcam* tersinkron.",
+    "sesudah": "agar perekaman CSI dan *webcam* sinkron.",
+    "alasan": "KBBI mencatat adjektiva \"sinkron\". Bentuk \"tersinkron\" tidak baku."
+   },
+   {
+    "lokasi": "3.6.3 butir 6",
+    "sebelum": "Membuang segmen bila orang tidak terdeteksi YOLO26-Pose, *jitter* *keypoint* ekstrem, atau segmen terpotong",
+    "sesudah": "Membuang segmen bila orang tidak terdeteksi YOLO26-Pose, terjadi *jitter* *keypoint* ekstrem, atau segmen terpotong",
+    "alasan": "Menyejajarkan rincian anak kalimat \"bila\". Butir tengah semula berupa frasa nomina tanpa predikat."
+   },
+   {
+    "lokasi": "3.6.4 ¶1",
+    "sebelum": "setelah persetujuan institusi mitra",
+    "sesudah": "setelah persetujuan lembaga mitra",
+    "alasan": "Konsistensi istilah dengan 3.3 dan 3.4 (\"lembaga mitra\")."
+   },
+   {
+    "lokasi": "3.6.4 ¶1",
+    "sebelum": "video disimpan terbatas dan tidak dipublikasikan",
+    "sesudah": "video disimpan secara terbatas dan tidak dipublikasikan",
+    "alasan": "Kalimat efektif: \"terbatas\" di sini berfungsi sebagai keterangan cara, jadi perlu \"secara\"."
+   },
+   {
+    "lokasi": "3.6.4 ¶1",
+    "sebelum": "Audio ucapan pada arah kedua dikirim ke layanan awan sehingga tujuan pengiriman tersebut diungkapkan pada formulir persetujuan dan ...",
+    "sesudah": "Audio ucapan pada arah kedua dikirim ke layanan awan; oleh karena itu, tujuan pengiriman tersebut diungkapkan pada formulir persetujuan dan ...",
+    "alasan": "\"Sehingga\" menyatakan akibat otomatis, padahal yang dimaksud adalah tindakan yang diambil sebagai konsekuensi. Penanda simpulan \"oleh karena itu\" lebih tepat secara logis."
+   }
+  ],
+  "temuan": [
+   {
+    "lokasi": "3.5.1 ¶1 dan 3.5.2 ¶1 / Gambar 3.6",
+    "temuan": "Prosa dan Gambar 3.6 tidak menjelaskan jalur label dari modul penerima (tempat inferensi murid) ke modul pengguna (layar dan pengirim teks ke TTS) pada konfigurasi tiga modul. 3.5.2 hanya menyebut \"modul penerima mengirim label dan skor melalui UDP sebagai telemetri riset\", dan Gambar 3.6 tidak memuat sisi MB→MC. Selain itu, 3.5.1 menulis \"kamus label-teks kecil pada modul\" tanpa menyebut modul yang mana.",
+    "usulan": "Pemilik menetapkan jalurnya, lalu menambahkan satu frasa di 3.5.2, misalnya \"... modul penerima meneruskan label ke modul pengguna melalui [ESP-NOW/UDP]\". Tetapkan juga letak kamus label-teks (modul penerima atau modul pengguna). Gambar 3.6 tidak diubah tanpa keputusan pemilik."
+   },
+   {
+    "lokasi": "3.5.1 ¶1 vs Gambar 3.5",
+    "temuan": "Prosa menulis teks \"tampil di layar modul pengguna, lalu dikirim ke layanan TTS awan\" (berurutan), sedangkan Gambar 3.5 menggambarkan MAPL→DSP1 dan MAPL→TTS sebagai dua cabang paralel.",
+    "usulan": "Biarkan apa adanya bila urutan \"tampil lalu dikirim\" memang dimaksudkan (sesuai keputusan terkunci no. 7). Bila ingin selaras visual, ganti sisi menjadi DSP1 → TTS pada sumber .mmd. Itu keputusan pemilik dan tidak mengubah prosa."
+   },
+   {
+    "lokasi": "3.5.2 ¶1 vs Gambar 3.6",
+    "temuan": "Prosa menyatakan seluruh perangkat terhubung ke satu access point yang menyediakan internet, dan laptop dapat menjadi access point melalui hotspot. Gambar 3.6 menggambar MC→TTSA/STTA langsung tanpa melalui AP, dan simpul AP berlabel \"(router mitra, satu kanal)\" tanpa opsi hotspot laptop yang ada di Tabel 3.1 baris 7.",
+    "usulan": "Catat sebagai penyederhanaan diagram. Bila perlu, tambahkan pada caption atau prosa bahwa lalu lintas modul pengguna ke layanan awan melewati access point. Tidak diubah karena caption dan Mermaid terkunci."
+   },
+   {
+    "lokasi": "3.5.1/3.5.2 vs Gambar 3.5–3.6",
+    "temuan": "Istilah tidak seragam antara prosa dan simpul diagram: prosa memakai \"bingkai bersama\" sedangkan Gambar 3.6 memakai \"ESP-NOW beacon (sumber CSI)\"; prosa memakai \"kamus label-teks\" (tanda hubung) sedangkan Gambar 3.5 memakai \"Kamus label–teks\" (tanda pisah); prosa memakai MMS-TTS-ind sedangkan simpul memakai \"TTS MMS\".",
+    "usulan": "Bila sumber .mmd disinkronkan kelak, seragamkan simpul menjadi \"bingkai bersama (beacon ESP-NOW)\", \"Kamus label-teks\", dan \"TTS MMS-TTS-ind\". Kalau tidak, biarkan; maknanya tetap terbaca."
+   },
+   {
+    "lokasi": "3.4 Tabel 3.2 baris 1",
+    "temuan": "Prosa kini menulis \"server\" tegak di semua tempat (\"server lokal\", \"server lokal laptop\", \"server RuView\"). Sel Tabel 3.2 baris 1 masih menulis \"*Firmware* dan *server* RuView\" dengan \"server\" miring karena baris tabel terkunci.",
+    "usulan": "Bila pemilik mengizinkan penyuntingan sel tabel, ubah menjadi \"*Firmware* dan server RuView\" agar seragam dengan prosa dan daftar istilah inti."
+   },
+   {
+    "lokasi": "Heading 3.6",
+    "temuan": "Heading \"Protokol Perekaman Dataset, Partisipan, dan Etika\" menulis \"Dataset\" tegak, padahal istilah inti mewajibkan *dataset* miring.",
+    "usulan": "Ubah menjadi \"Protokol Perekaman *Dataset*, Partisipan, dan Etika\" bila pemilik mengizinkan perubahan heading."
+   },
+   {
+    "lokasi": "3.6.2 ¶1",
+    "temuan": "Frasa \"Isyarat pengenalan\" agak kaku dan maksudnya isyarat yang dikenali pada arah pertama. Tidak diubah karena ragu.",
+    "usulan": "\"Isyarat untuk pengenalan arah pertama dipilih melalui dua saringan ...\""
+   },
+   {
+    "lokasi": "3.3–3.6 (keseluruhan)",
+    "temuan": "Potongan ini tidak menyebut judul lama secara harfiah, dan tidak memuat rumusan, tujuan, atau penutup latar belakang. Prosanya tetap selaras dengan kata kunci judul baru: dua arah SIBI ↔ teks/ujaran, inferensi pada ESP32-S3, pemrosesan bahasa di server/awan, dan kosakata terbatas 5–8 isyarat.",
+    "usulan": "Tidak perlu tindakan."
+   },
+   {
+    "lokasi": "Tinjauan (4 temuan)",
+    "temuan": "Keempat temuan tinjauan sahih dan sudah diterapkan: pemecahan kalimat alur arah pertama (3.5.1), \"server laptop\" menjadi \"server lokal laptop\" (3.5.2), \"*server* RuView\" menjadi tegak (3.5.2), dan \"menentukan pemilihan kosakata\" menjadi \"menentukan kosakata\" (3.6.1). Tidak ada yang ditolak.",
+    "usulan": "Pada temuan keempat dipilih \"menentukan kosakata\", bukan \"memilih kosakata\", agar peran validator tidak bergeser."
+   }
+  ],
+  "cek": "LOLOS"
+ },
+ {
+  "potongan": 6,
+  "isi": "BAB III 3.7 (memuat Gambar 3.7)",
+  "perubahan": [
+   {
+    "lokasi": "3.7.4 ¶1",
+    "sebelum": "... sedangkan kamera memilikinya secara alami; preseden pemindahan pengetahuan visi ke model Wi-Fi telah ada pada Person-in-WiFi [63] dan DensePose from WiFi [64] (Subbab 2.5).",
+    "sesudah": "... sedangkan kamera memilikinya secara alami. Preseden pemindahan pengetahuan visi ke model Wi-Fi telah ada pada Person-in-WiFi [63] dan DensePose from WiFi [64] (Subbab 2.5).",
+    "alasan": "Kalimat 43 kata memuat dua gagasan terpisah, yaitu alasan memilih metode dan preseden. Kalimat dipecah pada titik koma. Sitasi tetap melekat pada klaim preseden."
+   },
+   {
+    "lokasi": "3.7.4 ¶2",
+    "sebelum": "Guru dilatih lanjutan (*fine-tuning*) pada data visual SIBI hasil perekaman T2 ...",
+    "sesudah": "Guru menjalani pelatihan lanjutan (*fine-tuning*) pada data visual SIBI hasil perekaman T2 ...",
+    "alasan": "'Dilatih lanjutan' tidak gramatikal karena 'lanjutan' adalah nomina atau adjektiva, bukan keterangan verba. Bentuk baru sejalan dengan kalimat berikutnya, 'Pelatihan lanjutan dipilih ...'."
+   },
+   {
+    "lokasi": "3.7.4 ¶2",
+    "sebelum": "Kualitas guru dievaluasi sebelum dipakai melalui tiga ukuran, yaitu ...",
+    "sesudah": "Sebelum dipakai, kualitas guru dievaluasi melalui tiga ukuran, yaitu ...",
+    "alasan": "Pada urutan lama, 'dipakai melalui tiga ukuran' dapat terbaca sebagai satu kesatuan. Keterangan waktu dipindah ke depan supaya maknanya tidak ambigu."
+   },
+   {
+    "lokasi": "3.7.5 ¶1",
+    "sebelum": "Dataset murid dibentuk dengan menyelaraskan tiga deret ...",
+    "sesudah": "*Dataset* murid dibentuk dengan menyelaraskan tiga deret ...",
+    "alasan": "Daftar istilah inti menetapkan *dataset* ditulis miring, dan di subbab lain istilah ini sudah miring."
+   },
+   {
+    "lokasi": "3.7.5 ¶3",
+    "sebelum": "Hiperparameter dipilih berdasarkan data validasi yang terpisah dari data uji, dan model yang dipilih untuk purwarupa adalah model dengan keseimbangan terbaik ...",
+    "sesudah": "Hiperparameter dipilih berdasarkan data validasi yang terpisah dari data uji. Model yang dipilih untuk purwarupa adalah model dengan keseimbangan terbaik ...",
+    "alasan": "Kalimat dipecah dua karena EYD V tidak memakai koma sebelum 'dan' dalam kalimat majemuk setara. Kedua klausa juga membawa gagasan berbeda. Isinya tidak berubah."
+   },
+   {
+    "lokasi": "3.7.6 ¶1",
+    "sebelum": "... yaitu blok repetisi awal untuk pelatihan dan blok akhir untuk pengujian; pembagian acak tidak dipakai karena ...",
+    "sesudah": "... yaitu blok repetisi awal untuk pelatihan dan blok akhir untuk pengujian. Pembagian acak tidak dipakai karena ...",
+    "alasan": "Kalimat 39 kata. Dua klausa bebas yang dirangkai dengan titik koma dipisah menjadi dua kalimat. Isinya tidak berubah."
+   },
+   {
+    "lokasi": "3.7.7 ¶1",
+    "sebelum": "... sistem menampilkan pesan isyarat tidak dikenali; pada purwarupa ini penolakan lebih aman daripada menebak kelas yang salah.",
+    "sesudah": "... sistem menampilkan pesan \"isyarat tidak dikenali\". Pada purwarupa ini, penolakan lebih aman daripada menebak kelas yang salah.",
+    "alasan": "Teks pesan diberi tanda petik supaya terbaca sebagai isi pesan, sama dengan label pada Gambar 3.7. Klausa alasan dijadikan kalimat sendiri. Koma ditambahkan setelah keterangan pembuka."
+   },
+   {
+    "lokasi": "3.7.8 ¶1",
+    "sebelum": "bingkai CSI dari mode promiscuous masuk ke penyangga geser",
+    "sesudah": "bingkai CSI dari mode *promiscuous* masuk ke penyangga geser",
+    "alasan": "Istilah asing dimiringkan sesuai EYD V. Blok mermaid tidak diubah."
+   }
+  ],
+  "temuan": [
+   {
+    "lokasi": "3.7.8 ¶1 (temuan tinjauan 3, DITOLAK)",
+    "temuan": "Tinjauan mengusulkan agar 'Alur inferensi pada perangkat ditunjukkan pada Gambar 3.7: bingkai CSI ...' dipecah dengan titik setelah 'Gambar 3.7' karena kalimatnya panjang (38 kata).",
+    "usulan": "Usulan ditolak. Titik dua sudah tepat menurut EYD V karena memperkenalkan rincian langkah alur, dan kalimatnya tetap jelas. Usulan ini soal selera gaya (tingkat G), dan aturan minimal-intervensi meminta kalimat dibiarkan bila ragu."
+   },
+   {
+    "lokasi": "c4.md (luar potongan ini)",
+    "temuan": "Bentuk 'Model guru YOLO26-Pose dilatih lanjutan pada data visual SIBI ...' masih ada di c4.md. Di c6, 3.7.4 kini memakai 'menjalani pelatihan lanjutan'.",
+    "usulan": "Samakan di c4.md menjadi 'Model guru YOLO26-Pose menjalani pelatihan lanjutan pada data visual SIBI ...'. Suntingan ini tidak saya lakukan karena berada di luar potongan c6."
+   },
+   {
+    "lokasi": "3.7.7 ¶1",
+    "temuan": "Kalimat menyebut 'status penolakan pada kedua arah', tetapi yang diuraikan hanya arah pertama. Penolakan berbasis skor segmen CSI juga hanya berlaku untuk arah SIBI→teks/ujaran. Ini menyangkut substansi, jadi tidak saya ubah.",
+    "usulan": "Pemilik memilih salah satu. (a) Ganti 'pada kedua arah' menjadi 'pada arah pertama' bila penolakan memang hanya untuk klasifikasi CSI. (b) Tambahkan uraian perilaku penolakan arah kedua bila memang ada di desain."
+   },
+   {
+    "lokasi": "3.7.7 ¶1 (dan seluruh naskah)",
+    "temuan": "Naskah memakai dua istilah untuk konsep yang sama: 'klasifikator' (4 kali) dan 'pengklasifikasi' (2 kali, termasuk di 3.7.4 ¶3).",
+    "usulan": "Seragamkan menjadi satu istilah di seluruh naskah, misalnya 'pengklasifikasi'. Karena penyeragaman ini lintas potongan, tidak saya ubah di sini."
+   },
+   {
+    "lokasi": "Naskah lain (baris sumber ±134)",
+    "temuan": "Istilah 'mode promiscuous' di prosa bagian lain masih ditulis tegak, sedangkan di 3.7.8 kini sudah miring.",
+    "usulan": "Miringkan juga *promiscuous* di prosa bagian lain. Teks di blok mermaid dan sel tabel jangan diubah."
+   },
+   {
+    "lokasi": "Heading 3.7, 3.7.5, 3.7.8",
+    "temuan": "Heading memuat istilah asing yang ditulis tegak, yaitu 'Deployment' dan 'Dataset'. Heading terkunci sehingga tidak saya sunting.",
+    "usulan": "Pemilik dapat memutuskan apakah istilah ini dimiringkan (*Deployment*, *Dataset*) supaya sejalan dengan daftar istilah."
+   },
+   {
+    "lokasi": "3.7.4 ¶1",
+    "temuan": "'Memilikinya' dalam 'sedangkan kamera memilikinya secara alami' rujukannya agak jauh ke 'citra tubuh', dan pilihan katanya kurang tepat.",
+    "usulan": "Pertimbangkan 'sedangkan kamera merekamnya secara langsung' bila maknanya sesuai maksud pemilik. Tidak saya ubah karena aturan minimal-intervensi."
+   },
+   {
+    "lokasi": "Proses verifikasi",
+    "temuan": "Pada putaran sebelumnya, jev_review mengembalikan action 'escalate', jadi hasil itu bukan persetujuan otomatis. Pada putaran ini jev tidak dipanggil, dan diff diperiksa manual terhadap c6-asli.md. cek.py LOLOS.",
+    "usulan": "Pemilik sebaiknya membaca sekilas delapan suntingan di log. Semuanya kecil dan tidak menyentuh angka, sitasi, atau klaim."
+   },
+   {
+    "lokasi": "Judul baru",
+    "temuan": "Subbab 3.7 tidak menyebut judul lama secara harfiah, dan subbab ini bukan bagian rumusan, tujuan, atau penutup latar belakang.",
+    "usulan": "Tidak ada."
+   }
+  ],
+  "cek": "LOLOS"
+ },
+ {
+  "potongan": 7,
+  "isi": "BAB III 3.8–3.11 (memuat Gambar 3.8)",
+  "perubahan": [
+   {
+    "lokasi": "3.8.1 langkah 3",
+    "sebelum": "koneksi station, dan UDP aktif secara serentak, termasuk saat streaming audio dinyalakan",
+    "sesudah": "koneksi *station*, dan UDP aktif secara serentak, termasuk saat *streaming* audio dinyalakan",
+    "alasan": "Istilah asing dimiringkan (EYD V), seragam dengan bab lain yang sudah menulis *station* dan *streaming*"
+   },
+   {
+    "lokasi": "3.8.2 ¶1 kalimat 3",
+    "sebelum": "Tingkat penolakan dilaporkan, dan akurasi dilaporkan dalam dua bentuk",
+    "sesudah": "Tingkat penolakan dilaporkan; akurasi dilaporkan dalam dua bentuk",
+    "alasan": "EYD V tidak memakai koma sebelum 'dan' dalam kalimat majemuk setara. Titik koma memisahkan dua klausa setara tanpa mengubah makna"
+   },
+   {
+    "lokasi": "3.8.3 langkah 3",
+    "sebelum": "waktu suara tampil",
+    "sesudah": "waktu suara terdengar",
+    "alasan": "Kolokasi: suara tidak 'tampil' tetapi terdengar. 'Waktu representasi tampil' tetap karena memang ditampilkan di layar"
+   },
+   {
+    "lokasi": "3.8.4 langkah 1",
+    "sebelum": "daftar frasa uji Bahasa Indonesia pendek [PERLU DATA: ...]",
+    "sesudah": "daftar frasa uji pendek berbahasa Indonesia [PERLU DATA: ...]",
+    "alasan": "Urutan atribut lebih alami ('pendek' melekat pada 'frasa uji') dan selaras dengan 'berbahasa Indonesia' di bab lain. Penanda tetap verbatim dan tetap di posisinya"
+   },
+   {
+    "lokasi": "3.8.4 langkah 5",
+    "sebelum": "ketergantungan koneksi internet",
+    "sesudah": "ketergantungan pada koneksi internet",
+    "alasan": "Kata 'ketergantungan' memerlukan preposisi 'pada' (kalimat efektif)"
+   },
+   {
+    "lokasi": "3.8.5 ¶1",
+    "sebelum": "kata-katanya terwakili representasi tersedia; kata yang tidak terwakili jatuh ke ejaan jari",
+    "sesudah": "kata-katanya terwakili oleh representasi yang tersedia; kata yang tidak terwakili dialihkan ke ejaan jari",
+    "alasan": "Pelaku pasif dan kata 'yang' yang hilang dilengkapi. 'Jatuh ke' adalah kalke dari 'fall back to', sehingga diganti dengan bentuk baku yang maknanya sama"
+   },
+   {
+    "lokasi": "3.8.6 langkah 3",
+    "sebelum": "mencatat keberhasilan pesan tersampaikan",
+    "sesudah": "mencatat keberhasilan penyampaian pesan",
+    "alasan": "Frasa nomina yang gramatikal. Bentuk aslinya menumpuk dua predikat"
+   },
+   {
+    "lokasi": "3.8.6 ¶ setelah daftar",
+    "sebelum": "karena pengguna sedikit",
+    "sesudah": "karena jumlah pengguna sedikit",
+    "alasan": "Kalimat efektif: yang sedikit adalah jumlahnya. Angka dan kualifikasi tidak berubah"
+   }
+  ],
+  "temuan": [
+   {
+    "lokasi": "3.10 ¶1 kalimat 2 (temuan tinjauan, tingkat G) — DITOLAK",
+    "temuan": "Tinjauan mengusulkan 'Setiap parameter direncanakan ditetapkan sebelum dipakai untuk menilai ...' diubah menjadi 'direncanakan untuk ditetapkan ...'. Kalimat ini sudah diverifikasi: isinya identik di c7-asli.md dan c7.md baris 115. Usulan ini sama persis dengan suntingan yang sebelumnya dibatalkan.",
+    "usulan": "Ditolak. Usulan itu memunculkan 'untuk ditetapkan ... untuk menilai' sehingga ada 'untuk' ganda dalam satu kalimat, dan alasan pembatalannya sebelumnya tetap berlaku. Bentuk 'direncanakan ditetapkan' (dua verba pasif berderet) gramatikal dan lazim, jadi tidak perlu diubah menurut prinsip minimal-intervensi. Bila pemilik ingin melenturkannya, pilihan yang tidak menggandakan 'untuk' adalah 'Setiap parameter rencananya ditetapkan sebelum dipakai untuk menilai data uji atau gerbang terkait.'"
+   },
+   {
+    "lokasi": "3.8 ¶1 dibandingkan dengan Tabel 3.4 baris G4",
+    "temuan": "Prosa menyatakan uji operasional, jalur ucapan, dan cakupan kamus 'melengkapi analisis tanpa menjadi syarat gerbang'. Namun, kriteria lolos G4 pada Tabel 3.4 berbunyi 'Data uji operasional, jalur ucapan, cakupan kamus, dan kegunaan tercatat'. Jadi, keterekaman datanya justru menjadi syarat G4.",
+    "usulan": "Pemilik menyelaraskan, misalnya: 'Uji operasional, uji jalur ucapan, dan uji cakupan kamus melengkapi analisis; hasilnya tidak menentukan lolos gerbang, tetapi kelengkapan datanya disyaratkan pada G4.'"
+   },
+   {
+    "lokasi": "3.8.5 ¶1 dibandingkan dengan langkah 3 dan Gambar 3.8 (simpul COVER)",
+    "temuan": "Cakupan kamus didefinisikan sebagai 'proporsi frasa uji yang kata-katanya terwakili', sedangkan langkah 3 dan Gambar 3.8 memakai proporsi kata ('proporsi kata uji terwakili'). Satuan ukurnya tidak konsisten.",
+    "usulan": "Pilih satu satuan, kata atau frasa. Bila memilih kata, ubah definisinya menjadi 'proporsi kata pada frasa uji yang terwakili oleh representasi yang tersedia'."
+   },
+   {
+    "lokasi": "Gambar 3.8 (mermaid, terkunci) dibandingkan dengan prosa",
+    "temuan": "Ada beberapa ketidakseragaman istilah antara diagram dan prosa: simpul OP menulis 'ujung-ke-ujung', sedangkan prosa menulis 'ujung ke ujung'; simpul USE menulis 'validator tunarungu', sedangkan istilah inti adalah 'validator penutur tunarungu'; 'recall', 'confusion matrix', 'deployment', dan 'dataset' di simpul tidak dimiringkan. Selain itu, uji jalur ucapan (3.8.4) tidak muncul di alur Gambar 3.8, padahal prosa 3.8 ¶1 menyebut gambar itu sebagai rantai evaluasi hingga artefak.",
+    "usulan": "Tidak diubah karena blok mermaid terkunci. Bila pemilik membuka diagram, seragamkan menjadi 'ujung ke ujung' dan 'validator penutur tunarungu', dan pertimbangkan simpul uji jalur ucapan."
+   },
+   {
+    "lokasi": "3.8.4 langkah 4 dibandingkan dengan Tabel 3.7 baris 5",
+    "temuan": "Prosa menyebut 'MMS-TTS-ind', sedangkan Tabel 3.7 menyebut 'MMS-TTS'.",
+    "usulan": "Seragamkan nama model. Baris tabel terkunci, jadi keputusannya ada pada pemilik."
+   },
+   {
+    "lokasi": "Tabel 3.4 baris G0 dan Tabel 3.6 baris 9",
+    "temuan": "Kata 'station' (Tabel 3.4) dan 'subcarrier' (di dalam penanda PERLU DATA pada Tabel 3.6) tidak dimiringkan, padahal prosa kini memakai *station*. Baris tabel dan penanda terkunci.",
+    "usulan": "Dibiarkan. Bila pemilik mengizinkan, miringkan *station* di sel tabel. Penanda PERLU DATA tetap verbatim."
+   },
+   {
+    "lokasi": "3.8.1, 3.8.3, 3.8.4, 3.8.5, dan 3.8.6",
+    "temuan": "Kalimat pengantar daftar memakai pola yang sama lima kali ('Adapun prosedurnya adalah sebagai berikut.' / 'Adapun langkah uji ... adalah sebagai berikut.'). Pola ini baku, tetapi terasa templat.",
+    "usulan": "Opsional: variasikan sebagian, misalnya 'Prosedurnya sebagai berikut.' atau 'Langkah ujinya meliputi hal berikut.'. Tidak diubah karena minimal-intervensi."
+   },
+   {
+    "lokasi": "3.8.6 ¶1 dan langkah 1",
+    "temuan": "Kata 'keterpakaian' tidak saya pastikan ada di KBBI. Frasa 'hak mundur' kurang lazim untuk etika penelitian.",
+    "usulan": "Pertimbangkan 'kebergunaan/kegunaan' (istilah 'uji kegunaan' sudah dipakai) dan 'hak mengundurkan diri'."
+   },
+   {
+    "lokasi": "3.11 ¶ penutup",
+    "temuan": "'Cadangan A sampai D' dapat ditulis dengan tanda pisah rentang (A–D) sesuai konvensi naskah (M1–M14).",
+    "usulan": "Opsional: 'Cadangan A–D'. Tidak diubah."
+   },
+   {
+    "lokasi": "Judul (seluruh potongan c7)",
+    "temuan": "Potongan ini tidak menyebut judul lama secara harfiah dan bukan bagian rumusan, tujuan, atau penutup latar belakang. Rujukan pada 'rumusan masalah ketiga' di 3.8.8 (latensi kedua arah, cakupan kamus, dan seterusnya) tidak bertentangan dengan kata kunci judul baru.",
+    "usulan": "Tidak perlu tindakan untuk judul di potongan ini."
+   },
+   {
+    "lokasi": "Verifikasi jev",
+    "temuan": "Pada putaran sebelumnya, jev_review atas diff menghasilkan action 'escalate' (composite 0,8725; safe_to_apply 0,68; correctness confidence 0,47 di bawah ambang review). Tidak ada keberatan spesifik yang disebutkan. Kedelapan suntingan sudah diperiksa ulang secara manual: maknanya tetap. Pada putaran ini berkas tidak disunting, sehingga diff tidak berubah dan jev tidak dipanggil ulang.",
+    "usulan": "Pemilik meninjau sekilas delapan suntingan di log. Suntingan 'direncanakan untuk ditetapkan' di 3.10 tetap dibatalkan (lihat temuan tinjauan yang ditolak di atas)."
+   }
+  ],
+  "cek": "LOLOS"
+ }
+]

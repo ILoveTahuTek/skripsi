@@ -13,8 +13,8 @@ const {
   SectionType, TableOfContents, TableLayoutType, VerticalAlign,
 } = require('/home/z/.npm-global/lib/node_modules/docx');
 
-const parsed = JSON.parse(fs.readFileSync('/home/z/my-project/scripts/translator-sibi-docx/parsed.json', 'utf-8'));
-const OUT = '/home/z/my-project/download/translator-sibi-docx/Proposal-Penerjemah-Dua-Arah-SIBI-CSI-ESP32S3.docx';
+const parsed = JSON.parse(fs.readFileSync('/home/z/my-project/scripts/translator-sibi-docx/parsed-final.json', 'utf-8'));
+const OUT = '/home/z/my-project/download/translator-sibi-final/Proposal-Studi-Kelayakan-Purwarupa-SIBI-CSI-ESP32S3.docx';
 
 // ---------- Konstanta ----------
 const FONT = { ascii: 'Times New Roman', hAnsi: 'Times New Roman', eastAsia: 'Times New Roman' };
@@ -293,14 +293,14 @@ function wrapLatin(title, pt, maxW) {
   return lines;
 }
 
-function calcTitleLayoutMixed(title, maxW, preferredPt, minPt) {
+function calcTitleLayoutMixed(title, maxW, preferredPt, minPt, maxLines = 3) {
   let pt = preferredPt, lines;
   while (pt >= minPt) {
     lines = wrapLatin(title, pt, maxW);
-    if (lines.length <= 3) break;
+    if (lines.length <= maxLines) break;
     pt -= 1;
   }
-  if (!lines || lines.length > 3) { pt = minPt; lines = wrapLatin(title, pt, maxW); }
+  if (!lines || lines.length > maxLines) { pt = minPt; lines = wrapLatin(title, pt, maxW); }
   // cegah baris yatim (1 kata pendek di baris terakhir)
   if (lines.length > 1) {
     const last = lines[lines.length - 1];
@@ -318,8 +318,9 @@ function buildCover() {
   const simMarginLR = 1701, simMarginT = 1200;
   const contentW = PAGE.width - simMarginLR * 2;
 
-  const fullTitle = 'Purwarupa Penerjemah Dua Arah Isyarat SIBI Berbasis Wi-Fi Channel State Information pada Modul ESP32-S3 dengan Inferensi Tepi dan Pemrosesan Bahasa pada Server: Studi Kelayakan Kosakata Terbatas'.toUpperCase();
-  const { titlePt, titleLines } = calcTitleLayoutMixed(fullTitle, contentW, 14, 10);
+  // Judul baru pemilik (28 Okt 2026) — panjang (~270 karakter) sehingga izinkan hingga 5 baris sampul
+  const fullTitle = 'STUDI KELAYAKAN PURWARUPA SISTEM PENERJEMAHAN DUA ARAH ANTARA SISTEM ISYARAT BAHASA INDONESIA (SIBI) DAN TEKS ATAU UJARAN BAHASA INDONESIA BERBASIS WI-FI CHANNEL STATE INFORMATION (CSI) DENGAN INFERENSI MODEL PADA ESP32-S3 DAN PEMROSESAN BAHASA PADA SERVER UNTUK KOSAKATA TERBATAS';
+  const { titlePt, titleLines } = calcTitleLayoutMixed(fullTitle, contentW, 14, 10, 5);
   const titleSize = titlePt * 2;
 
   const metaEntries = [
@@ -470,8 +471,8 @@ const tocChildren = [
 // ---------- Dokumen ----------
 const doc = new Document({
   creator: 'Penyusun',
-  title: 'Proposal Penerjemah Dua Arah SIBI — Wi-Fi CSI pada ESP32-S3',
-  description: 'Proposal penelitian BAB I-III + Daftar Pustaka (distilasi guru-murid YOLO26-Pose ke model murid CSI)',
+  title: 'Proposal Studi Kelayakan Purwarupa Penerjemah Dua Arah SIBI — Wi-Fi CSI pada ESP32-S3',
+  description: 'Proposal penelitian BAB I-III + Daftar Pustaka (distilasi guru-murid YOLO26-Pose ke model murid CSI) — judul baru 28 Okt 2026',
   styles: {
     default: {
       document: {

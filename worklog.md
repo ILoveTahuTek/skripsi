@@ -547,3 +547,21 @@ Stage Summary:
 - Tidak ada perubahan substansi artefak apa pun; hanya pengemasan.
 - Berikutnya: tetap menunggu draft-final.md dari Claude (via pemilik) untuk langkah verifikasi + konversi DOCX.
 - Sisa human-owned: tidak berubah (44 penanda PERLU DATA, 6+1 konfirmasi pembimbing, Update Field TOC di Word).
+
+---
+Task ID: 28
+Agent: Super Z (main agent, sesi web)
+Task: Pemilik kembali dengan hasil Claude (draft-final.md via Drive) + 2 skill (sempro-mepet, naskah-id) — perintah "susun proposal docx". Verifikasi hasil Claude, lalu bangun DOCX dari draft-final.md dengan judul baru.
+
+Work Log:
+- Unduh 3 berkas Drive: (1) ZIP translator-sibi-final (draft-final.md + _kerja: chunk c0–c8, cek.py, hasil-workflow.json, draft-final.sebelum-selaras.md), (2) skill sempro-mepet, (3) skill naskah-id — keduanya diekstrak dan dibaca; dipakai sesuai arah pemilik.
+- Verifikasi invarian mandiri naskah (baris 1–981 sebelum marker AKHIR NASKAH): 44 penanda PERLU DATA; DP [1]–[80] lengkap; 8 blok mermaid verbatim; caption 3.1–3.8 urut; judul baru (keputusan pemilik 28 Okt 2026) di baris 1; angka jangkar identik — "26+9" ternyata singkatan prompt, bentuk naskah "26 huruf … 9 angka" identik di 4 lokasi; diff vs naskah-sumber 76 baris (7,8%) konsisten Log Perubahan Claude.
+- Skill naskah-id (periksa.py): 6 temuan = 4 gaya (AI-17 "Oleh karena itu") + 2 positif palsu lama diterima sejak Task 17 (F1 makro; Respon [9]) — 0 galat EYD baru.
+- Pipeline: skrip baru split_final.py (pisahkan naskah → 4 berkas bab, blok kepala 20 baris dilewati — sampul tetap dibuat buildCover); parse_md.js diarahkan ke split → parsed-final.json; generate_docx.js: judul baru sampul (calcTitleLayoutMixed diperluas maxLines 3→5, hasil 5 baris), OUT baru translator-sibi-final/; patch_footer.py + qa_ekspor.py diparameterisasi via argv.
+- Bangun: parse (bab1 1/6/2 · bab2 1/11 · bab3 1/11/30 · 9 tabel · 8 figur · 80 ref · 38 penanda tubuh + 6 sampul = 44) → DOCX 2,83 MB → add_toc_placeholders (64 entri) → patch_footer (roman/arab/pgNumType) → postcheck 0 galat (1 peringatan lama spasi tabel 9 pt) → PDF 68 hlm → qa_ekspor 8/8 gambar 14,0 cm (hlm 31–50) + 14 spot-check OK → VLM (glm) sampul: judul 5 baris utuh + identitas rapi; halaman Tabel 3.6: bersih.
+- Deliverable download/translator-sibi-final/: DOCX + Pratinjau PDF + catatan-pengemasan.md + draft-final.md + _kerja/; commit + push.
+- Berikutnya: menunggu keputusan pemilik atas Daftar Temuan Claude (tabel 2.2 baris 17; ujaran vs ucapan; ±40 temuan) dan pengisian 44 penanda PERLU DATA.
+
+Stage Summary:
+- DOCX final judul baru terbangun dari hasil Claude tanpa satu pun perubahan substansi: semua invarian hijau, 68 hlm, sampul 5 baris, TOC 64 entri, 8 gambar tervalidasi.
+- Sisa human-owned: 44 penanda PERLU DATA; ±40 temuan Claude di Daftar Temuan draft-final.md; 6+1 konfirmasi pembimbing; Update Field TOC di Word.

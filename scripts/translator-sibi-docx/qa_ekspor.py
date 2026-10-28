@@ -2,7 +2,7 @@
 """QA ekspor akhir: posisi & lebar cetak tiap gambar di PDF + spot-check teks."""
 import fitz, re, sys
 
-PDF = '/home/z/my-project/download/translator-sibi-docx/Pratinjau-Proposal-Penerjemah-Dua-Arah-SIBI.pdf'
+PDF = sys.argv[1] if len(sys.argv) > 1 else '/home/z/my-project/download/translator-sibi-docx/Pratinjau-Proposal-Penerjemah-Dua-Arah-SIBI.pdf'
 doc = fitz.open(PDF)
 print(f'halaman: {len(doc)}')
 
