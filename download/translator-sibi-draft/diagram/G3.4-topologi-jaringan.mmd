@@ -1,0 +1,29 @@
+%% G3.4 — Topologi perangkat, komunikasi antarmodul, layanan awan, dan server (BAB III, Subbab 3.5.2)
+%% Tipe: flowchart LR, 2-3 modul + AP internet + layanan ucapan awan + server lokal riset/cadangan
+flowchart LR
+    subgraph MODS["2-3 modul ESP32-S3 (baterai)"]
+        MA["Modul A (TX)<br/>pemancar ESP-NOW"]
+        MB["Modul B (RX)<br/>CSI + inferensi murid int8"]
+        MC["Modul C (pengguna)<br/>layar + speaker + mikrofon I2S<br/>+ tombol + rotary encoder"]
+    end
+
+    AP["Access point dengan akses internet:<br/>router mitra, semua perangkat satu kanal"]
+
+    subgraph AWAN["Layanan ucapan awan (jalur utama)"]
+        TTSA["TTS Indonesia"]
+        STTA["ASR Indonesia"]
+    end
+
+    subgraph SERVER["Server lokal laptop (riset dan cadangan)"]
+        RUVR["Server RuView:<br/>kalibrasi ruang, segmentasi"]
+        ASRL["ASR faster-whisper<br/>(cadangan)"]
+        TTSL["TTS MMS<br/>(cadangan)"]
+    end
+
+    MA -- "ESP-NOW beacon,<br/>sumber CSI" --> MB
+    MB -- "UDP: label dan skor" --> AP
+    MC -- "teks hasil isyarat (arah 1)" --> TTSA
+    TTSA -- "audio hasil sintesis" --> MC
+    MC -- "audio ucapan (arah 2)" --> STTA
+    STTA -- "teks" --> MC
+    AP -. "riset dan mode cadangan" .-> SERVER
