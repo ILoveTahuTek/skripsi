@@ -583,3 +583,12 @@ Stage Summary:
 - 56/80 rujukan berkasnya utuh; 23 berbayar + 1 buku cetak tanpa berkas — status per rujukan + jalur yang sudah dicoba tercatat di MANIFEST.md.
 - OJS pemblokir bot (12 KASIBI, 73 Rabit, 14 IJCS) dan Elsevier/APA/NCBI (3, 19) tak terjangkau dari sandbox.
 - Berikutnya: kembali menunggu keputusan pemilik atas Daftar Temuan Claude (Tabel 2.2 baris 17; ujaran vs ucapan) + pengisian 44 penanda PERLU DATA.
+
+## Task 30 — Redo pengunduhan 80 rujukan + laporan (2026-11-04)
+
+- Sandbox didaur ulang → `download/pustaka-sibi/` hilang; skrip selamat → dijalankan ulang (resumable) hingga tuntas.
+- Perbaikan vs Task 29: kandidat kurasi baru (19 Stanford VHIL, 20 gzhou.pages.wm.edu, 40 Tsinghua, 76 ditarik—ternyata dokumen lain), MDPI 54/57 lolos via res.mdpi.com, UU 8/2016 (6) via Wikisource (JDIH BPK & Wikimedia memblokir requests; curl+UA penuh), 74 Crossref via DOI benar `10.1109/TIME-E...` (tanda hubung), fallback **metadata Crossref JSON** untuk semua penerbit berbayar (25 buah) sehingga tiap rujukan kini punya catatan sumber resmi.
+- Hasil akhir: **27 PDF + 5 repo ZIP + 21 halaman + 25 metadata + 2 gagal = 80/80**; gagal murni: 45 (Kamus SIBI cetak 1994), 79 (Likert 1932) — keduanya tak ada versi digital legal.
+- Verifikasi `verifikasi_pustaka.py`: 80/80 berkas valid (PDF %PDF-header, ZIP PK, JSON parse, HTML ≥1,5 KB) — tanpa masalah.
+- Deliverable: `download/pustaka-sibi/` (pdf/, repos/, halaman-web/, metadata/, LAPORAN-PENGUNDUHAN.md 80 baris, _hasil.json provenance) + `download/Pustaka-SIBI-80-Rujukan.zip` (164 MB, 88 berkas) + `download/translator-sibi-final/daftar-pustaka.md` (80 entri, ekstrak draft-final.md hlm 820-1182).
+- Situs bajakan tetap tidak dipakai; mayoritas justru ditemukan di jalur resmi (halaman lab penulis, OJS kampus, arXiv, JDIH).

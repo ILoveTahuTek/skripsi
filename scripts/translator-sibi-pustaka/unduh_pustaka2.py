@@ -58,6 +58,9 @@ CURATED = {
     65: ["https://www.cs.temple.edu/~wu/robust17.pdf"],
     73: ["https://jurnal.mdp.ac.id/index.php/rabit/article/download/8340/4101"],
     76: ["https://vipl.ict.ac.cn/research/sign/hylw/202205/W020220524841131372266.pdf"],
+    19: ["https://vhil.stanford.edu/sites/g/files/sbiybj29011/files/media/file/bailenson-apa-nonverbal-overload.pdf"],
+    20: ["https://gzhou.pages.wm.edu/wp-content/blogs.dir/5736/files/sites/13/2017/12/WiFiSenseSurvey_CSUR19.pdf"],
+    40: ["https://tns.thss.tsinghua.edu.cn/widar3.0/data/TPAMI_Widar3.0_paper.pdf"],
     79: ["https://www.communicationcache.com/uploads/1/0/8/8/108844984/a_technique_for_the_measurement_of_attitudes.pdf"],
     6:  ["https://id.wikisource.org/wiki/Undang-Undang_Republik_Indonesia_Nomor_8_Tahun_2016"],
 }
