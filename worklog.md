@@ -565,3 +565,21 @@ Work Log:
 Stage Summary:
 - DOCX final judul baru terbangun dari hasil Claude tanpa satu pun perubahan substansi: semua invarian hijau, 68 hlm, sampul 5 baris, TOC 64 entri, 8 gambar tervalidasi.
 - Sisa human-owned: 44 penanda PERLU DATA; ±40 temuan Claude di Daftar Temuan draft-final.md; 6+1 konfirmasi pembimbing; Update Field TOC di Word.
+---
+Task ID: 29
+Agent: Super Z (main agent, sesi web)
+Task: Pemilik menempel DAFTAR PUSTAKA final (80 rujukan) + perintah "tolong unduh semua ini. bagaimanapun caranya" — unduh seluruh 80 rujukan proposal jadi satu paket siap-unduh.
+
+Work Log:
+- Silang-cek 80 rujukan = identik dengan download/translator-sibi-final/_kerja/split/daftar-pustaka.md; dikode di scripts/translator-sibi-pustaka/data_pustaka.py.
+- Pipeline: unduh_pustaka.py (8 thread — OA penerbit, arXiv, codeload GitHub, kartu model HF, Unpaywall/OpenAlex/Semantic Scholar, Europe PMC, scrape landing DOI, Wayback) + penyelamat1-8 (CDX Wayback, crossref alternative-id→stampPDF, Garuda, jina reader, situs penulis: gzhou.pages.wm.edu, bayes.wustl.edu, webusers.imj-prg.fr, tns.thss.tsinghua.edu.cn, people.vcu.edu, web.engr.oregonstate.edu, pure.uva.nl, JDIH USU, archive.org; fatcat.wiki sudah sunset — dibuang).
+- Perbaikan: (a) cabang default repo Espressif = master, bukan main → 5 repo beres; (b) rujukan 09 salah unduh (review buku lain, artikel 1115) → diganti artikel benar article/download/1109/1002 via Garuda + verifikasi pdftotext; (c) rujukan 08: URL asli BRIN ber-slug lengkap; (d) api fatcat mati, availability Wayback bocor snapshot → CDX.
+- Verifikasi akhir: 56 berkas magic-byte + judul pdftotext — 35/35 PDF cocok judul (68 = artefak encoding font 1995, sumber cermin Oregon State valid); 0 masalah.
+- Hasil: 35 PDF + 6 repo ZIP (27,28,30,31,33,72) + 8 halaman web utuh (5,8,10,35,36,37,38,42) + 7 halaman penerbit pengganti (18,43,51,53,58,67,78) + 23 berbayar (ACM/IEEE/Elsevier/Springer/MUSE/OUP — salinan terbuka tidak ada; situs bajakan TIDAK dipakai) + 1 buku cetak 1994 (45).
+- Deliverable: download/pustaka-sibi/ (pdf/ + repos/ + halaman-web/ + MANIFEST.md 80 baris + _hasil.json provenance) dan download/Pustaka-SIBI-80-Rujukan.zip (394 MB, 67 berkas).
+- .gitignore += download/pustaka-sibi/ + ZIP (repo tetap ramping); skrip + worklog di-push (git push origin HEAD:main).
+
+Stage Summary:
+- 56/80 rujukan berkasnya utuh; 23 berbayar + 1 buku cetak tanpa berkas — status per rujukan + jalur yang sudah dicoba tercatat di MANIFEST.md.
+- OJS pemblokir bot (12 KASIBI, 73 Rabit, 14 IJCS) dan Elsevier/APA/NCBI (3, 19) tak terjangkau dari sandbox.
+- Berikutnya: kembali menunggu keputusan pemilik atas Daftar Temuan Claude (Tabel 2.2 baris 17; ujaran vs ucapan) + pengisian 44 penanda PERLU DATA.
