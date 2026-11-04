@@ -592,3 +592,21 @@ Stage Summary:
 - Verifikasi `verifikasi_pustaka.py`: 80/80 berkas valid (PDF %PDF-header, ZIP PK, JSON parse, HTML ≥1,5 KB) — tanpa masalah.
 - Deliverable: `download/pustaka-sibi/` (pdf/, repos/, halaman-web/, metadata/, LAPORAN-PENGUNDUHAN.md 80 baris, _hasil.json provenance) + `download/Pustaka-SIBI-80-Rujukan.zip` (164 MB, 88 berkas) + `download/translator-sibi-final/daftar-pustaka.md` (80 entri, ekstrak draft-final.md hlm 820-1182).
 - Situs bajakan tetap tidak dipakai; mayoritas justru ditemukan di jalur resmi (halaman lab penulis, OJS kampus, arXiv, JDIH).
+
+---
+Task ID: 31
+Agent: Super Z (main agent, sesi web)
+Task: Pemilik minta "Pustaka-SIBI-80-Rujukan.zip buatkan link gofile" — sandbox didaur ulang lagi (pustaka-sibi/ + ZIP hilang, skrip selamat) → regenerasi penuh lalu unggah ke Gofile.
+
+Work Log:
+- Regenerasi resumable: gelombang 1 (21 pdf + 6 repo + 18 halaman) → gelombang 2 × 4 putaran (tulis _hasil.json inkremental) → skrip baru perbaikan_akhir.py untuk 5 kasus: #6 UU 8/2016 via Wikisource (curl; Wikimedia blok requests) → halaman; #74 metadata via DOI benar 10.1109/TIME-E.2015.7389747; #54/#57 PDF via mdpi-res.com (curl, pola d_attachment); #9 PDF via ejournal.uin-suka.ac.id inklusi viewFile/1109/1002 (292 KB, judul terverifikasi pdftotext).
+- Hasil final: 29 PDF + 6 repo + 20 halaman + 23 metadata + 2 gagal = 80/80 (lebih baik dari Task 30: 27/5/21/25/2); verifikasi_pustaka.py → "Masalah: tidak ada"; LAPORAN-PENGUNDUHAN.md ditulis ulang.
+- ZIP: download/Pustaka-SIBI-80-Rujukan.zip (371 MB, 88 berkas: pdf/ + repos/ + halaman-web/ + metadata/ + laporan + provenance).
+- Gofile: api.gofile.io DIBLOKIR sandbox (TCP connect timeout), tetapi store1.gofile.io TERJANGKAU → unggah langsung POST https://store1.gofile.io/contents/uploadfile (tes 19 B dulu, lalu ZIP 371 MB: 137 s, 2,8 MB/s, HTTP 200 status ok).
+- Integritas: MD5 lokal bcf68d917c893ca29e8961e8d16b4727 = MD5 dilaporkan Gofile → byte-per-byte utuh. Tes unduh HTTP 200 (redirect halaman HTML normal gofile).
+- Link unduhan: https://gofile.io/d/RcYwiK8l (anonim/guest; tidak ada token disimpan di repo).
+
+Stage Summary:
+- Deliverable: link Gofile https://gofile.io/d/RcYwiK8l + salinan lokal download/Pustaka-SIBI-80-Rujukan.zip (371 MB).
+- Pustaka tetap 80/80 terdokumentasi; 2 gagal murni (45 Kamus SIBI cetak 1994, 79 Likert 1932) tak ada versi digital legal — semua jalur legal, tanpa situs bajakan.
+- Berikutnya: kembali menunggu keputusan pemilik (Tabel 2.2 baris 17; ujaran vs ucapan) + pengisian 44 penanda PERLU DATA.
