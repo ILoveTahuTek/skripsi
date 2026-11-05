@@ -35,3 +35,24 @@ Terpasang: sampul (5 baris, menggantikan judul terkunci lama) — mengikuti `dra
 4. **±40 temuan Claude** di Daftar Temuan `draft-final.md` (istilah *kata-level*/*chip*/*router*, urutan tampil-kirim, ketidakseragaman diagram↔prosa, dst.) — semuanya dibiarkan sesuai protokol minimal-intervensi.
 5. **6+1 konfirmasi pembimbing** (gaya sitasi IEEE, ambang G2/G3, dua ruang mitra, token validator, jalur ucapan awan, Kaggle, jumlah bab sistematika).
 6. **Update Field** daftar isi di Word/WPS setelah dokumen diedit (petunjuk tercetak di bawah daftar isi).
+
+---
+
+# Revisi 6 November 2026 — Integrasi pipeline WPC + pangkas rujukan sulit dijangkau
+
+**Pemicu:** permintaan pemilik: (1) repositori `github.com/ILoveTahuTek/WPC` berisi pipeline pelatihan YOLO26 + kode + data latih — harus tercermin dalam proposal; (2) "hapus referensi yang sulit dijangkau".
+
+**Hasil audit keterjangkauan (verifikasi ulang 6 Nov 2026, jam 21–23):**
+- 17 rujukan DIHAPUS — naskah penuh di balik paywall penerbit tanpa salinan terbuka legal: [1],[2] Mitchell & Karchmer (MUSE); [4] Ritmeester (Oxford JDSDE); [18] MLMSign (Elsevier ISWA); [22] DF-WiSLR (Elsevier PMC + salinan penangguh Taylors mati); [23] Baldeo (IEEE TENCON); [24] WiSign (ACM TIST); [39] Chen (ACM CSUR, tanpa salinan penulis); [43] Picron (bab Springer); [44] Hakozaki (ACM ASSETS); [45] Kamus SIBI cetak 1994 (tanpa versi digital); [46] Stokoe (Oxford JDSDE); [66] Ahmed (IEEE IAICT); [67] Qin (Elsevier Measurement); [71] Chow (IEEE TIT; memo MIT tak terverifikasi dari sandbox); [74] Rakun (IEEE TIME-E); [75] Anggraini (IEEE ICEEI).
+- 63 rujukan DIPERTAHANKAN — semuanya bisa diunduh gratis: arXiv (Whisper, MMS, YOLO26, MediaPipe, DensePose-WiFi, Kiranyaz, Hinton, Zheng-pose), repo GitHub (esp-csi, RuView, esp-nn, esp-dl, faster-whisper, tflite-micro), OJS kampus (UIN Suka, UAI AUDHI, umj Holistika, um-sorong Insect, nurulfikri DBESTI, STIAYP Concept, ipm2kpe INTECOMS, mdp Rabit, poltekba JST, TMJ), thesai (Dwijayanti, Wiguna), salinan penulis resmi (vhil Stanford-Bailenson, gzhou-Ma CSUR, Tsinghua-Widar3.0, UW-Ong&Ranganath, CVF-Person-in-WiFi, Temple-Shang&Wu, Oregon-Cortes&Vapnik, aboutgis-Mountrakis, VIPL-Sagawa, Isfahan-Sokolova, bayes.wustl-Nyquist, Paris-Shannon, sigmobile-WiKey, ebulutvcu-Hernandez), arsip (archive.org-Likert, PMC-Lieberman/Bowen/Mosleh), dokumen resmi (Espressif datasheet, UU 8/2016, Kemenko PMK, BRIN, Kamus SIBI Digital, Google/Azure/Ultralytics docs, kartu model HF MMS-TTS & Kokoro).
+- 8 di antaranya memblokir unduhan otomatis (Cloudflare/portal) tetapi tetap gratis di peramban: KASIBI, OpenSIBI, SignFi, WiKey, Kindy, Sebastian, HandFi, Safrida.
+
+**Perubahan naskah:**
+- DAFTAR PUSTAKA 80 → 63 entri; seluruh sitasi dinomori ulang [1]–[63] (skrip `scripts/wpc-integrasi/renumber_pustaka.py`, peta tercatat di Log Perubahan draft).
+- Klaim yang kehilangan sumber direbut/ditulis ulang: 90–95% Mitchell→[3]; overfitting lintas domain→Widar3.0 [40→32 baru]; masalah terbuka SLMT→survei Ong & Ranganath; Kamus SIBI cetak→Kamus SIBI Digital [10→7 baru]; mekanisme penolakan→keputusan rancangan (tanpa sitasi); kalimat mouthing avatar, kata berinfleksi Rakun/Anggraini, DF-WiSLR/FSL/WiSign/LSTM/WiASL dihapus.
+- Tabel 2.2: 17→13 baris (baris WiSign, DF-WiSLR, Baldeo, Rakun dihapus; "Penelitian ini" kini baris 13, sel terkunci tetap verbatim).
+- Integrasi WPC: 3.2.3 (pelatihan guru memakai pipeline terimplementasi), Tabel 3.2 +baris 5 "Repositori pipeline pelatihan YOLO26 (WPC)" (12 baris), 3.4 bahan, 3.7.4 (pipeline + data latih tersedia; alur baku Ultralytics [42→34]). Repositori WPC PRIVAT saat revisi (endpoint git 401) — tidak dimasukkan Daftar Pustaka; rincian konfigurasinya menunggu akses pemilik.
+
+**Verifikasi ekspor ulang:** 65 hlm (sebelumnya 68) · TNR 12 pt, spasi 1,5, margin 4-3-3-3 tetap · 9 tabel tiga-garis (2.2 kini 13 baris; 3.2 kini 12 baris) · 8 gambar 14 cm (aset dipakai ulang, tidak berubah) · 44 penanda [PERLU DATA] tersorot di XML (38 tubuh + 6 sampul) · DP 63 entri [1]–[63] seluruhnya dirujuk balik di tubuh, tanpa sitasi menggantung · VLM: sampul utuh, Tabel 2.2/3.2 rapi, diagram 3.3/3.5 utuh berketerangan, halaman akhir [63] · pdftotext: tanpa jejak penulis terhapus.
+
+**Sisa keputusan pemilik:** tetap sama (44 penanda PERLU DATA — kini 6 sampul + 38 tubuh; baris 13 Tabel 2.2 & 2.11 ¶3; ujaran vs ucapan; 6+1 konfirmasi pembimbing; update field daftar isi di Word/WPS) + BARU: akses ke repo WPC (privat) bila ingin rincian pipeline dimasukkan.

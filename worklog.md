@@ -650,3 +650,23 @@ Stage Summary:
 - Deliverable: https://gofile.io/d/kTTWC7EX — ZIP 399 MB; 80/80 rujukan berbentuk dokumen: 44 PDF + 30 DOCX Lembar Rujukan + 6 repo kode (ZIP+README PDF).
 - Sisa DOCX = penerbit berbayar (IEEE/Elsevier/ACM/Springer/MUSE) yang tidak punya salinan terbuka legal + 2 sumber non-digital (#45 kamus cetak 1994, #79 tetap PDF arsip sekarang); semua memuat metadata resmi + abstrak utk verifikasi sitasi.
 - Berikutnya: kembali ke pipeline DOCX proposal (sel Tabel 2.2 baris 17, ujaran vs ucapan, 44 penanda PERLU DATA).
+
+---
+Task ID: 33
+Agent: Super Z (main agent, sesi web)
+Task: Pemilik: "ambil data dan baca repo https://github.com/ILoveTahuTek/WPC.git (pipeline pelatihan YOLO26, kode + data latih sudah ada). Revisi proposal yang ada. Hapus referensi yang sulit dijangkau."
+
+Work Log:
+- Repo WPC TIDAK dapat diakses: github.com/ILoveTahuTek/WPC → 404 publik; endpoint git info/refs → 401 = repo PRIVAT. Akun ILoveTahuTek hanya punya 5 repo publik (skripsi mirror workspace, Projek1, Introduction, decision-in-esp32, optimize-zai) tanpa WPC; pencarian global GitHub (wpc+yolo/csi/esp32/wifi/sibi) nihil. Integrasi dilakukan sebatas informasi pemilik (pipeline YOLO26 + kode + data latih tersedia) + fakta publik Ultralytics; repositori disebut di naskah sebagai repositori milik peneliti, TIDAK dimasukkan Daftar Pustaka (tidak dapat diperiksa pembaca); rincian konfigurasi menunggu akses pemilik.
+- Audit keterjangkauan 80 rujukan (probe ulang 6 Nov + bukti Task 29–32): HAPUS 17 rujukan paywall/cetak (MUSE×2, Oxford×2, Elsevier×4, IEEE×5, ACM×3, Springer×1, kamus cetak 1994). PERTAHANKAN 63 — semua tersedia gratis: verifikasi ulang hari ini menemukan salinan yang efektif utk 20+ rujukan yang dulu gagal (Ma CSUR gzhou, Widar3.0 Tsinghua, Ong UW, Person-in-WiFi CVF nama file benar "Perception", Shang&Wu Temple path Publication_files, Cortes Oregon, Mountrakis aboutgis nama file benar, Kiranyaz arXiv 1905.03554, Zheng arXiv 2012.13392, WiKey sigmobile, Bailenson vhil, Nyquist bayes.wustl/Manual, Sokolova Isfahan, Sagawa vipl.ict, AUDHI/DBESTI/Concept/Insect galley download/, INTECOMS GDrive DOCX, thesai DOI-landing nama file benar utk IJACSA×2).
+- Suntingan naskah draft-final.md (backup _kerja/draft-final.sebelum-wpc.md): sitasi terhapus ditulis ulang/direbut (90–95% Mitchell→[3]; overfitting→Widar3.0; masalah terbuka SLMT→Ong&Ranganath; Kamus SIBI cetak→Kamus SIBI Digital; penolakan=keputusan rancangan; hapus kalimat mouthing/kata-berinfleksi/DF-WiSLR/FSL/WiSign/LSTM/WiASL); Tabel 2.2 17→13 baris; integrasi WPC di 3.2.3 + Tabel 3.2 (baris 5 baru, 12 baris) + 3.4 + 3.7.4 (pipeline & data latih tersedia, alur baku Ultralytics).
+- Renumber seluruh sitasi [1]–[80]→[1]–[63] (scripts/wpc-integrasi/renumber_pustuka.py — koreksi: renumber_pustaka.py): DP 63 entri berurut, 63/63 dirujuk balik, 0 menggantung, 0 >63. Log Perubahan revisi ditambahkan ke draft-final.md (bagian log, tidak masuk DOCX).
+- Ekspor ulang DOCX (split_final.py → parse_md.js → generate_docx.js → patch_footer.py): 65 hlm (sebelum 68), TNR 12/1,5/4-3-3-3 tetap, 9 tabel isi + sampul, 8 gambar 14 cm (aset lama dipakai ulang), 44 penanda PERLU tersorot (XML), DP [1] Lieberman–[63] Hinton.
+- Verifikasi: pdftotext tanpa jejak penulis terhapus; VLM 8 halaman kunci (sampul 5 baris utuh, Tabel 2.2 13 baris urut — lapisan teks konfirmasi, Tabel 3.2 baris WPC, DP rapi, diagram 3.3/3.5 utuh berketerangan, akhir [63]); python-docx: H1×4, H2×28, tabel×10, gambar×8, DP×63.
+- Berkas turunan diperbarui: daftar-pustaka.md (63 entri), _kerja/naskah-untuk-docx.md + split/, catatan-pengemasan.md (+bagian revisi), BONUS download/translator-sibi-final/Akses-63-Rujukan.md (peta URL unduh legal semua rujukan, tanda ⚠ utk 8 situs gratis-pemblokir-bot).
+
+Stage Summary:
+- Deliverable: Proposal-Studi-Kelayakan-Purwarupa-SIBI-CSI-ESP32S3.docx + Pratinjau PDF (65 hlm) di download/translator-sibi-final/ — revisi terintegrasi pipeline WPC + 63 rujukan semuanya bisa diunduh gratis.
+- Repo WPC privat (401) → minta pemilik membuka akses/publikasi agar rincian pipeline (konfigurasi, dataset, hasil) dapat dimasukkan & dikutip.
+- Opsional menyusul: rebuild ZIP pustaka 63 rujukan bila diminta (butuh sesi unduhan baru).
+- Berikutnya: keputusan pemilik lama (baris 13 Tabel 2.2, ujaran vs ucapan, 44 PERLU DATA, konfirmasi pembimbing) + akses repo WPC.
