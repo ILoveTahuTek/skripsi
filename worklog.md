@@ -610,3 +610,23 @@ Stage Summary:
 - Deliverable: link Gofile https://gofile.io/d/RcYwiK8l + salinan lokal download/Pustaka-SIBI-80-Rujukan.zip (371 MB).
 - Pustaka tetap 80/80 terdokumentasi; 2 gagal murni (45 Kamus SIBI cetak 1994, 79 Likert 1932) tak ada versi digital legal — semua jalur legal, tanpa situs bajakan.
 - Berikutnya: kembali menunggu keputusan pemilik (Tabel 2.2 baris 17; ujaran vs ucapan) + pengisian 44 penanda PERLU DATA.
+
+---
+Task ID: 32
+Agent: Super Z (main agent, sesi web)
+Task: Pemilik: "aku butuh bentuk artikel pdf/docx loh bukan halaman web" — paket pustaka regenerasi (sandbox recycle lagi) + upgrade semua rujukan artikel dari 'halaman penerbit' menjadi berkas artikel sungguhan (PDF), render sumber web-native ke PDF, lalu ZIP + link Gofile baru.
+
+Work Log:
+- Sandbox didaur ulang → pustaka-sibi/ + ZIP hilang; unduh-balik dari Gofile tidak mungkin (redirect download lewat gofile.io yang terblokir) → regenerasi penuh: gelombang 1 + gelombang 2×2 + penyelamat 1–8 + verifikasi_akhir + finalisasi + perbaikan_akhir (semua resumable, catat inkremental).
+- Upgrade artikel (dari 'halaman/masih-gagal' → PDF asli): 6 UU 8/2016 (PDF resmi JDIH USU), 79 Likert 1932 (archive.org), 14 IJCS (host baru www.ijcs.net ditemukan via Garuda detail/4094170), 56 Shannon 1949 (cermin kuliah Université Paris Cité), 65 Shang-Wu (cis.temple.edu Publication_files/Shang_MASS_2017.pdf), 69 Mountrakis (aboutgis.com), 78 Sokolova-Lapalme (halaman dosen U. Isfahan), 54/57 MDPI (mdpi-res.com), 26 Mosleh (ieeexplore iel7 IEEE Access OA), 55 Nyquist (MIT DSpace AIM-175), 3 Lieberman tetap metadata (PMC/De Gruyter memblokir jaringan sandbox).
+- Probe agresif tambahan: CiteSeerX (sudah sunset → redirect Wayback terblokir), scholar.archive.org (SPA, fatcat API mati), bohrium (tak ada PDF biner), repo GitHub SignFi (105 MB zip, 0 PDF), lab Tsinghua tns (hanya keluarga Widar), gzhou REST+brute-force path SignFi (tidak ada).
+- Rujukan web-native (5,8,10,35,36,37,38,42) dirender print-to-PDF via weasyprint (CSS dibersihkan utk Google Cloud): 6 PDF render sukses dan terverifikasi berisi konten asli (8 BRIN, 35 MMS-TTS, 36 Google TTS, 37 Azure, 38 Kokoro, 42 Ultralytics); 5 & 10 portal JS — snapshot HTML + catatan jujur (jina kehabisan kuota 401).
+- 24 rujukan penerbit-berbayar/CF-blokir → metadata Crossref resmi (semua DOI valid) + alasan eksplisit per rujukan (mis. 73 Rabit: galley benar 8340/3439 ditemukan via Garuda tapi univrab.ac.id 403; 71 Chow: IEEE berbayar + MIT DSpace 429/403 berulang; 51/53/58 Procedia: ScienceDirect memblokir PDF walau OA; 21 SignFi: dl.acm.org CF; 18 MLMSign: Elsevier CF).
+- Final: 41 PDF artikel + 6 PDF render web-native + 6 repo ZIP + 8 halaman (2 portal JS HTML-only) + 24 metadata Crossref + 1 gagal (45 Kamus SIBI cetak 1994) = 80/80 terdokumentasi; verifikasi_pustaka.py: 80 rujukan, "Masalah: tidak ada".
+- ZIP baru: download/Pustaka-SIBI-80-Rujukan.zip (401 MB, 121 berkas: pdf/ 47, repos/ 6, halaman-web/, metadata/ 33, LAPORAN + provenance).
+- Gofile: upload langsung POST store1.gofile.io/contents/uploadfile (147,6 s, HTTP 200, status ok); MD5 lokal = MD5 Gofile (7a0bb3aa…) → utuh 100%.
+
+Stage Summary:
+- Deliverable: https://gofile.io/d/Vg3GGgoU — ZIP 401 MB, 121 berkas; semua rujukan kini berbentuk dokumen (PDF/ZIP) atau metadata resmi; hanya 2 berita pemerintah yang tetap HTML (portal JS) + 1 buku cetak.
+- Jalur legal saja (OJS kampus, Garuda, repositori penulis/universitas, JDIH, arXiv, archive.org, mdpi-res, ieeexplore OA); situs bajakan tetap tidak dipakai.
+- Berikutnya: menunggu keputusan pemilik atas Daftar Temuan Claude (Tabel 2.2 baris 17; ujaran vs ucapan) + pengisian 44 penanda PERLU DATA.
