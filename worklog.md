@@ -630,3 +630,23 @@ Stage Summary:
 - Deliverable: https://gofile.io/d/Vg3GGgoU — ZIP 401 MB, 121 berkas; semua rujukan kini berbentuk dokumen (PDF/ZIP) atau metadata resmi; hanya 2 berita pemerintah yang tetap HTML (portal JS) + 1 buku cetak.
 - Jalur legal saja (OJS kampus, Garuda, repositori penulis/universitas, JDIH, arXiv, archive.org, mdpi-res, ieeexplore OA); situs bajakan tetap tidak dipakai.
 - Berikutnya: menunggu keputusan pemilik atas Daftar Temuan Claude (Tabel 2.2 baris 17; ujaran vs ucapan) + pengisian 44 penanda PERLU DATA.
+
+## Task 32 — 80/80 Rujukan Berbentuk Dokumen (PDF/DOCX) + Gofile
+
+Tanggal: 2026-11-05
+Work Log:
+- Regenerasi penuh pasca-recycle (gelombang 1+2, perbaikan_akhir, render_web_pdf) → basis 27 pdf + 6 repo + 21 halaman + 24 metadata + 2 gagal.
+- artikelkan_semua.py 4 fase: (1) PDF rescue — kandidat manual, galley OJS, arXiv API, OpenAlex alternates, Unpaywall, Europe PMC search, Semantic Scholar openAccessPdf; (2) render HTML resmi → PDF (weasyprint) + kartu model HF dari API JSON; (3) DOCX "Lembar Rujukan" (sitasi APA + metadata Crossref/OpenAlex + abstrak penuh) utk sisanya; (4) README repo GitHub → PDF + laporan.
+- PDF PMC: pmc.ncbi.nlm.nih.gov memblokir requests (403) tapi BISA via curl → halaman artikel PMC full-text dirender PDF (#3 Lieberman 296 KB, #77 Bowen 93 KB).
+- Cloudflare "One moment, please" (#5 KemenkoPMK, #10 Kamus SIBI Digital, #12 KASIBI) → konten resmi diambil via WebFetch (infra luar) → PDF artikel dari teks resmi + tanggal akses.
+- URL terbukti dari worklog Task lama: #79 Likert 1932 (archive.org/download/likert-1932/Likert_1932.pdf, 21,2 MB — unduhan pertama terpotong 8,8 MB, dicek via metadata API, diulang -C - hingga utuh, teks terverifikasi), #55 Nyquist (bayes.wustl.edu via WebSearch), #69 Mountrakis (aboutgis.com/pdfs/… via WebSearch).
+- #9 UIN Suka viewFile, #56 Shannon (cermin kuliah Paris) pulih sebagai PDF asli.
+- Repo 6 entri: status dipulihkan dari docx → repo (ZIP tetap) + README dirender PDF (gh tuple REFS).
+- Verifikasi akhir (verifikasi_final.py): 80/80 valid, 0 rusak — 44 PDF (artikel asli/render/kartu) + 30 DOCX Lembar Rujukan + 6 repo (ZIP + README PDF + DOCX).
+- ZIP final: download/Pustaka-SIBI-80-Rujukan.zip (399 MB, 177 berkas, MD5 e19e18d705c5e8f267f0635f43706894).
+- Gofile: store1.gofile.io upload 142 s HTTP 200 status ok; MD5 server identik → utuh 100%.
+
+Stage Summary:
+- Deliverable: https://gofile.io/d/kTTWC7EX — ZIP 399 MB; 80/80 rujukan berbentuk dokumen: 44 PDF + 30 DOCX Lembar Rujukan + 6 repo kode (ZIP+README PDF).
+- Sisa DOCX = penerbit berbayar (IEEE/Elsevier/ACM/Springer/MUSE) yang tidak punya salinan terbuka legal + 2 sumber non-digital (#45 kamus cetak 1994, #79 tetap PDF arsip sekarang); semua memuat metadata resmi + abstrak utk verifikasi sitasi.
+- Berikutnya: kembali ke pipeline DOCX proposal (sel Tabel 2.2 baris 17, ujaran vs ucapan, 44 penanda PERLU DATA).
