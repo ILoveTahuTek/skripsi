@@ -670,3 +670,20 @@ Stage Summary:
 - Repo WPC privat (401) → minta pemilik membuka akses/publikasi agar rincian pipeline (konfigurasi, dataset, hasil) dapat dimasukkan & dikutip.
 - Opsional menyusul: rebuild ZIP pustaka 63 rujukan bila diminta (butuh sesi unduhan baru).
 - Berikutnya: keputusan pemilik lama (baris 13 Tabel 2.2, ujaran vs ucapan, 44 PERLU DATA, konfirmasi pembimbing) + akses repo WPC.
+
+---
+Task ID: 34
+Agent: Super Z (main agent, sesi web)
+Task: Pemilik: "push ke github btw, mana kemasan dokumen artikel jurnal yang aku minta"
+
+Work Log:
+- Verifikasi ulang tautan Gofile Task 32 via WebFetch (6 Nov): https://gofile.io/d/kTTWC7EX TETAP HIDUP — Pustaka-SIBI-80-Rujukan.zip, 418 MB, status publik, tombol unduh tersedia; MD5 saat unggah e19e18d705c5e8f267f0635f43706894 (terverifikasi server saat Task 32).
+- Git: seluruh commit s.d. Task 33 sudah ter-push (origin/main == HEAD 1da68b1, 0 unpushed); `git push origin HEAD:main` → "Everything up-to-date".
+- Bersih-bersih working tree: berkas DOCX/PDF final ter-regenerasi identik ukuran (diff biner ukuran sama; verifikasi ulang python-docx: 318 paragraf, 10 tabel, H1×4, H2×28, gambar×8; PDF pratinjau 65 hlm, 2,3 MB — identik dengan hasil verifikasi Task 33) → diseragamkan dalam satu commit agar status bersih.
+- Catatan komposisi ZIP utk pemilik: 80/80 rujukan berbentuk dokumen = 44 PDF (artikel asli/render resmi/kartu model) + 30 DOCX Lembar Rujukan (sitasi APA + metadata + abstrak; penerbit paywall) + 6 repo kode (ZIP + README PDF). 63 rujukan versi revisi Task 33 semuanya termuat di dalam ZIP; 17 rujukan paywall yang dihapus dari proposal tetap ada sebagai materi ekstra.
+
+Stage Summary:
+- Deliverable tetap sah dan hidup: ZIP 80 rujukan berbentuk dokumen di https://gofile.io/d/kTTWC7EX (418 MB).
+- Proposal revisi 63 rujukan (Task 33) terkonfirmasi utuh: DOCX 65 hlm + pratinjau PDF di download/translator-sibi-final/; peta akses 63 rujukan di Akses-63-Rujukan.md.
+- Repo GitHub sinkron penuh (semua Task 29–34 ter-push).
+- Tawaran menyusul: rebuild ZIP 63 rujukan selaras revisi (tanpa 17 paywall) bila diminta pemilik — butuh sesi unduhan baru karena berkas ZIP lokal hilang saat sandbox didaur ulang.
