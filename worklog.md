@@ -707,3 +707,18 @@ Stage Summary:
 - Referensi sulit dijangkau: 17 paywall sudah dihapus gelombang 1 (DP 80→63, semua gratis) — tidak ada tambahan pada gelombang ini.
 - Keamanan: PAT GitHub pemilik terpapar di percakapan → wajib di-revoke setelah sesi; token tidak pernah masuk berkas ter-commit.
 - Berikutnya: keputusan pemilik lama (44 penanda PERLU DATA: 6 sampul + 38 tubuh; baris 13 Tabel 2.2; ujaran vs ucapan; konfirmasi pembimbing) + pertimbangkan publikasi repo WPC agar dapat masuk Daftar Pustaka sebagai entri perangkat lunak.
+
+---
+Task ID: 36
+Agent: Super Z (main agent, sesi web)
+Task: Pemilik: "unduh ulang — kenapa Pratinjau-Proposal-Studi-Kelayakan-Purwarupa-SIBI.pdf dan Proposal-Penerjemah-Dua-Arah-SIBI-CSI-ESP32S3.docx tidak sama???"
+
+Work Log:
+- Diagnosis: pemilik membandingkan dua dokumen dari generasi berbeda. Pratinjau-Proposal-Studi-Kelayakan...pdf = pratinjau dokumen FINAL (65 hlm, judul "Proposal Studi Kelayakan Purwarupa...", DP 63, revisi WPC Task 33+35); Proposal-Penerjemah-Dua-Arah...docx = DRAF LAMA Oktober (68 hlm, judul "Proposal Penerjemah Dua Arah...", DP 80, pra-WPC) yang masih ter-track di download/translator-sibi-docx/ sehingga ikut terunduh dari GitHub. Keduanya berukuran mirip (2,83 MB) sehingga mudah tertukar.
+- Integritas file final di working tree diverifikasi ulang sebelum commit: DOCX 318 ¶ / 10 tabel / H1×4 / H2×28, "0,8944" ada di badan 3.7.4, "bobot terlatih" ada di sel Tabel 3.2 (= revisi gelombang 2, modifikasi hanya regenerasi byte); PDF pratinjau 65 hlm.
+- Repo dirapikan agar tidak tertukar lagi: download/translator-sibi-docx/{Proposal-Penerjemah...docx, Pratinjau...pdf} dipindah ke download/arsip/ (git mv + rename ter-catat) + README.md arsip yang menunjuk dokumen pengganti; sisa berkas di translator-sibi-docx/ (audit, catatan, aset gambar) tidak diubah.
+- Commit + git push origin HEAD:main.
+
+Stage Summary:
+- Pasangan unduhan yang benar: download/translator-sibi-final/{Proposal-Studi-Kelayakan-Purwarupa-SIBI-CSI-ESP32S3.docx, Pratinjau-Proposal-Studi-Kelayakan-Purwarupa-SIBI.pdf} — keduanya 65 hlm dan saling cocok.
+- Repo GitHub kini memisahkan arsip (download/arsip/) dari dokumen final (download/translator-sibi-final/).
