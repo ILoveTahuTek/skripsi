@@ -56,3 +56,22 @@ Terpasang: sampul (5 baris, menggantikan judul terkunci lama) — mengikuti `dra
 **Verifikasi ekspor ulang:** 65 hlm (sebelumnya 68) · TNR 12 pt, spasi 1,5, margin 4-3-3-3 tetap · 9 tabel tiga-garis (2.2 kini 13 baris; 3.2 kini 12 baris) · 8 gambar 14 cm (aset dipakai ulang, tidak berubah) · 44 penanda [PERLU DATA] tersorot di XML (38 tubuh + 6 sampul) · DP 63 entri [1]–[63] seluruhnya dirujuk balik di tubuh, tanpa sitasi menggantung · VLM: sampul utuh, Tabel 2.2/3.2 rapi, diagram 3.3/3.5 utuh berketerangan, halaman akhir [63] · pdftotext: tanpa jejak penulis terhapus.
 
 **Sisa keputusan pemilik:** tetap sama (44 penanda PERLU DATA — kini 6 sampul + 38 tubuh; baris 13 Tabel 2.2 & 2.11 ¶3; ujaran vs ucapan; 6+1 konfirmasi pembimbing; update field daftar isi di Word/WPS) + BARU: akses ke repo WPC (privat) bila ingin rincian pipeline dimasukkan.
+
+---
+
+# Revisi 6 November 2026, gelombang 2 — Verifikasi isi repositori WPC (akses pemilik)
+
+**Pemicu:** pemilik memberi akses token GitHub → repositori `github.com/ILoveTahuTek/WPC` (privat) berhasil dikloning penuh (495 berkas, 2,3 GB) dan diaudit.
+
+**Isi repositori terverifikasi:** README 12 bab — model juara exp06b pose mAP50 0,8944 / box 0,9098 pada 49 kelas (25 huruf + 24 kata); rantai pretraining COCO-pose → hand-keypoints (box 0,991/pose 0,895) → SIBI v1 (pose 0,821); dataset v2 FROZEN: 4 sumber 9.953 gambar → dedup md5 −2.215 → leak-guard dHash −18 → MediaPipe 7.210 gambar/7.627 objek, split 6.231/650/329; ratchet Kaggle T4×2 seed 42 EPS 0,002 dengan ledger 9 eksperimen (exp00 0,8445 → exp03 mosaic 0,3 → exp05 lr0 0,004+cos → exp10 60 epoch 0,8888 → juara exp06b pose 16/kobj 3 0,8944); exp11 24 huruf murni pose mAP50 0,9580, akurasi huruf 97,6% @conf 0,25; bobot juara 50,5 MB dengan MANIFEST sha256; `inference_sibi.py` keluaran JSON 21 keypoint; aplikasi: 24 huruf statis + J/Z huruf gerak, label stabil + tahan 0,5 s.
+
+**Perubahan naskah (draft-final.md):**
+- Tabel 3.2 baris 5: fungsi repositori dirinci (skrip konversi bergate kualitas, pelatihan deterministik GPU Kaggle, pencatatan eksperimen otomatis, verifikasi artefak, bobot terlatih).
+- 3.4: bahan penelitian ditambah "yang telah diverifikasi kelengkapannya".
+- 3.7.4 ¶2: ditulis ulang — alur kerja teruji ujung-ke-ujung, bukti 9 eksperimen (pose mAP50 0,8944, 49 kelas), penyesuaian eksplisit: penargetan ulang kepala keypoint pose tangan 21 titik → 17 keypoint COCO jalur guru.
+- Catatan revisi 1 (Log gelombang 1) diperbarui; Log Perubahan gelombang 2 ditambahkan (bagian log, tidak masuk DOCX).
+- Daftar pustaka: tidak ada perubahan (63 entri; pemangkasan 17 paywall selesai di gelombang 1).
+
+**Ekspor ulang & verifikasi:** DOCX 65 hlm (2.744.802 byte), TNR 12/1,5/4-3-3-3 tetap, 10 tabel, 8 gambar, H1×4, H2×28 — struktur identik baseline; 5 frasa kunci revisi terkonfirmasi di DOCX (0,8944, penargetan ulang kepala, checksum, perceptual hash, diverifikasi kelengkapannya); verifikasi visual Tabel 3.1/3.2 (hlm 32–33) dan 3.7.4 (hlm 41) rapi tanpa overflow; pratinjau PDF diperbarui; penanda PERLU tubuh 38 (tetap).
+
+**Keamanan:** token GitHub pemilik sempat lewat percakapan — wajib di-revoke setelah selesai (README WPC Bab 12 juga mensyaratkannya); token tidak pernah ditulis ke berkas yang di-commit (repo WPC dikloning ke `wpc-repo/` yang masuk `.gitignore`).

@@ -687,3 +687,23 @@ Stage Summary:
 - Proposal revisi 63 rujukan (Task 33) terkonfirmasi utuh: DOCX 65 hlm + pratinjau PDF di download/translator-sibi-final/; peta akses 63 rujukan di Akses-63-Rujukan.md.
 - Repo GitHub sinkron penuh (semua Task 29–34 ter-push).
 - Tawaran menyusul: rebuild ZIP 63 rujukan selaras revisi (tanpa 17 paywall) bila diminta pemilik — butuh sesi unduhan baru karena berkas ZIP lokal hilang saat sandbox didaur ulang.
+
+---
+Task ID: 35
+Agent: Super Z (main agent, sesi web)
+Task: Pemilik memberi token GitHub: baca repo WPC (pelatihan YOLO26, pipeline + kode + data lengkap), revisi proposal, hapus referensi sulit dijangkau, push ke skripsi.git, dan tanya lokasi kemasan artikel jurnal.
+
+Work Log:
+- Token GitHub pemilik dipakai sekali untuk kloning https://github.com/ILoveTahuTek/WPC.git (privat; sebelumnya 401) → wpc-repo/ (495 berkas, 2,3 GB); token langsung dihapus dari remote URL; wpc-repo/ masuk .gitignore; tidak di-commit.
+- Audit isi WPC (README 12 bab + program.md + docs/ + experiments/ + weights/): dataset v2 FROZEN (Roboflow sibi-bieme 5.831 + Kaggle combined 2.306 + lemlitbang 525/1.291 = 9.953 → dedup md5 −2.215, leak-guard dHash −18, MediaPipe 7.210 sukses/510 gagal → 7.627 objek; 49 kelas = 25 huruf + 24 kata; split 6.231/650/329); rantai pretraining COCO-pose → hand-keypoints (box 0,991/pose 0,895) → SIBI v1 (0,821); ratchet Kaggle T4×2 seed 42 EPS 0,002: exp00 0,8445 → exp03 mosaic 0,3 KEEP 0,8553 → exp05 lr0 0,004+cos KEEP 0,8578 → exp10 60 epoch KEEP 0,8888 → juara exp06b (pose 16, kobj 3) 0,8944/0,9098; exp11 24 huruf murni 0,9580, akurasi huruf 97,6% @conf 0,25; bobot juara 50,5 MB sha256 di weights/MANIFEST.json; inference_sibi.py keluaran JSON 21 keypoint; aplikasi WPC: 24 huruf statis + J/Z huruf gerak, label stabil, tahan 0,5 s.
+- Revisi draft-final.md (gelombang 2): Tabel 3.2 baris 5 dirinci (konversi bergate, pelatihan deterministik, ledger eksperimen, verifikasi artefak, bobot terlatih); 3.4 + "yang telah diverifikasi kelengkapannya"; 3.7.4 ¶2 ditulis ulang (alur teruji ujung-ke-ujung; bukti 9 eksperimen pose mAP50 0,8944 pada 49 kelas; penargetan ulang kepala keypoint 21 titik pose tangan → 17 COCO jalur guru); Catatan revisi 1 diperbarui; Log Perubahan gelombang 2 ditambahkan (tidak masuk DOCX). Rujukan tanpa perubahan (63 tetap; pemangkasan 17 paywall selesai gelombang 1).
+- Sinkron _kerja/naskah-untuk-docx.md (943 baris pertama draft) → split_final.py → parse_md.js → generate_docx.js → patch_footer.py: DOCX 65 hlm (2.744.802 byte).
+- Verifikasi: python-docx 318 ¶ / 10 tabel / 8 gambar / H1×4 / H2×28 (identik baseline); 5 frasa kunci revisi ADA di DOCX; pdftotext memetakan Tabel 3.2 hlm 36–37 dan 3.7.4 hlm 44–45 (0,8944 hlm 45); render visual hlm 32–33 & 41 rapi tanpa overflow; pratinjau PDF diperbarui; penanda PERLU tubuh 38 tetap.
+- Push: commit + git push origin HEAD:main → github.com/ILoveTahuTek/skripsi.git.
+
+Stage Summary:
+- Deliverable: Proposal-Studi-Kelayakan-Purwarupa-SIBI-CSI-ESP32S3.docx + pratinjau PDF (65 hlm) — revisi gelombang 2: integrasi WPC kini berbasis audit repositori nyata, bukan info verbal.
+- Kemasan artikel jurnal (jawaban pemilik): ZIP 80 rujukan berbentuk dokumen tetap hidup di https://gofile.io/d/kTTWC7EX (418 MB; 44 PDF + 30 DOCX Lembar Rujukan + 6 repo); 63 rujukan versi revisi semuanya termuat di dalamnya.
+- Referensi sulit dijangkau: 17 paywall sudah dihapus gelombang 1 (DP 80→63, semua gratis) — tidak ada tambahan pada gelombang ini.
+- Keamanan: PAT GitHub pemilik terpapar di percakapan → wajib di-revoke setelah sesi; token tidak pernah masuk berkas ter-commit.
+- Berikutnya: keputusan pemilik lama (44 penanda PERLU DATA: 6 sampul + 38 tubuh; baris 13 Tabel 2.2; ujaran vs ucapan; konfirmasi pembimbing) + pertimbangkan publikasi repo WPC agar dapat masuk Daftar Pustaka sebagai entri perangkat lunak.
