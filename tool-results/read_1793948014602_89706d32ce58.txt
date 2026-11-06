@@ -1,0 +1,670 @@
+     1→     1→# SIBI YOLO26-pose — Dari Pengumpulan Dataset sampai Model Juara (Ratchet Autoresearch di Kaggle T4x2)
+     2→     2→
+     3→     3→Repositori ini mendokumentasikan **perjalanan lengkap** membangun model pengenalan
+     4→     4→isyarat Bahasa Isyarat Indonesia (SIBI) berbasis **YOLO26m-pose**: dari pengumpulan
+     5→     5→dan pembangunan dataset, rantai pretraining, krisis lingkungan pelatihan, migrasi ke
+     6→     6→Kaggle, sampai 9 eksperimen ratchet otomatis yang menghasilkan model juara.
+     7→     7→
+     8→     8→> **Model juara: pose mAP50 = 0.8944** (box mAP50 = 0.9098)
+     9→     9→> Bobot: [`weights/yolo26m_pose_sibi_exp06b_kpt_gain_best.pt`](weights/yolo26m_pose_sibi_exp06b_kpt_gain_best.pt)
+    10→    10→> (50,5 MB · sha256 `073ccf71…b3ea0` · lihat [`weights/MANIFEST.json`](weights/MANIFEST.json))
+    11→    11→
+    12→    12→---
+    13→    13→
+    14→    14→## Peta Perjalanan (ringkasan kronologis)
+    15→    15→
+    16→    16→| Tahap | Peristiwa | Hasil |
+    17→    17→|---|---|---|
+    18→    18→| 1 | Pengumpulan 4 sumber dataset SIBI (Roboflow, 2× Kaggle, lemlitbang) | 9.953 gambar mentah |
+    19→    19→| 2 | Konversi v2: dedup md5, leak-guard dHash, label keypoint MediaPipe | **7.210 gambar, 49 kelas, 7.627 objek** |
+    20→    20→| 3 | Rantai pretraining: COCO-pose → hand-keypoints → SIBI v1 (26 kelas, 1.557 img) | pose mAP50 0.821 |
+    21→    21→| 4 | Audit kelemahan v1 → pembangunan dataset v2 (4,6× lebih besar, kata + dua tangan) | baseline molab **0.8338** |
+    22→    22→| 5 | Akun GPU pribadi kena restricted permanen → migrasi total ke Kaggle T4x2 | baseline Kaggle **0.8445** |
+    23→    23→| 6 | Ratchet 9 eksperimen otomatis (KEEP/REVERT berbasis pose mAP50) | juara **exp06b 0.8944** |
+    24→    24→| 7 | Finalisasi: bobot juara, artefak lengkap per eksperimen, panduan inferensi, README | repo ini |
+    25→    25→
+    26→    26→Total perbaikan pose mAP50: **0.821 (v1) → 0.8944 (juara)** = **+0.0734 poin absolut**;
+    27→    27→terhadap baseline Kaggle (0.8445) ratchet menambah **+0.0499**.
+    28→    28→
+    29→    29→---
+    30→    30→
+    31→    31→## Bab 1 — Masalah yang Diselesaikan
+    32→    32→
+    33→    33→SIBI (Sistem Isyarat Bahasa Indonesia) mengekspresikan huruf dan kata lewat **bentuk
+    34→    34→tangan**: 25 huruf alfabet (A–Z tanpa J, yang isyaratnya berupa gerakan dan bukan pose
+    35→    35→statis) serta puluhan kata sehari-hari (Tolong, Maaf, Cinta, angka Satu–Sembilan, dan
+    36→    36→lainnya). Karena pembeda antar-kelas terletak pada posisi jari dan telapak — bukan
+    37→    37→sekadar "di mana tangan berada" — pendekatan deteksi bounding box saja tidak cukup.
+    38→    38→Model harus menghasilkan **21 keypoint tangan** (kpt_shape `[21, 3]`, standar MediaPipe:
+    39→    39→4 titik per jari + 1 pergelangan) agar aplikasi downstream dapat membedakan huruf yang
+    40→    40→mirip secara bentuk box, misalnya "V" vs "U", atau "Satu" vs "Dua".
+    41→    41→
+    42→    42→Karena itu dipilih **YOLO26m-pose** dari Ultralytics: satu jaringan sekaligus
+    43→    43→mendeteksi tangan (box) dan meregresi 21 keypoint, cukup ringan untuk dijalankan
+    44→    44→real-time di GPU kelas menengah (T4) dan terbukti kuat untuk transfer learning dari
+    45→    45→pretraining hand-keypoints. Target metrik utama yang disepakati dari awal adalah
+    46→    46→**pose mAP50 pada split validasi** — satu angka, mudah dibandingkan, tidak boleh
+    47→    47→digantikan metrik proxy. Seluruh eksperimen diarahkan untuk menaikkan angka itu saja.
+    48→    48→
+    49→    49→---
+    50→    50→
+    51→    51→## Bab 2 — Pengumpulan dan Pembangunan Dataset (v2)
+    52→    52→
+    53→    53→### 2.1 Empat sumber data
+    54→    54→
+    55→    55→Dataset dikumpulkan dari empat sumber publik, total **9.953 gambar**:
+    56→    56→
+    57→    57→| Sumber | Jumlah | Catatan |
+    58→    58→|---|---|---|
+    59→    59→| Roboflow `sibi-bieme` v2 | 5.831 | label bbox buatan manusia (human-label), split resmi train/valid/test, CC BY 4.0 |
+    60→    60→| Kaggle `combined-sibi` | 2.306 | koleksi gabungan huruf SIBI |
+    61→    61→| Kaggle lemlitbang RAW | 525 | foto full-body; ternyata duplikat byte-identik di dalam V02 |
+    62→    62→| Kaggle lemlitbang V02 | 1.291 | foto HD full-body (2128×4608) |
+    63→    63→
+    64→    64→Semua sumber diunduh terprogram (Roboflow lewat endpoint `app.roboflow.com/ds/…`
+    65→    65→karena portal universitas diblokir Cloudflare), lalu dilewatkan pipeline konversi
+    66→    66→tunggal `scripts/convert_sibi_v2.py` (87,5 detik, 12 worker) yang menyeragamkan
+    67→    67→semuanya ke format YOLO-pose.
+    68→    68→
+    69→    69→### 2.2 Deduplikasi dan guard kebocoran (leak-guard)
+    70→    70→
+    71→    71→Kualitas dataset lebih ditentukan oleh apa yang **dibuang** daripada apa yang
+    72→    72→dimasukkan. Tiga gerbang penyaringan diterapkan berurutan:
+    73→    73→
+    74→    74→1. **Dedup md5** — membuang duplikat **persis** (byte-identik): −2.215 gambar.
+    75→    75→   Near-duplicate di dalam train sengaja **dipertahankan** (mereka adalah varian
+    76→    76→   augmentasi alami yang memperkaya data), berbeda dari v1 yang membuang ~335 gambar
+    77→    77→   unik karena aHash terlalu agresif.
+    78→    78→2. **Leak-guard dHash** — membuang 18 gambar Kaggle yang hampir identik dengan
+    79→    79→   val/test Roboflow (perceptual hash ≤ 8), agar model tidak "menghafal" soal ujian.
+    80→    80→3. **Gerbang MediaPipe** — deteksi keypoint 4 tingkat percobaan untuk Roboflow
+    81→    81→   (full-frame conf 0.4 → crop-bbox 0.25 → crop+upscale+CLAHE 0.25 → full 0.1) dan
+    82→    82→   2 tingkat untuk Kaggle (full 0.4 → CLAHE 0.25), dengan gerbang geometri yang
+    83→    83→   menyaring deteksi hantu (bayangan tangan, hull keluar frame, luas < 0,3%).
+    84→    84→
+    85→    85→Hasil akhir yang resmi dan **dibekukan (FROZEN)**:
+    86→    86→
+    87→    87→| Tahap | Jumlah |
+    88→    88→|---|---|
+    89→    89→| Ditemukan (4 sumber) | 9.953 |
+    90→    90→| Duplikat md5 dibuang | −2.215 |
+    91→    91→| Leak-guard dHash dibuang | −18 |
+    92→    92→| MediaPipe berhasil | **7.210** |
+    93→    93→| MediaPipe gagal (6,6%) | 510 |
+    94→    94→| Gambar multi-tangan (2 objek) | 417 |
+    95→    95→| Total objek berlabel | 7.627 |
+    96→    96→
+    97→    97→### 2.3 Split yang bebas bocor
+    98→    98→
+    99→    99→Split mengikuti split resmi Roboflow **verbatim** — tidak ada reshuffle:
+   100→   100→
+   101→   101→- **train: 6.231 gambar** (Roboflow train 4.194 + combined 1.074 + lemlitbang 963)
+   102→   102→- **valid: 650 gambar** (Roboflow valid 686 − 36 gagal deteksi)
+   103→   103→- **test: 329 gambar** (Roboflow test 343 − 14 gagal; *held-out*, hanya disentuh di
+   104→   104→  laporan final, tidak pernah dipakai untuk keputusan apa pun)
+   105→   105→
+   106→   106→Audit source-stem membuktikan 0 kebocoran lintas-split pada data Roboflow (3.430
+   107→   107→sumber unik). Varian augmentasi bawaan ekspor Roboflow yang berada di split yang sama
+   108→   108→(2.401 sumber punya >1 varian) dianalisis dan dinyatakan aman — itu variasi dalam
+   109→   109→split, bukan kebocoran antar-split.
+   110→   110→
+   111→   111→### 2.4 Keputusan labeling penting
+   112→   112→
+   113→   113→- **49 kelas** = 25 huruf + 24 kata (`Bodoh, Cinta, Delapan, Dua, Empat, Enam, Jahat,
+   114→   114→  Kamu, Kasih, Lima, Maaf, Makan, Masuk, Minum, Nama, Rumah, Satu, Saya, Sembilan,
+   115→   115→  Terima, Tidur, Tiga, Tolong, Tujuh`). Daftar persis ada di `docs/DATASET_V2.md`.
+   116→   116→- **Dua tangan**: 417 gambar kata diberi label 2 objek (1 bbox per tangan, kelas sama).
+   117→   117→  Kebijakan pencocokan bbox↔keypoint: box ketat (area < 0,2 frame) lewat gerbang
+   118→   118→  IoU ≥ 0,2; box besar (gesture dua tangan) lewat gerbang CONTAINMENT ≥ 0,7 +
+   119→   119→  union-IoU ≥ 0,25.
+   120→   120→- **Bbox**: label Roboflow (buatan manusia) dipakai **verbatim**; bbox Kaggle dihitung
+   121→   121→  dari hull 21 keypoint + padding 8%. Koordinat keypoint di-clamp ke [0,1]
+   122→   122→  (perbaikan bug data korup era v1).
+   123→   123→- **flip_idx = identitas** — keputusan yang kelak menentukan arah eksperimen. Label
+   124→   124→  keypoint MediaPipe tidak punya urutan kiri/kanan yang konsisten dengan permutasi
+   125→   125→  COCO-WholeHand yang dipakai v1; diverifikasi empiris (flip gambar → deteksi ulang →
+   126→   126→  voting bijektif greedy, n=16, konsistensi 0,91) bahwa flip yang benar adalah
+   127→   127→  **identitas**. Permutasi lama v1 justru merusak semantik keypoint saat augmentasi
+   128→   128→  fliplr aktif.
+   129→   129→
+   130→   130→### 2.5 Dari mana label pose berasal? — Pseudo-labeling MediaPipe
+   131→   131→
+   132→   132→Pertanyaan yang sangat wajar: **tidak ada satu pun dari keempat sumber yang
+   133→   133→menyediakan label keypoint.** Kaggle hanya memberi gambar mentah — bahkan tanpa
+   134→   134→file label sama sekali; kelasnya hanya tersirat pada nama folder. Roboflow memberi
+   135→   135→label **deteksi objek biasa**: bounding box axis-aligned 4 koordinat buatan manusia
+   136→   136→(format klasik YOLO detection — bukan OBB/oriented, bukan segmentation, dan jelas
+   137→   137→bukan pose). Lalu bagaimana dataset ini bisa berformat YOLO26-pose dengan
+   138→   138→`kpt_shape [21, 3]`?
+   139→   139→
+   140→   140→Jawabannya tegas: **tidak ada label keypoint yang diturunkan dari sumber mana pun —
+   141→   141→seluruh 21 keypoint dibuat sendiri oleh pipeline pseudo-labeling otomatis** di
+   142→   142→[`scripts/convert_sibi_v2.py`](scripts/convert_sibi_v2.py) yang menjadikan
+   143→   143→**MediaPipe HandLandmarker** sebagai "anotator mesin". MediaPipe sendiri pernah
+   144→   144→dilatih pada jutaan gambar tangan beranotasi, jadi yang kita lakukan adalah meminjam
+   145→   145→pengetahuan anotasi itu, membekukannya menjadi ground truth, lalu melatih YOLO26
+   146→   146→untuk mereplikasinya dalam satu jaringan real-time. Ini pola *weak supervision /
+   147→   147→pseudo-labeling* yang standar ketika anotasi keypoint manual (mahal dan butuh
+   148→   148→keahlian) tidak tersedia.
+   149→   149→
+   150→   150→Satu baris label hasil konversi memuat 68 field: `class cx cy w h` diikuti
+   151→   151→21 × `(x, y, visibility)`. Ketiga komponen itu berasal dari jalur berbeda
+   152→   152→per sumber:
+   153→   153→
+   154→   154→| Komponen | Roboflow (5.831 img) | Kaggle (combined + lemlitbang) |
+   155→   155→|---|---|---|
+   156→   156→| Kelas | file label + `data.yaml` (49 kelas) | nama folder induk / pola nama file (`A (4).jpg`) — hanya huruf A–Z |
+   157→   157→| Bbox | human-label, dipakai **verbatim** | dihitung mundur: hull 21 keypoint + padding 8% |
+   158→   158→| 21 keypoint | MediaPipe, dipandu crop di sekitar bbox | MediaPipe full-frame |
+   159→   159→| Objek per gambar | 1–2 (dua tangan utk kelas kata) | 1 (tangan pertama yang terdeteksi) |
+   160→   160→| Split | mengikuti split resmi | train saja |
+   161→   161→
+   162→   162→**Jalur Roboflow — bbox manusia memandu, MediaPipe mengisi keypoint.** Bbox
+   163→   163→buatan manusia tetap menjadi ground truth box (dipakai verbatim untuk objek satu
+   164→   164→tangan), dan sekaligus dipakai sebagai **pemandu deteksi**: MediaPipe dijalankan
+   165→   165→bertingkat — full conf 0.4 → crop margin 30% di sekitar bbox conf 0.25 → crop yang
+   166→   166→di-upscale ~480px + CLAHE conf 0.25 → full conf 0.1 untuk tangan terkatup. Saat
+   167→   167→MediaPipe menemukan lebih dari satu tangan, tangan "yang benar" dipilih lewat
+   168→   168→gerbang geometri terhadap bbox label: box ketat (area < 0,2 frame — satu tangan)
+   169→   169→memakai **IoU ≥ 0.2**; box besar (gesture dua tangan) memakai **containment ≥ 0.7
+   170→   170→+ union-IoU ≥ 0.25**. Deteksi hantu — hull menyentuh tepi frame atau luas < 0,3%
+   171→   171→gambar — dibuang. Untuk gambar dua tangan, label multi-objek milik Roboflow
+   172→   172→diringkas menjadi bbox terbesar sebagai pemandu, lalu label akhirnya ditulis ulang
+   173→   173→menjadi 2 objek dengan bbox per tangan dari hull keypoint masing-masing.
+   174→   174→
+   175→   175→**Jalur Kaggle — kelas dari nama folder, bbox lahir dari keypoint.** Dataset
+   176→   176→Kaggle tidak punya anotasi apa pun, sehingga kelas diambil dari **nama folder
+   177→   177→induk** (folder `A/` → kelas A) atau, sebagai fallback, pola nama file
+   178→   178→(`A (4).jpg`). Konsekuensinya hanya huruf A–Z yang bisa dipetakan — kelas kata
+   179→   179→semua berasal dari Roboflow — dan semua gambar Kaggle masuk split train. Tanpa
+   180→   180→bbox untuk memandu, MediaPipe dijalankan full-frame (conf 0.4, sekali retry
+   181→   181→CLAHE conf 0.25); bila tetap gagal, gambar dibuang. Urutannya di sini **terbalik**
+   182→   182→dari jalur Roboflow: keypoint dulu, baru bbox dihitung dari hull 21 titik +
+   183→   183→padding 8%.
+   184→   184→
+   185→   185→**Gerbang kualitas: membuang lebih baik daripada melabeli salah.** Label hanya
+   186→   186→lahir jika gambar lolos seluruh gerbang; 510 gambar (6,6%) yang tangan-nya tidak
+   187→   187→berhasil terdeteksi pada seluruh percobaan **dibuang, bukan dilabeli paksa**.
+   188→   188→Koordinat di-clamp ke [0,1], setiap file label diaudit otomatis (harus tepat
+   189→   189→68 field, semua koordinat dalam rentang valid), dan sebagian hasil dirender
+   190→   190→sebagai preview (bbox + 21 titik + tulang) untuk pemeriksaan visual. Urutan
+   191→   191→kiri/kanan (flip_idx) pun tidak diasumsikan: diverifikasi empiris dengan membalik
+   192→   192→gambar, mendeteksi ulang, lalu mem-voting pasangan titik (n=16, konsistensi
+   193→   193→0,91) — hasilnya identitas, dan itulah yang kelak menjelaskan kenapa exp01
+   194→   194→(fliplr) tidak memberi gain.
+   195→   195→
+   196→   196→**Batasan yang diakui terbuka.** Konsekuensi pseudo-labeling: ground truth pose
+   197→   197→pada split validasi juga buatan MediaPipe, sehingga **pose mAP50 mengukur
+   198→   198→kesepakatan model dengan "gurunya" (MediaPipe), bukan dengan anotasi manusia** —
+   199→   199→yang memang tidak tersedia untuk dataset ini. Sebaliknya box mAP50 (0.9098 pada
+   200→   200→juara) diukur terhadap bbox Roboflow yang dipakai verbatim (human-label), dan
+   201→   201→tetap tinggi. Karena aplikasi downstream memang mengonsumsi konvensi 21 titik
+   202→   202→MediaPipe, kesepakatan dengan guru tersebut adalah proxy evaluasi yang tepat —
+   203→   203→model yang kita inginkan pada dasarnya adalah "MediaPipe yang cepat dan satu
+   204→   204→tahap". Catatan kejujuran terakhir: visibilitas per titik ditulis selalu `2`
+   205→   205→(kehadiran tangan dijamin gerbang level-tangan, tetapi jari yang terkatup tetap
+   206→   206→mendapat tebakan MediaPipe) — audit kualitas keypoint oleh manusia adalah
+   207→   207→pekerjaan rumah yang sah untuk iterasi dataset berikutnya.
+   208→   208→
+   209→   209→Protokol lengkap dibekukan di [`docs/DATASET_V2.md`](docs/DATASET_V2.md). Dataset
+   210→   210→FROZEN ini menjadi landasan perbandingan yang adil antar semua eksperimen: satu-satunya
+   211→   211→variabel yang boleh berubah adalah hyperparameter training.
+   212→   212→
+   213→   213→---
+   214→   214→
+   215→   215→## Bab 3 — Rantai Pretraining (Transfer Learning)
+   216→   216→
+   217→   217→Model tidak dilatih dari nol. Rantainya:
+   218→   218→
+   219→   219→1. **COCO-pose** (pretrained Ultralytics) → 2. **hand-keypoints** — fine-tune pada
+   220→   220→   dataset tangan, hasil box mAP50 0.991 / pose 0.895 dalam 67,6 menit; bobotnya
+   221→   221→   disimpan sebagai asuransi di
+   222→   222→   [`weights/yolo26m_pose_handkp_best.pt`](weights/yolo26m_pose_handkp_best.pt) —
+   223→   223→   3. **SIBI** — fine-tune terakhir pada dataset SIBI.
+   224→   224→
+   225→   225→Era v1 (26 kelas, 1.557 gambar, 60 epoch) menghasilkan box mAP50 0.958 / pose mAP50
+   226→   226→**0.821**. Angka 0.821 itulah titik berangkat yang memicu audit: kenapa rendah, dan
+   227→   227→apa yang salah pada v1?
+   228→   228→
+   229→   229→---
+   230→   230→
+   231→   231→## Bab 4 — Audit v1 dan Bangun Dataset v2
+   232→   232→
+   233→   233→Audit menemukan tiga akar masalah v1, dan masing-masing diperbaiki di v2:
+   234→   234→
+   235→   235→1. **Volume data**: v1 hanya memakai 1.557 dari 9.953 sumber — dedup aHash terlalu
+   236→   236→   agresif dan Roboflow tidak ikut masuk. v2: 7.210 gambar (4,6×).
+   237→   237→2. **Cakupan kelas**: v1 hanya 26 huruf. v2 menambah kelas kata (49 kelas) — jauh
+   238→   238→   lebih berguna untuk aplikasi nyata.
+   239→   239→3. **flip_idx salah**: v1 memakai permutasi COCO-WholeHand untuk label berurutan
+   240→   240→   MediaPipe, sehingga augmentasi fliplr secara diam-diam merusak semantik keypoint.
+   241→   241→   v2 memakai flip_idx identitas yang terverifikasi empiris.
+   242→   242→
+   243→   243→Dengan dataset v2 + trainer baru (`scripts/train_sibi_v2.py`), baseline dijalankan di
+   244→   244→GPU pribadi (molab, RTX PRO 6000 Blackwell, batch 96, 30 epoch, 16 menit):
+   245→   245→**pose mAP50 0.8338 / box 0.8814** (`experiments/results.jsonl`, tag
+   246→   246→`exp00_baseline_v2`). Infrastruktur ratchet (driver, converter, program.md, GEPA arm)
+   247→   247→juga disiapkan pada fase ini.
+   248→   248→
+   249→   249→---
+   250→   250→
+   251→   251→## Bab 5 — Krisis: Akun Restricted, Migrasi ke Kaggle
+   252→   252→
+   253→   253→Di tengah pipeline retraining, akun GPU pribadi kena **restricted permanen** (HTTP
+   254→   254→410) — seluruh lingkungan pelatihan hilang seketika. Kaggle dipilih sebagai
+   255→   255→pengganti karena menyediakan GPU gratis, tetapi dengan kendala ketat:
+   256→   256→
+   257→   257→- **Hanya satu notebook GPU boleh berjalan** per akun — melanggar berarti kuota
+   258→   258→  terbakar atau run saling menendang.
+   259→   259→- Kuota GPU mingguan terbatas (±28 jam saat itu, refresh mingguan).
+   260→   260→- Disk lokal agent sempit (±395 MB bebas saat itu) — artefak besar tidak bisa
+   261→   261→  diunduh sembarangan.
+   262→   262→
+   263→   263→Konsekuensi desainnya (terdokumentasi di
+   264→   264→[`docs/SPEC_RATCHET_KAGGLE.md`](docs/SPEC_RATCHET_KAGGLE.md) dan
+   265→   265→[`docs/HANDOFF_2026-10-25.md`](docs/HANDOFF_2026-10-25.md)):
+   266→   266→
+   267→   267→1. **Semua training berjalan server-side** sebagai kernel Kaggle T4×2 (script,
+   268→   268→   internet aktif, DDP 2 GPU). Lokal hanya menjalankan langkah diskrit yang
+   269→   269→   **idempoten**: `push` (kirim kernel) dan `record` (tarik hasil + verdict).
+   270→   270→   Proses background lokal terbukti mati antar-sesi, jadi tidak ada yang bergantung
+   271→   271→   pada daemon lokal.
+   272→   272→2. **Guard satu-notebook** (`ensure_gpu_free`): setiap push dicek dulu — jika masih
+   273→   273→   ada kernel RUNNING/QUEUED, push ditolak. Aturan keras user dijamin sistem.
+   274→   274→3. **Konversi dataset hanya sekali** di kernel baseline; setiap kernel eksperimen
+   275→   275→   me-mount output baseline (`kernel_sources`), menghemat ±25 menit konversi per
+   276→   276→   eksperimen dan menjamin **byte-identik** dataset antar eksperimen.
+   277→   277→4. **Rantai fallback anti-OOM** dalam satu kernel: m-pose b16 DDP → s-pose b16 DDP →
+   278→   278→   m-pose b8 1-GPU → s-pose b8 1-GPU. Attempt pertama yang sukses menjadi winner.
+   279→   279→5. **Penarikan output per-file** via kagglesdk (hemat disk), dengan fallback CLI.
+   280→   280→6. **Semua keputusan dan artefak di-commit** ke repo ini — satu-satunya sumber
+   281→   281→   kebenaran yang selamat dari reset container (yang benar-benar terjadi berkali-kali
+   282→   282→   selama proses).
+   283→   283→
+   284→   284→---
+   285→   285→
+   286→   286→## Bab 6 — Metode Ratchet
+   287→   287→
+   288→   288→Pola "ratchet" ala autoresearch (gigi yang hanya bergerak maju):
+   289→   289→
+   290→   290→1. Ada **config juara** saat ini (mulai dari baseline).
+   291→   291→2. Eksperimen baru = config juara + **satu delta saja** (satu hipotesis, satu
+   292→   292→   perubahan) — sehingga naik/turun metrik bisa diatribusikan bersih ke delta itu.
+   293→   293→3. Latih dengan budget tetap, evaluasi **pose mAP50** di split validasi yang sama,
+   294→   294→   seed 42, deterministik.
+   295→   295→4. Verdict otomatis: **KEEP** hanya jika baru > best + **0.002 (EPS)** — di bawah
+   296→   296→   ambang itu dianggap noise dan config juara **tidak berubah (REVERT)**.
+   297→   297→5. Gigi maju: config juara baru menjadi dasar eksperimen berikutnya (seluruh delta
+   298→   298→   KEEP diwariskan penuh).
+   299→   299→6. Semua tercatat di `experiments/results_kaggle.jsonl` (terstruktur) dan
+   300→   300→   `experiments/ratchet_journal.md` (naratif audit berbahasa Indonesia), plus satu
+   301→   301→   commit per keputusan (`KEEP <tag>: 0.xxxx` / `REVERT <tag>`).
+   302→   302→
+   303→   303→Aturan antisipasi dari awal (dari `program.md`): dataset tidak boleh diubah, test
+   304→   304→split tidak boleh disentuh untuk seleksi, delta < 0.002 = noise, dan GPU molab yang
+   305→   305→hilang digantikan kernel Kaggle dengan guard.
+   306→   306→
+   307→   307→---
+   308→   308→
+   309→   309→## Bab 7 — Baseline Kaggle (exp00) dan Sembilan Eksperimen Ratchet
+   310→   310→
+   311→   311→### 7.1 Baseline: `exp00_kaggle_m_b16` — pose mAP50 0.8445
+   312→   312→
+   313→   313→Kernel baseline `sibi-yolo26-pose-t4x2` mengerjakan dua hal dalam satu run: (a)
+   314→   314→konversi keempat sumber menjadi dataset v2 di `/kaggle/working/sibi_v2_49cls/` (±25
+   315→   315→menit), dan (b) melatih yolo26m-pose 30 epoch dengan rantai fallback anti-OOM.
+   316→   316→Attempt m-pose batch-16 DDP langsung sukses (tidak perlu fallback): **pose mAP50
+   317→   317→0.8445 / box 0.8912** dalam 88,2 menit pada 2× Tesla T4, torch 2.11.0+cu128,
+   318→   318→ultralytics 8.4.188. Angka ini sekaligus memvalidasi bahwa migrasi Kaggle setara —
+   319→   319→bahkan lebih baik +0.0107 — dibanding baseline molab (0.8338), membuktikan dataset
+   320→   320→v2 deterministik dan seed 42 bekerja lintas lingkungan.
+   321→   321→
+   322→   322→Selama fase ini terjadi dua insiden yang membentuk disiplin operasional: run v3
+   323→   323→di-cancel eksternal tanpa output (dipulihkan dengan re-push identik sebagai v4 —
+   324→   324→output 0 file = cancel, bukan bug script), dan CLI Kaggle ternyata hanya mengunggah
+   325→   325→`code_file` sehingga config eksperimen harus **di-embed ke dalam script** via marker.
+   326→   326→
+   327→   327→### 7.2 Delapan eksperimen ratchet, satu per satu
+   328→   328→
+   329→   329→| # | Tag | Delta (satu hipotesis) | pose mAP50 | box mAP50 | Durasi | Verdict |
+   330→   330→|---|---|---|---|---|---|---|
+   331→   331→| 1 | exp01_aug_flip | fliplr 0.5 (kini legal dengan flip_idx identitas) | 0.8445 | 0.8912 | 89,1 mnt | REVERT |
+   332→   332→| 2 | exp02_aug_low | degrees 8, translate 0.15, scale 0.6 | 0.8458 | 0.8923 | 93,4 mnt | REVERT |
+   333→   333→| 3 | exp03_mosaic_low | mosaic 1.0→0.3, close_mosaic 10 | **0.8553** | 0.8975 | 92,3 mnt | **KEEP** |
+   334→   334→| 4 | exp04_imgsz800 | imgsz 800 (batch turun ke 8 utk muat T4 16GB) | 0.8508 | 0.8894 | 156,0 mnt | REVERT |
+   335→   335→| 5 | exp05_lr_cos | lr0 0.004 + cos_lr | **0.8578** | 0.8983 | 91,4 mnt | **KEEP** |
+   336→   336→| 6 | exp06_kpt_gain | pose gain 16 + `kpt` gain 3 | — | — | — | GAGAL |
+   337→   337→| 7 | exp10_epochs60 | budget 30→60 epoch (cek underfit) | **0.8888** | 0.9136 | 169,5 mnt | **KEEP** |
+   338→   338→| 8 | exp06b_kpt_gain | pose gain 16 + **kobj** gain 3 (fix exp06) + warisan exp05+exp10 | **0.8944** | 0.9098 | 176,0 mnt | **KEEP — JUARA** |
+   339→   339→
+   340→   340→**exp01 — flip legal tapi tidak menambah apa-apa (REVERT, 0.8445).** Setelah flip_idx
+   341→   341→diperbaiki menjadi identitas, fliplr 0.5 akhirnya boleh diuji. Hasilnya persis sama
+   342→   342→dengan baseline (0.8445/0.8912) — tidak merugikan, tapi juga tidak menaikkan. Hipotesis
+   343→   343→yang masuk akal: dataset sudah mengandung varian tangan kiri/kanan secara alami
+   344→   344→(lemlitbang full-body memotret orang berbeda), jadi flip sintetis tidak menambah
+   345→   345→informasi baru. Disiplin ratchet: tidak naik ≥ EPS → config juara tidak berubah.
+   346→   346→
+   347→   347→**exp02 — augmentasi geometri ringan, di bawah ambang (REVERT, 0.8458).** Rotasi ±8°,
+   348→   348→translate 0.15, scale 0.6 naik +0.0013 — arah benar tapi di bawah EPS 0.002 sehingga
+   349→   349→dianggap noise. Pelajaran pentingnya: gesture SIBI dieksekusi dengan presisi tinggi di
+   350→   350→depan kamera; distorsi geometri justru berisiko menggeser bentuk jari yang justru
+   351→   351→menjadi pembeda kelas.
+   352→   352→
+   353→   353→**exp03 — mosaic rendah, lompatan pertama (KEEP, 0.8553, +0.0108).** Mosaic default
+   354→   354→Ultralytics (1.0) menempelkan 4 gambar jadi satu — masuk akal untuk deteksi objek
+   355→   355→umum, tapi destruktif untuk gesture: tangan terpotong dan skala tangan berubah liar.
+   356→   356→Menurunkan mosaic ke 0.3 (dan mematikannya di 10 epoch terakhir via close_mosaic)
+   357→   357→memberi lompatan terbesar fase awal. Ini mengonfirmasi intuisi dari `program.md`:
+   358→   358→"tangan di tengah frame; mosaic bisa terlalu agresif".
+   359→   359→
+   360→   360→**exp04 — resolusi lebih besar tidak membantu di sini (REVERT, 0.8508).** Untuk
+   361→   361→memuat imgsz 800 di T4 16GB, batch harus turun 16→8 (adaptasi dicatat jujur di
+   362→   362→journal). Hasilnya justru turun ke 0.8508. Penjelasan paling masuk akal: informasi
+   363→   363→yang hilang oleh penurunan batch (gradien lebih berisik) lebih besar daripada
+   364→   364→tambahan detail dari resolusi +60%; plus dataset sudah di-resize ≤ 1024px sehingga
+   365→   365→tangan tidak benar-benar kecil di mayoritas sumber.
+   366→   366→
+   367→   367→**exp05 — learning rate lebih rendah + cosine schedule (KEEP, 0.8578).** lr0 turun
+   368→   368→0.01→0.004 dengan cos_lr memberi +0.0025 di atas exp03. Fine-tune halus memang lebih
+   369→   369→cocok untuk model yang sudah dekat konvergensi dari pretraining hand-keypoints.
+   370→   370→
+   371→   371→**exp06 — gagal total karena satu nama argumen (ERROR).** Delta mengirim `kpt: 3.0`
+   372→   372→— argumen itu **tidak ada** di ultralytics 8.4.188; script mati di validasi config
+   373→   373→(SyntaxError `'kpt' is not a valid YOLO argument`) sebelum satu epoch pun jalan.
+   374→   374→Kernel menyisakan 4 varian config fallback (m_b8_1gpu, s_b16, s_b8_1gpu) dan lognya —
+   375→   375→semua diarsipkan di `experiments/kaggle/exp06_kpt_gain/`. Ini bukan sia-sia: error
+   376→   376→eksplisit itulah yang mengarahkan perbaikan.
+   377→   377→
+   378→   378→**exp10 — budget 60 epoch, underfit terkonfirmasi (KEEP, 0.8888).** Dengan warisan
+   379→   379→mosaic-rendah + lr-cosine, menggandakan budget 30→60 epoch melompatkan pose mAP50 ke
+   380→   380→0.8888 (+0.0310, lompatan terbesar sepanjang ratchet) dan box mAP50 ke 0.9136.
+   381→   381→Kesimpulannya jelas: baseline 30 epoch masih underfit.
+   382→   382→
+   383→   383→**exp06b — perbaikan exp06 + gabungan semua temuan = JUARA (0.8944).** Nama argumen
+   384→   384→yang benar ternyata `kobj` (keypoint objectness loss gain) — dipasang 3.0 bersama
+   385→   385→pose gain 16.0 (bobot loss keypoint diperkuat agar model lebih peduli akurasi
+   386→   386→keypoint daripada box), di atas warisan penuh: mosaic 0.3 + close_mosaic 10 + lr0
+   387→   387→0.004 + cos_lr + 60 epoch. Hasil: **pose mAP50 0.8944 / box 0.9098** dalam 176 menit.
+   388→   388→
+   389→   389→### 7.3 Insiden di tengah jalan (jujur dan tercatat)
+   390→   390→
+   391→   391→- **Bug silsilah config** — jalur `record` menulis config dari default pemanggil,
+   392→   392→  bukan dari SUMMARY.json kernel, sehingga delta KEEP (mis. mosaic 0.3 exp03) bisa
+   393→   393→  hilang dari config juara. Ditangkap sebelum exp05 jalan; diperbaiki: config
+   394→   394→  otoritatif kini selalu dari SUMMARY.json kernel, dan pewarisan config membawa
+   395→   395→  SEMUA delta KEEP (commit `48fea55`).
+   396→   396→- **Container lokal reset berkali-kali** — justru memvalidasi desain crash-safe:
+   397→   397→  karena training server-side dan langkah lokal idempoten, reset tidak merusak
+   398→   398→  apa pun selain waktu.
+   399→   399→- **Push duplikat exp05** — sesi lanjutan yang tidak tahu chain sudah selesai
+   400→   400→  (worklog lokal terhapus bersama container) terlanjur me-push kernel exp05 v2.
+   401→   401→  Kernel dibiarkan selesai, hasilnya **tidak** dicatat ke ledger (aturan 1 baris per
+   402→   402→  tag). Efek sampingnya permanen: listing output exp05 di Kaggle kini kosong karena
+   403→   403→  ditimpa versi v2 — semua artefak exp05 di repo ini dipulihkan by-name via
+   404→   404→  endpoint unduh per-file. Pelajarannya tercatat di journal: *sinkronkan `git fetch`
+   405→   405→  + baca ledger sebelum push apa pun*.
+   406→   406→
+   407→   407→---
+   408→   408→
+   409→   409→## Bab 8 — Model Juara: `exp06b_kpt_gain`
+   410→   410→
+   411→   411→**Bobot**: [`weights/yolo26m_pose_sibi_exp06b_kpt_gain_best.pt`](weights/yolo26m_pose_sibi_exp06b_kpt_gain_best.pt)
+   412→   412→(50.532.034 byte, sha256 `073ccf71e94bb89425519a746dc0e22a1a04dd826b65c4bb94afa753b0ab3ea0`)
+   413→   413→
+   414→   414→Config lengkap (juga tersimpan sebagai [`configs/current_best_kaggle.yaml`](configs/current_best_kaggle.yaml)):
+   415→   415→
+   416→   416→```yaml
+   417→   417→name: exp06b_kpt_gain
+   418→   418→epochs: 60
+   419→   419→imgsz: 640
+   420→   420→batch: 16        # DDP 2x Tesla T4 (device 0,1)
+   421→   421→mosaic: 0.3
+   422→   422→close_mosaic: 10
+   423→   423→lr0: 0.004
+   424→   424→cos_lr: true
+   425→   425→pose: 16.0       # bobot loss keypoint
+   426→   426→kobj: 3.0        # keypoint objectness gain
+   427→   427→patience: 30
+   428→   428→cache: ram
+   429→   429→workers: 4
+   430→   430→seed: 42
+   431→   431→```
+   432→   432→
+   433→   433→Metrik pada validasi (650 gambar, 49 kelas): **pose mAP50 0.8944**, box mAP50
+   434→   434→0.9098. Untuk konteks: versi v1 (26 kelas, 1.557 gambar) berhenti di 0.821 — model
+   435→   435→ini +0.0734 lebih baik sekaligus menangani hampir dua kali lipat jumlah kelas dan
+   436→   436→4,6× lebih banyak data.
+   437→   437→
+   438→   438→Semua bobot penting tersimpan di `weights/` dengan manifest sha256
+   439→   439→(`weights/MANIFEST.json`): handkp baseline (asuransi), baseline Kaggle exp00
+   440→   440→(`yolo26m_pose_sibi_t4x2_m_b16_best.pt`), exp03 (best menengah), dan juara exp06b.
+   441→   441→Setiap folder eksperimen juga menyimpan salinan bobotnya sendiri — lihat Bab 9.
+   442→   442→
+   443→   443→### Evaluasi murni 24 huruf (exp11) — skor tanpa campuran kelas
+   444→   444→
+   445→   445→Skor juara di atas diukur pada 49 kelas, jadi mAP-nya "tercampur" pengaruh 24
+   446→   446→kelas kata/angka yang bukan target akhir program. Kernel Kaggle
+   447→   447→`sibi-exp11-huruf-murni-24` melatih ulang **resep juara exp06b apa adanya**
+   448→   448→(60 epoch, yolo26m-pose, batch 16 DDP, pose 16, kobj 3, mosaic 0.3, lr0 0.004
+   449→   449→cos, seed 42) pada dataset v2 yang sama, tetapi disaring saat runtime: hanya
+   450→   450→gambar yang memuat minimal satu huruf statis (4.054 dari 6.231 gambar train)
+   451→   451→dan label di-remap ke 24 kelas huruf (A–Y tanpa J dan Z). Dataset asli
+   452→   452→`sibi_v2_49cls` tidak diubah sama sekali.
+   453→   453→
+   454→   454→Hasil evaluasi murni (val 333 instance huruf; kernel `sibi-eval-huruf24`,
+   455→   455→dua pass conf 0.001 dan 0.25):
+   456→   456→
+   457→   457→| Metrik | 24 huruf murni (exp11) | 49 kelas (exp06b) |
+   458→   458→|---|---|---|
+   459→   459→| pose mAP50 | **0.9580** | 0.8944 |
+   460→   460→| pose mAP50-95 | **0.7235** | — |
+   461→   461→| box mAP50 | **0.9942** | 0.9098 |
+   462→   462→| box mAP50-95 | **0.8918** | — |
+   463→   463→
+   464→   464→> Kedua kolom **tidak dapat dibandingkan langsung**: beda jumlah kelas (24 vs
+   465→   465→> 49) dan beda split validasi (333 instance huruf vs 650 gambar lengkap).
+   466→   466→> Angka exp11 menjawab pertanyaan "seberapa baik model membaca 24 huruf
+   467→   467→> statis, tanpa hambatan kelas lain".
+   468→   468→
+   469→   469→Pada titik operasi conf 0.25, confusion matrix 25×25 berangka mencatat
+   470→   470→**325/333 (97,6%)** huruf terbaca benar; 8 kekeliruan terdiri dari 5 huruf
+   471→   471→tertukar (M→N, T→S, T→X, U→R, V→K — masing-masing 1 instance) dan 3 huruf
+   472→   472→tidak terdeteksi (N, Q, W → background). CM interaktif berangka (counts +
+   473→   473→row-normalized, bisa difilter per blok dan per kelas) ada di
+   474→   474→[`docs/confusion_matrix_24huruf.html`](docs/confusion_matrix_24huruf.html);
+   475→   475→data mentah (CSV/PNG, kernel training & eval, config) di
+   476→   476→[`experiments/kaggle/exp11_huruf24/`](experiments/kaggle/exp11_huruf24/).
+   477→   477→
+   478→   478→---
+   479→   479→
+   480→   480→## Bab 9 — Isi Repositori (semua artefak eksperimen, tanpa terkecuali)
+   481→   481→
+   482→   482→Setiap folder di `experiments/kaggle/<tag>/` memuat **seluruh isi output kernel
+   483→   483→Kaggle** untuk eksperimen tersebut (51 file standar; exp06 versi error 11 file):
+   484→   484→
+   485→   485→```
+   486→   486→experiments/kaggle/<tag>/
+   487→   487→├── SUMMARY.json                    # metrik resmi: pose/box mAP50, config, GPU, durasi
+   488→   488→├── best_<winner>.pt                # salinan bobot terbaik (persis output kernel)
+   489→   489→├── cfg_<winner>.yaml               # config training yang dipakai
+   490→   490→├── data_exp.yaml                   # config dataset (path di-patch utk mount read-only)
+   491→   491→├── train_<winner>.log              # log pelatihan penuh (±3 MB per eksperimen)
+   492→   492→├── train_sibi_v2.py                # snapshot trainer yang benar-benar jalan di kernel
+   493→   493→├── weights/yolo26n.pt              # backbone pretrained yang diunduh kernel
+   494→   494→├── runs/pose/<winner>_val/         # EVALUASI TERPISAH:
+   495→   495→│   ├── BoxF1/PR/P/R_curve.png      #   kurva box
+   496→   496→│   ├── PoseF1/PR/P/R_curve.png     #   kurva pose
+   497→   497→│   ├── confusion_matrix{,_normalized}.png
+   498→   498→│   └── val_batch{0,1,2}_{labels,pred}.jpg   # ground truth vs prediksi
+   499→   499→└── runs_v2/<winner>/               # DIREKTORI TRAINING:
+   500→   500→    ├── args.yaml                   # argumen Ultralytics final
+   501→   501→    ├── results.csv                 # metrik per-epoch (30/60 baris)
+   502→   502→    ├── results.png                 # kurva training antar-epoch
+   503→   503→    ├── labels.jpg                  # distribusi label
+   504→   504→    ├── train_batch{0,1,2}.jpg      # snapshot batch awal (augmentasi aktif)
+   505→   505→    ├── train_batch7800..2.jpg      # snapshot akhir (close_mosaic sudah mati)*
+   506→   506→    ├── val_batch{0,1,2}_{labels,pred}.jpg
+   507→   507→    └── weights/{best,last}.pt      # bobot terbaik & epoch terakhir
+   508→   508→```
+   509→   509→
+   510→   510→\* exp10 (60 epoch, dua kali lipat iterasi) menghasilkan snapshot akhir dengan
+   511→   511→penomoran berbeda (`train_batch19500..2.jpg`).
+   512→   512→
+   513→   513→Status kelengkapan diverifikasi programatik terhadap listing output kernel Kaggle
+   514→   514→(`scripts/verify_kernel_outputs.py`): **9/9 folder LENGKAP**. Dua pengecualian yang
+   515→   515→sengaja tidak diunduh dari kernel exp00 (bukan hasil eksperimen):
+   516→   516→`sibi_v2_49cls/` (salinan dataset 14.427 file — dataset tersedia sebagai input
+   517→   517→kernel via mount, lihat `docs/DATASET_V2.md`) dan `WPC/.git/*` (snapshot repo di
+   518→   518→working dir kernel).
+   519→   519→
+   520→   520→Struktur penuh:
+   521→   521→
+   522→   522→```
+   523→   523→WPC/
+   524→   524→├── README.md                       # dokumen ini
+   525→   525→├── program.md                      # program riset & antrian proposal ratchet
+   526→   526→├── configs/
+   527→   527→│   └── current_best_kaggle.yaml    # config juara (exp06b)
+   528→   528→├── weights/
+   529→   529→│   ├── CHAMPION.txt                # pointer bobot juara aktif
+   530→   530→│   ├── MANIFEST.json               # sha256 & ukuran semua bobot eksperimen
+   531→   531→│   └── yolo26m_pose_*.pt           # handkp, exp00, exp03, exp06b (juara)
+   532→   532→├── experiments/
+   533→   533→│   ├── kaggle/<tag>/               # ARTEFAK LENGKAP 9 eksperimen (lihat di atas)
+   534→   534→│   ├── results_kaggle.jsonl        # ledger terstruktur (1 baris per eksperimen)
+   535→   535→│   ├── results.jsonl               # ledger era molab (baseline 0.8338)
+   536→   536→│   └── ratchet_journal.md          # journal keputusan KEEP/REVERT (audit)
+   537→   537→├── scripts/
+   538→   538→│   ├── inference_sibi.py           # INFERENSI siap pakai (Bab 10)
+   539→   539→│   ├── kaggle_ratchet_driver.py    # driver push/record ratchet
+   540→   540→│   ├── kaggle_exp_script_template.py # template kernel eksperimen
+   541→   541→│   ├── train_sibi_v2.py            # trainer (dipakai kernel Kaggle)
+   542→   542→│   ├── convert_sibi_v2.py          # konversi dataset v2 (dibekukan)
+   543→   543→│   ├── verify_kernel_outputs.py    # verifikasi kelengkapan artefak vs Kaggle
+   544→   544→│   └── ...                         # orkestrator, finalizer, smoke test
+   545→   545→├── kaggle/                         # kernel baseline (konversi + train fallback chain)
+   546→   546→├── kaggle_exp/                     # arsip metadata kernel eksperimen
+   547→   547→└── docs/
+   548→   548→    ├── INFERENCE.md                # panduan inferensi lengkap + scrcpy + FAQ
+   549→   549→    ├── SPEC_RATCHET_KAGGLE.md      # spesifikasi metode ratchet
+   550→   550→    ├── DATASET_V2.md               # protokol dataset (dibekukan)
+   551→   551→    └── HANDOFF_2026-10-25.md       # serah terima sesi migrasi Kaggle
+   552→   552→```
+   553→   553→
+   554→   554→---
+   555→   555→
+   556→   556→## Bab 10 — Cara Inferensi
+   557→   557→
+   558→   558→### 10.1 Instalasi
+   559→   559→
+   560→   560→```bash
+   561→   561→pip install ultralytics opencv-python
+   562→   562→```
+   563→   563→
+   564→   564→### 10.2 Pemakaian cepat
+   565→   565→
+   566→   566→Bobot juara otomatis terpilih lewat `weights/CHAMPION.txt`:
+   567→   567→
+   568→   568→```bash
+   569→   569→# satu foto
+   570→   570→python scripts/inference_sibi.py --source foto.jpg
+   571→   571→
+   572→   572→# folder foto + visual + JSON terstruktur
+   573→   573→python scripts/inference_sibi.py --source data/uji/ --save-dir hasil/ --json hasil/prediksi.json
+   574→   574→
+   575→   575→# video file
+   576→   576→python scripts/inference_sibi.py --source isyarat.mp4
+   577→   577→
+   578→   578→# webcam langsung (Ctrl-C untuk berhenti)
+   579→   579→python scripts/inference_sibi.py --source 0
+   580→   580→
+   581→   581→# kustomisasi
+   582→   582→python scripts/inference_sibi.py --source foto.jpg \
+   583→   583→    --weights weights/yolo26m_pose_sibi_exp06b_kpt_gain_best.pt \
+   584→   584→    --conf 0.4 --imgsz 640 --no-kpt
+   585→   585→```
+   586→   586→
+   587→   587→Output: media beranotasi (box + 21 keypoint + label SIBI + confidence) di
+   588→   588→`--save-dir`, dan dengan `--json` daftar deteksi per frame (kelas, confidence, box
+   589→   589→`[x1 y1 x2 y2]`, `keypoints_xy` 21 titik) siap dipakai aplikasi downstream.
+   590→   590→Deteksi keypoint inilah nilai utama model ini: pembeda antar-huruf SIBI adalah
+   591→   591→geometri jari, sehingga downstream bisa menghitung sudut antar-ruas atau jarak
+   592→   592→ujung jari ke telapak untuk klasifikasi halus lebih lanjut.
+   593→   593→
+   594→   594→Cakupan program: **26 huruf SIBI**. Prediksi kata/angka dari 49 kelas model
+   595→   595→tidak pernah tampil ataupun diucapkan. Huruf **J** dan **Z** adalah huruf
+   596→   596→gerak: digambar kapital di udara dengan telunjuk, dikenali dari jejak
+   597→   597→gerakannya, dan diucap setelah diam 0,5 detik sebagai konfirmasi. Detail di
+   598→   598→[`docs/INFERENCE.md`](docs/INFERENCE.md).
+   599→   599→
+   600→   600→### 10.3 Sumber dari HP Android via scrcpy
+   601→   601→
+   602→   602→`--source` menerima device v4l2 dan URL stream, jadi kamera HP (kualitas umumnya
+   603→   603→jauh di atas webcam) bisa dipakai real-time via
+   604→   604→[scrcpy](https://github.com/Genymobile/scrcpy) **tanpa mengubah skrip**:
+   605→   605→
+   606→   606→```bash
+   607→   607→# 1) sekali di Linux: kamera virtual
+   608→   608→sudo apt install v4l2loopback-dkms
+   609→   609→sudo modprobe v4l2loopback devices=1 video_nr=0 max_width=1920 max_height=1920
+   610→   610→
+   611→   611→# 2) scrcpy kirim kamera HP -> /dev/video0 (Android 12+, USB debugging aktif)
+   612→   612→scrcpy --video-source=camera --camera-size=1280x720 --camera-fps=30 \
+   613→   613→       --no-window --no-audio --no-playback --v4l2-sink=/dev/video0
+   614→   614→
+   615→   615→# 3) inferensi real-time
+   616→   616→python scripts/inference_sibi.py --source /dev/video0 --skip 2
+   617→   617→```
+   618→   618→
+   619→   619→Tanpa Linux/v4l2? **Jalur 2**: rekam dulu (`scrcpy --record=sibi.mp4
+   620→   620→--video-source=camera …`) lalu proses filenya; **Jalur 3**: aplikasi kamera IP
+   621→   621→(IP Webcam/DroidCam) → `--source http://IP_HP:8080/video`. Detail tiga jalur +
+   622→   622→performa + troubleshooting: [`docs/INFERENCE.md`](docs/INFERENCE.md).
+   623→   623→
+   624→   624→---
+   625→   625→
+   626→   626→## Bab 11 — Cara Reproduce
+   627→   627→
+   628→   628→1. **Baseline**: push kernel dari folder `kaggle/` ke Kaggle (GPU T4 ×2, internet
+   629→   629→   aktif). Output = dataset v2 terkonversi + run baseline + bobot.
+   630→   630→2. **Eksperimen ratchet**:
+   631→   631→   ```bash
+   632→   632→   export KAGGLE_API_TOKEN=<token baru Anda>
+   633→   633→   python scripts/kaggle_ratchet_driver.py push exp01_aug_flip   # antrikan
+   634→   634→   python scripts/kaggle_ratchet_driver.py record exp01_aug_flip # verdict KEEP/REVERT
+   635→   635→   ```
+   636→   636→   Guard satu-notebook otomatis menolak push saat masih ada kernel berjalan.
+   637→   637→3. **Verifikasi artefak**: `python scripts/verify_kernel_outputs.py` membandingkan
+   638→   638→   isi repo vs listing output kernel Kaggle.
+   639→   639→4. **Inferensi**: Bab 10 di atas.
+   640→   640→
+   641→   641→Prinsip operasional yang wajib dipertahankan: maksimal 1 notebook GPU; dataset
+   642→   642→FROZEN; satu eksperimen = satu delta; EPS 0.002; semua keputusan di-commit.
+   643→   643→
+   644→   644→---
+   645→   645→
+   646→   646→## Bab 12 — Keamanan
+   647→   647→
+   648→   648→Selama penyelesaian proyek, token Kaggle (KGAT) dan PAT GitHub pernah terpapar di
+   649→   649→percakapan/riwayat git. **Keduanya wajib di-revoke** setelah seluruh pekerjaan
+   650→   650→selesai: Kaggle → Settings → API → *Expire Token*; GitHub → Settings → Developer
+   651→   651→settings → Personal access tokens → *Revoke*. Ganti token baru hanya via environment
+   652→   652→variable (`KAGGLE_API_TOKEN`) — tidak pernah ditulis ke file yang di-commit.
+   653→   653→
+   654→   654→---
+   655→   655→
+   656→   656→## Referensi Dokumen
+   657→   657→
+   658→   658→- [`docs/DATASET_V2.md`](docs/DATASET_V2.md) — protokol dataset lengkap (angka resmi,
+   659→   659→  gerbang dedup/leak-guard, kebijakan bbox & flip_idx)
+   660→   660→- [`docs/SPEC_RATCHET_KAGGLE.md`](docs/SPEC_RATCHET_KAGGLE.md) — spesifikasi metode
+   661→   661→  ratchet-on-Kaggle (problem statement, keputusan implementasi, kriteria uji)
+   662→   662→- [`docs/HANDOFF_2026-10-25.md`](docs/HANDOFF_2026-10-25.md) — kronologi migrasi
+   663→   663→  Kaggle + gotcha environment
+   664→   664→- [`docs/INFERENCE.md`](docs/INFERENCE.md) — panduan inferensi lengkap
+   665→   665→- [`experiments/ratchet_journal.md`](experiments/ratchet_journal.md) — journal audit
+   666→   666→  keputusan ratchet
+   667→   667→- [`experiments/results_kaggle.jsonl`](experiments/results_kaggle.jsonl) — ledger
+   668→   668→  terstruktur 9 eksperimen
+   669→   669→- [`weights/MANIFEST.json`](weights/MANIFEST.json) — sha256 semua bobot eksperimen
+   670→   670→

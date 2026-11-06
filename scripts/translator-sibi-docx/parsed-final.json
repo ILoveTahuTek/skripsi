@@ -1932,7 +1932,7 @@
     [
      "5",
      "Repositori pipeline pelatihan YOLO26 (WPC) milik peneliti",
-     "Menyediakan kode dan data pelatihan model YOLO26 yang diadaptasi untuk pelatihan guru (Subbab 3.7.4)"
+     "Menyediakan skrip konversi dataset bergate kualitas, pelatihan deterministik pada GPU Kaggle, pencatatan eksperimen otomatis, verifikasi artefak, dan bobot terlatih; diadaptasi untuk pelatihan guru (Subbab 3.7.4)"
     ],
     [
      "6",
@@ -1982,7 +1982,7 @@
      "italics": true
     },
     {
-     "text": " CSI beserta deret pose guru hasil perekaman sendiri, kode dan data pelatihan model guru YOLO26 dari repositori milik peneliti (Tabel 3.2), lembar definisi isyarat, aset tampilan arah kedua (gambar huruf, angka, dan isyarat terpilih), formulir persetujuan partisipan, instrumen uji, serta kuesioner persepsi. "
+     "text": " CSI beserta deret pose guru hasil perekaman sendiri, kode dan data pelatihan model guru YOLO26 dari repositori milik peneliti yang telah diverifikasi kelengkapannya (Tabel 3.2), lembar definisi isyarat, aset tampilan arah kedua (gambar huruf, angka, dan isyarat terpilih), formulir persetujuan partisipan, instrumen uji, serta kuesioner persepsi. "
     },
     {
      "text": "Dataset",
@@ -2405,7 +2405,91 @@
      "italics": true
     },
     {
-     "text": ") pada data visual SIBI hasil perekaman T2 dan pelatihannya dijalankan pada layanan server GPU Kaggle. Pelatihan tersebut tidak dibangun dari nol karena pipeline pelatihan YOLO26 beserta data latihnya telah tersedia pada repositori milik peneliti (Tabel 3.2) sehingga tahap ini berfokus pada penyiapan data visual SIBI ke format dataset pelatihan, penyesuaian konfigurasi, serta validasi hasil mengikuti alur baku pelatihan, validasi, dan ekspor model Ultralytics [34]. Pelatihan lanjutan dipilih agar deteksi orang dan kestabilan "
+     "text": ") pada data visual SIBI hasil perekaman T2 dan pelatihannya dijalankan pada layanan server GPU Kaggle. Pelatihan tersebut tidak dibangun dari nol karena repositori milik peneliti (Tabel 3.2) memuat alur kerja YOLO26 yang lengkap dan telah teruji ujung ke ujung: skrip konversi "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " multi-sumber dengan gerbang kualitas berjenjang (deduplikasi "
+    },
+    {
+     "text": "checksum",
+     "italics": true
+    },
+    {
+     "text": " md5, penjaga kebocoran antar-"
+    },
+    {
+     "text": "split",
+     "italics": true
+    },
+    {
+     "text": " berbasis "
+    },
+    {
+     "text": "perceptual hash",
+     "italics": true
+    },
+    {
+     "text": ", dan gerbang anotasi "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " otomatis), skrip pelatihan deterministik dengan "
+    },
+    {
+     "text": "seed",
+     "italics": true
+    },
+    {
+     "text": " tetap pada GPU Kaggle, pencatatan eksperimen otomatis yang memutuskan menyimpan atau mengembalikan konfigurasi berdasar satu metrik validasi, verifikasi kelengkapan artefak per eksperimen, serta bobot model pose SIBI terlatih bermanifes "
+    },
+    {
+     "text": "checksum",
+     "italics": true
+    },
+    {
+     "text": ". Sembilan eksperimen yang tercatat pada repositori menghasilkan model juara dengan "
+    },
+    {
+     "text": "pose",
+     "italics": true
+    },
+    {
+     "text": " mAP50 0,8944 pada 49 kelas isyarat pada "
+    },
+    {
+     "text": "split",
+     "italics": true
+    },
+    {
+     "text": " validasi, sehingga kemampuan melatih guru pada data visual SIBI telah terbukti sebelum penelitian ini dimulai. Penyesuaian yang diperlukan adalah penargetan ulang kepala "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " dari pose tangan 21 titik milik repositori ke 17 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " format COCO yang dibutuhkan jalur guru, disertai penyiapan data visual SIBI hasil perekaman ke format "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " pelatihan, penyetelan konfigurasi, dan validasi hasil mengikuti alur baku pelatihan, validasi, dan ekspor model Ultralytics [34]. Pelatihan lanjutan dipilih agar deteksi orang dan kestabilan "
     },
     {
      "text": "keypoint",
