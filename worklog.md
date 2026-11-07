@@ -722,3 +722,21 @@ Work Log:
 Stage Summary:
 - Pasangan unduhan yang benar: download/translator-sibi-final/{Proposal-Studi-Kelayakan-Purwarupa-SIBI-CSI-ESP32S3.docx, Pratinjau-Proposal-Studi-Kelayakan-Purwarupa-SIBI.pdf} — keduanya 65 hlm dan saling cocok.
 - Repo GitHub kini memisahkan arsip (download/arsip/) dari dokumen final (download/translator-sibi-final/).
+
+---
+Task ID: 37
+Agent: Super Z (main agent, sesi web)
+Task: Pemilik: "apakah kamu sudah mengubah proposalku? aku ingin proposal menggunakan 80 rujukan yang sama seperti sebelumnya. berikan aku list rujukan itu semuanya"
+
+Work Log:
+- Konfirmasi ke pemilik: ya, proposal direvisi Task 33 (rujukan dipangkas 80->63 sesuai permintaan "hapus referensi yang sulit dijangkau" + integrasi WPC) dan Task 35 (audit repo WPC, revisi gelombang 2). Kini dipulihkan sesuai permintaan baru.
+- Pemulihan (scripts/wpc-integrasi/pulihkan_80_rujukan.py): draft-final.md dikembalikan ke backup pra-WPC (_kerja/draft-final.sebelum-wpc.md — teks asli, sitasi & penomoran asli [1]-[80], Tabel 2.2 kembali 17 baris, kalimat-kalimat yang dulu ditulis ulang/dihapus kembali asli), lalu 4 blok integrasi WPC gelombang 1+2 dicangkok ulang: kalimat 3.2.3, Tabel 3.2 baris 5 (12 baris), klausa bahan 3.4, paragraf 3.7.4 (sitasi Ultralytics disesuaikan [34]->[42] ke penomoran asli). Jebakan yang diperbaiki: penanda AKHIR NASKAH di backup berada SETELAH log lamanya sehingga log lama bocor ke dp split (dp h2=3 table=3) — potong diganti ke min(posisi penanda, posisi log pertama).
+- Build ulang: split_final.py (BALANS OK, dp ref=80 table=0) -> parse_md.js -> generate_docx.js (2.748.034 byte) -> patch_footer.py -> pratinjau PDF 68 hlm (2,4 MB).
+- Verifikasi: DP 80 entri urut [1] Mitchell & Karchmer .. [80] Hinton; sitasi balik 80/80, 0 menggantung, 0 >80; python-docx 335 ¶ / 10 tabel / H1x4 / H2x28 / gambar x8; Tabel 2.2 = 18 baris (header+17), Tabel 3.2 = 13 baris (header+12, baris 5 WPC ADA); 0 jejak log bocor; render visual hlm sampul, 27 (T2.2), 38 (T3.2+WPC), 68 (DP [77]-[80]) rapi.
+- daftar-pustaka.md tingkat atas diregenerasi: 80 entri.
+- Push: commit + git push origin HEAD:main.
+
+Stage Summary:
+- Proposal final kembali memakai 80 rujukan asli (persis set sebelum Task 33) TETAPI integrasi pipeline WPC/YOLO26 dari Task 33+35 tetap dipertahankan — halaman kembali 68 (dulu 65 saat 63 rujukan; dulu 68 pra-WPC).
+- 17 rujukan yang dipulihkan adalah rujukan berbayar/cetak; dokumennya tetap tersedia di paket ZIP Gofile kTTWC7EX; peta akses 63 rujukan gratis tetap sah di Akses-63-Rujukan.md.
+- List lengkap 80 rujukan diberikan ke pemilik di chat + tersimpan di download/translator-sibi-final/daftar-pustaka.md.
