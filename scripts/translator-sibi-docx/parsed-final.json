@@ -145,7 +145,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Sebagai studi kelayakan, penelitian ini tidak mengklaim penerjemahan kontinu kosakata penuh. Kosakata dibatasi pada 5–8 isyarat SIBI terisolasi yang dibedakan oleh lintasan lengan, tubuh atas, atau kepala, bukan oleh bentuk jari, dengan alasan resolusi spasial CSI pada satu tautan antarmodul (Subbab 2.3). Model berbasis CSI juga mudah mengalami "
+     "text": "Sebagai studi kelayakan, penelitian ini tidak mengklaim penerjemahan kontinu kosakata penuh. Objek pengenalan dibatasi pada alfabet manual SIBI satu tangan sebanyak 26 huruf, yaitu 24 huruf statis serta huruf gerak J dan Z: 24 huruf statis dibedakan oleh konfigurasi tangan dan jari, sedangkan J dan Z dibedakan oleh lintasan geraknya. Kepekaan CSI terhadap gerak halus tingkat jari telah dilaporkan sejumlah penelitian [21], [23], [25], [54], [58], [67], tetapi kemampuan satu tautan antarmodul ESP32-S3 membedakan 26 konfigurasi tangan tersebut belum dapat dipastikan sebelum data dikumpulkan sehingga penelitian ini mengujinya melalui uji Delta-CSI dan gerbang separabilitas (Subbab 2.3 dan BAB III). Model berbasis CSI juga mudah mengalami "
     },
     {
      "text": "overfitting",
@@ -159,7 +159,14 @@
      "italics": true
     },
     {
-     "text": "): model guru kamera YOLO26-Pose mengekstrak deret pose gerakan SIBI dari video perekaman, sedangkan label kelas tetap berasal dari anotasi protokol (Subbab 2.5). Model murid belajar mengenali isyarat dari jendela CSI dengan supervisi tambahan deret pose guru, lalu berjalan sendiri pada modul tanpa kamera sehingga kamera dan model guru hanya aktif pada tahap akuisisi data dan pelatihan [41], [42]. Pemetaan teks ke representasi SIBI pada arah kedua dibatasi pada kamus kata-level dengan "
+     "text": "): model guru kamera YOLO26-Pose mengekstrak deret 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " pose tangan dari video perekaman, sedangkan label kelas tetap berasal dari anotasi protokol (Subbab 2.5). Model murid belajar mengenali isyarat dari jendela CSI dengan supervisi tambahan deret pose guru, lalu berjalan sendiri pada modul tanpa kamera sehingga kamera dan model guru hanya aktif pada tahap akuisisi data dan pelatihan [41], [42]. Pemetaan teks ke representasi SIBI pada arah kedua dibatasi pada kamus kata-level dengan "
     },
     {
      "text": "fallback",
@@ -203,7 +210,7 @@
    "n": "2.",
    "runs": [
     {
-     "text": "Bagaimana kinerja pengenalan 5–8 isyarat SIBI terisolasi dari CSI melalui inferensi pada perangkat, serta kinerja jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI, pada skenario dalam sesi, lintas partisipan, dan lintas ruang?"
+     "text": "Bagaimana kinerja pengenalan 24 huruf statis dan dua huruf gerak (J dan Z) alfabet manual SIBI dari CSI melalui inferensi pada perangkat, serta kinerja jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI, pada skenario dalam sesi, lintas partisipan, dan lintas ruang?"
     }
    ]
   },
@@ -249,7 +256,7 @@
    "n": "2.",
    "runs": [
     {
-     "text": "Mengukur kinerja pengenalan 5–8 isyarat SIBI terisolasi dari CSI melalui inferensi pada perangkat, serta kinerja jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI, pada skenario dalam sesi, lintas partisipan, dan lintas ruang."
+     "text": "Mengukur kinerja pengenalan 24 huruf statis dan dua huruf gerak (J dan Z) alfabet manual SIBI dari CSI melalui inferensi pada perangkat, serta kinerja jalur isyarat menjadi teks dan suara dan jalur teks atau ucapan menjadi representasi SIBI, pada skenario dalam sesi, lintas partisipan, dan lintas ruang."
     }
    ]
   },
@@ -279,14 +286,14 @@
    "n": "1.",
    "runs": [
     {
-     "text": "Objek pengenalan adalah 5–8 isyarat SIBI terisolasi yang lolos dua saringan, yaitu separabilitas fisik (isyarat dibedakan oleh lintasan lengan, tubuh atas, atau kepala, bukan oleh bentuk jari) dan validitas pedagogis (disetujui validator penutur tunarungu dan dicocokkan dengan "
+     "text": "Objek pengenalan adalah alfabet manual SIBI satu tangan sebanyak 26 huruf, yaitu 24 huruf statis serta huruf gerak J dan Z, dengan bentuk baku yang dicocokkan dengan "
     },
     {
      "text": "Kamus SIBI",
      "italics": true
     },
     {
-     "text": " [45]). Sistem yang dibangun bukan penerjemah kalimat dan tidak menangani pengenalan isyarat kontinu."
+     "text": " [45] dan disetujui validator penutur tunarungu. Sistem yang dibangun bukan penerjemah kalimat dan tidak menangani pengenalan isyarat kontinu."
     }
    ]
   },
@@ -295,7 +302,7 @@
    "n": "2.",
    "runs": [
     {
-     "text": "Konfigurasi jari dan ekspresi wajah tidak dikenali. Batas ini mengikat kedua arah sehingga keluaran arah pertama hanya menyangkut lintasan gerak, sedangkan arah kedua menampilkan representasi tingkat kata dan ejaan jari, bukan tata bahasa isyarat penuh beserta penanda nonmanual."
+     "text": "Konfigurasi tangan dan jari menjadi pembeda utama kelas yang diuji, sedangkan ekspresi wajah dan penanda nonmanual tidak dikenali. Batas ini mengikat kedua arah sehingga keluaran arah pertama berupa huruf yang dikenali, sedangkan arah kedua menampilkan representasi tingkat kata dan ejaan jari, bukan tata bahasa isyarat penuh beserta penanda nonmanual."
     }
    ]
   },
@@ -396,14 +403,21 @@
    "t": "p",
    "runs": [
     {
-     "text": "Penelitian ini diharapkan memberikan bukti awal kelayakan pengenalan sekelompok kecil isyarat SIBI terisolasi dari CSI satu tautan antarmodul ESP32-S3, disertai bukti kelayakan inferensi model terkuantisasi pada perangkat untuk tugas tersebut. Bukti itu tidak berlaku bagi kosakata yang dibedakan oleh bentuk jari. Penelitian ini juga menyediakan "
+     "text": "Penelitian ini diharapkan memberikan bukti awal kelayakan pengenalan alfabet manual SIBI, yaitu 24 huruf statis serta huruf gerak J dan Z, dari CSI satu tautan antarmodul ESP32-S3, disertai bukti kelayakan inferensi model terkuantisasi pada perangkat untuk tugas tersebut. Bukti itu terikat pada alfabet manual dan tidak otomatis berlaku bagi pengenalan isyarat kata maupun kontinu. Penelitian ini juga menyediakan "
     },
     {
      "text": "dataset",
      "italics": true
     },
     {
-     "text": " CSI isyarat SIBI berlabel beserta deret pose model guru dan protokol perekamannya sehingga dapat menjadi pembanding bagi penelitian penginderaan nirkabel untuk bahasa isyarat lain, termasuk perluasan ke BISINDO. Kajian integrasi penginderaan CSI dengan jalur sintesis ucapan dan pengenalan ucapan otomatis bahasa Indonesia pada satu purwarupa memberikan contoh dokumentasi arsitektur tepi–awan yang dapat ditelusuri ulang peneliti berikutnya."
+     "text": " CSI huruf SIBI berlabel beserta deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " model guru dan protokol perekamannya sehingga dapat menjadi pembanding bagi penelitian penginderaan nirkabel untuk bahasa isyarat lain, termasuk perluasan ke BISINDO. Kajian integrasi penginderaan CSI dengan jalur sintesis ucapan dan pengenalan ucapan otomatis bahasa Indonesia pada satu purwarupa memberikan contoh dokumentasi arsitektur tepi–awan yang dapat ditelusuri ulang peneliti berikutnya."
     }
    ]
   },
@@ -711,7 +725,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Panjang gelombang Wi-Fi pada pita 2,4 GHz sekitar 12,5 cm dan membatasi resolusi spasial CSI. Sejumlah penelitian melaporkan pengenalan isyarat dan gestur tangan dari CSI dengan perangkat riset multiantena. SignFi memakai NIC Intel 5300 dengan tiga antena penerima [21]. Wi-SL memakai router dengan dua antena pemancar dan tiga antena penerima pada kanal 40 MHz dengan laju pencuplikan 400 Hz [57]. HandFi memakai NIC Intel 5300 sebagai penerima dari router Wi-Fi komersial [58]. Penelitian ini tidak mengasumsikan kemampuan tersebut juga dimiliki perangkat yang digunakan. Dengan satu tautan antara dua modul ESP32-S3 yang masing-masing berantena tunggal, perbedaan konfigurasi jari dan ekspresi wajah diasumsikan terlalu halus untuk dibedakan secara andal. Asumsi tersebut diperiksa melalui uji Delta-CSI (BAB III) sehingga cakupan pengenalan dibatasi pada lintasan lengan, tubuh atas, dan kepala. Batas resolusi tersebut menentukan saringan separabilitas fisik pada kurasi kosakata (Subbab 3.6) dan makna keluaran sistem pada kedua arah."
+     "text": "Panjang gelombang Wi-Fi pada pita 2,4 GHz sekitar 12,5 cm dan membatasi resolusi spasial CSI. Sejumlah penelitian melaporkan pengenalan isyarat dan gestur tangan dari CSI dengan perangkat riset multiantena: SignFi memakai NIC Intel 5300 dengan tiga antena penerima [21], Wi-SL memakai router dengan dua antena pemancar dan tiga antena penerima pada kanal 40 MHz dengan laju pencuplikan 400 Hz [57], dan HandFi memakai NIC Intel 5300 sebagai penerima dari router Wi-Fi komersial [58]. Sebagian bukti bahkan memakai perangkat lebih sederhana: Cai dkk. mengenali gestur dengan akurasi rata-rata 98,3% pada skenario satu pemancar dan satu penerima [54]. Penelitian ini tidak mengasumsikan kemampuan tersebut juga dimiliki perangkat yang dipakai. Kelayakan satu tautan antara dua modul ESP32-S3 yang masing-masing berantena tunggal untuk membedakan 26 konfigurasi tangan dan jari alfabet manual SIBI, yaitu 24 huruf statis serta huruf gerak J dan Z, karenanya diperlakukan sebagai pertanyaan penelitian, bukan asumsi awal. Bukti kepekaan milimeter di atas dan preseden pengenalan tulisan huruf oleh WiASL [67] menjadi hipotesis kerja; uji Delta-CSI dan gerbang G1–G2 (BAB III) mengujinya langsung pada pasangan huruf dengan konfigurasi tangan yang paling mirip, dan bila pasangan tersebut tidak dapat dipisahkan, himpunan huruf dipangkas sesuai kriteria pada Tabel 3.6 serta hasilnya dilaporkan sebagai temuan kelayakan."
     }
    ]
   },
@@ -948,28 +962,49 @@
      "italics": true
     },
     {
-     "text": " tubuh manusia dari citra atau video [60]. YOLO26 merupakan keluarga model visi waktu nyata terbaru dari Ultralytics yang mendukung deteksi, segmentasi, klasifikasi, dan estimasi pose dalam satu kerangka [41]. YOLO26-Pose dilatih pada "
-    },
-    {
-     "text": "dataset keypoint",
-     "italics": true
-    },
-    {
-     "text": " COCO dan menghasilkan 17 "
+     "text": " manusia dari citra atau video [60]. YOLO26 merupakan keluarga model visi waktu nyata terbaru dari Ultralytics yang mendukung deteksi, segmentasi, klasifikasi, dan estimasi pose dalam satu kerangka [41]. Kerangka tersebut mendukung konfigurasi "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " tubuh per orang, mencakup titik wajah, bahu, siku, dan pergelangan tangan, tanpa "
+     "text": " khusus melalui parameter "
+    },
+    {
+     "text": "kpt_shape",
+     "italics": true
+    },
+    {
+     "text": " pada "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " pelatihan dan menyediakan "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "hand-keypoints",
+     "italics": true
+    },
+    {
+     "text": " dengan 21 "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " jari [42]. Analisis independen atas YOLO26 menunjukkan bahwa model ini dirancang untuk efisiensi inferensi dan kesiapan penerapan pada perangkat tepi [61]."
+     "text": " per tangan yang dianotasi memakai MediaPipe [42], sehingga model pose tangan dapat dilatih dengan alur kerja yang sama. Analisis independen atas YOLO26 menunjukkan bahwa model ini dirancang untuk efisiensi inferensi dan kesiapan penerapan pada perangkat tepi [61]."
     }
    ]
   },
@@ -991,28 +1026,21 @@
      "italics": true
     },
     {
-     "text": " akuisisi tersinkron mengikuti pola ADR-079 RuView yang aslinya memakai MediaPipe PoseLandmarker [62]; estimatornya diganti dengan YOLO26-Pose yang keluarannya juga 17 "
+     "text": " akuisisi tersinkron mengikuti pola ADR-079 RuView yang aslinya memakai MediaPipe PoseLandmarker [62]; estimatornya diganti dengan model guru pose tangan YOLO26-Pose dari repositori peneliti yang keluarannya 21 "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " format COCO sehingga formatnya setara dengan skrip asli. Pemakaian visi sebagai pemberi supervisi bagi pelatihan model Wi-Fi telah memiliki preseden: Person-in-WiFi memperoleh persepsi tubuh dari sinyal Wi-Fi dengan supervisi kamera [63], dan DensePose from WiFi memetakan sinyal Wi-Fi ke koordinat permukaan tubuh dengan jaringan visi sebagai guru [64]. Teknik umum di baliknya, yaitu distilasi pengetahuan, melatih model murid yang ringan agar meniru keluaran atau representasi model guru yang lebih kuat [80]. Label kelas SIBI tetap berasal dari kartu pemandu pada protokol "
+     "text": " per tangan (Subbab 3.7.4). Pemakaian visi sebagai pemberi supervisi bagi pelatihan model Wi-Fi telah memiliki preseden: Person-in-WiFi memperoleh persepsi tubuh dari sinyal Wi-Fi dengan supervisi kamera [63], dan DensePose from WiFi memetakan sinyal Wi-Fi ke koordinat permukaan tubuh dengan jaringan visi sebagai guru [64]. Teknik umum di baliknya, yaitu distilasi pengetahuan, melatih model murid yang ringan agar meniru keluaran atau representasi model guru yang lebih kuat [80]. Label kelas SIBI tetap berasal dari kartu pemandu pada protokol "
     },
     {
      "text": "elisitasi",
      "italics": true
     },
     {
-     "text": " sehingga model guru tidak mengklasifikasikan isyarat; klasifikasi gerakan otomatis dari video menuntut pengklasifikasi temporal di atas deret "
-    },
-    {
-     "text": "keypoint",
-     "italics": true
-    },
-    {
-     "text": " dan menjadi pengembangan lanjutan di luar cakupan. Deret "
+     "text": " sehingga makna huruf tidak bergantung pada dugaan model visi; keluaran klasifikasi huruf yang juga dimiliki model guru repositori peneliti tidak dipakai pada jalur pelatihan murid. Deret "
     },
     {
      "text": "keypoint",
@@ -1027,14 +1055,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Peran kamera dengan demikian terbatas pada tahap akuisisi data dan pelatihan serta tidak pernah menyala pada produk akhir. Batas ini penting karena keluaran model hanya mencakup tubuh tanpa "
+     "text": "Peran kamera dengan demikian terbatas pada tahap akuisisi data dan pelatihan serta tidak pernah menyala pada produk akhir. Keluaran guru berupa 21 "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " jari; batas tersebut sejalan dengan cakupan pengenalan yang memang dibatasi pada lintasan lengan, tubuh atas, dan kepala (Subbab 2.3). Setelah model murid dilatih dan di-"
+     "text": " pose tangan sehingga konfigurasi jari pada setiap huruf ikut tersupervisi; cakupan supervisi tersebut sejalan dengan objek pengenalan alfabet manual (Subbab 2.3). Setelah model murid dilatih dan di-"
     },
     {
      "text": "deploy",
@@ -1067,7 +1095,7 @@
      "italics": true
     },
     {
-     "text": " [23]. WiSign memperluas arah tersebut dengan mengenali kalimat ASL kontinu dari CSI dengan segmentasi berbasis kepadatan spektrum [24]. Keberadaan WiSign menunjukkan bahwa pengenalan kontinu bukan wilayah yang sama sekali belum disentuh. Oleh karena itu, kebaruan penelitian ini tidak diklaim pada pengenalan kontinu, melainkan pada penerapan CSI untuk SIBI dan pada integrasinya dengan jalur pemrosesan bahasa dua arah (Subbab 2.11)."
+     "text": " dengan akurasi 69,3% [23]. Akurasi yang dilaporkan pada karya-karya tersebut berkisar dari angka itu hingga 99,8% pada kondisi laboratorium [21], [66] dan menurun pada pengguna baru, misalnya 86,66% lintas lima pengguna pada SignFi [21]. WiSign memperluas arah tersebut dengan mengenali kalimat ASL kontinu dari CSI dengan segmentasi berbasis kepadatan spektrum [24]. Keberadaan WiSign menunjukkan bahwa pengenalan kontinu bukan wilayah yang sama sekali belum disentuh. Oleh karena itu, kebaruan penelitian ini tidak diklaim pada pengenalan kontinu, melainkan pada penerapan CSI untuk SIBI dan pada integrasinya dengan jalur pemrosesan bahasa dua arah (Subbab 2.11)."
     }
    ]
   },
@@ -1126,7 +1154,7 @@
      "italics": true
     },
     {
-     "text": " berukuran 18,4 KB, menunjukkan bahwa model kecil berjalan dengan penyangga terkendali [72]. Masukan klasifikasi CSI berupa vektor fitur deret pendek yang jauh lebih kecil daripada citra sehingga klasifikasi 5–8 kelas berada pada kelas kompleksitas yang lebih rendah daripada contoh-contoh tersebut. Meskipun demikian, karena belum ada publikasi tolok ukur model CSI-isyarat pada ESP32-S3, waktu inferensi aktual tetap diukur pada tahap "
+     "text": " berukuran 18,4 KB, menunjukkan bahwa model kecil berjalan dengan penyangga terkendali [72]. Masukan klasifikasi CSI berupa vektor fitur deret pendek yang jauh lebih kecil daripada citra sehingga klasifikasi 26 kelas huruf berada pada kelas kompleksitas yang lebih rendah daripada contoh-contoh tersebut. Meskipun demikian, karena belum ada publikasi tolok ukur model CSI-isyarat pada ESP32-S3, waktu inferensi aktual tetap diukur pada tahap "
     },
     {
      "text": "deployment",
@@ -1576,10 +1604,10 @@
     [
      "17",
      "Penelitian ini",
-     "CSI dua-tiga modul ESP32-S3, distilasi guru–murid YOLO26-Pose ke CSI, inferensi tepi; dua arah",
-     "SIBI",
+     "CSI dua-tiga modul ESP32-S3, distilasi guru–murid YOLO26-Pose pose tangan ke CSI, inferensi tepi; dua arah",
+     "SIBI, alfabet manual 26 huruf",
      "Ya",
-     "Purwarupa penerjemah dua arah kosakata terbatas"
+     "Purwarupa penerjemah dua arah alfabet manual SIBI"
     ]
    ]
   },
@@ -1587,7 +1615,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Tabel 2.2 memperlihatkan empat kelompok penelitian. Kelompok pertama mengenali bahasa isyarat dari sinyal Wi-Fi [21], [24], [65], [22], [23] dan membuktikan bahwa isyarat dapat dikenali tanpa kamera saat sistem dipakai, termasuk pengenalan kalimat kontinu oleh WiSign [24]; kelompok ini tidak menjangkau SIBI dan tidak memadukan hasilnya dengan jalur pemrosesan bahasa. Kelompok kedua membuktikan kepekaan CSI terhadap gerak halus [25], [26] sehingga asumsi kelayakan penginderaan gerak lengan memiliki dasar, tetapi keduanya bukan sistem isyarat. Kelompok ketiga memindahkan pengetahuan visi ke Wi-Fi [63], [64] dan menjadi preseden langsung distilasi guru–murid pada penelitian ini: kamera hanya aktif saat akuisisi data dan pelatihan, sedangkan perangkat akhir mengenali isyarat dari CSI saja. Kelompok keempat menjangkau SIBI dan BISINDO [15], [51], [52], [16], [74], tetapi hampir seluruhnya berbasis kamera pada arah isyarat menjadi teks; hanya dua kamus suara menjadi animasi yang bekerja pada arah balik [12], [13] dan keduanya satu arah dengan kosakata sangat terbatas."
+     "text": "Tabel 2.2 memperlihatkan empat kelompok penelitian. Kelompok pertama mengenali bahasa isyarat dari sinyal Wi-Fi [21], [24], [65], [22], [23] dan membuktikan bahwa isyarat dapat dikenali tanpa kamera saat sistem dipakai, termasuk pengenalan kalimat kontinu oleh WiSign [24]; kelompok ini tidak menjangkau SIBI dan tidak memadukan hasilnya dengan jalur pemrosesan bahasa. Kelompok kedua membuktikan kepekaan CSI terhadap gerak halus [25], [26], termasuk pada tingkat ketukan jari, sehingga hipotesis kepekaan CSI terhadap konfigurasi tangan dan jari memiliki dasar, tetapi keduanya bukan sistem isyarat. Kelompok ketiga memindahkan pengetahuan visi ke Wi-Fi [63], [64] dan menjadi preseden langsung distilasi guru–murid pada penelitian ini: kamera hanya aktif saat akuisisi data dan pelatihan, sedangkan perangkat akhir mengenali isyarat dari CSI saja. Kelompok keempat menjangkau SIBI dan BISINDO [15], [51], [52], [16], [74], tetapi hampir seluruhnya berbasis kamera pada arah isyarat menjadi teks; hanya dua kamus suara menjadi animasi yang bekerja pada arah balik [12], [13] dan keduanya satu arah dengan kosakata sangat terbatas."
     }
    ]
   },
@@ -1595,7 +1623,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Dalam batas penelusuran literatur penelitian ini, belum ditemukan publikasi yang mengenali isyarat SIBI dari CSI maupun purwarupa penerjemah dua arah yang memadukan penginderaan CSI dengan TTS dan ASR bahasa Indonesia pada perangkat ESP32-S3. Penelusuran tersebut mencakup Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 dengan kata kunci bahasa Inggris dan bahasa Indonesia (Subbab 1.1). Dengan demikian, kebaruan penelitian ini bersifat kombinatif, yaitu menggabungkan penginderaan CSI satu tautan antarmodul untuk SIBI, distilasi guru–murid dari YOLO26-Pose ke model CSI, inferensi pada perangkat, dan integrasi dua arah dengan pemrosesan bahasa Indonesia berbasis layanan awan. Penelitian ini tidak mengklaim kebaruan pada pengenalan kontinu yang telah dijangkau WiSign untuk ASL [24]. Penelitian ini juga tidak mengklaim kebaruan pada arah balik tingkat kata yang telah dibangun KASIBI dan OpenSIBI [12], [13] maupun penerjemahan kalimat penuh yang masih menjadi masalah terbuka [43]."
+     "text": "Dalam batas penelusuran literatur penelitian ini, belum ditemukan publikasi yang mengenali isyarat SIBI dari CSI maupun purwarupa penerjemah dua arah yang memadukan penginderaan CSI dengan TTS dan ASR bahasa Indonesia pada perangkat ESP32-S3. Penelusuran tersebut mencakup Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 dengan kata kunci bahasa Inggris dan bahasa Indonesia (Subbab 1.1). Dengan demikian, kebaruan penelitian ini bersifat kombinatif, yaitu menggabungkan penginderaan CSI satu tautan antarmodul untuk alfabet manual SIBI, distilasi guru–murid dari YOLO26-Pose pose tangan ke model CSI, inferensi pada perangkat, dan integrasi dua arah dengan pemrosesan bahasa Indonesia berbasis layanan awan. Penelitian ini tidak mengklaim kebaruan pada pengenalan kontinu yang telah dijangkau WiSign untuk ASL [24]. Penelitian ini juga tidak mengklaim kebaruan pada arah balik tingkat kata yang telah dibangun KASIBI dan OpenSIBI [12], [13] maupun penerjemahan kalimat penuh yang masih menjadi masalah terbuka [43]."
     }
    ]
   }
@@ -1613,7 +1641,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Penelitian ini dirancang sebagai studi kelayakan kuantitatif bergerbang yang menghasilkan purwarupa penerjemah dua arah. Bagian kuantitatif mengukur sejauh mana Wi-Fi CSI dari tautan antarmodul ESP32-S3 dapat membedakan 5–8 isyarat SIBI terisolasi. Bagian itu juga mengukur sejauh mana model terkuantisasi berjalan pada perangkat. Selain itu, diukur sejauh mana jalur isyarat menjadi teks dan suara serta jalur teks atau ucapan menjadi representasi SIBI bekerja pada skenario yang ditetapkan. Setelah komponen diuji, purwarupa dikemas lalu dikaji kelayakannya sebagai alat bantu komunikasi kosakata terbatas melalui uji operasional, uji kegunaan skala kecil, dan penilaian validator penutur tunarungu. Struktur bergerbang dipilih karena kemampuan CSI membedakan isyarat SIBI belum dapat dipastikan sebelum data dikumpulkan; setiap tahap menghasilkan artefak tetap, kegagalan gerbang dicatat sebagai temuan, dan kriteria akurasi dirumuskan relatif terhadap peluang acak (Subbab 2.10). Inti metodologi pelatihannya berbentuk distilasi guru–murid. Model guru kamera YOLO26-Pose mengekstrak deret pose gerakan SIBI dari video perekaman; deret tersebut menjadi supervisi tambahan bagi model murid yang mengenali isyarat dari jendela CSI dan berjalan langsung pada modul (Subbab 3.7)."
+     "text": "Penelitian ini dirancang sebagai studi kelayakan kuantitatif bergerbang yang menghasilkan purwarupa penerjemah dua arah. Bagian kuantitatif mengukur sejauh mana Wi-Fi CSI dari tautan antarmodul ESP32-S3 dapat membedakan 26 huruf alfabet manual SIBI, yaitu 24 huruf statis serta huruf gerak J dan Z. Bagian itu juga mengukur sejauh mana model terkuantisasi berjalan pada perangkat. Selain itu, diukur sejauh mana jalur isyarat menjadi teks dan suara serta jalur teks atau ucapan menjadi representasi SIBI bekerja pada skenario yang ditetapkan. Setelah komponen diuji, purwarupa dikemas lalu dikaji kelayakannya sebagai alat bantu komunikasi kosakata terbatas melalui uji operasional, uji kegunaan skala kecil, dan penilaian validator penutur tunarungu. Struktur bergerbang dipilih karena kemampuan CSI membedakan isyarat SIBI belum dapat dipastikan sebelum data dikumpulkan; setiap tahap menghasilkan artefak tetap, kegagalan gerbang dicatat sebagai temuan, dan kriteria akurasi dirumuskan relatif terhadap peluang acak (Subbab 2.10). Inti metodologi pelatihannya berbentuk distilasi guru–murid. Model guru kamera YOLO26-Pose mengekstrak deret 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " pose tangan dari video perekaman; deret tersebut menjadi supervisi tambahan bagi model murid yang mengenali huruf dari jendela CSI dan berjalan langsung pada modul (Subbab 3.7)."
     }
    ]
   },
@@ -1716,7 +1751,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "T1 mencakup kurasi 5–8 isyarat bersama validator penutur tunarungu, kalibrasi ruang mitra, penyusunan protokol perekaman dan etika, serta perizinan (Subbab 3.6). Kurasi juga menetapkan himpunan tampilan arah kedua, yaitu isyarat terpilih ditambah 26 huruf dan 9 angka sebagai kosakata ejaan jari (Subbab 2.8). G1 menguji separabilitas awal 2–3 isyarat dengan uji "
+     "text": "T1 mencakup kurasi 26 huruf alfabet manual SIBI bersama validator penutur tunarungu, kalibrasi ruang mitra, penyusunan protokol perekaman dan etika, serta perizinan (Subbab 3.6). Kurasi juga menetapkan himpunan tampilan arah kedua, yaitu 26 huruf dan 9 angka ditambah kata terpilih dari kamus (Subbab 2.8), serta pasangan huruf dengan konfigurasi tangan yang paling mirip sebagai bahan G1. G1 menguji separabilitas awal 2–3 pasang huruf tersebut dengan uji "
     },
     {
      "text": "nearest-centroid",
@@ -1781,7 +1816,7 @@
      "italics": true
     },
     {
-     "text": "; bila G2 gagal, cakupan dipangkas menjadi 3–5 isyarat yang pembedanya paling bertumpu pada lintasan (Tabel 3.6)."
+     "text": "; bila G2 gagal, cakupan dipangkas menjadi himpunan huruf yang pembeda CSI-nya paling kuat (Tabel 3.6)."
     }
    ]
   },
@@ -1841,7 +1876,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Seluruh artefak dianalisis dan disusun menjadi laporan kelayakan beserta rekomendasi berdasarkan gerbang yang lolos dan yang gagal. Laporan memuat keterbatasan secara eksplisit, yaitu konfigurasi jari dan ekspresi wajah tidak dikenali, arah kedua berbentuk kamus kata-level dan ejaan jari, serta seluruh klaim terikat pada kosakata terbatas (Subbab 1.4)."
+     "text": "Seluruh artefak dianalisis dan disusun menjadi laporan kelayakan beserta rekomendasi berdasarkan gerbang yang lolos dan yang gagal. Laporan memuat keterbatasan secara eksplisit, yaitu klaim pengenalan terikat pada alfabet manual 26 huruf, ekspresi wajah dan penanda nonmanual tidak dikenali, arah kedua berbentuk kamus kata-level dan ejaan jari, serta keluaran berupa huruf atau kata, bukan kalimat isyarat (Subbab 1.4)."
     }
    ]
   },
@@ -1995,8 +2030,8 @@
     ],
     [
      "3",
-     "Model guru YOLO26-Pose",
-     "Mengekstrak deret 17 *keypoint* format COCO pada jalur guru; hasilnya menjadi supervisi tambahan pelatihan murid dan dasar penyaringan segmen"
+     "Model guru pose tangan YOLO26-Pose",
+     "Mengekstrak deret 21 *keypoint* pose tangan pada jalur guru; hasilnya menjadi supervisi tambahan pelatihan murid dan dasar penyaringan segmen"
     ],
     [
      "4",
@@ -2056,7 +2091,7 @@
      "italics": true
     },
     {
-     "text": " CSI beserta deret pose guru hasil perekaman sendiri, kode dan data pelatihan model guru YOLO26 dari repositori milik peneliti yang telah diverifikasi kelengkapannya (Tabel 3.2), lembar definisi isyarat, aset tampilan arah kedua (gambar huruf, angka, dan isyarat terpilih), formulir persetujuan partisipan, instrumen uji, serta kuesioner persepsi. "
+     "text": " CSI beserta deret pose guru hasil perekaman sendiri, kode dan data pelatihan model guru YOLO26 dari repositori milik peneliti yang telah diverifikasi kelengkapannya (Tabel 3.2), lembar definisi huruf, aset tampilan arah kedua (gambar huruf, angka, dan kata terpilih), formulir persetujuan partisipan, instrumen uji, serta kuesioner persepsi. "
     },
     {
      "text": "Dataset",
@@ -2162,7 +2197,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Modul pemancar dan modul penerima dipasang pada dudukan setinggi dada pengisyarat dan mengapit zona isyarat agar gerak lengan dan tubuh atas berada di antara keduanya; kesesuaiannya diperiksa melalui uji Delta-CSI. Zona isyarat hanya ditempati satu pengisyarat dalam setiap sesi dan sistem tidak mengidentifikasi individu. Jarak antarmodul, ukuran zona, dan penempatan modul pengguna ditetapkan pada T0 dan dicatat dalam metadata sesi (Tabel 3.6)."
+     "text": "Modul pemancar dan modul penerima dipasang pada dudukan setinggi dada pengisyarat dan mengapit zona isyarat agar tangan dan lengan pengisyarat berada di antara keduanya; kesesuaiannya diperiksa melalui uji Delta-CSI. Zona isyarat hanya ditempati satu pengisyarat dalam setiap sesi dan sistem tidak mengidentifikasi individu. Jarak antarmodul, ukuran zona, dan penempatan modul pengguna ditetapkan pada T0 dan dicatat dalam metadata sesi (Tabel 3.6)."
     }
    ]
   },
@@ -2204,7 +2239,7 @@
      "italics": true
     },
     {
-     "text": "; validator menentukan kosakata, memeriksa sampel segmen, dan menilai kewajaran keluaran purwarupa; pengguna uji mencoba purwarupa dua arah pada uji kegunaan. Kriteria inklusi dan rekrutmen tercantum pada Tabel 3.6. Setiap pengisyarat direkam dalam sedikitnya dua sesi agar skema lintas sesi dapat dijalankan. Skema lintas ruang hanya memisahkan pengaruh ruang dari pengaruh orang bila pengisyarat yang sama direkam di setiap ruang."
+     "text": "; validator memeriksa lembar definisi huruf, memeriksa sampel segmen, dan menilai kewajaran keluaran purwarupa; pengguna uji mencoba purwarupa dua arah pada uji kegunaan. Kriteria inklusi dan rekrutmen tercantum pada Tabel 3.6. Setiap pengisyarat direkam dalam sedikitnya dua sesi agar skema lintas sesi dapat dijalankan. Skema lintas ruang hanya memisahkan pengaruh ruang dari pengaruh orang bila pengisyarat yang sama direkam di setiap ruang."
     }
    ]
   },
@@ -2216,21 +2251,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Isyarat pengenalan dipilih melalui dua saringan (Subbab 1.4) dengan acuan "
+     "text": "Alfabet manual yang menjadi objek pengenalan mencakup 26 huruf, yaitu 24 huruf statis serta huruf gerak J dan Z, dengan bentuk baku mengacu pada "
     },
     {
      "text": "Kamus SIBI",
      "italics": true
     },
     {
-     "text": " [45], sedangkan kosakata tampilan arah kedua mencakup isyarat terpilih tersebut ditambah 26 huruf dan 9 angka sebagai landasan ejaan jari [13]. Hasilnya adalah daftar 5–8 isyarat terisolasi "
-    },
-    {
-     "text": "[PERLU DATA: daftar isyarat SIBI terpilih]",
-     "highlight": true
-    },
-    {
-     "text": " yang dideskripsikan dalam lembar definisi isyarat sebagai acuan perekaman dan penilaian."
+     "text": " [45]. Lembar definisi setiap huruf memuat deskripsi konfigurasi tangan dan jari serta lintasan gerak untuk J dan Z, validator menyetujui lembar tersebut, dan pasangan huruf dengan konfigurasi tangan yang paling mirip ditetapkan sebagai bahan gerbang G1. Kosakata tampilan arah kedua mencakup 26 huruf dan 9 angka ditambah kata terpilih sebagai landasan ejaan jari [13]."
     }
    ]
   },
@@ -2249,7 +2277,7 @@
      "italics": true
     },
     {
-     "text": " terisolasi, yaitu satu isyarat per segmen dengan jeda antarrepetisi. Adapun prosedur perekaman setiap sesi adalah sebagai berikut."
+     "text": " terisolasi, yaitu satu huruf per segmen dengan jeda antarrepetisi; huruf statis diperagakan sebagai pose yang ditahan sejenak, sedangkan J dan Z diperagakan sebagai lintasan gerak. Adapun prosedur perekaman setiap sesi adalah sebagai berikut."
     }
    ]
   },
@@ -2315,7 +2343,7 @@
    "n": "5.",
    "runs": [
     {
-     "text": "Menampilkan kartu pemandu isyarat target, merekam satu repetisi, memberi jeda, dan mengulanginya hingga setiap isyarat mencapai kurang lebih 30 repetisi."
+     "text": "Menampilkan kartu pemandu huruf target, merekam satu repetisi, memberi jeda, dan mengulanginya hingga setiap huruf mencapai kurang lebih 30 repetisi."
     }
    ]
   },
@@ -2324,7 +2352,7 @@
    "n": "6.",
    "runs": [
     {
-     "text": "Membuang segmen bila orang tidak terdeteksi YOLO26-Pose, terjadi "
+     "text": "Membuang segmen bila tangan tidak terdeteksi model guru, terjadi "
     },
     {
      "text": "jitter",
@@ -2338,7 +2366,7 @@
      "italics": true
     },
     {
-     "text": " ekstrem, atau segmen terpotong, lalu mencatat tingkat segmen terbuang per isyarat dan per pengisyarat."
+     "text": " ekstrem, atau segmen terpotong, lalu mencatat tingkat segmen terbuang per huruf dan per pengisyarat."
     }
    ]
   },
@@ -2412,7 +2440,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Deret CSI dipotong menjadi segmen isyarat dengan segmentasi berbasis energi gerak RuView [28]. Batas segmen diverifikasi dengan deret "
+     "text": "Deret CSI dipotong menjadi segmen huruf dengan segmentasi berbasis energi gerak RuView [28]; huruf gerak J dan Z terpotong jelas dari energi geraknya, sedangkan huruf statis memerlukan jendela tahan pose yang ambang dan panjangnya ditetapkan pada Tabel 3.6. Batas segmen diverifikasi dengan deret "
     },
     {
      "text": "keypoint",
@@ -2464,14 +2492,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Distilasi pengetahuan merupakan teknik melatih model murid yang ringan agar meniru keluaran atau representasi model guru yang lebih kuat [80]. Metode ini dipilih karena CSI tidak memuat citra tubuh sehingga posisi tubuh tidak dapat dilabeli langsung dari data CSI, sedangkan kamera memilikinya secara alami. Preseden pemindahan pengetahuan visi ke model Wi-Fi telah ada pada Person-in-WiFi [63] dan DensePose from WiFi [64] (Subbab 2.5). Dalam penelitian ini, YOLO26-Pose berperan sebagai model guru kamera yang mengekstrak deret 17 "
+     "text": "Distilasi pengetahuan merupakan teknik melatih model murid yang ringan agar meniru keluaran atau representasi model guru yang lebih kuat [80]. Metode ini dipilih karena CSI tidak memuat citra tubuh sehingga posisi tubuh tidak dapat dilabeli langsung dari data CSI, sedangkan kamera memilikinya secara alami. Preseden pemindahan pengetahuan visi ke model Wi-Fi telah ada pada Person-in-WiFi [63] dan DensePose from WiFi [64] (Subbab 2.5). Dalam penelitian ini, YOLO26-Pose berperan sebagai model guru kamera yang mengekstrak deret 21 "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " format COCO dari video perekaman dan hasilnya menjadi supervisi tambahan bagi model murid CSI."
+     "text": " pose tangan dari video perekaman dan hasilnya menjadi supervisi tambahan bagi model murid CSI."
     }
    ]
   },
@@ -2535,49 +2563,49 @@
      "italics": true
     },
     {
-     "text": ". Sembilan eksperimen yang tercatat pada repositori menghasilkan model juara dengan "
+     "text": ". Sembilan eksperimen yang tercatat pada repositori menghasilkan model juara pose tangan 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " dengan "
     },
     {
      "text": "pose",
      "italics": true
     },
     {
-     "text": " mAP50 0,8944 pada 49 kelas isyarat pada "
+     "text": " mAP50 0,8944 pada 49 kelas isyarat (25 huruf dan 24 kata) pada "
     },
     {
      "text": "split",
      "italics": true
     },
     {
-     "text": " validasi, sehingga kemampuan melatih guru pada data visual SIBI telah terbukti sebelum penelitian ini dimulai. Penyesuaian yang diperlukan adalah penargetan ulang kepala "
+     "text": " validasi, dan eksperimen lanjutan pada himpunan 24 huruf statis mencatat mAP50 0,9580 dengan akurasi huruf 97,6%, sehingga kemampuan melatih guru pose tangan pada data visual SIBI telah terbukti sebelum penelitian ini dimulai. Model juara tersebut dipakai sebagai bentuk awal guru sehingga penargetan ulang kepala "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " dari pose tangan 21 titik milik repositori ke 17 "
-    },
-    {
-     "text": "keypoint",
-     "italics": true
-    },
-    {
-     "text": " format COCO yang dibutuhkan jalur guru, disertai penyiapan data visual SIBI hasil perekaman ke format "
+     "text": " tidak diperlukan. Penyesuaian yang diperlukan adalah penyiapan data visual SIBI hasil perekaman T2 ke format "
     },
     {
      "text": "dataset",
      "italics": true
     },
     {
-     "text": " pelatihan, penyetelan konfigurasi, dan validasi hasil mengikuti alur baku pelatihan, validasi, dan ekspor model Ultralytics [42]. Pelatihan lanjutan dipilih agar deteksi orang dan kestabilan "
+     "text": " pelatihan, penyetelan konfigurasi, dan validasi hasil mengikuti alur baku pelatihan, validasi, dan ekspor model Ultralytics [42]. Pelatihan lanjutan dipilih agar deteksi tangan dan kestabilan "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " pada gerakan tangan SIBI meningkat dibandingkan model awal. Sebelum dipakai, kualitas guru dievaluasi melalui tiga ukuran, yaitu proporsi bingkai dengan orang terdeteksi, tingkat "
+     "text": " pada konfigurasi huruf SIBI meningkat dibandingkan model awal. Sebelum dipakai, kualitas guru dievaluasi melalui tiga ukuran, yaitu proporsi bingkai dengan tangan terdeteksi, tingkat "
     },
     {
      "text": "jitter",
@@ -2606,14 +2634,21 @@
    "t": "p",
    "runs": [
     {
-     "text": "Model guru tidak mengklasifikasikan isyarat. Label kelas SIBI berasal dari anotasi protokol "
+     "text": "Model guru dipakai sebagai penyedia deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": ", bukan sebagai sumber label; meskipun model pose tangan repositori peneliti juga memuat keluaran klasifikasi huruf, label kelas SIBI tetap berasal dari anotasi protokol "
     },
     {
      "text": "elisitasi",
      "italics": true
     },
     {
-     "text": ", yaitu kartu pemandu yang menentukan isyarat pada setiap segmen (Subbab 3.6) sehingga makna isyarat tidak bergantung pada dugaan model visi. Klasifikasi gerakan otomatis dari video menuntut pengklasifikasi temporal di atas deret "
+     "text": ", yaitu kartu pemandu yang menentukan huruf pada setiap segmen (Subbab 3.6) sehingga makna huruf tidak bergantung pada dugaan model visi. Klasifikasi gerakan otomatis dari video menuntut pengklasifikasi temporal di atas deret "
     },
     {
      "text": "keypoint",
@@ -2636,7 +2671,7 @@
      "italics": true
     },
     {
-     "text": " murid dibentuk dengan menyelaraskan tiga deret berdasarkan penanda waktu, yaitu jendela CSI hasil segmentasi, label kelas dari anotasi protokol, dan deret pose guru. Masukan murid berupa jendela deret CSI, bukan cuplikan tunggal, karena gerakan SIBI bersifat temporal sehingga polanya hanya tampak pada urutan waktu (Subbab 2.3). Target pelatihan berupa label kelas, sedangkan deret pose guru menjadi supervisi tambahan yang melengkapi label."
+     "text": " murid dibentuk dengan menyelaraskan tiga deret berdasarkan penanda waktu, yaitu jendela CSI hasil segmentasi, label kelas dari anotasi protokol, dan deret pose guru. Masukan murid berupa jendela deret CSI, bukan cuplikan tunggal: huruf statis memerlukan jendela agar pola kanal saat pose ditahan dan getar halus tangan terekam, sedangkan huruf gerak J dan Z bersifat temporal sehingga polanya hanya tampak pada urutan waktu (Subbab 2.3). Target pelatihan berupa label kelas, sedangkan deret pose guru menjadi supervisi tambahan yang melengkapi label."
     }
    ]
   },
@@ -2889,7 +2924,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Uji klasifikasi pada kelima skema memakai metrik pada Subbab 2.10. Setiap metrik dilaporkan bersama peluang acak, yaitu 20% untuk lima kelas dan 12,5% untuk delapan kelas, serta 33,3% bila cakupan dipangkas menjadi tiga isyarat. Tingkat penolakan dilaporkan; akurasi dilaporkan dalam dua bentuk, yaitu akurasi tanpa penolakan atas seluruh segmen uji dan akurasi dengan penolakan atas segmen yang diterima saja. Sebagai pembanding internal, murid ablasi tanpa supervisi guru dilaporkan berdampingan dengan murid utama sehingga manfaat supervisi guru dinilai langsung dari data; SVM dilaporkan sebagai pembanding dasar."
+     "text": "Uji klasifikasi pada kelima skema memakai metrik pada Subbab 2.10. Setiap metrik dilaporkan bersama peluang acak, yaitu satu dibagi jumlah kelas, sekitar 3,8% untuk 26 kelas huruf, dan dihitung ulang bila cakupan dipangkas ke himpunan huruf yang lebih kecil. Tingkat penolakan dilaporkan; akurasi dilaporkan dalam dua bentuk, yaitu akurasi tanpa penolakan atas seluruh segmen uji dan akurasi dengan penolakan atas segmen yang diterima saja. Sebagai pembanding internal, murid ablasi tanpa supervisi guru dilaporkan berdampingan dengan murid utama sehingga manfaat supervisi guru dinilai langsung dari data; SVM dilaporkan sebagai pembanding dasar."
     }
    ]
   },
@@ -3061,7 +3096,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Uji kegunaan dengan 3–5 pengguna menelaah keterpakaian purwarupa sebagai alat bantu komunikasi kosakata terbatas pada skenario tugas terbimbing, yaitu saling menyampaikan pesan pendek dari kosakata yang tersedia. Adapun langkah uji untuk setiap pengguna adalah sebagai berikut."
+     "text": "Uji kegunaan dengan 3–5 pengguna menelaah keterpakaian purwarupa sebagai alat bantu komunikasi kosakata terbatas pada skenario tugas terbimbing, yaitu saling menyampaikan pesan pendek melalui ejaan huruf dan kosakata tampilan yang tersedia. Adapun langkah uji untuk setiap pengguna adalah sebagai berikut."
     }
    ]
   },
@@ -3126,14 +3161,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Validator penutur tunarungu menilai kewajaran keluaran purwarupa, yaitu kesesuaian teks hasil pengenalan dengan isyarat yang diperagakan serta kewajaran representasi yang ditampilkan pada arah kedua. Untuk setiap percobaan, keluaran sistem dan penilaian independen validator dicatat dalam tabel silang; kasus keluaran sistem yang dinilai keliru oleh validator dilaporkan tersendiri karena dapat menyesatkan pengguna. Sebagai analisis sekunder, kesalahan klasifikator dikaitkan secara luring dengan kemiripan lintasan tubuh dari deret "
+     "text": "Validator penutur tunarungu menilai kewajaran keluaran purwarupa, yaitu kesesuaian teks hasil pengenalan dengan isyarat yang diperagakan serta kewajaran representasi yang ditampilkan pada arah kedua. Untuk setiap percobaan, keluaran sistem dan penilaian independen validator dicatat dalam tabel silang; kasus keluaran sistem yang dinilai keliru oleh validator dilaporkan tersendiri karena dapat menyesatkan pengguna. Sebagai analisis sekunder, kesalahan klasifikator dikaitkan secara luring dengan kemiripan pose tangan pada deret "
     },
     {
      "text": "keypoint",
      "italics": true
     },
     {
-     "text": " YOLO26-Pose untuk membedakan kesalahan akibat lintasan yang mirip dari kesalahan akibat sinyal CSI yang lemah."
+     "text": " guru untuk membedakan kesalahan akibat konfigurasi tangan yang mirip dari kesalahan akibat sinyal CSI yang lemah."
     }
    ]
   },
@@ -3170,8 +3205,8 @@
     [
      "G1",
      "M3",
-     "Separabilitas awal 2–3 isyarat (*nearest-centroid*)",
-     "Repetisi isyarat yang sama lebih dekat satu sama lain daripada ke isyarat lain",
+     "Separabilitas awal 2–3 pasang huruf mirip (*nearest-centroid*)",
+     "Repetisi huruf yang sama lebih dekat satu sama lain daripada ke huruf lain",
      "Penempatan atau orientasi modul diubah satu kali; bila gagal lagi, tindakan mengikuti Tabel 3.6"
     ],
     [
@@ -3179,7 +3214,7 @@
      "M6–M7",
      "Akurasi skema dalam sesi",
      "Jauh di atas peluang acak; ambang pada Tabel 3.6",
-     "Cakupan dipangkas menjadi 3–5 isyarat yang bertumpu pada lintasan"
+     "Cakupan dipangkas menjadi himpunan huruf yang pembeda CSI-nya paling kuat"
     ],
     [
      "G3",
@@ -3253,7 +3288,7 @@
     ],
     [
      "2",
-     "T1 Kurasi isyarat dan kosakata tampilan, kalibrasi ruang, protokol, perizinan",
+     "T1 Kurasi alfabet manual SIBI dan kosakata tampilan, kalibrasi ruang, protokol, perizinan",
      "",
      "■",
      "■",
@@ -3414,7 +3449,7 @@
     ],
     [
      "8",
-     "Kriteria pemangkasan isyarat",
+     "Kriteria pemangkasan himpunan huruf",
      "Sebelum G2 dinilai",
      "[PERLU DATA: kriteria pemangkasan yang tidak memakai data uji]"
     ],
@@ -3524,13 +3559,19 @@
      "26",
      "Kriteria kualitas model guru",
      "Sebelum pelatihan murid",
-     "[PERLU DATA: ambang proporsi deteksi orang, batas *jitter* *keypoint*, dan prosedur pemeriksaan sampel]"
+     "[PERLU DATA: ambang proporsi deteksi tangan, batas *jitter* *keypoint*, dan prosedur pemeriksaan sampel]"
     ],
     [
      "27",
      "Bentuk dan bobot suku supervisi guru",
      "Dari data validasi",
      "[PERLU DATA: bentuk suku distilasi dan bobotnya, ditetapkan dari data validasi]"
+    ],
+    [
+     "28",
+     "Segmentasi huruf statis",
+     "Sebelum dipakai",
+     "[PERLU DATA: ambang energi dan panjang jendela tahan pose untuk huruf statis]"
     ]
    ]
   },
@@ -3609,6 +3650,12 @@
      "Kuota atau aksesibilitas layanan server GPU Kaggle terbatas saat pelatihan",
      "Jadwal pelatihan guru dan murid mundur",
      "Lingkungan pelatihan dan data disiapkan terkompresi agar sesi efisien; pelatihan murid yang ringan dapat dipindahkan ke laptop; jadwal disesuaikan"
+    ],
+    [
+     "10",
+     "Huruf dengan konfigurasi tangan yang sangat mirip tidak dapat dipisahkan CSI",
+     "Himpunan kelas efektif menyempit",
+     "Pemangkasan himpunan huruf pada G1–G2 mengikuti kriteria Tabel 3.6; pasangan yang gagal dilaporkan sebagai temuan kelayakan"
     ]
    ]
   },
@@ -4162,7 +4209,7 @@
    "t": "ref",
    "runs": [
     {
-     "text": "[42] Ultralytics, \"Pose estimation,\" Ultralytics YOLO Docs. [Online]. Available: https://docs.ultralytics.com/tasks/pose/, diakses 25 Okt. 2026."
+     "text": "[42] Ultralytics, \"Pose estimation\" dan \"Hand Keypoints Pose Estimation Dataset,\" Ultralytics YOLO Docs. [Online]. Available: https://docs.ultralytics.com/tasks/pose/ dan https://docs.ultralytics.com/datasets/pose/hand-keypoints/, diakses 8 Nov. 2026."
     }
    ]
   },

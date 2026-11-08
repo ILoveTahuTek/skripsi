@@ -318,8 +318,8 @@ function buildCover() {
   const simMarginLR = 1701, simMarginT = 1200;
   const contentW = PAGE.width - simMarginLR * 2;
 
-  // Judul baru pemilik (28 Okt 2026) — panjang (~270 karakter) sehingga izinkan hingga 5 baris sampul
-  const fullTitle = 'STUDI KELAYAKAN PURWARUPA SISTEM PENERJEMAHAN DUA ARAH ANTARA SISTEM ISYARAT BAHASA INDONESIA (SIBI) DAN TEKS ATAU UJARAN BAHASA INDONESIA BERBASIS WI-FI CHANNEL STATE INFORMATION (CSI) DENGAN INFERENSI MODEL PADA ESP32-S3 DAN PEMROSESAN BAHASA PADA SERVER UNTUK KOSAKATA TERBATAS';
+  // Judul SenseSIBI pemilik (8 Nov 2026) — ~127 karakter, muat 2-3 baris sampul; bentuk SenseSIBI dipertahankan
+  const fullTitle = 'STUDI KELAYAKAN PURWARUPA SenseSIBI: SISTEM PENERJEMAHAN DUA ARAH HURUF SIBI BERBASIS WI-FI CSI DENGAN INFERENSI ESP32-S3 DAN PEMROSESAN SERVER';
   const { titlePt, titleLines } = calcTitleLayoutMixed(fullTitle, contentW, 14, 10, 5);
   const titleSize = titlePt * 2;
 
@@ -471,8 +471,8 @@ const tocChildren = [
 // ---------- Dokumen ----------
 const doc = new Document({
   creator: 'Penyusun',
-  title: 'Proposal Studi Kelayakan Purwarupa Penerjemah Dua Arah SIBI — Wi-Fi CSI pada ESP32-S3',
-  description: 'Proposal penelitian BAB I-III + Daftar Pustaka (distilasi guru-murid YOLO26-Pose ke model murid CSI) — judul baru 28 Okt 2026',
+  title: 'Proposal Studi Kelayakan Purwarupa SenseSIBI — Huruf SIBI dari Wi-Fi CSI pada ESP32-S3',
+  description: 'Proposal penelitian BAB I-III + Daftar Pustaka (guru YOLO26-Pose pose tangan 21 keypoint dari repo WPC ke murid CSI) — judul SenseSIBI 8 Nov 2026',
   styles: {
     default: {
       document: {
