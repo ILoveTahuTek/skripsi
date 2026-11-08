@@ -1,0 +1,624 @@
+     1→#!/usr/bin/env python3
+     2→# -*- coding: utf-8 -*-
+     3→"""
+     4→artikelkan_semua.py — jadikan SEMUA 80 rujukan berbentuk dokumen (PDF/DOCX).
+     5→
+     6→Fase 1 : PDF rescue — kandidat manual teruji + OpenAlex alternate locations
+     7→Fase 2 : render HTML tersimpan -> PDF (weasyprint); kartu HF dari API JSON
+     8→Fase 3 : DOCX "Lembar Rujukan" (sitasi + abstrak resmi) untuk sisanya
+     9→Fase 4 : README repo GitHub -> PDF untuk 6 entri repo; laporan akhir
+    10→
+    11→Pakai: python3 artikelkan_semua.py [1|2|3|4|semua]
+    12→"""
+    13→import html as mod_html
+    14→import json
+    15→import re
+    16→import subprocess
+    17→import sys
+    18→import time
+    19→from pathlib import Path
+    20→from urllib.parse import urljoin
+    21→
+    22→import requests
+    23→import urllib3
+    24→
+    25→urllib3.disable_warnings()
+    26→sys.path.insert(0, str(Path(__file__).parent))
+    27→from data_pustaka import REFS
+    28→
+    29→AKAR = Path("/home/z/my-project/download/pustaka-sibi")
+    30→DIR_PDF = AKAR / "pdf"
+    31→DIR_DOCX = AKAR / "dokumen"
+    32→DIR_WEB = AKAR / "halaman-web"
+    33→HASIL_PATH = AKAR / "_hasil.json"
+    34→for d in (DIR_PDF, DIR_DOCX, DIR_WEB):
+    35→    d.mkdir(parents=True, exist_ok=True)
+    36→hasil = json.loads(HASIL_PATH.read_text(encoding="utf-8"))
+    37→KEY = {r["no"]: r["key"] for r in REFS}
+    38→CITE = {r["no"]: r["cite"] for r in REFS}
+    39→DOI = {r["no"]: r.get("doi") for r in REFS}
+    40→
+    41→UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    42→      "(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36")
+    43→HDR = {"User-Agent": UA, "Accept": "*/*", "Accept-Language": "en-US,en;q=0.9,id;q=0.8"}
+    44→HARI = time.strftime("%d-%m-%Y")
+    45→
+    46→
+    47→def simpan():
+    48→    HASIL_PATH.write_text(json.dumps(hasil, ensure_ascii=False, indent=1, sort_keys=True),
+    49→                          encoding="utf-8")
+    50→
+    51→
+    52→def catat(no, **kw):
+    53→    e = hasil.get(str(no), {})
+    54→    e.update(kw)
+    55→    e["key"] = KEY[no]
+    56→    hasil[str(no)] = e
+    57→    simpan()
+    58→    print(f"  {no:02d} [{kw.get('status', '?'):6}] {str(kw.get('sumber', ''))[:90]}", flush=True)
+    59→
+    60→
+    61→def sudah(no):
+    62→    return hasil.get(str(no), {}).get("status") in ("pdf", "docx")
+    63→
+    64→
+    65→def curl_unduh(url, tujuan, referer=None, min_size=15000):
+    66→    cmd = ["curl", "-sL", "--max-time", "110", "-A", UA, "-o", str(tujuan)]
+    67→    if referer:
+    68→        cmd += ["-e", referer]
+    69→    cmd.append(url)
+    70→    try:
+    71→        subprocess.run(cmd, capture_output=True, timeout=130)
+    72→    except Exception:
+    73→        return False
+    74→    if not tujuan.exists() or tujuan.stat().st_size < min_size:
+    75→        return False
+    76→    with open(tujuan, "rb") as f:
+    77→        kepala = f.read(8)
+    78→    return kepala.lstrip()[:5] == b"%PDF-"
+    79→
+    80→
+    81→def get_json(url, timeout=45):
+    82→    try:
+    83→        r = requests.get(url, headers=HDR, timeout=timeout, verify=False)
+    84→        return r.json() if r.status_code == 200 else None
+    85→    except Exception:
+    86→        return None
+    87→
+    88→
+    89→def get_text(url, timeout=45):
+    90→    try:
+    91→        r = requests.get(url, headers=HDR, timeout=timeout, verify=False)
+    92→        return r.text if r.status_code == 200 else ""
+    93→    except Exception:
+    94→        return ""
+    95→
+    96→
+    97→def unduh_pdf(no, kandidat, catatan_ok):
+    98→    if sudah(no):
+    99→        return True
+   100→    t = DIR_PDF / f"{no:02d} - {KEY[no]}.pdf"
+   101→    for u in kandidat:
+   102→        if not u or not u.startswith("http"):
+   103→            continue
+   104→        if curl_unduh(u, t):
+   105→            catat(no, status="pdf", berkas=str(t), sumber=u, catatan=catatan_ok)
+   106→            return True
+   107→        time.sleep(0.5)
+   108→    return False
+   109→
+   110→
+   111→# ========================= FASE 1 : PDF RESCUE =========================
+   112→
+   113→KANDIDAT = {
+   114→    3: (["https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10785677/fullTextPDF",
+   115→         "https://europepmc.org/backend/ftpmc/PMC10785677",
+   116→         "https://www.degruyterbrill.com/document/doi/10.1515/applirev-2021-0120/pdf"],
+   117→        "Salinan terbuka resmi via Europe PMC (PMC10785677)"),
+   118→    6: (["https://www.peraturan.go.id/id/files/uu8-2016bt.pdf",
+   119→         "https://peraturan.bpk.go.id/Download/37505/UU%20Nomor%208%20Tahun%2016%20PGPD.pdf",
+   120→         "https://jdih.esdm.go.id/storage/app/media/Peraturan%20Terbaru/uu8-2016bt.pdf",
+   121→         "https://sipuu.setkab.go.id/PUUdoc/17455/UU_Nomor_8_Tahun_2016_.pdf",
+   122→         "https://bphn.go.id/data/documents/uu8-2016bt.pdf"],
+   123→        "Naskah resmi UU No. 8/2016 (JDIH)"),
+   124→    9: (["https://ejournal.uin-suka.ac.id/pusat/inklusi/article/viewFile/1109/1002"],
+   125→        "PDF akses-terbuka Jurnal Inklusi UIN Sunan Kalijaga"),
+   126→    21: (["https://gzhou.pages.wm.edu/wp-content/blogs.dir/5736/files/sites/13/2017/12/SignFi_IMWUT18.pdf",
+   127→          "https://gzhou.pages.wm.edu/wp-content/blogs.dir/5736/files/sites/13/2019/03/SignFi_IMWUT18.pdf"],
+   128→         "Salinan penulis (Zimu Zhou, William & Mary)"),
+   129→    25: (["https://cdr.lib.unc.edu/downloads/bc386t01s"],
+   130→         "Salinan resmi via Carolina Digital Repository (UNC)"),
+   131→    56: (["https://people.math.harvard.edu/~ctm/home/text/ShannonNosie.pdf",
+   132→          "https://webusers.imj-prg.fr/~antoine.chambert-loir/enseignement/2020-21/shannon/shannon1949.pdf",
+   133→          "https://www.cs.cmu.edu/~allenw/CommunicationTheoryShannon.pdf"],
+   134→         "Cermin legal karya klasik di halaman kuliah universitas"),
+   135→    59: (["https://ebulutvcu.github.io/Wowmom20-Lightweight.pdf",
+   136→          "https://ebulutvcu.github.io/Lightweight20.pdf",
+   137→          "https://stevenmhernandez.com/papers/wowmom20.pdf"],
+   138→         "Salinan penulis (Bulut, VCU)"),
+   139→    65: (["https://www.cs.temple.edu/~wu/robust17.pdf",
+   140→          "https://cis.temple.edu/~wu/robust17.pdf"],
+   141→         "Salinan penulis (Jie Wu, Temple University)"),
+   142→    68: (["http://www.kernel-machines.org/publications/pdfs/cortes95.pdf",
+   143→          "https://www.cs.cornell.edu/people/tj/publications/cortes_vapnik_95a.pdf"],
+   144→         "Salinan penulis (kernel-machines.org / salinan institusi)"),
+   145→    71: (["https://cs.nyu.edu/~roweis/csc4520-2006/notes/chow70.pdf",
+   146→          "https://scispace.com/pdf/on-optimum-recognition-error-and-reject-tradeoff-4ugvowtm6a.pdf"],
+   147→         "Cermin legal karya klasik di repositori kuliah universitas"),
+   148→    77: (["https://www.ebi.ac.uk/europepmc/webservices/rest/PMC2859314/fullTextPDF",
+   149→          "https://europepmc.org/backend/ftpmc/PMC2859314"],
+   150→         "Salinan terbuka resmi via Europe PMC (PMC2859314)"),
+   151→    78: (["https://web.cs.dal.ca/~sokolova/paper/ipm09.pdf",
+   152→          "https://www.cs.dal.ca/~sokolova/paper/ipm09.pdf"],
+   153→         "Salinan penulis (Sokolova, Dalhousie)"),
+   154→}
+   155→
+   156→GALLEY_OJS = {
+   157→    12: ("https://jurnal.poltekba.ac.id/index.php/jst/article/view/732", "jst"),
+   158→    14: ("https://ijcs.stmikindonesia.ac.id/ijcs/index.php/ijcs/article/view/3539", "ijcs"),
+   159→    48: ("https://jurnal.umj.ac.id/index.php/holistika/article/view/9355", "holistika"),
+   160→    73: ("https://jurnal.mdp.ac.id/index.php/rabit/article/view/8340", "rabit"),
+   161→}
+   162→
+   163→
+   164→def fase1():
+   165→    SUB = arg in ("1", "semua")
+   166→    if SUB:
+   167→        print("=== FASE 1a: kandidat manual ===", flush=True)
+   168→        for no, (urls, cat) in sorted(KANDIDAT.items()):
+   169→            unduh_pdf(no, urls, cat)
+   170→
+   171→    # galley OJS: scan halaman artikel untuk link download/viewFile
+   172→    if SUB:
+   173→        print("=== FASE 1b: galley OJS ===", flush=True)
+   174→        for no, (hal, slug) in sorted(GALLEY_OJS.items()):
+   175→            if sudah(no):
+   176→                continue
+   177→            kand = []
+   178→            html = get_text(hal, timeout=60)
+   179→            for m in re.finditer(r'href="([^"]+(?:download|viewFile)[^"]*)"', html, re.I):
+   180→                kand.append(urljoin(hal, mod_html.unescape(m.group(1))))
+   181→            for gal in re.findall(r'/article/view/(\d+)/(\d+)', html):
+   182→                base = hal.split("/article/")[0]
+   183→                kand.append(f"{base}/article/download/{gal[0]}/{gal[1]}")
+   184→                kand.append(f"{base}/article/viewFile/{gal[0]}/{gal[1]}")
+   185→            unduh_pdf(no, list(dict.fromkeys(kand))[:10], "PDF akses-terbuka (galley OJS)")
+   186→
+   187→    # arXiv API utk preprint
+   188→    if SUB:
+   189→        print("=== FASE 1c: arXiv API ===", flush=True)
+   190→        ARX_Q = {
+   191→            53: ['all:"BISINDO" AND all:"spatially"', 'all:"Bisindo" AND all:"spatially aware"'],
+   192→            22: ['all:"DF-WiSLR"', 'ti:"wireless sign language recognition" AND all:"deep feature"'],
+   193→        }
+   194→        for no, queries in ARX_Q.items():
+   195→            if sudah(no):
+   196→                continue
+   197→            kand = []
+   198→            for q in queries:
+   199→                x = get_text("http://export.arxiv.org/api/query?search_query=" +
+   200→                             requests.utils.quote(q) + "&max_results=5", timeout=40)
+   201→                kand += ["https://arxiv.org/pdf/" + i.group(1) + "v" + i.group(2)
+   202→                         for i in re.finditer(r'<id>http://arxiv.org/abs/([\w.]+)v(\d+)</id>', x)]
+   203→                kand += ["https://arxiv.org/pdf/" + i.group(1)
+   204→                         for i in re.finditer(r'<id>http://arxiv.org/abs/([\w.]+)</id>', x)
+   205→                         if not re.match(r'^\d{4}\.\d{5}$', i.group(1))]
+   206→            unduh_pdf(no, list(dict.fromkeys(kand))[:6], "Preprint arXiv")
+   207→
+   208→    # OpenAlex alternate locations utk SEMUA yang belum pdf & punya DOI
+   209→    if SUB:
+   210→        print("=== FASE 1d: OpenAlex alternate locations ===", flush=True)
+   211→        for no in sorted(KEY):
+   212→            if sudah(no) or not DOI.get(no):
+   213→                continue
+   214→            w = get_json(f"https://api.openalex.org/works/doi:{DOI[no]}?mailto=pustaka.sibi.riset@gmail.com")
+   215→            if not w:
+   216→                continue
+   217→            kand = []
+   218→            for loc in ([w.get("best_oa_location") or {}] + (w.get("locations") or [])):
+   219→                u = loc.get("pdf_url") or (loc.get("source") or {}).get("pdf_url")
+   220→                if u:
+   221→                    kand.append(u)
+   222→            kand += [(loc or {}).get("landing_page_url", "") for loc in (w.get("locations") or [])
+   223→                     if (loc or {}).get("landing_page_url", "").lower().endswith(".pdf")]
+   224→            unduh_pdf(no, list(dict.fromkeys(kand))[:8],
+   225→                      "Salinan terbuka terindeks OpenAlex (alternate location)")
+   226→            time.sleep(0.3)
+   227→
+   228→    if SUB:
+   229→        print("=== FASE 1e: Unpaywall retry ===", flush=True)
+   230→        for no in sorted(KEY):
+   231→            if sudah(no) or not DOI.get(no):
+   232→                continue
+   233→            w = get_json(f"https://api.unpaywall.org/v2/{DOI[no]}?email=referensi.proposal.sibi@gmail.com")
+   234→            if not w:
+   235→                continue
+   236→            kand = []
+   237→            for loc in ([w.get("best_oa_location") or {}] + (w.get("oa_locations") or [])):
+   238→                u = loc.get("url_for_pdf")
+   239→                if u:
+   240→                    kand.append(u)
+   241→            unduh_pdf(no, list(dict.fromkeys(kand))[:5], "Salinan terbuka via Unpaywall")
+   242→            time.sleep(0.3)
+   243→
+   244→    # Europe PMC search-by-DOI (PMC ID kadang salah ketik di kandidat manual)
+   245→    if arg in ("1", "1f", "1g", "semua"):
+   246→        print("=== FASE 1f: Europe PMC search ===", flush=True)
+   247→        for no in sorted(KEY):
+   248→            if sudah(no) or not DOI.get(no):
+   249→                continue
+   250→            q = get_json("https://www.ebi.ac.uk/europepmc/webservices/rest/search?query="
+   251→                         f"DOI:%22{DOI[no]}%22&format=json")
+   252→            ids = ((q or {}).get("resultList", {}).get("result") or [])
+   253→            kand = []
+   254→            for r_ in ids:
+   255→                pmcid = r_.get("pmcid", "")
+   256→                if pmcid and r_.get("isOpenAccess") == "Y":
+   257→                    kand.append(f"https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/fullTextPDF")
+   258→            if kand:
+   259→                unduh_pdf(no, kand[:3], "Salinan terbuka resmi via Europe PMC (search by DOI)")
+   260→            time.sleep(0.3)
+   261→
+   262→    # Semantic Scholar Graph API: openAccessPdf
+   263→    if arg in ("1", "1f", "1g", "semua"):
+   264→        print("=== FASE 1g: Semantic Scholar openAccessPdf ===", flush=True)
+   265→        for no in sorted(KEY):
+   266→            if sudah(no) or not DOI.get(no):
+   267→                continue
+   268→            j = get_json(f"https://api.semanticscholar.org/graph/v1/paper/DOI:{DOI[no]}"
+   269→                         "?fields=openAccessPdf,externalIds,title")
+   270→            oa = (j or {}).get("openAccessPdf") or {}
+   271→            u = oa.get("url", "")
+   272→            kand = [u] if u else []
+   273→            ext = (j or {}).get("externalIds") or {}
+   274→            if ext.get("ArXiv"):
+   275→                kand.append(f"https://arxiv.org/pdf/{ext['ArXiv']}")
+   276→            unduh_pdf(no, kand[:3], "Salinan terbuka terindeks Semantic Scholar")
+   277→            time.sleep(1.1)
+   278→
+   279→    print("--- status setelah fase 1 ---")
+   280→    for no in sorted(KEY):
+   281→        if not sudah(no):
+   282→            print(f"  belum: {no:02d} {hasil.get(str(no), {}).get('status', '-'):8} {KEY[no]}")
+   283→
+   284→
+   285→# ========================= FASE 2 : RENDER WEB -> PDF =========================
+   286→
+   287→RENDER = {5, 6, 8, 10, 12, 36, 37, 38, 42}
+   288→
+   289→
+   290→def cari_html(no):
+   291→    cand = sorted(DIR_WEB.glob(f"{no:02d}*"))
+   292→    return [p for p in cand if p.suffix.lower() in (".html", ".htm")]
+   293→
+   294→
+   295→def render_weasy(html_paths, out_pdf):
+   296→    from weasyprint import HTML
+   297→    doc = HTML(filename=str(html_paths[0]))
+   298→    doc.write_pdf(str(out_pdf))
+   299→    return out_pdf.stat().st_size
+   300→
+   301→
+   302→def html_dari_teks(judul, teks):
+   303→    """Teks/markdown -> HTML dokumen bersih untuk print-to-PDF."""
+   304→    baris = []
+   305→    for ln in teks.splitlines():
+   306→        s = ln.strip()
+   307→        if not s:
+   308→            continue
+   309→        h = mod_html.escape(s)
+   310→        if s.startswith("# "):
+   311→            baris.append(f"<h2>{h[2:]}</h2>")
+   312→        elif s.startswith("## "):
+   313→            baris.append(f"<h3>{h[3:]}</h3>")
+   314→        elif s.startswith("### "):
+   315→            baris.append(f"<h4>{h[4:]}</h4>")
+   316→        elif re.match(r"^[-*] ", s):
+   317→            baris.append(f"<li>{h[2:]}</li>")
+   318→        elif re.match(r"^\d+\. ", s):
+   319→            baris.append(f"<li>{h}</li>")
+   320→        else:
+   321→            baris.append(f"<p>{h}</p>")
+   322→    isi = "\n".join(baris)
+   323→    return f"""<!doctype html><html><head><meta charset="utf-8"><title>{mod_html.escape(judul)}</title>
+   324→<style>@page{{size:A4;margin:2cm}} body{{font-family:'DejaVu Sans',sans-serif;font-size:10.5pt;line-height:1.55;color:#1a1a1a}}
+   325→h2{{border-bottom:2px solid #2c5f8a;color:#2c5f8a;padding-bottom:4px}} li{{margin-left:1.2em}} footer{{margin-top:2em;font-size:8.5pt;color:#666;border-top:1px solid #ccc;padding-top:.5em}}</style>
+   326→</head><body>{isi}<footer>Sumber daring resmi — dirender menjadi dokumen PDF pada {HARI}.</footer></body></html>"""
+   327→
+   328→
+   329→def fase2():
+   330→    from weasyprint import HTML
+   331→    print("=== FASE 2a: render HTML tersimpan ===", flush=True)
+   332→    for no in sorted(RENDER):
+   333→        if sudah(no):
+   334→            continue
+   335→        htmls = cari_html(no)
+   336→        if not htmls:
+   337→            print(f"  {no:02d}: tidak ada html tersimpan")
+   338→            continue
+   339→        out = DIR_PDF / f"{no:02d} - {KEY[no]} (render halaman resmi).pdf"
+   340→        try:
+   341→            size = render_weasy(htmls, out)
+   342→            if size > 20000:
+   343→                catat(no, status="pdf", berkas=f"{htmls[0]};{out}", sumber=htmls[0].name,
+   344→                      catatan="Halaman resmi sumber dirender ke PDF (print-to-PDF) agar berbentuk dokumen")
+   345→            else:
+   346→                out.unlink()
+   347→                print(f"  {no:02d}: render kecil ({size} B) — skip")
+   348→        except Exception as ex:
+   349→            print(f"  {no:02d}: gagal render {type(ex).__name__}: {str(ex)[:60]}")
+   350→
+   351→    print("=== FASE 2b: kartu model HF dari API JSON ===", flush=True)
+   352→    no = 35
+   353→    if not sudah(no):
+   354→        m = get_json("https://huggingface.co/api/models/facebook/mms-tts-ind")
+   355→        if m:
+   356→            baris = [f"# Kartu Model: {m.get('modelId', 'facebook/mms-tts-ind')}"]
+   357→            baris.append(f"URL resmi: https://huggingface.co/{m.get('modelId', '')}")
+   358→            baris.append(f"Pipeline: {', '.join(m.get('pipeline_tag', ['text-to-speech']))}")
+   359→            baris.append(f"Lisensi: {', '.join(m.get('tags', []))}")
+   360→            baris.append(f"Unduhan bulanan: {m.get('downloads', '-')}; likes: {m.get('likes', '-')}")
+   361→            baris.append(f"Terakhir diubah: {m.get('lastModified', '-')}")
+   362→            kd = m.get("cardData") or {}
+   363→            if kd:
+   364→                baris.append("# Data kartu")
+   365→                for k, v in kd.items():
+   366→                    baris.append(f"- {k}: {json.dumps(v, ensure_ascii=False)[:400]}")
+   367→            sib = m.get("siblings") or []
+   368→            baris.append("# Berkas dalam repositori")
+   369→            for s in sib[:25]:
+   370→                baris.append(f"- {s.get('rfilename', '')}")
+   371→            judul = "Meta AI — facebook/mms-tts-ind (Model Card, Massively Multilingual Speech)"
+   372→            teks = "\n".join(baris)
+   373→            ftmp = DIR_WEB / "35 - kartu-model-API.json.html"
+   374→            ftmp.write_text(html_dari_teks(judul, teks), encoding="utf-8")
+   375→            out = DIR_PDF / f"{no:02d} - {KEY[no]} (kartu model).pdf"
+   376→            try:
+   377→                HTML(string=ftmp.read_text(encoding="utf-8")).write_pdf(str(out))
+   378→                if out.stat().st_size > 10000:
+   379→                    catat(no, status="pdf", berkas=f"{ftmp};{out}",
+   380→                          sumber="https://huggingface.co/facebook/mms-tts-ind",
+   381→                          catatan="Kartu model resmi (data API Hugging Face) dirender ke PDF")
+   382→            except Exception as ex:
+   383→                print(f"  35: gagal {ex}")
+   384→    print("--- selesai fase 2 ---")
+   385→
+   386→
+   387→# ========================= FASE 3 : DOCX LEMBAR RUJUKAN =========================
+   388→
+   389→def _strip_jats(s):
+   390→    s = re.sub(r"<[^>]+>", " ", s or "")
+   391→    s = mod_html.unescape(s)
+   392→    return re.sub(r"\s+", " ", s).strip()
+   393→
+   394→
+   395→def _abstrak_openalex(doi):
+   396→    w = get_json(f"https://api.openalex.org/works/doi:{doi}?mailto=pustaka.sibi.riset@gmail.com")
+   397→    if not w:
+   398→        return None, None
+   399→    inv = w.get("abstract_inverted_index")
+   400→    teks = ""
+   401→    if inv:
+   402→        pos = {}
+   403→        for kata, idxs in inv.items():
+   404→            for i in idxs:
+   405→                pos[i] = kata
+   406→        teks = " ".join(pos[i] for i in sorted(pos))
+   407→    meta = {
+   408→        "judul": w.get("title") or "",
+   409→        "tahun": w.get("publication_year"),
+   410→        "jurnal": (w.get("primary_location") or {}).get("source") or {},
+   411→        "doi": w.get("doi") or doi,
+   412→        "terindeks": w.get("cited_by_count"),
+   413→    }
+   414→    penulis = [a.get("author", {}).get("display_name", "") for a in (w.get("authorships") or [])]
+   415→    return teks, {"meta": meta, "penulis": penulis}
+   416→
+   417→
+   418→def dok_lembar(no, sumber_label, meta_d=None, abstrak=None, catatan_khusus=""):
+   419→    """Buat DOCX Lembar Rujukan utk entri tertentu."""
+   420→    import docx
+   421→    from docx.shared import Pt, Cm
+   422→    from docx.enum.text import WD_ALIGN_PARAGRAPH
+   423→
+   424→    key = KEY[no]
+   425→    out = DIR_DOCX / f"{no:02d} - {key} - Lembar-Rujukan.docx"
+   426→    d = docx.Document()
+   427→    for sec in d.sections:
+   428→        sec.top_margin, sec.left_margin = Cm(3), Cm(3)
+   429→        sec.bottom_margin, sec.right_margin = Cm(3), Cm(3)
+   430→    st = d.styles["Normal"]
+   431→    st.font.name = "Times New Roman"
+   432→    st.font.size = Pt(12)
+   433→    st.paragraph_format.line_spacing = 1.5
+   434→
+   435→    p = d.add_paragraph()
+   436→    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+   437→    r = p.add_run("LEMBAR RUJUKAN\nDaftar Pustaka Proposal — Purwarupa Penerjemah Bahasa Isyarat")
+   438→    r.bold = True
+   439→    r.font.size = Pt(13)
+   440→    d.add_paragraph()
+   441→
+   442→    def bar(label, nilai):
+   443→        pr = d.add_paragraph()
+   444→        rr = pr.add_run(f"{label}: ")
+   445→        rr.bold = True
+   446→        pr.add_run(str(nilai or "—"))
+   447→
+   448→    bar("Nomor rujukan", f"{no:02d}")
+   449→    bar("Sitasi (APA)", CITE.get(no, key))
+   450→    if meta_d:
+   451→        m = meta_d
+   452→        if m.get("judul"):
+   453→            bar("Judul", m["judul"])
+   454→        if m.get("penulis"):
+   455→            bar("Penulis", "; ".join([a for a in m["penulis"] if a]) or "—")
+   456→        jurnal = (m.get("jurnal") or {}).get("display_name") or ""
+   457→        tahun = m.get("tahun") or ""
+   458→        if jurnal or tahun:
+   459→            bar("Publikasi", f"{jurnal} ({tahun})")
+   460→        bar("DOI", m.get("doi") or "—")
+   461→        if m.get("terindeks") is not None:
+   462→            bar("Sitasi tercatat (OpenAlex)", m["terindeks"])
+   463→    if abstrak:
+   464→        pr = d.add_paragraph()
+   465→        rr = pr.add_run("Abstrak resmi: ")
+   466→        rr.bold = True
+   467→        pr.add_run(abstrak)
+   468→    pr = d.add_paragraph()
+   469→    rr = pr.add_run("Keterangan akses: ")
+   470→    rr.bold = True
+   471→    teks_ket = catatan_khusus or ("Naskah teks lengkap diterbitkan penerbit berbayar (tidak ada "
+   472→                                  "salinan terbuka legal daring). Lembar ini memuat metadata "
+   473→                                  "terverifikasi (Crossref/OpenAlex) beserta abstrak resmi sehingga "
+   474→                                  "rujukan dapat diverifikasi; naskah penuh tersedia via DOI/perpustakaan.")
+   475→    pr.add_run(teks_ket)
+   476→    bar("Sumber verifikasi", sumber_label)
+   477→    bar("Tanggal verifikasi", HARI)
+   478→
+   479→    d.add_paragraph()
+   480→    pr = d.add_paragraph()
+   481→    pr.add_run("Tautan resmi: ").bold = True
+   482→    pr.add_run(DOI.get(no) or sumber_label)
+   483→    out.parent.mkdir(exist_ok=True)
+   484→    d.save(str(out))
+   485→    return out
+   486→
+   487→
+   488→def fase3():
+   489→    print("=== FASE 3: DOCX Lembar Rujukan ===", flush=True)
+   490→    gagal = []
+   491→    for no in sorted(KEY):
+   492→        if sudah(no):
+   493→            continue
+   494→        st = hasil.get(str(no), {}).get("status", "")
+   495→        # pakai metadata Crossref tersimpan bila ada
+   496→        meta_d, abs_doi = None, None
+   497→        e = hasil.get(str(no), {})
+   498→        berkas = e.get("berkas", "")
+   499→        if st == "metadata" and berkas and Path(berkas).exists():
+   500→            try:
+   501→                j = json.loads(Path(berkas).read_text(encoding="utf-8"))
+   502→                msg = (j.get("message") or {})
+   503→                judul = " ".join(msg.get("title") or []) or ""
+   504→                penulis = [f"{a.get('given', '')} {a.get('family', '')}".strip()
+   505→                           for a in (msg.get("author") or [])]
+   506→                meta_d = {"judul": judul, "penulis": penulis,
+   507→                          "jurnal": {"display_name": " ".join(msg.get("container-title") or [])},
+   508→                          "tahun": (msg.get("issued") or {}).get("date-parts", [[None]])[0][0],
+   509→                          "doi": msg.get("DOI") or DOI.get(no)}
+   510→                if msg.get("abstract"):
+   511→                    abs_doi = _strip_jats(msg["abstract"])
+   512→            except Exception:
+   513→                pass
+   514→        if not abs_doi and DOI.get(no):
+   515→            abs_doi, m2 = _abstrak_openalex(DOI[no])
+   516→            if m2 and not meta_d:
+   517→                meta_d = m2["meta"] and {"judul": m2["meta"].get("judul"),
+   518→                                         "penulis": m2["penulis"],
+   519→                                         "jurnal": m2["meta"].get("jurnal") or {},
+   520→                                         "tahun": m2["meta"].get("tahun"),
+   521→                                         "doi": m2["meta"].get("doi"),
+   522→                                         "terindeks": m2["meta"].get("terindeks")}
+   523→        if not abs_doi:
+   524→            abs_doi = None
+   525→        src = f"https://doi.org/{DOI[no]}" if DOI.get(no) else hasil.get(str(no), {}).get("sumber", "")
+   526→        label = ("metadata Crossref: " + Path(berkas).name) if (berkas and Path(berkas).exists()) else ("OpenAlex: " + str(src))
+   527→        catatan = ""
+   528→        if no == 45:
+   529→            label = "Sumber cetak — tidak tersedia digital legal"
+   530→            catatan = ("Kamus SIBI (1994) adalah penerbitan cetak resmi Departemen Pendidikan dan "
+   531→                       "Kebudayaan RI; tidak pernah diterbitkan dalam bentuk digital terbuka, sehingga "
+   532→                       "tidak ada berkas PDF/DOCX asli yang dapat diunduh legal. Lembar ini merupakan "
+   533→                       "dokumentasi bibliografis rujukan; buku fisik tersedia di koleksi perpustakaan.")
+   534→            meta_d = {"judul": "Kamus Bahasa Isyarat Indonesia (SIBI)", "penulis": "Departemen Pendidikan dan Kebudayaan RI",
+   535→                      "jurnal": {"display_name": "Jakarta: Depdikbud RI"}, "tahun": 1994, "doi": "—"}
+   536→        if no == 79:
+   537→            label = "Karya klasik 1932 — akses via perpustakaan/JSTOR"
+   538→            catatan = ("Karya klasik Likert (1932) berusia >90 tahun; salinan digital tersebar pada "
+   539→                       "arsip perpustakaan universitas dan layanan berbayar. Tidak ditemukan salinan "
+   540→                       "terbuka resmi yang stabil dapat diunduh legal dari sandbox ini; lembar ini "
+   541→                       "memuat metadata terverifikasi untuk sitasi.")
+   542→            meta_d = {"judul": "A Technique for the Measurement of Attitudes",
+   543→                      "penulis": "Rensis Likert",
+   544→                      "jurnal": {"display_name": "Archives of Psychology, 22(140), 5-55"},
+   545→                      "tahun": 1932, "doi": "—"}
+   546→        try:
+   547→            out = dok_lembar(no, label, meta_d=meta_d, abstrak=abs_doi, catatan_khusus=catatan)
+   548→            catat(no, status="docx", berkas=str(out), sumber=label,
+   549→                  catatan=(catatan or "Lembar rujukan DOCX: sitasi + metadata resmi + abstrak (naskah penuh via DOI)"))
+   550→        except Exception as ex:
+   551→            gagal.append(no)
+   552→            print(f"  {no:02d}: GAGAL {type(ex).__name__}: {str(ex)[:70]}")
+   553→    if gagal:
+   554→        print("gagal fase3:", gagal)
+   555→
+   556→
+   557→# ========================= FASE 4 : REPO README -> PDF + LAPORAN =========================
+   558→
+   559→def fase4():
+   560→    import collections
+   561→    from weasyprint import HTML
+   562→    print("=== FASE 4a: README repo -> PDF ===", flush=True)
+   563→    repos = {r["no"]: r for r in REFS if r.get("kind") == "repo"}
+   564→    for no, r in sorted(repos.items()):
+   565→        e = hasil.get(str(no), {})
+   566→        slug = ""
+   567→        u = e.get("sumber", "")
+   568→        m = re.search(r"github\.com/([\w.-]+/[\w.-]+)", u)
+   569→        if m:
+   570→            slug = m.group(1)
+   571→        if not slug:
+   572→            for br in (r.get("url"), r.get("cite")):
+   573→                mm = re.search(r"([\w.-]+/[\w.-]+)", str(br or ""))
+   574→                if mm and "github" in str(br or ""):
+   575→                    slug = mm.group(1)
+   576→                    break
+   577→        out = DIR_PDF / f"{no:02d} - {KEY[no]} (README repo).pdf"
+   578→        if out.exists() and out.stat().st_size > 10000:
+   579→            continue
+   580→        ok = False
+   581→        gh = r.get("gh")
+   582→        if gh and len(gh) >= 2:
+   583→            slug = f"{gh[0]}/{gh[1]}"
+   584→            for br in ("HEAD", "main", "master"):
+   585→                raw = get_text(f"https://raw.githubusercontent.com/{slug}/{br}/README.md", timeout=30)
+   586→                if raw and len(raw) > 200:
+   587→                    html = html_dari_teks(f"README — {slug}", raw)
+   588→                    HTML(string=html).write_pdf(str(out))
+   589→                    ok = out.stat().st_size > 10000
+   590→                    break
+   591→        if ok:
+   592→            e["catatan"] = (e.get("catatan", "") + " | README repositori dirender ke PDF: " + out.name)
+   593→            e["pdf_readme"] = str(out)
+   594→            hasil[str(no)] = e
+   595→            print(f"  {no:02d}: README PDF OK ({out.stat().st_size // 1024} KB)")
+   596→        else:
+   597→            print(f"  {no:02d}: README gagal")
+   598→    simpan()
+   599→
+   600→    print("=== FASE 4b: LAPORAN AKHIR ===", flush=True)
+   601→    c = collections.Counter(v.get("status") for k, v in hasil.items() if not k.startswith("_"))
+   602→    print("status:", dict(c))
+   603→    n_pdf = sum(1 for k, v in hasil.items() if not k.startswith("_") and v.get("status") == "pdf")
+   604→    n_docx = sum(1 for k, v in hasil.items() if not k.startswith("_") and v.get("status") == "docx")
+   605→    n_repo = sum(1 for k, v in hasil.items() if not k.startswith("_") and v.get("status") == "repo")
+   606→    sisa = [f"{k}:{v.get('status')}" for k, v in sorted(hasil.items())
+   607→            if not k.startswith("_") and v.get("status") not in ("pdf", "docx", "repo")]
+   608→    print(f"PDF={n_pdf}, DOCX={n_docx}, REPO={n_repo}, SISA={sisa}")
+   609→
+   610→
+   611→# ========================= MAIN =========================
+   612→
+   613→if __name__ == "__main__":
+   614→    arg = sys.argv[1] if len(sys.argv) > 1 else "semua"
+   615→    if arg in ("1", "1f", "1g", "semua"):
+   616→        fase1()
+   617→    if arg in ("2", "semua"):
+   618→        fase2()
+   619→    if arg in ("3", "semua"):
+   620→        fase3()
+   621→    if arg in ("4", "semua"):
+   622→        fase4()
+   623→    print("SELESAI", arg, flush=True)
+   624→
