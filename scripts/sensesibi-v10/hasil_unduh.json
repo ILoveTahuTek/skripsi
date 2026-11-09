@@ -1,0 +1,566 @@
+[
+ {
+  "no": 1,
+  "kunci": "Mitchell-2004",
+  "status": "LEWAT",
+  "info": "BERBAYAR (Project MUSE)"
+ },
+ {
+  "no": 2,
+  "kunci": "Mitchell-2005",
+  "status": "LEWAT",
+  "info": "BERBAYAR (Project MUSE)"
+ },
+ {
+  "no": 3,
+  "kunci": "Lieberman-2022",
+  "status": "TERUNDUH",
+  "info": "206422 byte (html) — teks penuh PMC PMC10785677"
+ },
+ {
+  "no": 4,
+  "kunci": "Ritmeester-2025",
+  "status": "LEWAT",
+  "info": "BERBAYAR (Oxford JDSDE)"
+ },
+ {
+  "no": 5,
+  "kunci": "KemenkoPMK-2025",
+  "status": "TERUNDUH",
+  "info": "12218 byte (html)"
+ },
+ {
+  "no": 6,
+  "kunci": "UU-8-2016",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (naskah resmi UU: https://www.peraturan.go.id/id/uu-no-8-tahun-2016)"
+ },
+ {
+  "no": 7,
+  "kunci": "Rodriguez-Correa-2023",
+  "status": "TERUNDUH",
+  "info": "533920 byte (pdf)"
+ },
+ {
+  "no": 8,
+  "kunci": "BRIN-2026",
+  "status": "TERUNDUH",
+  "info": "36114 byte (html)"
+ },
+ {
+  "no": 9,
+  "kunci": "Mursita-2015",
+  "status": "TERUNDUH",
+  "info": "292850 byte (pdf)"
+ },
+ {
+  "no": 10,
+  "kunci": "KamusSIBI-Digital",
+  "status": "TERUNDUH",
+  "info": "12082 byte (html)"
+ },
+ {
+  "no": 11,
+  "kunci": "AsSatillah-2024",
+  "status": "TERUNDUH",
+  "info": "318339 byte (pdf)"
+ },
+ {
+  "no": 12,
+  "kunci": "Zikky-2019-KASIBI",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (gratis di peramban: https://jurnal.poltekba.ac.id/index.php/jst/article/view/732)"
+ },
+ {
+  "no": 13,
+  "kunci": "Fatmawati-2022-OpenSIBI",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (gratis di peramban: https://ijc.ilearning.co/TMJ/en/article/view/1690 atau https://www.academia.edu/85649556)"
+ },
+ {
+  "no": 14,
+  "kunci": "Sanjaya-2023-IJCS",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (halaman Garuda/portal: https://garuda.kemdikbud.go.id/documents/detail/4094170)"
+ },
+ {
+  "no": 15,
+  "kunci": "Dwijayanti-2021",
+  "status": "TERUNDUH",
+  "info": "1426682 byte (pdf)"
+ },
+ {
+  "no": 16,
+  "kunci": "Soekarta-2024",
+  "status": "TERUNDUH",
+  "info": "1048509 byte (pdf)"
+ },
+ {
+  "no": 17,
+  "kunci": "Maulana-2026-DBESTI",
+  "status": "TERUNDUH",
+  "info": "573754 byte (pdf)"
+ },
+ {
+  "no": 18,
+  "kunci": "MLMSign-2024",
+  "status": "LEWAT",
+  "info": "BERBAYAR (Elsevier ISWA)"
+ },
+ {
+  "no": 19,
+  "kunci": "Bailenson-2021",
+  "status": "TERUNDUH",
+  "info": "354313 byte (pdf)"
+ },
+ {
+  "no": 20,
+  "kunci": "HandFi-2024",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (Procedia akses terbuka: https://doi.org/10.1016/j.procs.2024.04.042)"
+ },
+ {
+  "no": 21,
+  "kunci": "Ma-2019-CSUR",
+  "status": "TERUNDUH",
+  "info": "1115166 byte (pdf)"
+ },
+ {
+  "no": 22,
+  "kunci": "Ma-2018-SignFi",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (IMWUT akses terbuka: https://dl.acm.org/doi/10.1145/3191755)"
+ },
+ {
+  "no": 23,
+  "kunci": "Ahmed-2020-DFWiSLR",
+  "status": "LEWAT",
+  "info": "BERBAYAR (Elsevier PMC)"
+ },
+ {
+  "no": 24,
+  "kunci": "Baldeo-2024-FSL",
+  "status": "LEWAT",
+  "info": "BERBAYAR (IEEE TENCON)"
+ },
+ {
+  "no": 25,
+  "kunci": "Zhang-2020-WiSign",
+  "status": "LEWAT",
+  "info": "BERBAYAR (ACM TIST)"
+ },
+ {
+  "no": 26,
+  "kunci": "Ali-2015-WiKey",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (salinan resmi SIGMOBILE: https://www.sigmobile.org/mobicom/2015/papers/p90-aliA.pdf)"
+ },
+ {
+  "no": 27,
+  "kunci": "Mosleh-2022-BreatheSmart",
+  "status": "TERUNDUH",
+  "info": "286739 byte (html) — teks penuh PMC PMC9830631"
+ },
+ {
+  "no": 28,
+  "kunci": "Tan-2016-WiFinger",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (ACM DL: https://dl.acm.org/doi/10.1145/2942358.2942393)"
+ },
+ {
+  "no": 29,
+  "kunci": "Wu-2020-FingerDraw",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (IMWUT akses terbuka: https://dl.acm.org/doi/10.1145/3380981)"
+ },
+ {
+  "no": 30,
+  "kunci": "Zheng-2024-MeshID",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (MDPI akses terbuka: https://www.mdpi.com/1424-8220/24/6/1978)"
+ },
+ {
+  "no": 31,
+  "kunci": "esp-csi",
+  "status": "TERUNDUH",
+  "info": "7222 byte (md)"
+ },
+ {
+  "no": 32,
+  "kunci": "RuView",
+  "status": "TERUNDUH",
+  "info": "76910 byte (md)"
+ },
+ {
+  "no": 33,
+  "kunci": "ESP32-S3-datasheet",
+  "status": "TERUNDUH",
+  "info": "1098115 byte (pdf)"
+ },
+ {
+  "no": 34,
+  "kunci": "esp-nn",
+  "status": "TERUNDUH",
+  "info": "4817 byte (md)"
+ },
+ {
+  "no": 35,
+  "kunci": "esp-dl",
+  "status": "TERUNDUH",
+  "info": "9211 byte (md) — GitHub raw"
+ },
+ {
+  "no": 36,
+  "kunci": "tokio",
+  "status": "TERUNDUH",
+  "info": "9505 byte (md)"
+ },
+ {
+  "no": 37,
+  "kunci": "axum",
+  "status": "TERUNDUH",
+  "info": "14 byte (md) — README resmi axum"
+ },
+ {
+  "no": 38,
+  "kunci": "leptos",
+  "status": "TERUNDUH",
+  "info": "13263 byte (md)"
+ },
+ {
+  "no": 39,
+  "kunci": "tauri",
+  "status": "TERUNDUH",
+  "info": "6055 byte (md)"
+ },
+ {
+  "no": 40,
+  "kunci": "onnxruntime",
+  "status": "TERUNDUH",
+  "info": "3087 byte (md)"
+ },
+ {
+  "no": 41,
+  "kunci": "kokoro-onnx",
+  "status": "TERUNDUH",
+  "info": "2706 byte (md)"
+ },
+ {
+  "no": 42,
+  "kunci": "Kokoro-82M",
+  "status": "TERUNDUH",
+  "info": "6348 byte (md)"
+ },
+ {
+  "no": 43,
+  "kunci": "Pratap-2023-MMS",
+  "status": "TERUNDUH",
+  "info": "1743631 byte (pdf)"
+ },
+ {
+  "no": 44,
+  "kunci": "MMS-TTS-ind",
+  "status": "TERUNDUH",
+  "info": "3987 byte (md) — HF raw"
+ },
+ {
+  "no": 45,
+  "kunci": "GoogleCloud-TTS",
+  "status": "TERUNDUH",
+  "info": "839832 byte (html)"
+ },
+ {
+  "no": 46,
+  "kunci": "Azure-Speech",
+  "status": "TERUNDUH",
+  "info": "367265 byte (html)"
+ },
+ {
+  "no": 47,
+  "kunci": "Radford-2022-Whisper",
+  "status": "TERUNDUH",
+  "info": "1008644 byte (pdf)"
+ },
+ {
+  "no": 48,
+  "kunci": "faster-whisper",
+  "status": "TERUNDUH",
+  "info": "15249 byte (md)"
+ },
+ {
+  "no": 49,
+  "kunci": "Chen-2023-CSUR",
+  "status": "LEWAT",
+  "info": "BERBAYAR (ACM CSUR)"
+ },
+ {
+  "no": 50,
+  "kunci": "Zhang-2022-Widar3",
+  "status": "TERUNDUH",
+  "info": "2490305 byte (pdf)"
+ },
+ {
+  "no": 51,
+  "kunci": "Jocher-2026-YOLO26",
+  "status": "TERUNDUH",
+  "info": "9613058 byte (pdf)"
+ },
+ {
+  "no": 52,
+  "kunci": "Ultralytics-pose-docs",
+  "status": "TERUNDUH",
+  "info": "843753 byte (html)"
+ },
+ {
+  "no": 53,
+  "kunci": "Picron-2024",
+  "status": "LEWAT",
+  "info": "BERBAYAR (bab Springer)"
+ },
+ {
+  "no": 54,
+  "kunci": "Hakozaki-2025",
+  "status": "LEWAT",
+  "info": "BERBAYAR (ACM ASSETS)"
+ },
+ {
+  "no": 55,
+  "kunci": "KamusSIBI-1994",
+  "status": "LEWAT",
+  "info": "TANPA VERSI DIGITAL (cetak)"
+ },
+ {
+  "no": 56,
+  "kunci": "Stokoe-2005",
+  "status": "LEWAT",
+  "info": "BERBAYAR (Oxford JDSDE)"
+ },
+ {
+  "no": 57,
+  "kunci": "Ong-2005-survey",
+  "status": "TERUNDUH",
+  "info": "1185309 byte (pdf)"
+ },
+ {
+  "no": 58,
+  "kunci": "Nugraheni-2023-Holistika",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (OJS UMJ: https://jurnal.umj.ac.id/index.php/holistika/article/view/9355)"
+ },
+ {
+  "no": 59,
+  "kunci": "Malika-2025-Concept",
+  "status": "TERUNDUH",
+  "info": "931837 byte (pdf)"
+ },
+ {
+  "no": 60,
+  "kunci": "Rodhiyah-2024-INTECOMS",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (OJS IPM2KPE: https://journal.ipm2kpe.or.id/index.php/INTECOMS/article/view/8326)"
+ },
+ {
+  "no": 61,
+  "kunci": "Kindy-2025-BISINDO",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (Procedia akses terbuka: https://doi.org/10.1016/j.procs.2025.08.277)"
+ },
+ {
+  "no": 62,
+  "kunci": "Wiguna-2025-BISINDO",
+  "status": "TERUNDUH",
+  "info": "825042 byte (pdf)"
+ },
+ {
+  "no": 63,
+  "kunci": "Sebastian-2025-BISINDO",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (Procedia akses terbuka: https://doi.org/10.1016/j.procs.2025.09.042)"
+ },
+ {
+  "no": 64,
+  "kunci": "Cai-2024-Sensors",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (MDPI akses terbuka: https://www.mdpi.com/1424-8220/24/11/3414)"
+ },
+ {
+  "no": 65,
+  "kunci": "Nyquist-1928",
+  "status": "TERUNDUH",
+  "info": "644969 byte (pdf)"
+ },
+ {
+  "no": 66,
+  "kunci": "Shannon-1949",
+  "status": "TERUNDUH",
+  "info": "300965 byte (pdf)"
+ },
+ {
+  "no": 67,
+  "kunci": "Hao-2020-WiSL",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (MDPI akses terbuka: https://www.mdpi.com/1424-8220/20/14/4025)"
+ },
+ {
+  "no": 68,
+  "kunci": "Hernandez-2020-WoWMoM",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (salinan penulis VCU: https://www.people.vcu.edu/~ebulut/wowmom20-WiFiSensing.pdf)"
+ },
+ {
+  "no": 69,
+  "kunci": "Zheng-2023-PoseSurvey",
+  "status": "TERUNDUH",
+  "info": "2747099 byte (pdf)"
+ },
+ {
+  "no": 70,
+  "kunci": "Sapkota-2025-YOLO26",
+  "status": "TERUNDUH",
+  "info": "919273 byte (pdf)"
+ },
+ {
+  "no": 71,
+  "kunci": "Lugaresi-2019-MediaPipe",
+  "status": "TERUNDUH",
+  "info": "1885108 byte (pdf)"
+ },
+ {
+  "no": 72,
+  "kunci": "Wang-2019-PersonInWiFi",
+  "status": "TERUNDUH",
+  "info": "2888813 byte (pdf)"
+ },
+ {
+  "no": 73,
+  "kunci": "Geng-2023-DensePoseWiFi",
+  "status": "TERUNDUH",
+  "info": "11369233 byte (pdf)"
+ },
+ {
+  "no": 74,
+  "kunci": "Shang-2017-MobiArch",
+  "status": "TERUNDUH",
+  "info": "748776 byte (pdf)"
+ },
+ {
+  "no": 75,
+  "kunci": "Ahmed-2021-LSTM",
+  "status": "LEWAT",
+  "info": "BERBAYAR (IEEE IAICT)"
+ },
+ {
+  "no": 76,
+  "kunci": "Qin-2023-WiASL",
+  "status": "LEWAT",
+  "info": "BERBAYAR (Elsevier Measurement)"
+ },
+ {
+  "no": 77,
+  "kunci": "Cortes-1995-SVM",
+  "status": "TERUNDUH",
+  "info": "305232 byte (pdf)"
+ },
+ {
+  "no": 78,
+  "kunci": "Mountrakis-2011-SVM",
+  "status": "TERUNDUH",
+  "info": "602921 byte (pdf)"
+ },
+ {
+  "no": 79,
+  "kunci": "Kiranyaz-2021-1DCNN",
+  "status": "TERUNDUH",
+  "info": "2655644 byte (pdf)"
+ },
+ {
+  "no": 80,
+  "kunci": "Chow-1970",
+  "status": "LEWAT",
+  "info": "BERBAYAR (IEEE TIT)"
+ },
+ {
+  "no": 81,
+  "kunci": "tflite-micro-esp-examples",
+  "status": "TERUNDUH",
+  "info": "6133 byte (md)"
+ },
+ {
+  "no": 82,
+  "kunci": "Safrida-2026-Rabit",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (OJS MDP: https://jurnal.mdp.ac.id/index.php/rabit/article/view/8340)"
+ },
+ {
+  "no": 83,
+  "kunci": "Rakun-2015-SIBI",
+  "status": "LEWAT",
+  "info": "BERBAYAR (IEEE TIME-E)"
+ },
+ {
+  "no": 84,
+  "kunci": "Anggraini-2019-SIBI",
+  "status": "LEWAT",
+  "info": "BERBAYAR (IEEE ICEEI)"
+ },
+ {
+  "no": 85,
+  "kunci": "Sagawa-2002-JSL",
+  "status": "TERUNDUH",
+  "info": "524742 byte (pdf)"
+ },
+ {
+  "no": 86,
+  "kunci": "Bowen-2009",
+  "status": "TERUNDUH",
+  "info": "168725 byte (html) — teks penuh PMC PMC2859314"
+ },
+ {
+  "no": 87,
+  "kunci": "Sokolova-2009",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (salinan dosen: https://engold.ui.ac.ir/~h.marateb/SokolovaLapalme-JIPM09.pdf)"
+ },
+ {
+  "no": 88,
+  "kunci": "Likert-1932",
+  "status": "TERUNDUH",
+  "info": "21196634 byte (pdf)"
+ },
+ {
+  "no": 89,
+  "kunci": "Hinton-2015-Distill",
+  "status": "TERUNDUH",
+  "info": "106630 byte (pdf)"
+ },
+ {
+  "no": 90,
+  "kunci": "Wu-2022-CSIratio",
+  "status": "TERUNDUH",
+  "info": "3038 byte (html) — halaman artikel Springer"
+ },
+ {
+  "no": 91,
+  "kunci": "Mankins-2009-TRL",
+  "status": "LEWAT",
+  "info": "BERBAYAR (Elsevier Acta Astronautica)"
+ },
+ {
+  "no": 92,
+  "kunci": "Qian-2018-Widar2",
+  "status": "PERAMBAN",
+  "info": "PERAMBAN (ACM DL MobiSys'18: https://dl.acm.org/doi/10.1145/3210240.3210314)"
+ },
+ {
+  "no": 93,
+  "kunci": "Yang-2023-MMFi",
+  "status": "TERUNDUH",
+  "info": "3249954 byte (pdf)"
+ },
+ {
+  "no": 94,
+  "kunci": "INMP441-datasheet",
+  "status": "TERUNDUH",
+  "info": "168942 byte (html resmi) — halaman lembar data TDK"
+ }
+]

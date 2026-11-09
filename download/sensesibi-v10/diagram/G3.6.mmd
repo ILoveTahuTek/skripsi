@@ -1,0 +1,19 @@
+flowchart TB
+    subgraph MODS["Sepasang modul ESP32-S3 (baterai)"]
+        MA["Node TX: pemancar<br/>beacon ESP-NOW"]
+        MB["Node RX: CSI + inferensi murid int8<br/>+ antarmuka pengguna"]
+    end
+    TA["Ponsel Poco F4 5G (hotspot portabel):<br/>aplikasi Tauri + Kokoro TTS ONNX<br/>on-device via ONNX Runtime"]
+    RUST["Server lokal laptop: server Rust<br/>Tokio/Axum (pendengar UDP CSI),<br/>server RuView, faster-whisper, MMS"]
+    AP["Access point satu kanal:<br/>router mitra atau hotspot Poco F4"]
+    STTA["ASR Indonesia awan<br/>(jalur utama arah 2)"]
+    TTSA["TTS Indonesia awan<br/>(pembanding)"]
+    MA -- "ESP-NOW beacon<br/>(sumber CSI)" --> MB
+    MB -- "UDP: bingkai, label, skor" --> RUST
+    MB -- "teks hasil isyarat<br/>(arah 1)" --> TA
+    TA -- "audio hasil sintesis" --> MB
+    MB -- "audio ucapan<br/>(arah 2)" --> STTA
+    STTA -- "teks" --> MB
+    AP -. "internet" .-> STTA
+    AP -. "internet" .-> TTSA
+    AP -. "riset dan cadangan" .-> RUST

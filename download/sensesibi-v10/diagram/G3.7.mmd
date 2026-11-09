@@ -1,0 +1,19 @@
+flowchart LR
+    subgraph S1["Muka depan"]
+        LAY["Layar OLED/TFT<br/>(status huruf, baterai,<br/>kanal, mode kerja)"]
+        MIK["Mikrofon INMP441"]
+        SPK["Pengeras suara +<br/>DAC MAX98357A"]
+    end
+    subgraph S2["Muka samping"]
+        ROT["Rotary encoder EC11<br/>+ tombol tekan"]
+    end
+    subgraph S3["Muka bawah"]
+        USB["Port USB-C TP4056<br/>(pengisian baterai)"]
+    end
+    subgraph S4["Ruang dalam"]
+        PCB["Papan ESP32-S3<br/>(PSRAM 8 MB)"]
+        BAT["Baterai Li-Po 3,7 V<br/>2.500–3.000 mAh + BMS 1S"]
+    end
+    S4 --- S1
+    S4 --- S2
+    S4 --- S3

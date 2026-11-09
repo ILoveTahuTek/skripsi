@@ -1,0 +1,19 @@
+flowchart TB
+    FW["Modul ESP32-S3 (firmware esp32-csi-node):<br/>CSI promiscuous + inferensi murid int8"]
+    subgraph SRV["Server Rust purna (laptop)"]
+        UDP["Pendengar UDP Tokio:<br/>bingkai ADR-018 dan label<br/>(target parsing di bawah 0,2 ms)"]
+        AXM["Layanan Axum:<br/>HTTP/WebSocket telemetri"]
+        UDP --> AXM
+    end
+    D1["Dasbor Leptos (WASM):<br/>pemantauan sesi"]
+    subgraph HP["Ponsel Poco F4 5G"]
+        TAM["Aplikasi Tauri"]
+        KOR["Kokoro TTS ONNX<br/>(ONNX Runtime, luring)"]
+        TAM --> KOR
+    end
+    CLD["Layanan ASR awan<br/>(cadangan: faster-whisper lokal)"]
+    FW -- "UDP: bingkai, label, skor" --> UDP
+    AXM -- "WebSocket" --> D1
+    FW -- "teks hasil isyarat (arah 1)" --> TAM
+    KOR -- "audio sintesis" --> FW
+    TAM -- "audio ucapan (arah 2)" --> CLD

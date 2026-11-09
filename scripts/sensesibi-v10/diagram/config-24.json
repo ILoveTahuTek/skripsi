@@ -1,0 +1,19 @@
+{
+ "theme": "neutral",
+ "themeVariables": {
+  "fontFamily": "Arial, Helvetica, sans-serif",
+  "fontSize": "24px",
+  "clusterBkg": "#fafafa",
+  "clusterBorder": "#bbbbbb",
+  "edgeLabelBackground": "#ffffff"
+ },
+ "flowchart": {
+  "wrappingWidth": 700,
+  "markdownAutoWrap": false,
+  "htmlLabels": true,
+  "nodeSpacing": 16,
+  "rankSpacing": 30,
+  "padding": 6
+ },
+ "themeCSS": ".edgeLabel { font-size: 24px !important; line-height: 1.2 !important; } .edgeLabel span, .edgeLabel p { font-size: 24px !important; } .edgeLabel foreignObject > div, .edgeLabel div { background: #ffffff !important; }"
+}
