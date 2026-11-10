@@ -1,0 +1,63 @@
+# BAB I PENDAHULUAN
+
+## 1.1 Latar Belakang
+
+Anak tunarungu umumnya lahir dari orang tua yang mendengar. Sejak hari-hari pertama, komunikasi di rumah menuntut dua arah, tetapi kedua pihak tidak berbagi bahasa: orang tua berbicara dengan suara, anak menjawab dengan isyarat. Orang tua harus mempelajari bahasa isyarat dari nol, sementara kesempatan belajarnya terbatas. Indonesia memiliki sekitar 1,92 juta penyandang tunarungu, sedangkan jumlah juru bahasa isyarat hanya sekitar 500 orang [1]. Artinya, satu juru bahasa harus melayani hampir 4.000 orang. Menunggu juru bahasa jelas bukan pilihan untuk kebutuhan sehari-hari: menceritakan sakit, mengikuti pelajaran, atau sekadar bertanya pada penjual di pasar. Undang-Undang Nomor 8 Tahun 2016 sudah menjamin hak setiap penyandang disabilitas untuk berkomunikasi [2], tetapi jaminan itu berjalan lambat tanpa alat bantu yang benar-benar terjangkau.
+
+Kesenjangan itu paling terasa di ruang kelas. Guru menjelaskan dengan suara; siswa tunarungu menangkap sebagian, menebak sisanya, dan sering kehilangan alur pelajaran. Pada pendidikan formal, pembelajaran memakai SIBI, yaitu sistem isyarat yang bentuknya dibakukan pemerintah dalam *Kamus Sistem Isyarat Bahasa Indonesia* [3]. Penelitian di SLB Negeri Ogan Ilir menunjukkan siswa memakai SIBI dalam pembelajaran, meskipun di luar kelas mereka lebih akrab dengan BISINDO [4]. Temuan serupa dilaporkan Nugraheni dkk. [5] serta Malika dan Berlianti [6]: SIBI hidup di sekolah, sedangkan BISINDO hidup di komunitas. Survei BRIN mencatat 77,7% responden tunarungu memakai BISINDO dan hanya 1,9% memakai SIBI [7]; survei 100 responden tunarungu di Jawa dan Bali melaporkan 91% memakai BISINDO [8]. Kedua survei itu justru menegaskan tempat SIBI berada, yaitu sekolah. Karena tujuan penelitian ini adalah alat bantu pembelajaran, sistem yang dipilih adalah SIBI. Penelitian dilaksanakan bekerja sama dengan sekolah mitra di Jawa Timur [PERLU DATA: nama SLB atau lembaga mitra di Jawa Timur].
+
+Alat bantu komunikasi dua arah memang pernah dicoba, tetapi jalurnya masih setengah jalan. KASIBI mengubah ucapan menjadi teks, lalu menampilkan animasi tangan tiga dimensi [9]. OpenSIBI menganimasikan 50 kosakata SIBI dari teks [10]. Keduanya hanya melayani satu arah: orang pendengar berbicara, sistem menampilkan isyarat. Arah sebaliknya, yaitu isyarat siswa dibaca mesin, belum tersedia sebagai alat yang siap dipakai. Sementara itu, riset pengenalan isyarat di Indonesia bergerak di jalur kamera: pengenalan huruf BISINDO dari citra [11], aplikasi deteksi 24 huruf statis SIBI dengan MediaPipe [12], dan aplikasi Android berbasis *deep learning* [13]. Pendekatan kamera punya dua kendala praktis. Pertama, kamera menuntut pencahayaan dan posisi yang tepat; sedikit saja cahaya berubah, akurasi ikut jatuh. Kedua, kamera yang terus menyala membuat penggunanya merasa diawasi, dan tidak nyaman dipakai sepanjang hari di kelas.
+
+Sinyal Wi-Fi menawarkan jalan lain tanpa kamera. Sinyal Wi-Fi membawa informasi kanal yang disebut *Channel State Information* (CSI) [14]. Ketika tangan bergerak di antara pemancar dan penerima, jalur pantulan sinyal bergeser, dan CSI berubah mengikuti pola gerakan itu. Perubahan itulah yang dibaca untuk mengenali gerak tanpa sensor yang dikenakan di tubuh. Kemampuan ini telah terbukti: SignFi mengenali 276 isyarat *American Sign Language* (ASL) dari CSI [15], DF-WiSLR mengenali 49 gestur tanpa perangkat dikenakan [16], dan WiSign mengenali kalimat ASL dari perangkat Wi-Fi komersial [17]. CSI juga terbukti peka terhadap gerak halus, sampai ke gerakan jari [14]. Namun, penelusuran pada Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 belum menemukan satu pun penerapan CSI untuk isyarat SIBI.
+
+Alatnya juga sederhana dan murah. Modul ESP32-S3 adalah mikrokontroler sekitar Rp150.000 yang memiliki radio Wi-Fi 2,4 GHz dengan dukungan CSI resmi [18], [19]. Dua modul cukup: satu memancarkan sinyal, satu menangkapnya, dan zona isyarat berada di antara keduanya. Platform terbuka RuView sudah menyediakan *firmware* penangkap CSI yang teruji untuk modul ini [20]. Sepasang node lengkap diperkirakan berbiaya di bawah Rp350.000, jauh lebih murah daripada kamera ditambah komputer pengolah citra. Murah bukan sekadar angka; harga yang terjangkau membuat sekolah berani memasang alat ini di lebih dari satu ruang.
+
+Penelitian ini merancang purwarupa penerjemah dua arah bernama SenseSIBI, singkatan dari *Sensing & Translation of SIBI*. Pada arah pertama, siswa mengisyaratkan huruf; modul menangkap pola CSI, model yang berjalan langsung di modul mengenalinya, teks tampil di layar, lalu dibunyikan sebagai suara. Pada arah kedua, guru menekan tombol dan berbicara; ucapan dikenali menjadi teks, teks tampil di layar, dan bentuk isyaratnya ditampilkan. Model tidak dilatih dari nol. Sebuah model penglihatan bernama YOLO26m-Pose yang sudah terlatih pada data citra SIBI berperan sebagai "guru", sedangkan model Wi-Fi menjadi "murid" yang belajar menirunya melalui distilasi pengetahuan [21]. Guru melihat isyarat lewat kamera hanya saat data direkam; setelah murid lulus, seluruh sistem bekerja tanpa kamera.
+
+Sebagai studi kelayakan, penelitian ini sengaja membatasi klaimnya. Objek pengenalan adalah alfabet manual SIBI satu tangan 26 huruf, yaitu 24 huruf statis ditambah dua huruf gerak J dan Z, bukan penerjemahan kalimat penuh. Penerjemahan bahasa isyarat tingkat kalimat masih menjadi masalah terbuka [22]. Kemampuan membedakan huruf diuji terlebih dahulu sebelum klaim lebih jauh dibuat. Setiap tahap ditutup gerbang keputusan, dan kegagalan tetap dilaporkan sebagai temuan. Dengan batas itu, penelitian ini menjawab pertanyaan yang sederhana dan jujur: apakah sepasang modul Wi-Fi murah benar-benar dapat menjadi jembatan komunikasi dua arah antara siswa tunarungu dan gurunya di kelas.
+
+## 1.2 Rumusan Masalah
+
+Berdasarkan latar belakang yang telah dipaparkan, masalah yang dikaji dalam penelitian ini dirumuskan sebagai berikut.
+
+1. Bagaimana merancang purwarupa penerjemah dua arah yang menghubungkan SIBI dengan teks dan suara bahasa Indonesia berbasis sepasang modul ESP32-S3 yang bekerja tanpa kamera?
+2. Bagaimana kinerja pengenalan alfabet manual SIBI dari sinyal CSI serta kinerja kedua jalur penerjemahan pada skenario dalam sesi, lintas partisipan, dan lintas ruang?
+3. Bagaimana kelayakan purwarupa sebagai alat bantu komunikasi ditinjau dari latensi, cakupan kosakata, keandalan operasional, penerimaan pengguna, dan biaya?
+
+## 1.3 Tujuan Penelitian
+
+Berdasarkan rumusan masalah tersebut, tujuan penelitian ini adalah:
+
+1. Merancang purwarupa penerjemah dua arah yang menghubungkan SIBI dengan teks dan suara bahasa Indonesia berbasis sepasang modul ESP32-S3 yang bekerja tanpa kamera.
+2. Mengukur kinerja pengenalan alfabet manual SIBI dari sinyal CSI serta kinerja kedua jalur penerjemahan pada skenario dalam sesi, lintas partisipan, dan lintas ruang.
+3. Menganalisis kelayakan purwarupa sebagai alat bantu komunikasi ditinjau dari latensi, cakupan kosakata, keandalan operasional, penerimaan pengguna, dan biaya.
+
+## 1.4 Batasan Masalah
+
+Ruang lingkup penelitian ini dibatasi sebagai berikut.
+
+1. Objek pengenalan adalah alfabet manual SIBI satu tangan 26 huruf (24 statis serta huruf gerak J dan Z) dengan bentuk baku yang dicocokkan dengan *Kamus SIBI* [3] dan disetujui validator penutur tunarungu; sistem bukan penerjemah kalimat.
+2. Bentuk tangan dan jari menjadi pembeda utama; ekspresi wajah dan penanda nonmanual tidak dikenali.
+3. Penginderaan memakai sepasang modul ESP32-S3 (satu pemancar dan satu penerima, 2,4 GHz, kanal 20 MHz) dengan layar, baterai, *speaker*, dan mikrofon pada node penerima; kamera hanya dipakai saat perekaman data pelatihan.
+4. Model penglihatan YOLO26m-Pose hanya menjadi guru saat akuisisi dan pelatihan; produk akhir bebas kamera dan bebas citra.
+5. Sintesis ucapan berjalan *on-device* di ponsel; pengenalan ucapan memakai layanan awan dengan mesin lokal sebagai cadangan; pilihan final ditetapkan pada gerbang G3.
+6. Arah kedua dibatasi pada kamus tingkat kata dengan *fallback* ejaan jari; cakupan kamus diukur dan dilaporkan.
+7. Setiap sesi melibatkan satu pengisyarat; sistem tidak mengidentifikasi individu; pengujian dilakukan di sedikitnya dua ruang mitra di Jawa Timur yang dikalibrasi.
+8. Uji pengguna berskala kecil (3–5 pengguna) dan dianalisis secara deskriptif tanpa statistik inferensial.
+9. Penelitian ini tidak membahas isyarat kontinu, tata bahasa isyarat penuh, BISINDO, dan klasifikasi gerakan otomatis dari video.
+
+## 1.5 Manfaat Penelitian
+
+Manfaat penelitian ini dibedakan menjadi manfaat teoretis dan manfaat praktis.
+
+### 1.5.1 Manfaat Teoretis
+
+Penelitian ini memberikan bukti awal apakah CSI dari satu tautan antarmodul ESP32-S3 mampu membedakan alfabet manual SIBI. Bukti itu terikat pada alfabet manual dan belum tentu berlaku untuk isyarat kata maupun kontinu. Penelitian ini juga meninggalkan *dataset* CSI berlabel beserta protokol perekamannya, yang dapat dipakai penelitian berikutnya untuk bahasa isyarat lain, termasuk perluasan ke BISINDO.
+
+### 1.5.2 Manfaat Praktis
+
+Bagi sekolah mitra, penelitian ini memberikan gambaran nyata tentang kelayakan alat bantu komunikasi dua arah berbahasa SIBI, lengkap dengan biaya perangkatnya. Bila seluruh tahap berhasil, dihasilkan purwarupa yang menampilkan teks, menyuarakan isyarat, dan menampilkan bentuk isyarat bagi lawan bicara. Bila berhenti lebih awal, laporan karakterisasi, protokol, dan *dataset* berlabel tetap menjadi warisan penelitian. Bagi keluarga siswa, kosakata yang tervalidasi memastikan isyarat yang tampil benar bentuknya. Bagi komunitas riset, rancangan yang tidak terikat pada satu bahasa isyarat memudahkan replikasi di tempat lain.
+
+## 1.6 Sistematika Penulisan
+
+Proposal ini terdiri atas tiga bab. **BAB I Pendahuluan** memuat latar belakang, rumusan masalah, tujuan, batasan, manfaat, dan sistematika. **BAB II Kajian Pustaka** memuat teori dan penelitian terdahulu yang menjadi dasar perancangan. **BAB III Metode Penelitian** memuat desain, tahapan, waktu dan lokasi, alat dan bahan, perancangan sistem, protokol perekaman, pengolahan sinyal dan pelatihan, skenario pengujian, jadwal, parameter yang ditetapkan kemudian, serta risiko dan cadangan.
