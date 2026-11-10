@@ -12,7 +12,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Sebagian besar anak tunarungu lahir di tengah keluarga pendengar. Mitchell dan Karchmer [1], [2] mencatat proporsi tersebut sebesar 90–95% pada data siswa tunarungu di Amerika Serikat sekaligus membantah anggapan lama bahwa sekitar 10% anak tunarungu memiliki orang tua tunarungu. Angka sebanding untuk Indonesia belum ditemukan dalam penelusuran penelitian ini pada Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026; angka dari Amerika Serikat dipakai sebagai gambaran umum. Keluarga pendengar dari anak yang berkomunikasi dengan isyarat perlu ikut mempelajari bahasa isyarat, padahal proses belajarnya membutuhkan dukungan yang terstruktur [3] dan menghadapi hambatan praktis sehari-hari [4]. Artinya, komunikasi antara tunarungu dan pendengar di lingkungan keluarga tidak dapat dianggap terjadi dengan sendirinya."
+     "text": "Sebagian besar anak tunarungu lahir di tengah keluarga pendengar. Mitchell dan Karchmer [1], [2] mencatat proporsi itu sebesar 90–95% pada data siswa tunarungu di Amerika Serikat sekaligus membantah anggapan lama bahwa sekitar 10% anak tunarungu memiliki orang tua tunarungu. Angka sebanding untuk Indonesia belum ditemukan dalam penelusuran penelitian ini pada Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026; angka dari Amerika Serikat dipakai sebagai gambaran umum. Keluarga pendengar dari anak yang berkomunikasi dengan isyarat perlu ikut mempelajari bahasa isyarat, padahal proses belajarnya membutuhkan dukungan yang terstruktur [3] dan menghadapi hambatan praktis sehari-hari [4]. Artinya, komunikasi antara tunarungu dan pendengar di lingkungan keluarga tidak dapat dianggap terjadi dengan sendirinya."
     }
    ]
   },
@@ -107,7 +107,7 @@
      "italics": true
     },
     {
-     "text": " [24]. Preseden terbaru, WiSign, bahkan mengenali kalimat ASL kontinu dari CSI perangkat Wi-Fi komersial [25]. Kepekaan CSI terhadap gerak halus juga telah terbukti pada gerak yang jauh lebih kecil daripada gerak lengan: WiKey mengenali ketukan tombol dengan akurasi klasifikasi 96,4% untuk tombol tunggal pada kondisi terkendali [26], pemantauan napas dari CSI berhasil mengklasifikasikan pola pernapasan dengan akurasi 99,54% [27], WiFinger mengenali gestur jari dari satu perangkat Wi-Fi komersial [28], FingerDraw melacak gerak jari hingga skala subgelombang [29], dan MeshID mengidentifikasi pengguna dari gestur jarinya [30]. Meskipun demikian, belum ditemukan publikasi yang memakai CSI untuk mengenali isyarat SIBI maupun purwarupa penerjemah dua arah yang memadukan penginderaan CSI dengan pemrosesan bahasa Indonesia. Penelusuran tersebut mencakup Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 dengan kata kunci bahasa Inggris dan bahasa Indonesia (Subbab 2.11)."
+     "text": " [24]. Preseden terbaru, WiSign, bahkan mengenali kalimat ASL kontinu dari CSI perangkat Wi-Fi komersial [25]. Kepekaan CSI terhadap gerak halus juga telah terbukti pada gerak yang jauh lebih kecil daripada gerak lengan: WiKey mengenali ketukan tombol dengan akurasi klasifikasi 96,4% untuk tombol tunggal pada kondisi terkendali [26], pemantauan napas dari CSI berhasil mengklasifikasikan pola pernapasan dengan akurasi 99,54% [27], WiFinger mengenali gestur jari dari satu perangkat Wi-Fi komersial [28], FingerDraw melacak gerak jari hingga skala subgelombang [29], dan MeshID mengidentifikasi pengguna dari gestur jarinya [30]. Meskipun demikian, belum ditemukan publikasi yang memakai CSI untuk mengenali isyarat SIBI maupun purwarupa penerjemah dua arah yang memadukan penginderaan CSI dengan pemrosesan bahasa Indonesia. Penelusuran itu mencakup Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 dengan kata kunci bahasa Inggris dan bahasa Indonesia (Subbab 2.11)."
     }
    ]
   },
@@ -186,7 +186,15 @@
      "italics": true
     },
     {
-     "text": " (WASM) [36], [37], [38]. Pada arah kedua, tombol pada modul mengaktifkan mikrofon; ucapan dikirim ke layanan pengenal ucapan awan untuk diubah menjadi teks, kemudian teks dipetakan ke representasi SIBI dan ditampilkan di layar modul. Sintesis ucapan dirancang berjalan "
+     "text": " (WASM) [36], [37], [38]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pada arah kedua, tombol pada modul mengaktifkan mikrofon; ucapan dikirim ke layanan pengenal ucapan awan untuk diubah menjadi teks, kemudian teks dipetakan ke representasi SIBI dan ditampilkan di layar modul. Sintesis ucapan dirancang berjalan "
     },
     {
      "text": "on-device",
@@ -229,7 +237,7 @@
      "italics": true
     },
     {
-     "text": " visual SIBI terkurasi bersumber banyak melalui repositori milik peneliti (Subbab 2.5 dan 3.7.4); model tersebut mengestimasi 21 titik artikulasi tangan, yaitu satu titik pergelangan tangan dan empat titik pada setiap jari, dan terbukti mengenali 26 huruf SIBI secara akurat, termasuk membedakan pasangan huruf yang mirip seperti V dan U dari jarak antarujung telunjuk dan jari tengah serta mengikuti lintasan gerak telunjuk huruf J dan Z. Proposal ini merupakan tahap pengembangan berikutnya: membangun purwarupa berbasis Wi-Fi CSI yang mereplikasi kemampuan pembedaan itu tanpa kamera."
+     "text": " visual SIBI terkurasi bersumber banyak melalui repositori milik peneliti (Subbab 2.5 dan 3.7.4); model itu mengestimasi 21 titik artikulasi tangan, yaitu satu titik pergelangan tangan dan empat titik pada setiap jari, dan terbukti mengenali 26 huruf SIBI secara akurat, termasuk membedakan pasangan huruf yang mirip seperti V dan U dari jarak antarujung telunjuk dan jari tengah serta mengikuti lintasan gerak telunjuk huruf J dan Z. Proposal ini merupakan tahap pengembangan berikutnya: membangun purwarupa berbasis Wi-Fi CSI yang mereplikasi kemampuan pembedaan itu tanpa kamera."
     }
    ]
   },
@@ -237,14 +245,22 @@
    "t": "p",
    "runs": [
     {
-     "text": "Sebagai studi kelayakan, penelitian ini tidak mengklaim penerjemahan kontinu kosakata penuh. Objek pengenalan dibatasi pada alfabet manual SIBI satu tangan sebanyak 26 huruf, yaitu 24 huruf statis serta huruf gerak J dan Z: 24 huruf statis dibedakan oleh konfigurasi tangan dan jari, sedangkan J dan Z dibedakan oleh lintasan geraknya. Kepekaan CSI terhadap gerak halus tingkat jari telah dilaporkan sejumlah penelitian [22], [24], [26], [49], [50], [51], [28], [29], [30], tetapi kemampuan satu tautan antarmodul ESP32-S3 membedakan 26 konfigurasi tangan tersebut belum dapat dipastikan sebelum data dikumpulkan sehingga penelitian ini mengujinya melalui uji Delta-CSI serta gerbang G1 (Subbab 2.3 dan BAB III). Model berbasis CSI juga mudah mengalami "
+     "text": "Sebagai studi kelayakan, penelitian ini tidak mengklaim penerjemahan kontinu kosakata penuh. Objek pengenalan dibatasi pada alfabet manual SIBI satu tangan sebanyak 26 huruf, yaitu 24 huruf statis serta huruf gerak J dan Z: 24 huruf statis dibedakan oleh konfigurasi tangan dan jari, sedangkan J dan Z dibedakan oleh lintasan geraknya. Kepekaan CSI terhadap gerak halus tingkat jari telah dilaporkan sejumlah penelitian [22], [24], [26], [49], [50], [51], [28], [29], [30], tetapi kemampuan satu tautan antarmodul ESP32-S3 membedakan 26 konfigurasi tangan itu belum dapat dipastikan sebelum data dikumpulkan sehingga penelitian ini mengujinya melalui uji Delta-CSI serta gerbang G1 (Subbab 2.3 dan BAB III). Model berbasis CSI juga mudah mengalami "
     },
     {
      "text": "overfitting",
      "italics": true
     },
     {
-     "text": " terhadap orang dan ruang tempat data direkam [52]; karena itu kinerja diukur lintas partisipan dan lintas ruang dengan acuan strategi Widar3.0 [53]. Model murid CSI dilatih dengan distilasi guru–murid ("
+     "text": " terhadap orang dan ruang tempat data direkam [52]; karena itu kinerja diukur lintas partisipan dan lintas ruang dengan acuan strategi Widar3.0 [53]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Model murid CSI dilatih dengan distilasi guru–murid ("
     },
     {
      "text": "teacher–student",
@@ -272,7 +288,15 @@
      "italics": true
     },
     {
-     "text": " ejaan jari sebagaimana preseden KASIBI dan OpenSIBI. Penerjemahan tata bahasa penuh masih menjadi masalah terbuka internasional [56], [57]. Setiap tahapan ditutup gerbang keputusan; kegagalan tetap dilaporkan sebagai temuan kelayakan. Penelitian ini merancang dan membangun purwarupa sistem penerjemahan dua arah antara SIBI dan teks atau ujaran bahasa Indonesia berbasis Wi-Fi CSI dengan inferensi model pada modul ESP32-S3 dan pemrosesan bahasa pada server. Purwarupa itu diberi nama SenseSIBI, singkatan dari "
+     "text": " ejaan jari sebagaimana preseden KASIBI dan OpenSIBI. Penerjemahan tata bahasa penuh masih menjadi masalah terbuka internasional [56], [57]. Setiap tahapan ditutup gerbang keputusan; kegagalan tetap dilaporkan sebagai temuan kelayakan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Penelitian ini merancang dan membangun purwarupa sistem penerjemahan dua arah antara SIBI dan teks atau ujaran bahasa Indonesia berbasis Wi-Fi CSI dengan inferensi model pada modul ESP32-S3 dan pemrosesan bahasa pada server. Purwarupa itu diberi nama SenseSIBI, singkatan dari "
     },
     {
      "text": "Sensing & Translation of SIBI",
@@ -898,7 +922,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Perubahan kanal tersebut memiliki dasar fisika pada model zona Fresnel. Wu dkk. [67] merumuskan zona Fresnel sebagai wilayah elips di sekitar garis pandang pemancar–penerima tempat gelombang dipantulkan dan dilenturkan; gerakan objek yang melintasi batas zona mengubah panjang jalur pantulan sehingga amplitudo dan fase pada tiap "
+     "text": "Perubahan kanal itu memiliki dasar fisika pada model zona Fresnel. Wu dkk. [67] merumuskan zona Fresnel sebagai wilayah elips di sekitar garis pandang pemancar–penerima tempat gelombang dipantulkan dan dilenturkan; gerakan objek yang melintasi batas zona mengubah panjang jalur pantulan sehingga amplitudo dan fase pada tiap "
     },
     {
      "text": "subcarrier",
@@ -927,7 +951,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Gerak lengan juga menghasilkan komponen Doppler, yakni pergeseran frekuensi yang sebanding dengan laju perubahan panjang jalur pantulan [21], [53]. Komponen tersebut dapat diukur dari deret CSI dan mencerminkan kecepatan gerak. Penelitian ini memusatkan analisis Doppler pada pita frekuensi gerak 1–60 Hz; agar pita tersebut terwakili, laju pencuplikan CSI harus sekurang-kurangnya dua kali frekuensi tertingginya, yaitu 120 Hz, sesuai kriteria Nyquist [68], [69]. "
+     "text": "Gerak lengan juga menghasilkan komponen Doppler, yakni pergeseran frekuensi yang sebanding dengan laju perubahan panjang jalur pantulan [21], [53]. Komponen Doppler dapat diukur dari deret CSI dan mencerminkan kecepatan gerak. Penelitian ini memusatkan analisis Doppler pada pita frekuensi gerak 1–60 Hz; agar pita itu terwakili, laju pencuplikan CSI harus sekurang-kurangnya dua kali frekuensi tertingginya, yaitu 120 Hz, sesuai kriteria Nyquist [68], [69]. "
     },
     {
      "text": "Firmware",
@@ -964,7 +988,7 @@
      "italics": true
     },
     {
-     "text": " terhadap orang dan ruang tempat data pelatihan direkam [52]. Chen dkk. merangkum strategi generalisasi lintas domain untuk mengatasi persoalan tersebut, sedangkan Zhang dkk. mengusulkan Widar3.0 yang mengenali gestur lintas domain tanpa pelatihan ulang dengan profil kecepatan yang diturunkan dari Doppler [53]. Dalam penelitian ini, strategi lintas domain dijadikan acuan rancangan fitur, sedangkan kemampuan generalisasi sistem diukur langsung melalui skenario pengujian (Subbab 2.10 dan 3.8)."
+     "text": " terhadap orang dan ruang tempat data pelatihan direkam [52]. Chen dkk. merangkum strategi generalisasi lintas domain untuk mengatasi persoalan itu, sedangkan Zhang dkk. mengusulkan Widar3.0 yang mengenali gestur lintas domain tanpa pelatihan ulang dengan profil kecepatan yang diturunkan dari Doppler [53]. Dalam penelitian ini, strategi lintas domain dijadikan acuan rancangan fitur, sedangkan kemampuan generalisasi sistem diukur langsung melalui skenario pengujian (Subbab 2.10 dan 3.8)."
     }
    ]
   },
@@ -972,7 +996,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Panjang gelombang Wi-Fi pada pita 2,4 GHz sekitar 12,5 cm dan membatasi resolusi spasial CSI. Sejumlah penelitian melaporkan pengenalan isyarat dan gestur tangan dari CSI dengan perangkat riset multiantena: SignFi memakai NIC Intel 5300 dengan tiga antena penerima [22], Wi-SL memakai router dengan dua antena pemancar dan tiga antena penerima pada kanal 40 MHz dengan laju pencuplikan 400 Hz [70], dan HandFi memakai NIC Intel 5300 sebagai penerima dari router Wi-Fi komersial [50]. Sebagian bukti bahkan memakai perangkat lebih sederhana: Cai dkk. mengenali gestur dengan akurasi rata-rata 98,3% pada skenario satu pemancar dan satu penerima [49]. Penelitian ini tidak mengasumsikan kemampuan tersebut juga dimiliki perangkat yang dipakai. Kelayakan satu tautan antara dua modul ESP32-S3 yang masing-masing berantena tunggal untuk membedakan 26 konfigurasi tangan dan jari alfabet manual SIBI, yaitu 24 huruf statis serta huruf gerak J dan Z, karenanya diperlakukan sebagai pertanyaan penelitian, bukan asumsi awal. Bukti kepekaan milimeter di atas dan preseden pengenalan tulisan huruf oleh WiASL [51] menjadi hipotesis kerja; uji Delta-CSI dan gerbang G1 (BAB III) mengujinya langsung pada pasangan huruf dengan konfigurasi tangan yang paling mirip, dan bila pasangan tersebut tidak dapat dipisahkan, himpunan huruf dipangkas sesuai kriteria pada Tabel 3.8 serta hasilnya dilaporkan sebagai temuan kelayakan."
+     "text": "Panjang gelombang Wi-Fi pada pita 2,4 GHz sekitar 12,5 cm dan membatasi resolusi spasial CSI. Sejumlah penelitian melaporkan pengenalan isyarat dan gestur tangan dari CSI dengan perangkat riset multiantena: SignFi memakai NIC Intel 5300 dengan tiga antena penerima [22], Wi-SL memakai router dengan dua antena pemancar dan tiga antena penerima pada kanal 40 MHz dengan laju pencuplikan 400 Hz [70], dan HandFi memakai NIC Intel 5300 sebagai penerima dari router Wi-Fi komersial [50]. Sebagian bukti bahkan memakai perangkat lebih sederhana: Cai dkk. mengenali gestur dengan akurasi rata-rata 98,3% pada skenario satu pemancar dan satu penerima [49]. Penelitian ini tidak mengasumsikan kemampuan itu juga dimiliki perangkat yang dipakai. Kelayakan satu tautan antara dua modul ESP32-S3 yang masing-masing berantena tunggal untuk membedakan 26 konfigurasi tangan dan jari alfabet manual SIBI, yaitu 24 huruf statis serta huruf gerak J dan Z, karenanya diperlakukan sebagai pertanyaan penelitian, bukan asumsi awal. Bukti kepekaan milimeter di atas dan preseden pengenalan tulisan huruf oleh WiASL [51] menjadi hipotesis kerja; uji Delta-CSI dan gerbang G1 (BAB III) mengujinya langsung pada pasangan huruf dengan konfigurasi tangan yang paling mirip, dan bila pasangan itu tidak dapat dipisahkan, himpunan huruf dipangkas sesuai kriteria pada Tabel 3.8 serta hasilnya dilaporkan sebagai temuan kelayakan."
     }
    ]
   },
@@ -1069,7 +1093,7 @@
      "italics": true
     },
     {
-     "text": " adalah catatan keputusan arsitektur yang dipakai repositori tersebut untuk mendokumentasikan keputusan desain [32]. Kalibrasi ruang bawaan memakai 600 bingkai dan 8 "
+     "text": " adalah catatan keputusan arsitektur yang dipakai repositori itu untuk mendokumentasikan keputusan desain [32]. Kalibrasi ruang bawaan memakai 600 bingkai dan 8 "
     },
     {
      "text": "anchor",
@@ -1084,7 +1108,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Selain rantai akuisisi, RuView juga menerbitkan keluarga model WiFi-DensePose untuk penginderaan spasial dari CSI. Arsitektur tersebut menelusuri DensePose from WiFi yang memetakan sinyal Wi-Fi ke koordinat permukaan tubuh dengan jaringan visi sebagai guru [72]. Repositori RuView menyediakan enkode terpralatih ruvnet/wifi-densepose-pretrained yang dilatih secara kontrastif dan mencapai akurasi "
+     "text": "Selain rantai akuisisi, RuView juga menerbitkan keluarga model WiFi-DensePose untuk penginderaan spasial dari CSI. Arsitektur itu menelusuri DensePose from WiFi yang memetakan sinyal Wi-Fi ke koordinat permukaan tubuh dengan jaringan visi sebagai guru [72]. Repositori RuView menyediakan enkode terpralatih ruvnet/wifi-densepose-pretrained yang dilatih secara kontrastif dan mencapai akurasi "
     },
     {
      "text": "triplet",
@@ -1098,7 +1122,7 @@
      "italics": true
     },
     {
-     "text": " multimodal MM-Fi berisi lebih dari 320 ribu bingkai tersinkron dari 40 partisipan [73]. Kedua model tersebut tersedia dalam kuantisasi int8 untuk komputasi tepi [32]. Dalam penelitian ini, enkode terpralatih tersebut dipakai sebagai "
+     "text": " multimodal MM-Fi berisi lebih dari 320 ribu bingkai tersinkron dari 40 partisipan [73]. Kedua model itu tersedia dalam kuantisasi int8 untuk komputasi tepi [32]. Dalam penelitian ini, enkode terpralatih itu dipakai sebagai "
     },
     {
      "text": "backbone",
@@ -1162,7 +1186,7 @@
      "italics": true
     },
     {
-     "text": " yang memuat hingga 250 bita per paket dan dipakai RuView sebagai sumber bingkai bersama antarmodul [32]. Tiga syarat wajib menyertai pola tersebut. Seluruh perangkat berada pada satu kanal mengikuti kanal "
+     "text": " yang memuat hingga 250 bita per paket dan dipakai RuView sebagai sumber bingkai bersama antarmodul [32]. Tiga syarat wajib menyertai pola itu. Seluruh perangkat berada pada satu kanal mengikuti kanal "
     },
     {
      "text": "access point",
@@ -1256,7 +1280,7 @@
      "italics": true
     },
     {
-     "text": " manusia dari citra atau video [74]. YOLO26 merupakan keluarga model visi waktu nyata terbaru dari Ultralytics yang mendukung deteksi, segmentasi, klasifikasi, dan estimasi pose dalam satu kerangka [54]. Kerangka tersebut mendukung konfigurasi "
+     "text": " manusia dari citra atau video [74]. YOLO26, keluarga model visi waktu nyata terbaru dari Ultralytics, mendukung deteksi, segmentasi, klasifikasi, dan estimasi pose dalam satu kerangka [54]. Kerangka tersebut mendukung konfigurasi "
     },
     {
      "text": "keypoint",
@@ -1327,7 +1351,7 @@
      "italics": true
     },
     {
-     "text": " per tangan (Subbab 3.7.4). Pemakaian visi sebagai pemberi supervisi bagi pelatihan model Wi-Fi telah memiliki preseden: Person-in-WiFi memperoleh persepsi tubuh dari sinyal Wi-Fi dengan supervisi kamera [77], dan DensePose from WiFi memetakan sinyal Wi-Fi ke koordinat permukaan tubuh dengan jaringan visi sebagai guru [72]. Teknik umum di baliknya, yaitu distilasi pengetahuan, melatih model murid yang ringan agar meniru keluaran atau representasi model guru yang lebih kuat [78]. Selama akuisisi data, keluaran guru berupa deret 21 "
+     "text": " per tangan (Subbab 3.7.4). Pemakaian visi sebagai pemberi supervisi bagi pelatihan model Wi-Fi telah memiliki preseden: Person-in-WiFi memperoleh persepsi tubuh dari sinyal Wi-Fi dengan supervisi kamera [77], dan DensePose from WiFi memetakan sinyal Wi-Fi ke koordinat permukaan tubuh dengan jaringan visi sebagai guru [72]. Teknik umum di baliknya — distilasi pengetahuan — melatih model murid yang ringan agar meniru keluaran atau representasi model guru yang lebih kuat [78]. Selama akuisisi data, keluaran guru berupa deret 21 "
     },
     {
      "text": "keypoint",
@@ -1392,7 +1416,7 @@
      "italics": true
     },
     {
-     "text": " WiFi-DensePose int8 dengan kepala 1D-CNN melatih bobotnya di bawah supervisi guru memakai rekaman tersinkron ADR-079. Operasi lapangan berjalan tanpa kamera, yaitu murid menyimpulkan label huruf murni dari jendela CSI."
+     "text": " WiFi-DensePose int8 dengan kepala 1D-CNN melatih bobotnya di bawah supervisi guru memakai rekaman tersinkron ADR-079. Operasi lapangan berjalan tanpa kamera: murid menyimpulkan label huruf murni dari jendela CSI."
     }
    ]
   },
@@ -1931,7 +1955,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Kelayakan purwarupa sebagai alat komunikasi dinilai dari tiga dimensi tambahan di luar klasifikasi. Pertama, latensi ujung ke ujung diukur untuk setiap arah, yaitu selang dari selesainya isyarat hingga suara diputar pada arah pertama dan selang dari selesainya ucapan hingga representasi tampil pada arah kedua. Kedua, cakupan kamus arah kedua diukur sebagai proporsi kata uji yang terwakili. Ketiga, keandalan operasional ditinjau dari laju deteksi palsu per jam saat tidak ada isyarat dan konsumsi arus modul sebagai indikator ketahanan baterai. Keempat, biaya purwarupa dianalisis dari harga komponen dan biaya layanan yang dipakai sebagai bahan penilaian kelayakan adopsi. Persepsi pengguna diukur dengan kuesioner skala Likert [93] dan dianalisis secara deskriptif tanpa statistik inferensial, sedangkan kewajaran keluaran sistem dinilai oleh validator penutur tunarungu."
+     "text": "Kelayakan purwarupa sebagai alat komunikasi dinilai dari empat dimensi tambahan di luar klasifikasi. Pertama, latensi ujung ke ujung diukur untuk setiap arah, yaitu selang dari selesainya isyarat hingga suara diputar pada arah pertama dan selang dari selesainya ucapan hingga representasi tampil pada arah kedua. Kedua, cakupan kamus arah kedua diukur sebagai proporsi kata uji yang terwakili. Ketiga, keandalan operasional ditinjau dari laju deteksi palsu per jam saat tidak ada isyarat dan konsumsi arus modul sebagai indikator ketahanan baterai. Keempat, biaya purwarupa dianalisis dari harga komponen dan biaya layanan yang dipakai sebagai bahan penilaian kelayakan adopsi. Persepsi pengguna diukur dengan kuesioner skala Likert [93] dan dianalisis secara deskriptif tanpa statistik inferensial, sedangkan kewajaran keluaran sistem dinilai oleh validator penutur tunarungu."
     }
    ]
   },
@@ -2398,14 +2422,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Rumusan masalah pertama dijawab pada tahap replikasi platform, perancangan arsitektur, kurasi isyarat dan protokol, serta penerapan distilasi guru–murid. Rumusan masalah kedua dijawab melalui uji klasifikasi, uji "
+     "text": "Rumusan masalah pertama dijawab pada tahap replikasi platform, perancangan arsitektur, kurasi isyarat dan protokol, serta penerapan distilasi guru–murid. Uji klasifikasi, uji "
     },
     {
      "text": "deployment",
      "italics": true
     },
     {
-     "text": ", dan uji jalur bahasa pada tahap perekaman dan generalisasi. Rumusan masalah ketiga ditinjau melalui uji operasional, uji kegunaan, dan penilaian validator pada tahap pengemasan purwarupa."
+     "text": ", dan uji jalur bahasa pada tahap perekaman dan generalisasi menjawab rumusan masalah kedua. Rumusan masalah ketiga ditinjau melalui uji operasional, uji kegunaan, dan penilaian validator pada tahap pengemasan purwarupa."
     }
    ]
   },
@@ -2690,14 +2714,14 @@
    "t": "p",
    "runs": [
     {
-     "text": "Model murid yang telah berjalan di modul dikemas menjadi purwarupa dua arah (Subbab 3.5) dengan mengaktifkan tumpukan perangkat lunak purna Rust, yaitu server Tokio/Axum, dasbor Leptos, dan aplikasi Tauri pada ponsel, serta mesin ucapan pada kedua arah. Pengemasan memanfaatkan antarmuka pada modul penerima, yaitu tombol tekan-untuk-bicara, rotary encoder volume, layar, dan "
+     "text": "Model murid yang telah berjalan di modul dikemas menjadi purwarupa dua arah (Subbab 3.5). Pengemasan mengaktifkan tumpukan perangkat lunak purna Rust, yaitu server Tokio/Axum, dasbor Leptos, dan aplikasi Tauri pada ponsel, serta mesin ucapan pada kedua arah. Purwarupa memanfaatkan antarmuka modul penerima (tombol tekan-untuk-bicara, rotary encoder volume, layar, dan "
     },
     {
      "text": "speaker",
      "italics": true
     },
     {
-     "text": ", serta menambahkan pemetaan teks ke representasi SIBI dan inferensi Kokoro TTS ONNX "
+     "text": ") serta menambahkan pemetaan teks ke representasi SIBI dan inferensi Kokoro TTS ONNX "
     },
     {
      "text": "on-device",
@@ -2711,7 +2735,7 @@
      "italics": true
     },
     {
-     "text": " maupun jalur cadangan awan dan server lokal. Tahap ini ditutup uji penerimaan pengguna akhir dari kelompok sasaran, yaitu guru, siswa tunarungu, dan wali murid, penilaian validator, serta analisis biaya purwarupa; G4 menilai penerimaan tersebut, persetujuan validator atas kewajaran keluaran, hasil analisis biaya, lalu menyintesis rekomendasi kelayakan beserta posisi purwarupa pada skala TKT/TRL 3–4."
+     "text": " maupun jalur cadangan awan dan server lokal. Tahap ini ditutup uji penerimaan pengguna akhir dari kelompok sasaran, yaitu guru, siswa tunarungu, dan wali murid, penilaian validator, serta analisis biaya purwarupa. G4 menilai ketiganya lalu menyintesis rekomendasi kelayakan beserta posisi purwarupa pada skala TKT/TRL 3–4."
     }
    ]
   },
@@ -3518,7 +3542,7 @@
      "italics": true
     },
     {
-     "text": "; validator memeriksa lembar definisi huruf, memeriksa sampel segmen, dan menilai kewajaran keluaran purwarupa; pengguna uji, yang direkrut dari kelompok sasaran yaitu guru, siswa tunarungu, dan wali murid, mencoba purwarupa dua arah pada uji kegunaan. Kriteria inklusi dan rekrutmen tercantum pada Tabel 3.8. Setiap pengisyarat direkam dalam sedikitnya dua sesi agar skema lintas sesi dapat dijalankan. Skema lintas ruang hanya memisahkan pengaruh ruang dari pengaruh orang bila pengisyarat yang sama direkam di setiap ruang."
+     "text": ". Validator memeriksa lembar definisi huruf dan sampel segmen serta menilai kewajaran keluaran purwarupa. Pengguna uji, yang direkrut dari kelompok sasaran yaitu guru, siswa tunarungu, dan wali murid, mencoba purwarupa dua arah pada uji kegunaan. Kriteria inklusi dan rekrutmen tercantum pada Tabel 3.8. Setiap pengisyarat direkam dalam sedikitnya dua sesi agar skema lintas sesi dapat dijalankan. Skema lintas ruang hanya memisahkan pengaruh ruang dari pengaruh orang bila pengisyarat yang sama direkam di setiap ruang."
     }
    ]
   },
@@ -3771,7 +3795,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Distilasi pengetahuan merupakan teknik melatih model murid yang ringan agar meniru keluaran atau representasi model guru yang lebih kuat [78]. Metode ini dipilih karena CSI tidak memuat citra tubuh; posisi tubuh tidak dapat dilabeli langsung dari data CSI, sedangkan kamera memilikinya secara alami. Preseden pemindahan pengetahuan visi ke model Wi-Fi telah ada pada Person-in-WiFi [77] dan DensePose from WiFi [72] (Subbab 2.5). Dalam penelitian ini, YOLO26m-Pose berperan sebagai model guru kamera yang mengekstrak deret 21 "
+     "text": "Distilasi pengetahuan [78] dipilih karena CSI tidak memuat citra tubuh; posisi tubuh tidak dapat dilabeli langsung dari data CSI, sedangkan kamera memilikinya secara alami. Preseden pemindahan pengetahuan visi ke model Wi-Fi telah ada pada Person-in-WiFi [77] dan DensePose from WiFi [72] (Subbab 2.5). Dalam penelitian ini, YOLO26m-Pose berperan sebagai model guru kamera yang mengekstrak deret 21 "
     },
     {
      "text": "keypoint",
@@ -4013,7 +4037,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Kinerja diukur dengan enam skema pembagian data pada Tabel 3.5. Skema dalam sesi memakai pembagian data temporal per blok, yaitu blok repetisi awal untuk pelatihan dan blok akhir untuk pengujian. Pembagian acak tidak dipakai karena repetisi berurutan cenderung mirip dan berpotensi membocorkan informasi dari data latih ke data uji."
+     "text": "Kinerja diukur dengan enam skema pembagian data pada Tabel 3.5. Skema dalam sesi memakai pembagian data temporal per blok, yaitu blok repetisi awal untuk pelatihan dan blok akhir untuk pengujian. Pembagian acak tidak dipakai. Repetisi berurutan cenderung mirip, dan kemiripan itu berpotensi membocorkan informasi dari data latih ke data uji."
     }
    ]
   },
