@@ -1,0 +1,878 @@
+========================================================================
+  HUMANIZER ID - LAPORAN PEMERIKSAAN GAYA, KALKE, & ISTILAH BAKU
+  Berkas: download/sensesibi-v10/Proposal-SenseSIBI-v10.md
+========================================================================
+Ditemukan 145 pemicu editorial terdeteksi:
+
+[1] Baris 16 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : > Catatan penyusunan: draft utuh ini disusun dari dossier bahan `Bahan-Proposal-...
+------------------------------------------------------------------------
+[2] Baris 25 [TBB-001 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara A dengan B"
+    Saran perbaikan : "antara A dan B"
+    Catatan kaidah  : Pasangan perangkai korelatif baku untuk kata 'antara' adalah 'dan', bukan 'dengan' (Rujukan: TBBBI Edisi IV, Hasan Alwi dkk.).
+    Kutipan teks    : Sebagian besar anak tunarungu lahir di tengah keluarga pendengar. Mitchell dan K...
+------------------------------------------------------------------------
+[3] Baris 29 [TBB-003 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "bukan A tetapi B"
+    Saran perbaikan : "bukan A, melainkan B"
+    Catatan kaidah  : Konjungsi 'bukan' berpasangan dengan 'melainkan' untuk pengontrasan nomina/kategori; 'tidak' berpasangan dengan 'tetapi' untuk verba/adjektiva (TBBBI).
+    Kutipan teks    : Sistem Isyarat Bahasa Indonesia (SIBI) dipilih sebagai objek penelitian meskipun...
+------------------------------------------------------------------------
+[4] Baris 29 [PT-002 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "bukan A namun B"
+    Saran perbaikan : "bukan A, melainkan B"
+    Catatan kaidah  : Perangkai korelatif baku untuk 'bukan' pada penontrasan nomina/frasa adalah 'melainkan', bukan 'namun' atau 'tetapi' (Suyatno dkk., hlm. 104).
+    Kutipan teks    : Sistem Isyarat Bahasa Indonesia (SIBI) dipilih sebagai objek penelitian meskipun...
+------------------------------------------------------------------------
+[5] Baris 29 [UIN-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "meskipun ... tetapi"
+    Saran perbaikan : "Meskipun [klausa], [klausa utama] (tanpa 'tetapi/namun') / [Klausa utama], tetapi [klausa]"
+    Catatan kaidah  : Padanan tidak serasi: menggabungkan konjungsi subordinatif konsesif ('meskipun/walaupun') dengan konjungsi antarklausa pertentangan ('tetapi/namun') dalam kalimat yang sama (Buku Bahasa Indonesia UIN Alauddin, hlm. 109).
+    Kutipan teks    : Sistem Isyarat Bahasa Indonesia (SIBI) dipilih sebagai objek penelitian meskipun...
+------------------------------------------------------------------------
+[6] Baris 33 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : Gelombang Wi-Fi tidak hanya berfungsi sebagai media transmisi data internet. Sin...
+------------------------------------------------------------------------
+[7] Baris 33 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : Gelombang Wi-Fi tidak hanya berfungsi sebagai media transmisi data internet. Sin...
+------------------------------------------------------------------------
+[8] Baris 41 [TBB-001 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara A dengan B"
+    Saran perbaikan : "antara A dan B"
+    Catatan kaidah  : Pasangan perangkai korelatif baku untuk kata 'antara' adalah 'dan', bukan 'dengan' (Rujukan: TBBBI Edisi IV, Hasan Alwi dkk.).
+    Kutipan teks    : Sebagai studi kelayakan, penelitian ini tidak mengklaim penerjemahan kontinu kos...
+------------------------------------------------------------------------
+[9] Baris 41 [PFP-006 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara ... sampai / antara ... hingga / antara ... atau"
+    Saran perbaikan : "antara X dan Y (gunakan konjungsi 'dan')"
+    Catatan kaidah  : Merujuk kaidah frasa preposisional berpasangan (hlm. 43), preposisi 'antara' yang menandai dua kutub hanya berpasangan dengan konjungsi koordinatif 'dan'; perangkaian dengan 'sampai/hingga/atau' tidak baku.
+    Kutipan teks    : Sebagai studi kelayakan, penelitian ini tidak mengklaim penerjemahan kontinu kos...
+------------------------------------------------------------------------
+[10] Baris 47 [TBB-001 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara A dengan B"
+    Saran perbaikan : "antara A dan B"
+    Catatan kaidah  : Pasangan perangkai korelatif baku untuk kata 'antara' adalah 'dan', bukan 'dengan' (Rujukan: TBBBI Edisi IV, Hasan Alwi dkk.).
+    Kutipan teks    : 1. Bagaimana merancang purwarupa sistem penerjemahan dua arah antara SIBI dan te...
+------------------------------------------------------------------------
+[11] Baris 47 [PFP-006 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara ... sampai / antara ... hingga / antara ... atau"
+    Saran perbaikan : "antara X dan Y (gunakan konjungsi 'dan')"
+    Catatan kaidah  : Merujuk kaidah frasa preposisional berpasangan (hlm. 43), preposisi 'antara' yang menandai dua kutub hanya berpasangan dengan konjungsi koordinatif 'dan'; perangkaian dengan 'sampai/hingga/atau' tidak baku.
+    Kutipan teks    : 1. Bagaimana merancang purwarupa sistem penerjemahan dua arah antara SIBI dan te...
+------------------------------------------------------------------------
+[12] Baris 55 [TBB-001 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara A dengan B"
+    Saran perbaikan : "antara A dan B"
+    Catatan kaidah  : Pasangan perangkai korelatif baku untuk kata 'antara' adalah 'dan', bukan 'dengan' (Rujukan: TBBBI Edisi IV, Hasan Alwi dkk.).
+    Kutipan teks    : 1. Merancang purwarupa sistem penerjemahan dua arah antara SIBI dan teks atau uj...
+------------------------------------------------------------------------
+[13] Baris 55 [PFP-006 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara ... sampai / antara ... hingga / antara ... atau"
+    Saran perbaikan : "antara X dan Y (gunakan konjungsi 'dan')"
+    Catatan kaidah  : Merujuk kaidah frasa preposisional berpasangan (hlm. 43), preposisi 'antara' yang menandai dua kutub hanya berpasangan dengan konjungsi koordinatif 'dan'; perangkaian dengan 'sampai/hingga/atau' tidak baku.
+    Kutipan teks    : 1. Merancang purwarupa sistem penerjemahan dua arah antara SIBI dan teks atau uj...
+------------------------------------------------------------------------
+[14] Baris 55 [WDY-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pelesapan agen tak berdasar anteseden pada klausa verbal berawalan verba aktif transitif"
+    Saran perbaikan : "Hadirkan subjek eksplisit (peneliti, penulis, sistem) atau ubah menjadi konstruksi pasif ilmiah baku berawalan di- (dihitung, dianalisis) (Widyaparwa Vol. 48 No. 1, 2020, hlm. 20-21)."
+    Catatan kaidah  : Studi tuturan bahasa oleh Kirana (Widyaparwa, 2020) menemukan 50% kalimat tuturan lisan mengalami pelesapan agen (agent deletion). Dalam ragam lisan konteks situasional membantu pemahaman, namun dalam ragam tulis ilmiah, kalimat yang diawali langsung dengan verba aktif transitif tanpa subjek menciptakan kalimat buntung (fragment sentence) yang melanggar struktur gramatikal S-P-O-K.
+    Kutipan teks    : 1. Merancang purwarupa sistem penerjemahan dua arah antara SIBI dan teks atau uj...
+------------------------------------------------------------------------
+[15] Baris 56 [WDY-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pelesapan agen tak berdasar anteseden pada klausa verbal berawalan verba aktif transitif"
+    Saran perbaikan : "Hadirkan subjek eksplisit (peneliti, penulis, sistem) atau ubah menjadi konstruksi pasif ilmiah baku berawalan di- (dihitung, dianalisis) (Widyaparwa Vol. 48 No. 1, 2020, hlm. 20-21)."
+    Catatan kaidah  : Studi tuturan bahasa oleh Kirana (Widyaparwa, 2020) menemukan 50% kalimat tuturan lisan mengalami pelesapan agen (agent deletion). Dalam ragam lisan konteks situasional membantu pemahaman, namun dalam ragam tulis ilmiah, kalimat yang diawali langsung dengan verba aktif transitif tanpa subjek menciptakan kalimat buntung (fragment sentence) yang melanggar struktur gramatikal S-P-O-K.
+    Kutipan teks    : 2. Mengukur kinerja pengenalan 24 huruf statis dan dua huruf gerak (J dan Z) alf...
+------------------------------------------------------------------------
+[16] Baris 57 [WDY-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pelesapan agen tak berdasar anteseden pada klausa verbal berawalan verba aktif transitif"
+    Saran perbaikan : "Hadirkan subjek eksplisit (peneliti, penulis, sistem) atau ubah menjadi konstruksi pasif ilmiah baku berawalan di- (dihitung, dianalisis) (Widyaparwa Vol. 48 No. 1, 2020, hlm. 20-21)."
+    Catatan kaidah  : Studi tuturan bahasa oleh Kirana (Widyaparwa, 2020) menemukan 50% kalimat tuturan lisan mengalami pelesapan agen (agent deletion). Dalam ragam lisan konteks situasional membantu pemahaman, namun dalam ragam tulis ilmiah, kalimat yang diawali langsung dengan verba aktif transitif tanpa subjek menciptakan kalimat buntung (fragment sentence) yang melanggar struktur gramatikal S-P-O-K.
+    Kutipan teks    : 3. Menganalisis kelayakan operasional purwarupa sebagai alat bantu komunikasi du...
+------------------------------------------------------------------------
+[17] Baris 75 [BRN-002 - RETORIKA KLISE AI]
+    Pola terdeteksi : "judul subbab generik laporan riset: Subbab Tinjauan Pustaka / Bab Metodologi Penelitian / Subbab Hasil dan Pembahasan"
+    Saran perbaikan : "[gunakan frasa topik substantif yang mencerminkan materi kajian, bukan nama bab laporan teknis]"
+    Catatan kaidah  : Pedoman Penerbitan BRIN (2024, Bagian Text Matter) melarang subbab bertitel generik seperti 'Tinjauan Pustaka', 'Metodologi Penelitian', atau 'Hasil dan Pembahasan' dalam monograf ilmiah. Pembaca buku membutuhkan judul topik langsung yang bernas.
+    Kutipan teks    : Manfaat penelitian ini dibedakan menjadi manfaat teoretis dan manfaat praktis.
+------------------------------------------------------------------------
+[18] Baris 91 [BRN-002 - RETORIKA KLISE AI]
+    Pola terdeteksi : "judul subbab generik laporan riset: Subbab Tinjauan Pustaka / Bab Metodologi Penelitian / Subbab Hasil dan Pembahasan"
+    Saran perbaikan : "[gunakan frasa topik substantif yang mencerminkan materi kajian, bukan nama bab laporan teknis]"
+    Catatan kaidah  : Pedoman Penerbitan BRIN (2024, Bagian Text Matter) melarang subbab bertitel generik seperti 'Tinjauan Pustaka', 'Metodologi Penelitian', atau 'Hasil dan Pembahasan' dalam monograf ilmiah. Pembaca buku membutuhkan judul topik langsung yang bernas.
+    Kutipan teks    : **BAB II Kajian Pustaka** memuat kajian teori dan penelitian terdahulu yang menj...
+------------------------------------------------------------------------
+[19] Baris 93 [BRN-002 - RETORIKA KLISE AI]
+    Pola terdeteksi : "judul subbab generik laporan riset: Subbab Tinjauan Pustaka / Bab Metodologi Penelitian / Subbab Hasil dan Pembahasan"
+    Saran perbaikan : "[gunakan frasa topik substantif yang mencerminkan materi kajian, bukan nama bab laporan teknis]"
+    Catatan kaidah  : Pedoman Penerbitan BRIN (2024, Bagian Text Matter) melarang subbab bertitel generik seperti 'Tinjauan Pustaka', 'Metodologi Penelitian', atau 'Hasil dan Pembahasan' dalam monograf ilmiah. Pembaca buku membutuhkan judul topik langsung yang bernas.
+    Kutipan teks    : **BAB III Metode Penelitian** memuat desain penelitian; tahapan penelitian beser...
+------------------------------------------------------------------------
+[20] Baris 93 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : **BAB III Metode Penelitian** memuat desain penelitian; tahapan penelitian beser...
+------------------------------------------------------------------------
+[21] Baris 108 [TBB-001 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara A dengan B"
+    Saran perbaikan : "antara A dan B"
+    Catatan kaidah  : Pasangan perangkai korelatif baku untuk kata 'antara' adalah 'dan', bukan 'dengan' (Rujukan: TBBBI Edisi IV, Hasan Alwi dkk.).
+    Kutipan teks    : Komunikasi antara penutur isyarat dan pendengar menuntut kemampuan pada kedua ar...
+------------------------------------------------------------------------
+[22] Baris 110 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "API (Application Programming Interface)"
+    Saran perbaikan : "antarmuka pemrograman aplikasi"
+    Catatan kaidah  : Boleh disingkat API dalam teks teknis.
+    Kutipan teks    : Sistem terdahulu di Indonesia dapat dikelompokkan menurut arah kerjanya. Pada ar...
+------------------------------------------------------------------------
+[23] Baris 122 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : Perubahan kanal tersebut memiliki dasar fisika pada model zona Fresnel. Wu dkk. ...
+------------------------------------------------------------------------
+[24] Baris 122 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : Perubahan kanal tersebut memiliki dasar fisika pada model zona Fresnel. Wu dkk. ...
+------------------------------------------------------------------------
+[25] Baris 130 [TBB-001 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara A dengan B"
+    Saran perbaikan : "antara A dan B"
+    Catatan kaidah  : Pasangan perangkai korelatif baku untuk kata 'antara' adalah 'dan', bukan 'dengan' (Rujukan: TBBBI Edisi IV, Hasan Alwi dkk.).
+    Kutipan teks    : Panjang gelombang Wi-Fi pada pita 2,4 GHz sekitar 12,5 cm dan membatasi resolusi...
+------------------------------------------------------------------------
+[26] Baris 172 [TBB-003 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "bukan A tetapi B"
+    Saran perbaikan : "bukan A, melainkan B"
+    Catatan kaidah  : Konjungsi 'bukan' berpasangan dengan 'melainkan' untuk pengontrasan nomina/kategori; 'tidak' berpasangan dengan 'tetapi' untuk verba/adjektiva (TBBBI).
+    Kutipan teks    : Pengenalan bahasa isyarat dan gestur dari CSI telah diteliti pada beberapa bahas...
+------------------------------------------------------------------------
+[27] Baris 172 [PT-002 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "bukan A namun B"
+    Saran perbaikan : "bukan A, melainkan B"
+    Catatan kaidah  : Perangkai korelatif baku untuk 'bukan' pada penontrasan nomina/frasa adalah 'melainkan', bukan 'namun' atau 'tetapi' (Suyatno dkk., hlm. 104).
+    Kutipan teks    : Pengenalan bahasa isyarat dan gestur dari CSI telah diteliti pada beberapa bahas...
+------------------------------------------------------------------------
+[28] Baris 178 [KJK-005 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : ", karena"
+    Saran perbaikan : "karena (tanpa tanda koma sebelumnya)"
+    Catatan kaidah  : Konjungsi intrakalimat 'karena' TIDAK diawali tanda koma (Tabel 4.12, Buku Kelas XII Kemendikbudristek, hlm. 168). Penulisan benar: klausa1 karena klausa2 (tanpa koma).
+    Kutipan teks    : Inferensi pada penelitian ini dirancang berjalan langsung pada modul penerima, b...
+------------------------------------------------------------------------
+[29] Baris 178 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : Inferensi pada penelitian ini dirancang berjalan langsung pada modul penerima, b...
+------------------------------------------------------------------------
+[30] Baris 178 [SPE-001 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : ", karena / , agar / , supaya (koma terlarang sebelum anak kalimat kausal/final di belakang induk)"
+    Saran perbaikan : "karena / agar / supaya (hapus tanda koma di depan konjungsi)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 1 Ejaan (hlm. 39), jika anak kalimat kausal/final mengiringi induk kalimat di posisi belakang, tanda koma tidak boleh digunakan untuk memisahkannya.
+    Kutipan teks    : Inferensi pada penelitian ini dirancang berjalan langsung pada modul penerima, b...
+------------------------------------------------------------------------
+[31] Baris 178 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : Inferensi pada penelitian ini dirancang berjalan langsung pada modul penerima, b...
+------------------------------------------------------------------------
+[32] Baris 178 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : Inferensi pada penelitian ini dirancang berjalan langsung pada modul penerima, b...
+------------------------------------------------------------------------
+[33] Baris 186 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : Untuk ASR, Whisper adalah model terbuka yang dilatih pada lima juta jam data dan...
+------------------------------------------------------------------------
+[34] Baris 186 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : Untuk ASR, Whisper adalah model terbuka yang dilatih pada lima juta jam data dan...
+------------------------------------------------------------------------
+[35] Baris 200 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "API (Application Programming Interface)"
+    Saran perbaikan : "antarmuka pemrograman aplikasi"
+    Catatan kaidah  : Boleh disingkat API dalam teks teknis.
+    Kutipan teks    : Preseden arah kedua di Indonesia berbentuk kamus tingkat kata. KASIBI memetakan ...
+------------------------------------------------------------------------
+[36] Baris 251 [TBB-003 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "bukan A tetapi B"
+    Saran perbaikan : "bukan A, melainkan B"
+    Catatan kaidah  : Konjungsi 'bukan' berpasangan dengan 'melainkan' untuk pengontrasan nomina/kategori; 'tidak' berpasangan dengan 'tetapi' untuk verba/adjektiva (TBBBI).
+    Kutipan teks    : Tabel 2.2 memperlihatkan empat kelompok penelitian. Kelompok pertama mengenali b...
+------------------------------------------------------------------------
+[37] Baris 251 [PT-002 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "bukan A namun B"
+    Saran perbaikan : "bukan A, melainkan B"
+    Catatan kaidah  : Perangkai korelatif baku untuk 'bukan' pada penontrasan nomina/frasa adalah 'melainkan', bukan 'namun' atau 'tetapi' (Suyatno dkk., hlm. 104).
+    Kutipan teks    : Tabel 2.2 memperlihatkan empat kelompok penelitian. Kelompok pertama mengenali b...
+------------------------------------------------------------------------
+[38] Baris 265 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "API (Application Programming Interface)"
+    Saran perbaikan : "antarmuka pemrograman aplikasi"
+    Catatan kaidah  : Boleh disingkat API dalam teks teknis.
+    Kutipan teks    : | 3 | Node penginderaan | ESP32-S3, inti ganda Xtensa LX7 dengan instruksi vekto...
+------------------------------------------------------------------------
+[39] Baris 268 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : | 6 | Model murid tepi | *Backbone* WiFi-DensePose int8 dengan kepala 1D-CNN [32...
+------------------------------------------------------------------------
+[40] Baris 291 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "API (Application Programming Interface)"
+    Saran perbaikan : "antarmuka pemrograman aplikasi"
+    Catatan kaidah  : Boleh disingkat API dalam teks teknis.
+    Kutipan teks    : Uraian tiap komponen disajikan sebagai berikut. Pertama, mikrokontroler ESP32-S3...
+------------------------------------------------------------------------
+[41] Baris 300 [BRN-002 - RETORIKA KLISE AI]
+    Pola terdeteksi : "judul subbab generik laporan riset: Subbab Tinjauan Pustaka / Bab Metodologi Penelitian / Subbab Hasil dan Pembahasan"
+    Saran perbaikan : "[gunakan frasa topik substantif yang mencerminkan materi kajian, bukan nama bab laporan teknis]"
+    Catatan kaidah  : Pedoman Penerbitan BRIN (2024, Bagian Text Matter) melarang subbab bertitel generik seperti 'Tinjauan Pustaka', 'Metodologi Penelitian', atau 'Hasil dan Pembahasan' dalam monograf ilmiah. Pembaca buku membutuhkan judul topik langsung yang bernas.
+    Kutipan teks    : Rumusan masalah pertama dijawab pada tahap replikasi platform, perancangan arsit...
+------------------------------------------------------------------------
+[42] Baris 300 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : Rumusan masalah pertama dijawab pada tahap replikasi platform, perancangan arsit...
+------------------------------------------------------------------------
+[43] Baris 304 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : Penelitian berlangsung selama empat belas minggu (M1–M14) dalam enam tahap. Taha...
+------------------------------------------------------------------------
+[44] Baris 310 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : T0["T0 Replikasi platform, verifikasi<br/>CSI 56 subcarrier pada 1 m,<br/>uji De...
+------------------------------------------------------------------------
+[45] Baris 311 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : G0("G0 akhir M2: baseline CSI-jaringan:<br/>UDP Rust tanpa kehilangan paket,<br/...
+------------------------------------------------------------------------
+[46] Baris 312 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : T1["T1 Kurasi isyarat, kalibrasi ruang,<br/>protokol, etika, rintisan separabili...
+------------------------------------------------------------------------
+[47] Baris 313 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : T2["T2 Perekaman dataset dan<br/>pelatihan guru–murid<br/>(M4–M8)"]
+------------------------------------------------------------------------
+[48] Baris 316 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : T1 --> T2
+------------------------------------------------------------------------
+[49] Baris 320 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : T2B["Kuantisasi int8 dan uji<br/>deployment murid ke<br/>modul ESP32-S3"]
+------------------------------------------------------------------------
+[50] Baris 323 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : G2("G2 akhir M10: konsultasi 3 pilar<br/>pakar SIBI, RF, embedded AI<br/>tanpa t...
+------------------------------------------------------------------------
+[51] Baris 330 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : T3 --> G2
+------------------------------------------------------------------------
+[52] Baris 331 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : G2 -- "lolos" --> T4
+------------------------------------------------------------------------
+[53] Baris 361 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : subgraph R2[" "]
+------------------------------------------------------------------------
+[54] Baris 363 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : G2{"G2 gagal"}
+------------------------------------------------------------------------
+[55] Baris 364 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : P2["Temuan blok pilar pakar diperbaiki<br/>atau klaim disempitkan, lalu<br/>G2 d...
+------------------------------------------------------------------------
+[56] Baris 365 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : O2((" "))
+------------------------------------------------------------------------
+[57] Baris 366 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : G2 -- "gagal" --> P2
+------------------------------------------------------------------------
+[58] Baris 367 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : P2 -- "lanjut T4" --> O2
+------------------------------------------------------------------------
+[59] Baris 386 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : R1 ~~~ R2
+------------------------------------------------------------------------
+[60] Baris 387 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : R2 ~~~ R3
+------------------------------------------------------------------------
+[61] Baris 403 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : *Dataset* direkam dengan kurang lebih 30 repetisi per isyarat per sesi disertai ...
+------------------------------------------------------------------------
+[62] Baris 403 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : *Dataset* direkam dengan kurang lebih 30 repetisi per isyarat per sesi disertai ...
+------------------------------------------------------------------------
+[63] Baris 453 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : Gambar 3.4 Distilasi guru–murid tahap pelatihan: dataset murid ber-supervisi gur...
+------------------------------------------------------------------------
+[64] Baris 457 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : Model mudah mengalami *overfitting* pada orang dan ruang tempat data latih direk...
+------------------------------------------------------------------------
+[65] Baris 561 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : DSP2["Layar modul: teks lalu<br/>representasi SIBI"]
+------------------------------------------------------------------------
+[66] Baris 561 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : DSP2["Layar modul: teks lalu<br/>representasi SIBI"]
+------------------------------------------------------------------------
+[67] Baris 565 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : STT -- "teks" --> DSP2
+------------------------------------------------------------------------
+[68] Baris 565 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : STT -- "teks" --> DSP2
+------------------------------------------------------------------------
+[69] Baris 566 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : AST --> DSP2
+------------------------------------------------------------------------
+[70] Baris 566 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : AST --> DSP2
+------------------------------------------------------------------------
+[71] Baris 611 [TBB-001 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara A dengan B"
+    Saran perbaikan : "antara A dan B"
+    Catatan kaidah  : Pasangan perangkai korelatif baku untuk kata 'antara' adalah 'dan', bukan 'dengan' (Rujukan: TBBBI Edisi IV, Hasan Alwi dkk.).
+    Kutipan teks    : Modul pemancar dan modul penerima dipasang pada dudukan setinggi dada pengisyara...
+------------------------------------------------------------------------
+[72] Baris 648 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : subgraph S2["Muka samping"]
+------------------------------------------------------------------------
+[73] Baris 659 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : S4 --- S2
+------------------------------------------------------------------------
+[74] Baris 697 [BPK-010 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "perincian tuntas berbilangan pasti diawali antara lain atau misalnya alih-alih yaitu atau yakni (ada dua hal, misalnya A dan B)"
+    Saran perbaikan : "Gunakan yaitu atau yakni jika seluruh anggota disebutkan tuntas sesuai bilangannya: 'Ada dua hal, yaitu A dan B' (bukan 'Ada dua hal, misalnya/antara lain A dan B'); antara lain dan misalnya khusus bila menyebutkan sebagian (Mustakim 2019, hlm. 81-82)."
+    Catatan kaidah  : Bentuk dan Pilihan Kata (Mustakim, 2019, butir 3.1.4.h) membedakan fungsi penanda perincian: yaitu dan yakni digunakan untuk menyebutkan seluruh anggota yang sudah ditentukan jumlahnya secara eksak di awal kalimat (mis. 'Ada dua hal...'), sedangkan misalnya dan antara lain digunakan untuk menyebutkan sebagian dari jumlah yang lebih banyak.
+    Kutipan teks    : Prasyarat satu-satunya bagi jalur ini adalah ketersediaan suara bahasa Indonesia...
+------------------------------------------------------------------------
+[75] Baris 743 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : Guru menjalani pelatihan lanjutan (*fine-tuning*) pada data visual SIBI hasil pe...
+------------------------------------------------------------------------
+[76] Baris 743 [BAK-012 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "antar "
+    Saran perbaikan : "antar[kata]"
+    Catatan kaidah  : 'Antar' adalah bentuk terikat yang wajib digabungkan dengan kata berikutnya (antarkelompok, antarsimpul, antarmuka).
+    Kutipan teks    : Guru menjalani pelatihan lanjutan (*fine-tuning*) pada data visual SIBI hasil pe...
+------------------------------------------------------------------------
+[77] Baris 743 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "fine-tuning"
+    Saran perbaikan : "penyetelan halus"
+    Catatan kaidah  : Penyesuaian parameter model terarah.
+    Kutipan teks    : Guru menjalani pelatihan lanjutan (*fine-tuning*) pada data visual SIBI hasil pe...
+------------------------------------------------------------------------
+[78] Baris 792 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : subgraph R2[" "]
+------------------------------------------------------------------------
+[79] Baris 802 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : R1 --> R2
+------------------------------------------------------------------------
+[80] Baris 809 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : Uji Delta-CSI dan koeksistensi mendasari G0, uji klasifikasi dan uji *deployment...
+------------------------------------------------------------------------
+[81] Baris 809 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : Uji Delta-CSI dan koeksistensi mendasari G0, uji klasifikasi dan uji *deployment...
+------------------------------------------------------------------------
+[82] Baris 816 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : DEP["Kuantisasi int8 dan deployment<br/>murid ke modul ESP32-S3"]
+------------------------------------------------------------------------
+[83] Baris 853 [WDY-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pelesapan agen tak berdasar anteseden pada klausa verbal berawalan verba aktif transitif"
+    Saran perbaikan : "Hadirkan subjek eksplisit (peneliti, penulis, sistem) atau ubah menjadi konstruksi pasif ilmiah baku berawalan di- (dihitung, dianalisis) (Widyaparwa Vol. 48 No. 1, 2020, hlm. 20-21)."
+    Catatan kaidah  : Studi tuturan bahasa oleh Kirana (Widyaparwa, 2020) menemukan 50% kalimat tuturan lisan mengalami pelesapan agen (agent deletion). Dalam ragam lisan konteks situasional membantu pemahaman, namun dalam ragam tulis ilmiah, kalimat yang diawali langsung dengan verba aktif transitif tanpa subjek menciptakan kalimat buntung (fragment sentence) yang melanggar struktur gramatikal S-P-O-K.
+    Kutipan teks    : 4. Mengukur arus modul lengkap dengan alat ukur arus pada beberapa kondisi kerja...
+------------------------------------------------------------------------
+[84] Baris 854 [WDY-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pelesapan agen tak berdasar anteseden pada klausa verbal berawalan verba aktif transitif"
+    Saran perbaikan : "Hadirkan subjek eksplisit (peneliti, penulis, sistem) atau ubah menjadi konstruksi pasif ilmiah baku berawalan di- (dihitung, dianalisis) (Widyaparwa Vol. 48 No. 1, 2020, hlm. 20-21)."
+    Catatan kaidah  : Studi tuturan bahasa oleh Kirana (Widyaparwa, 2020) menemukan 50% kalimat tuturan lisan mengalami pelesapan agen (agent deletion). Dalam ragam lisan konteks situasional membantu pemahaman, namun dalam ragam tulis ilmiah, kalimat yang diawali langsung dengan verba aktif transitif tanpa subjek menciptakan kalimat buntung (fragment sentence) yang melanggar struktur gramatikal S-P-O-K.
+    Kutipan teks    : 5. Menghitung biaya purwarupa dari harga komponen serta perkiraan biaya layanan ...
+------------------------------------------------------------------------
+[85] Baris 855 [WDY-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pelesapan agen tak berdasar anteseden pada klausa verbal berawalan verba aktif transitif"
+    Saran perbaikan : "Hadirkan subjek eksplisit (peneliti, penulis, sistem) atau ubah menjadi konstruksi pasif ilmiah baku berawalan di- (dihitung, dianalisis) (Widyaparwa Vol. 48 No. 1, 2020, hlm. 20-21)."
+    Catatan kaidah  : Studi tuturan bahasa oleh Kirana (Widyaparwa, 2020) menemukan 50% kalimat tuturan lisan mengalami pelesapan agen (agent deletion). Dalam ragam lisan konteks situasional membantu pemahaman, namun dalam ragam tulis ilmiah, kalimat yang diawali langsung dengan verba aktif transitif tanpa subjek menciptakan kalimat buntung (fragment sentence) yang melanggar struktur gramatikal S-P-O-K.
+    Kutipan teks    : 6. Menghitung laju deteksi palsu, latensi kedua arah, dan estimasi ketahanan bat...
+------------------------------------------------------------------------
+[86] Baris 863 [WDY-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pelesapan agen tak berdasar anteseden pada klausa verbal berawalan verba aktif transitif"
+    Saran perbaikan : "Hadirkan subjek eksplisit (peneliti, penulis, sistem) atau ubah menjadi konstruksi pasif ilmiah baku berawalan di- (dihitung, dianalisis) (Widyaparwa Vol. 48 No. 1, 2020, hlm. 20-21)."
+    Catatan kaidah  : Studi tuturan bahasa oleh Kirana (Widyaparwa, 2020) menemukan 50% kalimat tuturan lisan mengalami pelesapan agen (agent deletion). Dalam ragam lisan konteks situasional membantu pemahaman, namun dalam ragam tulis ilmiah, kalimat yang diawali langsung dengan verba aktif transitif tanpa subjek menciptakan kalimat buntung (fragment sentence) yang melanggar struktur gramatikal S-P-O-K.
+    Kutipan teks    : 3. Mengukur waktu pengenalan per frasa, waktu pemetaan, waktu inferensi TTS *on-...
+------------------------------------------------------------------------
+[87] Baris 866 [WDY-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pelesapan agen tak berdasar anteseden pada klausa verbal berawalan verba aktif transitif"
+    Saran perbaikan : "Hadirkan subjek eksplisit (peneliti, penulis, sistem) atau ubah menjadi konstruksi pasif ilmiah baku berawalan di- (dihitung, dianalisis) (Widyaparwa Vol. 48 No. 1, 2020, hlm. 20-21)."
+    Catatan kaidah  : Studi tuturan bahasa oleh Kirana (Widyaparwa, 2020) menemukan 50% kalimat tuturan lisan mengalami pelesapan agen (agent deletion). Dalam ragam lisan konteks situasional membantu pemahaman, namun dalam ragam tulis ilmiah, kalimat yang diawali langsung dengan verba aktif transitif tanpa subjek menciptakan kalimat buntung (fragment sentence) yang melanggar struktur gramatikal S-P-O-K.
+    Kutipan teks    : 6. Menganalisis keseimbangan antara mutu, latensi, dan ketergantungan pada konek...
+------------------------------------------------------------------------
+[88] Baris 900 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | G0 | Baseline CSI dan jaringan, akhir M2 | Akuisisi CSI 56 *subcarrier* pada j...
+------------------------------------------------------------------------
+[89] Baris 901 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | G1 | Model tepi int8 dan distilasi guru–murid, akhir M8 | Akurasi klasifikasi ...
+------------------------------------------------------------------------
+[90] Baris 902 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | G2 | Konsultasi tiga pilar pakar, akhir M10 | Penilaian tertulis pakar SIBI da...
+------------------------------------------------------------------------
+[91] Baris 912 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | No. | Kegiatan | M1 | M2 | M3 | M4 | M5 | M6 | M7 | M8 | M9 | M10 | M11 | M12 ...
+------------------------------------------------------------------------
+[92] Baris 914 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | 1 | T0 Replikasi platform, uji Delta-CSI, dan uji koeksistensi | ■ | ■ | | | |...
+------------------------------------------------------------------------
+[93] Baris 916 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | 3 | T2 Perekaman *dataset*, pelatihan guru–murid dan pembanding, kuantisasi, u...
+------------------------------------------------------------------------
+[94] Baris 916 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : | 3 | T2 Perekaman *dataset*, pelatihan guru–murid dan pembanding, kuantisasi, u...
+------------------------------------------------------------------------
+[95] Baris 917 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | 4 | T3 Uji lintas sesi, lintas partisipan, lintas ruang, dan pengguna baru | |...
+------------------------------------------------------------------------
+[96] Baris 944 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | 16 | Rubrik dan ambang G2 | Sebelum G2 dinilai | [PERLU DATA: rubrik konsultas...
+------------------------------------------------------------------------
+[97] Baris 945 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | 17 | Personalisasi bila G2 gagal | Sebelum T4 | [PERLU DATA: prosedur perekama...
+------------------------------------------------------------------------
+[98] Baris 968 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | 2 | Akurasi lintas partisipan, ruang, atau posisi rendah (G2 gagal) | Klaim pe...
+------------------------------------------------------------------------
+[99] Baris 974 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | 8 | Rekrutmen partisipan atau persetujuan etika terlambat | Jadwal T2 mundur |...
+------------------------------------------------------------------------
+[100] Baris 1013 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deep learning"
+    Saran perbaikan : "pemelajaran mendalam"
+    Catatan kaidah  : PASTI Kemendikdasmen (Ranah: TI). Subbidang pemelajaran mesin berbasis jaringan saraf tiruan dalam.
+    Kutipan teks    : [14] S. A. Sanjaya and H. F. Ilone, "BISINDO sign language recognition: A system...
+------------------------------------------------------------------------
+[101] Baris 1013 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "science"
+    Saran perbaikan : "sains"
+    Catatan kaidah  : Penyerapan dengan penyesuaian ejaan PUPI 2005.
+    Kutipan teks    : [14] S. A. Sanjaya and H. F. Ilone, "BISINDO sign language recognition: A system...
+------------------------------------------------------------------------
+[102] Baris 1015 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "science"
+    Saran perbaikan : "sains"
+    Catatan kaidah  : Penyerapan dengan penyesuaian ejaan PUPI 2005.
+    Kutipan teks    : [15] S. Dwijayanti, Hermawati, S. I. Taqiyyah, H. Hikmarika, and B. Y. Suprapto,...
+------------------------------------------------------------------------
+[103] Baris 1019 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deep learning"
+    Saran perbaikan : "pemelajaran mendalam"
+    Catatan kaidah  : PASTI Kemendikdasmen (Ranah: TI). Subbidang pemelajaran mesin berbasis jaringan saraf tiruan dalam.
+    Kutipan teks    : [17] R. A. Maulana, A. R. Adriansyah, and Z. Imaduddin, "Integrasi model deep le...
+------------------------------------------------------------------------
+[104] Baris 1025 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "science"
+    Saran perbaikan : "sains"
+    Catatan kaidah  : Penyerapan dengan penyesuaian ejaan PUPI 2005.
+    Kutipan teks    : [20] P. Sruthi, S. Satapathy, and S. K. Udgata, "HandFi: WiFi sensing based hand...
+------------------------------------------------------------------------
+[105] Baris 1051 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "default"
+    Saran perbaikan : "bawaan / standar"
+    Catatan kaidah  : Nilai atau setelan awal sistem.
+    Kutipan teks    : [33] Espressif Systems, *ESP32-S3 Series Datasheet*, versi 2.2, 2026. [Online]. ...
+------------------------------------------------------------------------
+[106] Baris 1059 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "framework"
+    Saran perbaikan : "kerangka kerja"
+    Catatan kaidah  : Misalnya kerangka kerja Next.js atau Flutter.
+    Kutipan teks    : [37] tokio-rs, "axum: Ergonomic and modular web framework built with Tokio," rep...
+------------------------------------------------------------------------
+[107] Baris 1081 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : [48] SYSTRAN, "faster-whisper: Whisper transcription with CTranslate2," reposito...
+------------------------------------------------------------------------
+[108] Baris 1081 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : [48] SYSTRAN, "faster-whisper: Whisper transcription with CTranslate2," reposito...
+------------------------------------------------------------------------
+[109] Baris 1091 [GLOS-LIN - GLOSARIUM LINGUISTIK DAN ILMU BAHASA]
+    Pola terdeteksi : "machine translation"
+    Saran perbaikan : "terjemahan mesin"
+    Catatan kaidah  : Penerjemahan otomatis berbasis peranti lunak.
+    Kutipan teks    : [53] F. Picron, D. Van Landuyt, and R. Omardeen, "(Towards) Sign language machin...
+------------------------------------------------------------------------
+[110] Baris 1105 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "science"
+    Saran perbaikan : "sains"
+    Catatan kaidah  : Penyerapan dengan penyesuaian ejaan PUPI 2005.
+    Kutipan teks    : [60] B. I. Rodhiyah and S. Wulandari, "Aplikasi berbasis mobile sebagai sarana p...
+------------------------------------------------------------------------
+[111] Baris 1107 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "science"
+    Saran perbaikan : "sains"
+    Catatan kaidah  : Penyerapan dengan penyesuaian ejaan PUPI 2005.
+    Kutipan teks    : [61] G. O. Kindy, G. Leonali, and H. Lucky, "Word-level BISINDO: A novel video I...
+------------------------------------------------------------------------
+[112] Baris 1109 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "science"
+    Saran perbaikan : "sains"
+    Catatan kaidah  : Penyerapan dengan penyesuaian ejaan PUPI 2005.
+    Kutipan teks    : [62] K. L. Wiguna and Rojali, "Sentence-level Indonesian sign language (BISINDO)...
+------------------------------------------------------------------------
+[113] Baris 1111 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "science"
+    Saran perbaikan : "sains"
+    Catatan kaidah  : Penyerapan dengan penyesuaian ejaan PUPI 2005.
+    Kutipan teks    : [63] C. Sebastian, J. Limanza, L. Laurentia, J. Harefa, and K. Jingga, "Indonesi...
+------------------------------------------------------------------------
+[114] Baris 1123 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deep learning"
+    Saran perbaikan : "pemelajaran mendalam"
+    Catatan kaidah  : PASTI Kemendikdasmen (Ranah: TI). Subbidang pemelajaran mesin berbasis jaringan saraf tiruan dalam.
+    Kutipan teks    : [69] C. Zheng *et al.*, "Deep learning-based human pose estimation: A survey," *...
+------------------------------------------------------------------------
+[115] Baris 1127 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "framework"
+    Saran perbaikan : "kerangka kerja"
+    Catatan kaidah  : Misalnya kerangka kerja Next.js atau Flutter.
+    Kutipan teks    : [71] C. Lugaresi *et al.*, "MediaPipe: A framework for building perception pipel...
+------------------------------------------------------------------------
+[116] Baris 1135 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "artificial intelligence"
+    Saran perbaikan : "kecerdasan buatan / kecerdasan artifisial"
+    Catatan kaidah  : PASTI Kemendikdasmen (Ranah: Matematika/TI). Keduanya diakui secara resmi.
+    Kutipan teks    : [75] H. F. Thariq Ahmed, H. Ahmad, S. K. Phang, H. Harkat, and K. Narasingamurth...
+------------------------------------------------------------------------
+[117] Baris 1139 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "machine learning"
+    Saran perbaikan : "pemelajaran mesin"
+    Catatan kaidah  : PASTI Kemendikdasmen (Ranah: TI). Gunakan 'pemelajaran' (proses belajar mandiri/mesin), bukan 'pembelajaran' (proses guru mengajar siswa).
+    Kutipan teks    : [77] C. Cortes and V. Vapnik, "Support-vector networks," *Machine Learning*, vol...
+------------------------------------------------------------------------
+[118] Baris 1149 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : [82] A. Safrida, E. Mulyanto, and M. Naufal, "Optimasi klasifikasi citra alfabet...
+------------------------------------------------------------------------
+[119] Baris 1149 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : [82] A. Safrida, E. Mulyanto, and M. Naufal, "Optimasi klasifikasi citra alfabet...
+------------------------------------------------------------------------
+[120] Baris 1149 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "fine-tuning"
+    Saran perbaikan : "penyetelan halus"
+    Catatan kaidah  : Penyesuaian parameter model terarah.
+    Kutipan teks    : [82] A. Safrida, E. Mulyanto, and M. Naufal, "Optimasi klasifikasi citra alfabet...
+------------------------------------------------------------------------
+[121] Baris 1157 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "design"
+    Saran perbaikan : "desain"
+    Catatan kaidah  : Penyerapan dengan penyesuaian ejaan PUPI 2005.
+    Kutipan teks    : [86] D. J. Bowen, M. Kreuter, B. Spring, L. Cofta-Woerpel, L. Linnan, D. Weiner,...
+------------------------------------------------------------------------
+[122] Baris 1169 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : [92] K. Qian, C. Wu, Y. Zhang, G. Zhang, Z. Yang, and Y. Liu, “Widar2.0: Passive...
+------------------------------------------------------------------------
+[123] Baris 1169 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : [92] K. Qian, C. Wu, Y. Zhang, G. Zhang, Z. Yang, and Y. Liu, “Widar2.0: Passive...
+------------------------------------------------------------------------
+[124] Baris 1171 [TII-003 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "awalan non- dipertahankan mentah tanpa padanan tak-/bukan-/nir- sesuai maknanya (non-linear, non-metal, non-pergerakan)"
+    Saran perbaikan : "Sesuaikan makna non-: bermakna 'tidak' → tak- terangkai (non-linear → taklinear); bermakna 'bukan' → kata lepas bukan (non-metal → bukan logam); bermakna 'tanpa/bebas dari' → nir- terangkai (motionless → nirgerak; non-pergerakan → nirgerak) (hlm. 56-57)."
+    Catatan kaidah  : Tata Istilah Indonesia (1978, butir 7.7.1.2 angka 9) menetapkan awalan non- asing diterjemahkan menurut maknanya: 'tidak' menjadi tak- (taklinear), 'bukan' menjadi kata lepas bukan (bukan logam), dan 'tanpa/bebas dari' menjadi nir- (nirgerak). Mempertahankan non- mentah dalam teks Indonesia baku dianggap penyerapan setengah jalan; padanan KBBI mutakhir (nonaktif, nirlaba) mengikuti asas yang sama.
+    Kutipan teks    : [93] J. Yang, H. Huang, Y. Zhou, X. Chen, Y. Xu, S. Yuan, H. Zou, C. X. Lu, and ...
+------------------------------------------------------------------------
+[125] Baris 1206 [TII-001 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "kata serapan berakhir -ant/-ent/-ist/-an[ct] ditulis utuh tanpa menggugurkan konsonan akhir yang tidak berfungsi (dominant, informant, tolerant, relevant, optimist, realist, manifest)"
+    Saran perbaikan : "Gugurkan konsonan akhir yang tidak melambangkan bunyi dalam fonologi Indonesia: dominant → dominan; informant → informan; tolerant → toleran; relevant → relevan; latent → laten; optimist → optimis; realist → realis; nationalist → nasionalis; manifest → manifes (Ejaan fonemik, hlm. 51-52)."
+    Catatan kaidah  : Tata Istilah Indonesia (Pusat Bahasa 1978) menetapkan ejaan fonemik untuk penyerapan istilah: hanya satuan bunyi yang berfungsi dalam bahasa Indonesia dilambangkan huruf; konsonan akhir yang tidak berfungsi digugurkan (hlm. 51). Padanannya telah baku dalam KBBI dan PUEBI: dominan, toleran, relevan, optimis, realis, manifes. Bentuk berakhiran -ant/-ent/-ist utuh adalah residu ejaan asing yang tidak lagi sesuai sistem ejaan Indonesia.
+    Kutipan teks    : | 3.7.4 ¶2 | Keterangan generik: "pipeline pelatihan YOLO26 beserta data latihny...
+------------------------------------------------------------------------
+[126] Baris 1222 [TBB-001 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara A dengan B"
+    Saran perbaikan : "antara A dan B"
+    Catatan kaidah  : Pasangan perangkai korelatif baku untuk kata 'antara' adalah 'dan', bukan 'dengan' (Rujukan: TBBBI Edisi IV, Hasan Alwi dkk.).
+    Kutipan teks    : | Judul | "…ANTARA SISTEM ISYARAT BAHASA INDONESIA (SIBI) DAN TEKS ATAU UJARAN… ...
+------------------------------------------------------------------------
+[127] Baris 1222 [PFP-006 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "antara ... sampai / antara ... hingga / antara ... atau"
+    Saran perbaikan : "antara X dan Y (gunakan konjungsi 'dan')"
+    Catatan kaidah  : Merujuk kaidah frasa preposisional berpasangan (hlm. 43), preposisi 'antara' yang menandai dua kutub hanya berpasangan dengan konjungsi koordinatif 'dan'; perangkaian dengan 'sampai/hingga/atau' tidak baku.
+    Kutipan teks    : | Judul | "…ANTARA SISTEM ISYARAT BAHASA INDONESIA (SIBI) DAN TEKS ATAU UJARAN… ...
+------------------------------------------------------------------------
+[128] Baris 1224 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | 2.3 ¶ akhir | "perbedaan konfigurasi jari dan ekspresi wajah diasumsikan terla...
+------------------------------------------------------------------------
+[129] Baris 1235 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : - BAB II: fisika zona Fresnel dan model CSI-ratio (derau fase osilator lokal + o...
+------------------------------------------------------------------------
+[130] Baris 1235 [EYD-020 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "angka Arab pada awal kalimat: 15 orang tewas / 250 responden menyatakan"
+    Saran perbaikan : "Eja dengan huruf (Lima belas orang tewas / Dua ratus lima puluh responden)"
+    Catatan kaidah  : EYD (Lampiran 1 TBBBI, hlm. 418) menetapkan lambang bilangan pada awal kalimat ditulis dengan huruf; susun ulang kalimat bila bilangan panjang.
+    Kutipan teks    : - BAB II: fisika zona Fresnel dan model CSI-ratio (derau fase osilator lokal + o...
+------------------------------------------------------------------------
+[131] Baris 1235 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : - BAB II: fisika zona Fresnel dan model CSI-ratio (derau fase osilator lokal + o...
+------------------------------------------------------------------------
+[132] Baris 1236 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : - BAB III: gerbang didefinisikan ulang sesuai brief — G0 meja kerja & LoS 1 m (v...
+------------------------------------------------------------------------
+[133] Baris 1244 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | 1.1 ¶3 (Wi-Fi paradigm) | Paragraf dibuka langsung dengan CSI sebagai kandidat...
+------------------------------------------------------------------------
+[134] Baris 1244 [EYD-025 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "orang2 / anak2 / buku2 (angka 2 sebagai reduplikasi)"
+    Saran perbaikan : "orang-orang / anak-anak / buku-buku (eja lengkap dengan tanda hubung)"
+    Catatan kaidah  : Merujuk Seri Penyuluhan 9 EYD (hlm. 35), pemakaian angka 2 untuk menyatakan bentuk pengulangan hanya dibatasi pada tulisan cepat atau pencatatan; pada tulisan resmi dianjurkan menuliskan kata ulang secara lengkap.
+    Kutipan teks    : | 1.1 ¶3 (Wi-Fi paradigm) | Paragraf dibuka langsung dengan CSI sebagai kandidat...
+------------------------------------------------------------------------
+[135] Baris 1253 [GLOS-TEK - GLOSARIUM TEKNOLOGI DAN REKAYASA]
+    Pola terdeteksi : "deployment"
+    Saran perbaikan : "penerapan / penyebaran sistem"
+    Catatan kaidah  : Tahap pelepasan kode ke server produksi.
+    Kutipan teks    : | Baru: 2.13 | — | Rincian BoM 11 komponen (Tabel 2.4 + uraian deskripsi/tujuan/...
+------------------------------------------------------------------------
+[136] Baris 1254 [EJ-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "angka 2 sebagai penanda kata ulang (anak2, sekolah2, ber-kejar2-an)"
+    Saran perbaikan : "anak-anak / sekolah-sekolah / berkejar-kejaran / didorong-dorong"
+    Catatan kaidah  : Dalam tulisan resmi, kata ulang ditulis lengkap dengan tanda hubung, tidak boleh digantikan angka 2 (Hakim dkk., Seri Penyuluhan Ejaan 1990, hlm. 13).
+    Kutipan teks    : | 3.2, Gambar 3.1–3.2 | G0 meja/LoS, G1 ruang kelas, G2 lintas pengguna, G3 suar...
+------------------------------------------------------------------------
+[137] Baris 1272 [KJK-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : ", sehingga"
+    Saran perbaikan : "sehingga (tanpa tanda koma sebelumnya)"
+    Catatan kaidah  : Konjungsi intrakalimat 'sehingga' TIDAK diawali tanda koma (termasuk kategori konjungsi tanpa koma sebelumnya — Tabel 4.12, Buku Kelas XII Kemendikbudristek, hlm. 168). Penulisan benar: klausa1 sehingga klausa2 (tanpa koma).
+    Kutipan teks    : | 2.5 ¶1 | "…MediaPipe [55], sehingga model pose…" | Koma dihapus: "…MediaPipe [...
+------------------------------------------------------------------------
+[138] Baris 1273 [KJK-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : ", sehingga"
+    Saran perbaikan : "sehingga (tanpa tanda koma sebelumnya)"
+    Catatan kaidah  : Konjungsi intrakalimat 'sehingga' TIDAK diawali tanda koma (termasuk kategori konjungsi tanpa koma sebelumnya — Tabel 4.12, Buku Kelas XII Kemendikbudristek, hlm. 168). Penulisan benar: klausa1 sehingga klausa2 (tanpa koma).
+    Kutipan teks    : | 2.11 ¶1 | "…ketukan jari, sehingga hipotesis…" | Koma dihapus | SPE-001 |
+------------------------------------------------------------------------
+[139] Baris 1274 [KJK-004 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : ", sehingga"
+    Saran perbaikan : "sehingga (tanpa tanda koma sebelumnya)"
+    Catatan kaidah  : Konjungsi intrakalimat 'sehingga' TIDAK diawali tanda koma (termasuk kategori konjungsi tanpa koma sebelumnya — Tabel 4.12, Buku Kelas XII Kemendikbudristek, hlm. 168). Penulisan benar: klausa1 sehingga klausa2 (tanpa koma).
+    Kutipan teks    : | 3.7.4 ¶2 | "…97,6%, sehingga kemampuan…" | Koma dihapus | SPE-001 |
+------------------------------------------------------------------------
+[140] Baris 1275 [SYT-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pasangan korelatif tidak ... melainkan ... (melainkan dipasangkan dengan tidak)"
+    Saran perbaikan : "Sesuaikan pasangan korelatifnya: tidak ... tetapi ...; pasangan melainkan adalah bukan (bukan ... melainkan ...) (Suyatno dkk., hlm. 76)."
+    Catatan kaidah  : Bahasa Indonesia untuk Perguruan Tinggi (Suyatno dkk., IN MEDIA 2017) mencantumkan pasangan kata penghubung baku: antara ... dan ...; tidak ... tetapi ...; bukan ... melainkan .... Memasangkan tidak dengan melainkan adalah korelasi yang tidak serasi; pemadannya wajib tetap.
+    Kutipan teks    : | 2.6 ¶1 | "tidak diklaim pada pengenalan kontinu, melainkan pada penerapan…" | ...
+------------------------------------------------------------------------
+[141] Baris 1276 [SYT-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pasangan korelatif tidak ... melainkan ... (melainkan dipasangkan dengan tidak)"
+    Saran perbaikan : "Sesuaikan pasangan korelatifnya: tidak ... tetapi ...; pasangan melainkan adalah bukan (bukan ... melainkan ...) (Suyatno dkk., hlm. 76)."
+    Catatan kaidah  : Bahasa Indonesia untuk Perguruan Tinggi (Suyatno dkk., IN MEDIA 2017) mencantumkan pasangan kata penghubung baku: antara ... dan ...; tidak ... tetapi ...; bukan ... melainkan .... Memasangkan tidak dengan melainkan adalah korelasi yang tidak serasi; pemadannya wajib tetap.
+    Kutipan teks    : | 2.9 ¶3 | "tidak diproses sebagai label, melainkan dilaporkan…" | "…sebagai lab...
+------------------------------------------------------------------------
+[142] Baris 1277 [SYT-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "pasangan korelatif tidak ... melainkan ... (melainkan dipasangkan dengan tidak)"
+    Saran perbaikan : "Sesuaikan pasangan korelatifnya: tidak ... tetapi ...; pasangan melainkan adalah bukan (bukan ... melainkan ...) (Suyatno dkk., hlm. 76)."
+    Catatan kaidah  : Bahasa Indonesia untuk Perguruan Tinggi (Suyatno dkk., IN MEDIA 2017) mencantumkan pasangan kata penghubung baku: antara ... dan ...; tidak ... tetapi ...; bukan ... melainkan .... Memasangkan tidak dengan melainkan adalah korelasi yang tidak serasi; pemadannya wajib tetap.
+    Kutipan teks    : | 3.11 ¶1 | "tidak menghentikan penelitian, melainkan mempersempit…" | "…penelit...
+------------------------------------------------------------------------
+[143] Baris 1281 [BAK-006 - KATA BAKU DAN MORFOLOGI]
+    Pola terdeteksi : "metodologi"
+    Saran perbaikan : "metode"
+    Catatan kaidah  : Gunakan 'metode' untuk rangkaian prosedur atau teknik kerja teknis; 'metodologi' adalah ilmu/kajian teoretis tentang metode.
+    Kutipan teks    : | 3.1 ¶1 | "Inti metodologi pelatihannya…" | "Inti metode pelatihannya…" | *Meto...
+------------------------------------------------------------------------
+[144] Baris 1282 [TBG-001 - RETORIKA KLISE AI]
+    Pola terdeteksi : "rujukan deiksis spasial semu pada objek visual tabel atau grafik: grafik di atas, tabel di bawah ini, bagan berikut"
+    Saran perbaikan : "Gunakan rujukan bernomor ilmiah eksplisit: grafik di atas → Grafik 2 / Gambar 4.1; tabel di bawah ini → Tabel 3; bagan berikut → Bagan 1.2 (Modul Direktorat SMA Kemendikbud 2020, KD 3.1, hlm. 12-14)."
+    Catatan kaidah  : Modul Pembelajaran SMA Bahasa Indonesia (Teks Tanggapan/Visual, Direktorat SMA Kemendikbud 2020) menegaskan bahwa uraian teks visual ilmiah menuntut penunjuk objektif bernomor. Deiksis spasial relatif seperti 'di atas', 'di bawah ini', atau 'berikut' rentan membingungkan pembaca saat tata letak halaman bergeser dalam proses cetak/responsif digital.
+    Kutipan teks    : | 3.8.8 ¶1 | "Ambang kuantitatif pada tabel berikut…" | "Ambang kuantitatif pada...
+------------------------------------------------------------------------
+[145] Baris 1283 [SPB-002 - KALKE TERJEMAHAN MESIN]
+    Pola terdeteksi : "frasa klise penegas 'itu sendiri' / 'mau tidak mau'"
+    Saran perbaikan : "(dihilangkan) / langsung ke kata benda"
+    Catatan kaidah  : Frasa 'itu sendiri' dan 'mau tidak mau' merupakan residu lisan dan kalke terjemahan yang merusak kelugasan kalimat efektif (Sasangka, 2019, hlm. 64-65).
+    Kutipan teks    : | 2.8 ¶3 | "jumlah kosakata kamus itu sendiri belum terverifikasi…" | "jumlah ko...
+------------------------------------------------------------------------
+Total temuan: 145 indikasi pola yang perlu ditinjau.
+========================================================================
