@@ -778,7 +778,7 @@
      "italics": true
     },
     {
-     "text": ", menyeleksi ulang kosakata dengan kriteria yang sama, dan melakukan validasi bersama validator penutur BISINDO. Kelayakan perluasan tersebut tidak diuji dalam penelitian ini dan diusulkan sebagai penelitian lanjutan."
+     "text": ", menyeleksi ulang kosakata dengan kriteria yang sama, dan memvalidasi bersama validator penutur BISINDO. Kelayakan perluasan tersebut tidak diuji dalam penelitian ini dan diusulkan sebagai penelitian lanjutan."
     }
    ]
   },
@@ -1298,7 +1298,7 @@
      "italics": true
     },
     {
-     "text": " per tangan yang dianotasi memakai MediaPipe [55], sehingga model pose tangan dapat dilatih dengan alur kerja yang sama. Analisis independen atas YOLO26 menunjukkan bahwa model ini dirancang untuk efisiensi inferensi dan kesiapan penerapan pada perangkat tepi [75]."
+     "text": " per tangan yang dianotasi memakai MediaPipe [55] sehingga model pose tangan dapat dilatih dengan alur kerja yang sama. Analisis independen atas YOLO26 menunjukkan bahwa model ini dirancang untuk efisiensi inferensi dan kesiapan penerapan pada perangkat tepi [75]."
     }
    ]
   },
@@ -1440,7 +1440,7 @@
      "italics": true
     },
     {
-     "text": " dengan akurasi 69,3% [24]. Akurasi yang dilaporkan pada karya-karya tersebut berkisar dari angka itu hingga 99,8% pada kondisi laboratorium [22], [80] dan menurun pada pengguna baru, misalnya 86,66% lintas lima pengguna pada SignFi [22]. WiSign memperluas arah tersebut dengan mengenali kalimat ASL kontinu dari CSI dengan segmentasi berbasis kepadatan spektrum [25]. Pada skala gestur jari, WiFinger mengenali gestur jari dari satu perangkat Wi-Fi komersial [28], FingerDraw melacak gerak jari skala subgelombang untuk aplikasi menggambar di udara [29], dan MeshID memakai gestur jari untuk identifikasi pengguna [30]. Keberadaan WiSign menunjukkan bahwa pengenalan kontinu bukan wilayah yang sama sekali belum disentuh. Oleh karena itu, kebaruan penelitian ini tidak diklaim pada pengenalan kontinu, melainkan pada penerapan CSI untuk SIBI dan pada integrasinya dengan jalur pemrosesan bahasa dua arah (Subbab 2.11)."
+     "text": " dengan akurasi 69,3% [24]. Akurasi yang dilaporkan pada karya-karya tersebut berkisar dari angka itu hingga 99,8% pada kondisi laboratorium [22], [80] dan menurun pada pengguna baru, misalnya 86,66% lintas lima pengguna pada SignFi [22]. WiSign memperluas arah tersebut dengan mengenali kalimat ASL kontinu dari CSI dengan segmentasi berbasis kepadatan spektrum [25]. Pada skala gestur jari, WiFinger mengenali gestur jari dari satu perangkat Wi-Fi komersial [28], FingerDraw melacak gerak jari skala subgelombang untuk aplikasi menggambar di udara [29], dan MeshID memakai gestur jari untuk identifikasi pengguna [30]. Keberadaan WiSign menunjukkan bahwa pengenalan kontinu bukan wilayah yang sama sekali belum disentuh. Oleh karena itu, kebaruan penelitian ini tidak diklaim pada pengenalan kontinu, tetapi pada penerapan CSI untuk SIBI dan pada integrasinya dengan jalur pemrosesan bahasa dua arah (Subbab 2.11)."
     }
    ]
   },
@@ -1619,7 +1619,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Pada arah pertama, modul pemancar memancarkan bingkai bersama melalui ESP-NOW; gerak pengisyarat di zona isyarat mengubah amplitudo, fase, dan komponen Doppler pada deret CSI; modul penerima melakukan segmentasi, ekstraksi fitur, dan inferensi model int8 pada perangkat. Label beserta skor keyakinannya dipetakan menjadi teks Indonesia melalui kamus label-teks kecil pada modul, lalu teks dikirim ke aplikasi Tauri pada ponsel yang menginferensikan Kokoro TTS ONNX secara lokal dan memutar audio hasilnya pada pengeras suara modul atau ponsel (Subbab 3.5.7). Segmen dengan skor di bawah ambang tidak diproses sebagai label, melainkan dilaporkan sebagai status penolakan."
+     "text": "Pada arah pertama, modul pemancar memancarkan bingkai bersama melalui ESP-NOW; gerak pengisyarat di zona isyarat mengubah amplitudo, fase, dan komponen Doppler pada deret CSI; modul penerima menyegmentasi deret tersebut, mengekstraksi fitur, dan menjalankan inferensi model int8 pada perangkat. Label beserta skor keyakinannya dipetakan menjadi teks Indonesia melalui kamus label-teks kecil pada modul, lalu teks dikirim ke aplikasi Tauri pada ponsel yang menginferensikan Kokoro TTS ONNX secara lokal dan memutar audio hasilnya pada pengeras suara modul atau ponsel (Subbab 3.5.7). Segmen dengan skor di bawah ambang tidak diproses sebagai label, tetapi dilaporkan sebagai status penolakan."
     }
    ]
   },
@@ -1721,7 +1721,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Dengan rancangan tersebut, keluaran arah kedua adalah representasi tingkat kata dan ejaan jari, bukan kalimat isyarat bertata bahasa lengkap. Cakupan kamus, yaitu proporsi kata uji yang terwakili oleh representasi yang tersedia, diukur dan dilaporkan sebagai metrik utama arah ini (Subbab 3.8). Penelitian ini tidak mengklaim cakupan kosakata kamus SIBI penuh karena jumlah kosakata kamus itu sendiri belum terverifikasi dari sumber yang layak kutip."
+     "text": "Dengan rancangan tersebut, keluaran arah kedua adalah representasi tingkat kata dan ejaan jari, bukan kalimat isyarat bertata bahasa lengkap. Cakupan kamus, yaitu proporsi kata uji yang terwakili oleh representasi yang tersedia, diukur dan dilaporkan sebagai metrik utama arah ini (Subbab 3.8). Penelitian ini tidak mengklaim cakupan kosakata kamus SIBI penuh karena jumlah kosakata kamus tersebut belum terverifikasi dari sumber yang layak kutip."
     }
    ]
   },
@@ -2125,7 +2125,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Tabel 2.2 memperlihatkan empat kelompok penelitian. Kelompok pertama mengenali bahasa isyarat dari sinyal Wi-Fi [22], [25], [79], [23], [24] dan membuktikan bahwa isyarat dapat dikenali tanpa kamera saat sistem dipakai, termasuk pengenalan kalimat kontinu oleh WiSign [25]; kelompok ini tidak menjangkau SIBI dan tidak memadukan hasilnya dengan jalur pemrosesan bahasa. Kelompok kedua membuktikan kepekaan CSI terhadap gerak halus [26], [27], [28], [29], [30], termasuk pada tingkat gestur dan ketukan jari, sehingga hipotesis kepekaan CSI terhadap konfigurasi tangan dan jari memiliki dasar, tetapi kelimanya bukan sistem isyarat. Kelompok ketiga memindahkan pengetahuan visi ke Wi-Fi [77], [72] dan menjadi preseden langsung distilasi guru–murid pada penelitian ini: kamera hanya aktif saat akuisisi data dan pelatihan, sedangkan perangkat akhir mengenali isyarat dari CSI saja. Kelompok keempat menjangkau SIBI dan BISINDO [15], [64], [65], [16], [87], tetapi hampir seluruhnya berbasis kamera pada arah isyarat menjadi teks; hanya dua kamus suara menjadi animasi yang bekerja pada arah balik [12], [13] dan keduanya satu arah dengan kosakata sangat terbatas."
+     "text": "Tabel 2.2 memperlihatkan empat kelompok penelitian. Kelompok pertama mengenali bahasa isyarat dari sinyal Wi-Fi [22], [25], [79], [23], [24] dan membuktikan bahwa isyarat dapat dikenali tanpa kamera saat sistem dipakai, termasuk pengenalan kalimat kontinu oleh WiSign [25]; kelompok ini tidak menjangkau SIBI dan tidak memadukan hasilnya dengan jalur pemrosesan bahasa. Kelompok kedua membuktikan kepekaan CSI terhadap gerak halus [26], [27], [28], [29], [30], termasuk pada tingkat gestur dan ketukan jari sehingga hipotesis kepekaan CSI terhadap konfigurasi tangan dan jari memiliki dasar, tetapi kelimanya bukan sistem isyarat. Kelompok ketiga memindahkan pengetahuan visi ke Wi-Fi [77], [72] dan menjadi preseden langsung distilasi guru–murid pada penelitian ini: kamera hanya aktif saat akuisisi data dan pelatihan, sedangkan perangkat akhir mengenali isyarat dari CSI saja. Kelompok keempat menjangkau SIBI dan BISINDO [15], [64], [65], [16], [87], tetapi hampir seluruhnya berbasis kamera pada arah isyarat menjadi teks; hanya dua kamus suara menjadi animasi yang bekerja pada arah balik [12], [13] dan keduanya satu arah dengan kosakata sangat terbatas."
     }
    ]
   },
@@ -2319,7 +2319,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Adapun uraian tiap komponen adalah sebagai berikut. Pertama, mikrokontroler ESP32-S3 menjadi node pemancar dan node penerima; komponen ini berfungsi sebagai otak penginderaan CSI, akuisisi sinyal radio, dan eksekusi inferensi model murid WiFi-DensePose int8, dengan poin spesifik berupa akselerasi instruksi vektor dan API ekstraksi CSI "
+     "text": "Uraian tiap komponen disajikan sebagai berikut. Pertama, mikrokontroler ESP32-S3 menjadi node pemancar dan node penerima; komponen ini berfungsi sebagai otak penginderaan CSI, akuisisi sinyal radio, dan eksekusi inferensi model murid WiFi-DensePose int8, dengan poin spesifik berupa akselerasi instruksi vektor dan API ekstraksi CSI "
     },
     {
      "text": "native",
@@ -2369,7 +2369,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Penelitian ini dirancang sebagai studi kelayakan kuantitatif bergerbang yang menghasilkan purwarupa penerjemah dua arah. Bagian kuantitatif mengukur sejauh mana Wi-Fi CSI dari tautan antarmodul ESP32-S3 dapat membedakan 26 huruf alfabet manual SIBI, yaitu 24 huruf statis serta huruf gerak J dan Z. Bagian itu juga mengukur sejauh mana model terkuantisasi berjalan pada perangkat. Selain itu, diukur sejauh mana jalur isyarat menjadi teks dan suara serta jalur teks atau ucapan menjadi representasi SIBI bekerja pada skenario yang ditetapkan. Setelah komponen diuji, purwarupa dikemas lalu dikaji kelayakannya sebagai alat bantu komunikasi kosakata terbatas melalui uji operasional, uji kegunaan skala kecil, dan penilaian validator penutur tunarungu. Struktur bergerbang dipilih karena kemampuan CSI membedakan isyarat SIBI belum dapat dipastikan sebelum data dikumpulkan; setiap tahap menghasilkan artefak tetap, kegagalan gerbang dicatat sebagai temuan, dan kriteria akurasi dirumuskan relatif terhadap peluang acak (Subbab 2.10). Inti metodologi pelatihannya berbentuk distilasi guru–murid. Model guru kamera YOLO26m-Pose mengekstrak deret 21 "
+     "text": "Penelitian ini dirancang sebagai studi kelayakan kuantitatif bergerbang yang menghasilkan purwarupa penerjemah dua arah. Bagian kuantitatif mengukur sejauh mana Wi-Fi CSI dari tautan antarmodul ESP32-S3 dapat membedakan 26 huruf alfabet manual SIBI, yaitu 24 huruf statis serta huruf gerak J dan Z. Bagian itu juga mengukur sejauh mana model terkuantisasi berjalan pada perangkat. Selain itu, diukur sejauh mana jalur isyarat menjadi teks dan suara serta jalur teks atau ucapan menjadi representasi SIBI bekerja pada skenario yang ditetapkan. Setelah komponen diuji, purwarupa dikemas lalu dikaji kelayakannya sebagai alat bantu komunikasi kosakata terbatas melalui uji operasional, uji kegunaan skala kecil, dan penilaian validator penutur tunarungu. Struktur bergerbang dipilih karena kemampuan CSI membedakan isyarat SIBI belum dapat dipastikan sebelum data dikumpulkan; setiap tahap menghasilkan artefak tetap, kegagalan gerbang dicatat sebagai temuan, dan kriteria akurasi dirumuskan relatif terhadap peluang acak (Subbab 2.10). Inti metode pelatihannya berbentuk distilasi guru–murid. Model guru kamera YOLO26m-Pose mengekstrak deret 21 "
     },
     {
      "text": "keypoint",
@@ -3863,7 +3863,7 @@
      "italics": true
     },
     {
-     "text": " validasi, dan eksperimen lanjutan pada himpunan 24 huruf statis mencatat mAP50 0,9580 dengan akurasi huruf 97,6%, sehingga kemampuan melatih guru pose tangan pada data visual SIBI telah terbukti sebelum penelitian ini dimulai. Struktur keluarannya mengikuti standar 21 "
+     "text": " validasi, dan eksperimen lanjutan pada himpunan 24 huruf statis mencatat mAP50 0,9580 dengan akurasi huruf 97,6% sehingga kemampuan melatih guru pose tangan pada data visual SIBI telah terbukti sebelum penelitian ini dimulai. Struktur keluarannya mengikuti standar 21 "
     },
     {
      "text": "keypoint",
@@ -4554,7 +4554,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Kriteria setiap gerbang beserta tindakan bila gagal disajikan pada Tabel 3.6. Kelayakan pada rumusan masalah ketiga ditinjau per dimensi, yaitu latensi kedua arah, cakupan kamus, keandalan operasional, penilaian tiga pilar pakar, penerimaan pengguna, penilaian validator, dan biaya, bukan dari lolosnya G4 semata. Ambang kuantitatif pada tabel berikut merupakan usulan awal yang difinalkan bersama pembimbing sebelum gerbang terkait dinilai; parameter yang menyertainya dihimpun pada Tabel 3.8."
+     "text": "Kriteria setiap gerbang beserta tindakan bila gagal disajikan pada Tabel 3.6. Kelayakan pada rumusan masalah ketiga ditinjau per dimensi, yaitu latensi kedua arah, cakupan kamus, keandalan operasional, penilaian tiga pilar pakar, penerimaan pengguna, penilaian validator, dan biaya, bukan dari lolosnya G4 semata. Ambang kuantitatif pada Tabel 3.6 merupakan usulan awal yang difinalkan bersama pembimbing sebelum gerbang terkait dinilai; parameter yang menyertainya dihimpun pada Tabel 3.8."
     }
    ]
   },
@@ -4963,7 +4963,7 @@
    "t": "p",
    "runs": [
     {
-     "text": "Risiko utama beserta mitigasinya dirangkum pada Tabel 3.9. Alternatif cadangan disusun bertingkat sesuai titik kegagalan sehingga kegagalan salah satu komponen tidak menghentikan penelitian, melainkan mempersempit klaimnya."
+     "text": "Risiko utama beserta mitigasinya dirangkum pada Tabel 3.9. Alternatif cadangan disusun bertingkat sesuai titik kegagalan sehingga kegagalan salah satu komponen tidak menghentikan penelitian, tetapi mempersempit klaimnya."
     }
    ]
   },
