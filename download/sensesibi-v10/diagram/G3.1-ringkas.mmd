@@ -1,0 +1,30 @@
+flowchart LR
+    subgraph KA[" "]
+        direction TB
+        T0["T0 Replikasi platform:<br/>verifikasi CSI 56 subcarrier 1 m,<br/>uji Delta-CSI, koeksistensi (M1–M2)"]
+        G0("G0 akhir M2:<br/>baseline CSI-jaringan lolos")
+        T1["T1 Kurasi isyarat, kalibrasi ruang,<br/>protokol, etika (M2–M4)"]
+        T2["T2 Perekaman dataset dan<br/>pelatihan guru–murid (M4–M8)"]
+        T0 --> G0
+        G0 -- "lolos" --> T1
+        T1 --> T2
+    end
+    subgraph KB[" "]
+        direction TB
+        T2B["Kuantisasi int8 dan uji<br/>deployment murid ke modul"]
+        G1("G1 akhir M8: model tepi int8:<br/>akurasi skema, inferensi <100 ms")
+        T3["T3 Uji generalisasi lintas sesi,<br/>partisipan, ruang, posisi (M8–M10)"]
+        G2("G2 akhir M10: konsultasi 3 pilar<br/>pakar tanpa temuan blok (M10)")
+        T4["T4 Pengemasan dua arah dan<br/>uji penerimaan (M10–M12)"]
+        G3("G3 M11: integrasi Rust dan<br/>mesin ucapan dalam anggaran latensi")
+        G4("G4 akhir M12: sintesis kelayakan,<br/>rekomendasi TKT/TRL 3–4")
+        T5["T5 Analisis dan<br/>penulisan (M12–M14)"]
+        T2B --> G1
+        G1 -- "lolos" --> T3
+        T3 --> G2
+        G2 -- "lolos" --> T4
+        T4 --> G3
+        G3 -- "lolos" --> G4
+        G4 -- "lolos" --> T5
+    end
+    KA --> KB

@@ -1,0 +1,34 @@
+flowchart TD
+    TX["Node TX: beacon<br/>ESP-NOW"]
+    ZN["Zona isyarat<br/>(satu pengisyarat)"]
+    RX["Node RX: CSI promiscuous +<br/>inferensi murid int8 +<br/>antarmuka pengguna"]
+    MAPL["Kamus label–teks<br/>di modul"]
+    DSP1["Layar modul:<br/>teks hasil"]
+    TTS["Mesin TTS on-device:<br/>Kokoro ONNX di aplikasi<br/>Tauri (Poco F4 5G)"]
+    SPK["Speaker +<br/>rotary encoder"]
+    TX --> ZN
+    ZN --> RX
+    RX --> MAPL
+    MAPL --> DSP1
+    MAPL -- "teks via Wi-Fi" --> TTS
+    TTS -- "audio" --> SPK
+
+    BTN["Tombol<br/>tekan-untuk-bicara"]
+    MIC["Mikrofon<br/>I2S"]
+    STT["Layanan<br/>ASR awan"]
+    DSP2["Layar modul: teks lalu<br/>representasi SIBI"]
+    AST["Aset SIBI: glos,<br/>gambar, ejaan jari<br/>(Subbab 2.7)"]
+    BTN --> MIC
+    MIC -- "audio via Wi-Fi" --> STT
+    STT -- "teks" --> DSP2
+    AST --> DSP2
+
+    CAM["Webcam laptop"]
+    Y26P["YOLO26m-Pose:<br/>21 keypoint pose tangan"]
+    SUP["Supervisi pelatihan<br/>murid (Subbab 3.7)"]
+    CAM --> Y26P
+    Y26P --> SUP
+
+    LOK["Server lokal (cadangan):<br/>ASR faster-whisper,<br/>TTS MMS, server RuView,<br/>server Rust"]
+    TTS -. "TTS lokal" .-> LOK
+    STT -. "ASR lokal" .-> LOK

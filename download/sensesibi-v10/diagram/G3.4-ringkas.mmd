@@ -1,0 +1,16 @@
+flowchart TD
+    SD["Dataset murid: jendela CSI +<br/>ground truth guru: label huruf<br/>+ deret pose 21 keypoint"]
+    STU["Latih murid WiFi-DensePose int8<br/>+ kepala 1D-CNN di GPU Kaggle:<br/>kerugian klasifikasi + supervisi guru"]
+    BASE["Pembanding: SVM fitur dan<br/>murid ablasi tanpa<br/>supervisi guru"]
+    EQ{"Kinerja memadai<br/>(gerbang G1)?"}
+    OPT["Optimasi untuk ESP32-S3:<br/>kuantisasi int8, uji ukuran,<br/>RAM, dan latensi"]
+    DEP["Ekspor dan pemasangan model<br/>murid pada modul penerima<br/>ESP32-S3"]
+    DEV["Perangkat akhir: inferensi<br/>CSI-SIBI lokal tanpa kamera<br/>(Gambar 3.4)"]
+    SD --> STU
+    SD --> BASE
+    STU --> EQ
+    BASE --> EQ
+    EQ -- "belum (Tabel 3.6)" --> SD
+    EQ -- "ya" --> OPT
+    OPT --> DEP
+    DEP --> DEV

@@ -1,0 +1,24 @@
+flowchart LR
+    subgraph KA[" "]
+        direction TB
+        REC["Perekaman tersinkron<br/>(Subbab 3.6): video + CSI<br/>+ label, satu penanda waktu"]
+        FLT["Penyaringan segmen via<br/>keypoint YOLO26m-Pose:<br/>buang tangan hilang,<br/>jitter, terpotong"]
+        TT["Latih lanjutan dan evaluasi<br/>guru YOLO26m-Pose<br/>pada data visual SIBI<br/>(GPU Kaggle)"]
+        TQ{"Kualitas keypoint<br/>guru memadai?"}
+        REC --> FLT
+        FLT --> TT
+        TT --> TQ
+        TQ -- "belum" --> TT
+    end
+    subgraph KB[" "]
+        direction TB
+        Y26["Ekstraksi deret keypoint<br/>guru di laptop: 21 titik<br/>pose tangan + penanda waktu"]
+        PAIR["Penyandingan berbasis waktu:<br/>jendela CSI + ground truth guru<br/>(label huruf + deret pose)"]
+        DQ{"Cakupan data dan<br/>sinkronisasi memadai?"}
+        Y26 --> PAIR
+        PAIR --> DQ
+        DQ -- "ya: ke Gambar 3.3" --> EXIT((" "))
+    end
+    KA -- "ya" --> KB
+    KA -- "video + CSI" --> KB
+    KB -- "belum" --> KA
