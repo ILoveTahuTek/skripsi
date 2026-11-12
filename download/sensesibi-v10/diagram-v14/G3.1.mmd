@@ -1,0 +1,33 @@
+flowchart LR
+    accTitle: Tahapan penelitian T0 sampai T5 dengan gerbang keputusan G0 sampai G4
+    accDescr: Diagram dua fase. Fase pembangunan data berisi T0 replikasi platform, gerbang G0 baseline, T1 kurasi isyarat, dan T2 perekaman dataset serta pelatihan guru-murid. Fase pengujian berisi kuantisasi int8, gerbang G1 model tepi, T3 uji generalisasi, gerbang G2 konsultasi tiga pilar, T4 pengemasan purwarupa, gerbang G3 integrasi mesin ucapan, gerbang G4 sintesis kelayakan, dan T5 analisis serta penulisan.
+
+    subgraph KA["Fase pembangunan data (M1–M8)"]
+        direction TB
+    T0["T0 Replikasi platform, verifikasi<br/>CSI 56 subcarrier pada 1 m,<br/>uji Delta-CSI, koeksistensi (M1–M2)"]
+    G0("G0 akhir M2: baseline CSI-jaringan:<br/>UDP Rust tanpa kehilangan paket,<br/>akuisisi stabil, gerak terpisah")
+    T1["T1 Kurasi isyarat, kalibrasi ruang,<br/>protokol, etika, rintisan separabilitas<br/>pasangan huruf mirip (M2–M4)"]
+    T2["T2 Perekaman dataset dan<br/>pelatihan guru-murid<br/>(M4–M8)"]
+    T0 --> G0
+    G0 -- "lolos" --> T1
+    T1 --> T2
+    end
+    subgraph KB["Fase pengujian dan penulisan (M8–M14)"]
+        direction TB
+    T2B["Kuantisasi int8 dan uji<br/>deployment murid ke<br/>modul ESP32-S3"]
+    G1("G1 akhir M8: model tepi int8:<br/>akurasi skema dan inferensi<br/>di bawah 100 ms")
+    T3["T3 Uji generalisasi: lintas sesi,<br/>partisipan, ruang, posisi<br/>berdiri/duduk (M8–M10)"]
+    G2("G2 akhir M10: konsultasi 3 pilar<br/>pakar SIBI, RF, embedded AI<br/>tanpa temuan blok kritis")
+    T4["T4 Pengemasan dua arah, full-stack<br/>Rust, TTS on-device, uji penerimaan<br/>dan biaya (M10–M12)"]
+    G3("G3 M11: integrasi Rust dan mesin<br/>ucapan on-device dalam<br/>anggaran latensi")
+    G4("G4 akhir M12: sintesis kelayakan,<br/>penerimaan dan biaya layak,<br/>rekomendasi TKT/TRL 3–4")
+    T5["T5 Analisis dan penulisan<br/>(M12–M14)"]
+    T2B --> G1
+    G1 -- "lolos" --> T3
+    T3 --> G2
+    G2 -- "lolos" --> T4
+    T4 --> G3
+    G3 -- "lolos" --> G4
+    G4 -- "lolos" --> T5
+    end
+    KA --> KB

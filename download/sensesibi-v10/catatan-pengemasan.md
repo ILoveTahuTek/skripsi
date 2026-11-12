@@ -1,5 +1,18 @@
 # Catatan Pengemasan — sensesibi-v10
 
+**Tanggal:** 12 November 2026 (gelombang 14) · **Pemicu:** permintaan pemilik — daftar pustaka dipangkas menjadi sekitar 20-an entri, naskah menyesuaikan menjadi sekitar 30-an halaman, diagram dan kemampuan saintifik direvisi memakai K-Dense scientific-agent-skills · **Skill:** humanizer-indonesia (adhiprib v1.7, register akademik) + scientific-agent-skills (scientific-schematics, markdown-mermaid-writing, scientific-writing, citation-management)
+
+## 0. Isi paket gelombang 14
+
+| Berkas | Keterangan |
+|---|---|
+| `Proposal-SenseSIBI-v14.md` | **Naskah sumber tunggal terkini (gelombang 14):** BAB I–III + Daftar Pustaka [1]–[22] (enam sumber Indonesia dipertahankan) + Log Perubahan gelombang 14 |
+| `Proposal-SenseSIBI-Studi-Kelayakan-v14.docx` | **Deliverable utama terkini** — 34 hlm A4, TNR 12 pt, spasi 1,5, register mahasiswa D4/S1, konteks Jawa Timur tanpa mitra lembaga, daftar isi satu spasi satu halaman, 11 tabel tiga-garis, 3 gambar inti (Gambar 3.1 tinggi sematan 18 cm), DP 22 entri satu spasi 10 pt, 30 penanda `[PERLU DATA]`/`[PERLU ILUSTRASI]` tersorot |
+| `Proposal-SenseSIBI-Studi-Kelayakan-v14.pdf` | Pratinjau PDF 34 hlm |
+| `diagram-v14/G3.1..G3.3.mmd` | Sumber diagram gelombang 14: anotasi aksesibilitas `accTitle`/`accDescr`, subgraf berlabel, seluruh label tertelusur ke teks |
+| `assets-v14/gambar-3.1..3.3.png` | 3 diagram inti hasil render Mermaid (terverifikasi label dan `<title>`/`<desc>` SVG) |
+| `_kerja-g14/` | Jejak proses gelombang 14: `naskah-untuk-docx.md`, `split/` |
+
 **Tanggal:** 10 November 2026 (gelombang 11) · **Pemicu:** masukan dosen pembimbing yang diteruskan pemilik — register terlalu kompleks/terlalu AI, tanpa emosi, daftar pustaka terlalu banyak, sumber data harus Indonesia (masalah di Jawa Timur), jangan memaksakan padanan istilah asing · **Skill:** humanizer-id (Mode Akademik Ketat, repo apissaj/humanizer-id) + sempro-mepet (register korpus sempro, dari Google Drive pemilik) + naskah-id (EYD V)
 
 ## 1. Isi paket
