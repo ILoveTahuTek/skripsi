@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "ESP32-S3 DevKitC-1 development board microcontroller",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/686cd183abfa.jpg",
+      "caption": "",
+      "source": "Random Nerd Tutorials",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/060407a93ce1.jpeg",
+      "caption": "",
+      "source": "www.walmart.ca",
+      "original_width": "1600px",
+      "original_height": "1600px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c32a1c9bbed3.png",
+      "caption": "",
+      "source": "Technical Documents - Espressif Systems",
+      "original_width": "1593px",
+      "original_height": "764px"
+    }
+  ]
+}

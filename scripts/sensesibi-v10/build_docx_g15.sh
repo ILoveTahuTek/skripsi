@@ -1,0 +1,264 @@
+#!/usr/bin/env bash
+# Bangun DOCX+PDF v15 (gelombang 15): rumusan teknologi, 18 persamaan bernomor, 6 gambar (3 baru).
+set -e
+V10=/home/z/my-project/download/sensesibi-v10
+SCR=/home/z/my-project/scripts/sensesibi-v10
+G15=$V10/_kerja-g15
+
+# 1) salinan JS khusus g15 (idempoten: selin dari git setiap kali)
+cd /home/z/my-project
+git checkout -- scripts/sensesibi-v10/parse_md.js scripts/sensesibi-v10/generate_docx.js
+cp scripts/sensesibi-v10/parse_md.js scripts/sensesibi-v10/parse_md_g15.js
+cp scripts/sensesibi-v10/generate_docx.js scripts/sensesibi-v10/generate_docx_g15.js
+
+python3 - <<'EOF'
+from pathlib import Path
+scr = Path("/home/z/my-project/scripts/sensesibi-v10")
+
+p = scr / "parse_md_g15.js"
+s = p.read_text(encoding="utf-8")
+s = s.replace(
+    "const SRC = '/home/z/my-project/download/sensesibi-v10/_kerja/split';",
+    "const SRC = '/home/z/my-project/download/sensesibi-v10/_kerja-g15/split';")
+s = s.replace(
+    "const ASSETS = '/home/z/my-project/download/sensesibi-v10/assets';",
+    "const ASSETS = '/home/z/my-project/download/sensesibi-v10/assets-v15';")
+s = s.replace(
+    "const OUTJSON = '/home/z/my-project/scripts/sensesibi-v10/parsed-final.json';",
+    "const OUTJSON = '/home/z/my-project/scripts/sensesibi-v10/parsed-g15.json';")
+
+# PATCH v15a: blok ```gambar diperlakukan seperti mermaid (PNG dicari dari nomor keterangan)
+s = s.replace(
+    "    if (trimmed.startsWith('```mermaid')) {",
+    "    if (trimmed.startsWith('```mermaid') || trimmed.startsWith('```gambar')) {")
+
+# PATCH v15b: blok ```rumus -> {t:'rumus', lines:[{runs, num}]} (nomor di ujung kanan baris)
+anchor = "    if (trimmed.startsWith('# ')) {"
+rumus_handler = """    if (trimmed.startsWith('```rumus')) {
+      let j = i + 1;
+      const rl = [];
+      while (j < lines.length && !lines[j].trim().startsWith('```')) {
+        let ln = lines[j].trim();
+        let num = null;
+        const m = ln.match(/\\s*\\((\\d+\\.\\d+)\\)\\s*$/);
+        if (m) { num = m[1]; ln = ln.slice(0, m.index); }
+        rl.push({ runs: parseInline(ln), num });
+        j += 1;
+      }
+      blocks.push({ t: 'rumus', lines: rl });
+      i = j + 1;
+      continue;
+    }
+
+"""
+assert anchor in s, "anchor rumus tidak ditemukan"
+s = s.replace(anchor, rumus_handler + anchor, 1)
+
+# PATCH v15c: token subskrip ~x~ dan superskrip ^x^ pada parseInline
+anchor2 = """      runs.push({ text: m[1], code: true });
+      i += m[0].length;
+    } else {"""
+subsup = """      runs.push({ text: m[1], code: true });
+      i += m[0].length;
+    } else if ((m = rest.match(/^~([^~\\n]+)~/))) {
+      pushPlain();
+      runs.push({ text: m[1], sub: true });
+      i += m[0].length;
+    } else if ((m = rest.match(/^\\^([^\\^\\n]+)\\^/))) {
+      pushPlain();
+      runs.push({ text: m[1], sup: true });
+      i += m[0].length;
+    } else {"""
+assert anchor2 in s, "anchor subsup tidak ditemukan"
+s = s.replace(anchor2, subsup, 1)
+p.write_text(s, encoding="utf-8")
+
+g = scr / "generate_docx_g15.js"
+s = g.read_text(encoding="utf-8")
+s = s.replace(
+    "const parsed = JSON.parse(fs.readFileSync('/home/z/my-project/scripts/sensesibi-v10/parsed-final.json', 'utf-8'));",
+    "const parsed = JSON.parse(fs.readFileSync('/home/z/my-project/scripts/sensesibi-v10/parsed-g15.json', 'utf-8'));")
+s = s.replace(
+    "const OUT = '/home/z/my-project/download/sensesibi-v10/Proposal-SenseSIBI-Studi-Kelayakan-v10.docx';",
+    "const OUT = '/home/z/my-project/download/sensesibi-v10/Proposal-SenseSIBI-Studi-Kelayakan-v15.docx';")
+
+# PATCH v15d: makeRuns mendukung subskrip/superskrip
+s = s.replace(
+    "    bold: !!r.bold,\n    italics: !!r.italics,\n    highlight: r.highlight ? 'yellow' : undefined,",
+    "    bold: !!r.bold,\n    italics: !!r.italics,\n    subScript: !!r.sub,\n    superScript: !!r.sup,\n    highlight: r.highlight ? 'yellow' : undefined,")
+
+# PATCH v15e: perender blok rumus (persamaan tengah, nomor kanan; tabel 3 kolom tanpa garis)
+anchor_fig = "    else if (b.t === 'figure') out.push(...figureBlock(b));"
+s = s.replace(anchor_fig, anchor_fig + "\n    else if (b.t === 'rumus') out.push(...rumusParas(b));")
+anchor_fn = "// ---------- Rujukan ----------"
+rumus_fn = """// ---------- Rumus (persamaan bernomor; rumus di tengah, nomor di kanan) ----------
+function rumusParas(b) {
+  const cellM = { top: 10, bottom: 10, left: 40, right: 40 };
+  return b.lines
+    .filter(l => (l.runs && l.runs.length) || l.num)
+    .map(l => {
+      const runs = (l.runs || []).map(r => new TextRun({
+        text: r.text, italics: true,
+        subScript: !!r.sub, superScript: !!r.sup,
+        highlight: r.highlight ? 'yellow' : undefined,
+        size: 24, color: BLACK, font: r.code ? FONT_CODE : FONT,
+      }));
+      return new Table({
+        width: { size: 100, type: WidthType.PERCENTAGE },
+        layout: TableLayoutType.FIXED,
+        borders: allNoBorders,
+        rows: [new TableRow({
+          cantSplit: true,
+          children: [
+            new TableCell({ width: { size: 12, type: WidthType.PERCENTAGE }, borders: noBorders, margins: cellM,
+              children: [new Paragraph({ spacing: { line: 300, before: 20, after: 20 }, children: [] })] }),
+            new TableCell({ width: { size: 70, type: WidthType.PERCENTAGE }, borders: noBorders, margins: cellM,
+              children: [new Paragraph({ alignment: AlignmentType.CENTER, spacing: { line: 300, before: 20, after: 20 }, children: runs })] }),
+            new TableCell({ width: { size: 18, type: WidthType.PERCENTAGE }, borders: noBorders, margins: cellM,
+              children: [new Paragraph({ alignment: AlignmentType.RIGHT, spacing: { line: 300, before: 20, after: 20 },
+                children: l.num ? [new TextRun({ text: '(' + l.num + ')', size: 24, color: BLACK, font: FONT })] : [] })] }),
+          ],
+        })],
+      });
+    });
+}
+
+"""
+assert anchor_fn in s, "anchor fungsi rumus tidak ditemukan"
+s = s.replace(anchor_fn, rumus_fn + anchor_fn, 1)
+
+# DP satu spasi 10 pt (warisan g13/g14)
+s = s.replace(
+    "function refPara(runs) {\n  return new Paragraph({\n    alignment: AlignmentType.LEFT,\n    indent: { left: 480, hanging: 480 },\n    spacing: { line: 360, after: 120 },\n    children: makeRuns(runs, 24),",
+    "function refPara(runs) {\n  return new Paragraph({\n    alignment: AlignmentType.LEFT,\n    indent: { left: 480, hanging: 480 },\n    spacing: { line: 240, after: 40 },\n    children: makeRuns(runs, 20),")
+# Sel tabel lebih rapat
+s = s.replace(
+    "const cellMargins = { top: 40, bottom: 40, left: 80, right: 80 };",
+    "const cellMargins = { top: 30, bottom: 30, left: 80, right: 80 };")
+s = s.replace(
+    "spacing: { line: 276, before: 20, after: 20 },",
+    "spacing: { line: 240, before: 16, after: 16 },")
+# Heading & butir lebih rapat
+s = s.replace("spacing: { before: 360, after: 240, line: 360 },", "spacing: { before: 240, after: 160, line: 360 },")
+s = s.replace("spacing: { before: 240, after: 120, line: 360 },", "spacing: { before: 160, after: 80, line: 360 },")
+s = s.replace("spacing: { line: 360, after: 60 },\n    children: [new TextRun({ text: n + ' '", "spacing: { line: 360, after: 40 },\n    children: [new TextRun({ text: n + ' '")
+# Daftar isi hanya heading 1-2
+s = s.replace(
+    "new TableOfContents('Daftar Isi', { hyperlink: true, headingStyleRange: '1-3' }),",
+    "new TableOfContents('Daftar Isi', { hyperlink: true, headingStyleRange: '1-2' }),")
+# Deskripsi dokumen
+s = s.replace(
+    "description: 'Proposal penelitian BAB I-III + Daftar Pustaka v10 (full-stack Rust, Kokoro TTS on-device, BoM 11 komponen, G0-G4 tiga pilar pakar) \\u2014 revisi 9 Nov 2026'",
+    "description: 'Proposal v15 \\u2014 rumusan teknologi (YOLO26m-Pose, WiFi-DensePose), 18 persamaan bernomor, 6 gambar termasuk ilustrasi 3D (humanizer-indonesia v1.7 + scientific-agent-skills) 12 Nov 2026'")
+g.write_text(s, encoding="utf-8")
+
+cek_p = (scr / "parse_md_g15.js").read_text(encoding="utf-8")
+cek_g = (scr / "generate_docx_g15.js").read_text(encoding="utf-8")
+assert "assets-v15" in cek_p and "parsed-g15.json" in cek_p
+assert "rumus" in cek_p and "sub: true" in cek_p and "sup: true" in cek_p
+assert "v15.docx" in cek_g and "rumusParas" in cek_g and "subScript" in cek_g
+print("JS g15 siap (rumus + sub/superskrip + gambar baru).")
+EOF
+
+# 2) naskah-untuk-docx = tubuh + DP (tanpa log di bawah penanda AKHIR NASKAH)
+python3 - <<'EOF'
+from pathlib import Path
+src = Path("/home/z/my-project/download/sensesibi-v10/Proposal-SenseSIBI-v15.md").read_text(encoding="utf-8")
+mark = "<!-- ===== AKHIR NASKAH"
+body = src[:src.index(mark)].rstrip() + "\n"
+out = Path("/home/z/my-project/download/sensesibi-v10/_kerja-g15/naskah-untuk-docx.md")
+out.parent.mkdir(parents=True, exist_ok=True)
+out.write_text(body, encoding="utf-8")
+print("naskah-untuk-docx.md:", len(body), "karakter")
+EOF
+
+# 3) split 4 berkas
+python3 - <<'EOF'
+from pathlib import Path
+base = Path("/home/z/my-project/download/sensesibi-v10/_kerja-g15")
+teks = (base / "naskah-untuk-docx.md").read_text(encoding="utf-8")
+lines = teks.split("\n")
+idx = {}
+for i, l in enumerate(lines):
+    if l.startswith("# "):
+        if l.startswith("# BAB I "): idx["bab1"] = i
+        elif l.startswith("# BAB II "): idx["bab2"] = i
+        elif l.startswith("# BAB III "): idx["bab3"] = i
+        elif l.startswith("# DAFTAR PUSTAKA"): idx["dp"] = i
+assert set(idx) == {"bab1", "bab2", "bab3", "dp"}, idx
+out = {
+    "bab1-pendahuluan.md": lines[idx["bab1"]:idx["bab2"]],
+    "bab2-kajian-pustaka.md": lines[idx["bab2"]:idx["bab3"]],
+    "bab3-metodologi.md": lines[idx["bab3"]:idx["dp"]],
+    "daftar-pustaka.md": lines[idx["dp"]:],
+}
+sd = base / "split"
+sd.mkdir(parents=True, exist_ok=True)
+for name, ls in out.items():
+    (sd / name).write_text("\n".join(ls).rstrip() + "\n", encoding="utf-8")
+    print(name, "->", len(ls), "baris")
+EOF
+
+# 4) parse + generate
+cd "$SCR"
+node parse_md_g15.js
+node generate_docx_g15.js
+
+# 5) verifikasi parsed: rumus, gambar, sitasi, sub/sup
+python3 - <<'EOF'
+import json, re
+from pathlib import Path
+doc = json.loads(Path("/home/z/my-project/scripts/sensesibi-v10/parsed-g15.json").read_text(encoding="utf-8"))
+def hitung(arr, t): return sum(1 for b in arr if b.get("t") == t)
+rumus = sum(hitung(v, "rumus") for v in doc.values())
+figs = sum(hitung(v, "figure") for v in doc.values())
+baris_rumus = [l for v in doc.values() for b in v if b.get("t") == "rumus" for l in b["lines"]]
+nomor = [l["num"] for l in baris_rumus if l.get("num")]
+sub = sum(1 for v in doc.values() for b in v if b.get("t") == "rumus" for l in b["lines"] for r in l["runs"] if r.get("sub"))
+sup = sum(1 for v in doc.values() for b in v if b.get("t") == "rumus" for l in b["lines"] for r in l["runs"] if r.get("sup"))
+print("blok rumus:", rumus, "| baris rumus:", len(baris_rumus), "| bernomor:", len(nomor), nomor)
+print("run subskrip:", sub, "| run superskrip:", sup)
+print("blok gambar:", figs, [b["png"].split("/")[-1] for v in doc.values() for b in v if b.get("t") == "figure"])
+# sitasi tubuh 1-22 tetap, urut kemunculan
+tubuh = Path("/home/z/my-project/download/sensesibi-v10/_kerja-g15/naskah-untuk-docx.md").read_text(encoding="utf-8")
+tubuh = tubuh[:tubuh.index("# DAFTAR PUSTAKA")]
+nomor_sit = [int(x) for x in re.findall(r"\[(\d+)\]", tubuh)]
+pertama = []
+for n in nomor_sit:
+    if n not in pertama: pertama.append(n)
+print("sitasi unik:", sorted(set(nomor_sit)), "| monoton:", pertama == sorted(pertama), "| maks:", max(nomor_sit))
+assert max(nomor_sit) <= 22 and pertama == sorted(pertama)
+EOF
+
+# 6) patch gaya TOC1/TOC2 satu spasi di styles.xml
+python3 - <<'PYEOF'
+import zipfile, shutil
+DOCX = "/home/z/my-project/download/sensesibi-v10/Proposal-SenseSIBI-Studi-Kelayakan-v15.docx"
+TMP = DOCX + ".tmp"
+with zipfile.ZipFile(DOCX) as zin, zipfile.ZipFile(TMP, "w", zipfile.ZIP_DEFLATED) as zout:
+    for item in zin.infolist():
+        data = zin.read(item.filename)
+        if item.filename == "word/styles.xml":
+            s = data.decode("utf-8")
+            s = s.replace(
+                '<w:style w:type="paragraph" w:styleId="TOC1"><w:name w:val="toc 1"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:uiPriority w:val="39"/><w:semiHidden/><w:unhideWhenUsed/><w:pPr><w:spacing w:after="100"/></w:pPr></w:style>',
+                '<w:style w:type="paragraph" w:styleId="TOC1"><w:name w:val="toc 1"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:uiPriority w:val="39"/><w:pPr><w:spacing w:before="60" w:after="0" w:line="240" w:lineRule="auto"/></w:pPr></w:style>')
+            s = s.replace(
+                '<w:style w:type="paragraph" w:styleId="TOC2"><w:name w:val="toc 2"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:uiPriority w:val="39"/><w:semiHidden/><w:unhideWhenUsed/><w:pPr><w:spacing w:after="100"/><w:ind w:left="240"/></w:pPr></w:style>',
+                '<w:style w:type="paragraph" w:styleId="TOC2"><w:name w:val="toc 2"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:uiPriority w:val="39"/><w:pPr><w:spacing w:after="0" w:line="240" w:lineRule="auto"/><w:ind w:left="240"/></w:pPr></w:style>')
+            assert 'TOC1"><w:name w:val="toc 1"/><w:basedOn w:val="Normal"/><w:next w:val="Normal"/><w:uiPriority w:val="39"/><w:pPr><w:spacing w:before="60"' in s, "patch TOC1 gagal"
+            data = s.encode("utf-8")
+        zout.writestr(item, data)
+shutil.move(TMP, DOCX)
+print("styles.xml dipatch: TOC1/TOC2 satu spasi")
+PYEOF
+
+# 7) PDF via LibreOffice
+cd "$V10"
+rm -f Proposal-SenseSIBI-Studi-Kelayakan-v15.pdf
+soffice --headless --convert-to pdf --outdir "$V10" Proposal-SenseSIBI-Studi-Kelayakan-v15.docx >/dev/null 2>&1
+python3 - <<'EOF'
+from pypdf import PdfReader
+r = PdfReader("/home/z/my-project/download/sensesibi-v10/Proposal-SenseSIBI-Studi-Kelayakan-v15.pdf")
+print("PDF halaman:", len(r.pages))
+EOF

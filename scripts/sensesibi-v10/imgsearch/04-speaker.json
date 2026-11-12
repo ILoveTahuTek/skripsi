@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "MAX98357A I2S amplifier module with 8 ohm mini speaker",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1b1d212bb407.png",
+      "caption": "",
+      "source": "Robocraze",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2ec0045ae629.jpg",
+      "caption": "",
+      "source": "Rytronics.in",
+      "original_width": "1100px",
+      "original_height": "1100px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cb11dd031bd6.jpg",
+      "caption": "",
+      "source": "Electronic Clinic",
+      "original_width": "1280px",
+      "original_height": "720px"
+    }
+  ]
+}

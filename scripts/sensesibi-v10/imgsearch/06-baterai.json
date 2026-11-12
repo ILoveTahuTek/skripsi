@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "TP4056 lithium polymer battery charger module with 3.7V LiPo battery",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a5c5b17e8a8f.png",
+      "caption": "",
+      "source": "EasyElecModule",
+      "original_width": "1436px",
+      "original_height": "1047px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e348ae5ee4d2.jpg",
+      "caption": "",
+      "source": "YouTube",
+      "original_width": "1280px",
+      "original_height": "720px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/50dcfad52621.png",
+      "caption": "",
+      "source": "Probots",
+      "original_width": "1250px",
+      "original_height": "1250px"
+    }
+  ]
+}

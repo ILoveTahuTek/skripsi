@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "Xiaomi Poco F4 smartphone product photo",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f8d3cd0a6c52.jpg",
+      "caption": "",
+      "source": "eBay",
+      "original_width": "1200px",
+      "original_height": "1200px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/1501029c01d6.jpg",
+      "caption": "",
+      "source": "www.amazon.sa",
+      "original_width": "1001px",
+      "original_height": "1001px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/93ff7b95c537.jpg",
+      "caption": "",
+      "source": "India Gadgetz",
+      "original_width": "1600px",
+      "original_height": "1600px"
+    }
+  ]
+}

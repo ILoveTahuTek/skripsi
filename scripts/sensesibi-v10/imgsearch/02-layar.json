@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "0.96 inch OLED display SSD1306 I2C module electronics",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/751798d0850c.jpg",
+      "caption": "",
+      "source": "ShillehTek",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/4eeeea3fa56d.jpg",
+      "caption": "",
+      "source": "eBay",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/c0586e7e082f.jpg",
+      "caption": "",
+      "source": "Geekworm",
+      "original_width": "1000px",
+      "original_height": "1000px"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "query": "ASUS TUF Dash F15 laptop product photo",
+  "count": 3,
+  "ranked": false,
+  "captioned_count": 0,
+  "results": [
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d6d7f57ac60a.jpg",
+      "caption": "",
+      "source": "Amazon.com",
+      "original_width": "886px",
+      "original_height": "1000px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/815c17b8c75c.jpg",
+      "caption": "",
+      "source": "Ultrabookreview.com",
+      "original_width": "1500px",
+      "original_height": "600px"
+    },
+    {
+      "original_url": "https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/7d307b4f31e4.jpg",
+      "caption": "",
+      "source": "ASUS",
+      "original_width": "2400px",
+      "original_height": "2400px"
+    }
+  ]
+}
