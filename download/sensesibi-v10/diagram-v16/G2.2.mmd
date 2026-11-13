@@ -1,0 +1,45 @@
+flowchart TD
+    accTitle: Arsitektur model dua kepala tugas di atas encoder CSI terpralatih
+    accDescr: Jalur guru visual di sebelah kiri berisi kamera tersinkron dan YOLO26m-Pose yang menghasilkan label kelas dan 21 keypoint acuan, hanya saat akuisisi data. Jalur model Wi-Fi di sebelah kanan berisi CSI dari sepasang ESP32-S3 yang dipraproses, adapter masukan jika perlu, encoder terpralatih yang dibekukan, barisan embedding 128 dimensi, dan modul temporal, lalu kepala klasifikasi menghasilkan prediksi 26 kelas huruf dan kepala regresi menghasilkan prediksi 21 keypoint tangan. Dataset berpasangan menggabungkan kedua jalur, kerugian gabungan melatih dan evaluasi mengukur kedua kepala, dan model terpilih diinferensikan pada ESP32-S3. Simpul kuning ialah jalur guru, simpul biru jalur model Wi-Fi, simpul hijau alur pelatihan dan deployment.
+
+    CAM["Kamera laptop<br/>tersinkron CSI<br/>(hanya akuisisi)"]
+    GURU["YOLO26m-Pose<br/>(guru visual) [12]"]
+    LAB["Label kelas dan<br/>21 keypoint acuan"]
+    CAM --> GURU
+    GURU --> LAB
+
+    CSI["CSI sepasang ESP32-S3<br/>(56 subcarrier) [9]"]
+    PRE["Praproses: kalibrasi,<br/>segmentasi, jendela"]
+    ADP["Adapter masukan<br/>(jika audit memerlukannya)"]
+    ENC["Encoder CSI terpralatih<br/>dibekukan [11]"]
+    EMT["Embedding 128 per bingkai<br/>+ modul temporal"]
+    HCL["Kepala klasifikasi<br/>(Persamaan 2.8)"]
+    HRG["Kepala regresi<br/>(Persamaan 2.11)"]
+    KLS["Prediksi kelas<br/>26 huruf SIBI"]
+    KPT["Prediksi 21 keypoint<br/>tangan (T, 21, 2)"]
+    CSI --> PRE
+    PRE --> ADP
+    ADP --> ENC
+    ENC --> EMT
+    EMT --> HCL
+    EMT --> HRG
+    HCL --> KLS
+    HRG --> KPT
+
+    PAIR["Dataset berpasangan<br/>(Persamaan 2.24)"]
+    LTOT["Kerugian gabungan,<br/>evaluasi dan optimasi<br/>(Subbab 3.7)"]
+    EDGE["Inferensi terkuantisasi<br/>pada ESP32-S3"]
+
+    LAB --> PAIR
+    PRE -. "tersinkron penanda waktu" .-> PAIR
+    PAIR --> LTOT
+    KLS --> LTOT
+    KPT --> LTOT
+    LTOT --> EDGE
+
+    classDef guru fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef model fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef proses fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    class CAM,GURU,LAB guru
+    class CSI,PRE,ADP,ENC,EMT,HCL,HRG,KLS,KPT model
+    class PAIR,LTOT,EDGE proses

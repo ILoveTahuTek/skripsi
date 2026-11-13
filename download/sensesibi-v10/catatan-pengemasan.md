@@ -1,5 +1,26 @@
 # Catatan Pengemasan — sensesibi-v10
 
+**Tanggal:** 13 November 2026 (gelombang 16) · **Pemicu:** AGENT BRIEF v2 pemilik — revisi additif: pengembangan head klasifikasi dan regresi pada encoder Wi-Fi CSI terpralatih untuk jalur isyarat menjadi teks, TANPA mengubah ruang lingkup sistem SenseSIBI dua arah (judul dokumen acuan memakai frasa "CLOUD PROCESSING") · **Skill:** humanizer-indonesia (adhiprib v1.7, register akademik) + scientific-agent-skills (scientific-writing, citation-management, markdown-mermaid-writing)
+
+## 0. Isi paket gelombang 16
+
+| Berkas | Keterangan |
+|---|---|
+| `Proposal-SenseSIBI-v16.md` | **Naskah sumber tunggal terkini (gelombang 16):** BAB I–III + Daftar Pustaka [1]–[28] + Log Perubahan gelombang 12–16 (changelog per subbab pada log gelombang 16) |
+| `Proposal-SenseSIBI-Studi-Kelayakan-v16.docx` | **Deliverable utama terkini** — 49 hlm A4, TNR 12 pt, spasi 1,5, register mahasiswa D4/S1, konteks Jawa Timur tanpa mitra lembaga; 29 persamaan bernomor (tengah + nomor kanan), 12 tabel konten, 7 gambar, DP 28 entri satu spasi 10 pt; penanda `[PERLU DATA]` 31, `[PERLU VALIDASI]` 8 (baru; tersorot kuning), `[PERLU ILUSTRASI]` 2 |
+| `Proposal-SenseSIBI-Studi-Kelayakan-v16.pdf` | Pratinjau PDF 49 hlm |
+| `Audit-Klaim-v16.md` | **Matriks klaim → bukti** (audit sumber 13 Nov 2026: kartu model HF ×2 + model card repo + ADR-024/146/150 + MM-Fi + MediaPipe; tabel perubahan per bagian; batas klaim; asumsi terbuka) |
+| `diagram-v16/G2.2, G3.1, G3.3, G3.5.mmd` | Sumber 4 diagram direvisi (accTitle/accDescr, label tertelusur) |
+| `assets-v16/gambar-2.1..3.5.png` | 7 gambar: 3 dipertahankan dari v15 (Fresnel 3D, foto alat, skema node), 4 dirender ulang (arsitektur model dua kepala baru Gambar 2.2 dengan kode warna jalur guru/model/pelatihan, tahapan, arsitektur sistem, inferensi tepi) |
+| `_kerja-g16/` | Jejak proses: `src/` (6 berkas sumber), `naskah-untuk-docx.md`, `split/` |
+| `scripts/sensesibi-v10/build_docx_g16.sh` | Pipeline gelombang 16 (patch PERLU VALIDASI pada regex parser + pemadat spasi) |
+
+**Perubahan inti gelombang 16 (rincian per subbab pada Log Perubahan gelombang 16 di ujung naskah):** judul mengikuti dokumen acuan ("CLOUD PROCESSING"); blok model jalur isyarat menjadi teks berubah dari *backbone* WiFi-DensePose berkepala tunggal 1D-CNN menjadi *encoder* CSI terpralatih `ruvnet/wifi-densepose-pretrained` (embedding 128, 9.280 parameter, triplet-temporal 82,3% dijelaskan sebagai akurasi triplet bukan akurasi SIBI) yang dibekukan dengan dua kepala tugas (klasifikasi 26 huruf; regresi 21 *keypoint* dengan Smooth L1 bermask per *keypoint*, komponen ketiga `kpt_shape [21, 3]` ditegaskan visibilitas bukan koordinat z); istilah "distilasi pengetahuan" dikoreksi menjadi supervisi lintas modalitas berpandu guru / *pseudo-label*; 1D-CNN dievaluasi ulang sebagai kandidat modul temporal antara *encoder* dan kepala, bukan kepala tugas; temuan audit ketidaksesuaian bentuk masukan (8 fitur turunan @1 Hz vs 56 *subcarrier* @50 bingkai/dtk) dijadikan risiko dan kebutuhan adapter masukan eksplisit; LoRA dan pelatihan lanjutan berstatus eksperimen pembanding; pelatihan di komputer Python/PyTorch; TTS/ASR/cloud/server/arah kedua/gerbang G0–G4/uji pengguna/validator/biaya DIPERTAHANKAN utuh. Daftar pustaka 22 → 28 (7 rujukan primer baru terverifikasi; SVM keluar bersama pembanding lamanya). Persamaan 18 → 29.
+
+**Catatan halaman:** realisasi 49 hlm (v15: 40; target lama "±30-an"). Tambahan isi brief v2 (7 subbab baru BAB II, 11 persamaan, Tabel 2.2 pembedaan model, tabel parameter dan risiko yang membesar, 6 rujukan DP, 1 gambar) menaikkan tubuh naskah +36% (75.193 → 102.506 karakter); pemadat spasi rumus/tabel/heading dan batas tinggi gambar 16,4 cm sudah diterapkan. Jika pembimbing menuntut ±30 hlm, kandidat pemangkasan: gabung 2.5 ke 2.4, ringkas 2.8, pecah Tabel 3.7 jadi esensial saja, dan turunkan gambar ke 5 — daftar lengkap menanti keputusan pemilik.
+
+**Verifikasi gelombang 16:** metrik humanizer-indonesia preset akademik 9/9 LULUS (rerata 19,8 kata; ≥28 kata 16,4%; em/en dash prosa 0; "bila" 0; penyangkalan antisipatif 0); sitasi monoton 1–28 tanpa celah, DP 28 entri urut; 29 persamaan, 12 tabel, 7 gambar terverifikasi di DOCX (python-docx: 4 H1 + 34 H2 + 8 H3, 42 tabel termasuk 29 tabel rumus + identitas, 7 gambar inline) dan PDF (pypdf, 49 hlm, DP ditutup [28]); audit placeholder bersih (alarm "NaN"/"TODO" pertama terbukti positif palsu pencocokan case-insensitive atas suku kata Indonesia "kanan"/"metodologi"); diagram G2.2 tiga kali diiterasi hingga aspek 1,36 dengan font efektif 10,2 pt @14 cm.
+
 **Tanggal:** 12 November 2026 (gelombang 14) · **Pemicu:** permintaan pemilik — daftar pustaka dipangkas menjadi sekitar 20-an entri, naskah menyesuaikan menjadi sekitar 30-an halaman, diagram dan kemampuan saintifik direvisi memakai K-Dense scientific-agent-skills · **Skill:** humanizer-indonesia (adhiprib v1.7, register akademik) + scientific-agent-skills (scientific-schematics, markdown-mermaid-writing, scientific-writing, citation-management)
 
 ## 0. Isi paket gelombang 14

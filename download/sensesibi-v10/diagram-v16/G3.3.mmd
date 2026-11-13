@@ -1,0 +1,43 @@
+flowchart TD
+    accTitle: Arsitektur produk akhir tanpa kamera
+    accDescr: Tiga rantai. Arah 1 mengalir dari beacon ESP-NOW node pemancar melalui zona isyarat ke node penerima yang menjalankan encoder terpralatih berkepala dua yang terkuantisasi, lalu teks tampil di layar dan dibunyikan Kokoro TTS ONNX di aplikasi Tauri. Arah 2 mengalir dari tombol tekan-untuk-bicara dan mikrofon ke layanan ASR awan, lalu teks dan representasi SIBI tampil di layar. Jalur guru memakai webcam dan YOLO26m-Pose untuk supervisi pelatihan. Garis putus-putus menandai beralih ke server lokal saat internet terputus.
+
+    subgraph A1["Arah 1: isyarat menjadi teks dan suara"]
+        TX["Node TX: beacon<br/>ESP-NOW"]
+        ZN["Zona isyarat<br/>(satu pengisyarat)"]
+        RX["Node RX: CSI promiscuous +<br/>encoder terpralatih berkepala dua<br/>terkuantisasi + antarmuka"]
+        MAPL["Kamus label-teks<br/>di modul"]
+        DSP1["Layar modul:<br/>teks hasil"]
+        TTS["Mesin TTS on-device:<br/>Kokoro ONNX di aplikasi<br/>Tauri (Poco F4 5G)"]
+        SPK["Speaker +<br/>rotary encoder"]
+        TX --> ZN
+        ZN --> RX
+        RX --> MAPL
+        MAPL --> DSP1
+        MAPL -- "teks via Wi-Fi" --> TTS
+        TTS -- "audio" --> SPK
+    end
+
+    subgraph A2["Arah 2: ucapan menjadi representasi SIBI"]
+        BTN["Tombol<br/>tekan-untuk-bicara"]
+        MIC["Mikrofon<br/>I2S"]
+        STT["Layanan<br/>ASR awan"]
+        DSP2["Layar modul: teks lalu<br/>representasi SIBI"]
+        AST["Aset SIBI: glos,<br/>gambar, ejaan jari<br/>(Subbab 2.12)"]
+        BTN --> MIC
+        MIC -- "audio via Wi-Fi" --> STT
+        STT -- "teks" --> DSP2
+        AST --> DSP2
+    end
+
+    subgraph AG["Jalur guru (hanya akuisisi dan pelatihan)"]
+        CAM["Webcam laptop"]
+        Y26P["YOLO26m-Pose:<br/>21 keypoint pose tangan"]
+        SUP["Supervisi pelatihan<br/>dua kepala (Subbab 3.7)"]
+        CAM --> Y26P
+        Y26P --> SUP
+    end
+
+    LOK["Server lokal (cadangan):<br/>ASR faster-whisper,<br/>TTS MMS, server RuView,<br/>server Rust"]
+    TTS -. "TTS lokal" .-> LOK
+    STT -. "ASR lokal" .-> LOK
