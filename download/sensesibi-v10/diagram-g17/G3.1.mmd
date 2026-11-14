@@ -1,0 +1,35 @@
+flowchart LR
+    accTitle: Tahapan penelitian T0 sampai T5 dengan gerbang keputusan G0 sampai G4
+    accDescr: Diagram dua fase. Fase pembangunan data berisi T0 replikasi platform dan audit checkpoint encoder, gerbang G0 baseline, T1 kurasi isyarat, sub-gerbang G0b probe kompatibilitas representasi atas data pilot, dan T2 perekaman dataset serta pelatihan dua kepala. Fase pengujian berisi kuantisasi model, gerbang G1 model tepi, T3 uji generalisasi, gerbang G2 konsultasi tiga pilar, T4 pengemasan purwarupa, gerbang G3 integrasi mesin ucapan, gerbang G4 sintesis kelayakan, dan T5 analisis serta penulisan.
+
+    subgraph KA["Fase pembangunan data (M1–M8)"]
+        direction TB
+    T0["T0 Replikasi platform, verifikasi<br/>CSI 56 subcarrier pada 1 m, uji Delta-CSI,<br/>koeksistensi, audit checkpoint encoder (M1–M2)"]
+    G0("G0 akhir M2: baseline CSI-jaringan:<br/>UDP Rust tanpa kehilangan paket,<br/>akuisisi stabil, gerak terpisah")
+    T1["T1 Kurasi isyarat, kalibrasi ruang,<br/>protokol, etika, rintisan separabilitas<br/>pasangan huruf mirip (M2–M4)"]
+    T2["T2 Perekaman dataset dan<br/>pelatihan dua kepala di atas<br/>encoder beku (M4–M8)"]
+    T0 --> G0
+    G0 -- "lolos" --> T1
+    G0b("G0b awal T2: probe linear embedding beku,<br/>keputusan jalur masukan")
+    T1 --> G0b
+    G0b -- "lolos" --> T2
+    end
+    subgraph KB["Fase pengujian dan penulisan (M8–M14)"]
+        direction TB
+    T2B["Kuantisasi model terpilih dan uji<br/>deployment jalur klasifikasi<br/>ke modul ESP32-S3"]
+    G1("G1 akhir M8: model tepi terkuantisasi:<br/>akurasi skema, ablasi multitugas dilaporkan,<br/>inferensi di bawah 100 ms")
+    T3["T3 Uji generalisasi: lintas sesi,<br/>partisipan, ruang, posisi<br/>berdiri/duduk (M8–M10)"]
+    G2("G2 akhir M10: konsultasi 3 pilar<br/>pakar SIBI, RF, embedded AI<br/>tanpa temuan blok kritis")
+    T4["T4 Pengemasan dua arah, full-stack<br/>Rust, TTS server lokal, uji penerimaan<br/>dan biaya (M10–M12)"]
+    G3("G3 M11: integrasi Rust dan mesin<br/>ucapan dalam anggaran latensi")
+    G4("G4 akhir M12: sintesis kelayakan,<br/>penerimaan dan biaya layak,<br/>rekomendasi TKT/TRL 3–4")
+    T5["T5 Analisis dan penulisan<br/>(M12–M14)"]
+    T2B --> G1
+    G1 -- "lolos" --> T3
+    T3 --> G2
+    G2 -- "lolos" --> T4
+    T4 --> G3
+    G3 -- "lolos" --> G4
+    G4 -- "lolos" --> T5
+    end
+    KA --> KB

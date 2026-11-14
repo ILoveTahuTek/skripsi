@@ -1,0 +1,25 @@
+flowchart LR
+    accTitle: Alur inferensi langsung pada ESP32-S3
+    accDescr: Bingkai promiscuous masuk ke penyangga geser di PSRAM, segmen terdeteksi dari energi gerak, masukan encoder disiapkan sesuai audit bentuk masukan, model terkuantisasi berupa encoder terpralatih, modul temporal, dan dua kepala menghasilkan kelas beserta skor dan keypoint opsional, keluaran di atas ambang dikirim via UDP, dan keluaran di bawah ambang ditolak sebagai isyarat tidak dikenali.
+
+    subgraph R1["Akuisisi dan segmentasi"]
+        direction TB
+    CSI["Callback CSI,<br/>mode promiscuous,<br/>filter MGMT"]
+    BUF["Penyangga geser<br/>CSI di PSRAM"]
+    SEG["Segmentasi energi<br/>gerak (perangkat)"]
+    FT["Masukan encoder sesuai<br/>audit bentuk masukan"]
+    CSI --> BUF
+    BUF --> SEG
+    SEG --> FT
+    end
+    subgraph R2["Model dan keluaran"]
+        direction TB
+    MOD["Model terkuantisasi:<br/>encoder terpralatih +<br/>modul temporal + dua kepala"]
+    DEC{"Skor keyakinan<br/>di atas ambang?"}
+    OUT["Label + skor (+ keypoint<br/>opsional) dikirim via UDP"]
+    RJ["Label ditolak:<br/>isyarat tidak dikenali"]
+    MOD --> DEC
+    DEC -- "ya" --> OUT
+    DEC -- "tidak" --> RJ
+    end
+    R1 --> R2
