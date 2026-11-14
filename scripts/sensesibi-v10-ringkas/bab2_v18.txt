@@ -1,0 +1,337 @@
+# BAB II KAJIAN PUSTAKA
+
+## 2.1 Bahasa Isyarat, SIBI, dan Kebutuhan Komunikasi Dua Arah
+
+Bahasa isyarat menyampaikan makna lewat gerak tangan, lengan, tubuh, dan ekspresi wajah. Satu isyarat tersusun atas bentuk tangan, lokasi, gerak, serta orientasi telapak; cukup satu jari berubah bentuk, maknanya bisa ikut berubah. Susunan inilah yang menjadi acuan penelitian dalam memisahkan bagian isyarat yang bisa dinilai mesin dari bagian yang tetap memerlukan penilaian manusia [3]. SIBI ialah sistem isyarat baku pendidikan formal yang didokumentasikan kamus pemerintah [3], sedangkan BISINDO tumbuh alami di komunitas tunarungu. Survei terhadap 100 responden tunarungu di Jawa dan Bali menemukan 91% memakai BISINDO, sementara SIBI menempel pada konteks sekolah [4]. Penelitian ini tetap memilih SIBI karena sasarannya alat bantu pembelajaran di sekolah, bukan karena jumlah penuturnya lebih besar. Audit label pada dataset visual peneliti menegaskan pembagian kelas yang dipakai seluruh naskah: huruf C termasuk kelompok 24 huruf statis, sedangkan J dan Z satu-satunya huruf yang menuntut lintasan gerak.
+
+Bicara antara pengguna isyarat dan orang pendengar menuntut dua arah. Keluarga dan guru berada di barisan paling depan merasakan kesenjangan ini, sementara jumlah juru bahasa masih jauh dari cukup [1]; alat bantu karena itu harus melayani kedua arah, dan kamus satu arah tidak menyelesaikan masalahnya. Sistem satu arah yang mengubah ucapan menjadi animasi isyarat sudah lebih dulu hadir di Indonesia, tetapi untuk arah isyarat menjadi teks riset dalam negeri bertumpu pada kamera, misalnya CNN untuk huruf BISINDO [5]. Kamera menuntut pencahayaan dan garis pandang yang baik, dan kamera yang terus menyala membuat pengguna merasa diawasi. Dua kendala inilah yang mendorong pencarian jalur penginderaan tanpa kamera dan tanpa perangkat yang dikenakan.
+
+## 2.2 Wi-Fi CSI, Modul ESP32-S3, dan Akuisisi RuView
+
+*Channel State Information* (CSI) memuat informasi amplitudo dan fase pada setiap *subcarrier* sinyal Wi-Fi, yang bersama-sama menggambarkan kondisi jalur propagasi [6]. Tubuh yang bergerak di antara pemancar dan penerima mengubah panjang jalur pantulan; amplitudo dan fase tiap *subcarrier* pun ikut bergeser. Karena tiap *subcarrier* menempati frekuensi berbeda, satu pasang perangkat sekaligus menyediakan banyak kanal pengamatan [6]. Bentuk formalnya: pada kanal 20 MHz, tiap *subcarrier* valid n membawa koefisien kanal kompleks
+
+```rumus
+h~n~(t) = |h~n~(t)| · exp( j · φ~n~(t) ), n ∈ N~valid~ (2.1)
+```
+
+dengan |h~n~(t)| amplitudo, φ~n~(t) fase, dan j satuan imajiner [6], [9]. Dokumentasi ESP-IDF membedakan total indeks 56 *subcarrier* pada kanal 20 MHz dari *subcarrier* data efektif: tanpa STBC, LLTF memuat 52 *subcarrier* data efektif sedangkan HT-LTF memuat 56, dan bila penanda *first_word_invalid* aktif maka 4 bita awal (2 *subcarrier*) tidak valid [9]. Himpunan N~valid~ karena itu ditetapkan dari audit T0 atas jenis paket, tipe LTF, filter MAC, *pilot/null/guard*, dan penanda tersebut, bukan diasumsikan 56.
+
+Pemodelan CSI berpijak pada zona Fresnel [13]. Radius zona Fresnel ke-n pada suatu titik dihitung dari jarak titik itu ke pemancar d~1~ dan ke penerima d~2~ [13]:
+
+```rumus
+r~n~ = √( n · λ · d~1~ · d~2~ / ( d~1~ + d~2~ ) ) (2.2)
+```
+
+dengan λ panjang gelombang pembawa; pada 2,4 GHz, λ ≈ 12,5 cm. Pada jarak antarmodul 1 meter dengan tangan di titik tengah, radius zona pertama r~1~ ≈ 0,18 meter sehingga ruang gerak tangan seluruhnya berada di zona yang paling peka terhadap perubahan jalur. Artikulasi jari menggeser jalur pantulan pada orde sentimeter sampai milimeter, dan tiap bentuk huruf meninggalkan pola perubahan *subcarrier* yang khas. Gerak tubuh juga melahirkan pergeseran Doppler yang mengikuti kecepatan gerak v [6], [14]:
+
+```rumus
+f~D~ = ( v / λ ) · ( cos α + cos β ) (2.3)
+```
+
+dengan α dan β sudut antara arah gerak dan garis pandang ke pemancar serta ke penerima. Pita Doppler gerak isyarat kira-kira 1–60 Hz [6] dan kaidah Nyquist menuntut laju pencuplikan
+
+```rumus
+f~s~ ≥ 2 · f~maks~ (2.4)
+```
+
+Pada laju *firmware* RuView 50 bingkai per detik [10], pita teramati hanya sampai 25 Hz, sehingga gerak tangan yang masih teramati tanpa pelipatan kira-kira 1,6 meter per detik; gerak jari yang lebih cepat berisiko terlipat, dan jika laju terukur lebih rendah, pita yang dianalisis ikut menyempit serta dilaporkan apa adanya.
+
+Fase mentah tercemar derau osilator lokal. Teknik CSI-ratio membersihkannya lewat rasio atau perkalian konjugat tanpa perangkat tambahan [13]. Prinsip itu diadaptasi menjadi rasio terhadap rekam acuan kalibrasi ruang:
+
+```rumus
+ρ~n~(t) = h~n~(t) / h~n~( t~0~ ) (2.5)
+```
+
+dengan t~0~ waktu kalibrasi ruang, yaitu 600 bingkai bawaan RuView [10]. Rumus ini didefinisikan sempit sebagai normalisasi terhadap *baseline* kalibrasi ruang: pembagian itu membuang tanggapan statis ruangan, tetapi tidak otomatis menghapus seluruh *phase drift* lambat; sisanya diukur pada T0 lalu dilaporkan. Bukti kepekaan CSI terhadap gerak halus memang banyak [6], tetapi lahir dari kondisi terkendali sehingga bagi penelitian ini statusnya hipotesis kerja. Model CSI juga mudah *overfitting* terhadap orang dan ruang; Widar3.0 menjawabnya dengan profil kecepatan Doppler untuk pengenalan lintas domain [14]. Kelayakan satu tautan dua modul berantena tunggal membedakan 26 bentuk tangan SIBI karenanya diperlakukan sebagai pertanyaan penelitian yang diuji lewat Delta-CSI dan gerbang G1, bukan asumsi; jika beberapa huruf terbukti tidak terpisahkan, himpunan huruf dipangkas (Tabel 3.8).
+
+ESP32-S3 ialah mikrokontroler Wi-Fi 802.11 b/g/n 2,4 GHz berantena tunggal dengan inti ganda 240 MHz, SRAM 512 KB, dan PSRAM hingga 8 MB [8]. Dukungan CSI tersedia resmi lewat repositori esp-csi [9]. RuView merekomendasikan ESP32-S3 sebagai modul penangkap CSI sekaligus menyediakan rantai akuisisi lengkap [10] yang dipetakan pada Tabel 2.1, dan repositori yang sama menerbitkan *checkpoint encoder* terpralatih yang menjadi tulang punggung murid penelitian ini.
+
+Tabel 2.1 Pemetaan fitur RuView terhadap peran dalam penelitian ini
+
+| Fitur RuView | Peran dalam penelitian ini |
+|---|---|
+| *Firmware* penangkap CSI (UDP, mode *promiscuous*) | Mengalirkan CSI dan label ke server |
+| *Station* + UDP + CSI *promiscuous* pada satu *chip*; ESP-NOW hanya fitur sinkronisasi opsional | Dasar topologi satu kanal (Subbab 3.5) |
+| Kalibrasi ruang 600 bingkai + 8 *anchor* | Kalibrasi tiap sesi; pemotongan segmen isyarat |
+| Mode privasi | Membuang fitur biometrik selama penelitian |
+| Akuisisi tersinkron kamera-CSI | Jalur guru; estimator memakai YOLO26m-Pose |
+| *Checkpoint encoder* CSI terpralatih (*embedding* 128 dimensi) [11] | *Encoder* murid yang dibekukan pada baseline (Subbab 2.3) |
+
+Mekanisme akuisisinya perlu dinyatakan tepat agar tidak tertukar. Node penerima menangkap CSI dari bingkai Wi-Fi biasa yang melintasi kanal dalam mode *promiscuous*, sebagaimana diimplementasikan *firmware* RuView; CSI bukan keluaran protokol khusus, dan node pemancar cukup menyediakan lalu lintas Wi-Fi baku pada zona sebagai sumber bingkai [10]. ESP-NOW tidak menjadi bagian arsitektur inti: protokol itu hanya kandidat fitur sinkronisasi antarmodul, dengan kecocokan sinkronnya terukur 99,56% pada dokumentasi RuView [10]. Koeksistensi radio pada satu *chip* tetap disyaratkan: seluruh perangkat berada pada satu kanal dan mode hemat daya dimatikan [10]. Versi dan *commit firmware* yang dipakai dipin pada T0 [PERLU DATA: versi dan commit RuView]. Satu catatan jujur menyertai semua ini: RuView belum melalui telaah sejawat, jadi fungsinya diverifikasi sendiri pada gerbang G0.
+
+## 2.3 Encoder CSI Terpralatih RuView, Transfer Learning, dan Jalur Masukan
+
+*Encoder* terpralatih yang menjadi tulang punggung jalur isyarat menjadi teks terdokumentasi pada kartu modelnya [11]. Arsitekturnya dua lapis *fully connected* dengan BatchNorm dan GELU yang memetakan fitur CSI menjadi *embedding* 128 dimensi ternormalisasi L2, seluruhnya hanya 9.280 parameter:
+
+```rumus
+z~i~ = f~θ0~( X~i~ ), z~i~ ∈ R^d^, d = 128 (2.6)
+```
+
+dengan X~i~ masukan ke-i, f~θ0~ pemetaan *encoder* bertetapan θ~0~, dan z~i~ vektor *embedding* keluaran. Pretrainingnya kontrastif dengan triplet loss dan InfoNCE pada temperatur 0,1; pasangan positif diambil dari jendela dalam jarak 2 detik, negatif dari jarak lebih dari 30 detik, selama 60 epoch dengan AdamW dan perlindungan EWC terhadap lupa bencana [11]. Kontrak masukannya diikat eksplisit: satu vektor delapan fitur turunan per jendela satu detik (*batch* (B, 8)), bukan deret *subcarrier*, dan keluarannya satu *embedding* per jendela; deret waktu hidup pada tingkat barisan jendela. Parameter normalisasi masukan belum dipublikasikan kartu modelnya sehingga dicari pada artefak *checkpoint* saat audit T0 [PERLU VALIDASI: parameter normalisasi masukan pada artefak checkpoint].
+
+Dua model lain pada ekosistem yang sama sering tertukar dengan *encoder* ini. Model `wifi-densepose-mmfi-pose` [15] adalah *checkpoint* pose terpisah: masukan amplitudo CSI [3, 114, 10] pada 100 Hz diproses *encoder* Transformer menjadi keluaran [17, 2], yaitu 17 *keypoint* tubuh COCO, dengan sekitar 2,3 juta parameter; kinerjanya PCK@20 82,69% (ansambel 83,59%), turun ke sekitar 64% lintas subjek *zero-shot* dan 17,5% lintas lingkungan, lalu naik ke 72–78% setelah kalibrasi 50–1.000 bingkai per orang [15]. Model itu dilatih pada dataset MM-Fi [16] (40 subjek, 27 kategori aksi, lebih dari 320 ribu bingkai) dan berlisensi CC BY-NC 4.0 mengikuti lisensi datanya. Model ketiga, YOLO26m-Pose [12], ialah model penglihatan yang berperan sebagai guru visual (Subbab 2.5). Tabel 2.2 merangkum pembedaan ketiganya.
+
+Tabel 2.2 Pembedaan tiga model ekosistem yang tidak boleh tercampur dalam penelitian ini
+
+| Aspek | Encoder CSI terpralatih [11] | Model pose MM-Fi [15] | Guru visual YOLO26m-Pose [12] |
+|---|---|---|---|
+| Berkas | `ruvnet/wifi-densepose-pretrained` (audit kedua set berkas model.* vs csi-embed-v2.* pada T0) | `ruvnet/wifi-densepose-mmfi-pose` | Repositori WPC peneliti (eksperimen exp11_huruf24) |
+| Masukan | 8 fitur turunan CSI per jendela 1 detik (*batch* (B, 8)); bukan deret *subcarrier* | Amplitudo CSI [3, 114, 10] @ 100 Hz | Citra RGB kamera |
+| Keluaran | *Embedding* 128 dimensi ternormalisasi L2 | 17 *keypoint* tubuh COCO dalam [0, 1] | Kelas isyarat dan 21 *keypoint* tangan |
+| Parameter | 9.280 | ±2,3 juta (varian utama) | [PERLU DATA: jumlah parameter model juara WPC] |
+| Peran | Representasi murid, dibekukan pada baseline | Pembanding temuan lintas domain, bukan komponen model | Pemberi label kelas dan *keypoint* saat akuisisi |
+| Status bukti | Kartu model; triplet-temporal 82,3%; EWC tingkat lupa 32,97% | Kartu model; PCK@20 82,69%; lisensi CC BY-NC 4.0 | Data pra-penelitian peneliti; mAP50 0,9580 pada 24 huruf statis |
+
+Status tiga dokumen rancangan pada repositori RuView juga dinyatakan terbuka: ADR-024 (model penyematan kontrastif AETHER), ADR-146 (*encoder* RF tujuh kepala tugas), dan ADR-150 (*foundation encoder* tahan pergantian orang dan ruang) semuanya berstatus Proposed, artinya belum diimplementasikan [10]. Penelitian ini bersandar hanya pada *checkpoint* yang benar-benar tersedia; angka estimasi dari ADR dikutip dengan label estimasi rancangan setiap kali muncul.
+Audit langsung ke repositori Hugging Face dan GitHub RuView pada 14 November 2026 menambah tiga temuan yang wajib masuk rancangan [10], [11]. Pertama, terdapat dua set artefak *checkpoint* (berkas model.* serta csi-embed-v2.* yang memuat *standardizer* FP16); berkas model.safetensors mengalami *NUL-padding* pada *header* (isu #1522) sehingga tidak terbaca langsung oleh safetensors.torch.load_file, dan audit T0 wajib memeriksa kedua set berkas itu sebelum pelatihan dimulai. Kedua, dokumentasi RuView (isu #509) memperingatkan keterbatasan aliran CSI antena tunggal (SISO) 56 *subcarrier* ESP32 terhadap detail sendi distal tangan. Ketiga, kartu model dengan jujur mencatat tingkat lupa (*forgetting rate*) EWC sebesar 32,97% pada empat tugas pretraining meski memakai EWC. Angka triplet-temporal 82,3% pun harus dibaca sempit: ia menghitung peluang jarak anchor ke positif temporal lebih pendek daripada ke negatif, pada satu ruangan, satu rekaman, dan dua node [11]; yang diukurnya kualitas geometri *embedding*, bukan akurasi klasifikasi SIBI dan bukan pula galat *keypoint*. Dua hal terakhir itulah yang hendak diukur penelitian ini.
+
+Ketidaksesuaian bentuk masukan menjadi risiko ilmiah utama. Kartu model mencatat masukan delapan fitur turunan CSI (kehadiran, gerak, napas, detak jantung, varians fase, jumlah orang, deteksi jatuh, dan RSSI) pada laju 1 Hz [11], sedangkan jalur akuisisi menghasilkan N~valid~ *subcarrier* hingga 50 bingkai per detik [9], [10]. Delapan fitur itu harus dibaca jujur sebagai kontrak lingkungan, bukan kontrak artikulasi: napas, detak jantung, jumlah orang, dan deteksi jatuh hampir tidak berubah selama artikulasi jari, dan pretraining memakai data ruangan delapan jam dengan supervisi sensor PIR dan BME280 [11]. Jika detail jari hilang ketika CSI diringkas menjadi delapan fitur, membuka bobot *encoder* lewat LoRA maupun pelatihan lanjutan tidak dapat mengembalikan informasi yang sudah terbuang. Penelitian karena itu menyiapkan dua jalur implementasi masukan dan satu pembanding alternatif:
+
+1. Jalur A (rekonstruksi fitur bawaan): menghitung ulang delapan fitur turunan RuView dari bingkai CSI, dengan unit, definisi, penanda waktu, dan normalisasi yang diverifikasi terhadap artefak asli pada T0.
+2. Jalur B (adapter konvolusi 1D terlatih), dibedakan menjadi Jalur B1 (adapter rekonstruksi) yang dilatih meniru delapan fitur RuView, dan Jalur B2 (adapter tugas) yang dioptimalkan langsung oleh kerugian SIBI. Jika Jalur B2 berhasil sementara Jalur A gagal, kontribusi pemisahan kelas berasal dari adapter tugas dan tidak diklaim sebagai bukti kualitas representasi bawaan RuView.
+3. Pembanding C (baseline CSI temporal lebih kaya): model temporal ringan yang menerima spektrum CSI yang belum dipersempit menjadi delapan fitur, untuk menjaga ketajaman analisis pada G0b tanpa mengganti desain utama secara diam-diam.
+
+Baseline penelitian membekukan *encoder* pada θ~0~ dan melatih bersama adapter masukan (bila dipakai), modul temporal, serta kedua kepala tugas, sebagaimana dirumuskan Persamaan 2.15. Dengan *encoder* beku, kualitas *embedding* terpralatih untuk SIBI terbaca langsung dari kinerja kepala sehingga sumbangan pretraining terpisah dari sumbangan penyetelan; karena *encoder* hanya 9.280 parameter, biaya membandingkan skema adaptasi lain pun rendah. LoRA menambah pembaruan berperingkat rendah pada tetapan asli tanpa menyimpan gradien untuk seluruh matriks [17]:
+
+```rumus
+W~akhir~ = W~0~ + B · A (2.7)
+```
+
+dengan W~0~ matriks tetapan asli yang dibekukan, B berukuran d~keluar~ × r dan A berukuran r × d~masukan~, serta r peringkat adapter yang jauh lebih kecil daripada ukuran matriks. Kartu model menyertakan adapter ruangan node-1.json dan node-2.json masing-masing sekitar 21 KB [11], dan ADR-150 menaksir adapter sekitar 11 KB mampu menyamai kinerja lintas subjek dengan 100 sampai 200 data berlabel per ruang [10]; angka ADR itu berstatus estimasi rancangan. Kompatibilitas LoRA dengan alur ekspor ke ESP32-S3 belum terverifikasi [PERLU VALIDASI: kompatibilitas LoRA dengan alur ekspor]. Pembanding ketiga ialah pelatihan lanjutan, baik sebagian maupun seluruhnya, yang dijaga EWC seperti pretrainingnya [11]; ketiga skema (beku, beku plus LoRA, pelatihan lanjutan) diperlakukan sebagai eksperimen pembanding pada data dan seed yang sama, selalu berdampingan dengan Pembanding C karena penyetelan bobot tidak dapat memulihkan informasi jari yang hilang pada masukan delapan fitur.
+
+
+## 2.4 Dua Kepala Tugas, Modul Temporal, dan Kerugian Gabungan
+
+Kepala klasifikasi mengubah ringkasan barisan *embedding* menjadi skor tiap kelas huruf. Untuk K kelas dengan K = 26, skor logit dihitung dari
+
+```rumus
+a~i~ = W~c~ · s~i~ + b~c~ (2.8)
+```
+
+dengan s~i~ ∈ R^d^ vektor ringkasan atensi modul temporal (s~i~ = z~i~, d = 128 pada *probe* linear atau ablasi tanpa proyeksi temporal), W~c~ matriks berukuran K × d, dan b~c~ vektor bias. Skor lalu diubah menjadi probabilitas lewat *softmax*
+
+```rumus
+q~ik~ = exp( a~ik~ ) / Σ~k~ exp( a~ik~ ) (2.9)
+```
+
+sehingga seluruh probabilitas berjumlah satu. Sebagai lantai pembanding, tebakan acak seragam bernilai 1/K ≈ 3,8%, dihitung ulang jika himpunan huruf dipangkas. Kerugian pelatihannya silang-entropi kategorikal; dengan label *one-hot* y~ik~ yang bernilai satu pada kelas benar, kerugian atas N sampel dalam *batch* berbunyi
+
+```rumus
+L~cls~ = − ( 1 / N ) · Σ~i~ Σ~k~ y~ik~ · log q~ik~ (2.10)
+```
+
+Jika data latih terbukti timpang antarhuruf, bobot kelas dipasang berbanding terbalik dengan frekuensi kelasnya, dihitung hanya dari data latih (Tabel 3.8). Klasifikator himpunan tertutup selalu memilih satu kelas, sehingga keluarannya dilengkapi skor keyakinan dan mekanisme penolakan [18]: keyakinan rendah memunculkan pesan isyarat tidak dikenali alih-alih menebak salah. Kelayakan operasional mekanisme itu dilaporkan lewat *accepted coverage*, akurasi pada segmen diterima (*selective accuracy*), akurasi keseluruhan, serta laju terima-salah dan tolak-salah; ambangnya ditetapkan dari data validasi (Subbab 3.7).
+
+Kepala regresi memperkirakan bentuk jari kontinu. Target mengikuti skema 21 *landmark* tangan MediaPipe Hands [19]; sesuai `kpt_shape` [21, 3], tiap sampel memuat 21 titik dengan koordinat x, y, dan tanda visibilitas. Koordinat target dipakai berpasangan (x, y) saja, sedangkan visibilitas diperlakukan sebagai mask. Kepala regresi membaca tiap keadaan tersembunyi modul temporal secara langsung sehingga keluarannya tetap per langkah, Q~t~ = reshape( W~r~ · h~t~ + b~r~, 21, 2 ) dengan W~r~ berukuran 42 × 128 dan keluaran per segmen berbentuk T × 21 × 2; bentuk ini dipilih karena J dan Z dibedakan oleh lintasan gerak, bukan satu pose. Varian peringkas tunggal yang memprediksi seluruh jendela dari satu vektor,
+
+```rumus
+Q~i~ = reshape( W~r~ · z~i~ + b~r~, T, 21, 2 ) (2.11)
+```
+
+dengan W~r~ berukuran 42T × 128, dipertahankan sebagai pembanding ablasi untuk huruf statis. Sistem koordinat target harus dibakukan sebelum pelatihan: koordinat piksel kamera tidak otomatis dapat diprediksi dari CSI dan tidak tahan perubahan posisi kamera, jarak, maupun orientasi. Kandidat kuatnya koordinat ternormalisasi terhadap kotak deteksi guru atau titik pergelangan tangan, dengan konvensi *handedness*, skala acuan d~ref~, ambang PCK α, dan pemetaan target temporal ke pusat jendela CSI ditetapkan pada T0 lalu dipakai konsisten oleh guru dan murid [PERLU VALIDASI: sistem koordinat, handedness, skala acuan, dan ambang PCK]. Proyeksi XY dua dimensi juga tidak merepresentasikan kedalaman dan orientasi telapak secara penuh; keterbatasan itu dinyatakan pada laporan.
+
+Kerugian regresinya Smooth L1 yang dibobot mask [20]. Fungsi Smooth L1 berperilaku kuadratik dekat nol dan linear untuk galat besar,
+
+```rumus
+SmoothL1~δ~( x ) = 0,5 · x^2^ / δ untuk |x| ≤ δ, dan |x| − 0,5 · δ untuk |x| > δ (2.12)
+```
+
+dengan δ ambang peralihan, sehingga pencilan anotasi tidak mendominasi gradien. Kerugian bermask dihitung hanya pada titik dan langkah yang valid, dijumlahkan pada kedua koordinat:
+
+```rumus
+L~reg~ = ( Σ~i,t,j~ m*~itj~ · Σ~c~ SmoothL1~δ~( Q~itj,c~ − P~itj,c~ ) ) / ( 2 · Σ~i,t,j~ m*~itj~ + ε ) (2.13)
+```
+
+dengan m*~itj~ mask gabungan, c ∈ {x, y}, P~itj~ koordinat acuan guru, dan ε penahan pembagi nol; mask gabungan itu menggabungkan validitas langkah temporal dan visibilitas titik:
+
+```rumus
+m*~itj~ = m^valid^~it~ · m^vis^~itj~ (2.13a)
+```
+
+dengan m^valid^~it~ bernilai nol pada langkah *padding* dan m^vis^~itj~ mask visibilitas guru. Jika prediksi visibilitas juga diinginkan, kepala tambahan dengan silang-entropi biner disiapkan sebagai perluasan (Tabel 3.8).
+
+Pembelajaran multitugas melatih beberapa tugas berbarengan di atas representasi yang dibagi, dan representasi yang baik untuk satu tugas kerap menolong tugas lain yang berkaitan [21]. Kedua tugas penelitian ini memang dua pandangan atas isyarat yang sama: klasifikasi membacanya sebagai kelas diskret, regresi sebagai bentuk jari kontinu; hipotesis kerjanya, supervisi *keypoint* ikut merapikan batas antarhuruf yang bentuknya mirip. Kerugian gabungan menjumlah keduanya dengan bobot:
+
+```rumus
+L~total~ = λ~cls~ · L~cls~ + λ~reg~ · L~reg~ (2.14)
+```
+
+Skala keduanya disamakan lebih dulu, misalnya dengan membagi tiap kerugian oleh nilai rata-ratanya pada epoch pertama, sebelum bobot λ ditala dari data validasi (Tabel 3.8). Konflik gradien antartugas dipantau lewat besar gradien tiap kepala dan kemiripan arahnya,
+
+```rumus
+cos( g~c~, g~r~ ) = ( g~c~^T^ · g~r~ ) / ( ||g~c~|| · ||g~r~|| + ε ) (2.14a)
+```
+
+dengan g~c~ dan g~r~ gradien kerugian klasifikasi dan regresi terhadap tetapan bersama; jika keduanya menarik representasi ke arah berlawanan (kemiripan arah menurun), penyeimbangan gradien atau pelatihan bergantian dipertimbangkan dan perlakuannya dilaporkan. Pada baseline, pembaruan tetapan menyentuh seluruh tetapan di luar *encoder*:
+
+```rumus
+Θ~train~ = { φ~adapter~, θ~temporal~, θ~c~, θ~r~ }, θ~encoder~ = θ~0~ (2.15)
+```
+
+dengan φ~adapter~ tetapan adapter masukan yang hanya hadir jika jalur adapter terpilih pada G0b, θ~temporal~ tetapan modul temporal, serta θ~c~ dan θ~r~ tetapan kedua kepala; pembaruannya mengikuti Θ~train~ ← Optimizer( ∇ L~total~ ). Modul temporal sendiri bukan kepala tugas: ia memproses barisan *embedding* per langkah dan mengeluarkan keadaan tersembunyi per langkah, h~1~ sampai h~T~. Kandidatnya 1D-CNN ringan dari rancangan lama yang memelihara urutan waktu; agregasi statistik hanya kandidat bagi jalur klasifikasi, dan pilihan di antara keduanya diambil dari hasil ablasi pada data yang sama. Kepala tunggal yang dilatih sendiri-sendiri juga disiapkan sebagai pembanding pada split yang sama; keputusan modul temporal dicatat pada Tabel 3.8.
+
+## 2.5 Guru Visual YOLO26m-Pose dan Supervisi Lintas Modalitas
+
+Guru visual bekerja hanya pada tahap akuisisi data. Kamera laptop dan node penerima CSI merekam serentak dengan penanda waktu yang sama; pada tiap bingkai, YOLO26m-Pose [12] menghasilkan kelas isyarat beserta 21 *keypoint* tangan dan visibilitasnya. Label kelas dicocokkan dengan kartu pemandu protokol perekaman sehingga derau label terkendali. Kemampuan guru sudah teruji pada pra-penelitian di repositori WPC milik peneliti: dataset versi 2 memuat 49 kelas isyarat dengan 7.210 gambar (6.231 latih, 650 validasi, 329 uji), dan eksperimen exp11_huruf24 mencatat *pose* mAP50 0,9580 dengan akurasi huruf 97,6% pada 24 huruf statis [PERLU DATA: commit/hash checkpoint WPC exp11_huruf24]. Angka itu berlaku untuk data visual dan tidak dikutip sebagai kemampuan guru mengenali J dan Z; supervisi kedua huruf gerak itu diambil dari lintasan *keypoint* beserta label protokol, dengan kualitas deteksinya dievaluasi khusus (deteksi berhasil, *jitter*, dan bingkai hilang) karena performa exp11 hanya terukur pada pose statis (Subbab 3.6). Dari angka itu terbaca bahwa 21 titik artikulasi jari memuat informasi cukup untuk gestur mikro SIBI. Dua hal ditegaskan: seluruh angka itu hasil model visual pada data visual, bukan hasil model Wi-Fi, dan dataset itu tidak memuat satu pun rekaman CSI sehingga pasangan data baru direkam sendiri pada T2.
+
+Peran guru dipisahkan menurut jenis target. Untuk 24 huruf statis, label kelas pelatihan diambil dari protokol perekaman, sedangkan guru menyumbang deret 21 *keypoint* beserta visibilitasnya. Untuk J dan Z, label kelas juga berasal dari protokol; guru tidak diposisikan sebagai pengklasifikasi kedua huruf gerak itu kecuali model guru terbukti memuat kelasnya [PERLU VALIDASI: kelas J dan Z pada model juara WPC]. Istilahnya pun dipilih hati-hati: karena murid hanya menerima label keras berupa kelas dan koordinat, pola yang presisi ialah supervisi lintas modalitas berpandu guru; distilasi pengetahuan klasik yang memindahkan probabilitas lunak tidak menggambarkan bentuk transfer ini [22]. Konsep guru-murid tetap dipertahankan: YOLO26m-Pose adalah guru visual saat akuisisi dan pelatihan, model CSI adalah murid yang dipakai tanpa kamera pada inferensi. Konsekuensi status pseudo-label dijalani jujur: keluaran guru yang belum diperiksa manusia bukan kebenaran sempurna, sehingga protokol menyertakan verifikasi sampel oleh validator, penyaringan bingkai gagal deteksi, dan pencatatan *jitter keypoint* (Subbab 3.6). Ekspektasi generalisasinya dijaga memakai temuan model pose MM-Fi [15]: kinerja lintas subjek *zero-shot* hanya sekitar 64% dan lintas lingkungan 17,5%, naik ke 72–78% setelah kalibrasi 50–1.000 bingkai per orang; angka itu menjadi acuan ekspektasi sekaligus alasan skema kalibrasi per orang dan per ruang disiapkan sebagai jalur cadangan (Tabel 3.9).
+
+## 2.6 Pengenalan Isyarat Berbasis CSI dan Inferensi pada Perangkat
+
+Riset pengenalan bahasa isyarat dari CSI sudah berjalan di beberapa negara. SignFi mengenali 276 isyarat ASL dengan akurasi hingga 99,8% di laboratorium, walau turun menjadi 86,66% pada lima pengguna baru [7]; jalur ini belum menyentuh SIBI. Model utama penelitian ini tiga bagian: *encoder* terpralatih yang dibekukan (Subbab 2.3), modul temporal untuk deret waktu (Subbab 2.4), dan dua kepala tugas. Pembandingnya sesama model CSI pada data dan seed sama: varian kepala tunggal tanpa kepala regresi serta Pembanding C yang tidak melewati penyempitan delapan fitur (Subbab 3.7). Inferensi dirancang berjalan langsung di modul. ESP-DL membuktikan eksekusi model int8 pada keluarga ESP32 dengan tolok ukur 69,2 ms untuk model citra MobileNetV2-0,5 (RGB 128×128×3; total 73,9 ms termasuk pra- dan pasca-proses) [23]; angka itu membuktikan kemampuan eksekusi terkuantisasi pada perangkat kerasnya, bukan latensi model CSI. TensorFlow Lite Micro menjadi alternatifnya. Tolok ukur CSI-isyarat pada ESP32-S3 belum ada, jadi waktu inferensi aktual diukur sendiri (Subbab 3.7).
+
+## 2.7 TTS, ASR, dan Pemetaan Teks ke Representasi SIBI
+
+Purwarupa membutuhkan mesin sintesis ucapan (TTS) dan pengenalan ucapan (ASR) dengan tiga kriteria: dukungan bahasa Indonesia terverifikasi, jalur lokal dan *on-device* tersedia, serta biaya berkelanjutan yang masuk akal bagi sekolah. Hasil verifikasi langsung ke berkas VOICES.md resmi Kokoro-82M v1.0 pada 14 November 2026: model itu mencantumkan sembilan kelompok suara untuk delapan bahasa tanpa bahasa Indonesia, serta mencatat kelemahan pada ujaran sangat pendek [24]. MMS-TTS-ind, model TTS Indonesia dari Meta [25], karena itu diposisikan sebagai kandidat utama operasional, dengan Kokoro tetap tercatat untuk verifikasi ulang bila suara Indonesia tersedia pada rilis berikutnya [PERLU KONFIRMASI: keputusan final mesin TTS, Tabel 3.8 #17]. Mesin TTS berjalan di server lokal sebagai jalur utama dan di ponsel melalui ONNX Runtime sebagai cadangan; keduanya diuji banding pada G3. Pada sisi ASR, Whisper dilatih dengan lima juta jam audio dan mendukung lebih dari 100 bahasa termasuk Indonesia [26]; ketika internet terputus, server lokal mengambil alih dengan faster-whisper. Galat kata Whisper untuk percakapan bahasa Indonesia belum terverifikasi dari sumber primer, jadi akurasinya diukur sendiri (Subbab 3.8).
+
+Terjemahan teks menjadi isyarat tidak mungkin dilakukan kata demi kata karena bahasa isyarat memiliki tata bahasa sendiri. Arah kedua karenanya dirancang pada tingkat kamus kata dengan ejaan jari sebagai cadangan; struktur SIBI mendukung rancangan ini sebab alfabet manualnya lengkap, 26 huruf dan 9 angka [3]. Tampilannya dua lapis: lapis utama memunculkan glos dan gambar bentuk tangan untuk kata yang tersedia di kamus (ukuran gambar sekitar dua puluh sampai tiga puluh kilobita sehingga muat di penyimpanan modul), dan lapis kedua berupa animasi yang dialirkan dari server jika waktu pengembangan memungkinkan. Kata di luar kamus dialihkan ke ejaan jari; untuk huruf dinamis J dan Z, ejaan jari memerlukan representasi animasi atau urutan lintasan karena satu gambar statis tidak memadai. Cakupan kamus, yaitu proporsi kata uji yang terwakili, menjadi metrik utama arah ini (Subbab 3.8).
+
+## 2.8 Komunikasi Modul, Server, dan Topologi Jaringan
+
+Seluruh perangkat, dari kedua modul penginderaan sampai ponsel, berbagi satu kanal Wi-Fi yang sama sehingga penangkapan CSI berjalan serentak dengan komunikasi data [10]. Peran jembatan jaringan sekaligus penjangkar kanal dipegang *access point*, yang bentuknya bisa *router* sekolah maupun *hotspot* ponsel; aliran data ke server memakai UDP, sedangkan sinkronisasi antarmodul, bila diperlukan, memakai ESP-NOW sebagai fitur opsional (Subbab 2.2). Lapisan orkestrasi server, penelan UDP, dasbor, dan klien ditulis dalam Rust: Tokio menangani konkurensi, Axum menyediakan HTTP dan WebSocket, Leptos membangun dasbor yang dikompilasi ke WASM, dan Tauri menjadi aplikasi klien ponsel; mesin inferensi ASR dan TTS (faster-whisper, ONNX Runtime) dijalankan lewat *runtime* ML yang sesuai. Alasannya praktis: tanpa pengumpul sampah pemrosesan bingkai UDP tetap cepat, binernya hemat memori, dan satu sistem tipe mendeteksi perubahan format bingkai saat kompilasi. Target *parsing* di bawah 0,2 ms dan memori server di bawah 40 MB adalah target rancangan yang baru diukur pada G3. Server lokal pada laptop menjalankan seluruh layanan luring sehingga pemrosesan teks dan suara tetap berjalan tanpa internet. Pemisahan bahasanya tegas: pelatihan model berjalan di komputer dengan Python dan PyTorch (Subbab 3.7), Rust dipakai untuk *runtime* server dan klien; keduanya tidak saling menggantikan.
+
+## 2.9 Evaluasi Kelayakan
+
+Penilaian kelayakan berjalan bertahap lewat lima gerbang G0 sampai G4 (BAB III), dan tiap tahap menghasilkan artefak tetap sehingga kegagalan pun terdokumentasi. Rekomendasi akhirnya menyatakan posisi purwarupa pada kerangka *technology readiness level* [27]. Kinerja klasifikasi diukur dengan akurasi, presisi, *recall*, skor F1 makro, serta *confusion matrix* per isyarat, selalu dibandingkan terhadap peluang acak. Untuk kelas huruf k, presisi dan *recall* dihitung dari jumlah benar positif TP~k~, salah positif FP~k~, serta salah negatif FN~k~:
+
+```rumus
+P~k~ = TP~k~ / ( TP~k~ + FP~k~ ) (2.16)
+```
+
+```rumus
+R~k~ = TP~k~ / ( TP~k~ + FN~k~ ) (2.17)
+```
+
+```rumus
+F1~k~ = 2 · P~k~ · R~k~ / ( P~k~ + R~k~ ) (2.18)
+```
+
+```rumus
+F1~makro~ = ( 1 / K ) · Σ~k~ F1~k~ (2.19)
+```
+
+```rumus
+p~acak~ = 1 / K (2.20)
+```
+
+Untuk K = 26 huruf, p~acak~ ≈ 3,8%, dihitung ulang jika himpunan huruf dipangkas (Subbab 3.8.2). Kinerja kepala regresi diukur dengan MPJPE, rata-rata jarak Euclid antara prediksi dan acuan pada titik dan langkah valid,
+
+```rumus
+MPJPE = ( Σ~i,t,j~ m*~itj~ · || Q~itj~ − P~itj~ || ) / Σ~i,t,j~ m*~itj~ (2.21)
+```
+
+serta PCK, proporsi *keypoint* yang galatnya masuk ambang relatif,
+
+```rumus
+PCK@α = ( Σ~i,t,j~ m*~itj~ · 1( || Q~itj~ − P~itj~ || ≤ α · d~ref~ ) ) / Σ~i,t,j~ m*~itj~ (2.22)
+```
+
+dengan 1(·) bernilai satu jika kondisinya terpenuhi, α ambang relatif, dan d~ref~ skala acuan yang mengikuti sistem koordinat terbakukan (Subbab 2.4); NME dilaporkan sebagai alternatif ternormalisasi, dan galat per *keypoint* diringkas untuk mengenali titik jari yang paling sulit diprediksi. Pada baseline Pilihan 1, MPJPE dan PCK@α berstatus metrik pemantauan; jika Pilihan 2 terpilih, ambang kelayakan regresi ditetapkan lebih dulu pada Tabel 3.8 sebelum G1 dinilai. Pada jalur ucapan, kesalahan pengenalan kata diukur dengan laju galat kata (WER), yaitu jumlah substitusi S, penghapusan D, dan penyisipan I terhadap N kata acuan:
+
+```rumus
+WER = ( S + D + I ) / N (2.23)
+```
+
+WER dilaporkan beserta rinciannya (S, D, I, N) karena nilai itu bisa melebihi satu akibat penyisipan. Empat dimensi tambahan menilai kelayakan alat komunikasinya: latensi ujung ke ujung, cakupan kamus, keandalan operasional, dan biaya. Persepsi pengguna diukur dengan kuesioner skala Likert [28] lalu dianalisis secara deskriptif, sedangkan kewajaran keluaran dinilai validator penutur tunarungu. Rekomendasi akhir menyatakan posisi purwarupa pada skala TKT nasional yang mengikuti Permenristekdikti Nomor 42 Tahun 2016 tentang Pengukuran dan Penetapan Tingkat Kesiapterapan Teknologi [29], selaras dengan kerangka TRL [27].
+
+## 2.10 Penelitian Terdahulu
+
+Penelitian terdahulu yang paling relevan dibandingkan pada Tabel 2.3, mencakup pengenalan isyarat dan gestur dari sinyal Wi-Fi serta pengenalan isyarat berbasis kamera di Indonesia.
+
+Tabel 2.3 Perbandingan penelitian terdahulu
+
+| No. | Peneliti (Tahun) | Modalitas dan arah | Bahasa isyarat | Bebas kamera | Fokus |
+|---|---|---|---|---|---|
+| 1 | Ma dkk. (2018) [7] | CSI; isyarat menjadi teks | ASL, 276 isyarat | Ya | Pengenalan berskala besar |
+| 2 | Zhang dkk. (2022) [14] | CSI; gestur lintas domain | Gestur umum | Ya | Generalisasi lintas orang dan ruang |
+| 3 | Geng dkk. (2022) [30] | CSI NIC riset; pose padat tubuh | Bukan isyarat | Ya | Estimasi pose padat dari WiFi |
+| 4 | Ahmed dkk. (2020) [31] | CSI; isyarat statis dan dinamis | ISL, 49 gestur (30 statis, 19 dinamis) | Ya | Pengenalan lintas ruang rumah dan kantor |
+| 5 | Gao dkk. (2023) [32] | CSI; multitugas pengenalan isyarat dan identifikasi pengguna/ruang | ASL (dataset SignFi) | Ya | Multitugas CNN dan KNN |
+| 6 | Dwijayanti dkk. (2021) [5] | Citra; isyarat menjadi teks | BISINDO | Tidak | CNN pengenalan citra |
+| 7 | Penelitian ini | CSI sepasang ESP32-S3; encoder terpralatih berkepala dua; supervisi guru visual; inferensi tepi; TTS dan ASR Indonesia | SIBI, alfabet 26 huruf | Ya | Studi kelayakan purwarupa dua arah |
+
+Tiga kelompok bisa dibaca dari tabel itu. Pengenalan isyarat dan gestur dari Wi-Fi [7], [14], [31], [32] berjalan tanpa kamera tetapi belum menjangkau SIBI. Estimasi pose dari Wi-Fi telah dibuka DensePose From WiFi yang memetakan fase dan amplitudo CSI menjadi koordinat UV pada 24 wilayah tubuh [30]; garis itu dilanjutkan model pose MM-Fi pada ekosistem RuView [15]. Karena keduanya memakai NIC riset multi-antena atau data laboratorium, keberhasilannya tidak otomatis berlaku pada tautan tunggal ESP32-S3 yang menjadi pertanyaan penelitian ini. Riset Indonesia berbasis kamera [5] membuktikan tingginya minat, namun tetap terikat pencahayaan dan garis pandang. Dalam batas penelusuran (Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026; log kueri dilampirkan [PERLU DATA: log kueri penelusuran literatur]), publikasi pengenalan isyarat SIBI dari CSI maupun purwarupa dua arah yang memadukannya dengan TTS dan ASR bahasa Indonesia pada ESP32-S3 belum ditemukan. Kebaruan penelitian ini karenanya diklaim secara kombinatif dan terukur: penerapan CSI satu tautan ESP32-S3 untuk alfabet SIBI, penggunaan encoder RuView sebagai representasi beku, supervisi 21 *keypoint* tangan lintas modalitas, serta integrasi dua arah dengan pemrosesan bahasa Indonesia. Di luar itu, pengenalan isyarat dari CSI, gestur statis-dinamis dari Wi-Fi, dan multitask learning pada isyarat sudah ada [31], [32], jadi tidak diklaim sebagai kebaruan global; kebaruan juga tidak diklaim untuk isyarat kontinu maupun penerjemahan kalimat penuh.
+
+## 2.11 Matriks Justifikasi Pemilihan Komponen
+
+Tabel 2.4 merangkum jawaban atas pertanyaan mengapa X dan bukan Y untuk delapan keputusan arsitektur. Seluruh target kinerja di dalamnya adalah target rancangan yang baru diukur pada gerbang BAB III, bukan hasil yang dijanjikan.
+
+Tabel 2.4 Matriks justifikasi pemilihan komponen (Mengapa X dan Bukan Y?)
+
+| No. | Keputusan | Komponen dipilih | Alternatif ditinggalkan | Justifikasi |
+|---|---|---|---|---|
+| 1 | Tumpukan server dan klien | Orkestrasi server dan klien dalam Rust (Tokio/Axum, Leptos WASM, Tauri) plus runtime ML ucapan | Node.js, Streamlit, Electron, React/JS | Parsing UDP di bawah 0,2 ms; memori di bawah 40 MB; satu sistem tipe (Subbab 2.8) |
+| 2 | Mesin TTS | MMS-TTS-ind sebagai kandidat utama operasional; Kokoro bila suara Indonesia tersedia [24], [25] | TTS awan, VITS/Tacotron penuh | Kokoro v1.0 terverifikasi tanpa bahasa Indonesia (14 Nov. 2026); kedua kandidat luring di server lokal (utama) dan ponsel (cadangan) (Subbab 2.7) |
+| 3 | Node penginderaan | ESP32-S3 [8] | ESP32 biasa, C3/C6, Arduino Uno | Instruksi vektor int8; PSRAM penyangga CSI dan model; API CSI resmi (Subbab 2.2) |
+| 4 | Penginderaan radio | Normalisasi rasio terhadap baseline kalibrasi ruang, kanal 20 MHz [13] | RSSI, radar khusus, time of flight | RSSI terlalu kasar; rasio membersihkan derau fase tanpa perangkat tambahan (Subbab 2.2) |
+| 5 | Model guru visi | YOLO26m-Pose 21 keypoint [12] | YOLOv8-pose, MediaPipe langsung, UNet | 21 titik artikulasi vital untuk membedakan huruf mirip dan lintasan J/Z; mAP50 0,9580 dan akurasi 97,6% pada 24 huruf statis (Subbab 2.5) |
+| 6 | Model murid tepi | Encoder CSI terpralatih dibekukan + modul temporal + dua kepala; Jalur A/B1/B2 dengan Pembanding C [11] | SVM, MLP berat, pelatihan dari nol | Checkpoint 9.280 parameter teruji kontrastif; beku memisahkan sumbangan pretraining; penyempitan 8 fitur diuji eksplisit lewat Pembanding C (Subbab 2.3 dan 2.4) |
+| 7 | Dua kepala tugas | Klasifikasi 26 huruf + regresi 21 keypoint dengan kerugian gabungan [21] | Kepala klasifikasi saja | Supervisi keypoint berpotensi merapikan batas kelas yang mirip; manfaatnya diuji lewat ablasi (Subbab 3.7) |
+| 8 | Metode supervisi | Supervisi lintas modalitas berpandu guru; label keras kelas dan keypoint [22] | Pelatihan CSI murni; distilasi soft target | CSI abstrak memerlukan supervisi spasial guru; bentuk transfer yang dipakai memang label keras (Subbab 2.5) |
+
+## 2.12 Kerangka Pemikiran dan Arsitektur Model
+
+Kerangka pemikiran penelitian ini mengalir dari data sampai perangkat, seperti dirangkum Gambar 2.1. Jalur guru mengunci label: kamera tersinkron dan YOLO26m-Pose menghasilkan kelas serta 21 *keypoint* acuan hanya saat akuisisi data. Jalur model memproses CSI sepasang ESP32-S3 lewat praproses, rute masukan terpilih hasil audit T0 dan G0b (Jalur A, B1, atau B2, dengan Pembanding C sebagai alternatif evaluasi), *encoder* beku yang menghasilkan barisan *embedding* 128 dimensi, dan modul temporal. Saat pelatihan, kepala klasifikasi dan kepala regresi berjalan bersama di bawah kerugian gabungan; saat *deployment* Pilihan 1, kepala regresi dilepas dan model terkuantisasi yang tersisa dijalankan di modul, sementara arah kedua sistem tetap berjalan lewat ASR, kamus, dan TTS (Subbab 3.5).
+
+```mermaid
+flowchart TB
+    accTitle: Arsitektur model jalur guru, pelatihan dua kepala, dan deployment Pilihan 1
+    accDescr: Tiga kelompok. Kelompok akuisisi tersinkron berisi kamera laptop yang hanya aktif saat akuisisi, YOLO26m-Pose sebagai guru visual, kartu pemandu protokol dengan urutan acak per blok, dan CSI sepasang ESP32-S3 yang dipraproses lalu dibagi per blok sebelum jendela bergulir dibentuk, semuanya membentuk dataset berpasangan. Kelompok pelatihan berisi rute masukan hasil audit T0 dan G0b dengan Jalur A, Jalur B1 dan B2, serta Pembanding C; encoder RuView beku menghasilkan barisan embedding, modul temporal mengolah barisan itu, kepala klasifikasi membaca ringkasan atensi menjadi 26 kelas huruf, kepala regresi membaca tiap langkah menjadi 21 keypoint, dan keduanya dilatih dengan kerugian gabungan beserta pemantauan kemiripan arah gradien dan mask gabungan. Kelompok deployment berisi model terkuantisasi pada ESP32-S3 untuk jalur klasifikasi saja menurut Pilihan 1, dengan catatan Pilihan 2 menunggu keputusan Tabel 3.8, dan keluarannya label huruf beserta skor keyakinan dengan mekanisme penolakan.
+
+    subgraph S1["Akuisisi tersinkron (hanya pelatihan dan validasi)"]
+        CAM["Kamera laptop<br/>(hanya akuisisi)"]
+        YOLO["YOLO26m-Pose<br/>(guru visual) [12]"]
+        PROT["Kartu pemandu protokol<br/>(urutan acak per blok)"]
+        CSI["CSI sepasang ESP32-S3<br/>(N_valid subcarrier, hingga 50 bingkai/dtk) [9]"]
+        PREP["Praproses: audit LTF dan first_word_invalid,<br/>baseline rasio, segmentasi onset dan pose-hold"]
+        DSET["Dataset berpasangan D_pas<br/>(Persamaan 2.24)"]
+        CAM --> YOLO
+        YOLO -->|"21 keypoint + visibilitas (pseudo-label)"| DSET
+        PROT --> DSET
+        CSI --> PREP
+        PREP -->|"split per blok sebelum sliding window<br/>+ jeda pembersih"| DSET
+    end
+
+    subgraph S2["Pelatihan dua kepala (supervisi lintas modalitas)"]
+        ROUTE{"Rute masukan<br/>(audit T0 dan G0b)"}
+        ENC["Encoder RuView beku θ0<br/>→ z_t ∈ R^128 [11]"]
+        TEMP["Modul temporal (kandidat 1D-CNN)<br/>→ h_1 sampai h_T"]
+        KCLS["Kepala klasifikasi 26 huruf<br/>(Persamaan 2.8)"]
+        KREG["Kepala regresi 21 keypoint<br/>(T × 21 × 2)"]
+        LOSS["Kerugian gabungan L_total;<br/>pantau cos(g_c, g_r); mask m* (Persamaan 2.13a-2.15)"]
+        ROUTE -->|"Jalur A: 8 fitur RuView"| ENC
+        ROUTE -->|"Jalur B1/B2: adapter 1D-CNN"| ENC
+        ROUTE -.->|"Pembanding C (tanpa penyempitan 8 fitur)"| TEMP
+        ENC -->|"barisan z_1 sampai z_T"| TEMP
+        TEMP -->|"ringkasan atensi s_i"| KCLS
+        TEMP -->|"keadaan per langkah h_t"| KREG
+        KCLS --> LOSS
+        KREG --> LOSS
+    end
+
+    subgraph S3["Deployment produk akhir (tanpa kamera)"]
+        DEP["Model terkuantisasi ESP32-S3:<br/>praproses → rute terpilih → encoder →<br/>modul temporal → kepala klasifikasi<br/>(Pilihan 1; Pilihan 2 menunggu Tabel 3.8)"]
+        OUT["Keluaran perangkat: label huruf + skor keyakinan<br/>(dengan mekanisme penolakan)"]
+        DEP --> OUT
+    end
+
+    DSET --> ROUTE
+    LOSS -->|"model terpilih dikuantisasi"| DEP
+
+    classDef guru fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef model fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef proses fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    class CAM,YOLO,PROT guru
+    class CSI,PREP,ROUTE,ENC,TEMP,KCLS,KREG model
+    class DSET,LOSS,DEP,OUT proses
+```
+
+Gambar 2.1 Arsitektur model: akuisisi terpandu guru hanya saat pelatihan, pelatihan dua kepala di atas encoder beku dengan rute masukan hasil audit (Jalur A, B1, B2, dan Pembanding C), serta deployment Pilihan 1 yang menjalankan klasifikator saja; simpul kuning = jalur guru, biru = jalur model Wi-Fi, hijau = pelatihan dan deployment
+
+Dataset yang menopang kerangka ini dirumuskan sebagai pasangan berunsur:
+
+```rumus
+D~pas~ = { ( X~i~, y~i~, P~i~, m~i~, s~i~, q~i~ ) }, i = 1, ..., N (2.24)
+```
+
+dengan X~i~ jendela CSI, y~i~ label kelas isyarat, P~i~ koordinat 21 *keypoint* acuan, m~i~ mask visibilitasnya, s~i~ metadata subjek, sesi, ruang, serta perangkat, dan q~i~ skor kualitas anotasi guru; keseluruhan pasangan direkam sendiri pada T2 karena tidak ada sumber lain yang menyediakannya. Dengan rumusan itu, teori CSI dan zona Fresnel (Subbab 2.2) menyediakan sinyal, *encoder* terpralatih (Subbab 2.3) menyediakan representasi, kedua formulasi kepala (Subbab 2.4) menyediakan keluaran tugas, guru visual (Subbab 2.5) menyediakan labelnya, dan hasilnya diukur di tepi (Subbab 2.6) sebelum kedua arah disatukan menjadi purwarupa (BAB III).

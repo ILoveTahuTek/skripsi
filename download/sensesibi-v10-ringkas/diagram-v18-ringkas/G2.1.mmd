@@ -1,0 +1,46 @@
+flowchart TB
+    accTitle: Arsitektur model jalur guru, pelatihan dua kepala, dan deployment Pilihan 1
+    accDescr: Tiga kelompok dari atas ke bawah. Kelompok akuisisi tersinkron berisi kamera laptop dan YOLO26m-Pose sebagai guru visual yang hanya aktif saat akuisisi, kartu pemandu protokol dengan urutan acak per blok, serta CSI sepasang ESP32-S3 yang dipraproses lalu dibagi per blok sebelum jendela bergulir dibentuk, semuanya membentuk dataset berpasangan. Kelompok pelatihan berisi rute masukan hasil audit T0 dan G0b dengan Jalur A, Jalur B1 dan B2, serta Pembanding C; encoder RuView beku menghasilkan barisan embedding, modul temporal mengolah barisan itu, kepala klasifikasi membaca ringkasan atensi menjadi 26 kelas huruf, kepala regresi membaca tiap langkah menjadi 21 keypoint, dan keduanya dilatih dengan kerugian gabungan beserta pemantauan kemiripan arah gradien dan mask gabungan. Kelompok deployment berisi model terkuantisasi pada ESP32-S3 untuk jalur klasifikasi saja menurut Pilihan 1, dengan catatan Pilihan 2 menunggu keputusan Tabel 3.8, dan keluarannya label huruf beserta skor keyakinan dengan mekanisme penolakan.
+
+    subgraph S1["Akuisisi tersinkron (hanya pelatihan)"]
+        direction TB
+    GURU["Kamera + YOLO26m-Pose<br/>(guru visual) [12]"]
+    ACQ["CSI sepasang ESP32-S3 (N_valid subcarrier)<br/>→ praproses: audit LTF, segmentasi onset/pose-hold [9]"]
+    DSET["Dataset berpasangan D_pas (Persamaan 2.24;<br/>label kartu pemandu acak per blok)"]
+    GURU -->|"21 keypoint + visibilitas"| DSET
+    ACQ -->|"split per blok + jeda pembersih"| DSET
+    end
+
+    subgraph S2["Pelatihan dua kepala (supervisi lintas modalitas)"]
+        direction TB
+    ROUTE{"Rute masukan<br/>(audit T0 dan G0b)"}
+    ENC["Encoder RuView beku θ0 → z_t ∈ R^128 [11]"]
+    TEMP["Modul temporal (kandidat 1D-CNN) → h_1..h_T"]
+    KCLS["Kepala klasifikasi 26 huruf (Persamaan 2.8)"]
+    KREG["Kepala regresi 21 keypoint (T × 21 × 2)"]
+    LOSS["Kerugian gabungan; pantau cos(g_c, g_r);<br/>mask m* (Persamaan 2.13a-2.15)"]
+    ROUTE -->|"Jalur A / B1 / B2"| ENC
+    ROUTE -.->|"Pembanding C"| TEMP
+    ENC --> TEMP
+    TEMP -->|"ringkasan atensi s_i"| KCLS
+    TEMP -->|"h_t per langkah"| KREG
+    KCLS --> LOSS
+    KREG --> LOSS
+    end
+
+    subgraph S3["Deployment produk akhir (tanpa kamera)"]
+        direction TB
+    DEP["Model terkuantisasi ESP32-S3: rute terpilih → encoder →<br/>modul temporal → kepala klasifikasi (Pilihan 1;<br/>Pilihan 2 menunggu Tabel 3.8)"]
+    OUT["Keluaran: label + skor keyakinan (dengan penolakan)"]
+    DEP --> OUT
+    end
+
+    DSET --> ROUTE
+    LOSS -->|"model terpilih dikuantisasi"| DEP
+
+    classDef guru fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef model fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef proses fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    class GURU guru
+    class ACQ,ROUTE,ENC,TEMP,KCLS,KREG model
+    class DSET,LOSS,DEP,OUT proses

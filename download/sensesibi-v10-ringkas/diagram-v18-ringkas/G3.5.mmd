@@ -1,0 +1,25 @@
+flowchart LR
+    accTitle: Alur inferensi langsung pada ESP32-S3 menurut Pilihan 1
+    accDescr: Bingkai promiscuous diperiksa filter MAC, penanda first_word_invalid, dan himpunan subcarrier valid lalu masuk ke penyangga geser di PSRAM. Segmentasi memisahkan onset gerak Delta-CSI, jendela penahanan pose untuk huruf statis, dan jendela lintasan untuk J dan Z, kemudian masukan encoder diekstraksi menurut rute terpilih Jalur A, B, atau Pembanding C. Model terkuantisasi menjalankan encoder, modul temporal, dan kepala klasifikasi; keluaran di atas ambang keyakinan ditampilkan dan dikirim via UDP, keluaran di bawah ambang ditolak sebagai isyarat tidak dikenali. Kepala regresi dilepas pada Pilihan 1 dan hanya aktif bila Pilihan 2 ditetapkan pada Tabel 3.8.
+
+    subgraph ACQ["Akuisisi dan segmentasi di node RX"]
+        direction TB
+    CB["Callback CSI promiscuous:<br/>filter MAC/MGMT, cek<br/>first_word_invalid, N_valid"]
+    BUF["Penyangga geser CSI<br/>di PSRAM"]
+    SEG["Segmentasi: onset Delta-CSI;<br/>pose-hold (statis) /<br/>lintasan (J, Z)"]
+    INP["Masukan teraudit<br/>(Jalur A / B / Pembanding C)"]
+    CB --> BUF
+    BUF --> SEG
+    SEG --> INP
+    end
+    subgraph INF["Inferensi tepi (Pilihan 1: klasifikator saja)"]
+        direction TB
+    MOD["Model terkuantisasi: encoder +<br/>modul temporal + kepala klasifikasi<br/>(regresi dilepas; Pilihan 2<br/>menunggu Tabel 3.8)"]
+    TH{"Skor keyakinan<br/>di atas ambang?"}
+    OUT["Tampil di layar;<br/>label + skor via UDP"]
+    RJ["Label ditolak:<br/>isyarat tidak dikenali"]
+    MOD --> TH
+    TH -- "ya" --> OUT
+    TH -- "tidak" --> RJ
+    end
+    ACQ --> INF

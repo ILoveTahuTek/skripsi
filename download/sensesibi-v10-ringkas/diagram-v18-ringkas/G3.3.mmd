@@ -1,0 +1,44 @@
+flowchart TD
+    accTitle: Arsitektur produk akhir tanpa kamera
+    accDescr: Tiga rantai. Arah 1 mengalir dari lalu lintas Wi-Fi node pemancar melalui zona isyarat ke node penerima yang menjalankan model klasifikasi terkuantisasi; label dan skor dikirim via UDP ke server orkestrasi Rust, teks tampil di layar modul dan aplikasi Tauri, teks disintesis mesin TTS di server lokal, dan audio dialirkan kembali ke speaker node penerima. Arah 2 mengalir dari tombol tekan-untuk-bicara dan mikrofon I2S; audio dialirkan ke server lalu dikenali ASR, yaitu layanan awan saat daring atau faster-whisper di server saat luring, dan teks dipetakan ke representasi SIBI pada aplikasi Tauri. Jalur guru memakai webcam dan YOLO26m-Pose untuk supervisi pelatihan. Garis putus-putus menandai jalur cadangan TTS on-device pada ponsel jika server tidak tersedia.
+
+    subgraph A1["Arah 1: isyarat menjadi teks dan suara"]
+        TX["Node TX: sumber frame<br/>Wi-Fi baku (ESP-NOW<br/>opsional utk sinkronisasi)"]
+        ZN["Zona isyarat<br/>(satu pengisyarat)"]
+        RX["Node RX: CSI promiscuous +<br/>model klasifikasi terkuantisasi<br/>+ antarmuka"]
+        MAPL["Kamus label-teks<br/>di modul"]
+        DSP1["Layar modul + aplikasi Tauri:<br/>teks hasil"]
+        SPK["Speaker DAC I2S<br/>(node RX)"]
+        TX --> ZN
+        ZN --> RX
+        RX --> MAPL
+        MAPL --> DSP1
+    end
+
+    SVR["Server orkestrasi Rust:<br/>TTS utama (MMS-TTS-ind),<br/>faster-whisper ASR luring"]
+    TTSP["TTS on-device ponsel<br/>(cadangan)"]
+
+    subgraph A2["Arah 2: ucapan menjadi representasi SIBI"]
+        BTN["Tombol<br/>tekan-untuk-bicara"]
+        MIC["Mikrofon<br/>I2S"]
+        ASR["ASR: layanan awan saat daring,<br/>faster-whisper di server saat luring"]
+        DSP2["Aplikasi Tauri: teks lalu<br/>representasi SIBI"]
+        AST["Aset SIBI: glos,<br/>gambar, ejaan jari<br/>(Subbab 2.7)"]
+        BTN --> MIC
+        MIC -- "audio via UDP" --> SVR
+        ASR -- "teks" --> DSP2
+        AST --> DSP2
+    end
+
+    subgraph AG["Jalur guru (hanya akuisisi dan pelatihan)"]
+        CAM["Webcam laptop"]
+        Y26P["YOLO26m-Pose:<br/>21 keypoint pose tangan"]
+        SUP["Supervisi pelatihan<br/>dua kepala (Subbab 3.7)"]
+        CAM --> Y26P
+        Y26P --> SUP
+    end
+
+    RX -- "label + skor via UDP" --> SVR
+    SVR -- "audio dialirkan" --> SPK
+    SVR -- "audio" --> ASR
+    SVR -. "server tak tersedia" .-> TTSP

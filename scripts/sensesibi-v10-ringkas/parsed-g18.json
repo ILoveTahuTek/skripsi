@@ -1,0 +1,6579 @@
+{
+ "bab1": [
+  {
+   "t": "h1",
+   "text": "BAB I PENDAHULUAN"
+  },
+  {
+   "t": "h2",
+   "text": "1.1 Latar Belakang"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Sebagian besar anak tunarungu tumbuh di dalam keluarga penutur dengar yang belum menguasai bahasa isyarat sejak awal. Sejak hari-hari pertama, komunikasi di rumah kerap berjalan dalam dua saluran bahasa yang belum saling menjembatani: orang tua berbicara dengan suara, anak menjawab dengan isyarat, sementara waktu dan kesempatan belajar bahasa isyarat serba terbatas. Angkanya memang timpang. Di Indonesia ada sekitar 1,92 juta penyandang tunarungu, sementara juru bahasa isyarat hanya sekitar 500 orang [1], sehingga satu juru bahasa harus melayani hampir 4.000 orang. Untuk kebutuhan harian seperti menceritakan sakit atau bertanya kepada penjual di pasar, menunggu juru bahasa jelas bukan jalan keluar. Undang-Undang Nomor 8 Tahun 2016 sudah menjamin hak setiap penyandang disabilitas untuk berkomunikasi [2], tetapi tanpa alat bantu yang benar-benar terjangkau, jaminan itu berjalan lambat."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kesenjangan itu paling terasa di ruang kelas: guru menjelaskan dengan suara, siswa tunarungu menangkap sebagian dan menebak sisanya. SIBI menjadi bahasa pengantar pendidikan formal dan dibakukan pemerintah dalam "
+    },
+    {
+     "text": "Kamus Sistem Isyarat Bahasa Indonesia",
+     "italics": true
+    },
+    {
+     "text": " [3]. Survei terhadap 100 responden tunarungu di Jawa dan Bali melaporkan 91% memakai BISINDO sehari-hari, sementara SIBI menempel pada konteks sekolah [4]. Karena penelitian ini menyasar alat bantu pembelajaran di sekolah, SIBI yang dipilih; pelaksanaannya direncanakan di Jawa Timur tanpa mengikat lembaga tertentu."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Alat bantu komunikasi dua arah yang tersedia baru menempuh setengah jalan: sistem yang mengubah ucapan menjadi animasi isyarat hanya melayani arah orang pendengar. Arah isyarat siswa yang dibaca mesin belum tersedia; riset di Indonesia masih berkutat di jalur kamera, misalnya pengenalan huruf BISINDO dari citra dengan CNN [5]. Kendalanya dua dan keduanya praktis: kamera menuntut pencahayaan serta posisi yang tepat sehingga akurasi jatuh begitu cahaya berubah, dan kamera yang terus menyala membuat penggunanya merasa diawasi sepanjang hari di kelas."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Untuk menghindari dua kendala itu, sinyal Wi-Fi membuka jalan lain tanpa kamera. Sinyal ini membawa informasi kanal bernama "
+    },
+    {
+     "text": "Channel State Information",
+     "italics": true
+    },
+    {
+     "text": " (CSI) [6]. Begitu tangan bergerak di antara pemancar dan penerima, jalur pantulan sinyal bergeser dan CSI berubah mengikuti pola gerakannya; perubahan itulah yang dibaca untuk mengenali gerak tanpa sensor yang dikenakan di tubuh. SignFi, contoh terkemukanya, mengenali 276 isyarat "
+    },
+    {
+     "text": "American Sign Language",
+     "italics": true
+    },
+    {
+     "text": " (ASL) dari CSI [7], dan CSI bahkan peka terhadap gerak halus sampai ke gerakan jari [6]. Penelusuran pada Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 belum menemukan satu pun penerapan CSI untuk isyarat SIBI maupun purwarupa dua arah sejenis; ketiadaan itu dicatat sebagai batas penelusuran basis data terkait (Subbab 2.10)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Perangkat yang dibutuhkan pun sederhana. Modul ESP32-S3, mikrokontroler seharga sekitar Rp150.000, sudah memiliki radio Wi-Fi 2,4 GHz dengan dukungan CSI resmi [8], [9]. Dua modul cukup untuk satu pasang: yang satu menyediakan lalu lintas Wi-Fi sebagai sumber bingkai CSI, yang lain menangkapnya dalam mode "
+    },
+    {
+     "text": "promiscuous",
+     "italics": true
+    },
+    {
+     "text": "; zona isyarat berada di antara keduanya. "
+    },
+    {
+     "text": "Firmware",
+     "italics": true
+    },
+    {
+     "text": " penangkap CSI yang teruji untuk modul ini tersedia pada platform terbuka RuView [10]. Sepasang modul inti diperkirakan sekitar Rp300.000, lebih ringan daripada kamera ditambah komputer pengolah citra. Total biaya node lengkap dengan layar, audio, baterai, dan "
+    },
+    {
+     "text": "enclosure",
+     "italics": true
+    },
+    {
+     "text": " disusun lewat daftar komponen (BOM) yang diisi dari survei dan dinilai pada gerbang G4 "
+    },
+    {
+     "text": "[PERLU DATA: total BOM purwarupa lengkap]",
+     "highlight": true
+    },
+    {
+     "text": " (Tabel 3.2), bukan diklaim murah sebelum rinciannya ada. Harga yang terjangkau mengundang sekolah berani memasang alat ini di lebih dari satu ruang."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Jawabannya, penelitian ini merancang purwarupa bernama SenseSIBI, singkatan dari "
+    },
+    {
+     "text": "Sensing & Translation of SIBI",
+     "italics": true
+    },
+    {
+     "text": ". Arah pertamanya berjalan dari siswa: ia mengisyaratkan huruf, modul menangkap pola CSI, model yang berjalan langsung di modul mengenalinya, teks muncul di layar, lalu dibunyikan sebagai suara. Arah kedua berjalan dari guru: ia menekan tombol lalu berbicara, ucapannya dikenali menjadi teks, lalu bentuk isyaratnya tampil di layar. Model pengenal isyaratnya tidak dilatih dari nol: "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " CSI terpralatih dari RuView [11] menjadi tulang punggungnya. Representasinya dibekukan, lalu adapter masukan (jika dipakai), modul temporal, dan dua kepala tugas dilatih di atasnya, satu kepala mengenali 26 kelas huruf dan satu lagi memperkirakan 21 titik jari tangan, dengan YOLO26m-Pose yang terlatih pada data citra SIBI milik peneliti sebagai guru pemberi label [12]. Kamera hanya menyala saat data direkam; setelah kedua kepala terlatih, seluruh sistem bekerja tanpa kamera."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Sebagai studi kelayakan, penelitian ini membatasi klaimnya. Objek pengenalan dibatasi pada alfabet manual SIBI satu tangan sebanyak 26 huruf, yaitu 24 huruf statis ditambah dua huruf gerak J dan Z, bukan penerjemahan kalimat penuh. Kemampuan membedakan huruf diuji lebih dahulu, tiap tahap ditutup gerbang keputusan, dan kegagalan dilaporkan sebagai temuan. Dalam batas itu penelitian ini menjawab satu pertanyaan: apakah sepasang modul Wi-Fi murah sungguh bisa menjadi jembatan komunikasi dua arah antara siswa tunarungu dan gurunya di kelas?"
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "1.2 Rumusan Masalah"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Dari latar belakang yang telah dipaparkan, masalah yang dikaji dalam penelitian ini dirumuskan sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Bagaimana merancang purwarupa penerjemah dua arah antara huruf SIBI dan teks beserta suara bahasa Indonesia dengan sepasang modul ESP32-S3 tanpa kamera, yang pada jalur isyarat menjadi teks memakai "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " CSI terpralatih RuView yang dibekukan dengan dua kepala tugas, yaitu kepala klasifikasi 26 huruf dan kepala regresi 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " tangan dengan label kelas dari protokol perekaman serta supervisi "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " dari guru visual YOLO26m-Pose, menjalankan inferensi terkuantisasi langsung di modul, serta menghadirkan mesin ucapan dan pengenalan ucapan bahasa Indonesia?"
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Seberapa baik alfabet manual SIBI dikenali dari sinyal CSI oleh model "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " terpralatih berkepala dua, termasuk sumbangan kepala regresi yang diukur lewat ablasi, serta bagaimana kinerja kedua jalur penerjemahan pada skenario dalam sesi, lintas partisipan, dan lintas ruang?"
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Seberapa layak purwarupa menjadi alat bantu komunikasi jika ditinjau dari latensi inferensi terkuantisasi dan ujung ke ujung, cakupan kosakata, keandalan operasional, penerimaan pengguna, serta biaya perangkat dan layanan?"
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "1.3 Tujuan Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tujuan penelitian ini adalah sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Merancang purwarupa penerjemah dua arah antara huruf SIBI dan teks beserta suara bahasa Indonesia dengan sepasang modul ESP32-S3 tanpa kamera, yang pada jalur isyarat menjadi teks memakai "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " CSI terpralatih RuView yang dibekukan dengan dua kepala tugas, yaitu kepala klasifikasi 26 huruf dan kepala regresi 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " tangan dengan label kelas dari protokol perekaman serta supervisi "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " dari guru visual YOLO26m-Pose, menjalankan inferensi terkuantisasi langsung di modul, serta menghadirkan mesin ucapan dan pengenalan ucapan bahasa Indonesia."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Mengukur seberapa baik alfabet manual SIBI dikenali dari sinyal CSI oleh model "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " terpralatih berkepala dua, termasuk sumbangan kepala regresi yang diukur lewat ablasi, serta kinerja kedua jalur penerjemahan pada skenario dalam sesi, lintas partisipan, dan lintas ruang."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Menganalisis kelayakan purwarupa sebagai alat bantu komunikasi ditinjau dari latensi inferensi terkuantisasi dan ujung ke ujung, cakupan kosakata, keandalan operasional, penerimaan pengguna, serta biaya perangkat dan layanan."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "1.4 Batasan Masalah"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Agar fokus, ruang lingkup penelitian ini dibatasi sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Objek pengenalan ialah alfabet manual SIBI satu tangan 26 huruf (24 statis serta huruf gerak J dan Z). Bentuk bakunya dicocokkan dengan "
+    },
+    {
+     "text": "Kamus SIBI",
+     "italics": true
+    },
+    {
+     "text": " [3] dan disetujui validator penutur tunarungu; sistem ini bukan penerjemah kalimat."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Pembeda utamanya adalah bentuk tangan dan jari beserta lintasan gerak J dan Z; ekspresi wajah serta penanda nonmanual tidak dikenali."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Penginderaan memakai sepasang modul ESP32-S3 (satu pemancar, satu penerima; 2,4 GHz, kanal 20 MHz) dengan layar, baterai, "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": ", dan mikrofon pada node penerima; kamera hanya menyala saat perekaman data pelatihan."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "YOLO26m-Pose berperan sebagai guru visual hanya pada saat akuisisi dan pelatihan; produk akhirnya bebas kamera dan bebas citra."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "5.",
+   "runs": [
+    {
+     "text": "Encoder",
+     "italics": true
+    },
+    {
+     "text": " murid memakai "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " terpralatih "
+    },
+    {
+     "text": "ruvnet/wifi-densepose-pretrained",
+     "code": true
+    },
+    {
+     "text": " dengan "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " 128 dimensi dan 9.280 parameter [11]; "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " dibekukan pada baseline, sedangkan LoRA dan pelatihan lanjutan diperlakukan sebagai eksperimen pembanding. Masukan "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " berupa delapan fitur turunan per jendela satu detik disesuaikan lewat jalur fitur turunan atau adapter masukan yang dipilih pada gerbang G0b "
+    },
+    {
+     "text": "[PERLU VALIDASI: parameter normalisasi masukan dan keputusan jalur G0b]",
+     "highlight": true
+    },
+    {
+     "text": "."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "6.",
+   "runs": [
+    {
+     "text": "Sintesis ucapan utama berjalan di server lokal dan audio diputar pada "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": " node penerima, dengan mesin "
+    },
+    {
+     "text": "on-device",
+     "italics": true
+    },
+    {
+     "text": " pada ponsel sebagai cadangan; pengenalan ucapan memakai layanan awan dengan faster-whisper lokal sebagai cadangan; pilihan final mesin dan layanan tetap ditetapkan pada gerbang G3."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "7.",
+   "runs": [
+    {
+     "text": "Arah kedua terbatas pada kamus tingkat kata dengan "
+    },
+    {
+     "text": "fallback",
+     "italics": true
+    },
+    {
+     "text": " ejaan jari; cakupan kamusnya diukur lalu dilaporkan."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "8.",
+   "runs": [
+    {
+     "text": "Satu sesi hanya melibatkan satu pengisyarat dan sistem tidak mengidentifikasi individu; pengujian berlangsung di sedikitnya dua ruang berbeda di Jawa Timur yang sudah dikalibrasi."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "9.",
+   "runs": [
+    {
+     "text": "Uji pengguna berskala kecil (3–5 pengguna) dan dianalisis secara deskriptif, tanpa statistik inferensial."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "10.",
+   "runs": [
+    {
+     "text": "Isyarat kontinu, tata bahasa isyarat penuh, BISINDO, serta klasifikasi gerakan otomatis dari video berada di luar pembahasan."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "11.",
+   "runs": [
+    {
+     "text": "Seluruh hasil dilaporkan sebagai bukti awal pada populasi terbatas, yaitu 3–4 pengisyarat, sedikitnya dua ruang, dan satu konfigurasi perangkat; skema "
+    },
+    {
+     "text": "leave-one-subject-out",
+     "italics": true
+    },
+    {
+     "text": ", pengguna baru, dan "
+    },
+    {
+     "text": "leave-one-room-out",
+     "italics": true
+    },
+    {
+     "text": " dibaca sebagai indikasi ketahanan awal, bukan bukti generalisasi populasi; klaim lintas populasi tidak dibuat."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "1.5 Manfaat Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Manfaat penelitian ini terbagi atas manfaat teoretis dan manfaat praktis."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "1.5.1 Manfaat Teoretis"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Secara teoretis, penelitian ini menyumbang bukti awal tentang satu pertanyaan yang tajam: apakah "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " hasil pretraining kontrastif pada CSI masih informatif untuk gestur jari apabila "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " dibekukan dan hanya adapter masukan (jika dipakai), modul temporal, serta kedua kepala tugasnya yang dilatih. Bukti itu terikat pada alfabet manual dan belum tentu berlaku untuk isyarat kata maupun isyarat kontinu. Penelitian ini juga menghasilkan formulasi multitugas lintas modalitas yang mengawasi klasifikasi isyarat dengan regresi bentuk jari pada satu "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " bersama, serta "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " CSI berlabel beserta protokol perekamannya. Peneliti berikutnya bisa memakainya untuk bahasa isyarat lain, termasuk perluasan ke BISINDO."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "1.5.2 Manfaat Praktis"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Bagi sekolah yang kelak memakainya, penelitian ini memberi gambaran nyata kelayakan alat bantu komunikasi dua arah berbahasa SIBI beserta biayanya. Purwarupa yang memunculkan teks, menyuarakan isyarat, dan memperagakan bentuk isyarat lahir jika seluruh tahap berhasil; jika berhenti lebih awal, laporan karakterisasi, protokol, dan "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " berlabel tetap menjadi warisan penelitian. Bagi keluarga siswa, kosakata tervalidasi memastikan isyarat di layar benar bentuknya; bagi komunitas riset, rancangan yang tidak terikat satu bahasa isyarat memudahkan replikasi."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "1.6 Sistematika Penulisan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Proposal ini disusun atas tiga bab. "
+    },
+    {
+     "text": "BAB I Pendahuluan",
+     "bold": true
+    },
+    {
+     "text": " memuat latar belakang, rumusan, tujuan, batasan, manfaat, dan sistematika. "
+    },
+    {
+     "text": "BAB II Kajian Pustaka",
+     "bold": true
+    },
+    {
+     "text": " menghimpun teori dan penelitian terdahulu yang menjadi dasar perancangan, termasuk "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " CSI terpralatih, kedua kepala tugas, dan supervisi guru visual. "
+    },
+    {
+     "text": "BAB III Metode Penelitian",
+     "bold": true
+    },
+    {
+     "text": " memuat desain, tahapan, waktu dan lokasi, alat dan bahan, perancangan sistem, protokol perekaman, pengolahan sinyal dan pelatihan, skenario pengujian, jadwal, parameter lanjutan, serta risiko dan cadangannya."
+    }
+   ]
+  }
+ ],
+ "bab2": [
+  {
+   "t": "h1",
+   "text": "BAB II KAJIAN PUSTAKA"
+  },
+  {
+   "t": "h2",
+   "text": "2.1 Bahasa Isyarat, SIBI, dan Kebutuhan Komunikasi Dua Arah"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Bahasa isyarat menyampaikan makna lewat gerak tangan, lengan, tubuh, dan ekspresi wajah. Satu isyarat tersusun atas bentuk tangan, lokasi, gerak, serta orientasi telapak; cukup satu jari berubah bentuk, maknanya bisa ikut berubah. Susunan inilah acuan penelitian dalam memisahkan bagian isyarat yang bisa dinilai mesin dari bagian yang tetap memerlukan penilaian manusia [3]. SIBI ialah sistem isyarat baku pendidikan formal yang didokumentasikan kamus pemerintah [3], sedangkan BISINDO tumbuh alami di komunitas tunarungu; survei 100 responden tunarungu di Jawa dan Bali menemukan 91% memakai BISINDO sehari-hari, sementara SIBI menempel pada konteks sekolah [4]. Penelitian ini memilih SIBI karena sasarannya alat bantu pembelajaran di sekolah. Audit label pada dataset visual peneliti menegaskan pembagian kelas seluruh naskah: huruf C termasuk 24 huruf statis, sedangkan J dan Z satu-satunya huruf yang menuntut lintasan gerak."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Bicara antara pengguna isyarat dan orang pendengar menuntut dua arah, sementara jumlah juru bahasa jauh dari cukup [1]; alat bantu karena itu harus melayani kedua arah, dan kamus satu arah tidak menyelesaikan masalahnya. Sistem satu arah pengubah ucapan menjadi animasi isyarat sudah hadir di Indonesia, tetapi untuk arah isyarat menjadi teks riset dalam negeri bertumpu pada kamera, misalnya CNN untuk huruf BISINDO [5]. Kamera menuntut pencahayaan dan garis pandang yang baik, dan kamera yang terus menyala membuat pengguna merasa diawasi; dua kendala ini mendorong pencarian jalur penginderaan tanpa kamera dan tanpa perangkat yang dikenakan."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.2 Wi-Fi CSI, Modul ESP32-S3, dan Akuisisi RuView"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Channel State Information",
+     "italics": true
+    },
+    {
+     "text": " (CSI) memuat informasi amplitudo dan fase pada setiap "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " sinyal Wi-Fi, yang bersama-sama menggambarkan kondisi jalur propagasi [6]. Tubuh yang bergerak di antara pemancar dan penerima mengubah panjang jalur pantulan; amplitudo dan fase tiap "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " pun ikut bergeser. Karena tiap "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " menempati frekuensi berbeda, satu pasang perangkat sekaligus menyediakan banyak kanal pengamatan [6]. Bentuk formalnya: pada kanal 20 MHz, tiap "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " valid n membawa koefisien kanal kompleks"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "h"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": "(t) = |h"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": "(t)| · exp( j · φ"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": "(t) ), n ∈ N"
+      },
+      {
+       "text": "valid",
+       "sub": true
+      }
+     ],
+     "num": "2.1"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan |h"
+    },
+    {
+     "text": "n",
+     "sub": true
+    },
+    {
+     "text": "(t)| amplitudo, φ"
+    },
+    {
+     "text": "n",
+     "sub": true
+    },
+    {
+     "text": "(t) fase, dan j satuan imajiner [6], [9]. Dokumentasi ESP-IDF membedakan total indeks 56 "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " pada kanal 20 MHz dari "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " data efektif: tanpa STBC, LLTF memuat 52 "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " data efektif sedangkan HT-LTF memuat 56, dan jika penanda "
+    },
+    {
+     "text": "first_word_invalid",
+     "italics": true
+    },
+    {
+     "text": " aktif maka 4 bita awal (2 "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": ") tidak valid [9]. Himpunan N"
+    },
+    {
+     "text": "valid",
+     "sub": true
+    },
+    {
+     "text": " karena itu ditetapkan dari audit T0 atas jenis paket, tipe LTF, filter MAC, "
+    },
+    {
+     "text": "pilot/null/guard",
+     "italics": true
+    },
+    {
+     "text": ", dan penanda tersebut, bukan diasumsikan 56."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pemodelan CSI berpijak pada zona Fresnel [13]. Radius zona Fresnel ke-n pada suatu titik dihitung dari jarak titik itu ke pemancar d"
+    },
+    {
+     "text": "1",
+     "sub": true
+    },
+    {
+     "text": " dan ke penerima d"
+    },
+    {
+     "text": "2",
+     "sub": true
+    },
+    {
+     "text": " [13]:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "r"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": " = √( n · λ · d"
+      },
+      {
+       "text": "1",
+       "sub": true
+      },
+      {
+       "text": " · d"
+      },
+      {
+       "text": "2",
+       "sub": true
+      },
+      {
+       "text": " / ( d"
+      },
+      {
+       "text": "1",
+       "sub": true
+      },
+      {
+       "text": " + d"
+      },
+      {
+       "text": "2",
+       "sub": true
+      },
+      {
+       "text": " ) )"
+      }
+     ],
+     "num": "2.2"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan λ panjang gelombang pembawa; pada 2,4 GHz, λ ≈ 12,5 cm. Pada jarak antarmodul 1 meter dengan tangan di titik tengah, radius zona pertama r"
+    },
+    {
+     "text": "1",
+     "sub": true
+    },
+    {
+     "text": " ≈ 0,18 meter sehingga ruang gerak tangan berada di zona yang paling peka terhadap perubahan jalur. Artikulasi jari menggeser jalur pantulan pada orde sentimeter sampai milimeter, dan tiap bentuk huruf meninggalkan pola perubahan "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " yang khas. Gerak tubuh juga melahirkan pergeseran Doppler yang mengikuti kecepatan gerak v [6], [14]:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "f"
+      },
+      {
+       "text": "D",
+       "sub": true
+      },
+      {
+       "text": " = ( v / λ ) · ( cos α + cos β )"
+      }
+     ],
+     "num": "2.3"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan α dan β sudut antara arah gerak dan garis pandang ke pemancar serta ke penerima. Pita Doppler gerak isyarat kira-kira 1–60 Hz [6] dan kaidah Nyquist menuntut laju pencuplikan"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "f"
+      },
+      {
+       "text": "s",
+       "sub": true
+      },
+      {
+       "text": " ≥ 2 · f"
+      },
+      {
+       "text": "maks",
+       "sub": true
+      }
+     ],
+     "num": "2.4"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pada laju "
+    },
+    {
+     "text": "firmware",
+     "italics": true
+    },
+    {
+     "text": " RuView 50 bingkai per detik [10], pita teramati hanya sampai 25 Hz, sehingga gerak tangan yang masih teramati tanpa pelipatan kira-kira 1,6 meter per detik. Gerak jari yang lebih cepat berisiko terlipat, dan jika laju terukur lebih rendah, pita yang dianalisis ikut menyempit serta dilaporkan apa adanya."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Fase mentah tercemar derau osilator lokal; teknik CSI-ratio membersihkannya lewat rasio atau perkalian konjugat tanpa perangkat tambahan [13], yang diadaptasi menjadi rasio terhadap rekam acuan kalibrasi ruang:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "ρ"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": "(t) = h"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": "(t) / h"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": "( t"
+      },
+      {
+       "text": "0",
+       "sub": true
+      },
+      {
+       "text": " )"
+      }
+     ],
+     "num": "2.5"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan t"
+    },
+    {
+     "text": "0",
+     "sub": true
+    },
+    {
+     "text": " waktu kalibrasi ruang, yaitu 600 bingkai bawaan RuView [10]. Rumus ini didefinisikan sempit sebagai normalisasi terhadap "
+    },
+    {
+     "text": "baseline",
+     "italics": true
+    },
+    {
+     "text": " kalibrasi ruang: pembagian itu membuang tanggapan statis ruangan, tetapi tidak otomatis menghapus seluruh "
+    },
+    {
+     "text": "phase drift",
+     "italics": true
+    },
+    {
+     "text": " lambat; sisanya diukur pada T0 lalu dilaporkan. Bukti kepekaan CSI terhadap gerak halus memang banyak [6], tetapi lahir dari kondisi terkendali sehingga bagi penelitian ini statusnya hipotesis kerja. Model CSI juga mudah "
+    },
+    {
+     "text": "overfitting",
+     "italics": true
+    },
+    {
+     "text": " terhadap orang dan ruang; Widar3.0 menjawabnya dengan profil kecepatan Doppler untuk pengenalan lintas domain [14]. Kelayakan satu tautan berantena tunggal membedakan 26 bentuk tangan SIBI karenanya menjadi pertanyaan penelitian yang diuji lewat Delta-CSI dan gerbang G1; jika beberapa huruf terbukti tidak terpisahkan, himpunan huruf dipangkas (Tabel 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "ESP32-S3 ialah mikrokontroler Wi-Fi 802.11 b/g/n 2,4 GHz berantena tunggal dengan inti ganda 240 MHz, SRAM 512 KB, dan PSRAM hingga 8 MB [8]. Dukungan CSI tersedia resmi lewat repositori esp-csi [9]. RuView merekomendasikan ESP32-S3 sebagai modul penangkap CSI sekaligus menyediakan rantai akuisisi lengkap [10] yang dipetakan pada Tabel 2.1, dan repositori yang sama menerbitkan "
+    },
+    {
+     "text": "checkpoint encoder",
+     "italics": true
+    },
+    {
+     "text": " terpralatih yang menjadi tulang punggung murid penelitian ini."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 2.1 Pemetaan fitur RuView terhadap peran dalam penelitian ini",
+   "header": [
+    "Fitur RuView",
+    "Peran dalam penelitian ini"
+   ],
+   "rows": [
+    [
+     "*Firmware* penangkap CSI (UDP, mode *promiscuous*)",
+     "Mengalirkan CSI dan label ke server"
+    ],
+    [
+     "*Station* + UDP + CSI *promiscuous* pada satu *chip*; ESP-NOW hanya fitur sinkronisasi opsional",
+     "Dasar topologi satu kanal (Subbab 3.5)"
+    ],
+    [
+     "Kalibrasi ruang 600 bingkai + 8 *anchor*",
+     "Kalibrasi tiap sesi; pemotongan segmen isyarat"
+    ],
+    [
+     "Mode privasi",
+     "Membuang fitur biometrik selama penelitian"
+    ],
+    [
+     "Akuisisi tersinkron kamera-CSI",
+     "Jalur guru; estimator memakai YOLO26m-Pose"
+    ],
+    [
+     "*Checkpoint encoder* CSI terpralatih (*embedding* 128 dimensi) [11]",
+     "*Encoder* murid yang dibekukan pada baseline (Subbab 2.3)"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Mekanisme akuisisinya dinyatakan tepat agar tidak tertukar: node penerima menangkap CSI dari bingkai Wi-Fi biasa yang melintasi kanal dalam mode "
+    },
+    {
+     "text": "promiscuous",
+     "italics": true
+    },
+    {
+     "text": ", sebagaimana diimplementasikan "
+    },
+    {
+     "text": "firmware",
+     "italics": true
+    },
+    {
+     "text": " RuView [10]; CSI bukan keluaran protokol khusus, dan node pemancar cukup menyediakan lalu lintas Wi-Fi baku pada zona. ESP-NOW bukan bagian arsitektur inti, hanya kandidat fitur sinkronisasi antarmodul dengan kecocokan sinkron terukur 99,56% [10]. Koeksistensi radio pada satu "
+    },
+    {
+     "text": "chip",
+     "italics": true
+    },
+    {
+     "text": " tetap disyaratkan: satu kanal untuk seluruh perangkat dan mode hemat daya dimatikan [10]; versi dan "
+    },
+    {
+     "text": "commit firmware",
+     "italics": true
+    },
+    {
+     "text": " yang dipakai dipin pada T0 "
+    },
+    {
+     "text": "[PERLU DATA: versi dan commit RuView]",
+     "highlight": true
+    },
+    {
+     "text": ". Satu catatan jujur menyertainya: RuView belum melalui telaah sejawat, jadi fungsinya diverifikasi sendiri pada gerbang G0."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.3 Encoder CSI Terpralatih RuView, Transfer Learning, dan Jalur Masukan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Encoder",
+     "italics": true
+    },
+    {
+     "text": " terpralatih yang menjadi tulang punggung jalur isyarat menjadi teks terdokumentasi pada kartu modelnya [11]: dua lapis "
+    },
+    {
+     "text": "fully connected",
+     "italics": true
+    },
+    {
+     "text": " dengan BatchNorm dan GELU memetakan fitur CSI menjadi "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " 128 dimensi ternormalisasi L2, seluruhnya hanya 9.280 parameter:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "z"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": " = f"
+      },
+      {
+       "text": "θ0",
+       "sub": true
+      },
+      {
+       "text": "( X"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": " ), z"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": " ∈ R"
+      },
+      {
+       "text": "d",
+       "sup": true
+      },
+      {
+       "text": ", d = 128"
+      }
+     ],
+     "num": "2.6"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan X"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": " masukan ke-i, f"
+    },
+    {
+     "text": "θ0",
+     "sub": true
+    },
+    {
+     "text": " pemetaan "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " bertetapan θ"
+    },
+    {
+     "text": "0",
+     "sub": true
+    },
+    {
+     "text": ", dan z"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": " vektor "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " keluaran. Pretrainingnya kontrastif dengan triplet loss dan InfoNCE pada temperatur 0,1; pasangan positif dari jendela berjarak 2 detik, negatif dari lebih 30 detik, selama 60 epoch dengan AdamW dan perlindungan EWC [11]. Kontrak masukannya diikat eksplisit: satu vektor delapan fitur turunan per jendela satu detik ("
+    },
+    {
+     "text": "batch",
+     "italics": true
+    },
+    {
+     "text": " (B, 8)), bukan deret "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": ", dan keluarannya satu "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " per jendela; deret waktu hidup pada tingkat barisan jendela. Parameter normalisasi masukan belum dipublikasikan kartu modelnya sehingga dicari pada artefak "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " saat audit T0 "
+    },
+    {
+     "text": "[PERLU VALIDASI: parameter normalisasi masukan pada artefak checkpoint]",
+     "highlight": true
+    },
+    {
+     "text": "."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Dua model lain pada ekosistem yang sama sering tertukar dengan "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " ini. Model "
+    },
+    {
+     "text": "wifi-densepose-mmfi-pose",
+     "code": true
+    },
+    {
+     "text": " [15] adalah "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " pose terpisah: amplitudo CSI [3, 114, 10] pada 100 Hz diproses "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " Transformer menjadi 17 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " tubuh COCO dengan sekitar 2,3 juta parameter. Kinerjanya PCK@20 82,69% (ansambel 83,59%), turun ke 64% lintas subjek "
+    },
+    {
+     "text": "zero-shot",
+     "italics": true
+    },
+    {
+     "text": " dan 17,5% lintas lingkungan, lalu naik ke 72–78% setelah kalibrasi 50–1.000 bingkai per orang [15]. Model itu dilatih pada dataset MM-Fi [16] (40 subjek, 27 kategori aksi, lebih 320 ribu bingkai) dan berlisensi CC BY-NC 4.0 mengikuti lisensi datanya. Model ketiga, YOLO26m-Pose [12], ialah model penglihatan yang berperan sebagai guru visual (Subbab 2.5); Tabel 2.2 merangkum pembedaan ketiganya."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 2.2 Pembedaan tiga model ekosistem yang tidak boleh tercampur dalam penelitian ini",
+   "header": [
+    "Aspek",
+    "Encoder CSI terpralatih [11]",
+    "Model pose MM-Fi [15]",
+    "Guru visual YOLO26m-Pose [12]"
+   ],
+   "rows": [
+    [
+     "Berkas",
+     "`ruvnet/wifi-densepose-pretrained` (audit kedua set berkas model.* vs csi-embed-v2.* pada T0)",
+     "`ruvnet/wifi-densepose-mmfi-pose`",
+     "Repositori WPC peneliti (eksperimen exp11_huruf24)"
+    ],
+    [
+     "Masukan",
+     "8 fitur turunan CSI per jendela 1 detik (*batch* (B, 8)); bukan deret *subcarrier*",
+     "Amplitudo CSI [3, 114, 10] @ 100 Hz",
+     "Citra RGB kamera"
+    ],
+    [
+     "Keluaran",
+     "*Embedding* 128 dimensi ternormalisasi L2",
+     "17 *keypoint* tubuh COCO dalam [0, 1]",
+     "Kelas isyarat dan 21 *keypoint* tangan"
+    ],
+    [
+     "Parameter",
+     "9.280",
+     "±2,3 juta (varian utama)",
+     "[PERLU DATA: jumlah parameter model juara WPC]"
+    ],
+    [
+     "Peran",
+     "Representasi murid, dibekukan pada baseline",
+     "Pembanding temuan lintas domain, bukan komponen model",
+     "Pemberi label kelas dan *keypoint* saat akuisisi"
+    ],
+    [
+     "Status bukti",
+     "Kartu model; triplet-temporal 82,3%; EWC tingkat lupa 32,97%",
+     "Kartu model; PCK@20 82,69%; lisensi CC BY-NC 4.0",
+     "Data pra-penelitian peneliti; mAP50 0,9580 pada 24 huruf statis"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Status tiga dokumen rancangan pada repositori RuView juga dinyatakan terbuka: ADR-024 (model penyematan kontrastif AETHER), ADR-146 ("
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " RF tujuh kepala tugas), dan ADR-150 ("
+    },
+    {
+     "text": "foundation encoder",
+     "italics": true
+    },
+    {
+     "text": " tahan pergantian orang dan ruang) semuanya berstatus Proposed, artinya belum diimplementasikan [10]. Penelitian ini bersandar hanya pada "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " yang benar-benar tersedia; angka estimasi dari ADR dikutip dengan label estimasi rancangan setiap kali muncul. Audit langsung ke repositori Hugging Face dan GitHub RuView pada 14 November 2026 menambah tiga temuan wajib [10], [11]. Pertama, terdapat dua set artefak "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " (model."
+    },
+    {
+     "text": " serta csi-embed-v2.",
+     "italics": true
+    },
+    {
+     "text": " yang memuat "
+    },
+    {
+     "text": "standardizer",
+     "italics": true
+    },
+    {
+     "text": " FP16) dan berkas model.safetensors mengalami "
+    },
+    {
+     "text": "NUL-padding",
+     "italics": true
+    },
+    {
+     "text": " pada "
+    },
+    {
+     "text": "header",
+     "italics": true
+    },
+    {
+     "text": " (isu #1522) sehingga tidak terbaca langsung oleh safetensors.torch.load_file; audit T0 memeriksa keduanya sebelum pelatihan. Kedua, dokumentasi RuView (isu #509) memperingatkan keterbatasan aliran CSI antena tunggal (SISO) 56 "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " ESP32 terhadap detail sendi distal tangan. Ketiga, kartu model mencatat tingkat lupa ("
+    },
+    {
+     "text": "forgetting rate",
+     "italics": true
+    },
+    {
+     "text": ") EWC 32,97% pada empat tugas pretraining meski memakai EWC. Angka triplet-temporal 82,3% juga dibaca sempit: ia menghitung peluang jarak anchor ke positif temporal lebih pendek daripada ke negatif pada satu ruangan, satu rekaman, dan dua node [11], bukan akurasi klasifikasi SIBI dan bukan galat "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " yang justru hendak diukur penelitian ini."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Ketidaksesuaian bentuk masukan menjadi risiko ilmiah utama. Kartu model mencatat masukan delapan fitur turunan CSI (kehadiran, gerak, napas, detak jantung, varians fase, jumlah orang, deteksi jatuh, dan RSSI) pada laju 1 Hz [11], sedangkan jalur akuisisi menghasilkan N"
+    },
+    {
+     "text": "valid",
+     "sub": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " hingga 50 bingkai per detik [9], [10]. Delapan fitur itu harus dibaca jujur sebagai kontrak lingkungan, bukan kontrak artikulasi: napas, detak jantung, jumlah orang, dan deteksi jatuh hampir tidak berubah selama artikulasi jari, dan pretraining memakai data ruangan delapan jam dengan supervisi sensor PIR dan BME280 [11]. Jika detail jari hilang ketika CSI diringkas menjadi delapan fitur, membuka bobot "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " lewat LoRA maupun pelatihan lanjutan tidak dapat mengembalikan informasi yang sudah terbuang. Penelitian karena itu menyiapkan dua jalur implementasi masukan dan satu pembanding alternatif:"
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Jalur A (rekonstruksi fitur bawaan): menghitung ulang delapan fitur turunan RuView dari bingkai CSI, dengan unit, definisi, penanda waktu, dan normalisasi yang diverifikasi terhadap artefak asli pada T0."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Jalur B (adapter konvolusi 1D terlatih), dibedakan menjadi Jalur B1 (adapter rekonstruksi) yang dilatih meniru delapan fitur RuView, dan Jalur B2 (adapter tugas) yang dioptimalkan langsung oleh kerugian SIBI. Jika Jalur B2 berhasil sementara Jalur A gagal, kontribusi pemisahan kelas berasal dari adapter tugas dan tidak diklaim sebagai bukti kualitas representasi bawaan RuView."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Pembanding C (baseline CSI temporal lebih kaya): model temporal ringan yang menerima spektrum CSI yang belum dipersempit menjadi delapan fitur, untuk menjaga ketajaman analisis pada G0b tanpa mengganti desain utama secara diam-diam."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Baseline penelitian membekukan "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " pada θ"
+    },
+    {
+     "text": "0",
+     "sub": true
+    },
+    {
+     "text": " dan melatih bersama adapter masukan (jika dipakai), modul temporal, serta kedua kepala tugas, sebagaimana dirumuskan Persamaan 2.15. Dengan "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " beku, kualitas "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " terpralatih untuk SIBI terbaca langsung dari kinerja kepala sehingga sumbangan pretraining terpisah dari penyetelan; "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " hanya 9.280 parameter sehingga membandingkan skema adaptasi lain pun murah. LoRA menambah pembaruan berperingkat rendah pada tetapan asli tanpa menyimpan gradien seluruh matriks [17]:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "W"
+      },
+      {
+       "text": "akhir",
+       "sub": true
+      },
+      {
+       "text": " = W"
+      },
+      {
+       "text": "0",
+       "sub": true
+      },
+      {
+       "text": " + B · A"
+      }
+     ],
+     "num": "2.7"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan W"
+    },
+    {
+     "text": "0",
+     "sub": true
+    },
+    {
+     "text": " matriks tetapan asli yang dibekukan, B berukuran d"
+    },
+    {
+     "text": "keluar",
+     "sub": true
+    },
+    {
+     "text": " × r dan A berukuran r × d"
+    },
+    {
+     "text": "masukan",
+     "sub": true
+    },
+    {
+     "text": ", serta r peringkat adapter yang jauh lebih kecil daripada ukuran matriks. Kartu model menyertakan adapter ruangan node-1.json dan node-2.json sekitar 21 KB [11], dan ADR-150 menaksir adapter sekitar 11 KB menyamai kinerja lintas subjek dengan 100–200 data berlabel per ruang [10] sebagai estimasi rancangan. Kompatibilitas LoRA dengan alur ekspor ke ESP32-S3 belum terverifikasi "
+    },
+    {
+     "text": "[PERLU VALIDASI: kompatibilitas LoRA dengan alur ekspor]",
+     "highlight": true
+    },
+    {
+     "text": ". Pembanding ketiga ialah pelatihan lanjutan yang dijaga EWC seperti pretrainingnya [11]; ketiga skema (beku, beku plus LoRA, pelatihan lanjutan) menjadi eksperimen pembanding pada data dan seed yang sama, selalu berdampingan dengan Pembanding C karena penyetelan bobot tidak memulihkan informasi jari yang hilang pada masukan delapan fitur."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.4 Dua Kepala Tugas, Modul Temporal, dan Kerugian Gabungan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kepala klasifikasi mengubah ringkasan barisan "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " menjadi skor kelas. Untuk K = 26 kelas, skor logit dihitung dari"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "a"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": " = W"
+      },
+      {
+       "text": "c",
+       "sub": true
+      },
+      {
+       "text": " · s"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": " + b"
+      },
+      {
+       "text": "c",
+       "sub": true
+      }
+     ],
+     "num": "2.8"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan s"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": " ∈ R"
+    },
+    {
+     "text": "d",
+     "sup": true
+    },
+    {
+     "text": " vektor ringkasan atensi modul temporal (s"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": " = z"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": ", d = 128 pada "
+    },
+    {
+     "text": "probe",
+     "italics": true
+    },
+    {
+     "text": " atau ablasi tanpa proyeksi temporal), W"
+    },
+    {
+     "text": "c",
+     "sub": true
+    },
+    {
+     "text": " matriks K × d, dan b"
+    },
+    {
+     "text": "c",
+     "sub": true
+    },
+    {
+     "text": " vektor bias. Skor diubah menjadi probabilitas lewat "
+    },
+    {
+     "text": "softmax",
+     "italics": true
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "q"
+      },
+      {
+       "text": "ik",
+       "sub": true
+      },
+      {
+       "text": " = exp( a"
+      },
+      {
+       "text": "ik",
+       "sub": true
+      },
+      {
+       "text": " ) / Σ"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " exp( a"
+      },
+      {
+       "text": "ik",
+       "sub": true
+      },
+      {
+       "text": " )"
+      }
+     ],
+     "num": "2.9"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "sehingga seluruh probabilitas berjumlah satu. Sebagai lantai pembanding, tebakan acak seragam bernilai 1/K ≈ 3,8%, dihitung ulang jika himpunan huruf dipangkas. Kerugian pelatihannya silang-entropi kategorikal; dengan label "
+    },
+    {
+     "text": "one-hot",
+     "italics": true
+    },
+    {
+     "text": " y"
+    },
+    {
+     "text": "ik",
+     "sub": true
+    },
+    {
+     "text": " yang bernilai satu pada kelas benar, kerugian atas N sampel dalam "
+    },
+    {
+     "text": "batch",
+     "italics": true
+    },
+    {
+     "text": " berbunyi"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "L"
+      },
+      {
+       "text": "cls",
+       "sub": true
+      },
+      {
+       "text": " = − ( 1 / N ) · Σ"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": " Σ"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " y"
+      },
+      {
+       "text": "ik",
+       "sub": true
+      },
+      {
+       "text": " · log q"
+      },
+      {
+       "text": "ik",
+       "sub": true
+      }
+     ],
+     "num": "2.10"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Jika data latih timpang antarhuruf, bobot kelas dipasang berbanding terbalik dengan frekuensi kelasnya, dihitung hanya dari data latih (Tabel 3.8). Klasifikator himpunan tertutup selalu memilih satu kelas, sehingga keluarannya dilengkapi skor keyakinan dan mekanisme penolakan [18]: keyakinan rendah memunculkan pesan isyarat tidak dikenali alih-alih menebak salah. Kelayakan operasionalnya dilaporkan lewat "
+    },
+    {
+     "text": "accepted coverage",
+     "italics": true
+    },
+    {
+     "text": ", akurasi pada segmen diterima ("
+    },
+    {
+     "text": "selective accuracy",
+     "italics": true
+    },
+    {
+     "text": "), akurasi keseluruhan, serta laju terima-salah dan tolak-salah dengan ambang dari data validasi (Subbab 3.7)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kepala regresi memperkirakan bentuk jari kontinu. Target mengikuti skema 21 "
+    },
+    {
+     "text": "landmark",
+     "italics": true
+    },
+    {
+     "text": " tangan MediaPipe Hands [19]; sesuai "
+    },
+    {
+     "text": "kpt_shape",
+     "code": true
+    },
+    {
+     "text": " [21, 3], tiap sampel memuat 21 titik dengan koordinat x, y, dan tanda visibilitas, dipakai berpasangan (x, y) dengan visibilitas sebagai mask. Kepala regresi membaca tiap keadaan tersembunyi modul temporal langsung sehingga keluarannya per langkah, Q"
+    },
+    {
+     "text": "t",
+     "sub": true
+    },
+    {
+     "text": " = reshape( W"
+    },
+    {
+     "text": "r",
+     "sub": true
+    },
+    {
+     "text": " · h"
+    },
+    {
+     "text": "t",
+     "sub": true
+    },
+    {
+     "text": " + b"
+    },
+    {
+     "text": "r",
+     "sub": true
+    },
+    {
+     "text": ", 21, 2 ) dengan W"
+    },
+    {
+     "text": "r",
+     "sub": true
+    },
+    {
+     "text": " berukuran 42 × 128 dan keluaran per segmen T × 21 × 2. Bentuk ini dipilih karena J dan Z dibedakan lintasan gerak, bukan satu pose. Varian peringkas tunggal yang memprediksi seluruh jendela dari satu vektor,"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "Q"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": " = reshape( W"
+      },
+      {
+       "text": "r",
+       "sub": true
+      },
+      {
+       "text": " · z"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": " + b"
+      },
+      {
+       "text": "r",
+       "sub": true
+      },
+      {
+       "text": ", T, 21, 2 )"
+      }
+     ],
+     "num": "2.11"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan W"
+    },
+    {
+     "text": "r",
+     "sub": true
+    },
+    {
+     "text": " berukuran 42T × 128, dipertahankan sebagai pembanding ablasi untuk huruf statis. Sistem koordinat target dibakukan sebelum pelatihan: koordinat piksel kamera tidak otomatis dapat diprediksi dari CSI dan tidak tahan perubahan posisi kamera, jarak, maupun orientasi. Kandidat kuatnya koordinat ternormalisasi terhadap kotak deteksi guru atau titik pergelangan tangan. Konvensi "
+    },
+    {
+     "text": "handedness",
+     "italics": true
+    },
+    {
+     "text": ", skala acuan d"
+    },
+    {
+     "text": "ref",
+     "sub": true
+    },
+    {
+     "text": ", ambang PCK α, dan pemetaan target temporal ke pusat jendela ditetapkan pada T0 lalu dipakai konsisten oleh guru dan murid "
+    },
+    {
+     "text": "[PERLU VALIDASI: sistem koordinat, handedness, skala acuan, dan ambang PCK]",
+     "highlight": true
+    },
+    {
+     "text": ". Proyeksi XY dua dimensi tidak merepresentasikan kedalaman dan orientasi telapak penuh; keterbatasan itu dinyatakan pada laporan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kerugian regresinya Smooth L1 yang dibobot mask [20]. Fungsi Smooth L1 berperilaku kuadratik dekat nol dan linear untuk galat besar,"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "SmoothL1"
+      },
+      {
+       "text": "δ",
+       "sub": true
+      },
+      {
+       "text": "( x ) = 0,5 · x"
+      },
+      {
+       "text": "2",
+       "sup": true
+      },
+      {
+       "text": " / δ untuk |x| ≤ δ, dan |x| − 0,5 · δ untuk |x| > δ"
+      }
+     ],
+     "num": "2.12"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan δ ambang peralihan, sehingga pencilan anotasi tidak mendominasi gradien. Kerugian bermask dihitung hanya pada titik dan langkah yang valid, dijumlahkan pada kedua koordinat:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "L"
+      },
+      {
+       "text": "reg",
+       "sub": true
+      },
+      {
+       "text": " = ( Σ"
+      },
+      {
+       "text": "i,t,j",
+       "sub": true
+      },
+      {
+       "text": " m"
+      },
+      {
+       "text": "~itj~ · Σ~c~ SmoothL1~δ~( Q~itj,c~ − P~itj,c~ ) ) / ( 2 · Σ~i,t,j~ m",
+       "italics": true
+      },
+      {
+       "text": "itj",
+       "sub": true
+      },
+      {
+       "text": " + ε )"
+      }
+     ],
+     "num": "2.13"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan m*"
+    },
+    {
+     "text": "itj",
+     "sub": true
+    },
+    {
+     "text": " mask gabungan, c ∈ {x, y}, P"
+    },
+    {
+     "text": "itj",
+     "sub": true
+    },
+    {
+     "text": " koordinat acuan guru, dan ε penahan pembagi nol; mask gabungan itu menggabungkan validitas langkah temporal dan visibilitas titik:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "m*"
+      },
+      {
+       "text": "itj",
+       "sub": true
+      },
+      {
+       "text": " = m"
+      },
+      {
+       "text": "valid",
+       "sup": true
+      },
+      {
+       "text": "it",
+       "sub": true
+      },
+      {
+       "text": " · m"
+      },
+      {
+       "text": "vis",
+       "sup": true
+      },
+      {
+       "text": "itj",
+       "sub": true
+      }
+     ],
+     "num": "2.13a"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan m"
+    },
+    {
+     "text": "valid",
+     "sup": true
+    },
+    {
+     "text": "it",
+     "sub": true
+    },
+    {
+     "text": " bernilai nol pada langkah "
+    },
+    {
+     "text": "padding",
+     "italics": true
+    },
+    {
+     "text": " dan m"
+    },
+    {
+     "text": "vis",
+     "sup": true
+    },
+    {
+     "text": "itj",
+     "sub": true
+    },
+    {
+     "text": " mask visibilitas guru. Jika prediksi visibilitas juga diinginkan, kepala tambahan dengan silang-entropi biner disiapkan sebagai perluasan (Tabel 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pembelajaran multitugas melatih beberapa tugas berbarengan di atas representasi yang dibagi, dan representasi yang baik untuk satu tugas kerap menolong tugas lain yang berkaitan [21]. Kedua tugas penelitian ini dua pandangan atas isyarat yang sama, klasifikasi sebagai kelas diskret dan regresi sebagai bentuk jari kontinu; hipotesisnya, supervisi "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " ikut merapikan batas antarhuruf yang mirip. Kerugian gabungan menjumlah keduanya dengan bobot:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "L"
+      },
+      {
+       "text": "total",
+       "sub": true
+      },
+      {
+       "text": " = λ"
+      },
+      {
+       "text": "cls",
+       "sub": true
+      },
+      {
+       "text": " · L"
+      },
+      {
+       "text": "cls",
+       "sub": true
+      },
+      {
+       "text": " + λ"
+      },
+      {
+       "text": "reg",
+       "sub": true
+      },
+      {
+       "text": " · L"
+      },
+      {
+       "text": "reg",
+       "sub": true
+      }
+     ],
+     "num": "2.14"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Skala keduanya disamakan lebih dulu, misalnya dengan membagi tiap kerugian oleh nilai rata-ratanya pada epoch pertama, sebelum bobot λ ditala dari data validasi (Tabel 3.8). Konflik gradien antartugas dipantau lewat besar gradien tiap kepala dan kemiripan arahnya,"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "cos( g"
+      },
+      {
+       "text": "c",
+       "sub": true
+      },
+      {
+       "text": ", g"
+      },
+      {
+       "text": "r",
+       "sub": true
+      },
+      {
+       "text": " ) = ( g"
+      },
+      {
+       "text": "c",
+       "sub": true
+      },
+      {
+       "text": "T",
+       "sup": true
+      },
+      {
+       "text": " · g"
+      },
+      {
+       "text": "r",
+       "sub": true
+      },
+      {
+       "text": " ) / ( ||g"
+      },
+      {
+       "text": "c",
+       "sub": true
+      },
+      {
+       "text": "|| · ||g"
+      },
+      {
+       "text": "r",
+       "sub": true
+      },
+      {
+       "text": "|| + ε )"
+      }
+     ],
+     "num": "2.14a"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan g"
+    },
+    {
+     "text": "c",
+     "sub": true
+    },
+    {
+     "text": " dan g"
+    },
+    {
+     "text": "r",
+     "sub": true
+    },
+    {
+     "text": " gradien kerugian klasifikasi dan regresi terhadap tetapan bersama; jika keduanya menarik representasi ke arah berlawanan (kemiripan arah menurun), penyeimbangan gradien atau pelatihan bergantian dipertimbangkan dan perlakuannya dilaporkan. Pada baseline, pembaruan tetapan menyentuh seluruh tetapan di luar "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": ":"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "Θ"
+      },
+      {
+       "text": "train",
+       "sub": true
+      },
+      {
+       "text": " = { φ"
+      },
+      {
+       "text": "adapter",
+       "sub": true
+      },
+      {
+       "text": ", θ"
+      },
+      {
+       "text": "temporal",
+       "sub": true
+      },
+      {
+       "text": ", θ"
+      },
+      {
+       "text": "c",
+       "sub": true
+      },
+      {
+       "text": ", θ"
+      },
+      {
+       "text": "r",
+       "sub": true
+      },
+      {
+       "text": " }, θ"
+      },
+      {
+       "text": "encoder",
+       "sub": true
+      },
+      {
+       "text": " = θ"
+      },
+      {
+       "text": "0",
+       "sub": true
+      }
+     ],
+     "num": "2.15"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan φ"
+    },
+    {
+     "text": "adapter",
+     "sub": true
+    },
+    {
+     "text": " tetapan adapter masukan yang hanya hadir jika jalur adapter terpilih pada G0b, θ"
+    },
+    {
+     "text": "temporal",
+     "sub": true
+    },
+    {
+     "text": " tetapan modul temporal, serta θ"
+    },
+    {
+     "text": "c",
+     "sub": true
+    },
+    {
+     "text": " dan θ"
+    },
+    {
+     "text": "r",
+     "sub": true
+    },
+    {
+     "text": " tetapan kedua kepala; pembaruannya mengikuti Θ"
+    },
+    {
+     "text": "train",
+     "sub": true
+    },
+    {
+     "text": " ← Optimizer( ∇ L"
+    },
+    {
+     "text": "total",
+     "sub": true
+    },
+    {
+     "text": " ). Modul temporal sendiri bukan kepala tugas: ia memproses barisan "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " per langkah dan mengeluarkan keadaan tersembunyi per langkah, h"
+    },
+    {
+     "text": "1",
+     "sub": true
+    },
+    {
+     "text": " sampai h"
+    },
+    {
+     "text": "T",
+     "sub": true
+    },
+    {
+     "text": ". Kandidatnya 1D-CNN ringan dari rancangan lama yang memelihara urutan waktu; agregasi statistik hanya kandidat bagi jalur klasifikasi, dan pilihan di antara keduanya diambil dari hasil ablasi pada data yang sama. Kepala tunggal yang dilatih sendiri-sendiri juga disiapkan sebagai pembanding pada split yang sama; keputusan modul temporal dicatat pada Tabel 3.8."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.5 Guru Visual YOLO26m-Pose dan Supervisi Lintas Modalitas"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Guru visual bekerja hanya pada tahap akuisisi data. Kamera laptop dan node penerima CSI merekam serentak dengan penanda waktu yang sama; pada tiap bingkai, YOLO26m-Pose [12] menghasilkan kelas isyarat beserta 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " tangan dan visibilitasnya, dan label kelas dicocokkan dengan kartu pemandu protokol sehingga derau label terkendali. Kemampuan guru teruji pada pra-penelitian di repositori WPC peneliti: dataset versi 2 memuat 49 kelas isyarat dengan 7.210 gambar (6.231 latih, 650 validasi, 329 uji), dan eksperimen exp11_huruf24 mencatat "
+    },
+    {
+     "text": "pose",
+     "italics": true
+    },
+    {
+     "text": " mAP50 0,9580 dengan akurasi huruf 97,6% pada 24 huruf statis "
+    },
+    {
+     "text": "[PERLU DATA: commit/hash checkpoint WPC exp11_huruf24]",
+     "highlight": true
+    },
+    {
+     "text": ". Angka itu berlaku untuk data visual dan tidak dikutip sebagai kemampuan mengenali J dan Z; supervisi kedua huruf gerak diambil dari lintasan "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " dan label protokol, dengan kualitas deteksi dievaluasi khusus (deteksi berhasil, "
+    },
+    {
+     "text": "jitter",
+     "italics": true
+    },
+    {
+     "text": ", bingkai hilang) karena performa exp11 hanya terukur pada pose statis (Subbab 3.6). Dari angka itu terbaca 21 titik artikulasi jari memuat informasi cukup untuk gestur mikro SIBI. Dua hal ditegaskan: seluruh angka itu hasil model visual pada data visual, bukan hasil model Wi-Fi, dan dataset itu tidak memuat rekaman CSI sehingga pasangan data baru direkam sendiri pada T2."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Peran guru dipisahkan menurut jenis target. Untuk 24 huruf statis, label kelas pelatihan diambil dari protokol perekaman dan guru menyumbang deret 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " beserta visibilitasnya. Untuk J dan Z, label juga berasal dari protokol, dan guru tidak diposisikan sebagai pengklasifikasi kedua huruf gerak itu kecuali model guru terbukti memuat kelasnya "
+    },
+    {
+     "text": "[PERLU VALIDASI: kelas J dan Z pada model juara WPC]",
+     "highlight": true
+    },
+    {
+     "text": ". Istilahnya dipilih hati-hati: karena murid hanya menerima label keras berupa kelas dan koordinat, pola yang presisi ialah supervisi lintas modalitas berpandu guru; distilasi pengetahuan klasik yang memindahkan probabilitas lunak tidak menggambarkan bentuk transfer ini [22]. Konsep guru-murid tetap dipertahankan: YOLO26m-Pose guru visual saat akuisisi dan pelatihan, model CSI murid yang dipakai tanpa kamera pada inferensi. Status pseudo-label dijalani jujur: keluaran guru yang belum diperiksa manusia bukan kebenaran sempurna, sehingga protokol menyertakan verifikasi sampel oleh validator, penyaringan bingkai gagal deteksi, dan pencatatan "
+    },
+    {
+     "text": "jitter keypoint",
+     "italics": true
+    },
+    {
+     "text": " (Subbab 3.6). Ekspektasi generalisasinya dijaga temuan model pose MM-Fi [15]: lintas subjek "
+    },
+    {
+     "text": "zero-shot",
+     "italics": true
+    },
+    {
+     "text": " hanya 64% dan lintas lingkungan 17,5%, naik ke 72–78% setelah kalibrasi 50–1.000 bingkai per orang; angka itu menjadi acuan ekspektasi sekaligus alasan skema kalibrasi per orang dan per ruang disiapkan sebagai jalur cadangan (Tabel 3.9)."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.6 Pengenalan Isyarat Berbasis CSI dan Inferensi pada Perangkat"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Riset pengenalan bahasa isyarat dari CSI sudah berjalan di beberapa negara. SignFi mengenali 276 isyarat ASL dengan akurasi hingga 99,8% di laboratorium, walau turun menjadi 86,66% pada lima pengguna baru [7]; jalur ini belum menyentuh SIBI. Model utama penelitian ini tiga bagian: "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " terpralatih yang dibekukan (Subbab 2.3), modul temporal untuk deret waktu (Subbab 2.4), dan dua kepala tugas. Pembandingnya sesama model CSI pada data dan seed sama: varian kepala tunggal tanpa kepala regresi serta Pembanding C yang tidak melewati penyempitan delapan fitur (Subbab 3.7). Inferensi dirancang berjalan langsung di modul. ESP-DL membuktikan eksekusi model int8 pada keluarga ESP32 dengan tolok ukur 69,2 ms untuk model citra MobileNetV2-0,5 (RGB 128×128×3; total 73,9 ms termasuk pra- dan pasca-proses) [23]; angka itu membuktikan kemampuan eksekusi terkuantisasi pada perangkat kerasnya, bukan latensi model CSI. TensorFlow Lite Micro menjadi alternatifnya. Tolok ukur CSI-isyarat pada ESP32-S3 belum ada, jadi waktu inferensi aktual diukur sendiri (Subbab 3.7)."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.7 TTS, ASR, dan Pemetaan Teks ke Representasi SIBI"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Purwarupa membutuhkan mesin sintesis ucapan (TTS) dan pengenalan ucapan (ASR) dengan tiga kriteria: dukungan bahasa Indonesia terverifikasi, jalur lokal dan "
+    },
+    {
+     "text": "on-device",
+     "italics": true
+    },
+    {
+     "text": " tersedia, serta biaya berkelanjutan bagi sekolah. Verifikasi langsung ke berkas VOICES.md resmi Kokoro-82M v1.0 pada 14 November 2026 menunjukkan sembilan kelompok suara untuk delapan bahasa tanpa bahasa Indonesia, serta kelemahan pada ujaran sangat pendek [24]. MMS-TTS-ind, model TTS Indonesia dari Meta [25], karena itu menjadi kandidat utama operasional. Kokoro tetap tercatat untuk verifikasi ulang jika suara Indonesia tersedia pada rilis berikutnya "
+    },
+    {
+     "text": "[PERLU KONFIRMASI: keputusan final mesin TTS, Tabel 3.8 #17]",
+     "highlight": true
+    },
+    {
+     "text": ". Keduanya berjalan di server lokal sebagai jalur utama dan di ponsel melalui ONNX Runtime sebagai cadangan, lalu diuji banding pada G3. Pada sisi ASR, Whisper dilatih lima juta jam audio dan mendukung lebih dari 100 bahasa termasuk Indonesia [26]; saat internet terputus, server lokal mengambil alih dengan faster-whisper. Galat katanya untuk percakapan Indonesia belum terverifikasi dari sumber primer, jadi akurasinya diukur sendiri (Subbab 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Terjemahan teks menjadi isyarat tidak mungkin dilakukan kata demi kata karena bahasa isyarat memiliki tata bahasa sendiri. Arah kedua karenanya dirancang pada tingkat kamus kata dengan ejaan jari sebagai cadangan; struktur SIBI mendukung rancangan ini sebab alfabet manualnya lengkap, 26 huruf dan 9 angka [3]. Tampilannya dua lapis: lapis utama memunculkan glos dan gambar bentuk tangan untuk kata yang tersedia di kamus (ukuran gambar sekitar dua puluh sampai tiga puluh kilobita sehingga muat di penyimpanan modul), dan lapis kedua berupa animasi yang dialirkan dari server jika waktu pengembangan memungkinkan. Kata di luar kamus dialihkan ke ejaan jari; untuk huruf dinamis J dan Z, ejaan jari memerlukan representasi animasi atau urutan lintasan karena satu gambar statis tidak memadai. Cakupan kamus, yaitu proporsi kata uji yang terwakili, menjadi metrik utama arah ini (Subbab 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.8 Komunikasi Modul, Server, dan Topologi Jaringan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Seluruh perangkat, dari kedua modul penginderaan sampai ponsel, berbagi satu kanal Wi-Fi yang sama sehingga penangkapan CSI berjalan serentak dengan komunikasi data [10]. Peran jembatan jaringan sekaligus penjangkar kanal dipegang "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": ", berupa "
+    },
+    {
+     "text": "router",
+     "italics": true
+    },
+    {
+     "text": " sekolah maupun "
+    },
+    {
+     "text": "hotspot",
+     "italics": true
+    },
+    {
+     "text": " ponsel; aliran data ke server memakai UDP, sedangkan sinkronisasi antarmodul, jika diperlukan, memakai ESP-NOW sebagai fitur opsional (Subbab 2.2). Lapisan orkestrasi server, penelan UDP, dasbor, dan klien ditulis dalam Rust: Tokio menangani konkurensi, Axum menyediakan HTTP dan WebSocket, Leptos membangun dasbor WASM, dan Tauri menjadi aplikasi klien ponsel, sementara mesin ASR dan TTS (faster-whisper, ONNX Runtime) dijalankan lewat "
+    },
+    {
+     "text": "runtime",
+     "italics": true
+    },
+    {
+     "text": " ML yang sesuai. Alasannya praktis: tanpa pengumpul sampah pemrosesan bingkai UDP tetap cepat, binernya hemat memori, dan satu sistem tipe mendeteksi perubahan format bingkai saat kompilasi. Target "
+    },
+    {
+     "text": "parsing",
+     "italics": true
+    },
+    {
+     "text": " di bawah 0,2 ms dan memori server di bawah 40 MB adalah target rancangan yang baru diukur pada G3; server lokal pada laptop menjalankan seluruh layanan luring sehingga pemrosesan teks dan suara tetap berjalan tanpa internet. Pemisahan bahasanya tegas: pelatihan model berjalan dengan Python dan PyTorch (Subbab 3.7), Rust untuk "
+    },
+    {
+     "text": "runtime",
+     "italics": true
+    },
+    {
+     "text": " server dan klien; keduanya tidak saling menggantikan."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.9 Evaluasi Kelayakan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Penilaian kelayakan berjalan bertahap lewat lima gerbang G0 sampai G4 (BAB III), dan tiap tahap menghasilkan artefak tetap sehingga kegagalan pun terdokumentasi. Rekomendasi akhirnya menyatakan posisi purwarupa pada kerangka "
+    },
+    {
+     "text": "technology readiness level",
+     "italics": true
+    },
+    {
+     "text": " [27]. Kinerja klasifikasi diukur dengan akurasi, presisi, "
+    },
+    {
+     "text": "recall",
+     "italics": true
+    },
+    {
+     "text": ", skor F1 makro, serta "
+    },
+    {
+     "text": "confusion matrix",
+     "italics": true
+    },
+    {
+     "text": " per isyarat, selalu dibandingkan terhadap peluang acak. Untuk kelas huruf k, presisi dan "
+    },
+    {
+     "text": "recall",
+     "italics": true
+    },
+    {
+     "text": " dihitung dari jumlah benar positif TP"
+    },
+    {
+     "text": "k",
+     "sub": true
+    },
+    {
+     "text": ", salah positif FP"
+    },
+    {
+     "text": "k",
+     "sub": true
+    },
+    {
+     "text": ", serta salah negatif FN"
+    },
+    {
+     "text": "k",
+     "sub": true
+    },
+    {
+     "text": ":"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "P"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " = TP"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " / ( TP"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " + FP"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " )"
+      }
+     ],
+     "num": "2.16"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "R"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " = TP"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " / ( TP"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " + FN"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " )"
+      }
+     ],
+     "num": "2.17"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "F1"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " = 2 · P"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " · R"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " / ( P"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " + R"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " )"
+      }
+     ],
+     "num": "2.18"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "F1"
+      },
+      {
+       "text": "makro",
+       "sub": true
+      },
+      {
+       "text": " = ( 1 / K ) · Σ"
+      },
+      {
+       "text": "k",
+       "sub": true
+      },
+      {
+       "text": " F1"
+      },
+      {
+       "text": "k",
+       "sub": true
+      }
+     ],
+     "num": "2.19"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "p"
+      },
+      {
+       "text": "acak",
+       "sub": true
+      },
+      {
+       "text": " = 1 / K"
+      }
+     ],
+     "num": "2.20"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Untuk K = 26 huruf, p"
+    },
+    {
+     "text": "acak",
+     "sub": true
+    },
+    {
+     "text": " ≈ 3,8%, dihitung ulang jika himpunan huruf dipangkas (Subbab 3.8.2). Kinerja kepala regresi diukur dengan MPJPE, rata-rata jarak Euclid antara prediksi dan acuan pada titik dan langkah valid,"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "MPJPE = ( Σ"
+      },
+      {
+       "text": "i,t,j",
+       "sub": true
+      },
+      {
+       "text": " m"
+      },
+      {
+       "text": "~itj~ · || Q~itj~ − P~itj~ || ) / Σ~i,t,j~ m",
+       "italics": true
+      },
+      {
+       "text": "itj",
+       "sub": true
+      }
+     ],
+     "num": "2.21"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "serta PCK, proporsi "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " yang galatnya masuk ambang relatif,"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "PCK@α = ( Σ"
+      },
+      {
+       "text": "i,t,j",
+       "sub": true
+      },
+      {
+       "text": " m"
+      },
+      {
+       "text": "~itj~ · 1( || Q~itj~ − P~itj~ || ≤ α · d~ref~ ) ) / Σ~i,t,j~ m",
+       "italics": true
+      },
+      {
+       "text": "itj",
+       "sub": true
+      }
+     ],
+     "num": "2.22"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan 1(·) bernilai satu jika kondisinya terpenuhi, α ambang relatif, dan d"
+    },
+    {
+     "text": "ref",
+     "sub": true
+    },
+    {
+     "text": " skala acuan yang mengikuti sistem koordinat terbakukan (Subbab 2.4); NME dilaporkan sebagai alternatif ternormalisasi, dan galat per "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " diringkas untuk mengenali titik jari yang paling sulit diprediksi. Pada baseline Pilihan 1, MPJPE dan PCK@α berstatus metrik pemantauan; jika Pilihan 2 terpilih, ambang kelayakan regresi ditetapkan lebih dulu pada Tabel 3.8 sebelum G1 dinilai. Pada jalur ucapan, kesalahan pengenalan kata diukur dengan laju galat kata (WER), yaitu jumlah substitusi S, penghapusan D, dan penyisipan I terhadap N kata acuan:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "WER = ( S + D + I ) / N"
+      }
+     ],
+     "num": "2.23"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "WER dilaporkan beserta rinciannya (S, D, I, N) karena nilai itu bisa melebihi satu akibat penyisipan. Empat dimensi tambahan menilai kelayakan alat komunikasinya: latensi ujung ke ujung, cakupan kamus, keandalan operasional, dan biaya. Persepsi pengguna diukur dengan kuesioner skala Likert [28] lalu dianalisis secara deskriptif, sedangkan kewajaran keluaran dinilai validator penutur tunarungu. Rekomendasi akhir menyatakan posisi purwarupa pada skala TKT nasional yang mengikuti Permenristekdikti Nomor 42 Tahun 2016 tentang Pengukuran dan Penetapan Tingkat Kesiapterapan Teknologi [29], selaras dengan kerangka TRL [27]."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.10 Penelitian Terdahulu"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Penelitian terdahulu yang paling relevan dibandingkan pada Tabel 2.3, mencakup pengenalan isyarat dan gestur dari sinyal Wi-Fi serta pengenalan isyarat berbasis kamera di Indonesia."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 2.3 Perbandingan penelitian terdahulu",
+   "header": [
+    "No.",
+    "Peneliti (Tahun)",
+    "Modalitas dan arah",
+    "Bahasa isyarat",
+    "Bebas kamera",
+    "Fokus"
+   ],
+   "rows": [
+    [
+     "1",
+     "Ma dkk. (2018) [7]",
+     "CSI; isyarat menjadi teks",
+     "ASL, 276 isyarat",
+     "Ya",
+     "Pengenalan berskala besar"
+    ],
+    [
+     "2",
+     "Zhang dkk. (2022) [14]",
+     "CSI; gestur lintas domain",
+     "Gestur umum",
+     "Ya",
+     "Generalisasi lintas orang dan ruang"
+    ],
+    [
+     "3",
+     "Geng dkk. (2022) [30]",
+     "CSI NIC riset; pose padat tubuh",
+     "Bukan isyarat",
+     "Ya",
+     "Estimasi pose padat dari WiFi"
+    ],
+    [
+     "4",
+     "Ahmed dkk. (2020) [31]",
+     "CSI; isyarat statis dan dinamis",
+     "ISL, 49 gestur (30 statis, 19 dinamis)",
+     "Ya",
+     "Pengenalan lintas ruang rumah dan kantor"
+    ],
+    [
+     "5",
+     "Gao dkk. (2023) [32]",
+     "CSI; multitugas pengenalan isyarat dan identifikasi pengguna/ruang",
+     "ASL (dataset SignFi)",
+     "Ya",
+     "Multitugas CNN dan KNN"
+    ],
+    [
+     "6",
+     "Dwijayanti dkk. (2021) [5]",
+     "Citra; isyarat menjadi teks",
+     "BISINDO",
+     "Tidak",
+     "CNN pengenalan citra"
+    ],
+    [
+     "7",
+     "Penelitian ini",
+     "CSI sepasang ESP32-S3; encoder terpralatih berkepala dua; supervisi guru visual; inferensi tepi; TTS dan ASR Indonesia",
+     "SIBI, alfabet 26 huruf",
+     "Ya",
+     "Studi kelayakan purwarupa dua arah"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tiga kelompok bisa dibaca dari tabel itu. Pengenalan isyarat dan gestur dari Wi-Fi berjalan tanpa kamera tetapi belum menjangkau SIBI: SignFi mengenali 276 isyarat ASL [7], Widar3.0 menggeneralisasi gestur lintas orang dan ruang [14], DF-WiSLR membuktikan 49 gestur ISL (30 statis, 19 dinamis) terpisah lintas ruang rumah dan kantor [31], dan Wi-SignFi menjalankan multitugas pengenalan isyarat sekaligus identifikasi pengguna dan lingkungan pada dataset SignFi [32]. Estimasi pose dari Wi-Fi telah dibuka DensePose From WiFi yang memetakan fase dan amplitudo CSI menjadi koordinat UV pada 24 wilayah tubuh [30]; garis itu dilanjutkan model pose MM-Fi pada ekosistem RuView [15]. Wi-SignFi sendiri mencatat CNN ringannya belum menangkap dinamika temporal secara optimal sehingga modul temporal diusulkan penulisnya; catatan itu menguatkan keputusan mempertahankan modul temporal pada penelitian ini. Karena karya-karya itu memakai NIC riset multi-antena atau data laboratorium, keberhasilannya tidak otomatis berlaku pada tautan tunggal ESP32-S3 yang menjadi pertanyaan penelitian ini. Riset Indonesia berbasis kamera [5] membuktikan tingginya minat, namun tetap terikat pencahayaan dan garis pandang. Dalam batas penelusuran (Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026; log kueri dilampirkan "
+    },
+    {
+     "text": "[PERLU DATA: log kueri penelusuran literatur]",
+     "highlight": true
+    },
+    {
+     "text": "), publikasi pengenalan isyarat SIBI dari CSI maupun purwarupa dua arah yang memadukannya dengan TTS dan ASR bahasa Indonesia pada ESP32-S3 belum ditemukan. Kebaruan penelitian ini karenanya diklaim secara kombinatif dan terukur: penerapan CSI satu tautan ESP32-S3 untuk alfabet SIBI, penggunaan encoder RuView sebagai representasi beku, supervisi 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " tangan lintas modalitas, serta integrasi dua arah dengan pemrosesan bahasa Indonesia. Di luar itu, pengenalan isyarat dari CSI, gestur statis-dinamis dari Wi-Fi, dan multitask learning pada isyarat sudah ada [31], [32], jadi tidak diklaim sebagai kebaruan global; kebaruan juga tidak diklaim untuk isyarat kontinu maupun penerjemahan kalimat penuh."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.11 Matriks Justifikasi Pemilihan Komponen"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tabel 2.4 merangkum jawaban atas pertanyaan mengapa X dan bukan Y untuk delapan keputusan arsitektur. Seluruh target kinerja di dalamnya adalah target rancangan yang baru diukur pada gerbang BAB III, bukan hasil yang dijanjikan."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 2.4 Matriks justifikasi pemilihan komponen (Mengapa X dan Bukan Y?)",
+   "header": [
+    "No.",
+    "Keputusan",
+    "Komponen dipilih",
+    "Alternatif ditinggalkan",
+    "Justifikasi"
+   ],
+   "rows": [
+    [
+     "1",
+     "Tumpukan server dan klien",
+     "Orkestrasi server dan klien dalam Rust (Tokio/Axum, Leptos WASM, Tauri) plus runtime ML ucapan",
+     "Node.js, Streamlit, Electron, React/JS",
+     "Parsing UDP di bawah 0,2 ms; memori di bawah 40 MB; satu sistem tipe (Subbab 2.8)"
+    ],
+    [
+     "2",
+     "Mesin TTS",
+     "MMS-TTS-ind sebagai kandidat utama operasional; Kokoro jika suara Indonesia tersedia [24], [25]",
+     "TTS awan, VITS/Tacotron penuh",
+     "Kokoro v1.0 terverifikasi tanpa bahasa Indonesia (14 Nov. 2026); kedua kandidat luring di server lokal (utama) dan ponsel (cadangan) (Subbab 2.7)"
+    ],
+    [
+     "3",
+     "Node penginderaan",
+     "ESP32-S3 [8]",
+     "ESP32 biasa, C3/C6, Arduino Uno",
+     "Instruksi vektor int8; PSRAM penyangga CSI dan model; API CSI resmi (Subbab 2.2)"
+    ],
+    [
+     "4",
+     "Penginderaan radio",
+     "Normalisasi rasio terhadap baseline kalibrasi ruang, kanal 20 MHz [13]",
+     "RSSI, radar khusus, time of flight",
+     "RSSI terlalu kasar; rasio membersihkan derau fase tanpa perangkat tambahan (Subbab 2.2)"
+    ],
+    [
+     "5",
+     "Model guru visi",
+     "YOLO26m-Pose 21 keypoint [12]",
+     "YOLOv8-pose, MediaPipe langsung, UNet",
+     "21 titik artikulasi vital untuk membedakan huruf mirip dan lintasan J/Z; mAP50 0,9580 dan akurasi 97,6% pada 24 huruf statis (Subbab 2.5)"
+    ],
+    [
+     "6",
+     "Model murid tepi",
+     "Encoder CSI terpralatih dibekukan + modul temporal + dua kepala; Jalur A/B1/B2 dengan Pembanding C [11]",
+     "SVM, MLP berat, pelatihan dari nol",
+     "Checkpoint 9.280 parameter teruji kontrastif; beku memisahkan sumbangan pretraining; penyempitan 8 fitur diuji eksplisit lewat Pembanding C (Subbab 2.3 dan 2.4)"
+    ],
+    [
+     "7",
+     "Dua kepala tugas",
+     "Klasifikasi 26 huruf + regresi 21 keypoint dengan kerugian gabungan [21]",
+     "Kepala klasifikasi saja",
+     "Supervisi keypoint berpotensi merapikan batas kelas yang mirip; manfaatnya diuji lewat ablasi (Subbab 3.7)"
+    ],
+    [
+     "8",
+     "Metode supervisi",
+     "Supervisi lintas modalitas berpandu guru; label keras kelas dan keypoint [22]",
+     "Pelatihan CSI murni; distilasi soft target",
+     "CSI abstrak memerlukan supervisi spasial guru; bentuk transfer yang dipakai memang label keras (Subbab 2.5)"
+    ]
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "2.12 Kerangka Pemikiran dan Arsitektur Model"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kerangka pemikiran penelitian ini mengalir dari data sampai perangkat, seperti dirangkum Gambar 2.1. Jalur guru mengunci label: kamera tersinkron dan YOLO26m-Pose menghasilkan kelas serta 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " acuan hanya saat akuisisi data. Jalur model memproses CSI sepasang ESP32-S3 lewat praproses, rute masukan terpilih hasil audit T0 dan G0b (Jalur A, B1, atau B2, dengan Pembanding C sebagai alternatif evaluasi), "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " beku yang menghasilkan barisan "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " 128 dimensi, dan modul temporal. Saat pelatihan, kepala klasifikasi dan kepala regresi berjalan bersama di bawah kerugian gabungan; saat "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": " Pilihan 1, kepala regresi dilepas dan model terkuantisasi yang tersisa dijalankan di modul, sementara arah kedua sistem tetap berjalan lewat ASR, kamus, dan TTS (Subbab 3.5)."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 2.1 Arsitektur model: akuisisi terpandu guru hanya saat pelatihan, pelatihan dua kepala di atas encoder beku dengan rute masukan hasil audit (Jalur A, B1, B2, dan Pembanding C), serta deployment Pilihan 1 yang menjalankan klasifikator saja; simpul kuning = jalur guru, biru = jalur model Wi-Fi, hijau = pelatihan dan deployment",
+   "png": "/home/z/my-project/download/sensesibi-v10/assets-v18/gambar-2.1.png"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Dataset yang menopang kerangka ini dirumuskan sebagai pasangan berunsur:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "D"
+      },
+      {
+       "text": "pas",
+       "sub": true
+      },
+      {
+       "text": " = { ( X"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": ", y"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": ", P"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": ", m"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": ", s"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": ", q"
+      },
+      {
+       "text": "i",
+       "sub": true
+      },
+      {
+       "text": " ) }, i = 1, ..., N"
+      }
+     ],
+     "num": "2.24"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan X"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": " jendela CSI, y"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": " label kelas isyarat, P"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": " koordinat 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " acuan, m"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": " mask visibilitasnya, s"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": " metadata subjek, sesi, ruang, serta perangkat, dan q"
+    },
+    {
+     "text": "i",
+     "sub": true
+    },
+    {
+     "text": " skor kualitas anotasi guru; keseluruhan pasangan direkam sendiri pada T2 karena tidak ada sumber lain yang menyediakannya. Dengan rumusan itu, teori CSI dan zona Fresnel (Subbab 2.2) menyediakan sinyal, "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " terpralatih (Subbab 2.3) menyediakan representasi, dan kedua formulasi kepala (Subbab 2.4) menyediakan keluaran tugas. Guru visual (Subbab 2.5) menyediakan labelnya, dan hasilnya diukur di tepi (Subbab 2.6) sebelum kedua arah disatukan menjadi purwarupa (BAB III)."
+    }
+   ]
+  }
+ ],
+ "bab3": [
+  {
+   "t": "h1",
+   "text": "BAB III METODE PENELITIAN"
+  },
+  {
+   "t": "h2",
+   "text": "3.1 Desain Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Penelitian ini berbentuk studi kelayakan kuantitatif bergerbang yang mengukur tiga hal: kemampuan CSI satu tautan antarmodul ESP32-S3 membedakan 26 huruf alfabet manual SIBI, kemampuan model terkuantisasi berjalan di modul, dan kinerja kedua jalur penerjemahan. Komponen yang lulus uji dikemas menjadi purwarupa lalu dinilai lewat uji operasional, uji kegunaan skala kecil, dan penilaian validator penutur tunarungu. Bergerbang karena belum ada yang membuktikan CSI mampu membedakan isyarat SIBI dan kemampuan itu tidak boleh diasumsikan: tiap tahap menghasilkan artefak tetap, kegagalan gerbang dicatat sebagai temuan, dan kriteria akurasi dirumuskan relatif peluang acak (Subbab 2.9). Inti pelatihannya supervisi lintas modalitas berpandu guru (Subbab 3.7): label kelas dari protokol perekaman dan deret 21 "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " dari guru kamera YOLO26m-Pose mengawasi pelatihan adapter masukan (jika dipakai), modul temporal, serta dua kepala tugas di atas "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " terpralatih yang dibekukan. Model terpilihnya lalu dijalankan langsung di modul. Rumusan pertama dijawab pada replikasi platform hingga perancangan model, kedua pada uji klasifikasi, regresi, dan "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": ", ketiga pada uji operasional, kegunaan, dan penilaian validator."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.2 Tahapan Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Empat belas minggu (M1 sampai M14) dibagi ke dalam enam tahap: replikasi platform dan karakterisasi (T0), kurasi isyarat dan protokol (T1), perekaman "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " serta pelatihan dua kepala (T2), uji generalisasi (T3), pengemasan purwarupa dan uji penerimaan (T4), serta analisis dan penulisan (T5). Lima gerbang keputusan menutup rangkaian itu, ditambah sub-gerbang G0b yang mengaudit kompatibilitas representasi "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " atas data pilot sebelum pelatihan penuh; kriteria dan tindakan jika gagal dirinci pada Tabel 3.6; penerimaan pengguna dan biaya dinilai G4, yang kemudian menyusun rekomendasi posisi TKT/TRL 3–4 [27], [29]. Alur lolosnya dirangkum pada Gambar 3.1. Jika G0 gagal dua kali, jalur CSI dihentikan dan dilaporkan sebagai temuan; kriteria seluruh gerbang difinalkan bersama pembimbing sebelum dinilai (Tabel 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.1 Tahapan penelitian T0–T5 dan gerbang keputusan G0–G4 beserta sub-gerbang G0b (jalur lolos; tindakan jika gagal pada Tabel 3.6)",
+   "png": "/home/z/my-project/download/sensesibi-v10/assets-v18/gambar-3.1.png"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tahap T0 sampai T2 membangun dasar data. T0 menyiapkan dua modul dengan "
+    },
+    {
+     "text": "firmware",
+     "italics": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "esp32-csi-node",
+     "code": true
+    },
+    {
+     "text": " RuView [10] lalu menjalankan empat uji tanpa partisipan: verifikasi N"
+    },
+    {
+     "text": "valid",
+     "sub": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " pada jarak baku 1 meter, uji Delta-CSI (Subbab 3.8.1), koeksistensi radio dengan "
+    },
+    {
+     "text": "streaming",
+     "italics": true
+    },
+    {
+     "text": " audio "
+    },
+    {
+     "text": "[PERLU DATA: format audio, laju cuplik, pengaliran, dan penanganan paket hilang]",
+     "highlight": true
+    },
+    {
+     "text": ", serta pengukuran laju pencuplikan. T0 juga mengaudit "
+    },
+    {
+     "text": "checkpoint encoder",
+     "italics": true
+    },
+    {
+     "text": " [11]: bentuk masukan, parameter normalisasi, jumlah parameter, normalisasi L2, dukungan ekspor, kompatibilitas LoRA, kedua set berkas (model."
+    },
+    {
+     "text": " dan csi-embed-v2.",
+     "italics": true
+    },
+    {
+     "text": "), jenis bingkai sumber CSI, serta versi dan "
+    },
+    {
+     "text": "commit",
+     "italics": true
+    },
+    {
+     "text": " RuView "
+    },
+    {
+     "text": "[PERLU DATA: versi dan commit RuView]",
+     "highlight": true
+    },
+    {
+     "text": " (Subbab 3.7). T1 meliputi kurasi 26 huruf bersama validator, kalibrasi ruang, protokol, etika, perizinan, serta penetapan pasangan huruf paling mirip sebagai bahan G1 (Subbab 3.6)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pada T2, "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " kurang lebih 30 repetisi per isyarat per sesi direkam disertai video tersinkron (Subbab 3.6). Alurnya supervisi berpandu guru: segmen disaring lewat "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " guru, jendela CSI disandingkan dengan label berdasarkan penanda waktu, lalu kedua kepala dilatih di atas "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " beku dengan kerugian gabungan; model terpilih dikuantisasi dan diuji di modul (Subbab 3.7). T2 melahirkan "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " berlabel, model terlatih, dan laporan "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": ". G1 menilai hasilnya; jika gagal, cakupan dipangkas menjadi himpunan huruf berpembeda CSI terkuat (Tabel 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tahap T3 sampai T5 berisi pengujian dan pelaporan. Generalisasi lintas sesi, partisipan, ruang, serta posisi berdiri-duduk diuji pada T3, termasuk pada satu pengguna baru tanpa pelatihan ulang dengan acuan Widar3.0 [14]; jika ketahanan lintas pengguna rendah, cakupan berubah menjadi personalisasi per pengguna dan dilaporkan sebagai temuan. T4 mengemas model menjadi purwarupa dua arah (Subbab 3.5) lalu menjalankan uji operasional dan jalur ucapan (Subbab 3.8) yang dinilai G3; rangkaian ditutup uji penerimaan, penilaian validator, dan analisis biaya yang dinilai G4. Pada T5, seluruh artefak dianalisis dan laporan kelayakan disusun lengkap dengan rekomendasi TKT/TRL 3–4 [27], [29] beserta keterbatasan eksplisitnya (Subbab 1.4)."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.3 Waktu dan Lokasi Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pelaksanaan penelitian jatuh pada "
+    },
+    {
+     "text": "[PERLU DATA: bulan dan tahun pelaksanaan penelitian]",
+     "highlight": true
+    },
+    {
+     "text": " di Jawa Timur. Penelitian ini tidak bersandar pada mitra lembaga; partisipan direkrut langsung oleh peneliti, sedangkan perekaman dan pengujian berlangsung di sedikitnya dua ruang berbeda, misalnya ruang kelas dan ruang kerja, sebagai jumlah minimum skema "
+    },
+    {
+     "text": "leave-one-room-out",
+     "italics": true
+    },
+    {
+     "text": ". Tiap ruang dikalibrasi lebih dulu sebelum perekaman (Subbab 3.5)."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.4 Alat dan Bahan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tabel 3.1 dan Tabel 3.3 menyajikan perangkat keras dan perangkat lunak penelitian. Node penginderaan dipegang sepasang modul ESP32-S3: TX menyediakan lalu lintas Wi-Fi baku sebagai sumber bingkai CSI, sedangkan RX mengekstrak CSI N"
+    },
+    {
+     "text": "valid",
+     "sub": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " pada 2,4 GHz kanal 20 MHz sekaligus memuat antarmuka; ESP-NOW hanya kandidat fitur sinkronisasi opsional (Subbab 2.2). Versi perangkat lunak dicatat bersama log pelatihan agar eksperimen bisa diulang. Bahan penelitiannya meliputi "
+    },
+    {
+     "text": "checkpoint encoder",
+     "italics": true
+    },
+    {
+     "text": " terpralatih [11], "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " CSI berpasangan yang direkam sendiri, dataset citra WPC beserta model guru YOLO26m-Pose dari repositori peneliti, lembar definisi huruf, aset tampilan arah kedua, formulir persetujuan, instrumen uji, dan kuesioner persepsi; perekaman dilakukan sendiri karena pengenalan isyarat SIBI dari CSI belum ditemukan dalam penelusuran (Subbab 2.10)."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.1 Perangkat keras penelitian",
+   "header": [
+    "No.",
+    "Nama",
+    "Spesifikasi",
+    "Jumlah",
+    "Keterangan"
+   ],
+   "rows": [
+    [
+     "1",
+     "Modul ESP32-S3",
+     "PSRAM 8 MB; 2,4 GHz 802.11b/g/n, kanal 20 MHz (56 *subcarrier*), 1T1R; varian yang direkomendasikan RuView [10]",
+     "2 unit",
+     "Node TX (sumber lalu lintas Wi-Fi) dan node RX (penerima CSI dan antarmuka)"
+    ],
+    [
+     "2",
+     "Layar modul",
+     "OLED 0,96 inci I2C (128×64) atau TFT 1,3 inci SPI (240×240) [PERLU DATA: model final]",
+     "1 unit",
+     "Tampilan huruf, baterai, kanal, mode kerja"
+    ],
+    [
+     "3",
+     "*Rotary encoder* EC11 dan tombol tekan",
+     "Putar 360 derajat, 20 detak per putaran, tombol terintegrasi; sakelar sesaat *pull-up* internal",
+     "1–2 unit",
+     "Navigasi menu, sensitivitas, tekan-untuk-bicara, reset"
+    ],
+    [
+     "4",
+     "Pengeras suara dengan DAC I2S",
+     "Mini 8 Ohm 3 W, penguat kelas D MAX98357A",
+     "1 set",
+     "Pemutaran suara TTS hasil sintesis server yang dialirkan ke modul (keputusan D3 pada Tabel 3.8); *speaker* ponsel sebagai cadangan"
+    ],
+    [
+     "5",
+     "Mikrofon I2S",
+     "INMP441, MEMS omnidireksional, SNR 61 dBA",
+     "1 unit",
+     "Pintu suara arah kedua"
+    ],
+    [
+     "6",
+     "Baterai Li-Po, BMS 1S, pengisi TP4056",
+     "Li-Po 3,7 V 2.500–3.000 mAh [PERLU DATA: kapasitas final berdasarkan uji arus]; proteksi; pengisi 1 A USB-C",
+     "1–2 set",
+     "Daya portabel, proteksi, dan pengisian"
+    ],
+    [
+     "7",
+     "Laptop",
+     "ASUS TUF Dash F15 FX516PR: i7-11370H, RTX 3070 Laptop 8 GB VRAM, RAM 16 GB",
+     "1 unit",
+     "Server Rust (penelan CSI, orkestrasi, ASR lokal cadangan, TTS lokal utama, dasbor); akuisisi jalur guru; pelatihan dua kepala; evaluasi"
+    ],
+    [
+     "8",
+     "Ponsel pintar",
+     "Poco F4 5G: Snapdragon 870, RAM 6 GB, Android",
+     "1 unit",
+     "Klien Tauri (tampilan teks dan representasi SIBI), mesin TTS *on-device* sebagai cadangan, *hotspot* cadangan"
+    ],
+    [
+     "9",
+     "*Access point*",
+     "*Router* Wi-Fi 2,4 GHz dengan internet [PERLU DATA: pilihan final]",
+     "1 unit",
+     "Jembatan jaringan dan penjangkar kanal, bukan penginderaan"
+    ],
+    [
+     "10",
+     "*Webcam*",
+     "Bawaan laptop",
+     "1 unit",
+     "Hanya untuk jalur guru"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Harga komponen dirangkum pada Tabel 3.2 sebagai kerangka daftar komponen (BOM) rencana; seluruh harga diisi dari survei pemasok sebelum gerbang G4 dan tidak ditebak lebih dahulu "
+    },
+    {
+     "text": "[PERLU DATA: harga satuan komponen dan sumber rujukan]",
+     "highlight": true
+    },
+    {
+     "text": "."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.2 Kerangka BOM rencana sepasang node lengkap",
+   "header": [
+    "No.",
+    "Komponen",
+    "Jumlah",
+    "Harga satuan (Rp)",
+    "Subtotal (Rp)",
+    "Sumber harga"
+   ],
+   "rows": [
+    [
+     "1",
+     "Modul ESP32-S3 (TX dan RX)",
+     "2 unit",
+     "[PERLU DATA]",
+     "[PERLU DATA]",
+     "[PERLU DATA]"
+    ],
+    [
+     "2",
+     "Layar modul final (OLED 0,96 inci atau TFT 1,3 inci)",
+     "1 unit",
+     "[PERLU DATA]",
+     "[PERLU DATA]",
+     "[PERLU DATA]"
+    ],
+    [
+     "3",
+     "*Rotary encoder* EC11 dan tombol PTT/reset",
+     "1–2 set",
+     "[PERLU DATA]",
+     "[PERLU DATA]",
+     "[PERLU DATA]"
+    ],
+    [
+     "4",
+     "Mikrofon I2S INMP441",
+     "1 unit",
+     "[PERLU DATA]",
+     "[PERLU DATA]",
+     "[PERLU DATA]"
+    ],
+    [
+     "5",
+     "DAC I2S MAX98357A dan *speaker* 8 Ohm 3 W",
+     "1 set",
+     "[PERLU DATA]",
+     "[PERLU DATA]",
+     "[PERLU DATA]"
+    ],
+    [
+     "6",
+     "Baterai Li-Po (kapasitas final), BMS 1S, TP4056, dan komponen pasif",
+     "1–2 set",
+     "[PERLU DATA]",
+     "[PERLU DATA]",
+     "[PERLU DATA]"
+    ],
+    [
+     "7",
+     "*Enclosure* cetak 3D serta kabel, *header*, dan PCB",
+     "2 set",
+     "[PERLU DATA]",
+     "[PERLU DATA]",
+     "[PERLU DATA]"
+    ],
+    [
+     "—",
+     "Total sepasang node lengkap (di luar laptop, ponsel, dan AP)",
+     "—",
+     "—",
+     "[PERLU DATA]",
+     "—"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Foto pada Gambar 3.2 memudahkan mengenali bentuk sembilan perangkat pada Tabel 3.1; webcam memakai bawaan laptop sehingga tidak difoto terpisah. Foto produk hanya menjadi pengenal bentuk, bukan acuan merek maupun spesifikasi, dan rujukan spesifikasinya tetap Tabel 3.1 "
+    },
+    {
+     "text": "[PERLU ILUSTRASI: foto dokumentasi sendiri setelah seluruh perangkat dibeli]",
+     "highlight": true
+    },
+    {
+     "text": "."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.2 Perangkat keras penelitian; huruf pada tiap foto mengikuti baris Tabel 3.1 (foto produk hanya ilustrasi pengenal bentuk sebelum pengadaan dan perakitan, bukan acuan merek)",
+   "png": "/home/z/my-project/download/sensesibi-v10/assets-v18/gambar-3.2.png"
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.3 Perangkat lunak penelitian",
+   "header": [
+    "No.",
+    "Nama",
+    "Fungsi dalam penelitian"
+   ],
+   "rows": [
+    [
+     "1",
+     "*Firmware* dan *server* RuView [10]",
+     "Menangkap CSI, mengirim UDP, kalibrasi ruang, segmentasi"
+    ],
+    [
+     "2",
+     "*Checkpoint* encoder CSI terpralatih `ruvnet/wifi-densepose-pretrained` beserta adapter LoRA ruangannya [11]",
+     "*Encoder* murid yang dibekukan pada baseline; kandidat adaptasi LoRA"
+    ],
+    [
+     "3",
+     "`scripts/collect-ground-truth.py` (diadaptasi)",
+     "Sinkron kamera-CSI; estimator memakai YOLO26m-Pose"
+    ],
+    [
+     "4",
+     "Model guru YOLO26m-Pose dan repositori alur kerja YOLO26 peneliti [12]",
+     "Ekstraksi *keypoint*; konversi *dataset*, pelatihan deterministik, pencatatan eksperimen (Subbab 3.7)"
+    ],
+    [
+     "5",
+     "Layanan GPU Kaggle",
+     "Pelatihan lanjutan guru dan pembanding adaptasi *encoder* jika GPU lokal tidak cukup"
+    ],
+    [
+     "6",
+     "Python dan PyTorch",
+     "Pelatihan dua kepala, LoRA, pelatihan lanjutan, evaluasi; kompatibel dengan *checkpoint* dan mendukung autograd"
+    ],
+    [
+     "7",
+     "ESP-DL dengan akselerasi ESP-NN (alternatif: TensorFlow Lite Micro) [23]",
+     "Menjalankan model terkuantisasi pada node RX"
+    ],
+    [
+     "8",
+     "faster-whisper [26]; MMS-TTS-ind [25]; layanan ASR awan [PERLU DATA: layanan final hasil uji banding]",
+     "ASR luring (faster-whisper); kandidat utama TTS Indonesia (MMS-TTS-ind); ASR utama saat daring"
+    ],
+    [
+     "9",
+     "Rust, Tokio, Axum, Leptos, Tauri",
+     "Server seluruhnya Rust, dasbor WASM, aplikasi klien ponsel"
+    ],
+    [
+     "10",
+     "Kokoro TTS ONNX dan ONNX Runtime [24]",
+     "Kokoro terverifikasi tanpa bahasa Indonesia (14 Nov. 2026), diuji ulang jika rilis berikutnya menyediakannya [PERLU KONFIRMASI: Tabel 3.8 #17]; ONNX Runtime menjalankan TTS *on-device* di ponsel"
+    ],
+    [
+     "11",
+     "Kamus label-teks dan teks-isyarat",
+     "Dikembangkan sendiri; kamus label-teks dimuat pada modul"
+    ]
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.5 Perancangan Sistem"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Gambar 3.3 memperlihatkan keseluruhan sistem: dua jalur operasional tanpa kamera dan satu jalur guru yang hanya aktif saat akuisisi serta pelatihan. Pada arah pertama, lalu lintas Wi-Fi node pemancar melintasi zona isyarat, gerak pengisyarat mengubah deret CSI yang ditangkap node penerima, dan model klasifikasi terkuantisasi yang berjalan langsung di modul menghasilkan label beserta skor keyakinan. Label dikirim via UDP ke server Rust, dipetakan menjadi teks Indonesia, tampil di layar modul dan aplikasi Tauri, lalu disintesis mesin TTS di server lokal; audionya dialirkan kembali ke modul dan diputar pada "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": " DAC I2S. Jika aliran audio tidak stabil atau server tidak tersedia, sintesis beralih ke mesin "
+    },
+    {
+     "text": "on-device",
+     "italics": true
+    },
+    {
+     "text": " pada ponsel dan peralihan itu dicatat. Dengan "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": " Pilihan 1 (Tabel 3.8), kepala regresi hanya supervisi tambahan saat pelatihan dan dilepas pada "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": " sehingga keluaran perangkat ialah label huruf beserta skor keyakinan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pada arah kedua, tombol tekan-untuk-bicara mengaktifkan mikrofon I2S node penerima; audio ditangkap lalu dialirkan ke server Rust, yang meneruskannya ke layanan ASR awan saat daring atau memprosesnya sendiri dengan faster-whisper. Teks hasil pengenalan dipetakan ke representasi SIBI dari aset modul dan tampil pada aplikasi Tauri dengan indikator opsional di layar modul. Saat internet terputus, kedua arah tetap berjalan karena ASR dan TTS beralih ke server lokal; pemrosesan audio di node penerima sebatas penangkapan dan pengaliran. Jalur guru memakai "
+    },
+    {
+     "text": "webcam",
+     "italics": true
+    },
+    {
+     "text": " dan YOLO26m-Pose untuk mengekstrak deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " sebagai supervisi pelatihan dan bukan bagian produk akhir."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.3 Arsitektur produk akhir tanpa kamera. Subgraf arah 1 = isyarat menjadi teks dan suara; subgraf arah 2 = ucapan menjadi representasi SIBI; subgraf jalur guru hanya aktif saat akuisisi dan pelatihan; garis putus-putus = jalur cadangan TTS on-device pada ponsel jika server tidak tersedia.",
+   "png": "/home/z/my-project/download/sensesibi-v10/assets-v18/gambar-3.3.png"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Topologinya menyatukan seluruh perangkat pada satu "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " dan satu kanal sehingga penangkapan CSI berjalan serentak dengan komunikasi data (Subbab 2.2). Node pemancar menyediakan lalu lintas Wi-Fi baku sebagai sumber bingkai CSI; node penerima mengirim bingkai, label, dan skor melalui UDP kepada server Rust sebagai telemetri riset, dengan ESP-NOW hanya fitur sinkronisasi opsional. Server lokal menjalankan server RuView, server Rust, faster-whisper sebagai ASR luring, serta mesin TTS dengan MMS-TTS-ind sebagai kandidat utama dan Kokoro jika suara Indonesia tersedia."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kedua modul dipasang setinggi dada dan saling mengapit zona isyarat; uji Delta-CSI memeriksa kesesuaiannya. Zona hanya ditempati satu pengisyarat per sesi, sistem tidak mengidentifikasi individu, dan jarak antarmodul (baku 1 meter) ditetapkan pada T0 lalu dicatat dalam metadata sesi (Tabel 3.8). Karena CSI peka terhadap perubahan ruang [10], [14], setiap sesi diawali kalibrasi ruang bawaan RuView selama kurang lebih empat menit dengan 600 bingkai dan 8 "
+    },
+    {
+     "text": "anchor",
+     "italics": true
+    },
+    {
+     "text": ". Posisi perabot, pendingin ruangan, serta orang yang lewat dicatat sebagai kovariat analisis."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Enclosure",
+     "italics": true
+    },
+    {
+     "text": " cetak tiga dimensi bahan PLA atau ABS menampung papan, baterai, BMS, TP4056, dan seluruh antarmuka node penerima: layar, pengeras suara, dan mikrofon di muka depan atau atas, "
+    },
+    {
+     "text": "rotary encoder",
+     "italics": true
+    },
+    {
+     "text": " dan tombol di samping, port USB-C di bawah; node pemancar dikemas serupa tanpa antarmuka. Pemetaan pin GPIO pada Tabel 3.4 dipilih agar tidak menabrak pin "
+    },
+    {
+     "text": "strapping",
+     "italics": true
+    },
+    {
+     "text": " (GPIO 0, 3, 45, 46) maupun kanal USB [8] dan diverifikasi ulang pada unit papan fisik saat T0, mencakup jalur USB, kanal ADC1, konflik periferal I2C/I2S/SPI, dan revisi papan "
+    },
+    {
+     "text": "[PERLU DATA: revisi papan final]",
+     "highlight": true
+    },
+    {
+     "text": ". Rantai dayanya tersusun atas baterai, BMS 1S, TP4056, dan regulator 3,3 volt papan; tegangan baterai diukur lewat pembagi tegangan. Kecukupan arus puncak saat Wi-Fi dan "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": " aktif serta keamanan pengisian sambil beroperasi diverifikasi pada uji bangku T0/G3 "
+    },
+    {
+     "text": "[PERLU DATA: profil arus puncak, regulasi beban saat pengisian, dan kapasitas baterai final]",
+     "highlight": true
+    },
+    {
+     "text": ". "
+    },
+    {
+     "text": "[PERLU DATA: berkas model enclosure final]",
+     "highlight": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "[PERLU ILUSTRASI: foto atau render enclosure dan tata letak komponennya]",
+     "highlight": true
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Skema tiga dimensi pada Gambar 3.4 merangkum penempatan seluruh komponen node penerima di dalam enclosure; pemetaan pinnya mengikuti Tabel 3.4 dan dimensinya difinalkan setelah uji T0."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.4 Skema penempatan komponen node penerima di dalam enclosure (ilustrasi tiga dimensi, tidak berskala)",
+   "png": "/home/z/my-project/download/sensesibi-v10/assets-v18/gambar-3.4.png"
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.4 Matriks pinout wiring GPIO node penerima",
+   "header": [
+    "No.",
+    "Subsistem",
+    "Pin modul",
+    "GPIO ESP32-S3",
+    "Fungsi"
+   ],
+   "rows": [
+    [
+     "1",
+     "Layar I2C (OLED)",
+     "SDA / SCL",
+     "GPIO 8 / GPIO 9",
+     "Jalur data dan *clock* bus I2C"
+    ],
+    [
+     "2",
+     "*Rotary encoder* EC11",
+     "CLK (A) / DT (B) / SW",
+     "GPIO 10 / GPIO 11 / GPIO 12",
+     "Detak, arah putaran, tombol"
+    ],
+    [
+     "3",
+     "Tombol tekan",
+     "OUT",
+     "GPIO 13",
+     "Tekan-untuk-bicara dan reset; *pull-up* internal"
+    ],
+    [
+     "4",
+     "Mikrofon INMP441",
+     "SCK / WS / SD",
+     "GPIO 14 / GPIO 15 / GPIO 16",
+     "*Clock*, *word select*, data I2S penerima"
+    ],
+    [
+     "5",
+     "DAC MAX98357A",
+     "BCLK / LRC / DIN",
+     "GPIO 17 / GPIO 18 / GPIO 21",
+     "*Clock*, penanda kiri-kanan, data I2S pengirim"
+    ],
+    [
+     "6",
+     "Pemantau tegangan baterai",
+     "ADC",
+     "GPIO 1 (ADC1_CH0)",
+     "Keluaran pembagi tegangan baterai"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Seluruh perangkat lunak server dan klien ditulis dalam Rust (Subbab 2.8): pendengar UDP bingkai CSI berjalan di atas Tokio, Axum menyediakan HTTP dan WebSocket bagi dasbor Leptos WASM, dan aplikasi Tauri pada ponsel menjadi klien antarmuka dua arah. Target "
+    },
+    {
+     "text": "parsing",
+     "italics": true
+    },
+    {
+     "text": " bingkai di bawah 0,2 ms dan memori server di bawah 40 MB baru diukur pada G3 (Subbab 3.8.3). Mesin sintesis utamanya berjalan di server lokal dengan MMS-TTS-ind sebagai kandidat utama operasional [25], setelah verifikasi 14 November 2026 membuktikan Kokoro-82M v1.0 tanpa suara bahasa Indonesia [24]; Kokoro diuji ulang jika rilis berikutnya menyediakannya "
+    },
+    {
+     "text": "[PERLU KONFIRMASI: Tabel 3.8 #17]",
+     "highlight": true
+    },
+    {
+     "text": ". Jalur cadangan "
+    },
+    {
+     "text": "on-device",
+     "italics": true
+    },
+    {
+     "text": " berjalan di ponsel lewat ONNX Runtime di dalam Tauri. Target latensinya didefinisikan sebagai waktu menuju audio pertama ("
+    },
+    {
+     "text": "time-to-first-audio",
+     "italics": true
+    },
+    {
+     "text": ", TTFA) di bawah 100 ms pada frasa uji paling banyak lima kata. Pelaporannya menurut persentil p50 dan p95 pada lingkungan uji terdokumentasi "
+    },
+    {
+     "text": "[PERLU DATA: konfigurasi CPU/GPU, runtime, presisi model, dan opsi pre-cache audio huruf tunggal]",
+     "highlight": true
+    },
+    {
+     "text": ", dan durasi sintesis keseluruhan dilaporkan terpisah."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.6 Protokol Perekaman Dataset, Partisipan, dan Etika"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Partisipan terdiri atas 3–4 pengisyarat kompeten, sedikitnya satu validator penutur tunarungu, serta 3–5 pengguna uji dari kelompok sasaran, yaitu guru, siswa tunarungu, dan wali murid. Agar skema lintas sesi bisa dijalankan, setiap pengisyarat direkam dalam sedikitnya dua sesi. Kurasi isyarat mengacu pada "
+    },
+    {
+     "text": "Kamus SIBI",
+     "italics": true
+    },
+    {
+     "text": " [3]: lembar definisi memuat konfigurasi tangan-jari serta lintasan J dan Z, lalu validator menyetujuinya. Pasangan huruf paling mirip ditetapkan sebagai bahan G1, sedangkan kosakata tampilan arah kedua meliputi 26 huruf dan 9 angka [3] serta kata terpilih. Perekaman memakai "
+    },
+    {
+     "text": "elisitasi",
+     "italics": true
+    },
+    {
+     "text": " terisolasi, satu huruf per segmen dengan jeda antarrepetisi: huruf statis diperagakan sebagai pose yang ditahan sejenak, J dan Z sebagai lintasan gerak. Prosedur perekaman setiap sesi adalah sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Menyiapkan seluruh peralatan yang dipakai."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Memasang kedua modul, pemancar dan penerima, lalu menghubungkan seluruh perangkat ke "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " pada satu kanal."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Menjalankan kalibrasi ruang seraya mencatat metadata sesi: tanggal, ruang, kode pengisyarat, posisi modul, dan kondisi latar."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Menjalankan "
+    },
+    {
+     "text": "scripts/collect-ground-truth.py",
+     "code": true
+    },
+    {
+     "text": " dengan sumber penanda waktu tunggal supaya perekaman CSI dan "
+    },
+    {
+     "text": "webcam",
+     "italics": true
+    },
+    {
+     "text": " berjalan sinkron. Kualitas sinkronisasi diverifikasi ulang lewat uji kejadian di awal sesi, misalnya satu ketukan tangan yang terbaca kedua sensor "
+    },
+    {
+     "text": "[PERLU DATA: sumber clock final, resolusi waktu, toleransi sinkronisasi, metode penyelarasan dan pensampelan ulang keypoint ke pusat jendela, serta penanganan bingkai hilang]",
+     "highlight": true
+    },
+    {
+     "text": "."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "5.",
+   "runs": [
+    {
+     "text": "Memunculkan kartu pemandu huruf target dengan urutan huruf yang diacak di dalam setiap blok, merekam satu repetisi, memberi jeda, lalu mengulanginya sampai setiap huruf mencapai kurang lebih 30 repetisi; jumlah repetisi yang benar-benar terpakai per kelas dan per sesi dicatat setelah pembuangan segmen bermasalah."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "6.",
+   "runs": [
+    {
+     "text": "Membuang segmen yang tangan tidak terdeteksi model guru, yang mengalami "
+    },
+    {
+     "text": "jitter",
+     "italics": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " ekstrem, atau yang terpotong, lalu mencatat tingkat segmen terbuang dan skor kualitas anotasi tiap segmen. Kualitas deteksi "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " pada gerakan dinamis J dan Z dievaluasi khusus (laju deteksi berhasil, "
+    },
+    {
+     "text": "jitter",
+     "italics": true
+    },
+    {
+     "text": ", bingkai hilang, dan validitas lintasan) karena performa exp11_huruf24 hanya terukur pada 24 pose statis "
+    },
+    {
+     "text": "[PERLU DATA: ambang batas jitter dan laju deteksi minimum]",
+     "highlight": true
+    },
+    {
+     "text": "."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "7.",
+   "runs": [
+    {
+     "text": "Meminta validator mengambil sampel segmen untuk memeriksa kebenaran bentuk isyarat "
+    },
+    {
+     "text": "[PERLU DATA: proporsi sampel dan jumlah penilai]",
+     "highlight": true
+    },
+    {
+     "text": "; label guru berstatus "
+    },
+    {
+     "text": "pseudo-label",
+     "italics": true
+    },
+    {
+     "text": " sampai pemeriksaan ini selesai."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Beban perekaman dihitung agar protokolnya realistis dan etis. Dengan 26 huruf dan kurang lebih 30 repetisi, satu sesi memuat sekitar 780 repetisi; pada asumsi lima detik per repetisi, perekaman murni sekitar 65 menit, dan dengan jeda blok, kalibrasi, serta persiapan menjadi sekitar 97 menit. Sesi dibagi blok sepuluh menit dengan jeda wajib sekurang-kurangnya tiga menit, paling banyak dua sesi per hari per pengisyarat, dan pengisyarat boleh berhenti kapan saja tanpa konsekuensi; kelelahan diamati dari penurunan mutu segmen pada blok akhir dan dilaporkan bersama tingkat segmen terbuang."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Baru setelah persetujuan etik dari "
+    },
+    {
+     "text": "[PERLU DATA: lembaga atau komisi pemberi persetujuan etik]",
+     "highlight": true
+    },
+    {
+     "text": " serta persetujuan tertulis setiap partisipan diperoleh, perekaman dimulai; partisipan berhak mengundurkan diri kapan saja. Formulir persetujuan menerangkan bahwa kamera hanya menyala pada sesi akuisisi jalur guru, produk akhir bebas kamera, dan mode privasi RuView aktif. Video semata-mata dipakai untuk verifikasi batas segmen, penyaringan kualitas, dan diagnosis; penyimpanannya terbatas, tidak dipublikasikan, dan dihapus permanen setelah verifikasi serta ekstraksi selesai "
+    },
+    {
+     "text": "[PERLU DATA: durasi retensi, batas kontrol akses berkas, dan prosedur penghapusan]",
+     "highlight": true
+    },
+    {
+     "text": ". Formulir persetujuan disajikan dalam format yang mudah diakses dan dipahami partisipan tunarungu; jika ada partisipan di bawah umur, persetujuan orang tua atau wali beserta "
+    },
+    {
+     "text": "assent",
+     "italics": true
+    },
+    {
+     "text": " anak wajib disertakan, atau partisipan dibatasi pada kelompok dewasa. Potensi risiko identifikasi ulang dari metadata, pola kinematika, dan suara diakui secara terbuka tanpa klaim anonimitas mutlak. Karena audio arah kedua dikirim ke layanan awan, tujuannya diungkapkan pada formulir dan kebijakan penyimpanan layanan diperiksa sebelum dipakai. "
+    },
+    {
+     "text": "Dataset",
+     "italics": true
+    },
+    {
+     "text": " yang dipublikasikan hanya memuat CSI, label, "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": ", dan metadata tanpa identitas."
+    }
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.7 Pengolahan Sinyal, Pelatihan Dua Kepala, dan Deployment"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Bingkai CSI dibatasi "
+    },
+    {
+     "text": "firmware",
+     "italics": true
+    },
+    {
+     "text": " RuView paling sering setiap 20 ms atau 50 bingkai per detik [10]; laju aktualnya diukur pada T0, dan jika terukur lebih rendah, pita Doppler yang dianalisis dipangkas hingga setengah laju aktual. Deret CSI dipotong menjadi segmen huruf dengan segmentasi energi gerak memakai Delta-CSI, yaitu rata-rata besar perubahan koefisien kanal kompleks antarbingkai pada seluruh "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " valid n ∈ N"
+    },
+    {
+     "text": "valid",
+     "sub": true
+    },
+    {
+     "text": " (himpunan "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " data efektif hasil audit T0; Subbab 2.2):"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "d( t ) = ( 1 / |N"
+      },
+      {
+       "text": "valid",
+       "sub": true
+      },
+      {
+       "text": "| ) · Σ"
+      },
+      {
+       "text": "n∈Nvalid",
+       "sub": true
+      },
+      {
+       "text": " | h"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": "(t) − h"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": "( t − 1 ) |"
+      }
+     ],
+     "num": "3.1"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Segmentasi memisahkan dua fase: deteksi "
+    },
+    {
+     "text": "onset",
+     "italics": true
+    },
+    {
+     "text": " gerak dari Delta-CSI (d(t) melampaui ambang τ), lalu untuk 24 huruf statis jendela penahanan pose ("
+    },
+    {
+     "text": "pose-hold",
+     "italics": true
+    },
+    {
+     "text": ") selama durasi observasi tetap untuk klasifikasi statis. Untuk J dan Z digunakan jendela lintasan penuh dari "
+    },
+    {
+     "text": "onset",
+     "italics": true
+    },
+    {
+     "text": " sampai "
+    },
+    {
+     "text": "offset",
+     "italics": true
+    },
+    {
+     "text": " gerak; seluruh ambang dan durasi ditetapkan dari data validasi, bukan dari data uji (Tabel 3.8) "
+    },
+    {
+     "text": "[PERLU VALIDASI: ambang onset, durasi pose-hold, dan offset]",
+     "highlight": true
+    },
+    {
+     "text": ". Sebagai pembanding sensitivitas pada uji Delta-CSI (Subbab 3.8.1), varian berbasis amplitudo saja juga dihitung dan dilaporkan berdampingan:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "d"
+      },
+      {
+       "text": "|H|",
+       "sub": true
+      },
+      {
+       "text": "( t ) = ( 1 / |N"
+      },
+      {
+       "text": "valid",
+       "sub": true
+      },
+      {
+       "text": "| ) · Σ"
+      },
+      {
+       "text": "n∈Nvalid",
+       "sub": true
+      },
+      {
+       "text": " | |h"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": "(t)| − |h"
+      },
+      {
+       "text": "n",
+       "sub": true
+      },
+      {
+       "text": "( t − 1 )| |"
+      }
+     ],
+     "num": null
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Bentuk masukan "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " harus disesuaikan sebelum dipakai (Subbab 2.3): masukan kartu model delapan fitur turunan pada laju 1 Hz [11] berhadapan dengan N"
+    },
+    {
+     "text": "valid",
+     "sub": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": " hingga 50 bingkai per detik [9], [10]. Tiga rute karenanya disiapkan. Jalur A menghitung ulang delapan fitur turunan RuView, Jalur B1/B2 melatih adapter konvolusi satu dimensi (rekonstruksi atau tugas), dan Pembanding C memakai spektrum CSI tanpa penyempitan delapan fitur; keputusan rutenya diambil pada G0b "
+    },
+    {
+     "text": "[PERLU VALIDASI: bentuk masukan checkpoint dan rancangan adapter]",
+     "highlight": true
+    },
+    {
+     "text": ". Alur fitur dibakukan pada tiga tingkat: bingkai CSI (N"
+    },
+    {
+     "text": "valid",
+     "sub": true
+    },
+    {
+     "text": " "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": ", hingga 50 bingkai per detik), jendela fitur sepanjang W = 1 detik yang diringkas menjadi satu vektor masukan, dan langkah "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": ", yaitu satu keluaran "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " per jendela. "
+    },
+    {
+     "text": "Encoder",
+     "italics": true
+    },
+    {
+     "text": " diterapkan per jendela, bukan per bingkai, sesuai kontrak laju 1 Hz kartu model [11]."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Resolusi temporal dijaga dengan jendela bergulir sepanjang W = 1 detik berlompatan H = 0,25 detik (usulan; dikalibrasi pada T2). Empat langkah per detik itu adalah laju awal jendela dengan tumpang-tindih 75%, bukan empat observasi independen; satu segmen huruf menghasilkan satu sampai sekitar tiga belas langkah "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " tergantung durasinya. Untuk J dan Z, kelas tidak dibaca dari satu jendela: barisan langkah diproses modul temporal secara berurutan dan klasifikasinya diambil dari ringkasan barisan tersebut, sehingga lintasan gerak tetap terbaca tanpa melanggar kontrak masukan "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": ". Konfigurasi (W, H) yang lebih pendek khusus J dan Z dibandingkan pada data pilot "
+    },
+    {
+     "text": "[PERLU VALIDASI: finalisasi W, H, dan T dari data pilot]",
+     "highlight": true
+    },
+    {
+     "text": ". Kandidat modul temporal ialah 1D-CNN ringan yang memelihara urutan waktu per langkah; agregasi statistik hanya kandidat bagi jalur klasifikasi, dan pilihan di antara keduanya diambil dari hasil ablasi pada data yang sama (Subbab 2.4)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kompatibilitas representasi diuji pada gerbang G0b sebagai eksperimen sungguh-sungguh, bukan asumsi. G0b dinilai setelah G0 atas data pilot satu pengisyarat satu sesi (sekitar 97 menit) yang direkam lebih dulu atau diambil dari sesi pertama T2; statusnya penyaringan awal, bukan bukti final. Alat ujinya "
+    },
+    {
+     "text": "probe",
+     "italics": true
+    },
+    {
+     "text": " linear di atas "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " beku: "
+    },
+    {
+     "text": "probe",
+     "italics": true
+    },
+    {
+     "text": " 24 huruf statis pada skema blok temporal, "
+    },
+    {
+     "text": "probe",
+     "italics": true
+    },
+    {
+     "text": " sekuensial atas gabungan langkah tiap segmen, dan "
+    },
+    {
+     "text": "probe",
+     "italics": true
+    },
+    {
+     "text": " biner J terhadap Z. Dua kontrol menyertainya, yaitu "
+    },
+    {
+     "text": "probe",
+     "italics": true
+    },
+    {
+     "text": " pada fitur mentah ringkas dan uji permutasi label pada unit blok repetisi (p_perm < 0,05, skor label asli melampaui distribusi nol permutasi), agar hasilnya tidak menipu. Ambang usulannya: F1 makro sekurang-kurangnya 0,30 dan tiga kali peluang acak, "
+    },
+    {
+     "text": "probe",
+     "italics": true
+    },
+    {
+     "text": " biner J terhadap Z sekurang-kurangnya 70%, seluruhnya difinalkan bersama pembimbing sebelum gerbang dinilai. Jalur fitur turunan dipakai jika lulus; jika gagal tetapi adapter lulus, adapter yang dipilih; jika keduanya gagal, Pembanding C dijalankan berdampingan dengan skema adaptasi LoRA dan pelatihan lanjutan (Subbab 2.3), dan hasilnya dilaporkan sebagai temuan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Dataset",
+     "italics": true
+    },
+    {
+     "text": " murid terbentuk dengan menyelaraskan tiga deret menurut penanda waktu: jendela CSI hasil segmentasi, label huruf dari kartu pemandu protokol, dan deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " guru pemakai model juara pra-penelitian dari repositori peneliti [12]. Keluaran kelas guru hanya salinan pembanding untuk penyaringan kualitas, bukan label kebenaran; ketidakcocokannya dengan label protokol dicatat sebagai temuan kualitas anotasi dan dilaporkan bersama tingkat segmen terbuang. Jika rekaman baru memperlihatkan pergeseran domain yang menurunkan kualitas deteksi, guru menjalani pelatihan lanjutan di layanan GPU Kaggle dengan alur teruji sebelum labelnya dipakai. Seluruh pasangan direkam dalam struktur "
+    },
+    {
+     "text": "dataset",
+     "italics": true
+    },
+    {
+     "text": " berpasangan Subbab 2.12 beserta mask visibilitas, metadata sesi, dan skor kualitas anotasi."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " guru disampel ulang ke pusat tiap jendela fitur sehingga tiap langkah "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": " memiliki satu target 21 × 2; keluaran regresi model didefinisikan pada laju yang sama. Metrik galat lintasan J dan Z dilaporkan pada resolusi langkah model sebagai metrik utama; interpolasi prediksi ke laju kamera hanya pembanding sekunder karena tidak menambah informasi temporal yang belum teramati, dan metodenya dinyatakan pada laporan. Panjang T ditetapkan 16 langkah per segmen (usulan; difinalkan dari distribusi durasi segmen pada data pilot T2): pada lompatan 0,25 detik, jarak jendela awal ke akhir 3,75 detik dan cakupan data mentah gabungannya sampai sekitar 4,75 detik. Segmen lebih pendek diberi "
+    },
+    {
+     "text": "padding",
+     "italics": true
+    },
+    {
+     "text": " nol dengan mask valid m"
+    },
+    {
+     "text": "valid",
+     "sup": true
+    },
+    {
+     "text": " (Persamaan 2.13a), dan kerugian regresi dinormalisasi oleh jumlah langkah valid. Resampling ke panjang tetap tidak dipakai untuk pelatihan J dan Z karena menyeragamkan durasi dan menghapus petunjuk kecepatan yang justru membedakan kedua huruf itu."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Enam skema pada Tabel 3.5 mengukur kinerja. Pembagian latih-validasi-uji dilakukan pada level rekaman mentah, sesi, atau blok repetisi sebelum jendela bergulir dibentuk, disertai jeda pembersih ("
+    },
+    {
+     "text": "purge gap",
+     "italics": true
+    },
+    {
+     "text": ") sekurang-kurangnya selebar W antarbagian, sehingga tumpang-tindih 75% tidak membocorkan data latih ke data uji. Data validasi hanya berasal dari data latih, sehingga data uji tidak pernah dipakai untuk memilih "
+    },
+    {
+     "text": "subcarrier",
+     "italics": true
+    },
+    {
+     "text": ", menormalkan fitur, menetapkan ambang, ataupun menala bobot kerugian (Tabel 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.5 Skema pembagian data",
+   "header": [
+    "No.",
+    "Skema",
+    "Data latih",
+    "Data uji",
+    "Aspek yang diukur"
+   ],
+   "rows": [
+    [
+     "1",
+     "Dalam sesi (blok temporal)",
+     "Blok awal satu sesi",
+     "Blok akhir sesi yang sama",
+     "Separabilitas orang, ruang, sesi sama"
+    ],
+    [
+     "2",
+     "Lintas sesi",
+     "Sebagian sesi pengisyarat di satu ruang",
+     "Sesi lain, ruang sama",
+     "Ketahanan antarsesi"
+    ],
+    [
+     "3",
+     "Lintas partisipan (*leave-one-subject-out*)",
+     "Semua pengisyarat kecuali satu",
+     "Pengisyarat yang ditinggalkan, bergiliran",
+     "Ketahanan pergantian orang"
+    ],
+    [
+     "4",
+     "Lintas ruang (*leave-one-room-out*)",
+     "Semua ruang kecuali satu",
+     "Ruang yang ditinggalkan, bergiliran",
+     "Ketahanan pergantian ruang"
+    ],
+    [
+     "5",
+     "Pengguna baru",
+     "Seluruh pengisyarat",
+     "Satu pengguna baru tanpa pelatihan ulang",
+     "Kesiapan orang baru"
+    ],
+    [
+     "6",
+     "Lintas posisi",
+     "Posisi berdiri (atau sebaliknya)",
+     "Posisi duduk",
+     "Ketahanan pergeseran posisi"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Pelatihan berjalan di komputer dengan Python dan PyTorch yang kompatibel dengan "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " serta mendukung autograd dan pengoptimal; layanan GPU Kaggle dipakai jika GPU lokal tidak cukup. Baselinenya eksplisit: "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": " dimuat lalu dibekukan, geometri "
+    },
+    {
+     "text": "embedding",
+     "italics": true
+    },
+    {
+     "text": "-nya diverifikasi lewat uji triplet kecil, lalu kedua kepala beserta modul temporal dilatih serentak dengan kerugian gabungan Persamaan 2.14 dan 2.15 memakai seed tetap dan "
+    },
+    {
+     "text": "early stopping",
+     "italics": true
+    },
+    {
+     "text": " pada data validasi. Ablasi berjalan pada data dan seed yang sama: kepala klasifikasi saja, multitugas penuh, variasi bobot λ"
+    },
+    {
+     "text": "reg",
+     "sub": true
+    },
+    {
+     "text": ", dan Pembanding C; manfaat supervisi "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " dibaca dari selisihnya, termasuk jika nihil. Adaptasi LoRA (Persamaan 2.7) [17] dan pelatihan lanjutan dijalankan pada pembagian yang sama jika waktu dan data mencukupi, dan seluruh hasilnya dilaporkan berdampingan."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Keluaran klasifikator dilengkapi skor keyakinan dan mekanisme penolakan [18]. Segmen di bawah ambang berujung status penolakan pada kedua arah: "
+    },
+    {
+     "text": "speaker",
+     "italics": true
+    },
+    {
+     "text": " tidak mengucapkan apa pun dan layar memunculkan pesan isyarat tidak dikenali. Menolak lebih aman daripada menebak kelas yang salah; ambangnya ditetapkan dari data validasi, dan pelaporannya mencakup "
+    },
+    {
+     "text": "accepted coverage",
+     "italics": true
+    },
+    {
+     "text": ", akurasi pada segmen diterima, akurasi keseluruhan, serta laju terima-salah dan tolak-salah yang diperiksa lewat uji operasional serta penilaian validator (Subbab 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Setelah terpilih, model "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": " disusun menurut Pilihan 1 sebagai rancangan utama naskah ini: "
+    },
+    {
+     "text": "encoder",
+     "italics": true
+    },
+    {
+     "text": ", adapter (jika dipakai), modul temporal, dan kepala klasifikasi digabung menjadi satu "
+    },
+    {
+     "text": "graph",
+     "italics": true
+    },
+    {
+     "text": " inferensi lalu dikuantisasi; kepala regresi dilepas setelah pelatihan karena perannya supervisi tambahan. Keputusan finalnya menunggu hasil ablasi dan konfirmasi (Tabel 3.8 #19) "
+    },
+    {
+     "text": "[PERLU DATA: keputusan deployment final]",
+     "highlight": true
+    },
+    {
+     "text": ". Kepala regresi ikut dijalankan pada "
+    },
+    {
+     "text": "deployment",
+     "italics": true
+    },
+    {
+     "text": " (Pilihan 2) hanya jika keputusan itu menyatakannya, dengan tambahan biaya memori, komputasi, dan kuantisasi yang diukur serta dilaporkan. Skema kuantisasinya affine 8-bit [23]: nilai x dipetakan ke bilangan bulat q lewat skala s dan titik nol z"
+    },
+    {
+     "text": "0",
+     "sub": true
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "q = round( x / s ) + z"
+      },
+      {
+       "text": "0",
+       "sub": true
+      },
+      {
+       "text": ", dengan s = ( x"
+      },
+      {
+       "text": "maks",
+       "sub": true
+      },
+      {
+       "text": " − x"
+      },
+      {
+       "text": "min",
+       "sub": true
+      },
+      {
+       "text": " ) / 255"
+      }
+     ],
+     "num": "3.2"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan parameter s dan z"
+    },
+    {
+     "text": "0",
+     "sub": true
+    },
+    {
+     "text": " dihitung dari data kalibrasi; varian float16, int8, dan int4 dievaluasi sesuai dukungan operator "
+    },
+    {
+     "text": "runtime",
+     "italics": true
+    },
+    {
+     "text": ". Jalur ekspornya bertahap: format bobot "
+    },
+    {
+     "text": "checkpoint",
+     "italics": true
+    },
+    {
+     "text": " diperiksa lebih dulu, lalu operator BatchNorm dan GELU diverifikasi pada "
+    },
+    {
+     "text": "runtime",
+     "italics": true
+    },
+    {
+     "text": " kandidat di ESP32-S3, baik lewat ESP-DL dengan akselerasi ESP-NN maupun TensorFlow Lite Micro [23]; klaim dukungan operator tidak dibuat sebelum terverifikasi "
+    },
+    {
+     "text": "[PERLU VALIDASI: dukungan operator runtime tepi]",
+     "highlight": true
+    },
+    {
+     "text": ". Radio tetap terikat satu kanal bersama "
+    },
+    {
+     "text": "access point",
+     "italics": true
+    },
+    {
+     "text": " dengan "
+    },
+    {
+     "text": "power save",
+     "italics": true
+    },
+    {
+     "text": " dimatikan [10]. Alur inferensinya tampak pada Gambar 3.5. Waktu inferensi per segmen, pemakaian memori, serta pengaruhnya pada laju pemrosesan diukur lalu dilaporkan; jika model terbukti terlalu berat, klasifikasi pindah ke server menurut jalur cadangan (Subbab 3.11)."
+    }
+   ]
+  },
+  {
+   "t": "figure",
+   "caption": "Gambar 3.5 Inferensi langsung pada ESP32-S3 menurut Pilihan 1 (klasifikator saja; aktivasi kepala regresi menunggu keputusan Tabel 3.8); seluruh waktunya diukur, bukan dijanjikan",
+   "png": "/home/z/my-project/download/sensesibi-v10/assets-v18/gambar-3.5.png"
+  },
+  {
+   "t": "h2",
+   "text": "3.8 Skenario Pengujian dan Metrik Evaluasi"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "G0 berdiri di atas uji Delta-CSI dan koeksistensi, G1 di atas uji model pada Subbab 3.8.2, G2 di atas konsultasi tiga pilar, G3 di atas uji operasional dan jalur ucapan, serta G4 di atas uji kegunaan, penilaian validator, dan analisis biaya. Cakupan kamus melengkapi analisis tanpa menjadi syarat gerbang, dan seluruh hasil dilaporkan sebagai bukti awal pada populasi terbatas sesuai Batasan no. 11 (Subbab 1.4)."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.1 Uji Delta-CSI dan Koeksistensi"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Uji Delta-CSI menjawab satu pertanyaan: apakah gerak tubuh menghasilkan perubahan CSI yang terpisah jelas dari kondisi tanpa gerak (ukuran keterpisahannya pada Tabel 3.8). Prosedurnya sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Memasang kedua modul pada posisi awal sehingga mengapit zona isyarat."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Merekam CSI dalam tiga kondisi (ruang kosong, pengisyarat diam, dan pengisyarat bergerak) serta beberapa konfigurasi tangan statis, orientasi telapak berbeda, dan lintasan J dan Z sebagai rintisan separabilitas."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Menjalankan modul penerima dengan CSI, koneksi "
+    },
+    {
+     "text": "station",
+     "italics": true
+    },
+    {
+     "text": ", dan UDP secara serentak, termasuk saat "
+    },
+    {
+     "text": "streaming",
+     "italics": true
+    },
+    {
+     "text": " audio, serta mencatat laju CSI aktual dan paket yang hilang."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Membandingkan pola antarkondisi, lalu mencatat dan menganalisis hasilnya sebagai bahan G0."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.2 Uji Klasifikasi, Regresi, dan Ablasi"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Keenam skema Tabel 3.5 diuji dengan metrik Subbab 2.9, selalu dibandingkan terhadap peluang acak sekitar 3,8% untuk 26 kelas; angka acak itu dihitung ulang jika cakupan dipangkas. Kelayakan ilmiah, yaitu apakah sinyal memuat informasi kelas, dibedakan dari kebergunaan operasional, yaitu apakah mekanisme penolakan menghasilkan alat yang bisa dipakai. Akurasi dilaporkan dalam dua versi (tanpa penolakan pada seluruh segmen uji, dan dengan penolakan pada segmen yang diterima) bersama "
+    },
+    {
+     "text": "accepted coverage",
+     "italics": true
+    },
+    {
+     "text": ", akurasi pada segmen diterima, akurasi keseluruhan, serta laju terima-salah dan tolak-salah. "
+    },
+    {
+     "text": "Recall",
+     "italics": true
+    },
+    {
+     "text": " tiap kelas dilaporkan, dengan "
+    },
+    {
+     "text": "recall",
+     "italics": true
+    },
+    {
+     "text": " J dan Z terpisah beserta "
+    },
+    {
+     "text": "confusion",
+     "italics": true
+    },
+    {
+     "text": " terhadap huruf paling mirip. Kinerja kepala regresi dilaporkan dengan MPJPE, NME, PCK@α, dan galat per "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " (Subbab 2.9), dirinci untuk pasangan huruf paling mirip serta lintasan J dan Z. Pembanding ablasi dilaporkan berdampingan: kepala klasifikasi saja, multitugas penuh, variasi bobot λ_reg, dan Pembanding C; manfaat supervisi "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " dinyatakan dari selisihnya, termasuk jika manfaatnya nihil."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.3 Uji Operasional"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tiga hal diukur pada uji operasional: deteksi palsu per jam tanpa peragaan, latensi ujung ke ujung tiap arah, dan konsumsi arus modul. Prosedurnya sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Menjalankan purwarupa di ruang yang sudah terkalibrasi."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Merekam kondisi tanpa peragaan, termasuk ketika orang lewat dan kipas menyala, lalu mencatat isyarat yang terdeteksi."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Meminta pengisyarat memperagakan isyarat target, lalu mencatat waktu selesainya isyarat dan terdengarnya suara; pada arah kedua, mengucapkan frasa uji dan mencatat waktu representasi tampil."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Mengukur arus modul pada beberapa kondisi kerja, kemudian menghitung estimasi ketahanan baterai."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "5.",
+   "runs": [
+    {
+     "text": "Menghitung biaya purwarupa dari Tabel 3.2 (BOM) serta perkiraan biaya layanan ucapan per jam pemakaian."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "6.",
+   "runs": [
+    {
+     "text": "Menganalisis deteksi palsu, latensi pada kedua arah, dan ketahanan baterai terhadap indikator layak yang ditetapkan kemudian (Tabel 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tiga perhitungan penunjang dirumuskan lebih dulu agar hasilnya bisa diperiksa ulang. Latensi tiap arah ialah penjumlahan waktu tahapnya:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "T"
+      },
+      {
+       "text": "1",
+       "sub": true
+      },
+      {
+       "text": " = t"
+      },
+      {
+       "text": "CSI-buf",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "segmentasi",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "inferensi",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "telemetri",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "pemetaan",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "TTS",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "pengaliran-audio",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "pemutaran",
+       "sub": true
+      }
+     ],
+     "num": "3.3a"
+    },
+    {
+     "runs": [
+      {
+       "text": "T"
+      },
+      {
+       "text": "2",
+       "sub": true
+      },
+      {
+       "text": " = t"
+      },
+      {
+       "text": "penangkapan",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "pengunggahan-audio",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "ASR",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "pemetaan-kamus",
+       "sub": true
+      },
+      {
+       "text": " + t"
+      },
+      {
+       "text": "penampilan",
+       "sub": true
+      }
+     ],
+     "num": "3.3b"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan T"
+    },
+    {
+     "text": "1",
+     "sub": true
+    },
+    {
+     "text": " latensi arah pertama (isyarat menjadi teks dan suara) dan T"
+    },
+    {
+     "text": "2",
+     "sub": true
+    },
+    {
+     "text": " latensi arah kedua (ucapan menjadi representasi isyarat); keduanya dilaporkan menurut persentil p50 dan p95 pada jalur daring dan luring, dan anggaran per tahap serta ambang totalnya diuji pada G3 (Tabel 3.6). Ketahanan baterai diestimasi dari kapasitas baterai C"
+    },
+    {
+     "text": "baterai",
+     "sub": true
+    },
+    {
+     "text": " dan arus rata-rata terukur I"
+    },
+    {
+     "text": "rata",
+     "sub": true
+    },
+    {
+     "text": ":"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "T"
+      },
+      {
+       "text": "baterai",
+       "sub": true
+      },
+      {
+       "text": " ≈ 0,8 · C"
+      },
+      {
+       "text": "baterai",
+       "sub": true
+      },
+      {
+       "text": " / I"
+      },
+      {
+       "text": "rata",
+       "sub": true
+      }
+     ],
+     "num": "3.4"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Faktor 0,8 menampung efisiensi konverter dan penuaan baterai; sebagai ilustrasi, baterai 2.500 mAh pada arus rata-rata 250 mA bertahan kira-kira delapan jam, dengan arus sebenarnya diukur, bukan diasumsikan. Biaya total purwarupa menjumlahkan harga seluruh komponen b"
+    },
+    {
+     "text": "j",
+     "sub": true
+    },
+    {
+     "text": " dan biaya layanan ucapan per jam:"
+    }
+   ]
+  },
+  {
+   "t": "rumus",
+   "lines": [
+    {
+     "runs": [
+      {
+       "text": "B"
+      },
+      {
+       "text": "total",
+       "sub": true
+      },
+      {
+       "text": " = Σ"
+      },
+      {
+       "text": "j",
+       "sub": true
+      },
+      {
+       "text": " b"
+      },
+      {
+       "text": "j",
+       "sub": true
+      },
+      {
+       "text": " + b"
+      },
+      {
+       "text": "layanan",
+       "sub": true
+      },
+      {
+       "text": " · t"
+      },
+      {
+       "text": "pakai",
+       "sub": true
+      }
+     ],
+     "num": "3.5"
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "dengan t"
+    },
+    {
+     "text": "pakai",
+     "sub": true
+    },
+    {
+     "text": " jam pemakaian layanan selama uji."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.4 Uji Jalur Ucapan dan Cakupan Kamus"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Komponen bahasa pada kedua arah dinilai lewat uji jalur ucapan, yang membandingkan jalur "
+    },
+    {
+     "text": "on-device",
+     "italics": true
+    },
+    {
+     "text": ", awan, dan server lokal disertai cakupan kamus arah kedua. Prosedurnya sebagai berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Menyiapkan daftar frasa uji pendek berbahasa Indonesia "
+    },
+    {
+     "text": "[PERLU DATA: daftar frasa uji dan jumlah penutur]",
+     "highlight": true
+    },
+    {
+     "text": " yang memuat kata di dalam dan di luar kamus."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Merekam teks keluaran layanan ASR awan, lalu menghitung akurasi katanya terhadap teks acuan."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Mengukur waktu pengenalan, pemetaan, waktu menuju audio pertama (TTFA) sintesis TTS menurut p50 dan p95, serta total ujung ke ujung pada kedua arah."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Mengulang pengukuran pada kedua kandidat mesin (MMS-TTS-ind sebagai kandidat utama dan Kokoro ONNX sebagai pembanding) di server lokal maupun "
+    },
+    {
+     "text": "on-device",
+     "italics": true
+    },
+    {
+     "text": " ponsel serta jalur pembanding awan, lalu menimbang mutu dan latensinya."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "5.",
+   "runs": [
+    {
+     "text": "Memverifikasi prasyarat suara Indonesia sambil mengukur "
+    },
+    {
+     "text": "parsing",
+     "italics": true
+    },
+    {
+     "text": " UDP dan memori server Rust (Subbab 2.8)."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "6.",
+   "runs": [
+    {
+     "text": "Mencatat proporsi kata uji yang tampil sebagai representasi isyarat, ejaan jari, dan gagal tampil, kemudian menganalisis mutu, latensi, serta ketergantungan internet sebagai bahan keputusan G3 (Tabel 3.8)."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.5 Uji Kegunaan dan Penilaian Validator"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Uji kegunaan diposisikan sebagai evaluasi formatif skala kecil: hasilnya dianalisis secara deskriptif (median, sebaran, skor tiap partisipan, dan catatan kualitatif) untuk menemukan hambatan pemakaian dan mengarahkan perbaikan purwarupa, tanpa klaim efektivitas populasi maupun kesimpulan kausal; rumusan ini selaras dengan Batasan no. 9. Keterpakaian purwarupa ditelaah lewat uji kegunaan bersama 3–5 pengguna kelompok sasaran pada skenario tugas terbimbing, yaitu saling menyampaikan pesan pendek melalui ejaan huruf dan kosakata tampilan. Tiap pengguna menjalani langkah berikut."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "1.",
+   "runs": [
+    {
+     "text": "Menjelaskan tujuan uji, batas kosakata, kenyataan bahwa kamera tidak menyala, dan hak mundur, lalu meminta persetujuan tertulis."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "2.",
+   "runs": [
+    {
+     "text": "Memberi waktu berlatih singkat bersama kamus tampilan."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "3.",
+   "runs": [
+    {
+     "text": "Menjalankan tugas komunikasi dua arah sambil mencatat keberhasilan, waktu penyelesaian, dan keluaran yang menyesatkan."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "4.",
+   "runs": [
+    {
+     "text": "Meminta pengguna mengisi kuesioner skala Likert [28] mengenai kegunaan, kejelasan, dan keinginan memakai ulang."
+    }
+   ]
+  },
+  {
+   "t": "li",
+   "n": "5.",
+   "runs": [
+    {
+     "text": "Merekapitulasi hasil, lalu menganalisisnya secara deskriptif tanpa klaim kausal."
+    }
+   ]
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Kewajaran keluaran kedua arah dinilai validator penutur tunarungu; keluaran sistem dan penilaian independennya dicatat dalam tabel silang, sedangkan kasus yang dinilai keliru dilaporkan tersendiri. Rubrik penilaian tertulis, identitas dan kompetensi pakar, serta batas temuan kritis difinalkan sebelum G2 dan T4 dijalankan "
+    },
+    {
+     "text": "[PERLU DATA: rubrik pakar, nama dan kompetensi, kuesioner, dan kriteria temuan kritis]",
+     "highlight": true
+    },
+    {
+     "text": ". Sebagai analisis sekunder, kesalahan klasifikator dikaitkan luring dengan kemiripan pose pada deret "
+    },
+    {
+     "text": "keypoint",
+     "italics": true
+    },
+    {
+     "text": " guru agar kesalahan konfigurasi mirip dapat dibedakan dari kesalahan sinyal lemah."
+    }
+   ]
+  },
+  {
+   "t": "h3",
+   "text": "3.8.6 Kriteria Gerbang Keputusan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tabel 3.6 menyajikan kriteria tiap gerbang beserta tindakan jika gagal. Kelayakan pada rumusan ketiga ditinjau per dimensi, bukan semata dari lolosnya G4, dan ambang kuantitatifnya difinalkan bersama pembimbing sebelum gerbang dinilai."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.6 Kriteria gerbang keputusan",
+   "header": [
+    "Gerbang",
+    "Nama dan waktu",
+    "Kriteria lolos (ambang usulan)",
+    "Tindakan jika gagal"
+   ],
+   "rows": [
+    [
+     "G0",
+     "Baseline CSI dan jaringan, akhir M2",
+     "Akuisisi N_valid *subcarrier* hasil audit (tipe LTF, *pilot/null/guard*, *first_word_invalid*) stabil 1 m ke UDP Rust; laju sekurang-kurangnya 25 bingkai per detik; paket hilang tidak melampaui 0,1%; pola bergerak terpisah dari diam; audit *checkpoint encoder* dan versi/commit RuView selesai",
+     "Perbaikan penempatan satu kali; gagal lagi berarti jalur CSI dihentikan dan dilaporkan"
+    ],
+    [
+     "G0b",
+     "Audit kompatibilitas representasi *encoder*, setelah G0 atas data pilot (awal T2)",
+     "*Probe* linear di atas *embedding* beku: F1 makro 24 huruf statis sekurang-kurangnya 0,30 dan sekurang-kurangnya tiga kali peluang acak; *probe* biner J–Z sekurang-kurangnya 70% [usulan]; uji permutasi label pada unit blok repetisi (p_perm < 0,05, skor label asli melampaui distribusi nol permutasi); keputusan rute masukan tercatat",
+     "Jalur fitur turunan gagal maka jalur adapter diuji; keduanya gagal maka Pembanding C dijalankan berdampingan dengan skema adaptasi LoRA/pelatihan lanjutan (Subbab 2.3) dan hasilnya dilaporkan sebagai temuan"
+    ],
+    [
+     "G1",
+     "Model tepi terkuantisasi dan dua kepala, akhir M8",
+     "Akurasi dalam sesi sekurang-kurangnya 50% (sekitar 13 kali acak); F1 makro sekurang-kurangnya 0,45 [usulan]; tanpa kelas *recall* nol; melampaui ablasi kepala tunggal, variasi bobot, dan Pembanding C; *recall* J dan Z terpisah beserta *confusion*; laporan *coverage* dan akurasi selektif; MPJPE sebagai pemantauan; inferensi di bawah 100 ms; ambang difinalkan bersama pembimbing sebelum G1 dinilai",
+     "Pangkas himpunan huruf pembeda terkuat, lalu nilai ulang"
+    ],
+    [
+     "G2",
+     "Tiga pilar pakar, akhir M10",
+     "Penilaian tertulis pakar SIBI-aksesibilitas, RF-*wireless sensing*, dan *embedded AI* masuk semua; tanpa temuan blok kritis; skor rata-rata per pilar sekurang-kurangnya 3 dari 5",
+     "Perbaiki temuan blok atau sempitkan klaim, lalu nilai ulang"
+    ],
+    [
+     "G3",
+     "Integrasi Rust dan mesin ucapan, M11",
+     "Latensi arah 1 (T_1) tidak melampaui 2 detik dan arah 2 (T_2) tidak melampaui 3 detik pada jalur utama server lokal, dilaporkan p50 dan p95 (5 detik untuk jalur cadangan *on-device*); TTFA p50 di bawah 100 ms pada frasa uji paling banyak lima kata; *parsing* UDP di bawah 0,2 ms; memori server di bawah 40 MB; status mesin TTS (MMS-TTS-ind atau Kokoro) tercatat",
+     "Beralih ke mesin alternatif, lalu jalur *on-device* ponsel atau awan; melampaui berarti temuan"
+    ],
+    [
+     "G4",
+     "Sintesis kelayakan, akhir M12",
+     "Skor persepsi rata-rata sekurang-kurangnya 3,0 dari 5; validator menyetujui kewajaran; biaya lengkap dari BOM; rekomendasi posisi TKT 3–4 menurut Permenristekdikti 42/2016 [29] dan TRL [27] tertulis",
+     "Hasil negatif tetap dilaporkan; rekomendasi menyatakan posisi lebih rendah beserta alasan"
+    ]
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.9 Jadwal Penelitian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tabel 3.7 memuat jadwal empat belas minggu; tanda ■ menandai minggu pelaksanaan."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.7 Jadwal penelitian",
+   "header": [
+    "No.",
+    "Kegiatan",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7",
+    "M8",
+    "M9",
+    "M10",
+    "M11",
+    "M12",
+    "M13",
+    "M14",
+    "Gerbang"
+   ],
+   "rows": [
+    [
+     "1",
+     "T0 Replikasi platform, audit *checkpoint*, uji Delta-CSI, dan koeksistensi",
+     "■",
+     "■",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "G0 (akhir M2)"
+    ],
+    [
+     "2",
+     "T1 Kurasi alfabet SIBI dan kosakata, kalibrasi ruang, protokol, perizinan",
+     "",
+     "■",
+     "■",
+     "■",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "—"
+    ],
+    [
+     "2b",
+     "G0b Probe linear kompatibilitas representasi *encoder* atas data pilot (Subbab 3.7)",
+     "",
+     "",
+     "",
+     "■",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "G0b (awal T2)"
+    ],
+    [
+     "3",
+     "T2 Perekaman *dataset*, pelatihan dua kepala, kuantisasi, uji *deployment*",
+     "",
+     "",
+     "",
+     "■",
+     "■",
+     "■",
+     "■",
+     "■",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "G1 (akhir M8)"
+    ],
+    [
+     "4",
+     "T3 Uji lintas sesi, partisipan, ruang, dan pengguna baru",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "■",
+     "■",
+     "■",
+     "",
+     "",
+     "",
+     "",
+     "G2 (akhir M10)"
+    ],
+    [
+     "5",
+     "T4 Pengemasan dua arah, Rust, TTS server lokal, uji operasional, jalur ucapan, kegunaan, validator",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "■",
+     "■",
+     "■",
+     "",
+     "",
+     "G3 (M11), G4 (akhir M12)"
+    ],
+    [
+     "6",
+     "T5 Analisis dan penulisan",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "",
+     "■",
+     "■",
+     "■",
+     "—"
+    ]
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.10 Parameter Rancangan yang Ditetapkan Kemudian"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Sebagian parameter bergantung pada kesepakatan pembimbing, hasil tahap sebelumnya, atau data validasi. Parameter semacam itu dihimpun pada Tabel 3.8 dan ditetapkan lebih dulu sebelum dipakai menilai data uji maupun gerbang terkait."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.8 Parameter rancangan yang ditetapkan kemudian",
+   "header": [
+    "No.",
+    "Parameter",
+    "Waktu atau dasar penetapan",
+    "Status"
+   ],
+   "rows": [
+    [
+     "1",
+     "Finalisasi ambang seluruh gerbang G0–G4",
+     "Sebelum gerbang dinilai",
+     "[PERLU DATA: finalisasi ambang Tabel 3.6 bersama pembimbing]"
+    ],
+    [
+     "2",
+     "Ambang G1, tindakan gagal kedua, dan kriteria pemangkasan himpunan huruf",
+     "Sebelum eksperimen",
+     "[PERLU DATA: ambang, tindakan, dan kriteria pemangkasan tanpa data uji]"
+    ],
+    [
+     "3",
+     "Kriteria kualitas model guru",
+     "Sebelum pelatihan murid",
+     "[PERLU DATA: ambang deteksi tangan, batas jitter, prosedur sampel]"
+    ],
+    [
+     "4",
+     "Pemilihan *subcarrier*, lintasan puncak, dan segmentasi huruf statis",
+     "Sebelum dipakai",
+     "[PERLU DATA: kriteria, definisi operasional, ambang *pose-hold*]"
+    ],
+    [
+     "5",
+     "Pembagian data dan strategi Widar3.0",
+     "Sebelum dipakai",
+     "[PERLU DATA: blok, proporsi latih-validasi-uji, komponen strategi, repetisi uji]"
+    ],
+    [
+     "6",
+     "Rute masukan *encoder* (A, B1, atau B2), parameter normalisasi masukan, dan panjang barisan T",
+     "Hasil audit T0 dan gerbang G0b",
+     "[PERLU VALIDASI: parameter normalisasi masukan; keputusan rute G0b; finalisasi T dari pilot]"
+    ],
+    [
+     "7",
+     "Sistem koordinat target regresi, skala acuan d_ref, konvensi *handedness*, dan ambang α",
+     "Sebelum pelatihan",
+     "[PERLU VALIDASI: sistem koordinat, handedness, dan ambang PCK]"
+    ],
+    [
+     "8",
+     "Status modul temporal final (1D-CNN atau agregasi statistik)",
+     "Dari hasil ablasi",
+     "[PERLU DATA: keputusan modul temporal beserta bukti ablasi]"
+    ],
+    [
+     "9",
+     "Bobot λ_cls, λ_reg, normalisasi skala kerugian, dan ambang keyakinan",
+     "Dari data validasi",
+     "[PERLU DATA: nilai bobot, skema normalisasi, dan ambang]"
+    ],
+    [
+     "10",
+     "Peringkat LoRA r dan lapis yang disadap",
+     "Sebelum adaptasi dijalankan",
+     "[PERLU VALIDASI: kompatibilitas LoRA dengan alur ekspor dan pilihan r]"
+    ],
+    [
+     "11",
+     "Perlakuan data uji",
+     "Sebelum dipakai",
+     "[PERLU DATA: segmen tersaring kamera atau segmentasi tanpa koreksi]"
+    ],
+    [
+     "12",
+     "Inklusi partisipan, sesi per ruang, dan token apresiasi",
+     "Sebelum dipakai",
+     "[PERLU DATA: kriteria kompetensi, kefasihan validator, pengguna uji, token]"
+    ],
+    [
+     "13",
+     "Publikasi *dataset* dan persetujuan etik",
+     "Sebelum dipakai",
+     "[PERLU DATA: izin, repositori, lisensi, lembaga persetujuan etik]"
+    ],
+    [
+     "14",
+     "Rubrik tiga pilar pakar dan personalisasi jika G2 gagal",
+     "Sebelum G2 dinilai",
+     "[PERLU DATA: rubrik, ambang skor, prosedur data latih pengguna]"
+    ],
+    [
+     "15",
+     "Indikator layak operasional dan durasi pengamatan deteksi palsu",
+     "Sebelum G3 dinilai",
+     "[PERLU DATA: anggaran latensi, batas deteksi palsu, baterai minimum, durasi]"
+    ],
+    [
+     "16",
+     "Kanal, jarak antarmodul, zona, model layar, audio, dan kapasitas baterai",
+     "Pada T0 atau sebelum T4",
+     "[PERLU DATA: penetapan, model layar final, kapasitas dari uji arus]"
+    ],
+    [
+     "17",
+     "Lokasi sintesis dan pemutaran TTS (server lokal utama, ponsel cadangan), mesin final, layanan ASR, dan frasa uji",
+     "Pada G3",
+     "[PERLU KONFIRMASI: keputusan final mesin; MMS-TTS-ind kandidat utama operasional setelah verifikasi Kokoro tanpa bahasa Indonesia; daftar frasa dari uji banding]"
+    ],
+    [
+     "18",
+     "Kuesioner, rubrik validator dan pakar, serta asumsi biaya G4",
+     "Sebelum T4",
+     "[PERLU DATA: butir kuesioner, rubrik, batas kesesuaian, harga dan asumsi]"
+    ],
+    [
+     "19",
+     "Model *deployment* (Pilihan 1: klasifikator saja; Pilihan 2: dua kepala aktif)",
+     "Tujuan eksperimen dan hasil ablasi manfaat regresi",
+     "[PERLU DATA: keputusan final; Pilihan 1 rancangan utama naskah menunggu hasil ablasi dan konfirmasi]"
+    ],
+    [
+     "20",
+     "Akhiran judul (PEMROSESAN SERVER atau CLOUD PROCESSING)",
+     "Kesesuaian dengan arsitektur aktual yang berpusat di server",
+     "[PERLU DATA: keputusan akhiran judul bersama pembimbing]"
+    ]
+   ]
+  },
+  {
+   "t": "h2",
+   "text": "3.11 Risiko dan Alternatif Cadangan"
+  },
+  {
+   "t": "p",
+   "runs": [
+    {
+     "text": "Tabel 3.9 merangkum risiko utama beserta mitigasinya. Cadangan disusun bertingkat mengikuti titik kegagalan, sehingga kegagalan komponen hanya mempersempit klaim tanpa menghentikan penelitian; setiap pemakaian cadangan tercatat dalam laporan akhir."
+    }
+   ]
+  },
+  {
+   "t": "table",
+   "caption": "Tabel 3.9 Risiko dan mitigasi",
+   "header": [
+    "No.",
+    "Risiko",
+    "Dampak",
+    "Mitigasi dan cadangan"
+   ],
+   "rows": [
+    [
+     "1",
+     "Pola CSI isyarat tidak terpisah pada konfigurasi dua modul",
+     "G0 gagal; jalur CSI tidak layak",
+     "Perbaikan penempatan satu kali; gagal lagi berarti dihentikan dan dilaporkan"
+    ],
+    [
+     "2",
+     "Bentuk masukan *checkpoint* tidak sesuai jendela CSI (delapan fitur turunan lawan N_valid *subcarrier*)",
+     "*Encoder* tidak bisa dipakai langsung",
+     "Jalur A (fitur turunan), Jalur B1/B2 (adapter), atau Pembanding C (CSI tanpa penyempitan); hasil audit T0 dan G0b dilaporkan"
+    ],
+    [
+     "3",
+     "*Embedding encoder* beku tidak memisahkan kelas huruf",
+     "Kepala tidak dapat belajar",
+     "Pembanding C dijalankan berdampingan dengan adaptasi LoRA dan pelatihan lanjutan; hasilnya dibandingkan apa adanya"
+    ],
+    [
+     "4",
+     "Konflik gradien antartugas multitugas",
+     "Salah satu tugas terhambat",
+     "Penyeimbangan gradien atau pelatihan bergantian; kepala tunggal pembanding"
+    ],
+    [
+     "5",
+     "Akurasi lintas partisipan, ruang, atau posisi rendah (G2 gagal)",
+     "Klaim pengguna baru tak dapat dibuat",
+     "Personalisasi per pengguna (cadangan A); dilaporkan"
+    ],
+    [
+     "6",
+     "Model terkuantisasi terlalu berat atau lambat di modul",
+     "Inferensi tepi tidak tercapai",
+     "Klasifikasi dipindah ke server, modul kirim fitur (cadangan B)"
+    ],
+    [
+     "7",
+     "Beban radio gabungan CSI, UDP, dan audio bermasalah",
+     "Purwarupa tidak stabil",
+     "Modul ketiga khusus antarmuka (cadangan C)"
+    ],
+    [
+     "8",
+     "Layanan ucapan tidak memadai (Kokoro terverifikasi tanpa bahasa Indonesia, 14 Nov. 2026)",
+     "Jalur ucapan terganggu",
+     "MMS-TTS-ind sebagai kandidat utama operasional, lalu server lokal atau awan (cadangan D)"
+    ],
+    [
+     "9",
+     "Aset representasi isyarat mahal",
+     "Cakupan arah kedua sempit",
+     "Batasi ke glos dan gambar plus ejaan jari"
+    ],
+    [
+     "10",
+     "Ketahanan baterai di bawah target",
+     "Klaim portabilitas melemah",
+     "Ukur arus, sesuaikan target, laporkan apa adanya"
+    ],
+    [
+     "11",
+     "Rekrutmen, etika, atau kuota GPU terlambat",
+     "Jadwal mundur",
+     "Dua ruang dan pengisyarat cadangan; pelatihan terkompresi; minggu transisi"
+    ],
+    [
+     "12",
+     "Huruf sangat mirip tak terpisahkan CSI",
+     "Himpunan kelas menyempit",
+     "Pangkas himpunan pada G1 sesuai Tabel 3.8; laporkan pasangan gagal"
+    ]
+   ]
+  }
+ ],
+ "dp": [
+  {
+   "t": "h1",
+   "text": "DAFTAR PUSTAKA"
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[1] Kementerian Koordinator Bidang Pembangunan Manusia dan Kebudayaan, \"Kemenko PMK bergerak bersama wujudkan selaras bahasa isyarat,\" 3 Okt. 2025. [Online]. Available: https://www.kemenkopmk.go.id/kemenko-pmk-bergerak-bersama-wujudkan-selaras-bahasa-isyarat, diakses 24 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[2] Republik Indonesia, "
+    },
+    {
+     "text": "Undang-Undang Nomor 8 Tahun 2016 tentang Penyandang Disabilitas",
+     "italics": true
+    },
+    {
+     "text": ". Jakarta, Indonesia, 2016."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[3] Departemen Pendidikan dan Kebudayaan, "
+    },
+    {
+     "text": "Kamus Sistem Isyarat Bahasa Indonesia",
+     "italics": true
+    },
+    {
+     "text": " (edisi pertama). Jakarta, Indonesia: Departemen Pendidikan dan Kebudayaan, 1994."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[4] R. A. Mursita, \"Respon tunarungu terhadap penggunaan Sistem Bahasa Isyarat Indonesia (SIBI) dan Bahasa Isyarat Indonesia (BISINDO) dalam komunikasi,\" "
+    },
+    {
+     "text": "INKLUSI",
+     "italics": true
+    },
+    {
+     "text": ", vol. 2, no. 2, p. 221, 2015, doi: 10.14421/ijds.2202."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[5] S. Dwijayanti, Hermawati, S. I. Taqiyyah, H. Hikmarika, and B. Y. Suprapto, \"Indonesia sign language recognition using convolutional neural network,\" "
+    },
+    {
+     "text": "International Journal of Advanced Computer Science and Applications",
+     "italics": true
+    },
+    {
+     "text": ", vol. 12, no. 10, 2021, doi: 10.14569/IJACSA.2021.0121046."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[6] Y. Ma, G. Zhou, and S. Wang, \"WiFi sensing with channel state information: A survey,\" "
+    },
+    {
+     "text": "ACM Computing Surveys",
+     "italics": true
+    },
+    {
+     "text": ", vol. 52, no. 3, pp. 1–36, 2019, doi: 10.1145/3310194."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[7] Y. Ma, G. Zhou, S. Wang, H. Zhao, and W. Jung, \"SignFi: Sign language recognition using WiFi,\" "
+    },
+    {
+     "text": "Proceedings of the ACM on Interactive, Mobile, Wearable and Ubiquitous Technologies",
+     "italics": true
+    },
+    {
+     "text": ", vol. 2, no. 1, pp. 1–21, 2018, doi: 10.1145/3191755."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[8] Espressif Systems, "
+    },
+    {
+     "text": "ESP32-S3 Series Datasheet",
+     "italics": true
+    },
+    {
+     "text": ", versi 2.2, 2026. [Online]. Available: https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[9] Espressif Systems, \"esp-csi: Wi-Fi channel state information based sensing,\" repositori GitHub. [Online]. Available: https://github.com/espressif/esp-csi, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[10] ruvnet, \"RuView,\" repositori GitHub. [Online]. Available: https://github.com/ruvnet/RuView, diakses 13 Nov. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[11] ruvnet, \"wifi-densepose-pretrained,\" model card Hugging Face. [Online]. Available: https://huggingface.co/ruvnet/wifi-densepose-pretrained, diakses 13 Nov. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[12] Ultralytics, \"Pose estimation\" dan \"Hand keypoints pose estimation dataset,\" Ultralytics YOLO Docs. [Online]. Available: https://docs.ultralytics.com/tasks/pose/ dan https://docs.ultralytics.com/datasets/pose/hand-keypoints/, diakses 8 Nov. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[13] D. Wu, Y. Zeng, F. Zhang, and D. Zhang, \"WiFi CSI-based device-free sensing: From Fresnel zone model to CSI-ratio model,\" "
+    },
+    {
+     "text": "CCF Transactions on Pervasive Computing and Interaction",
+     "italics": true
+    },
+    {
+     "text": ", vol. 4, no. 1, pp. 88–102, 2022, doi: 10.1007/s42486-021-00077-z."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[14] Y. Zhang, Y. Zheng, K. Qian, G. Zhang, Y. Liu, C. Wu, and Z. Yang, \"Widar3.0: Zero-effort cross-domain gesture recognition with Wi-Fi,\" "
+    },
+    {
+     "text": "IEEE Transactions on Pattern Analysis and Machine Intelligence",
+     "italics": true
+    },
+    {
+     "text": ", vol. 44, no. 11, pp. 8671–8685, 2022, doi: 10.1109/TPAMI.2021.3105387."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[15] ruvnet, \"wifi-densepose-mmfi-pose,\" model card Hugging Face. [Online]. Available: https://huggingface.co/ruvnet/wifi-densepose-mmfi-pose, diakses 13 Nov. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[16] J. Yang, H. Huang, Y. Zhou, X. Chen, Y. Xu, S. Yuan, H. Zou, C. X. Lu, and L. Xie, \"MM-Fi: Multi-modal non-intrusive 4D human dataset for versatile wireless sensing,\" in "
+    },
+    {
+     "text": "Proc. NeurIPS Datasets and Benchmarks Track",
+     "italics": true
+    },
+    {
+     "text": ", 2023. [Online]. Available: https://arxiv.org/abs/2305.10345, doi: 10.48550/arXiv.2305.10345."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[17] E. J. Hu, Y. Shen, P. Wallis, Z. Allen-Zhu, Y. Li, S. Wang, L. Wang, and W. Chen, \"LoRA: Low-rank adaptation of large language models,\" in "
+    },
+    {
+     "text": "Proc. 10th International Conference on Learning Representations (ICLR)",
+     "italics": true
+    },
+    {
+     "text": ", 2022."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[18] C. K. Chow, \"On optimum recognition error and reject tradeoff,\" "
+    },
+    {
+     "text": "IEEE Transactions on Information Theory",
+     "italics": true
+    },
+    {
+     "text": ", vol. 16, no. 1, pp. 41–46, 1970, doi: 10.1109/TIT.1970.1054406."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[19] F. Zhang, V. Bazarevsky, A. Vakunov, A. Tkachenka, G. Sung, C.-L. Chang, and M. Grundmann, \"MediaPipe Hands: On-device real-time hand tracking,\" arXiv:2006.10214, 2020, doi: 10.48550/arXiv.2006.10214."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[20] R. Girshick, \"Fast R-CNN,\" in "
+    },
+    {
+     "text": "Proceedings of the IEEE International Conference on Computer Vision (ICCV)",
+     "italics": true
+    },
+    {
+     "text": ", 2015, pp. 1440–1448."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[21] R. Caruana, \"Multitask learning,\" "
+    },
+    {
+     "text": "Machine Learning",
+     "italics": true
+    },
+    {
+     "text": ", vol. 28, no. 1, pp. 41–75, 1997, doi: 10.1023/A:1007379606734."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[22] G. Hinton, O. Vinyals, and J. Dean, \"Distilling the knowledge in a neural network,\" arXiv:1503.02531, 2015, doi: 10.48550/arXiv.1503.02531."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[23] Espressif Systems, \"esp-dl: Espressif deep-learning library for ESP32-S3,\" repositori GitHub. [Online]. Available: https://github.com/espressif/esp-dl, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[24] hexgrad, \"Kokoro-82M,\" model card Hugging Face. [Online]. Available: https://huggingface.co/hexgrad/Kokoro-82M dan https://doi.org/10.57967/hf/4329, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[25] Meta AI, \"Massively Multilingual Speech (MMS): Indonesian text-to-speech,\" model card Hugging Face facebook/mms-tts-ind. [Online]. Available: https://huggingface.co/facebook/mms-tts-ind, diakses 25 Okt. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[26] A. Radford "
+    },
+    {
+     "text": "et al.",
+     "italics": true
+    },
+    {
+     "text": ", \"Robust speech recognition via large-scale weak supervision,\" arXiv:2212.04356, 2022, doi: 10.48550/arXiv.2212.04356."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[27] J. C. Mankins, \"Technology readiness assessments: A retrospective,\" "
+    },
+    {
+     "text": "Acta Astronautica",
+     "italics": true
+    },
+    {
+     "text": ", vol. 65, no. 9-10, pp. 1216–1223, 2009, doi: 10.1016/j.actaastro.2009.03.058."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[28] R. Likert, \"A technique for the measurement of attitudes,\" "
+    },
+    {
+     "text": "Archives of Psychology",
+     "italics": true
+    },
+    {
+     "text": ", no. 140, pp. 5–55, 1932."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[29] Peraturan Menteri Riset, Teknologi, dan Pendidikan Tinggi Republik Indonesia, Nomor 42 Tahun 2016 tentang Pengukuran dan Penetapan Tingkat Kesiapterapan Teknologi. Jakarta, Indonesia, 2016. [Online]. Available: https://peraturan.bpk.go.id/Details/141280/permen-ristekdikti-no-42-tahun-2016, diakses 14 Nov. 2026."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[30] J. Geng, D. Huang, and F. De la Torre, \"DensePose From WiFi,\" arXiv:2301.00250, 2022, doi: 10.48550/arXiv.2301.00250."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[31] H. F. T. Ahmed, H. Ahmad, K. Narasingamurthi, H. Harkat, and S. K. Phang, \"DF-WiSLR: Device-free Wi-Fi-based sign language recognition,\" "
+    },
+    {
+     "text": "Pervasive and Mobile Computing",
+     "italics": true
+    },
+    {
+     "text": ", art. 101289, 2020, doi: 10.1016/j.pmcj.2020.101289."
+    }
+   ]
+  },
+  {
+   "t": "ref",
+   "runs": [
+    {
+     "text": "[32] Z. Gao et al., \"A multitask sign language recognition system using commodity Wi-Fi,\" "
+    },
+    {
+     "text": "Mobile Information Systems",
+     "italics": true
+    },
+    {
+     "text": ", vol. 2023, art. 7959916, 2023, doi: 10.1155/2023/7959916."
+    }
+   ]
+  }
+ ]
+}
