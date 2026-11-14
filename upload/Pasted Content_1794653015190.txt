@@ -1,0 +1,737 @@
+Anda benar, dan saya berterima kasih atas koreksinya. Pada respons sebelumnya
+saya melakukan beberapa pelanggaran terhadap
+HANDOFF_SenseSIBI_v17_TRUTH_BASELINE.md:
+
+1.  Urutan dan pemisahan keluaran (§10 butir 2–3 & Deliverables): Saya tidak
+    memulai dengan Issue Ledger, tidak memisahkan secara tegas tiga keluaran
+    konseptual (Keputusan Terkunci, Keputusan Belum Dikonfirmasi, dan
+    Rekomendasi Teknis Reviewer), serta tidak menyajikan Daftar Perubahan
+    Prioritas P0/P1/P2 secara terpisah.
+2.  Mengisi celah [OPEN] dengan tebakan (Aturan Keras #2 & #8): Di dalam draf
+    siap tempel sebelumnya, saya menyelipkan angka/spesifikasi yang belum ada di
+    sumber maupun hasil audit (misalnya "PCM 16-bit mono 16 kHz", "≥500–800 mA",
+    "≤20 ms", "≥10%", "maksimal 30 hari", serta strategi pre-cache 26 audio)
+    seolah sudah menjadi bagian desain final, alih-alih mempertahankannya
+    sebagai [OPEN] atau memisahkannya sebagai [REVIEW].
+3.  Mendahului konfirmasi pengguna (§3.4 & Aturan Keras #6): Pada Pilihan 1 vs
+    Pilihan 2, §3.4 handoff secara tegas melarang menganggap Pilihan 1 sudah
+    final sebelum pengguna mengonfirmasi dan tabel/diagram diselaraskan—namun
+    saya langsung menghapus kepala regresi pada diagram tanpa memberi opsi
+    kondisional. Hal serupa terjadi pada pergeseran Kokoro-82M → MMS-TTS-ind:
+    temuan primer memang menunjukkan Kokoro v1.0 belum mendukung Bahasa
+    Indonesia, tetapi penetapan finalnya harus tetap disajikan transparan untuk
+    konfirmasi pengguna tanpa membuang Kokoro secara diam-diam.
+4.  Sejumlah butir handoff yang terlewat: verifikasi pinout Tabel 3.3 (strapping
+    pins, USB, ADC, konflik periferal, revisi papan — §2.2), kelengkapan
+    parameter audit T0 CSI (panjang buffer, RSSI/noise floor, penanganan fase —
+    §5.1), jumlah repetisi tersisa pasca-pembuangan segmen (§4.3), definisi
+    ambang PCK \alpha & pemetaan temporal ke pusat window (§3.3), status foto
+    produk Gambar 3.2 (§7 #23), serta kelengkapan butir G2–G4 & evaluasi
+    deskriptif 3–5 pengguna tanpa klaim kausal (§6.4).
+
+Di bawah ini adalah perbaikan ulang yang disusun ketat mengikuti urutan, aturan
+keras, dan seluruh deliverable di HANDOFF_SenseSIBI_v17_TRUTH_BASELINE.md,
+dengan Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf sebagai sumber utama.
+
+1. Issue Ledger Lengkap (Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf)
+
+Catatan tipe status sesuai §10 butir 2: fact (fakta dokumen/sumber primer yang
+perlu diluruskan), contradiction (pertentangan internal
+teks/persamaan/tabel/diagram), open (belum diputuskan/belum terbukti, wajib
+bertanda eksplisit), dan recommendation (usulan teknis reviewer).
+
+| ID         | Lokasi (Hal. PDF / Cetak / Subbab)                                                    | Bukti Kutipan / Kondisi Diagram di v17                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | Keparahan | Jenis Status                       | Tindakan Perbaikan                                                                                                                                                                                                                                                                                                                             |
+| ---------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ISS-01** | Hal. 16 (cetak 13) §2.5; Hal. 9 (cetak 6) §1.5.1                                      | §2.5 menulis *"membekukan encoder dan melatih hanya kedua kepala tugasnya"*, sedangkan §2.4, §2.8, Pers. (2.15′), dan §3.7 melatih `φ_adapter` (jika dipakai) + `θ_temporal` + `θ_c` + `θ_r`. Hal serupa di §1.5.1.                                                                                                                                                                                                                                                                                                               | **P0**    | `contradiction`                    | Samakan kalimat §1.5.1, §2.5, dan §3.1 dengan Pers. (2.15): *encoder* beku (`θ_0`), sedangkan *adapter* masukan (jika dipakai), modul temporal, dan kedua kepala dilatih bersama.                                                                                                                                                              |
+| **ISS-02** | Hal. 14–15 (cetak 11–12) §2.4; Hal. 42 (cetak 39) §3.7                                | Dua jalur masukan *encoder* (8 fitur RuView vs *adapter* 1D-CNN) belum mendefinisikan apakah *adapter* dilatih merekonstruksi 8 fitur asli atau dioptimalkan oleh *loss* SIBI; tidak ada pembanding tanpa penyempitan 8 dimensi.                                                                                                                                                                                                                                                                                                  | **P0**    | `open` / `recommendation`          | Bedakan eksplisit Jalur A (rekonstruksi rumus 8 fitur), Jalur B1 (*adapter* rekonstruksi fitur), dan Jalur B2 (*adapter* tugas SIBI); tambahkan evaluasi alternatif **Pembanding C** (*raw/richer CSI temporal*) tanpa mengganti desain utama diam-diam.                                                                                       |
+| **ISS-03** | Hal. 14–17 (cetak 11–14) §2.4–2.5                                                     | Audit primer kartu model RuView & GitHub (14 Nov 2026): ada dua set berkas (`model.*` vs `csi-embed-v2.*`), `model.safetensors` memiliki *NUL-padding header* (\#1522), catatan SISO \#509 menyebut aliran 1-antena ESP32 kurang menangkap sendi distal, dan EWC bawaan masih mencatat *forgetting rate* **32,97%**.                                                                                                                                                                                                              | **P0**    | `fact`                             | Catat keterbatasan SISO & *forgetting rate* EWC 32,97% pada §2.4–2.5 \[4.1\], \[4.3\]; wajibkan audit kedua set berkas *checkpoint* di T0; nyatakan LoRA tidak dapat memulihkan detail jari jika sudah hilang pada input 8-D.                                                                                                                  |
+| **ISS-04** | Hal. 42–44 (cetak 39–41) §3.7                                                         | `W = 1 s`, `H = 0,25 s` disebut *"tersedia pada laju empat langkah per detik, cukup untuk lintasan sekitar satu detik"*. `T = 16` ditulis *"menutup segmen hingga sekitar empat detik"*.                                                                                                                                                                                                                                                                                                                                          | **P0**    | `fact` / `recommendation`          | Tegaskan 4 Hz adalah *window-start/hop rate* dengan **overlap 75%**, bukan 4 observasi independen. Pada `T = 16`, jarak awal window 1–16 adalah 3,75 s dan cakupan data mentah gabungan hingga \~4,75 s. Tetapkan `T` dari data pilot (masih `open`) dan bandingkan $(W, H)$ lebih pendek untuk J/Z.                                           |
+| **ISS-05** | Hal. 44 (cetak 41) §3.7                                                               | Menyebut prediksi keypoint diinterpolasi kembali ke laju kamera untuk menghitung galat lintasan J/Z tanpa batas interpretasi.                                                                                                                                                                                                                                                                                                                                                                                                     | **P0**    | `recommendation`                   | Jelaskan interpolasi tidak menambah informasi temporal baru yang tak diamati; laporkan metrik pada resolusi langkah model sebagai utama dan interpolasi sebagai sekunder dengan batas interpretasi.                                                                                                                                            |
+| **ISS-06** | Hal. 42 (cetak 39) §3.7                                                               | Segmentasi memakai Delta-CSI berbasis energi gerak `d(t) > τ`; untuk huruf statis disebut *"jendela tahan pose"* namun pemisahan fase deteksi *onset* vs penahanan pose statis belum terstruktur.                                                                                                                                                                                                                                                                                                                                 | **P0**    | `contradiction` / `open`           | Pisahkan secara eksplisit: (1) deteksi *onset* gerak ($\Delta$\-CSI), (2) *pose-hold window* (ketika tangan menahan pose diam untuk 24 huruf statis), durasi observasi, dan klasifikasi statis; seluruh ambang berstatus `open` dari validasi.                                                                                                 |
+| **ISS-07** | Hal. 19 (cetak 16) §2.7; Hal. 52 (cetak 49) Tabel 3.7 \#7                             | Koordinat target regresi, titik acuan, normalisasi, *handedness*, skala $d_{\text{ref}}$, ambang PCK $\alpha$, pemetaan temporal target ke pusat *window* CSI, dan batas proyeksi XY 2D masih belum final (`kehati-hatianya`, `d~ref~`).                                                                                                                                                                                                                                                                                          | **P0**    | `open` / `fact`                    | Pertahankan status `[PERLU VALIDASI]` sebelum pelatihan; rincikan opsi kandidat koordinat & batas proyeksi 2D terhadap orientasi telapak; perbaiki *typo*.                                                                                                                                                                                     |
+| **ISS-08** | Hal. 19 (cetak 16) §2.7; Hal. 25 (cetak 22) §2.14; Hal. 44 (cetak 41) §3.7            | Pers. (2.13), (2.21), (2.22) hanya menulis mask visibilitas $m_{itj}$ (baru menyebut mask *padding* di §3.7) dan tidak mengeksplisitkan sumasi 2 koordinat $(x,y)$ di `SmoothL1`.                                                                                                                                                                                                                                                                                                                                                 | **P0**    | `contradiction`                    | Rumuskan $m^*_{itj} = m^{\text{valid}}_{it} \cdot m^{\text{vis}}_{itj}$ pada §2.7 dan pakai konsisten pada Pers. (2.13), (2.21), (2.22); eksplisitkan sumasi $c \in \{x,y\}$.                                                                                                                                                                  |
+| **ISS-09** | Hal. 17, 20 (cetak 14, 17) §2.6, §2.8                                                 | §2.8 memantau konflik gradien lewat *besar* gradien saja; Pers. `(2.15′)` meloncat dari `(2.14)` tanpa `(2.15)`; Pers. `(2.8)` menulis $W_c \cdot z_i$ alih-alih vektor ringkasan atensi temporal $s_i \in \mathbb{R}^{d_h}$.                                                                                                                                                                                                                                                                                                     | **P0**    | `contradiction` / `recommendation` | Tambah *cosine similarity* gradien $\cos(g_c, g_r)$ atau nyatakan pemantauan besar gradien hanya awal; rapikan `(2.15′)` → `(2.15)`; selaraskan Pers. `(2.8)` dengan modul temporal.                                                                                                                                                           |
+| **ISS-10** | Hal. 43 (cetak 40) §3.7; Hal. 50 (cetak 47) Tabel 3.5 G0b                             | Kriteria *"kontrol label-acak (p \< 0,05)"* dan *"kontrol label-acak signifikan (p \< 0,05)"* ambigu/terbalik; kegagalan Jalur A & B langsung dialihkan ke LoRA tanpa pembanding raw CSI.                                                                                                                                                                                                                                                                                                                                         | **P0**    | `contradiction` / `recommendation` | Definisikan *permutation test* (jumlah permutasi, unit permutasi per blok/repetisi independen, statistik uji, $p_{\text{perm}} < 0,05$ untuk skor label asli melampaui distribusi null). Tegaskan G0b satu pengisyarat/sesi hanyalah *screening* awal; jika 8 fitur gagal, wajib uji Pembanding C bersama LoRA.                                |
+| **ISS-11** | Hal. 44 (cetak 41) §3.7; Hal. 25 (cetak 22) §2.14                                     | Menyebut *"pembagiannya temporal per blok dan tidak acak"*, tetapi belum melarang eksplisit *sliding-window* sebelum *split* maupun menetapkan *purge gap*.                                                                                                                                                                                                                                                                                                                                                                       | **P0**    | `recommendation`                   | Wajibkan pembagian train/val/test pada level rekaman mentah, sesi, atau blok repetisi **sebelum** pembentukan *sliding windows*, plus *purge gap* $\ge W$ guna mencegah *data leakage* akibat overlap 75%.                                                                                                                                     |
+| **ISS-12** | Hal. 11–13 (cetak 8–10) §2.2; Hal. 42 (cetak 39) §3.7                                 | Pers. (3.1) membagi `/56` rata tanpa memfilter *pilot/null/guard bins*, tipe LTF (LLTF 52 vs HT-LTF 56), dan `first_word_invalid`; Pers. (2.5) disamakan dengan seluruh teknik CSI-ratio \[13\] tanpa mengklarifikasi sisa *phase drift*.                                                                                                                                                                                                                                                                                         | **P0**    | `fact`                             | Ubah penjumlahan ke himpunan *subcarrier* valid $\mathcal{N}_{\text{valid}}$; wajibkan audit T0 atas jenis frame/packet, LTF, filter MAC, *pilot/null/guard*, `first_word_invalid`, panjang buffer, laju/loss, RSSI/*noise floor*, dan pembersihan fase \[2.4.1\], \[7.1.3\]; tegaskan Pers. (2.5) hanya normalisasi *baseline* ruang.         |
+| **ISS-13** | Hal. 35, 45–46, 53 (cetak 32, 42–43, 50) §3.5, §3.7, Gambar 2.2 & 3.5, Tabel 3.7 \#19 | Narasi §3.5 & §3.7 menyatakan **Pilihan 1** (*classifier-only deployment*), tetapi Tabel 3.7 \#19 masih `[PERLU DATA]`, Gambar 3.5 masih menggambar *"dua kepala"* + `"(+ keypoint opsional)"`, dan Gambar 2.2 mencampur graf *training* dan *deployment*.                                                                                                                                                                                                                                                                        | **P0**    | `contradiction` / `open`           | Tandai Pilihan 1 sebagai rancangan teks utama sementara (*preferred textual design*), tetap pertahankan keputusan final menunggu konfirmasi & hasil ablasi; selaraskan Tabel 3.7 \#19 dan siapkan diagram terpisah (Gambar 2.2 *training* vs *deployment*, serta opsi Gambar 3.5 untuk Pilihan 1 & catatan Pilihan 2).                         |
+| **ISS-14** | Hal. 25–26 (cetak 22–23) §2.15; Hal. 24 (cetak 21) §2.14                              | Tabel 2.3 hanya memuat 3 paper (SignFi, Widar3.0, Dwijayanti) sehingga klaim kebaruan lemah; TKT hanya merujuk Mankins (2009) \[27\].                                                                                                                                                                                                                                                                                                                                                                                             | **P1**    | `recommendation`                   | Tambah **DF-WiSLR (2020)** \[5.1.1\] & **Wi-SignFi (2023)** \[5.2.1\] setelah verifikasi primer; persempit klaim kebaruan (SIBI 26 kelas, transfer RuView, supervisi 21 *keypoint*, integrasi dua arah Indonesia); tambah rujukan regulasi TKT Indonesia (**Permenristekdikti No. 42 Tahun 2016** \[2.3.1\]).                                  |
+| **ISS-15** | Hal. 22–23, 40, 52–54 §2.11, §3.5, Tabel 3.2, 3.7 \#17, 3.8 \#8                       | `Kokoro-82M` ditempatkan sebagai TTS utama dengan prasyarat cek suara Indonesia di G3; verifikasi `VOICES.md` v1.0 (14 Nov 2026) memastikan **Bahasa Indonesia tidak ada** di Kokoro (plus catatan kelemahan \<10–20 token) \[4.5\], \[8.2.1\]. Target TTFA \<100 ms belum mendefinisikan lingkungan uji & p50/p95.                                                                                                                                                                                                               | **P1**    | `fact` / `open`                    | Laporkan hasil audit Kokoro (tidak ada suara Indonesia pada rilis v1.0); posisikan **`MMS-TTS-ind`** sebagai pilihan operasional bila Kokoro tetap gagal verifikasi sebelum G3 (tetap minta konfirmasi pengguna sesuai §0 Aturan 6); rincikan lingkungan uji TTFA (CPU/GPU, EP, *precision*, *chunk*, p50/p95, waktu sintesis penuh terpisah). |
+| **ISS-16** | Hal. 25 (cetak 22) §2.14; Hal. 49 (cetak 46) §3.8.4                                   | Pers. (2.23) menulis *"dan akurasi kata dilaporkan sebagai 1 − WER"*. WER bisa \>1 akibat penyisipan $I$.                                                                                                                                                                                                                                                                                                                                                                                                                         | **P1**    | `contradiction`                    | Hapus `1 − WER`; laporkan **WER** beserta jumlah $(S, D, I, N)$ secara langsung (atau definisikan *exact-match/token accuracy* terpisah).                                                                                                                                                                                                      |
+| **ISS-17** | Hal. 48 (cetak 45) §3.8.3                                                             | Pers. (3.3) memakai satu rumus untuk dua arah berbeda; target *parse* dan TTFA tidak merinci persentil maupun mode daring/luring.                                                                                                                                                                                                                                                                                                                                                                                                 | **P1**    | `recommendation`                   | Pisahkan rumus latensi **Arah 1 ($T_1$)** dan **Arah 2 ($T_2$)**; wajibkan pengukuran p50 dan p95 pada mode daring dan luring.                                                                                                                                                                                                                 |
+| **ISS-18** | Hal. 5 (cetak 2) §1.1; Hal. 33 (cetak 30) Tabel 3.1; Hal. 48 (cetak 45) §3.8.3        | Klaim *"Biaya sepasang node lengkap diperkirakan di bawah Rp350.000"* dan *"murah"* bertentangan dengan 2 × ESP32-S3 (\~Rp300.000) sebelum layar, mic, DAC, speaker, encoder, baterai, BMS, TP4056, dan *enclosure*.                                                                                                                                                                                                                                                                                                              | **P1**    | `contradiction` / `open`           | Hapus klaim biaya node lengkap \<Rp350.000 dan kata *"murah"* tanpa data; pisahkan harga sepasang modul ESP32-S3 (\~Rp300.000) dari total BOM purwarupa lengkap (siapkan struktur BOM tanpa angka tebakan).                                                                                                                                    |
+| **ISS-19** | Hal. 24, 36–39 (cetak 21, 33–36) §2.13, §3.5, Tabel 3.3                               | Protokol audio (format/codec, *sample rate*, streaming/*buffering*, *packet loss*, *retry*, *timeout*), koeksistensi simultan (`CSI promiscuous + STA/UDP + ESP-NOW + audio`), verifikasi pinout Tabel 3.3 (*strapping*, jalur USB, ADC, konflik periferal, revisi papan), dan profil daya (arus puncak, *load-sharing*) belum ditetapkan.                                                                                                                                                                                        | **P1**    | `open`                             | Pertahankan sebagai item audit wajib T0/G3 (jangan menebak angka/format sebelum diuji); tambahkan butir verifikasi pinout Tabel 3.3 dan protokol audio/jaringan/daya ke §3.5 & T0.                                                                                                                                                             |
+| **ISS-20** | Hal. 21–23, 40–41, 49–53 §2.9, §2.12, §3.6, §3.8.5, Tabel 3.5                         | Belum ada pengukuran kualitas keypoint YOLO khusus gerak **J/Z** (*detection rate*, *jitter*, *frame drop*, validitas lintasan); belum ada animasi/urutan untuk ejaan jari J/Z (§2.12); kartu huruf per blok belum diacak; belum dicatat jumlah repetisi tersisa pasca-pembuangan; toleransi sinkronisasi kamera-CSI masih `[PERLU DATA]`; rubrik pakar, ambang kritis, frasa uji, target baterai, *false detection/jam*, dan analisis deskriptif 3–5 pengguna (tanpa klaim kausal) belum lengkap; \[12\] kurang hash/commit WPC. | **P1**    | `open` / `recommendation`          | Lengkapi prosedur validasi keypoint J/Z, acak urutan kartu per blok, catat jumlah repetisi terpakai, syaratkan animasi ejaan jari J/Z, pertahankan `[PERLU DATA]` pada sinkronisasi/rubrik/frasa/target/hash WPC, dan tegaskan sifat formatif-deskriptif uji 3–5 pengguna.                                                                     |
+| **ISS-21** | Hal. 41 (cetak 38) §3.6                                                               | Etika: komisi etik masih placeholder; belum ada masa simpan & jadwal hapus video, kontrol akses data, klarifikasi risiko re-identifkasi (hindari klaim "sepenuhnya anonim"), *consent* wali + *assent* anak jika melibatkan siswa di bawah umur, serta format persetujuan aksesibel untuk partisipan tunarungu.                                                                                                                                                                                                                   | **P1**    | `open` / `recommendation`          | Lengkapi seluruh klausul tata kelola etika & privasi (dengan masa simpan tetap `[PERLU DATA]` / keputusan komisi etik).                                                                                                                                                                                                                        |
+| **ISS-22** | Hal. 18, 22, 24, 47, 50 §2.6, §2.10, §2.13, §3.8.2, Tabel 3.5 G1                      | Ambang G1 (≥50%, F1 ≥0,45) belum memisahkan *scientific feasibility* vs *operational usability* dan belum mewajibkan pelaporan *accepted coverage*, *selective accuracy*, *false accept/reject*; ESP-DL 69,2 ms \[23\] tak dijelaskan sebagai tolok ukur citra RGB; §2.13 menyebut server *"seluruhnya dalam Rust"* padahal memuat runtime ML (`faster-whisper`/ONNX).                                                                                                                                                            | **P1**    | `fact` / `recommendation`          | Pisahkan *feasibility* vs *usability*; wajibkan *coverage* & *selective accuracy*; jelaskan 69,2 ms ESP-DL adalah `MobileNetV2-0.5` citra RGB \[8.3.1\]; ubah istilah ke *orkestrasi server dalam Rust + runtime ML untuk ucapan*.                                                                                                             |
+| **ISS-23** | Hal. 31 (cetak 28) Gambar 3.1; Hal. 51–52 (cetak 48–49) Tabel 3.6                     | **Koreksi visual PDF v17:** G0b **sudah tampak** di Gambar 3.1 hal. 31, tetapi **absen dari Tabel 3.6 (Jadwal)**, tidak disebut pada *caption* Gambar 3.1, dan kotak kuantisasi + G1 di Gambar 3.1 berada di subgraf `M8–M14` padahal T2 berjalan `M4–M8`.                                                                                                                                                                                                                                                                        | **P1–P2** | `contradiction`                    | Tambahkan **G0b** ke Tabel 3.6 (antara T1 dan T2), perbarui *caption* Gambar 3.1, dan pindahkan kotak kuantisasi + G1 ke fase `M1–M8`.                                                                                                                                                                                                         |
+| **ISS-24** | Hal. 12, 34, 37, 39 (cetak 9, 31, 34, 36) Gambar 2.1, 3.2, 3.3, 3.4                   | Label Gambar 2.1 bertumpuk; Gambar 3.2 perlu penegasan foto stok/ilustrasi, bukan perangkat terakit; Gambar 3.3 merender `*on-device*` mentah di *caption* & kotak cadangan TTS menjuntai di bawah Arah 2; **koreksi visual:** Gambar 3.4 **ada** di hal. 39 tetapi label di dalamnya bertumpuk dan berkas CAD/foto finalnya masih `[PERLU DATA]`.                                                                                                                                                                                | **P2**    | `contradiction` / `open`           | Rapikan tata letak Gambar 2.1, 3.3, 3.4; perjelas status ilustrasi stok Gambar 3.2; hilangkan `*` mentah di *caption* Gambar 3.3.                                                                                                                                                                                                              |
+| **ISS-25** | Hal. 1–5, 16, 19, 32–33, 52–53                                                        | Sampul masih placeholder; Daftar Isi belum mutakhir & masih menyertakan catatan *Update Field*; §1.1 mengklaim *"anak tunarungu hampir selalu lahir..."* & klaim pencarian *"hingga Oktober 2026"* tanpa log kueri; *typo* `"Paramete/r"`, `"Jumla/h"`, `"kehati-hatianya"`, `d~ref~`, `λ~cls~`, `λ~reg~`; 20 item Tabel 3.7 dan `[PERLU DATA]` tanggal/lokasi/perangkat masih terbuka.                                                                                                                                           | **P2**    | `open` / `fact`                    | Haluskan klaim demografi §1.1, lampirkan log pencarian literatur, perbaiki seluruh *typo*/tabel, pertahankan placeholder terbuka sampai data resmi tersedia, dan perbarui Daftar Isi pada ekspor akhir.                                                                                                                                        |
+
+2. Pemisahan Tiga Keluaran Konseptual (§10 Butir 3)
+
+2A. Keputusan Terkunci ([LOCKED]) — Tidak Boleh Diubah
+
+1.  Identitas purwarupa SenseSIBI: studi kelayakan alat bantu komunikasi dua
+    arah berbasis Wi-Fi CSI dengan inferensi jalur isyarat di ESP32-S3 dan
+    pemrosesan layanan pada server lokal + klien ponsel (Tauri).
+2.  Ruang lingkup alfabet: 26 kelas alfabet manual SIBI satu tangan (24 huruf
+    statis termasuk C, serta J dan Z dinamis). Tidak diperluas menjadi
+    penerjemahan kalimat penuh, tata bahasa SIBI penuh, BISINDO, atau penanda
+    nonmanual.
+3.  Kedua arah komunikasi wajib utuh:
+      - Arah 1: Isyarat SIBI (TX→RX ESP32-S3) → klasifikasi CSI di perangkat →
+        teks Indonesia → layar + suara TTS.
+      - Arah 2: Ucapan (tombol PTT + mikrofon RX) → ASR → teks → pemetaan kamus
+        kata SIBI + fallback ejaan jari → tampilan layar/aplikasi.
+4.  Kamera + YOLO26m-Pose hanya berfungsi sebagai guru visual saat akuisisi dan
+    pelatihan (menyumbang pseudo-label 21 keypoint); produk akhir bebas kamera,
+    dan label kelas berasal dari kartu pemandu protokol perekaman.
+5.  Komponen inti tetap dipertahankan: sepasang ESP32-S3, kandidat encoder
+    RuView (wifi-densepose-pretrained), pelatihan Python/PyTorch,
+    orkestrasi/klien Rust (Tokio, Axum, Leptos/WASM, Tauri), ponsel Poco F4 5G,
+    laptop RTX 3070, ASR, dan TTS.
+
+2B. Keputusan Desain & Parameter Belum Dikonfirmasi ([OPEN]) — Wajib Diputuskan Pengguna / Pembimbing
+
+1.  Akhiran judul (Tabel 3.7 #20): PEMROSESAN SERVER (v17) vs CLOUD PROCESSING
+    (judul kerja lama) vs usulan penegasan PEMROSESAN SERVER LOKAL.
+2.  Arsitektur deployment akhir (Tabel 3.7 #19): Pilihan 1 (classifier-only,
+    kepala regresi dilepas saat deployment — saat ini preferred textual design
+    di §3.5/§3.7, belum diselaraskan ke seluruh tabel/diagram) vs Pilihan 2 (dua
+    kepala aktif).
+3.  Penanganan mesin TTS Bahasa Indonesia (Tabel 3.7 #17): Karena Kokoro-82M
+    v1.0 terbukti belum memuat suara Indonesia [4.5], [8.2.1], konfirmasi apakah
+    MMS-TTS-ind langsung ditetapkan sebagai pilihan operasional utama server
+    lokal (sesuai arahan handoff §7 #17) sambil tetap mencatat evaluasi Kokoro
+    bila ada pembaruan sebelum G3.
+4.  Rute masukan encoder pasca-T0/G0b (Tabel 3.7 #6): Jalur A (8 fitur RuView)
+    vs Jalur B1 (adapter rekonstruksi) vs Jalur B2 (adapter tugas), serta batas
+    penghentian menuju LoRA/pelatihan lanjutan & Pembanding C.
+5.  Kontrak target regresi & temporal (Tabel 3.7 #4, #6, #7): Sistem koordinat
+    final (bbox vs wrist-relative), skala d_{\text{ref}}, ambang PCK \alpha,
+    metode pemetaan keypoint ke pusat window CSI, panjang segmen T, ambang
+    pose-hold huruf statis, serta batas akhir T0/T2.
+6.  Perangkat keras & anggaran BOM (Tabel 3.1, §1.1, Tabel 3.7 #16): Model papan
+    ESP32-S3 final, layar (OLED vs TFT), router AP, kapasitas baterai pasca-uji
+    arus, berkas enclosure, verifikasi pinout Tabel 3.3, serta revisi batas
+    anggaran pasca-penyusunan BOM lengkap.
+7.  Protokol akuisisi, audio, etika, & gerbang (Tabel 3.7 #1–#3, #5, #11–#15,
+    #18): Toleransi sinkronisasi kamera-CSI, protokol pengiriman audio &
+    parameter koeksistensi T0, komisi etik, masa simpan video, keikutsertaan
+    anak/wali, rubrik & nama/kompetensi pakar G2, frasa uji G3, target baterai &
+    false detection/jam, kuesioner G4, identitas sampul, waktu/lokasi
+    penelitian, serta commit/hash WPC exp11_huruf24.
+
+2C. Rekomendasi Teknis Reviewer ([REVIEW]) — Terpisah dari Fakta & Keputusan Terkunci
+
+1.  Tambahkan Pembanding C (raw/richer CSI temporal baseline): Untuk menguji
+    apakah ringkasan 8 fitur lingkungan RuView menjadi bottleneck informasi jari
+    (jangan mengganti desain utama RuView secara diam-diam).
+2.  Eksperimen (W, H) lebih pendek untuk J/Z: Bandingkan
+    (1{,}0\text{ s}, 0{,}25\text{ s}) terhadap
+    (0{,}5\text{ s}, 0{,}10\text{–}0{,}25\text{ s}) dan Pembanding C karena
+    window 1 detik ber-overlap 75% berisiko mengaburkan gerak cepat.
+3.  Uji permutasi & split anti-leakage: Gunakan permutasi pada blok/repetisi
+    independen untuk G0b (p_{\text{perm}} < 0{,}05 skor asli di atas null) dan
+    wajibkan pemecahan data sebelum sliding window + purge gap \ge W.
+4.  Pemantau gradien & metrik seleksi: Tambahkan cosine similarity gradien
+    bersama \cos(g_c, g_r), serta laporkan accepted coverage, selective
+    accuracy, false accept/reject, dan p50/p95 latensi.
+5.  Penguatan komunikasi & kelayakan: Pisahkan scientific feasibility vs
+    operational usability di G1; wajibkan animasi ejaan jari J/Z pada Arah 2;
+    acak urutan kartu huruf per blok; hitung kesepakatan validator & keandalan
+    keypoint J/Z; evaluasi opsi pre-cache audio 26 huruf tunggal agar pemutaran
+    Arah 1 tidak terhambat short-utterance latency TTS.
+
+3. Daftar Perubahan Prioritas (P0 / P1 / P2)
+
+Prioritas P0 — Konsistensi Ilmiah, Model, Sinyal, & Anti-Leakage (Wajib Diselesaikan Sebelum Seminar)
+
+1.  Selaraskan parameter trainable (§1.5.1, §2.5, §3.1 ↔ Pers. 2.15): Hapus
+    klaim "melatih hanya kedua kepala" agar seragam dengan Θ_train = {φ_adapter,
+    θ_temporal, θ_c, θ_r} dan θ_encoder = θ_0.
+2.  Definisikan objektif Jalur A vs B1 vs B2 & tambahkan Pembanding C (§2.4,
+    §3.7, G0b): Pisahkan rekonstruksi 8 fitur, adapter rekonstruksi, adapter
+    tugas, dan baseline CSI lebih kaya; catat temuan primer RuView (EWC 32,97%
+    lupa, isu SISO #509, model.safetensors #1522 vs csi-embed-v2).
+3.  Koreksi klaim temporal J/Z (§3.7): Nyatakan 4 langkah/s adalah hop rate
+    dengan 75% overlap; jelaskan rentang efektif T=16 (3,75 s jarak pusat;
+    hingga ~4,75 s cakupan mentah); batasi klaim interpolasi ke FPS kamera.
+4.  Pisahkan onset gerak vs pose-hold window untuk 24 huruf statis (§3.7).
+5.  Kunci struktur masker, koordinat 2D, & konflik gradien (§2.7, §2.8, §2.14):
+    Gabungkan mask valid padding + visibilitas (m^*_{itj}), eksplisitkan sumasi
+    (x,y) pada Smooth L1, selaraskan dimensi Pers. (2.8), rapikan nomor Pers.
+    (2.15), dan tambahkan \cos(g_c, g_r).
+6.  Perbaiki uji statistik G0b & split anti-leakage (§3.7, Tabel 3.5): Ganti
+    "kontrol label-acak (p < 0,05)" menjadi permutation test; wajibkan split
+    sebelum sliding window + purge gap.
+7.  Perketat definisi subcarrier valid & rasio baseline (§2.2, §3.7, T0): Ganti
+    /56 menjadi 1/|N_valid|; masukkan audit packet, LTF, MAC, pilot/null/guard,
+    first_word_invalid, panjang buffer, laju/loss, RSSI/noise floor, dan sisa
+    phase drift.
+8.  Sinkronkan Pilihan 1 vs Pilihan 2 (§3.5, §3.7, Tabel 3.7 #19, Gambar 2.2
+    & 3.5): Selaraskan seluruh bagian sambil menunggu konfirmasi resmi pengguna.
+
+Prioritas P1 — Sistem, Integrasi, Evaluasi, & Pustaka
+
+9.  Perluas Bab II §2.15 dengan DF-WiSLR [29] & Wi-SignFi [30] serta persempit
+    klaim kebaruan.
+10. Perbarui status TTS Indonesia (§2.11, §3.5, Tabel 3.2, 3.7 #17, 3.8 #8):
+    Dokumentasikan verifikasi Kokoro-82M v1.0 tidak memiliki suara Indonesia dan
+    siapkan jalur operasional MMS-TTS-ind (menunggu konfirmasi).
+11. Perbaiki Pers. (2.23) WER (hapus 1 − WER) dan pecah Pers. (3.3) menjadi
+    rumus latensi T_1 dan T_2 dengan pengukuran p50/p95 daring & luring.
+12. Luruskan klaim biaya <Rp350.000 (§1.1, Tabel 3.1, §3.8.3): Pisahkan biaya
+    modul inti ESP32-S3 (~Rp300.000) dari total BOM purwarupa lengkap.
+13. Lengkapi protokol audio, koeksistensi radio, manajemen daya, & verifikasi
+    pinout Tabel 3.3 sebagai butir T0/G3 tanpa mengarang angka.
+14. Tambahkan validasi keypoint J/Z, pengacakan kartu, pelaporan jumlah repetisi
+    terpakai, animasi ejaan jari J/Z (§2.12), serta klausul etika/privasi
+    (§3.6).
+15. Pisahkan scientific feasibility vs operational usability (G1) +
+    coverage/selective accuracy (§2.6, §3.8.2), klarifikasi ESP-DL 69,2 ms [23]
+    (§2.10), istilah orkestrator Rust (§2.13), dan masukkan
+    Permenristekdikti 42/2016 [31] (§2.14, G4).
+16. Tambahkan G0b ke Tabel 3.6 (Jadwal).
+
+Prioritas P2 — Dokumen, Visual, & Administrasi
+
+17. Perbarui Gambar 2.1, 2.2, 3.1, 3.3, 3.4, 3.5 (hilangkan label bertumpuk,
+    *on-device* mentah, sesuaikan fase di Gambar 3.1, dan tandai status
+    ilustrasi stok Gambar 3.2).
+18. Lengkapi placeholder terbuka (sampul, tanggal/lokasi, komisi etik, perangkat
+    final, hash WPC, rubrik/kuesioner/frasa uji, 20 butir Tabel 3.7).
+19. Perbaiki formatting tabel/teks (Paramete/r, Jumla/h, kehati-hatianya,
+    d~ref~, λ~cls~, λ~reg~), haluskan klaim demografi §1.1, lampirkan log
+    pencarian literatur, dan perbarui Daftar Isi serta hapus catatan Update
+    Field sebelum ekspor v18.
+
+4. Daftar Pembaruan Persamaan, Tabel, dan Diagram
+
+4A. Pembaruan Persamaan (Konsisten Tanpa Melanggar Penomoran)
+
+  - (2.1):
+    h_n(t) = |h_n(t)| \cdot \exp(j \cdot \varphi_n(t)), \quad n \in \mathcal{N}_{\text{valid}}
+    (menunggu audit T0 atas LLTF/HT-LTF, pilot/null/guard, dan
+    first_word_invalid).
+  - (2.5): \rho_n(t) = h_n(t) / h_n(t_0) (didefinisikan tegas sebagai
+    normalisasi relatif terhadap baseline kalibrasi ruang t_0, bukan penghilang
+    seluruh drift fase waktu-nyata).
+  - (2.8): a_i = W_c \cdot s_i + b_c, dengan s_i \in \mathbb{R}^{d_h} vektor
+    ringkasan atensi modul temporal (s_i = z_i, d_h = 128 pada probe atau varian
+    tanpa proyeksi temporal),
+    W_c \in \mathbb{R}^{K \times d_h}, b_c \in \mathbb{R}^K.
+  - (2.13a) (baru): m^*_{itj} = m^{\text{valid}}_{it} \cdot m^{\text{vis}}_{itj}
+    (gabungan mask valid temporal untuk padding dan mask visibilitas keypoint).
+  - (2.13):
+    \mathcal{L}_{\text{reg}} = \dfrac{\sum_{i,t,j} m^*_{itj} \sum_{c \in \{x,y\}} \text{SmoothL1}_\delta(Q_{itj,c} - P_{itj,c})}{2 \sum_{i,t,j} m^*_{itj} + \varepsilon}.
+  - (2.14a) (baru):
+    \cos(g_c, g_r) = \dfrac{g_c^\top g_r}{\|g_c\|_2 \|g_r\|_2 + \varepsilon},
+    dengan g_c = \nabla_{\theta_{\text{shared}}}\mathcal{L}_{\text{cls}} dan
+    g_r = \nabla_{\theta_{\text{shared}}}\mathcal{L}_{\text{reg}} pada
+    \theta_{\text{shared}} = \{\phi_{\text{adapter}}, \theta_{\text{temporal}}\}.
+  - (2.15) (mengganti 2.15′):
+    \Theta_{\text{train}} = \{\phi_{\text{adapter}}, \theta_{\text{temporal}}, \theta_c, \theta_r\}, \quad \theta_{\text{encoder}} = \theta_0.
+  - (2.21) & (2.22): Ganti m_{itj} menjadi m^*_{itj} agar padding tidak dihitung
+    dalam MPJPE maupun PCK@\alpha.
+  - (2.23): \text{WER} = (S + D + I) / N (hapus keterangan 1 − WER).
+  - (3.1):
+    d(t) = \dfrac{1}{|\mathcal{N}_{\text{valid}}|} \sum_{n \in \mathcal{N}_{\text{valid}}} |h_n(t) - h_n(t-1)|
+    dan varian
+    d_{|H|}(t) = \dfrac{1}{|\mathcal{N}_{\text{valid}}|} \sum_{n \in \mathcal{N}_{\text{valid}}} \big||h_n(t)| - |h_n(t-1)|\big|.
+  - (3.3a) & (3.3b) (memecah 3.3):
+    T_1 = t_{\text{CSI-buf}} + t_{\text{seg}} + t_{\text{inf-tepi}} + t_{\text{tel}} + t_{\text{map}} + t_{\text{TTS}} + t_{\text{audio-dl}} + t_{\text{putar}} \qquad (3.3a)
+    T_2 = t_{\text{rekam}} + t_{\text{audio-ul}} + t_{\text{ASR}} + t_{\text{kamus}} + t_{\text{tampil}} \qquad (3.3b)
+
+4B. Pembaruan Tabel
+
+  - Tabel 2.2: Perbaiki pemenggalan Parameter; cantumkan catatan verifikasi
+    berkas v1 vs v2 pada kolom RuView [4.1], [4.3].
+  - Tabel 2.3: Tambahkan baris DF-WiSLR (Ahmed dkk., 2020 [29]) dan Wi-SignFi
+    (Gao dkk., 2023 [30]).
+  - Tabel 2.4: Baris 1 ganti ke "Orkestrasi server & klien dalam Rust + runtime
+    ML ucapan"; Baris 2 catat bahwa Kokoro-82M v1.0 terkonfirmasi tanpa Bahasa
+    Indonesia dan sertakan MMS-TTS-ind sebagai kandidat operasional menunggu
+    konfirmasi G3; Baris 4 ubah ke "Normalisasi rasio terhadap baseline
+    kalibrasi ruang"; Baris 6 tambah catatan Pembanding C.
+  - Tabel 3.1 & Kerangka Tabel BOM Baru: Perbaiki Jumlah; pertahankan semua
+    [PERLU DATA]; tambahkan Tabel BOM Rencana berikut untuk diisi sebelum G4
+    tanpa mengarang harga:
+
+| No.       | Komponen                                                                            | Jumlah  | Harga Satuan (Rp) | Subtotal (Rp)      | Sumber Rujukan Harga |
+| --------- | ----------------------------------------------------------------------------------- | ------- | ----------------- | ------------------ | -------------------- |
+| 1         | Modul ESP32-S3 (TX & RX)                                                            | 2 unit  | `[PERLU DATA]`    | `[PERLU DATA]`     | `[PERLU DATA]`       |
+| 2         | Layar modul final (OLED 0,96" / TFT 1,3")                                           | 1 unit  | `[PERLU DATA]`    | `[PERLU DATA]`     | `[PERLU DATA]`       |
+| 3         | *Rotary encoder* EC11 + tombol PTT/reset                                            | 1–2 set | `[PERLU DATA]`    | `[PERLU DATA]`     | `[PERLU DATA]`       |
+| 4         | Mikrofon I2S INMP441                                                                | 1 unit  | `[PERLU DATA]`    | `[PERLU DATA]`     | `[PERLU DATA]`       |
+| 5         | DAC/Amp I2S MAX98357A + speaker 8 Ω 3 W                                             | 1 set   | `[PERLU DATA]`    | `[PERLU DATA]`     | `[PERLU DATA]`       |
+| 6         | Baterai Li-Po (kapasitas final) + BMS 1S + TP4056 + komponen pasif/pembagi tegangan | 1–2 set | `[PERLU DATA]`    | `[PERLU DATA]`     | `[PERLU DATA]`       |
+| 7         | *Enclosure* cetak 3D + kabel/header/PCB                                             | 2 set   | `[PERLU DATA]`    | `[PERLU DATA]`     | `[PERLU DATA]`       |
+| **Total** | **Sepasang Node Lengkap (di luar laptop, ponsel, AP)**                              | —       | —                 | **`[PERLU DATA]`** | —                    |
+
+  - Tabel 3.2: Perbarui baris 8 & 10 sesuai status verifikasi Kokoro vs
+    MMS-TTS-ind; perjelas baris 9 sebagai lapisan orkestrasi/server/klien.
+  - Tabel 3.3: Tambahkan catatan kaki wajib bahwa seluruh pin GPIO (termasuk
+    pengecekan strapping pins 0, 3, 45, 46, jalur USB, kanal ADC1, konflik
+    periferal, dan revisi papan) diverifikasi pada unit fisik saat T0.
+  - Tabel 3.5: Perbaiki kriteria G0 (audit \mathcal{N}_{\text{valid}},
+    first_word_invalid, pose statis awal), G0b (permutation test
+    p_{\text{perm}} < 0{,}05 skor asli melampaui null + evaluasi LoRA/Pembanding
+    C bila Jalur A/B gagal), G1 (scientific feasibility vs operational
+    usability, coverage & selective accuracy, dilarang memakai data uji), G3
+    (T_1/T_2 p50/p95, status TTS), dan G4 (Permenristekdikti 42/2016 [31]).
+  - Tabel 3.6: Sisipkan baris/gerbang G0b di antara T1 dan T2 (awal M4) agar
+    sinkron dengan Gambar 3.1.
+  - Tabel 3.7: Perbaiki typo baris 7 (d_{\text{ref}}) dan baris 9
+    (\lambda_{\text{cls}}, \lambda_{\text{reg}}); perjelas status baris 17
+    (verifikasi Kokoro/MMS-TTS-ind) dan baris 19 (preferred textual design
+    Pilihan 1 menunggu konfirmasi resmi); kelompokkan baris ke dalam Keputusan
+    Desain/Administratif Inti vs Parameter Teknis Berbasis Audit/Validasi.
+  - Tabel 3.8: Perbarui baris 3 (tambahkan Pembanding C) dan baris 8 (tambahkan
+    fakta ketiadaan suara Indonesia pada Kokoro v1.0).
+
+4C. Pembaruan Diagram (Termasuk Opsi Kondisional Sampai Dikonfirmasi)
+
+1.  Gambar 2.1 (hal. cetak 9): Redraw skrip 3D dengan menempatkan label TX, RX,
+    jarak 1\text{ m}, r_1 \approx 18\text{ cm}, dan tangan pengisyarat memakai
+    callout berlatar putih di luar area tumpang-tindih tengah.
+2.  Gambar 2.2 (hal. cetak 25) — Pisahkan Training vs Deployment (menjaga
+    Pilihan 1 & Pilihan 2 kondisional sampai disahkan):
+
+flowchart TB
+    subgraph S1["Akuisisi Tersinkron (Hanya Pelatihan & Validasi)"]
+        CAM["Kamera laptop (hanya akuisisi)"] --> YOLO["YOLO26m-Pose (guru visual) [12]"]
+        PROT["Kartu pemandu protokol (urutan acak per blok)"] --> DSET
+        YOLO -->|"21 keypoint + visibilitas (pseudo-label)"| DSET
+        CSI_IN["CSI sepasang ESP32-S3 (N_valid subcarrier ≤ 50 fps) [9]"] --> PREP["Praproses: audit LTF & first_word_invalid, baseline ρ_n(t), segmentasi onset & pose-hold"]
+        PREP -->|"split per blok SEBELUM sliding window + purge gap"| DSET["Dataset berpasangan D_pas (Pers. 2.24)"]
+    end
+
+    subgraph S2["Arsitektur Pelatihan (Supervisi Lintas Modalitas Dua Kepala)"]
+        DSET --> ROUTE{"Rute Masukan (audit T0 & G0b)"}
+        ROUTE -->|"Jalur A: 8 fitur RuView"| ENC
+        ROUTE -->|"Jalur B1/B2: Adapter 1D-CNN"| ENC["Encoder RuView θ_0 (beku di baseline) → z_t ∈ R^128 [11]"]
+        ROUTE -.->|"Pembanding C (alternatif tanpa bottleneck 8-D)"| TEMP
+        ENC -->|"barisan (z_1,...,z_T)"| TEMP["Modul temporal (kandidat 1D-CNN) → (h_1,...,h_T)"]
+        TEMP -->|"ringkasan atensi s_i"| KCLS["Kepala klasifikasi 26 huruf (Pers. 2.8)"]
+        TEMP -->|"keadaan tiap langkah h_t"| KREG["Kepala regresi 21 keypoint (T × 21 × 2)"]
+        KCLS --> LOSS["Kerugian gabungan L_total + pantau cos(g_c, g_r) + mask m*_itj (Pers. 2.13a–2.15)"]
+        KREG --> LOSS
+    end
+
+    subgraph S3["Arsitektur Deployment Produk Akhir (Tanpa Kamera)"]
+        LOSS -->|"Pilihan 1 (preferensi teks: lepas kepala regresi; Pilihan 2 aktifkan kepala regresi bila ditetapkan Tabel 3.7 #19)"| DEP["Model Terkuantisasi ESP32-S3: Praproses → Rute Terpilih → Encoder → Modul Temporal → Kepala Klasifikasi [opsi +Regresi]"]
+        DEP --> OUT["Keluaran perangkat: Label 26 huruf + skor keyakinan (dengan mekanisme tolak)"]
+    end
+
+3.  Gambar 3.1 (hal. cetak 28): Pindahkan kotak Kuantisasi model terpilih... dan
+    G1 akhir M8 ke dalam subgraf Fase Pembangunan Data, Audit, & Model (M1–M8)
+    agar sinkron dengan jadwal T2 (M4–M8); perbarui caption agar menyebut G0–G4
+    dan G0b.
+4.  Gambar 3.2 (hal. cetak 31): Pertahankan sebagai foto pengenal bentuk
+    konseptual dan tambahkan peringatan visual di caption: "Catatan: foto produk
+    hanya ilustrasi bentuk sebelum pengadaan/perakitan final."
+5.  Gambar 3.3 (hal. cetak 34): Hapus tanda * mentah di caption (*on-device* →
+    on-device); hubungkan kotak TTS on-device ponsel sebagai cabang putus-putus
+    langsung dari Arah 1 (Server Orkestrasi Rust / Speaker RX), bukan menjuntai
+    di bawah Arah 2; ubah label kotak server menjadi Server Orkestrasi Rust
+    (Tokio/Axum/Leptos) + Runtime TTS & ASR.
+6.  Gambar 3.4 (hal. cetak 36): Pertahankan skema 3D konseptual; geser label
+    komponen di kotak abu-abu ke luar kotak dengan leader line agar terbaca
+    jelas; tetap pertahankan [PERLU DATA: berkas model enclosure final] dan
+    [PERLU ILUSTRASI: foto/render final].
+7.  Gambar 3.5 (hal. cetak 43): Sajikan sinkron dengan Pilihan 1 (sebagai
+    preferred textual design) sambil menandai node keputusan atau keterangan
+    bahwa aktivasi kepala regresi tunduk pada konfirmasi final Tabel 3.7 #19:
+
+flowchart LR
+    subgraph ACQ["Akuisisi, Validasi Buffer, & Segmentasi di Node RX"]
+        CB["Callback CSI (promiscuous, filter MAC/MGMT, cek first_word_invalid & N_valid)"] --> BUF["Penyangga geser CSI di PSRAM"]
+        BUF --> SEG["Segmentasi: onset Delta-CSI + jendela pose-hold (statis) / lintasan (J,Z)"]
+        SEG --> INP["Ekstraksi masukan teraudit (Jalur A / B / alternatif C)"]
+    end
+
+    subgraph INF["Inferensi Tepi Terkuantisasi (Pilihan 1: Klasifikator Saja; Pilihan 2: Tunggu Tabel 3.7 #19)"]
+        MOD["Model terkuantisasi: Encoder + Modul Temporal + Kepala Klasifikasi [lepas regresi pada Pilihan 1]"] --> TH{"Skor keyakinan ≥ ambang?"}
+        TH -->|"ya"| ACC["Tampil di layar + kirim label & skor via UDP"]
+        TH -->|"tidak"| REJ["Label ditolak: isyarat tidak dikenali"]
+    end
+
+    INP --> MOD
+
+5. Draf Revisi Targeted per Subbab (Teks Siap Tempel)
+
+Seluruh draf di bawah bersifat additive dan targeted: identitas SenseSIBI
+terjaga utuh, item [OPEN] tetap bertanda [PERLU DATA] / [PERLU VALIDASI] /
+[PERLU KONFIRMASI] tanpa tebakan, dan usulan reviewer ditandai jelas.
+
+5.1 Sampul & BAB I
+
+  - Sampul (Hal. PDF 1): Tetap pertahankan ke-5 [PERLU DATA] identitas serta
+    catatan keputusan judul akhir (PEMROSESAN SERVER vs PEMROSESAN SERVER LOKAL
+    vs CLOUD PROCESSING pada Tabel 3.7 #20).
+  - Subbab 1.1 Latar Belakang — Paragraf 1 (Hal. cetak 1):
+    Sebagian besar anak tunarungu tumbuh di dalam keluarga penutur dengar yang
+    belum menguasai bahasa isyarat sejak awal. Sejak hari-hari pertama,
+    komunikasi di rumah kerap berjalan dalam dua saluran bahasa yang belum
+    saling menjembatani: orang tua berbicara dengan suara, sedangkan anak
+    berkomunikasi dengan isyarat, sementara waktu dan kesempatan belajar bahasa
+    isyarat serba terbatas. Angka akses layanannya juga timpang. Di Indonesia
+    ada sekitar 1,92 juta penyandang tunarungu, sementara juru bahasa isyarat
+    baru sekitar 500 orang [1]. Untuk kebutuhan harian seperti menceritakan
+    sakit atau bertanya di ruang kelas, menunggu juru bahasa bukan jalan keluar.
+    Undang-Undang Nomor 8 Tahun 2016 sudah menjamin hak setiap penyandang
+    disabilitas untuk berkomunikasi [2], tetapi tanpa alat bantu yang
+    terjangkau, jaminan itu berjalan lambat.
+  - Subbab 1.1 — Paragraf 3 & 4 (Hal. cetak 2):
+    Untuk menghindari dua kendala itu, sinyal Wi-Fi membuka jalan lain tanpa
+    kamera melalui Channel State Information (CSI) [6]. Begitu tangan bergerak
+    di antara pemancar dan penerima, jalur pantulan sinyal bergeser dan CSI
+    berubah mengikuti pola gerakannya; perubahan itulah yang dibaca untuk
+    mengenali gerak tanpa sensor yang dikenakan di tubuh. SignFi mengenali 276
+    isyarat American Sign Language (ASL) dari CSI [7], sementara DF-WiSLR [29]
+    dan Wi-SignFi [30] memperluas kajian pengenalan gestur isyarat
+    statis-dinamis serta pemodelan multitugas berbasis Wi-Fi. Penelusuran pada
+    Google Scholar, Crossref, dan OpenAlex hingga Oktober 2026 (menggunakan
+    kombinasi kata kunci "Wi-Fi CSI", "sign language", "SIBI", dan "Sistem
+    Isyarat Bahasa Indonesia") belum menemukan publikasi penerapan CSI untuk
+    isyarat SIBI maupun purwarupa dua arah berbasis ESP32-S3; ketiadaan tersebut
+    dicatat sebagai batas hasil penelusuran basis data terkait.
+    Dari sisi perangkat keras, modul ESP32-S3 dengan radio Wi-Fi 2,4 GHz dan
+    dukungan CSI resmi [8], [9] serta firmware terbuka RuView [10] berkisar
+    sekitar Rp150.000 per modul penginderaan dasar (~Rp300.000 untuk sepasang
+    modul TX–RX di luar layar, antarmuka audio, baterai, pengisi daya, dan
+    enclosure). Rincian biaya satu pasang node antarmuka lengkap disusun melalui
+    daftar komponen (bill of materials, BOM) aktual dan dinilai pada gerbang G4
+    [PERLU DATA: total BOM purwarupa lengkap], alih-alih diklaim murah sebelum
+    perincian komponen tersedia.
+    Jawabannya, penelitian ini merancang purwarupa bernama SenseSIBI (Sensing &
+    Translation of SIBI). Arah pertamanya berjalan dari siswa: ia mengisyaratkan
+    huruf, modul RX menangkap pola CSI, model klasifikasi tepi yang dijalankan
+    pada modul mengenalinya menjadi label huruf, lalu label dikirim ke server
+    untuk pemetaan teks Indonesia, tampilan layar, dan sintesis suara yang
+    diputar pada speaker. Arah kedua berjalan dari guru: ia menekan tombol lalu
+    berbicara; ucapannya dikenali menjadi teks oleh mesin ASR, lalu dipetakan ke
+    kamus kata SIBI beserta fallback ejaan jari pada layar aplikasi.
+  - Subbab 1.5.1 Manfaat Teoretis (Hal. cetak 6):
+    Secara teoretis, penelitian ini menyumbang bukti awal tentang satu
+    pertanyaan yang tajam: apakah embedding hasil pretraining kontrastif pada
+    CSI masih informatif untuk gestur jari apabila encoder dibekukan dan hanya
+    adapter masukan (jika dipakai), modul temporal, serta kedua kepala tugasnya
+    yang dilatih.
+
+5.2 BAB II KAJIAN PUSTAKA
+
+  - Subbab 2.2 Wi-Fi CSI (Hal. cetak 8–10):
+
+    Bentuk formalnya sederhana: pada kanal 20 MHz, tiap subcarrier valid
+    n \in \mathcal{N}_{\text{valid}} membawa koefisien kanal kompleks:
+    h_n(t) = |h_n(t)| \cdot \exp(j \cdot \varphi_n(t)) \qquad (2.1) dengan
+    |h_n(t)| amplitudo, \varphi_n(t) fase, dan j satuan imajiner [6], [9].
+    Dokumentasi ESP-IDF membedakan total indeks 56 subcarrier pada kanal 20 MHz
+    dari subcarrier data efektif, pilot, null/guard bins, serta tipe Long
+    Training Field (LTF): tanpa STBC, LLTF memuat 52 subcarrier data efektif
+    sedangkan HT-LTF memuat 56 subcarrier, dan bila tanda first_word_invalid
+    aktif maka 4 byte awal (2 subcarrier) tidak valid [9]. Karena itu, jenis
+    paket, LTF yang dipakai, filter MAC, panjang buffer, RSSI/noise floor,
+    penanganan pilot/null/guard serta first_word_invalid, dan pembersihan fase
+    wajib divalidasi pada T0 untuk menentukan \mathcal{N}_{\text{valid}}.
+
+    (Pada Pers. 2.5 hal. cetak 10:)
+    \rho_n(t) = \frac{h_n(t)}{h_n(t_0)} \qquad (2.5) dengan t_0 waktu kalibrasi
+    ruang bawaan RuView (600 bingkai) [10]. Rumus ini didefinisikan secara
+    sempit sebagai normalisasi relatif terhadap baseline kalibrasi ruang, bukan
+    seluruh varian CSI-ratio antar-antena atau perkalian konjugat pada literatur
+    [13]. Pembagian terhadap satu rekaman acuan membuang pantulan statis
+    ruangan, tetapi tidak otomatis menghapus seluruh phase drift lambat yang
+    berubah seiring waktu; sisa drift dan derau fase diukur pada T0 dan
+    dilaporkan apa adanya.
+
+  - Subbab 2.4 Encoder RuView (Hal. cetak 11–13):
+
+    (Tambahkan setelah kalimat audit checkpoint pada hal. cetak 11:) Pemeriksaan
+    repositori Hugging Face dan GitHub RuView (diakses 14 November 2026)
+    menunjukkan adanya dua set artefak checkpoint
+    (model.safetensors/model.rvf.jsonl serta csi-embed-v2.safetensors,
+    csi-embed-v2-int4.bin, dan csi-embed-v2.py yang memuat standardizer FP16),
+    sekaligus mengungkap bahwa berkas model.safetensors mengalami NUL-padding
+    pada header (issue #1522) sehingga tidak terbaca langsung oleh
+    safetensors.torch.load_file [10], [11]. Selain itu, dokumentasi RuView
+    (#509) memperingatkan keterbatasan aliran CSI antena tunggal (SISO) 56
+    subcarrier ESP32 terhadap detail sendi distal, dan angka
+    triplet-temporal 82,3% hanya berasal dari satu ruangan, satu rekaman, dan
+    dua node [10], [11]. Audit T0 wajib memeriksa versi berkas, jumlah parameter
+    aktual, dan parameter standardizer sebelum pelatihan dimulai.
+
+    (Ganti paragraf "Ketidaksesuaian bentuk masukan..." hal. cetak 12 menjadi:)
+    Ketidaksesuaian bentuk masukan menjadi risiko ilmiah utama. Kartu model
+    mencatat masukan delapan fitur turunan lingkungan per jendela 1 detik
+    (presence, motion, breathing, heart rate, phase variance, person count, fall
+    detection, RSSI) [11], sedangkan akuisisi ESP32-S3 menghasilkan
+    \mathcal{N}_{\text{valid}} subcarrier hingga 50 bingkai/detik [9], [10].
+    Apabila detail artikulasi jari hilang ketika CSI diringkas menjadi delapan
+    fitur tersebut, membuka bobot encoder melalui LoRA maupun fine-tuning tidak
+    otomatis mengembalikan informasi yang sudah terbuang. Untuk membedakan dua
+    tujuan yang sering tercampur serta mencegah bottleneck input, penelitian
+    menyiapkan dua jalur implementasi masukan beserta satu pembanding alternatif
+    arsitektur:
+
+    1.  Jalur A (Rekonstruksi Fitur Bawaan): Implementasi ulang delapan fitur
+        turunan RuView beserta unit, definisi, timestamp, dan normalisasi yang
+        diverifikasi terhadap artefak asli pada T0.
+    2.  Jalur B (Adapter Konvolusi 1D Terlatih): Dibedakan menjadi Jalur B1
+        (adapter rekonstruksi) yang dilatih meniru delapan fitur RuView, dan
+        Jalur B2 (adapter tugas) yang dioptimalkan langsung dengan loss tugas
+        SIBI. Jika Jalur B2 berhasil sementara Jalur A gagal, kontribusi
+        pemisahan kelas berasal dari adapter tugas dan tidak diklaim semata
+        sebagai bukti representasi bawaan RuView.
+    3.  Pembanding C (Baseline CSI Temporal Lebih Kaya): Evaluasi alternatif
+        arsitektur berupa model temporal ringan yang menerima spektrum CSI yang
+        belum dipersempit menjadi delapan fitur. Pembanding C menjaga ketajaman
+        analisis pada G0b tanpa mengganti desain utama RuView secara diam-diam.
+
+  - Subbab 2.5 Transfer Learning (Hal. cetak 13–14):
+
+    Baseline penelitian ini membekukan tetapan encoder
+    (\theta_{\text{encoder}} = \theta_0) dan melatih bersama adapter masukan
+    (bila dipakai), modul temporal, serta kedua kepala tugas sebagaimana
+    dirumuskan pada Persamaan (2.15).
+
+    (Pada paragraf pelatihan lanjutan hal. cetak 14:) Keduanya dijaga dengan EWC
+    sebagai mitigasi lupa bencana [11], dengan catatan transparan bahwa kartu
+    model wifi-densepose-pretrained sendiri masih melaporkan forgetting rate
+    sebesar 32,97% pada empat tugas pretraining meskipun memakai EWC
+    (strength 2.000) [11]. Selain itu, LoRA dan pelatihan lanjutan tetap wajib
+    dibandingkan terhadap Pembanding C, karena penyetelan bobot encoder tidak
+    dapat memulihkan informasi jari jika sudah hilang pada representasi delapan
+    fitur.
+
+  - Subbab 2.6, 2.7, 2.8 (Hal. cetak 14–17):
+
+      - §2.6 (Pers. 2.8 & selective prediction): Ubah menjadi
+        a_i = W_c \cdot s_i + b_c dengan s_i \in \mathbb{R}^{d_h} vektor
+        ringkasan atensi temporal (s_i = z_i, d_h = 128 pada probe atau ablasi
+        tanpa proyeksi temporal), serta wajibkan pelaporan accepted coverage,
+        selective accuracy, overall accuracy, dan false accept/reject bersama
+        ambang penolakan [18].
+      - §2.7 (Koordinat & mask gabungan): Perbaiki typo "kehati-hatiannya".
+        Pertahankan status [PERLU VALIDASI] untuk sistem koordinat (bounding box
+        vs wrist-relative), skala acuan d_{\text{ref}}, ambang PCK \alpha,
+        konvensi handedness, dan pemetaan temporal target ke pusat window CSI;
+        tegaskan keterbatasan proyeksi XY 2D yang tidak merepresentasikan
+        kedalaman/orientasi 3D penuh. Tambahkan Pers. (2.13a)
+        m^*_{itj} = m^{\text{valid}}_{it} \cdot m^{\text{vis}}_{itj} agar
+        padding temporal tidak terhitung, dan perbarui Pers. (2.13) dengan
+        sumasi c \in \{x,y\}.
+      - §2.8 (Konflik gradien & Pers. 2.15): Tambahkan Pers. (2.14a) cosine
+        similarity \cos(g_c, g_r) pada parameter bersama (atau nyatakan
+        pemantauan besar gradien hanya sebagai indikator awal); ubah nomor
+        (2.15′) menjadi (2.15); sesuaikan ukuran
+        W_r \in \mathbb{R}^{42 \times d_h}.
+
+  - Subbab 2.10, 2.11, 2.12, 2.13, 2.14, 2.15:
+
+      - §2.10: Perjelas bahwa tolok ukur ESP-DL 69,2 ms [23] adalah model citra
+        RGB MobileNetV2-0.5 (128×128×3 int8, total 73,9 ms), yang membuktikan
+        kemampuan eksekusi int8 pada perangkat keras ESP32-S3, bukan latensi
+        model CSI.
+      - §2.11: Laporkan hasil verifikasi primer (14 Nov 2026) bahwa
+        hexgrad/Kokoro-82M v1.0 mencantumkan 8 bahasa tanpa Bahasa Indonesia dan
+        mencatat kelemahan pada ujaran pendek <10–20 token [24]. Sesuai rencana
+        penentuan alternatif operasional, MMS-TTS-ind [25] disiapkan sebagai
+        pilihan operasional Bahasa Indonesia bila ketersediaan suara Indonesia
+        pada Kokoro tetap tidak terverifikasi hingga G3 [PERLU KONFIRMASI
+        PENGGUNA: Tabel 3.7 #17].
+      - §2.12: Tegaskan bahwa pada fallback ejaan jari, huruf dinamis J dan Z
+        memerlukan representasi animasi atau urutan lintasan karena satu gambar
+        statis tidak memadai.
+      - §2.13: Ubah kalimat pembuka menjadi: "Lapisan orkestrasi server, penelan
+        UDP, dasbor, dan klien ditulis dalam Rust (Tokio, Axum, Leptos/WASM,
+        Tauri), sedangkan mesin inferensi ASR dan TTS (faster-whisper, ONNX
+        Runtime) dijalankan melalui runtime/antarmuka ML yang sesuai."
+      - §2.14: Ganti m_{itj} pada Pers. (2.21)–(2.22) dengan m^*_{itj}
+        (Pers. 2.13a); hapus 1 − WER di bawah Pers. (2.23) dan wajibkan
+        pelaporan WER bersama (S, D, I, N); tambahkan Permenristekdikti Nomor 42
+        Tahun 2016 [31] sebagai acuan resmi indikator TKT 3–4 di Indonesia
+        bersama Mankins [27].
+      - §2.15: Tambahkan pembahasan DF-WiSLR (Ahmed dkk., 2020 [29]) dan
+        Wi-SignFi (Gao dkk., 2023 [30]); tegaskan batas kebaruan yang aman
+        (tidak mengklaim CSI sign, statis-dinamis Wi-Fi, multitask umum, atau
+        teacher-student umum sebagai kebaruan global).
+
+5.3 BAB III METODE PENELITIAN
+
+  - Subbab 3.1 (Hal. cetak 26): Tambahkan adapter masukan (bila dipakai) dan
+    modul temporal pada bagian komponen yang dilatih di atas encoder beku.
+
+  - Subbab 3.2 (Hal. cetak 27–29): Perjelas T0 mengaudit
+    \mathcal{N}_{\text{valid}}, LTF, first_word_invalid, sisa phase drift,
+    koeksistensi audio-CSI-ESPNOW, dan kedua versi artefak RuView; perjelas T2
+    memisahkan data sebelum sliding window; selaraskan penyebutan G0b dengan
+    Tabel 3.6 & Gambar 3.1.
+
+  - Subbab 3.4 & Gambar 3.2 (Hal. cetak 29–32): Pertahankan semua [PERLU DATA]
+    papan/layar/AP/kapasitas baterai; tambahkan struktur Tabel BOM Rencana
+    (tanpa angka tebakan); tambahkan catatan jelas pada Gambar 3.2 bahwa foto
+    produk hanya ilustrasi pengenal bentuk, bukan dokumentasi perangkat yang
+    sudah dibeli/dirakit.
+
+  - Subbab 3.5 Perancangan Sistem (Hal. cetak 32–37):
+
+      - Tandai status Pilihan 1 sebagai rancangan utama teks saat ini sambil
+        mencatat konfirmasi final & sinkronisasi diagram/Tabel 3.7 #19.
+      - Tambahkan pada Tabel 3.3 / paragraf wiring: "Seluruh pemetaan pin GPIO
+        pada Tabel 3.3 wajib diverifikasi ulang pada unit papan fisik yang
+        dibeli saat T0, mencakup pengecekan pin strapping (GPIO 0, 3, 45, 46),
+        jalur USB, kemampuan kanal ADC1, potensi konflik periferal I2C/I2S/SPI,
+        dan revisi papan."
+      - Tambahkan pada protokol jaringan & audio (pertahankan [OPEN] tanpa
+        mengarang format): "Pada tahap T0 dan gerbang G3, protokol komunikasi
+        dan audio wajib ditetapkan serta diuji secara empiris: (a) verifikasi
+        koeksistensi firmware untuk menjalankan CSI promiscuous, koneksi
+        station/UDP, dan sinkronisasi ESP-NOW secara serentak; (b) penetapan
+        format audio/codec, sample rate, mekanisme streaming dan buffering untuk
+        aliran mikrofon (INMP441) maupun speaker (MAX98357A), penanganan packet
+        loss, timeout, dan retry [PERLU DATA: spesifikasi protokol audio T0];
+        (c) sinkronisasi timestamp antarmodul-server; serta (d) dampak beban
+        lalu lintas audio terhadap laju aktual CSI dan kestabilan jaringan."
+      - Tambahkan pada manajemen daya: "Rantai daya (baterai, BMS, TP4056,
+        regulator 3,3 V) dievaluasi pada uji bangku T0/G3 untuk memverifikasi
+        kecukupan arus puncak saat Wi-Fi TX dan speaker aktif serta keamanan
+        pengisian daya [PERLU DATA: profil arus puncak, regulasi beban saat
+        pengisian, dan kapasitas baterai final]."
+      - Pada target TTFA <100 ms: "Waktu TTFA (<100 ms) dan waktu sintesis penuh
+        dilaporkan terpisah menurut persentil p50 dan p95 pada lingkungan uji
+        terdokumentasi [PERLU DATA: konfigurasi CPU/GPU, execution provider ONNX
+        Runtime, presisi model, ukuran chunk audio, serta opsi pre-cache audio
+        huruf tunggal jika dipakai]."
+
+  - Subbab 3.6 Protokol Perekaman, Partisipan, & Etika (Hal. cetak 37–38):
+
+    4.  Menjalankan scripts/collect-ground-truth.py dengan sumber timestamp
+        tunggal dan resolusi waktu terdokumentasi; kualitas sinkronisasi
+        kamera-CSI diverifikasi ulang melalui uji kejadian di awal sesi (ketukan
+        tangan). [PERLU DATA: sumber clock final, resolusi waktu, toleransi
+        error sinkronisasi, metode alignment dan resampling keypoint ke pusat
+        window CSI, prosedur penanganan frame drop dan timestamp tidak valid].
+    5.  Memunculkan kartu pemandu huruf target dengan urutan huruf yang diacak
+        di dalam setiap blok untuk menekan efek urutan dan kelelahan, hingga
+        mencapai sekitar 30 repetisi per huruf per sesi; setelah pembuangan
+        segmen bermasalah, jumlah dan proporsi repetisi yang benar-benar dipakai
+        per kelas dan sesi dicatat serta dilaporkan.
+    6.  Membuang segmen yang gagal deteksi guru, mengalami jitter ekstrem, atau
+        terpotong, serta melakukan evaluasi kualitas keypoint YOLO khusus pada
+        gerakan dinamis J dan Z (mengukur detection rate, jitter, frame drop,
+        dan validitas lintasan karena performa exp11_huruf24 hanya terukur
+        pada 24 pose statis).
+    7.  Meminta validator penutur tunarungu memeriksa sampel segmen sesuai
+        prosedur verifikasi [PERLU DATA: proporsi sampel, jumlah penilai, batas
+        jitter, dan commit/hash checkpoint WPC exp11_huruf24]; keluaran YOLO
+        tetap berstatus pseudo-label hingga verifikasi selesai.
+
+    (Tambahkan pada paragraf etika hal. cetak 38:) Persetujuan tertulis
+    (informed consent) disajikan dalam format yang mudah diakses dan dipahami
+    partisipan tunarungu. Apabila uji melibatkan partisipan di bawah umur,
+    penelitian wajib menyertakan persetujuan orang tua/wali dan assent anak
+    (atau membatasi partisipan pada kelompok dewasa). Formulir dan tata kelola
+    data juga menetapkan batas masa simpan video mentah, prosedur penghapusan
+    permanen setelah verifikasi/ekstraksi selesai, pembatasan kontrol akses
+    berkas audio/video/CSI [PERLU DATA: persetujuan komisi etik, durasi retensi,
+    dan prosedur hapus], serta mengakui potensi risiko identifikasi ulang dari
+    metadata dan pola kinematika/suara tanpa mengklaim anonimitas mutlak.
+
+  - Subbab 3.7 Pengolahan Sinyal, Pelatihan, & Deployment (Hal. cetak 38–43):
+
+      - Ganti Pers. (3.1) memakai \mathcal{N}_{\text{valid}}; wajibkan
+        dokumentasi audit T0 (jenis frame/packet, LTF, filter MAC,
+        pilot/null/guard, first_word_invalid, panjang buffer, laju CSI/loss,
+        RSSI/noise floor, penanganan fase).
+      - Pisahkan segmentasi: onset gerak (\Delta-CSI) → pose-hold window +
+        durasi observasi + klasifikasi statis untuk 24 huruf statis; jendela
+        lintasan penuh untuk J dan Z.
+      - Perjelas definisi Jalur A, Jalur B1, Jalur B2, dan evaluasi alternatif
+        Pembanding C.
+      - Perbaiki kalimat temporal J/Z: 4 langkah/s adalah hop rate
+        (overlap 75%), bukan 4 observasi independen; T=16 berjarak
+        awal-akhir 3,75 s (cakupan mentah hingga ~4,75 s) dan berstatus usulan
+        yang difinalkan dari pilot; bandingkan konfigurasi (W, H) lebih pendek
+        dan Pembanding C; batasi interpretasi interpolasi ke laju kamera.
+      - Perbaiki statistik G0b: definisikan permutation test (jumlah permutasi,
+        unit permutasi pada blok/repetisi independen, statistik uji,
+        p_{\text{perm}} < 0,05 untuk skor label asli melampaui null), nyatakan
+        batas screening 1 pengisyarat/1 sesi, dan uji Pembanding C bila jalur 8
+        fitur gagal.
+      - Wajibkan split pada level rekaman mentah/sesi/blok repetisi sebelum
+        pembentukan sliding windows ditambah purge gap \ge W untuk mencegah data
+        leakage.
+
+  - Subbab 3.8 Skenario Pengujian & Metrik (Hal. cetak 43–48):
+
+      - §3.8.1: Tambahkan uji pilot beberapa konfigurasi tangan statis berbeda,
+        orientasi telapak berbeda, dan J/Z pada T0/G0.
+      - §3.8.2: Pisahkan scientific feasibility vs operational usability;
+        wajibkan accepted coverage, selective accuracy, overall accuracy, false
+        accept/reject, dan p50/p95 latensi.
+      - §3.8.3: Gunakan Pers. (3.3a) & (3.3b) untuk latensi masing-masing arah
+        (daring & luring, p50 & p95); rujuk Tabel BOM untuk biaya; catat bahwa
+        target baterai & false detection/jam masih [PERLU DATA] di Tabel 3.7
+        #15.
+      - §3.8.4: Hapus 1 − WER, laporkan WER + (S, D, I, N); pertahankan [PERLU
+        DATA: daftar frasa uji]; dokumentasikan uji TTS luring/daring & p50/p95
+        TTFA.
+      - §3.8.5 (Uji Kegunaan & Validator): Tegaskan: "Evaluasi 3–5 pengguna
+        bersifat formatif dan deskriptif untuk mengidentifikasi hambatan
+        penggunaan serta variasi antarpartisipan (melaporkan median, sebaran,
+        skor tiap partisipan, serta catatan kualitatif), tanpa klaim efektivitas
+        populasi maupun kesimpulan kausal. Rubrik penilaian tertulis tiga pilar
+        pakar (beserta nama/kompetensi pakar dan definisi ambang temuan kritis
+        pada G2), butir kuesioner Likert, serta batas kesesuaian validator
+        dicantumkan sebagai instrumen yang difinalkan sebelum G2/T4 dijalankan
+        [PERLU DATA: rubrik pakar, nama/kompetensi, kuesioner, dan kriteria
+        temuan kritis]."
+      - §3.8.6 Tabel 3.5: Terapkan revisi G0, G0b, G1, G3, G4 sesuai butir 4B.
+
+  - Subbab 3.9, 3.10, 3.11 & Daftar Pustaka:
+
+      - Terapkan pembaruan Tabel 3.6 (sisipkan G0b), Tabel 3.7 (perbaiki typo
+        d~ref~, λ~cls~, λ~reg~; selaraskan #17 dan #19), Tabel 3.8 (baris 3
+        tambah Pembanding C; baris 8 catat hasil verifikasi Kokoro), dan Daftar
+        Pustaka [29]–[31] (DF-WiSLR, Wi-SignFi, Permenristekdikti No. 42
+        Tahun 2016) beserta catatan tanggal akses 14 Nov 2026 & [PERLU DATA:
+        hash/commit WPC] pada [12].
+
+6. Audit Lintas-Referensi Akhir (Teks ↔ Persamaan ↔ Tabel ↔ Gambar ↔ Referensi)
+
+| Poros Audit                  | Item Verifikasi Sebelum Ekspor ke `Proposal-SenseSIBI-Studi-Kelayakan-v18.pdf`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | Status Saat Ini                           |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| **Teks ↔ Teks (Internal)**   | 1\. §1.5.1, §2.5, §3.1 sama-sama menyebut `φ_adapter + θ_temporal + θ_c + θ_r` dilatih, `θ_0` beku.<br>2\. §1.1, §3.4, §3.8.3 konsisten memisahkan biaya pasangan modul (\~Rp300rb) dari total BOM node lengkap.<br>3\. §2.11, §3.5, §3.8.4, Tabel 3.2, 3.7 \#17, 3.8 \#8 konsisten soal hasil cek Kokoro v1.0 & jalur operasional `MMS-TTS-ind` menunggu konfirmasi.<br>4\. §3.5, §3.7, Tabel 3.7 \#19 konsisten status Pilihan 1 (*preferred textual design* menunggu konfirmasi).                                                                                                                                                                                                     | Siap diterapkan                           |
+| **Teks ↔ Persamaan**         | 1\. `(2.1)` & `(3.1)` memakai $\mathcal{N}_{\text{valid}}$ (bukan `/56`).<br>2\. `(2.5)` didefinisikan sebagai normalisasi *baseline* ruang.<br>3\. `(2.8)` memakai vektor ringkasan atensi temporal $s_i \in \mathbb{R}^{d_h}$.<br>4\. `(2.13a)` $m^*_{itj}$ diterapkan konsisten pada `(2.13)`, `(2.21)`, dan `(2.22)`.<br>5\. `(2.14a)` $\cos(g_c, g_r)$ ditautkan di §2.8; `(2.15′)` dirapikan menjadi `(2.15)`.<br>6\. `(2.23)` bebas dari rumus keliru `1 − WER`.<br>7\. `(3.3a)` $T_1$ & `(3.3b)` $T_2$ terhubung ke G3 dan §3.8.3.                                                                                                                                               | Siap diterapkan                           |
+| **Teks ↔ Tabel**             | 1\. Tabel 2.2, 3.1, 3.5 bebas pemenggalan kata cacat; Tabel 3.7 \#7 & \#9 bebas `~`.<br>2\. Tabel 2.3 memuat `[29]` DF-WiSLR & `[30]` Wi-SignFi.<br>3\. Tabel 3.3 memuat catatan verifikasi pinout fisik pada T0.<br>4\. Tabel 3.5 G0b memakai *permutation test* ($p_{\text{perm}} < 0,05$) & Pembanding C; G1 mewajibkan *coverage/selective accuracy*; G4 merujuk `[31]` Permenristekdikti 42/2016.<br>5\. Tabel 3.6 memuat **G0b** sinkron dengan Gambar 3.1 dan §3.2.<br>6\. Tabel BOM Rencana disisipkan di §3.4/§3.8.3 tanpa angka tebakan.                                                                                                                                       | Siap diterapkan                           |
+| **Teks ↔ Gambar**            | 1\. Gambar 2.1: label tidak saling menimpa.<br>2\. Gambar 2.2: graf *training* terpisah jelas dari graf *deployment* (Pilihan 1 vs opsi Pilihan 2); Jalur A/B dan alternatif C tergambar.<br>3\. Gambar 3.1: kotak kuantisasi & G1 masuk fase `M1–M8`; *caption* menyebut G0–G4 dan G0b.<br>4\. Gambar 3.2: catatan ilustrasi produk/stok (bukan unit terakit).<br>5\. Gambar 3.3: bebas `*` mentah di *caption*; TTS *on-device* ponsel tersambung sebagai cadangan Arah 1.<br>6\. Gambar 3.4: ada di hal. 39, rapikan label bertumpuk, status tetap skema konseptual.<br>7\. Gambar 3.5: diselaraskan dengan status Pilihan 1 (dan catatan kondisional Pilihan 2 dari Tabel 3.7 \#19). | Siap dirender ulang                       |
+| **Referensi, Sampul, & TOC** | 1\. Pustaka `[1]–[28]` tetap utuh + `[29]`, `[30]`, `[31]` terverifikasi 14 Nov 2026.<br>2\. Seluruh `[PERLU DATA]`/`[PERLU VALIDASI]`/`[PERLU KONFIRMASI]` tetap terjaga eksplisit hingga keputusan pengguna masuk.<br>3\. Klik kanan **Update Field** pada Daftar Isi Word lalu hapus catatan instruksi pembaruan sebelum mengekspor berkas baru **`Proposal-SenseSIBI-Studi-Kelayakan-v18.pdf`** (jangan menimpa v17 asli).                                                                                                                                                                                                                                                           | Menunggu konfirmasi & penyuntingan berkas |
+
+Rujukan Verifikasi Primer (Diakses 14 November 2026)
+
+  - Kartu model ruvnet/wifi-densepose-pretrained & repositori GitHub
+    ruvnet/RuView (artefak model.* vs csi-embed-v2.*, issue #1522 NUL-padding
+    model.safetensors, catatan SISO #509, tingkat lupa EWC 32,97%, serta konteks
+    triplet 82,3%) [4.1], [4.3].
+  - Kartu model ruvnet/wifi-densepose-mmfi-pose (input amplitudo
+    [3, 114, 10], 17 keypoint COCO, lisensi CC BY-NC 4.0) [4.2].
+  - Dokumentasi resmi ESP-IDF & espressif/esp-csi (penanda first_word_invalid,
+    struktur wifi_csi_info_t, perbedaan 52 subcarrier LLTF vs 56 subcarrier
+    HT-LTF pada 20 MHz) [2.4.1], [7.1.3], [7.1.4], serta README espressif/esp-dl
+    (konteks tolok ukur MobileNetV2-0.5 RGB 69,2 ms) [8.3.1].
+  - Kartu model & VOICES.md hexgrad/Kokoro-82M (8 bahasa tanpa Bahasa Indonesia,
+    peringatan ujaran <10–20 token) [4.5], [8.2.1], serta facebook/mms-tts-ind
+    [3.2.1], [3.2.3].
+  - Data bibliografi DF-WiSLR (2020) [5.1.1], Wi-SignFi (2023) [5.2.1], dan
+    Permenristekdikti Nomor 42 Tahun 2016 beserta Perdirjen 603/E1.2/2016 di
+    JDIH BPK [2.3.1], [7.4.1], [7.4.5].
+
+Langkah berikutnya yang paling tepat: silakan konfirmasikan keputusan Anda pada
+Bagian 2B (terutama: akhiran judul, Pilihan 1 vs Pilihan 2 pada Tabel 3.7 #19,
+penetapan MMS-TTS-ind saat Kokoro belum mendukung Indonesia, serta data
+sampul/BOM bila sudah ada), lalu saya akan menyusun atau mengedit berkas naskah
+v18 yang bersih dan siap diajukan.
