@@ -1,0 +1,33 @@
+flowchart LR
+    accTitle: Tahapan penelitian T0 sampai T5 dengan gerbang G0 sampai G4 dan sub-gerbang G0b
+    accDescr: Diagram dua fase. Fase data, audit representasi, dan model (M1 sampai M8) berisi T0 replikasi platform, penguncian versi firmware RuView, audit subcarrier valid dan first_word_invalid, uji Delta-CSI, koeksistensi audio-CSI, audit artefak RuView; gerbang G0 baseline; T1 kurasi, kalibrasi, protokol, etika, pilot G0b; sub-gerbang G0b uji permutasi probe untuk memilih Jalur A, B, atau Pembanding C; T2 perekaman dataset, split anti-kebocoran, pelatihan dua kepala, ablasi, kuantisasi, uji deployment Pilihan 1; gerbang G1 dengan cakupan diterima dan akurasi selektif. Fase pengujian dan penulisan (M8 sampai M14) berisi T3 uji generalisasi enam skema; G2 konsultasi tiga pilar; T4 pengemasan dua arah, TTS lokal utama MMS-TTS-ind, uji latensi; G3 latensi per arah dan TTFA; G4 sintesis kelayakan dan rekomendasi TKT 3-4 Permenristekdikti 42/2016; T5 analisis dan penulisan.
+
+    subgraph KA["Fase data, audit, dan model (M1-M8)"]
+        direction TB
+    T0["T0 Replikasi platform, audit<br/>subcarrier valid, Delta-CSI,<br/>koeksistensi, artefak (M1-M2)"]
+    G0("G0 akhir M2: laju ≥ 25 fps,<br/>paket hilang ≤ 0,1%,<br/>gerak terpisah")
+    T1["T1 Kurasi 26 huruf, kalibrasi,<br/>protokol, etika,<br/>pilot G0b (M2-M4)"]
+    G0b("G0b awal T2 (M4): probe linear +<br/>uji permutasi (p < 0,05);<br/>pilih jalur masukan")
+    T2["T2 Perekaman dataset, split anti-<br/>leakage, pelatihan dua kepala,<br/>kuantisasi, uji deployment (M4-M8)"]
+    G1("G1 akhir M8: akurasi ≥ 50%,<br/>F1 ≥ 0,45, cakupan +<br/>akurasi selektif, < 100 ms")
+    T0 --> G0
+    G0 -- "lolos" --> T1
+    T1 --> G0b
+    G0b -- "lolos" --> T2
+    T2 --> G1
+    end
+    subgraph KB["Fase pengujian dan penulisan (M8-M14)"]
+        direction TB
+    T3["T3 Uji generalisasi enam skema:<br/>sesi, LOSO, LORO, pengguna<br/>baru, posisi (M8-M10)"]
+    G2("G2 akhir M10: 3 pilar pakar<br/>tanpa temuan blok kritis")
+    T4["T4 Pengemasan dua arah, Rust,<br/>TTS lokal MMS-TTS-ind, uji<br/>latensi, biaya (M10-M12)"]
+    G3("G3 M11: Arah 1 ≤ 2 s, Arah 2 ≤ 3 s (p50/p95);<br/>TTFA < 100 ms; UDP < 0,2 ms; RAM < 40 MB")
+    G4("G4 akhir M12: Likert, validator,<br/>BOM biaya, TKT 3-4<br/>(Permenristekdikti 42/2016)")
+    T5["T5 Analisis dan penulisan<br/>laporan akhir (M12-M14)"]
+    T3 --> G2
+    G2 -- "lolos" --> T4
+    T4 --> G3
+    G3 -- "lolos" --> G4
+    G4 -- "lolos" --> T5
+    end
+    KA -- "G1 lolos" --> KB

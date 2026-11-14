@@ -1,0 +1,43 @@
+flowchart TD
+    accTitle: Arsitektur produk akhir tanpa kamera dengan cadangan TTS on-device pada Arah 1
+    accDescr: Jalur guru hanya aktif saat akuisisi dan pelatihan; webcam dan YOLO26m-Pose menghasilkan 21 keypoint untuk supervisi dua kepala. Arah 1 mengalir dari bingkai sounding NDP node TX melalui zona isyarat ke node RX yang menjalankan model klasifikasi terkuantisasi Pilihan 1; label dan skor dikirim via UDP ke server Rust, teks tampil di layar dan aplikasi Tauri, TTS server lokal menyintesis suara yang dialirkan ke speaker DAC I2S node RX; garis putus-putus adalah cadangan TTS on-device ponsel untuk Arah 1. Arah 2 mengalir dari tombol PTT dan mikrofon I2S ke server, dikenali ASR awan saat daring atau faster-whisper saat luring, dipetakan ke kamus kata SIBI dengan ejaan jari termasuk animasi J dan Z, lalu tampil di aplikasi Tauri.
+
+    subgraph GURU["Jalur guru (akuisisi dan pelatihan saja)"]
+        direction TB
+    WC["Webcam laptop"]
+    YP["YOLO26m-Pose:<br/>21 keypoint tangan"]
+    SUP["Supervisi pelatihan<br/>(Subbab 3.7)"]
+    WC --> YP
+    YP --> SUP
+    end
+    subgraph A1["Arah 1: isyarat menjadi teks dan suara"]
+        direction TB
+    TX["Node TX: injeksi NDP"]
+    ZN["Zona isyarat"]
+    RX["Node RX: CSI + model klasifikasi<br/>terkuantisasi (Pilihan 1)"]
+    MAPL["Kamus label-teks di modul"]
+    DSP1["Layar modul + Tauri:<br/>teks hasil + skor"]
+    SPK["Speaker DAC I2S (node RX)"]
+    TTSP["TTS on-device ponsel<br/>(cadangan Arah 1)"]
+    TX --> ZN
+    ZN --> RX
+    RX --> MAPL
+    MAPL --> DSP1
+    end
+    SRV["Server Rust (laptop):<br/>TTS MMS-TTS-ind utama +<br/>ASR faster-whisper"]
+    subgraph A2["Arah 2: ucapan menjadi representasi SIBI"]
+        direction TB
+    PTT["Tombol tekan-untuk-bicara"]
+    MIC["Mikrofon I2S (INMP441)"]
+    ASR["ASR: awan (daring) /<br/>faster-whisper (luring)"]
+    ASET["Kamus kata SIBI + ejaan jari<br/>(animasi J dan Z)"]
+    TAU["Aplikasi Tauri:<br/>teks + representasi SIBI"]
+    PTT --> MIC
+    MIC -- "audio PCM via UDP/WS" --> SRV
+    ASR -- "teks" --> ASET
+    ASET --> TAU
+    end
+    RX -- "label + skor via UDP" --> SRV
+    SRV -- "audio TTS dialirkan" --> SPK
+    SRV -. "cadangan" .-> TTSP
+    SRV -- "audio" --> ASR
