@@ -1,0 +1,1161 @@
+[Certain] **v17 sudah jauh lebih matang daripada v16, tetapi saya belum merekomendasikanmu menyerahkannya sebagai proposal final.** Masalah utamanya bukan lagi rancangan dua arah SenseSIBI. Masalah terbesarnya adalah apakah encoder RuView yang dipilih benar-benar membawa informasi yang cukup untuk mengenali bentuk tangan dan lintasan J/Z dari CSI.
+
+Proposal ini sudah memiliki arsitektur, model matematis, protokol pengambilan data, eksperimen, dan kriteria kelayakan yang cukup lengkap. Namun, ada beberapa bagian yang terlihat lebih pasti daripada bukti yang mendukungnya. Saya akan memisahkan apa yang sudah kuat, apa yang belum terbukti, dan apa yang perlu diperbaiki sebelum seminar.
+
+# **1. Penilaian keseluruhan**
+
+# **9/10**
+
+**Kesesuaian dengan visi SenseSIBI**
+
+Arsitektur dan ruang lingkup proyek
+
+# **6/10**
+
+**Kekuatan metodologi**
+
+Kelayakan model, desain eksperimen, dan pembuktian
+
+# **6/10**
+
+**Kesiapan untuk seminar**
+
+Konsistensi isi, keputusan desain, dan kelengkapan dokumen
+
+Skor merupakan penilaian reviewer, bukan skor pengujian akademik formal.
+
+| Dimensi                        | Penilaian                               |
+| ------------------------------ | --------------------------------------- |
+| Identitas dan tujuan SenseSIBI | Sangat baik                             |
+| Ruang lingkup SIBI             | Sangat baik                             |
+| Integrasi dua arah             | Baik                                    |
+| Pemanfaatan RuView             | Risiko metodologis tinggi               |
+| Desain dua kepala              | Baik, perlu konsistensi                 |
+| Supervisi YOLO26m-Pose         | Cukup kuat                              |
+| Dataset dan sinkronisasi       | Belum lengkap                           |
+| Evaluasi model                 | Baik, beberapa ambang perlu justifikasi |
+| Embedded deployment            | Belum terbukti                          |
+| TTS, ASR, dan server           | Cukup matang                            |
+| Etika dan partisipan           | Perlu dilengkapi                        |
+| Literatur dan kebaruan         | Perlu diperkuat                         |
+
+## **Apa yang paling berhasil diperbaiki dari v16?**
+
+[Certain] Ada enam peningkatan penting.
+
+1\. **Label kelas tidak lagi bergantung pada klasifikasi YOLO.** Label huruf berasal dari kartu pemandu protokol, sedangkan YOLO digunakan sebagai pemberi supervisi keypoint. Ini lebih tepat karena eksperimen WPC `exp11_huruf24` hanya membuktikan klasifikasi visual untuk 24 huruf statis, bukan seluruh 26 huruf.
+
+2\. **G0b ditambahkan.** Encoder tidak langsung diasumsikan cocok untuk SIBI. Representasinya harus diuji dahulu melalui pilot dan linear probe.
+
+3\. **J dan Z diperlakukan sebagai gerakan temporal.** Regresi keypoint dirancang per langkah waktu, bukan hanya satu pose statis.
+
+4\. **Peran regression head pada deployment diperjelas.** Pilihan utama adalah menggunakan regresi sebagai supervisi tambahan saat pelatihan, kemudian melepasnya pada deployment.
+
+5\. **Pemrosesan audio lebih konsisten.** Server lokal menjadi mesin TTS utama, sedangkan ponsel menjadi cadangan. ASR cloud dan faster-whisper lokal juga sudah dibedakan.
+
+6\. **Batas generalisasi dinyatakan lebih jujur.** Hasil dengan 3–4 pengisyarat dan dua ruang tidak diklaim sebagai bukti generalisasi populasi.
+
+Perubahan ini terlihat dalam rumusan masalah, arsitektur, batasan, dan metode penelitian.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+# **2. Temuan kritis: model RuView dan kemampuan mengenali huruf SIBI**
+
+Prioritas P0 — wajib diperkuat
+
+Ini bagian yang paling menentukan keberhasilan penelitianmu.
+
+## **2.1 Encoder RuView bukan encoder pose tangan**
+
+[Certain] Proposal telah mengidentifikasi kontrak input model RuView:
+
+- Delapan fitur turunan CSI per jendela satu detik.
+- Input tensor berbentuk `(B, 8)`.
+- Encoder menghasilkan embedding 128 dimensi.
+- Arsitektur encoder dua lapis fully connected dengan BatchNorm dan GELU.
+- Jumlah parameter sekitar 9.280.
+- Embedding dinormalisasi dengan L2.
+
+Artinya, model tersebut tidak menerima langsung tensor 56 subcarrier × 50 frame per detik.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Lebih penting lagi, delapan fitur tersebut bukan delapan koordinat spasial tangan.
+
+Model card RuView mencantumkan fitur berikut:
+
+| Fitur          | Makna                                           |
+| -------------- | ----------------------------------------------- |
+| Presence       | Gangguan sinyal akibat keberadaan objek/manusia |
+| Motion         | Perubahan sinyal akibat pergerakan              |
+| Breathing      | Perubahan kanal akibat pernapasan               |
+| Heart rate     | Mikro-Doppler akibat denyut jantung             |
+| Phase variance | Variansi fase sinyal                            |
+| Person count   | Estimasi jumlah orang                           |
+| Fall detected  | Deteksi gerakan jatuh                           |
+| RSSI           | Kekuatan sinyal                                 |
+
+Sumber model juga menjelaskan bahwa pretraining dilakukan pada rekaman lingkungan, bukan pada dataset gerakan jari SIBI.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://huggingface.co\&sz=32)
+
+Hugging Face+1
+
+
+
+Di sinilah saya melihat risiko terbesar.
+
+**Encoder tersebut mungkin mempelajari struktur temporal lingkungan, tetapi itu belum membuktikan bahwa ia mempelajari geometri tangan atau artikulasi jari.**
+
+Keberadaan fitur `motion` dan `phase variance` memberi peluang untuk mengenali perubahan gerakan. Namun, pengenalan 24 pose jari yang berbeda membutuhkan informasi jauh lebih spesifik daripada sekadar mengetahui bahwa seseorang sedang bergerak.
+
+Bahkan gerakan yang sama dapat menghasilkan pola CSI berbeda karena posisi orang, ruang, orientasi tangan, dan posisi perangkat.
+
+### **Masalah angka 82,3%**
+
+[Certain] Proposal sudah menjelaskan bahwa angka 82,3% adalah *held-out temporal-triplet accuracy*, bukan akurasi klasifikasi SIBI dan bukan akurasi regresi keypoint. Ini sudah benar.
+
+Namun, konteks pengukurannya juga perlu kamu tekankan ketika mempertahankan proposal:
+
+- Satu ruang.
+- Satu rekaman.
+- Dua node ESP32-S3.
+- Pengukuran temporal-triplet, bukan klasifikasi gestur.
+
+Model card secara eksplisit membatasi klaim tersebut.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://huggingface.co\&sz=32)
+
+Hugging Face
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+**Rekomendasi saya:** jangan menjadikan 82,3% sebagai alasan memilih encoder karena dianggap sudah cocok untuk SIBI. Jadikan angka itu alasan bahwa encoder layak diuji sebagai kandidat representasi awal.
+
+## **2.2 Dua jalur input encoder belum cukup terdefinisi**
+
+V17 menawarkan dua jalur:
+
+**Jalur A — Feature reconstruction**
+
+CSI mentah diproses untuk menghitung kembali delapan fitur turunan RuView.
+
+**Jalur B — Learned input adapter**
+
+Jendela CSI mentah diproses oleh adapter berbasis konvolusi 1D untuk menghasilkan vektor input delapan dimensi.
+
+Dua pilihan ini secara konseptual berbeda. Proposal belum sepenuhnya menjelaskan objektif pelatihan adapter.
+
+Ada dua pertanyaan yang harus dijawab:
+
+1. Apakah adapter berusaha mereproduksi delapan fitur asli yang dipakai saat pretraining?
+2. Atau adapter mempelajari proyeksi delapan dimensi baru yang dioptimalkan untuk klasifikasi SIBI dan regresi keypoint?
+
+Pilihan pertama merupakan rekonstruksi fitur. Pilihan kedua merupakan adapter supervisi tugas.
+
+Keduanya tidak boleh disebut seolah-olah sama.
+
+[Likely] Bila adapter belajar langsung dari label SIBI, keberhasilan klasifikasi bisa berasal dari adapter baru, bukan dari kualitas representasi pretraining RuView. Itu tetap eksperimen yang valid, tetapi kontribusinya harus dijelaskan dengan benar.
+
+**Perbaikan yang saya sarankan:**
+
+| Eksperimen | Input                              | Tujuan                                  |
+| ---------- | ---------------------------------- | --------------------------------------- |
+| A          | Delapan fitur hasil rekonstruksi   | Menguji encoder secara langsung         |
+| B          | Delapan fitur hasil adapter        | Menguji adaptasi input                  |
+| C          | CSI mentah + model temporal ringan | Baseline tanpa bottleneck delapan fitur |
+| D          | Encoder beku + task heads          | Baseline multitugas                     |
+| E          | Encoder + LoRA/fine-tuning         | Mengukur manfaat adaptasi encoder       |
+
+Eksperimen C penting. Bila semua representasi delapan fitur gagal, kamu masih membutuhkan pembanding yang menerima informasi CSI lebih kaya. LoRA tidak otomatis mengembalikan informasi yang telah hilang ketika CSI mentah diringkas menjadi delapan fitur.
+
+## **2.3 G0b sudah tepat, tetapi kriterianya harus dibenahi**
+
+[Certain] G0b menggunakan:
+
+- Probe linear untuk 24 huruf statis.
+- Probe sekuensial dan biner J–Z.
+- Pembanding fitur mentah.
+- Kontrol label acak.
+- F1 makro minimal 0,30.
+- Probe J–Z minimal 70%.
+
+Ini perkembangan yang sangat baik.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Namun, saya menemukan satu masalah statistik:
+
+Proposal menulis kontrol label-acak dengan ketentuan `p < 0,05`.
+
+Kalimat ini ambigu dan dapat ditafsirkan terbalik. Dalam uji permutasi, yang seharusnya signifikan adalah **skor probe dengan label asli dibandingkan distribusi skor dari label yang diacak**.
+
+Kontrol label acak seharusnya tetap berada pada tingkat performa acak. Bukan dituntut menghasilkan signifikansi.
+
+Perbaikannya:
+
+- Jalankan probe dengan label asli.
+- Acak label berkali-kali untuk membentuk distribusi null.
+- Hitung apakah skor label asli melebihi persentil ke-95 distribusi null.
+- Laporkan nilai permutation p-value.
+- Pastikan pengujian tidak mencampur jendela overlap antara data latih dan uji.
+
+Selain itu, G0b hanya menggunakan satu pengisyarat dan satu sesi. Itu cukup sebagai *screening awal*, tetapi belum cukup untuk menyimpulkan kemampuan representasi lintas orang.
+
+**Hal yang sangat penting:** apabila kedua jalur input gagal pada G0b, jangan mengasumsikan LoRA atau full fine-tuning otomatis menjadi solusi. Jika delapan fitur input tidak menyimpan informasi artikulasi tangan, membuka bobot encoder tidak bisa menciptakan kembali informasi yang sudah hilang.
+
+# **3. Temporal model untuk J dan Z**
+
+Prioritas P0
+
+V17 sudah mengembangkan rancangan temporal dengan lebih baik daripada v16.
+
+Alurnya sekarang:
+
+\\[ \text{CSI windows} \rightarrow \text{RuView encoder} \rightarrow \text{embedding sequence} \rightarrow \text{temporal module} \\]
+
+Kemudian:
+
+- Classification head membaca ringkasan temporal.
+- Regression head membaca setiap hidden state.
+- Regresi menghasilkan koordinat 21 keypoint untuk setiap langkah waktu.
+
+Ini desain yang masuk akal.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Namun, saya tidak setuju dengan satu klaim di Subbab 3.7.
+
+## **3.1 Empat langkah per detik tidak sama dengan empat observasi independen**
+
+Proposal menggunakan:
+
+\\[ W=1\text{ detik} \\]
+
+\\[ H=0{,}25\text{ detik} \\]
+
+Artinya encoder menghasilkan embedding setiap 0,25 detik dengan input jendela sepanjang satu detik.
+
+Ilustrasi jendela overlap
+
+Jendela 1 detik, hop 0,25 detik
+
+Window 1
+
+Window 2
+
+Window 3
+
+Window 4
+
+Setiap jendela baru berbagi sebagian besar data dengan jendela sebelumnya.
+
+[Certain] Dengan konfigurasi ini, empat embedding per detik merupakan empat keluaran yang sangat saling tumpang tindih. Setiap embedding merangkum satu detik data, bukan hanya data selama 0,25 detik.
+
+Jadi, frasa proposal bahwa lintasan J/Z tersedia pada laju empat langkah per detik perlu diperhalus. Itu adalah *hop rate*, bukan empat observasi temporal independen.
+
+Masalahnya, J dan Z merupakan huruf dinamis. Jika gerak terjadi dalam durasi singkat, agregasi satu detik bisa mengaburkan urutan detail lintasannya.
+
+Saya menyarankan perbandingan:
+
+| Konfigurasi | Window                  | Hop             |
+| ----------- | ----------------------- | --------------- |
+| A           | 1,0 detik               | 0,25 detik      |
+| B           | 0,5 detik               | 0,10–0,25 detik |
+| C           | 0,2 detik               | 0,05–0,10 detik |
+| D           | CSI temporal lebih kaya | Sesuai sampling |
+
+A dan B masih dapat mempertahankan baseline encoder, sedangkan C dan D dapat menjadi pembanding jika kinerja temporal J/Z tidak memadai.
+
+Jangan menetapkan konfigurasi paling sesuai berdasarkan asumsi. Ukur kemampuan membedakan lintasan dan kecepatan gerakan.
+
+## **3.2 Panjang urutan T=16 perlu diperjelas**
+
+[Certain] Proposal menetapkan T=16 dengan hop 0,25 detik.
+
+Enam belas posisi langkah berarti jarak waktu antara langkah pertama dan terakhir adalah 3,75 detik. Namun, setiap langkah masih membawa konteks jendela sepanjang satu detik. Karena itu, cakupan data mentah efektifnya dapat mencapai sekitar 4,75 detik apabila semua jendela valid.
+
+Jelaskan apakah T=16 berarti:
+
+- 16 titik waktu embedding,
+- 16 jendela dengan overlap,
+- atau segmen mentah berdurasi sekitar empat detik.
+
+Tiga hal tersebut tidak persis sama.
+
+## **3.3 Interpolasi kembali ke frame kamera**
+
+Proposal mengusulkan menginterpolasi prediksi keypoint dari laju embedding ke frame kamera.
+
+[Certain] Interpolasi tidak dapat menciptakan informasi temporal yang tidak pernah diamati. Jika model hanya menghasilkan empat langkah per detik, mengubah hasilnya menjadi 30 frame per detik hanya menghasilkan kurva yang lebih rapat, bukan estimasi gerakan dengan ketelitian native 30 FPS.
+
+Oleh karena itu, MPJPE lintasan J/Z harus dilaporkan sebagai galat estimasi pada resolusi temporal model, atau sebagai galat setelah interpolasi dengan batas interpretasi yang jelas.
+
+## **3.4 Regression head sebaiknya dipertahankan sebagai supervisi tambahan**
+
+[Likely] Saya lebih menyukai Pilihan 1 dalam v17:
+
+- Regresi dipakai saat training untuk membantu pembentukan representasi.
+- Setelah pelatihan, regression head dilepas.
+- ESP32-S3 hanya menjalankan encoder, adapter, modul temporal, dan classification head.
+
+Ini mengurangi beban memori, kuantisasi, dan komputasi.
+
+Tetapi untuk menguji manfaatnya, proposal harus membandingkan:
+
+1. Classification-only.
+2. Classification + keypoint regression.
+3. Classification + keypoint regression dengan beberapa bobot loss.
+
+Proposal sudah menyusun arah ablasi ini dengan benar.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+# **4. Konsistensi matematis dan arsitektur**
+
+Prioritas P0
+
+## **4.1 Kontradiksi trainable parameters pada Subbab 2.5**
+
+Saya menemukan kontradiksi yang masih tertinggal.
+
+Subbab 2.4 dan Persamaan 2.15′ menyebut parameter yang dilatih adalah:
+
+\\[ \Theta\_{\mathrm{train}}= \\{ \phi\_{\mathrm{adapter}}, \theta\_{\mathrm{temporal}}, \theta_c, \theta_r \\} \\]
+
+Encoder CSI tetap dibekukan:
+
+\\[ \theta\_{\mathrm{encoder}}=\theta_0 \\]
+
+Namun Subbab 2.5 masih menyatakan baseline melatih **hanya kedua kepala tugas**. Itu tidak konsisten.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Perbaikannya sederhana:
+
+> Baseline membekukan parameter encoder. Parameter adapter masukan (jika digunakan), modul temporal, kepala klasifikasi, dan kepala regresi dilatih bersama. LoRA dan pelatihan lanjutan menjadi eksperimen pembanding.
+
+## **4.2 Pemantauan konflik gradien**
+
+Persamaan loss gabungan sudah tepat secara prinsip:
+
+\\[ L\_{\mathrm{total}}= \lambda\_{\mathrm{cls}} L\_{\mathrm{cls}} + \lambda\_{\mathrm{reg}} L\_{\mathrm{reg}} \\]
+
+Tetapi proposal menyebut konflik gradien dipantau lewat besar gradien tiap kepala.
+
+[Certain] Besar gradien saja belum cukup untuk mendeteksi konflik arah pembaruan.
+
+Tambahkan cosine similarity:
+
+\\[ \operatorname{cos}(g_c,g_r)= \frac{g_c^\top g_r} {\\|g_c\\|\\|g_r\\|} \\]
+
+Nilai negatif menunjukkan gradien antartugas memiliki arah yang saling bertentangan pada parameter yang dibagi.
+
+Ini akan memperkuat alasan mengapa kamu memilih bobot loss tertentu atau mempertimbangkan metode seperti GradNorm atau PCGrad.
+
+## **4.3 Sistem koordinat regresi belum selesai**
+
+[Certain] Proposal sudah benar mengakui bahwa koordinat piksel kamera tidak otomatis cocok menjadi target regresi CSI.
+
+Namun, sistem koordinat final masih `[PERLU VALIDASI]`.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Hal yang perlu dikunci:
+
+- Koordinat dinormalisasi terhadap bounding box tangan atau pergelangan.
+- Definisi titik referensi.
+- Skala normalisasi.
+- Orientasi tangan dan handedness.
+- Sinkronisasi keypoint dengan pusat jendela CSI.
+- Perlakuan keypoint yang tertutup atau gagal terdeteksi.
+
+Koordinat XY dari kamera adalah proyeksi dua dimensi. Ia tidak otomatis mewakili orientasi tiga dimensi tangan. Padahal beberapa bentuk huruf dapat berbeda karena orientasi telapak atau arah jari.
+
+Jadi, jelaskan bahwa 21 keypoint menjadi supervisi bentuk tangan dalam sistem koordinat yang ditetapkan, bukan representasi lengkap semua aspek bahasa isyarat.
+
+## **4.4 Mask regresi harus mencakup padding temporal**
+
+Proposal sudah menggunakan mask visibilitas dan mask valid untuk padding urutan.
+
+Tetapi persamaan loss regresi harus menjelaskan bahwa keduanya dikombinasikan:
+
+\\[ m^{\*}\_{itj}=m^{\mathrm{valid}}\_{it} \cdot m^{\mathrm{visibility}}\_{itj} \\]
+
+Dengan demikian, padding temporal tidak ikut dihitung sebagai keypoint yang harus diregresikan.
+
+# **5. CSI acquisition dan validitas penginderaan**
+
+Prioritas P0
+
+## **5.1 Definisi 56 subcarrier perlu lebih presisi**
+
+V17 menyebut CSI 56 subcarrier pada 20 MHz. Itu sesuai jumlah total indeks subcarrier 802.11n 20 MHz pada dokumentasi ESP32-S3.
+
+Namun dokumentasi Espressif membedakan:
+
+- 56 subcarrier total.
+- 52 subcarrier data yang dapat digunakan.
+- Pilot subcarrier di antara indeks tersebut.
+- Kemungkinan bagian awal buffer CSI tidak valid apabila `first_word_invalid` bernilai true.
+- Ketersediaan LLTF, HT-LTF, dan STBC-HT-LTF bergantung jenis paket dan konfigurasi.
+
+Karena itu, jangan hanya mengatakan 56 subcarrier lalu merata-ratakan semuanya tanpa menerangkan penanganan indeks dan paket yang tidak valid.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://docs.espressif.com\&sz=32)
+
+— ESP-IDF Programming Guide v5.1.2 documentation+1
+
+
+
+Tambahkan konfigurasi CSI pada G0:
+
+1. Jenis packet yang diterima.
+2. LTF yang diaktifkan.
+3. Filter frame dan MAC address.
+4. Penanganan pilot/null/guard bins.
+5. Penanganan `first_word_invalid`.
+6. Validasi panjang buffer CSI.
+7. Pencatatan RSSI dan noise floor.
+
+## **5.2 Persamaan Delta-CSI dan CSI-ratio**
+
+[Certain] V17 sudah memperbaiki definisi Delta-CSI dengan menuliskan perubahan koefisien kanal kompleks:
+
+\\[ d(t)= \frac{1}{56}\sum_n |h_n(t)-h_n(t-1)| \\]
+
+Ini berbeda dari perubahan amplitudo saja.
+
+Menambahkan varian amplitudo sebagai pembanding sensitivitas merupakan keputusan yang bagus.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Tetapi ada dua hal:
+
+**Pertama**, Delta-CSI akan mengecil ketika pose statis sudah ditahan. Karena objek penelitianmu memiliki 24 huruf statis, mekanisme segmentasi harus menjelaskan bagaimana pose tersebut tetap dikenali setelah gerakan awal berhenti.
+
+Solusinya adalah memisahkan:
+
+- deteksi awal gerak,
+- jendela penahanan pose,
+- dan klasifikasi bentuk statis.
+
+Jangan mengandalkan threshold energi gerak sebagai satu-satunya syarat untuk mendeteksi huruf statis.
+
+**Kedua**, persamaan rasio:
+
+\\[ \rho_n(t)=\frac{h_n(t)}{h_n(t_0)} \\]
+
+lebih aman disebut normalisasi relatif terhadap baseline. Rasio terhadap satu rekaman referensi tidak otomatis menghapus seluruh drift fase yang berubah terhadap waktu. Jelaskan batas metode dan uji derau fase aktual pada T0. Jangan menyamakan begitu saja rumus baseline ini dengan seluruh mekanisme CSI-ratio dari penelitian terdahulu.
+
+## **5.3 Uji G0 belum cukup untuk 24 pose statis**
+
+Sekarang G0 memeriksa ruang kosong, pengisyarat diam, dan pengisyarat bergerak.
+
+[Certain] Ini membuktikan perbedaan aktivitas secara kasar, tetapi belum membuktikan bahwa 24 bentuk tangan statis dapat dibedakan dari CSI.
+
+Tambahkan pengujian pilot:
+
+- tangan tanpa isyarat,
+- beberapa konfigurasi tangan statis yang berbeda,
+- posisi telapak yang berbeda,
+- serta J dan Z sebagai lintasan dinamis.
+
+G0 seharusnya menguji kualitas sistem akuisisi; G0b menguji kualitas representasi; G1 menguji model lengkap. Ketiganya jangan sampai tumpang tindih atau saling menggantikan.
+
+# **6. YOLO26m-Pose sebagai guru visual**
+
+Arah sudah benar
+
+[Certain] Pembagian supervisi pada v17 adalah salah satu perbaikan terbaik:
+
+| Kelompok        | Label kelas              | Keypoint            |
+| --------------- | ------------------------ | ------------------- |
+| 24 huruf statis | Kartu protokol perekaman | YOLO26m-Pose        |
+| J               | Kartu protokol           | Deret keypoint guru |
+| Z               | Kartu protokol           | Deret keypoint guru |
+
+YOLO tidak dianggap sebagai pengklasifikasi kedua untuk J dan Z jika model yang digunakan memang tidak memiliki kelas tersebut.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Namun, ada dua pekerjaan yang belum selesai.
+
+### **6.1 Pastikan keypoint tetap terdeteksi pada J dan Z**
+
+Walaupun kelas J/Z tidak digunakan dari YOLO, keypoint guru tetap harus bisa mengekstraksi lintasan tangan ketika isyarat tersebut dilakukan.
+
+Maka kamu perlu mengevaluasi:
+
+- tingkat keberhasilan deteksi tangan pada J dan Z,
+- jitter keypoint saat bergerak,
+- jumlah frame yang gagal,
+- ketepatan sinkronisasi,
+- dan konsistensi landmark ketika gerakan cepat.
+
+Jangan mengasumsikan model yang dilatih untuk 24 pose statis otomatis memiliki kualitas keypoint yang sama pada gerakan dinamis.
+
+### **6.2 Pseudo-label harus mempunyai ambang kualitas**
+
+Keluaran MediaPipe/YOLO bukan ground truth sempurna.
+
+Proposal sudah menyebut verifikasi sampel oleh validator. Tetapi perlu ditambahkan angka dan prosedur:
+
+- Berapa proporsi sampel yang diverifikasi?
+- Berapa penilai independen?
+- Apa kriteria membuang keypoint?
+- Apa batas jitter?
+- Apa tindakan jika label protokol dan keypoint guru tidak konsisten?
+
+Selain itu, referensi [12] sekarang terutama merujuk dokumentasi Ultralytics. Untuk hasil eksperimen WPC milikmu, tambahkan rujukan repositori WPC, checkpoint yang digunakan, tanggal atau commit, dan hash model. Dengan begitu, hasil pra-penelitian 97,6% bisa direproduksi atau diaudit.
+
+# **7. Dataset, partisipan, dan validitas eksperimen**
+
+Prioritas P1
+
+## **7.1 Beban perekaman sudah dihitung, ini bagus**
+
+V17 mengestimasi:
+
+\\[ 26 \times 30 =780 \\]
+
+repetisi per sesi.
+
+Dengan asumsi lima detik per repetisi, durasi perekaman murni sekitar 65 menit. Setelah jeda, kalibrasi, dan persiapan, estimasi sesi sekitar 97 menit.
+
+Ada pula jeda blok dan batas dua sesi per hari. Ini lebih baik daripada sekadar meminta partisipan mengulang 780 gerakan tanpa penjelasan.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Namun, saya sarankan urutan kartu pemandu huruf diacak dalam blok.
+
+Jika perekaman selalu berdasarkan urutan alfabet, kemungkinan ada efek urutan dan kelelahan yang berkaitan dengan kelas tertentu. Hal ini bisa mencemari hasil.
+
+## **7.2 Cegah leakage dari overlapping window**
+
+Ini masalah yang harus diperhatikan.
+
+Karena satu jendela CSI berdurasi satu detik memiliki overlap 0,75 detik dengan jendela berikutnya, dua sampel yang sangat mirip bisa masuk ke data latih dan uji bila pembagian dilakukan setelah pembuatan window.
+
+Proposal sudah menyebut pembagian temporal per blok, tetapi harus ditulis lebih tegas:
+
+**Pembagian train-validation-test dilakukan pada rekaman mentah atau grup repetisi sebelum pembentukan jendela bergulir.**
+
+Kemudian, bagian batas blok diberi *purge gap* sekurang-kurangnya sepanjang window yang digunakan. Dengan demikian, dua window yang tumpang tindih tidak tersebar pada dua set berbeda.
+
+Enam skema pada Tabel 3.4 sudah bermanfaat, termasuk leave-one-subject-out dan leave-one-room-out.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Namun, dengan 3–4 pengisyarat dan dua ruang, hasilnya tetap merupakan indikasi awal. V17 sudah menyatakan keterbatasan ini secara tepat.
+
+## **7.3 Sinkronisasi kamera-CSI**
+
+Proposal menyebut penanda waktu bersama dan contoh satu ketukan tangan untuk memverifikasi sinkronisasi.
+
+Yang masih kosong adalah toleransi sinkronisasi.
+
+Tetapkan:
+
+- sumber timestamp,
+- resolusi waktu,
+- toleransi keterlambatan,
+- cara menangani frame hilang,
+- cara menyelaraskan CSI 50 FPS dengan webcam,
+- dan cara menginterpolasi keypoint menuju pusat window.
+
+Ini sangat penting karena regresi keypoint mengandalkan target pose yang sesuai dengan window CSI.
+
+## **7.4 Etika partisipan**
+
+[Certain] Proposal sudah memuat persetujuan tertulis, hak mengundurkan diri, penggunaan kamera hanya untuk akuisisi, dan pengungkapan pengiriman audio ke layanan cloud.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Tetapi ada kekurangan:
+
+- Lembaga atau komisi pemberi persetujuan etik masih placeholder.
+- Masa penyimpanan video belum ditentukan.
+- Prosedur penghapusan rekaman belum dijelaskan.
+- Akses ke video, audio, dan CSI belum dibatasi secara operasional.
+- Belum ada penjelasan apakah data keypoint dan metadata masih memungkinkan identifikasi ulang subjek.
+- Jika pengguna uji melibatkan siswa yang masih di bawah umur, persetujuan wali dan assent anak perlu ditambahkan.
+- Formulir persetujuan sebaiknya tersedia dalam format yang dapat dipahami partisipan tunarungu.
+
+Jangan menyebut dataset sepenuhnya anonim hanya karena nama partisipan tidak disimpan. Video, suara, dan pola data dapat tetap memiliki risiko identifikasi.
+
+# **8. Sistem dua arah, server, dan perangkat**
+
+Secara konsep sudah baik
+
+[Certain] V17 sekarang lebih jelas dalam pembagian tugas:
+
+**Arah 1 — SIBI ke teks dan suara**
+
+Isyarat tangan SIBI
+
+TX ESP32-S3 → zona isyarat → RX ESP32-S3
+
+Klasifikasi di ESP32-S3
+
+Server Rust → pemetaan teks → TTS lokal
+
+Layar dan speaker node RX
+
+**Arah 2 — Ucapan ke representasi SIBI**
+
+Tombol PTT dan mikrofon RX
+
+Audio via Wi-Fi ke server Rust
+
+ASR cloud / faster-whisper lokal
+
+Kamus kata SIBI dan fallback ejaan jari
+
+Aplikasi Tauri dan tampilan SIBI
+
+Arsitektur yang dituliskan di Subbab 3.5 sudah mempertahankan dua arah ini dan membedakan jalur guru visual yang hanya aktif pada saat pelatihan.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Masih ada beberapa detail yang perlu diselesaikan.
+
+## **8.1 Protokol audio belum cukup teknis**
+
+Belum dijelaskan secara eksplisit:
+
+- format PCM atau codec audio,
+- sample rate dan jumlah kanal,
+- metode streaming dari ESP32-S3 ke server,
+- protokol pengiriman audio,
+- buffering dan packet loss,
+- timeout dan retry,
+- cara mengalirkan audio TTS kembali ke speaker ESP32-S3.
+
+Hal ini penting karena CSI, UDP, audio, dan layanan jaringan menggunakan kanal radio yang sama.
+
+ESP32-S3 memang mendukung STA/AP, Sniffer, ESP-NOW, dan CSI, tetapi kombinasi operasi aktual tetap harus diuji melalui firmware dan beban sistem yang digunakan.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://docs.espressif.com\&sz=32)
+
+— ESP-IDF Programming Guide v5.1.2 documentation
+
+
+
+## **8.2 Server Rust seharusnya disebut orkestrator**
+
+V17 menyatakan tumpukan server seluruhnya Rust, tetapi di dalamnya juga menggunakan faster-whisper dan ONNX Runtime.
+
+Lebih akurat jika ditulis:
+
+> Server Rust menjadi lapisan orkestrasi, komunikasi, dan pengelolaan alur kerja. Mesin inferensi ASR dan TTS dijalankan melalui runtime atau pustaka model yang sesuai.
+
+Tidak perlu memaksakan seluruh implementasi ASR/TTS menjadi Rust.
+
+## **8.3 Klaim biaya di bawah Rp350.000 tidak masuk akal dalam bentuk sekarang**
+
+Ini klaim yang perlu segera dikoreksi.
+
+Proposal menyebut dua ESP32-S3 sekitar Rp150.000 per unit, kemudian menyatakan satu pasang node lengkap di bawah Rp350.000.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Perhitungannya:
+
+\\[ 2 \times Rp150.000 = Rp300.000 \\]
+
+Sisa anggaran hanya Rp50.000 untuk komponen lain.
+
+Padahal Tabel 3.1 masih memuat layar, baterai, charger, mikrofon, DAC, speaker, rotary encoder, dan komponen pendukung.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+[Certain] Angka Rp350.000 belum didukung oleh BOM biaya dan hampir pasti terlalu rendah apabila yang dimaksud adalah dua node lengkap.
+
+Perjelas apakah angka itu hanya untuk dua modul utama atau seluruh purwarupa. Buat tabel harga per komponen, sumber harga, jumlah, dan total.
+
+## **8.4 Manajemen daya masih perlu dirinci**
+
+Rangkaian baterai, BMS, TP4056, dan regulator 3,3 V masih perlu spesifikasi yang pasti.
+
+Pastikan proposal menjelaskan:
+
+- kapasitas arus regulator,
+- konsumsi Wi-Fi pada kondisi aktif,
+- konsumsi speaker saat berbunyi,
+- apakah perangkat dapat digunakan sambil mengisi baterai,
+- proteksi dan pemantauan tegangan,
+- serta titik ukur arus untuk estimasi runtime.
+
+Faktor 0,8 pada persamaan estimasi baterai tidak dapat menggantikan pengukuran arus aktual.
+
+# **9. TTS, ASR, dan penerjemahan arah kedua**
+
+[Certain] Bagian TTS dan ASR sudah jauh lebih matang daripada v16.
+
+Proposal kini menempatkan Kokoro-82M ONNX sebagai mesin TTS utama di server lokal dengan opsi ponsel, sementara MMS-TTS-ind menjadi alternatif. Whisper/faster-whisper juga diposisikan sebagai jalur ASR cloud dan lokal.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Tetapi ada tiga masalah.
+
+### **9.1 Kokoro belum memiliki dukungan Bahasa Indonesia yang terkonfirmasi**
+
+Proposal sendiri mencatat bahwa delapan bahasa yang terdaftar pada model card tidak mencakup Bahasa Indonesia.
+
+Jadi, Kokoro belum boleh diperlakukan sebagai pilihan final sebelum suara Bahasa Indonesia diuji. Jika gagal, MMS-TTS-ind harus menjadi solusi yang nyata, bukan hanya cadangan di atas kertas.
+
+### **9.2 Angka TTFA 100 ms harus dibuktikan**
+
+V17 sudah membedakan *time-to-first-audio* dari waktu sintesis keseluruhan. Itu bagus.
+
+Namun, target 100 ms untuk frasa sampai lima kata masih cukup agresif untuk model 82 juta parameter.
+
+Tentukan lingkungan uji yang pasti:
+
+- CPU atau GPU laptop?
+- ONNX Runtime dengan execution provider apa?
+- Model precision apa?
+- Ukuran chunk audio berapa?
+- Apakah pengukuran mencakup pemrosesan awal dan buffering?
+
+Laporkan p50 dan p95, bukan hanya angka rata-rata.
+
+### **9.3 Arah kedua bukan penerjemahan bahasa isyarat penuh**
+
+[Certain] Arah kedua sebenarnya merupakan pemetaan teks ke representasi SIBI tingkat kata ditambah ejaan jari sebagai fallback, bukan penerjemahan kalimat penuh. Proposal telah membatasi klaim ini dengan benar.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Tetapi jika fallback ejaan jari harus mencakup semua 26 huruf, J dan Z memerlukan animasi atau urutan gerakan. Gambar statis tidak cukup menggambarkan lintasan huruf tersebut.
+
+Hal ini harus jelas dalam Bab II dan Bab III.
+
+# **10. Evaluasi, metrik, dan gerbang keputusan**
+
+V17 sudah memiliki lima gerbang keputusan G0–G4 ditambah G0b.
+
+Ini struktur yang saya setujui. Namun, kriterianya masih membutuhkan justifikasi.
+
+| Gerbang | Penilaian                          | Perbaikan                                                     |
+| ------- | ---------------------------------- | ------------------------------------------------------------- |
+| G0      | Akuisisi, kestabilan CSI, jaringan | Tambahkan pengujian pose statis                               |
+| G0b     | Probe representasi encoder         | Perbaiki kontrol label acak dan definisikan pelatihan adapter |
+| G1      | Klasifikasi, regresi, deployment   | Pisahkan bukti separabilitas dengan kriteria kegunaan         |
+| G2      | Tiga pilar pakar                   | Definisikan rubrik dan tingkat temuan                         |
+| G3      | Integrasi dan audio                | Ukur p50/p95 dua arah dan beban nyata                         |
+| G4      | Penerimaan pengguna dan biaya      | Pertahankan sebagai evaluasi formatif                         |
+
+## **10.1 G1: 50% akurasi bukan berarti model siap dipakai**
+
+G1 mengusulkan akurasi minimal 50%, F1 makro minimal 0,45, recall tidak nol, dan inferensi di bawah 100 ms.
+
+[Likely] Angka tersebut dapat diterima sebagai ambang minimum untuk membuktikan adanya pemisahan sinyal, tetapi bukan sebagai standar alat bantu yang dapat diandalkan di kelas.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Pertahankan dua kategori:
+
+- **Minimum scientific feasibility:** apakah sinyal dan model dapat membedakan kelas.
+- **Minimum operational usability:** apakah hasilnya cukup tepat dan konsisten untuk dipakai menyampaikan pesan.
+
+Tambahkan coverage dan selective accuracy untuk mekanisme penolakan. Sistem yang menolak 70% input tidak boleh tampak memiliki akurasi tinggi hanya karena 30% sisanya benar.
+
+## **10.2 Formula WER**
+
+Proposal menulis:
+
+\\[ WER=\frac{S+D+I}{N} \\]
+
+Kemudian menyebut akurasi kata:
+
+\\[ Accuracy=1-WER \\]
+
+Ini harus diperbaiki.
+
+WER dapat melebihi 1 karena jumlah insertion dapat lebih besar dari jumlah kata acuan. Maka \\(1-WER\\) tidak selalu merupakan ukuran akurasi yang dibatasi antara nol dan satu.
+
+Lebih baik laporkan WER secara langsung, bersama jumlah substitusi, deletion, dan insertion. Gunakan exact-match accuracy atau metrik akurasi token terpisah bila memang dibutuhkan.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+## **10.3 G4 dan 3–5 pengguna**
+
+Saya setuju dengan posisi v17 bahwa 3–5 pengguna hanya merupakan evaluasi kegunaan skala kecil, bukan penelitian efektivitas populasi.
+
+Jangan mengubah skor rata-rata 3/5 menjadi kesimpulan bahwa alat sudah diterima secara luas. Laporkan median, nilai per partisipan, masalah penggunaan, dan komentar kualitatif.
+
+## **10.4 Persamaan latensi belum membedakan arah**
+
+Persamaan 3.3 saat ini menggunakan satu formula umum:
+
+\\[ t\_{\mathrm{total}}= t\_{\mathrm{segmentasi}}+ t\_{\mathrm{inferensi}}+ t\_{\mathrm{pemetaan}}+ t\_{\mathrm{keluaran}} \\]
+
+Tetapi kedua arah memiliki komponen berbeda.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Gunakan dua rumus:
+
+\\[ T_1= t\_{\mathrm{CSI}}+ t\_{\mathrm{segmentasi}}+ t\_{\mathrm{inferensi}}+ t\_{\mathrm{pemetaan}}+ t\_{\mathrm{TTS}}+ t\_{\mathrm{audio}} \\]
+
+\\[ T_2= t\_{\mathrm{audio}}+ t\_{\mathrm{upload}}+ t\_{\mathrm{ASR}}+ t\_{\mathrm{kamus}}+ t\_{\mathrm{tampilan}} \\]
+
+Ukur keduanya pada mode online dan offline.
+
+# **11. Kajian pustaka dan kebaruan penelitian**
+
+Prioritas P1
+
+Saya melihat kekurangan yang cukup besar di Subbab 2.15: penelitian terdahulu masih terlalu sedikit untuk menopang klaim kebaruan.
+
+V17 membandingkan SignFi, Widar3.0, dan satu penelitian pengenalan BISINDO berbasis kamera.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Ada dua penelitian yang seharusnya dimasukkan.
+
+## **11.1 DF-WiSLR (2020)**
+
+Ahmed dkk., *DF-WiSLR: Device-Free Wi-Fi-based Sign Language Recognition*, 2020.
+
+Penelitian ini mengenali 49 gestur Indian Sign Language (ISL): 30 statis dan 19 dinamis. Data CSI diuji dalam lingkungan rumah dan kantor, dengan beberapa metode machine learning dan CNN.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://www.sciencedirect.com\&sz=32)
+
+sciencedirect.com+1
+
+
+
+Ini sangat relevan untuk pembahasan:
+
+- gestur statis,
+- gestur dinamis,
+- perubahan lingkungan,
+- dan penggunaan CSI untuk pengenalan bahasa isyarat.
+
+## **11.2 Wi-SignFi (2023)**
+
+Gao dkk., *A Multitask Sign Language Recognition System Using Commodity Wi-Fi*, 2023.
+
+Framework tersebut menggunakan CNN untuk pengenalan gestur dan KNN untuk tugas identifikasi pengguna atau lingkungan. Pengujian menggunakan dataset SignFi, termasuk 276/150 aktivitas, lima pengguna, dan dua lingkungan.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://onlinelibrary.wiley.com\&sz=32)
+
+Wiley Online Library+1
+
+
+
+Yang penting, Wi-SignFi mengakui bahwa CNN ringan yang digunakan belum mampu mempelajari dinamika temporal kompleks secara optimal; penulis mengusulkan eksplorasi LSTM atau transformer.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://onlinelibrary.wiley.com\&sz=32)
+
+Wiley Online Library
+
+
+
+Ini membuat keputusanmu mempertahankan modul temporal menjadi lebih relevan, tetapi juga berarti **penggunaan multitask learning dan CSI untuk sign recognition bukan kebaruan global**.
+
+## **11.3 Kebaruan yang seharusnya kamu klaim**
+
+Saya menyarankan kebaruan disusun seperti ini:
+
+| Aspek                                                      | Status kebaruan yang lebih akurat |
+| ---------------------------------------------------------- | --------------------------------- |
+| CSI untuk pengenalan bahasa isyarat                        | Sudah ada                         |
+| CSI untuk gestur statis dan dinamis                        | Sudah ada                         |
+| Multitask learning pada pengenalan isyarat Wi-Fi           | Sudah ada                         |
+| Penerapan pada alfabet manual SIBI                         | Kandidat kebaruan utama           |
+| Encoder RuView untuk alfabet SIBI                          | Kontribusi eksperimental          |
+| Supervisi keypoint tangan 21 titik lintas modalitas        | Kandidat kontribusi metodologis   |
+| Integrasi dua arah, server, ASR/TTS Indonesia dan ESP32-S3 | Kontribusi rekayasa sistem        |
+
+Dengan demikian, kontribusimu menjadi jauh lebih terukur dan tidak mudah dibantah penguji.
+
+Penelusuran literatur yang menyatakan belum ada penelitian CSI-SIBI juga sebaiknya dilengkapi dengan log pencarian: database, tanggal, string pencarian bahasa Inggris dan Indonesia, serta kriteria inklusi. Pernyataan "belum ditemukan" harus diperlakukan sebagai hasil pencarian, bukan bukti mutlak bahwa penelitian tidak ada.
+
+## **11.4 Rujukan TKT Indonesia**
+
+Daftar pustaka menggunakan Mankins (2009) untuk kerangka TRL. Itu berguna sebagai latar, tetapi proposalmu menggunakan istilah TKT Indonesia.
+
+Tambahkan **Permenristekdikti Nomor 42 Tahun 2016 tentang Pengukuran dan Penetapan Tingkat Kesiapterapan Teknologi**. Basis data JDIH BPK mencantumkan peraturan tersebut dengan status berlaku.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://peraturan.bpk.go.id\&sz=32)
+
+JDIH BPK+1
+
+
+
+TKT 3–4 jangan ditetapkan hanya karena purwarupa berhasil dibuat. Cocokkan bukti pengujian dengan kriteria tingkat kesiapterapan yang berlaku.
+
+# **12. Pemeriksaan per BAB**
+
+Berikut ringkasan temuan yang lebih praktis untuk revisi dokumen.
+
+| Bagian                        | Penilaian                  | Tindakan                                                        |
+| ----------------------------- | -------------------------- | --------------------------------------------------------------- |
+| BAB I — Latar belakang        | Alur argumen kuat          | Perhalus klaim orang tua dan statistik                          |
+| BAB I — Rumusan masalah       | Sudah terarah              | Pastikan istilah dua arah tidak menyiratkan penerjemahan penuh  |
+| BAB I — Tujuan                | Konsisten                  | Sudah baik                                                      |
+| BAB I — Batasan               | Sangat baik                | Pertahankan batas generalisasi                                  |
+| BAB I — Manfaat               | Cukup baik                 | Kurangi klaim manfaat yang bergantung pada semua tahap berhasil |
+| BAB II — SIBI                 | Baik                       | Perjelas SIBI sebagai sistem isyarat pendidikan                 |
+| BAB II — CSI                  | Baik secara konsep         | Perbaiki detail subcarrier dan phase noise                      |
+| BAB II — RuView               | Risiko tinggi              | Tegaskan keterbatasan fitur 8-D                                 |
+| BAB II — LoRA                 | Cukup baik                 | Perbaiki kontradiksi trainable parameters dan EWC               |
+| BAB II — Classification head  | Baik                       | Tambahkan coverage/selective accuracy                           |
+| BAB II — Regression head      | Cukup kuat                 | Tetapkan koordinat dan mask temporal                            |
+| BAB II — Multitask            | Baik                       | Tambahkan pengukuran konflik gradien                            |
+| BAB II — YOLO                 | Baik                       | Tambahkan validasi keypoint J/Z                                 |
+| BAB II — TTS/ASR              | Cukup baik                 | Pastikan suara Indonesia dan target TTFA                        |
+| BAB II — Penelitian terdahulu | Kurang lengkap             | Tambahkan DF-WiSLR dan Wi-SignFi                                |
+| BAB II — Arsitektur           | Baik                       | Pisahkan diagram training dan inference                         |
+| BAB III — Desain              | Baik                       | Perjelas status G0b                                             |
+| BAB III — Tahapan             | Cukup realistis            | Tambahkan G0b ke diagram dan jadwal                             |
+| BAB III — Alat dan bahan      | Belum final                | Tetapkan board, layar, AP, BOM                                  |
+| BAB III — Sistem              | Baik                       | Definisikan alur audio dan transport                            |
+| BAB III — Dataset             | Cukup baik                 | Perbaiki randomisasi, split, sinkronisasi                       |
+| BAB III — Training            | Baik                       | Perjelas adapter dan baseline raw CSI                           |
+| BAB III — Evaluasi            | Cukup kuat                 | Justifikasi ambang dan rumus WER                                |
+| BAB III — Parameter           | Terlalu banyak placeholder | Pisahkan keputusan inti dan hyperparameter                      |
+| BAB III — Risiko              | Baik                       | Perbaiki mitigasi ketika encoder gagal                          |
+
+
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+# **13. Masalah visual dan administrasi dokumen**
+
+Saya juga memeriksa render visual, bukan hanya teks yang diekstrak.
+
+### **Koreksi atas temuan sebelumnya**
+
+[Certain] Saya perlu mengoreksi komentar saya sebelumnya: **Gambar 3.4 sebenarnya ada**. Pemeriksaan contact sheet dan halaman PDF menunjukkan skema enclosure muncul pada halaman PDF 39. Saya sebelumnya salah menyimpulkan gambar tersebut tidak ada karena ekstraksi halaman yang saya lihat hanya menampilkan caption.
+
+Namun, status gambar tersebut masih perlu diperjelas sebagai skema konseptual atau desain enclosure final. Pada halaman sebelumnya masih ada placeholder berkas enclosure dan foto/render final.
+
+### **Hal visual yang masih perlu diperbaiki**
+
+1\. **Gambar 3.5 tidak konsisten dengan Pilihan 1.** Teks menyatakan regression head dilepas dari deployment, tetapi diagram masih menunjukkan dua kepala pada model inferensi. Ini harus diperbaiki.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+2\. **Gambar 2.2 mencampurkan training dan deployment.** Sebaiknya ada dua diagram: arsitektur training dengan dua kepala dan loss gabungan, serta arsitektur deployment classifier-only.
+
+3\. **Gambar 3.1 belum menampilkan G0b**, padahal subgerbang tersebut sudah menjadi bagian penting metode. Perbarui flowchart dan jadwal agar sama dengan Tabel 3.5.
+
+4\. **Gambar 3.2 menggunakan foto produk sebagai referensi bentuk.** Itu masih dapat digunakan sebagai ilustrasi konsep, tetapi jangan memberi kesan bahwa perangkat sudah dimiliki atau dirakit. Sumber gambar setiap komponen juga perlu jelas.
+
+5\. **Daftar isi perlu diperbarui** sebelum ekspor PDF. Dokumen sendiri masih menyertakan instruksi pembaruan field.
+
+6\. Halaman sampul, waktu penelitian, persetujuan etik, dan sejumlah parameter masih berisi placeholder.
+
+7\. Tabel 3.7 memiliki sekitar 20 keputusan yang belum final. Tidak semua harus diketahui sebelum pilot, tetapi keputusan fundamental tidak boleh dibiarkan mengambang sampai seminar.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+# **14. Sepuluh pertanyaan yang kemungkinan diajukan penguji**
+
+Ini pertanyaan yang menurut saya paling berbahaya untuk proposal v17.
+
+**1. Mengapa menggunakan encoder RuView yang dilatih untuk fitur lingkungan dan vital signs untuk mengenali bentuk tangan SIBI?**
+
+Jawaban harus menjelaskan bahwa itu hipotesis transfer representasi yang diuji melalui G0b, bukan asumsi bahwa encoder sudah memiliki kemampuan pose.
+
+**2. Bagaimana delapan fitur RuView mempertahankan informasi yang dibutuhkan untuk membedakan 24 bentuk tangan statis?**
+
+Ini pertanyaan teknis paling sulit. Kamu harus menunjukkan fitur, normalisasi, dan hasil pembanding terhadap raw CSI.
+
+**3. Mengapa satu jendela satu detik cukup untuk mengenali lintasan dinamis J dan Z?**
+
+Jawabannya harus berbasis eksperimen window dan hop, bukan sekadar menyebut empat embedding per detik.
+
+**4. Bagaimana memastikan keypoint YOLO yang dihasilkan pada J dan Z tetap akurat?**
+
+Perlu data validasi keypoint dinamis, bukan hanya hasil `exp11_huruf24`.
+
+**5. Mengapa melakukan regresi 21 keypoint apabila regresi tidak dipakai pada deployment?**
+
+Jawabannya: regresi merupakan tugas bantu untuk menguji apakah supervisi bentuk tangan memperbaiki representasi dan klasifikasi. Tetapi manfaatnya harus dibuktikan dengan ablasi.
+
+**6. Bagaimana kamu memastikan train dan test tidak berbagi data karena overlapping windows?**
+
+Jawabannya harus menjelaskan pembagian rekaman sebelum sliding-window, grup repetisi, serta purge gap.
+
+**7. Mengapa hanya menggunakan dua ESP32-S3 dengan satu link Wi-Fi?**
+
+Jelaskan alasannya sebagai konfigurasi berbiaya rendah yang kelayakannya justru diuji, bukan sebagai konfigurasi yang sudah terbukti mampu membedakan huruf.
+
+**8. Bagaimana memastikan perangkat tetap stabil ketika CSI, UDP, audio, ASR, dan TTS berjalan bersamaan?**
+
+Jawabannya perlu hasil uji koeksistensi dengan beban jaringan dan latensi aktual.
+
+**9. Apakah sistem ini benar-benar menerjemahkan bahasa isyarat?**
+
+Jawaban yang jujur: tidak menerjemahkan seluruh bahasa isyarat. Sistem mengenali alfabet manual SIBI dan memetakan ucapan/teks ke representasi kamus tingkat kata dan ejaan jari.
+
+**10. Apa kebaruan yang membedakan penelitian ini dari DF-WiSLR dan Wi-SignFi?**
+
+Jawab dengan fokus pada alfabet SIBI, auxiliary 21-hand-keypoint supervision, encoder RuView, konfigurasi ESP32-S3, serta integrasi komunikasi dua arah Bahasa Indonesia—bukan mengklaim CSI sign recognition atau multitask secara umum sebagai hal baru.
+
+# **15. Urutan revisi yang saya rekomendasikan**
+
+Jangan menghabiskan waktu memperbaiki redaksi dan tata letak sebelum masalah model selesai. Urutannya harus berdasarkan dampak terhadap validitas penelitian.
+
+## **P0 — Selesaikan sebelum proposal dianggap matang**
+
+0/8 selesai
+
+0%
+
+Tetapkan kontrak input encoder RuView dan normalisasi delapan fiturnya.
+
+Definisikan metode pelatihan adapter dan objektifnya.
+
+Perbaiki G0b, termasuk pengujian permutation null dan baseline raw CSI.
+
+Perbaiki justifikasi temporal J/Z: window, hop, T, dan durasi efektif.
+
+Selesaikan kontradiksi trainable parameters di Subbab 2.5.
+
+Pisahkan diagram training dan deployment Pilihan 1.
+
+Kunci koordinat regresi serta mask visibility dan padding.
+
+Perjelas CSI preprocessing: LTF, subcarrier, pilot, dan first_word_invalid.
+
+## **P1 — Perkuat metode dan bukti**
+
+0/8 selesai
+
+0%
+
+Tambahkan DF-WiSLR dan Wi-SignFi ke penelitian terdahulu.
+
+Tetapkan split dataset sebelum pembentukan overlapping windows.
+
+Tambahkan randomisasi urutan isyarat dan toleransi sinkronisasi.
+
+Validasi keypoint guru pada J dan Z.
+
+Pisahkan metrik latency dua arah dan laporkan p50/p95.
+
+Lengkapi protokol audio, transport, buffer, dan retry.
+
+Perjelas rubrik pakar, etika, privasi, dan persetujuan partisipan.
+
+Buat BOM biaya yang realistis dan ukur konsumsi daya.
+
+## **P2 — Finalisasi naskah**
+
+0/6 selesai
+
+0%
+
+Putuskan judul dan istilah pemrosesan server.
+
+Perbarui Gambar 2.2, Gambar 3.1, dan Gambar 3.5.
+
+Perjelas status Gambar 3.4 sebagai skema konseptual atau enclosure final.
+
+Perbarui daftar isi dan konsistensi tabel/diagram.
+
+Isi identitas, tanggal, persetujuan etik, serta seluruh placeholder.
+
+Tambahkan regulasi TKT Indonesia ke daftar pustaka.
+
+## **Keputusan tentang judul**
+
+[Certain] Judul PDF v17 sekarang berakhir dengan **“PEMROSESAN SERVER”**, sedangkan judul kerja yang sebelumnya kamu tetapkan menggunakan **“CLOUD PROCESSING”**.&#x20;
+
+Proposal-SenseSIBI-Studi-Kelayakan-v17.pdf
+
+
+
+Menurut saya, jangan otomatis mengembalikan istilah *Cloud Processing*. Dalam desain sekarang TTS utama berjalan di server lokal dan ASR cloud hanya dipakai saat daring. Istilah yang lebih akurat mungkin **“PEMROSESAN SERVER LOKAL”** atau istilah yang secara eksplisit menunjukkan arsitektur hibrida. Tentukan setelah arsitektur final dikunci.
+
+# **Kesimpulan akhir**
+
+[Certain] **v17 sudah berhasil mempertahankan identitas SenseSIBI dan mengintegrasikan sebagian besar keputusan arsitektur yang kita inginkan.** Tidak ada alasan untuk menulis ulang seluruh proposal.
+
+[Likely] Tetapi ada satu hal yang tidak boleh kamu lewatkan: proposal ini masih terlalu bergantung pada asumsi bahwa embedding RuView mampu mempertahankan informasi bentuk tangan. Ini harus menjadi pusat pembuktian penelitian, bukan sekadar satu langkah preprocessing yang dianggap sudah selesai.
+
+Saya akan mempertahankan:
+
+- SenseSIBI sebagai sistem komunikasi dua arah.
+- Dua ESP32-S3.
+- RuView sebagai kandidat encoder terpralatih.
+- YOLO26m-Pose sebagai guru visual.
+- Dua kepala tugas saat training.
+- Regression head sebagai supervisi tambahan pada baseline deployment.
+- 1D-CNN temporal sebagai kandidat yang diuji.
+- Python/PyTorch untuk training dan Rust untuk orkestrasi.
+- ASR, TTS, kamus SIBI, serta server lokal.
+
+Saya **tidak** akan mengunci klaim bahwa model saat ini pasti mampu mengklasifikasikan 26 huruf SIBI, merekonstruksi lintasan J/Z secara memadai, atau berjalan sesuai target latency di ESP32-S3 sebelum G0b, G1, dan deployment membuktikannya.
+
+Kalau proposal ini diperbaiki berdasarkan urutan P0 → P1 → P2, fondasinya akan jauh lebih kuat untuk menghadapi pertanyaan penguji, terutama tentang pemilihan encoder, kelayakan sinyal, supervisi keypoint, dan validitas eksperimen.
