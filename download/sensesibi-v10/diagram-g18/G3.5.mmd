@@ -1,0 +1,25 @@
+flowchart LR
+    accTitle: Alur inferensi langsung pada ESP32-S3 menurut deployment Pilihan 1
+    accDescr: Bingkai promiscuous masuk ke penyangga geser di PSRAM dengan pemeriksaan subcarrier valid dan first_word_invalid; segmentasi perangkat memisahkan onset Delta-CSI, jendela tahan pose untuk huruf statis, dan jendela lintasan untuk J dan Z; masukan diekstraksi sesuai rute hasil audit; model terkuantisasi berisi encoder, modul temporal, dan kepala klasifikasi saja karena kepala regresi dilepas sesuai Pilihan 1; keluaran di atas ambang ditampilkan dan dikirim via UDP ke server Rust, keluaran di bawah ambang ditolak tanpa memicu suara.
+
+    subgraph R1["Akuisisi dan segmentasi"]
+        direction TB
+    CSI["Callback CSI promiscuous<br/>(subcarrier valid, filter MAC)"]
+    BUF["Penyangga geser<br/>CSI di PSRAM"]
+    SEG["Segmentasi: onset,<br/>tahan pose / lintasan"]
+    FT["Masukan teraudit<br/>(Jalur A / B / C)"]
+    CSI --> BUF
+    BUF --> SEG
+    SEG --> FT
+    end
+    subgraph R2["Inferensi Pilihan 1"]
+        direction TB
+    MOD["Model int8/fp16: encoder +<br/>temporal + klasifikasi"]
+    DEC{"Keyakinan di<br/>atas ambang?"}
+    OUT["Tampil + UDP label/skor<br/>ke server Rust"]
+    RJ["Tolak: tidak dikenali<br/>(tanpa suara)"]
+    MOD --> DEC
+    DEC -- "ya" --> OUT
+    DEC -- "tidak" --> RJ
+    end
+    R1 --> R2

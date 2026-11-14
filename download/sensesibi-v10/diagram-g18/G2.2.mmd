@@ -1,0 +1,41 @@
+flowchart TB
+    accTitle: Graf pelatihan dua kepala dan graf deployment Pilihan 1 di atas encoder CSI terpralatih
+    accDescr: Subgraf pelatihan dua kepala memuat jalur guru (kamera dan YOLO26m-Pose memberi pseudo-label 21 keypoint; kartu pemandu memberi label kelas) yang membentuk dataset berpasangan terpisah per blok, jalur model Wi-Fi dengan tiga rute masukan hasil audit (Jalur A delapan fitur, Jalur B adapter, Pembanding C), encoder beku, modul temporal, kepala klasifikasi dari ringkasan atensi, kepala regresi per langkah, serta kerugian gabungan dengan mask efektif dan pemantauan kosinus gradien. Subgraf deployment Pilihan 1 memperlihatkan graf inferensi tanpa kamera dan tanpa kepala regresi dengan keluaran label dan skor bermekanisme tolak. Simpul kuning jalur guru, biru jalur model Wi-Fi, hijau pelatihan dan deployment.
+
+    subgraph S1["Pelatihan dua kepala"]
+        direction TB
+    YOLO["Kamera + YOLO26m-Pose<br/>(guru) [12]"]
+    PROT["Kartu pemandu<br/>protokol"]
+    DSET["Dataset berpasangan (Pers. 2.24),<br/>split per blok sebelum windowing"]
+    CSI["CSI + praproses ESP32-S3<br/>(subcarrier valid) [9]"]
+    ROUTE{"Rute masukan<br/>(audit T0, G0b)"}
+    ENC["Encoder θ0 beku [11]"]
+    TEMP["Modul temporal<br/>(1D-CNN)"]
+    KCLS["Kepala klasifikasi<br/>26 huruf (Pers. 2.8)"]
+    KREG["Kepala regresi<br/>(T × 21 × 2)"]
+    LOSS["Kerugian gabungan + mask efektif<br/>+ cos gradien (Pers. 2.13a-2.15)"]
+    YOLO -- "21 keypoint<br/>(pseudo-label)" --> DSET
+    PROT --> DSET
+    CSI -. "tersinkron penanda waktu" .-> DSET
+    CSI --> ROUTE
+    ROUTE -- "Jalur A:<br/>8 fitur" --> ENC
+    ROUTE -- "Jalur B1/B2:<br/>adapter" --> ENC
+    ROUTE -- "Pembanding C" --> TEMP
+    ENC -- "barisan z1..zT" --> TEMP
+    TEMP -- "ringkasan s_i" --> KCLS
+    TEMP -- "keadaan h_t" --> KREG
+    KCLS --> LOSS
+    KREG --> LOSS
+    end
+    subgraph S2["Deployment Pilihan 1 (tanpa kamera, tanpa kepala regresi)"]
+        direction TB
+    DEP["Graf inferensi ESP32-S3 (int8/fp16):<br/>label 26 huruf + skor (dengan tolak)"]
+    end
+    S1 -- "lepas kepala regresi,<br/>kuantisasi int8/fp16" --> S2
+
+    classDef guru fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    classDef model fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#1e3a5f
+    classDef proses fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d
+    class YOLO,PROT guru
+    class CSI,ROUTE,ENC,TEMP,KCLS,KREG model
+    class DSET,LOSS,DEP proses
